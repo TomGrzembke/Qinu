@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,9 @@ public class StartupManager : MonoBehaviour
     {
         yield return null;
         LoadingScreen.Show(this);
-        yield return SceneLoader.LoadScene(Scenes.Manager);
+
+        if (!SceneManager.GetSceneByBuildIndex((int)Scenes.Manager).IsValid())
+            yield return SceneLoader.LoadScene(Scenes.Manager);
 
         if (!SceneManager.GetSceneByBuildIndex((int)Scenes.Gameplay).IsValid())
             yield return SceneLoader.LoadScene(Scenes.MainMenu);

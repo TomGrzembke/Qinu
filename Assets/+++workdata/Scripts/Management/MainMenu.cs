@@ -5,7 +5,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         PauseManager.Instance.PauseLogic(false);
-        MusicManager.Instance.PlaySong(MusicManager.Songs.MainMenu);
     }
     public void StartGame()
     {

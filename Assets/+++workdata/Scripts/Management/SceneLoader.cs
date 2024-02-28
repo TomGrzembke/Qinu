@@ -11,6 +11,7 @@ using UnityEditor.SceneManagement;
     {
         Startup,
         Manager,
+        Pixelate,
         MainMenu,
         Gameplay
     }

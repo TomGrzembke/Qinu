@@ -11,8 +11,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] Vector2 movementVec;
     InputAction moveAction;
 
-
-
     void Awake()
     {
         Instance = this;
@@ -33,6 +31,11 @@ public class InputManager : MonoBehaviour
     {
         moveAction.performed += ctx => method(ctx.ReadValue<Vector2>());
         moveAction.canceled += ctx => method(ctx.ReadValue<Vector2>());
+    }
+    public void DesubscribeToMove(Action<Vector2> method)
+    {
+        moveAction.performed -= ctx => method(ctx.ReadValue<Vector2>());
+        moveAction.canceled -= ctx => method(ctx.ReadValue<Vector2>());
     }
 
     #region OnEnable/Disable

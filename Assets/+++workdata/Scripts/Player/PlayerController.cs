@@ -1,6 +1,5 @@
 using MyBox;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,34 +10,14 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region private fields
-    PlayerInputActions playerControls;
-    InputAction move;
-    Vector2 moveDir;
+    public Vector2 MoveDir => InputManager.Instance.MovementVec;
     Vector2 currentVelocity;
     Rigidbody2D rb;
     #endregion
 
     void Awake()
     {
-        playerControls = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    void OnEnable()
-    {
-        move = playerControls.Player.Move;
-
-        playerControls.Enable();
-    }
-
-    void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    void Update()
-    {
-        moveDir = move.ReadValue<Vector2>();
     }
 
     void FixedUpdate()
@@ -46,9 +25,9 @@ public class PlayerController : MonoBehaviour
         Movement();
     }
 
-    private void Movement()
+    void Movement()
     {
-        Vector2 targetVelocity = new Vector2(moveDir.x, moveDir.y).normalized * moveSpeed;
+        Vector2 targetVelocity = new Vector2(MoveDir.x, MoveDir.y).normalized * moveSpeed;
 
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, deceleration * Time.fixedDeltaTime);
 

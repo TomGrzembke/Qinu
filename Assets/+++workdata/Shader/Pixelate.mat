@@ -49,7 +49,7 @@ Material:
     - _PixelRes: 0
     m_Colors:
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _PixelCount: {r: 343, g: 192.9375, b: 0, a: 0}
+    - _PixelCount: {r: 252, g: 141.75, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1023563809089684273
 MonoBehaviour:

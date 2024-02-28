@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,26 +16,11 @@ public class InputManager : MonoBehaviour
         input = new();
 
         moveAction = input.Player.Move;
-        moveAction.performed += ctx => Movement(ctx.ReadValue<Vector2>());
-        moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>());
+        moveAction.performed += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
+        moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
     }
 
-    void Movement(Vector2 direction)
-    {
-        if (direction != Vector2.zero)
-            movementVec = direction.normalized;
-    }
-
-    public void SubscribeToMove(Action<Vector2> method)
-    {
-        moveAction.performed += ctx => method(ctx.ReadValue<Vector2>());
-        moveAction.canceled += ctx => method(ctx.ReadValue<Vector2>());
-    }
-    public void DesubscribeToMove(Action<Vector2> method)
-    {
-        moveAction.performed -= ctx => method(ctx.ReadValue<Vector2>());
-        moveAction.canceled -= ctx => method(ctx.ReadValue<Vector2>());
-    }
+    void Movement(Vector2 direction) => movementVec = direction;
 
     #region OnEnable/Disable
     void OnEnable()

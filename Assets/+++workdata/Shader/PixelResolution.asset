@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7d40351e1746b428071ee5db8ffb0b, type: 3}
   m_Name: PixelResolution
   m_EditorClassIdentifier: 
-  pixelRes: 343
+  pixelRes: 252
   screenRes: {x: 1920, y: 1080}
   pixelartMat: {fileID: 2100000, guid: 5d6deb9f34c61d148851ba13c8508c92, type: 2}

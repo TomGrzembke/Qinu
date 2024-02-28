@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1130039576}
   - component: {fileID: 1130039575}
+  - component: {fileID: 1130039580}
   - component: {fileID: 1130039579}
   - component: {fileID: 1130039578}
   - component: {fileID: 1130039577}
@@ -600,8 +601,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  deceleration: 10
+  moveSpeed: 7
+  acceleration: 10
+--- !u!114 &1130039580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130039574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce717eba283faa4f8dc46e965fdb6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationParent: {fileID: 1130039576}
+  flipRange:
+    Min: 0
+    Max: 180
+  additionalFlipObjectsX: []
+  additionalFlipObjectsY: []
 --- !u!1 &1183967831
 GameObject:
   m_ObjectHideFlags: 0

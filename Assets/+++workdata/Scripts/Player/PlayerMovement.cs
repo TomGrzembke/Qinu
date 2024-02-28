@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed;
     #endregion
 
-
     #region private fields
     Vector2 movement;
     Vector2 moveSafe;
@@ -33,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
         inputActions.Player.Move.performed += ctx => Movement(ctx.ReadValue<Vector2>());
         inputActions.Player.Move.canceled += ctx => Movement(ctx.ReadValue<Vector2>());
-        inputActions.Player.Sprint.performed += ctx => Sprint(true);
-        inputActions.Player.Sprint.canceled += ctx => Sprint(false);
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;

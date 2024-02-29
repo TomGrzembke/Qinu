@@ -1,0 +1,13 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    #region serialized fields
+    #NOTRIM#
+    #endregion
+
+    #region private fields
+    #NOTRIM#
+    #endregion
+
+}

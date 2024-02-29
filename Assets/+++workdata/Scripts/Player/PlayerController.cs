@@ -5,20 +5,18 @@ public class PlayerController : MonoBehaviour
 {
     #region serialized fields
 
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float maxSpeed = 5f;
     [SerializeField] float acceleration = 10f;
+    [SerializeField] float decceleration = 10f;
     #endregion
 
     #region private fields
     public Vector2 MoveDir => InputManager.Instance.MovementVec;
-    Vector2 currentVelocity;
     Rigidbody2D rb;
     #endregion
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    void Awake()  => rb = GetComponent<Rigidbody2D>();
+    
 
     void FixedUpdate()
     {
@@ -27,13 +25,18 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        Vector2 targetVelocity = new Vector2(MoveDir.x, MoveDir.y).normalized * moveSpeed;
+        if (MoveDir == Vector2.zero)
+        {
+            rb.AddForce(rb.velocity * - decceleration, ForceMode2D.Force);
+            return;
+        }
 
-        currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-
-        if (currentVelocity.magnitude < 0.1f) currentVelocity = Vector2.zero;
-
-        rb.velocity = currentVelocity;
+        rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
+       
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = Vector2.Lerp(rb.velocity, rb.velocity.normalized * maxSpeed, Time.deltaTime * acceleration);
+        }
 
         //Flip();
     }

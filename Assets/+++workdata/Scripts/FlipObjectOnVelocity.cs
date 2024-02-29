@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlipObjectOnVelocity : MonoBehaviour
 {
     #region serialized fields
+    [SerializeField] float flipSpeed = 7;
     #endregion
 
     #region private fields
@@ -13,11 +14,13 @@ public class FlipObjectOnVelocity : MonoBehaviour
     bool flipState;
     Vector3 localScale;
     Rigidbody2D rb;
+    float initialScale;
     #endregion
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
+        initialScale = transform.localScale.x;
     }
 
     void Update()
@@ -27,12 +30,11 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     void FlipLogic()
     {
+        if (rb.velocity.magnitude <= 0) return;
+
         localScale = transform.localScale;
         flipState = rb.velocity.x > 0;
 
-        if (flipped == flipState) return;
-
-        transform.localScale = localScale.SetX(-localScale.x);
-        flipped = flipState;
+        transform.localScale = Vector2.Lerp(localScale, localScale.SetX(flipState ? -initialScale : initialScale), Time.deltaTime * flipSpeed);
     }
 }

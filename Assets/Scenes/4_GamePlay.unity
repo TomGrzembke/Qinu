@@ -451,13 +451,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce717eba283faa4f8dc46e965fdb6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipSpeed: 10
+  flipSpeed: 0.1
   flipCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.019062042
-      value: 0.15667725
+      time: 0.0021743774
+      value: 0.2168274
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -465,8 +465,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.8655634
-      value: 0.2003802
+      time: 0.7881733
+      value: 0.26759732
       inSlope: 0.39207542
       outSlope: 0.39207542
       tangentMode: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
       inWeight: 0.104614735
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
 --- !u!1 &1183967831
 GameObject:
@@ -565,8 +565,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183967831}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: 0.05, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.25, y: 0.05000019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,6 +943,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1130039576}
+  - {fileID: 1183967833}
   - {fileID: 1997296910}
   - {fileID: 1603357924}
-  - {fileID: 1183967833}

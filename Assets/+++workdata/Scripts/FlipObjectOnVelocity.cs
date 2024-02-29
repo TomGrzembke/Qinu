@@ -29,12 +29,11 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     void FlipLogic()
     {
-        if (rb.velocity.x == 0) return;
+        if (rb.velocity.magnitude <= 0) return;
 
         localScale = transform.localScale;
         flipState = rb.velocity.x > 0;
 
-        print(rb.velocity.magnitude / flipSpeed);
         transform.localScale = Vector2.Lerp(localScale, localScale.SetX(flipState ? -initialScale : initialScale), flipCurve.Evaluate(rb.velocity.magnitude / flipSpeed));
     }
 }

@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class #SCRIPTNAME# : MonoBehaviour
+public class b : MonoBehaviour
 {
     #region serialized fields
-    #NOTRIM#
+    
     #endregion
 
     #region private fields
-    #NOTRIM#
+    
     #endregion
 
 }

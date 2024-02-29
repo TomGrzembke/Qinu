@@ -8,6 +8,7 @@ public class PixelResSO : ScriptableObject
     public float pixelRes = 128;
     public Vector2 screenRes = new(1920, 1080);
     public Material pixelartMat;
+    public Color col;
     RangedFloat screenRatio;
     Vector2 scaling;
 
@@ -32,6 +33,7 @@ public class PixelResSO : ScriptableObject
         scaling.y = pixelRes / screenRatio.Min * screenRatio.Max;
 
         pixelartMat.SetVector("_PixelCount", scaling);
+        pixelartMat.SetColor("_OutlineColor", col);
     }
 
     public float CalculateGCF(float a, float b)

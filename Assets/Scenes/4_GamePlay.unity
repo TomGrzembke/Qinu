@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1130039576}
   - component: {fileID: 1130039575}
   - component: {fileID: 1130039579}
+  - component: {fileID: 1130039580}
   - component: {fileID: 1130039578}
   - component: {fileID: 1130039577}
   m_Layer: 0
@@ -519,6 +520,18 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 150
   decceleration: 10
+--- !u!114 &1130039580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130039574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce717eba283faa4f8dc46e965fdb6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1183967831
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +593,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -6,6 +6,8 @@ public class FlipObjectOnVelocity : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] float flipSpeed = 7;
+    [SerializeField] float flipTime = 1;
+    [SerializeField] float maxRBSpeed = 5;
     [SerializeField] AnimationCurve flipCurve;
     #endregion
 
@@ -34,6 +36,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
         localScale = transform.localScale;
         flipState = rb.velocity.x > 0;
 
-        transform.localScale = Vector2.Lerp(localScale, localScale.SetX(flipState ? -initialScale : initialScale), flipCurve.Evaluate(rb.velocity.magnitude / flipSpeed));
+        transform.localScale = Vector2.Lerp(localScale, localScale.SetX(flipState ? -initialScale : initialScale), flipCurve.Evaluate(rb.velocity.magnitude / maxRBSpeed));
+        print(rb.velocity.magnitude / maxRBSpeed);
     }
 }

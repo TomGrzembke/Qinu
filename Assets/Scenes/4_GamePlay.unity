@@ -282,16 +282,6 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.905, y: -2.9399998}
-      - {x: 1.535, y: -2.9399998}
-      - {x: 1.405, y: -3.05}
-      - {x: 1.375, y: -3.1499999}
-      - {x: 1.375, y: -3.35}
-      - {x: 1.495, y: -3.47}
-      - {x: 1.755, y: -3.47}
-      - {x: 1.915, y: -3.4299998}
-      - {x: 1.9749999, y: -3.28}
-      - {x: 1.9749999, y: -3.03}
     - - {x: 1.5749999, y: -2.31}
       - {x: 1.485, y: -2.1}
       - {x: 1.345, y: -1.9499999}
@@ -408,21 +398,6 @@ PolygonCollider2D:
       - {x: 1.515, y: -2.81}
       - {x: 1.555, y: -2.6799998}
       - {x: 1.5949999, y: -2.57}
-    - - {x: 1.785, y: -2.1599998}
-      - {x: 1.7149999, y: -2.27}
-      - {x: 1.7149999, y: -2.46}
-      - {x: 1.735, y: -2.48}
-      - {x: 2.0249999, y: -2.48}
-      - {x: 2.075, y: -2.46}
-      - {x: 2.075, y: -2.23}
-      - {x: 1.9549999, y: -2.1599998}
-    - - {x: -2.0449998, y: 0.81}
-      - {x: -2.075, y: 0.81}
-      - {x: -2.075, y: 0.51}
-      - {x: -2.065, y: 0.51}
-      - {x: -2.0149999, y: 0.53}
-      - {x: -1.995, y: 0.61}
-      - {x: -1.995, y: 0.75}
   m_UseDelaunayMesh: 0
 --- !u!114 &1130039579
 MonoBehaviour:
@@ -437,8 +412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  acceleration: 170
-  decceleration: 7
+  acceleration: 150
+  decceleration: 6
 --- !u!114 &1130039580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipSpeed: 0.1
+  flipTime: 1
+  maxRBSpeed: 7
   flipCurve:
     serializedVersion: 2
     m_Curve:
@@ -647,71 +624,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipSpeed: 99
+  flipTime: 1
+  maxRBSpeed: 20
   flipCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.022346497
-      value: 0.11791992
-      inSlope: 0.4555048
-      outSlope: 0.4555048
-      tangentMode: 34
+      time: -0.0054855347
+      value: 0.18231201
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.0813112
-      value: 0.1651365
-      inSlope: 0.33696288
-      outSlope: 0.33696288
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3222037
-      value: 0.21775247
-      inSlope: 0.16100915
-      outSlope: 0.16100915
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.51458764
-      value: 0.23768294
-      inSlope: 0.21183744
-      outSlope: 0.21183744
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.66982627
-      value: 0.28737134
-      inSlope: 0.32306057
-      outSlope: 0.32306057
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8214197
-      value: 0.33679742
-      inSlope: 2.019897
-      outSlope: 2.019897
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 3.7137504
-      outSlope: 3.7137504
-      tangentMode: 34
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -727,7 +661,7 @@ GameObject:
   - component: {fileID: 1603357924}
   - component: {fileID: 1603357923}
   - component: {fileID: 1603357922}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,10 +716,61 @@ PolygonCollider2D:
       - {x: -9.599999, y: -5.4}
       - {x: 9.599999, y: -5.4}
       - {x: 9.599999, y: 5.4}
-    - - {x: -8.389999, y: 4.41}
-      - {x: 8.11, y: 4.41}
-      - {x: 8.11, y: -4.37}
-      - {x: -8.389999, y: -4.37}
+    - - {x: -7.19, y: -4.31}
+      - {x: -7.2599998, y: -4.19}
+      - {x: -7.41, y: -3.9299998}
+      - {x: -7.49, y: -3.79}
+      - {x: -7.6699996, y: -3.48}
+      - {x: -7.75, y: -3.34}
+      - {x: -7.8999996, y: -3.08}
+      - {x: -8.19, y: -2.58}
+      - {x: -8.309999, y: -2.37}
+      - {x: -8.38, y: -2.25}
+      - {x: -8.389999, y: -2.24}
+      - {x: -8.389999, y: 2.25}
+      - {x: -8.34, y: 2.32}
+      - {x: -8.23, y: 2.51}
+      - {x: -7.93, y: 3.03}
+      - {x: -7.85, y: 3.1699998}
+      - {x: -7.7799997, y: 3.29}
+      - {x: -7.7, y: 3.4299998}
+      - {x: -7.6299996, y: 3.55}
+      - {x: -7.44, y: 3.8799999}
+      - {x: -7.37, y: 4}
+      - {x: -7.29, y: 4.14}
+      - {x: -7.18, y: 4.33}
+      - {x: -7.14, y: 4.41}
+      - {x: 6.8199997, y: 4.41}
+      - {x: 6.87, y: 4.31}
+      - {x: 6.91, y: 4.24}
+      - {x: 6.98, y: 4.12}
+      - {x: 7.1299996, y: 3.86}
+      - {x: 7.24, y: 3.6699998}
+      - {x: 7.54, y: 3.1499999}
+      - {x: 8.03, y: 2.3}
+      - {x: 8.099999, y: 2.18}
+      - {x: 8.11, y: 2.1699998}
+      - {x: 8.11, y: 1.55}
+      - {x: 8.099999, y: 1.54}
+      - {x: 8.099999, y: 0.42999998}
+      - {x: 8.11, y: 0.42}
+      - {x: 8.11, y: -2.1699998}
+      - {x: 8.099999, y: -2.18}
+      - {x: 7.99, y: -2.37}
+      - {x: 7.8999996, y: -2.54}
+      - {x: 7.8799996, y: -2.56}
+      - {x: 7.81, y: -2.6799998}
+      - {x: 7.66, y: -2.9399998}
+      - {x: 7.58, y: -3.08}
+      - {x: 7.5099998, y: -3.1999998}
+      - {x: 7.43, y: -3.34}
+      - {x: 7.3599997, y: -3.46}
+      - {x: 7.21, y: -3.72}
+      - {x: 7.14, y: -3.84}
+      - {x: 6.99, y: -4.1}
+      - {x: 6.87, y: -4.31}
+      - {x: 6.8399997, y: -4.37}
+      - {x: -7.17, y: -4.37}
   m_UseDelaunayMesh: 0
 --- !u!212 &1603357923
 SpriteRenderer:

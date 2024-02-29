@@ -1,27 +1,27 @@
-using MyBox;
+using System.Collections;
 using UnityEngine;
 
 /// <summary> Flips the object with context</summary>
 public class FlipObjectOnVelocity : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] float flipSpeed = 7;
-    [SerializeField] float flipTime = 1;
-    [SerializeField] float maxRBSpeed = 5;
+    [SerializeField] float timeToFlip = .3f;
     [SerializeField] AnimationCurve flipCurve;
     #endregion
 
     #region private fields
-    bool flipState;
+    Vector2 targetScale;
     Vector3 localScale;
+    bool flipState;
     Rigidbody2D rb;
-    float initialScale;
+    float maxScale;
+    Coroutine flipRoutine;
     #endregion
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        initialScale = transform.localScale.x;
+        maxScale = transform.localScale.x;
     }
 
     void Update()
@@ -33,10 +33,28 @@ public class FlipObjectOnVelocity : MonoBehaviour
     {
         if (rb.velocity.magnitude <= 0) return;
 
-        localScale = transform.localScale;
-        flipState = rb.velocity.x > 0;
+        if (flipRoutine == null)
+            flipRoutine = StartCoroutine(Flip());
 
-        transform.localScale = Vector2.Lerp(localScale, localScale.SetX(flipState ? -initialScale : initialScale), flipCurve.Evaluate(rb.velocity.magnitude / maxRBSpeed));
-        print(rb.velocity.magnitude / maxRBSpeed);
+    }
+
+    IEnumerator Flip()
+    {
+        flipState = rb.velocity.x > 0;
+        localScale = transform.localScale;
+        targetScale.y = localScale.y;
+        targetScale.x = flipState ? -maxScale : maxScale;
+
+        float flipTime = 0;
+
+        while (timeToFlip > flipTime && flipState == rb.velocity.x > 0)
+        {
+            flipTime += Time.deltaTime;
+            transform.localScale = Vector2.Lerp(localScale, targetScale, flipCurve.Evaluate(flipTime / timeToFlip));
+
+            yield return null;
+        }
+
+        flipRoutine = null;
     }
 }

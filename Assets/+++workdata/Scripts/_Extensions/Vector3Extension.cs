@@ -16,6 +16,11 @@ public static class Vector3Extension
         return target;
     }
 
+    public static Vector2 RemoveZ(this Vector3 target)
+    {
+        return target;
+    }
+
     public static Vector3 ChangeAxis(this Vector3 target, Axis axis, float value)
     {
         if (axis == Axis.X)

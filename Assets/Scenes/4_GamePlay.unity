@@ -964,13 +964,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce717eba283faa4f8dc46e965fdb6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToFlip: 0.3
+  timeToFlip: 0.2
   flipCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0011177063
-      value: 0.30007935
+      time: -0.0041503906
+      value: 0.20431519
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -978,19 +978,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.071024954
-      value: 0.4385708
-      inSlope: 2.4322598
-      outSlope: 2.4322598
+      time: 0.31050348
+      value: 0.44201177
+      inSlope: 0.17393437
+      outSlope: 0.17393437
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.199225
-      outWeight: 0.052238345
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1055,7 +1055,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1844331456, guid: e7867d17ed2fb304caf897646eeffe26, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.53611755, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1075,7 +1075,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.87, y: 0.73, z: 0}
-  m_LocalScale: {x: 0.47851, y: 0.47851, z: 0.47851}
+  m_LocalScale: {x: 0.43198445, y: 0.43198445, z: 0.43198445}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

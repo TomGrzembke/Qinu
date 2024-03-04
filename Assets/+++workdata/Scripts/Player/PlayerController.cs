@@ -1,4 +1,6 @@
+using MyBox;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : RBGetter
 {
@@ -7,10 +9,23 @@ public class PlayerController : RBGetter
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float acceleration = 10f;
     [SerializeField] float decceleration = 10f;
+    [SerializeField] NavMeshAgent agent;
     #endregion
 
     #region private fields
-    public Vector2 MoveDir => InputManager.Instance.MovementVec;
+    public Vector2 MoveDir
+    {
+        get
+        {
+            if (agent == null)
+                return InputManager.Instance.MovementVec;
+            else
+            {
+                return (agent.destination - transform.position).RemoveZ().ClampX(-1,1).ClampY(-1, 1);
+            }
+        }
+        private set { }
+    }
     #endregion
 
     void FixedUpdate()

@@ -4,20 +4,19 @@ using UnityEngine.AI;
 public class AgentController : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] bool wasd = true;
+    [SerializeField] bool calculateOnly;
     #endregion
 
     #region private fields
-    
+
     #endregion
 
     #region serialized fields
-    [SerializeField] float smoothing = 10;
+    [SerializeField] float range = 5;
     #endregion
 
     #region private fields
     Vector2 Movement => InputManager.Instance.MovementVec;
-    Vector2 moveSafe;
     NavMeshAgent agent;
     #endregion
 
@@ -28,7 +27,7 @@ public class AgentController : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         SetAgentPosition();
     }
@@ -37,18 +36,20 @@ public class AgentController : MonoBehaviour
     {
         if (Movement == Vector2.zero)
         {
-            SetAgentPosition(agent.transform.position);
+                agent.velocity = Vector2.zero;
             return;
         }
 
-        moveSafe = Vector2.Lerp(moveSafe, Movement, Time.deltaTime * smoothing);
-        SetAgentPosition(transform.position + new Vector3(moveSafe.x, moveSafe.y, 0) * 5);
+        SetAgentPosition(transform.position.Add(Movement.x * range, Movement.y * range));
     }
 
     public void SetAgentPosition(Vector3 targetPos)
     {
         agent.SetDestination(targetPos);
+        if (calculateOnly)
+            agent.velocity = Vector2.zero;
     }
+
     void OnDrawGizmosSelected()
     {
     }

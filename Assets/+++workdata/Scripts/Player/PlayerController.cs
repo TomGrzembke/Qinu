@@ -1,4 +1,3 @@
-using MyBox;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,12 +16,14 @@ public class PlayerController : RBGetter
     {
         get
         {
+            if (InputManager.Instance.MovementVec == Vector2.zero)
+                return Vector2.zero;
+
             if (agent == null)
                 return InputManager.Instance.MovementVec;
             else
-            {
-                return (agent.destination - transform.position).RemoveZ().ClampX(-1,1).ClampY(-1, 1);
-            }
+                return agent.desiredVelocity.RemoveZ().Clamp(-1, 1).RoundUp(agent.speed / 10);
+
         }
         private set { }
     }

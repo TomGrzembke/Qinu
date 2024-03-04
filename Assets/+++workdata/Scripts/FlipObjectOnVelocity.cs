@@ -7,14 +7,15 @@ public class FlipObjectOnVelocity : MonoBehaviour
     #region serialized fields
     [SerializeField] float timeToFlip = .3f;
     [SerializeField] AnimationCurve flipCurve;
+    [SerializeField] float flipSensitivity;
     #endregion
 
     #region private fields
     Vector2 targetScale;
     Vector3 localScale;
     bool flipState;
-    Rigidbody2D rb;
     float maxScale;
+    Rigidbody2D rb;
     Coroutine flipRoutine;
     #endregion
 
@@ -31,7 +32,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     void FlipLogic()
     {
-        if (rb.velocity.magnitude <= 0) return;
+        if (rb.velocity.magnitude <= flipSensitivity) return;
 
         if (flipRoutine == null)
             flipRoutine = StartCoroutine(Flip());

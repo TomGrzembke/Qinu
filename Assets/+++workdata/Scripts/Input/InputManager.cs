@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
         private set;
     }
 
+    public bool HasMoveInput => movementVec.magnitude > 0 || leftclickAction.IsPressed();
+
     public InputAction leftclickAction
     {
         get;

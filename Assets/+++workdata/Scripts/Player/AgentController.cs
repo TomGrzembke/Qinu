@@ -48,7 +48,7 @@ public class AgentController : MonoBehaviour
 
     public void SetAgentPosition()
     {
-        if (Movement == Vector2.zero)
+        if (!InputManager.Instance.HasMoveInput)
         {
             agent.velocity = Vector2.zero;
             return;

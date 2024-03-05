@@ -11416,6 +11416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calculateOnly: 1
+  wasd: 0
   range: 5
 --- !u!1 &1172093693
 GameObject:

@@ -42,7 +42,7 @@ public class AgentController : MonoBehaviour
 
     public void ClickMove(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !wasd)
             SetAgentPosition(InputManager.Instance.MousePos);
     }
 

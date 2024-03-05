@@ -16,14 +16,12 @@ public class PlayerController : RBGetter
     {
         get
         {
-            if (InputManager.Instance.MovementVec == Vector2.zero)
-                return Vector2.zero;
-
             if (agent == null)
                 return InputManager.Instance.MovementVec;
-            else
+            else if (agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1).RoundUp(agent.speed / 10);
-
+            else
+                return Vector2.zero;
         }
         private set { }
     }

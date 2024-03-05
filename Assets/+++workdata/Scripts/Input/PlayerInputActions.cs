@@ -107,15 +107,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Mouse"",
-                    ""type"": ""Value"",
-                    ""id"": ""40cb1d07-8399-4dc1-8b4a-9ae4b1e799ff"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -327,17 +318,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""36750f91-0f96-4b7c-aed5-a177a7d4d331"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Mouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -383,7 +363,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_DebugSlash = m_Player.FindAction("DebugSlash", throwIfNotFound: true);
         m_Player_DebugAsterisk = m_Player.FindAction("DebugAsterisk", throwIfNotFound: true);
         m_Player_Debug7 = m_Player.FindAction("Debug7", throwIfNotFound: true);
-        m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
         // UserInterface
         m_UserInterface = asset.FindActionMap("UserInterface", throwIfNotFound: true);
         m_UserInterface_SkillTree = m_UserInterface.FindAction("SkillTree", throwIfNotFound: true);
@@ -457,7 +436,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DebugSlash;
     private readonly InputAction m_Player_DebugAsterisk;
     private readonly InputAction m_Player_Debug7;
-    private readonly InputAction m_Player_Mouse;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -471,7 +449,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @DebugSlash => m_Wrapper.m_Player_DebugSlash;
         public InputAction @DebugAsterisk => m_Wrapper.m_Player_DebugAsterisk;
         public InputAction @Debug7 => m_Wrapper.m_Player_Debug7;
-        public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -508,9 +485,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Debug7.started += instance.OnDebug7;
             @Debug7.performed += instance.OnDebug7;
             @Debug7.canceled += instance.OnDebug7;
-            @Mouse.started += instance.OnMouse;
-            @Mouse.performed += instance.OnMouse;
-            @Mouse.canceled += instance.OnMouse;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -542,9 +516,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Debug7.started -= instance.OnDebug7;
             @Debug7.performed -= instance.OnDebug7;
             @Debug7.canceled -= instance.OnDebug7;
-            @Mouse.started -= instance.OnMouse;
-            @Mouse.performed -= instance.OnMouse;
-            @Mouse.canceled -= instance.OnMouse;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -619,7 +590,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnDebugSlash(InputAction.CallbackContext context);
         void OnDebugAsterisk(InputAction.CallbackContext context);
         void OnDebug7(InputAction.CallbackContext context);
-        void OnMouse(InputAction.CallbackContext context);
     }
     public interface IUserInterfaceActions
     {

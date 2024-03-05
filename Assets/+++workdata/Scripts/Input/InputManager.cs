@@ -6,13 +6,15 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance;
     PlayerInputActions input;
 
-    public Vector2 CamPos => camPos;
-    [SerializeField] Vector2 camPos;
+    public Vector2 MousePos => mousePos;
+    [SerializeField] Vector2 mousePos;
 
     Camera cam;
     public Vector2 MovementVec => movementVec;
     [SerializeField] Vector2 movementVec;
+
     InputAction moveAction;
+    InputAction leftclickAction;
 
     void Awake()
     {
@@ -22,6 +24,8 @@ public class InputManager : MonoBehaviour
         moveAction = input.Player.Move;
         moveAction.performed += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
         moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
+
+        //leftclickAction = input
     }
 
     void Start()
@@ -33,7 +37,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        camPos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
     #region OnEnable/Disable

@@ -11,7 +11,12 @@ public class PlayerController : RBGetter
     [SerializeField] float acceleration = 10f;
     [SerializeField] float decceleration = 10f;
     [SerializeField] float dashForce = 10f;
+    [SerializeField] float dashTime = 0.1f;
+    [SerializeField] float dashCooldown = 0.1f;
     [SerializeField] NavMeshAgent agent;
+    Coroutine moveRoutine;
+    Coroutine dashRoutine;
+    Coroutine dashCooldownRoutine;
     #endregion
 
     #region private fields
@@ -21,10 +26,10 @@ public class PlayerController : RBGetter
         {
             if (agent && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1).RoundUp(agent.speed / 10);
+            if (agent == null)
+                return InputManager.Instance.MovementVec;
             else if (!InputManager.Instance.HasMoveInput)
                 return Vector2.zero;
-            else if (agent == null)
-                return InputManager.Instance.MovementVec;
             else
                 return Vector2.zero;
         }
@@ -39,40 +44,63 @@ public class PlayerController : RBGetter
 
     void FixedUpdate()
     {
-        Movement();
-    }
+        if (moveRoutine == null && dashRoutine == null)
+            moveRoutine = StartCoroutine(Move());
 
-    void Movement()
-    {
-        if (MoveDir == Vector2.zero)
-        {
-            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-            return;
-        }
-
-        rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
-
-        if (rb.velocity.magnitude > maxSpeed && !InputManager.Instance.rightClickAction.IsPressed())
-        {
-            rb.velocity = Vector2.Lerp(rb.velocity, rb.velocity.normalized * maxSpeed, Time.deltaTime * decceleration);
-        }
+        print(rb.velocity.magnitude);
     }
 
     void RightClick(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null)
         {
-            StartCoroutine(Dash());
+            dashRoutine = StartCoroutine(Dash());
         }
     }
+
+    IEnumerator Move()
+    {
+        while (dashRoutine == null)
+        {
+            if (MoveDir == Vector2.zero)
+            {
+                rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
+                yield return null;
+                continue;
+            }
+
+            rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
+
+            if (rb.velocity.magnitude > maxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxSpeed;
+            }
+
+            yield return null;
+        }
+    }
+
     IEnumerator Dash()
     {
         yield return null;
+        moveRoutine = null;
         rb.AddForce(MoveDir * dashForce, ForceMode2D.Impulse);
 
         if (agent)
             agent.ResetPath();
+
+        yield return new WaitForSeconds(dashTime);
+
+        dashCooldownRoutine = StartCoroutine(DashCooldown());
+        dashRoutine = null;
     }
+    IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(dashCooldown);
+
+        dashCooldownRoutine = null;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
 

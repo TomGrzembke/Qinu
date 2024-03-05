@@ -29,6 +29,7 @@ public class AgentController : MonoBehaviour
         agent.updateUpAxis = false;
 
         InputManager.Instance.SubscribeTo(ClickMove, InputManager.Instance.leftclickAction);
+        InputManager.Instance.SubscribeTo(ClickMove, InputManager.Instance.rightClickAction);
     }
 
     void Update()
@@ -51,6 +52,7 @@ public class AgentController : MonoBehaviour
         if (!InputManager.Instance.HasMoveInput)
         {
             agent.velocity = Vector2.zero;
+            agent.ResetPath();
             return;
         }
 

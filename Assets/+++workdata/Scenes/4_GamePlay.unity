@@ -5837,6 +5837,7 @@ MonoBehaviour:
   maxSpeed: 17
   acceleration: 150
   decceleration: 8
+  dashForce: 10
   agent: {fileID: 0}
 --- !u!212 &899189022
 SpriteRenderer:
@@ -11320,6 +11321,7 @@ MonoBehaviour:
   maxSpeed: 12
   acceleration: 150
   decceleration: 8
+  dashForce: 46.66
   agent: {fileID: 1130039582}
 --- !u!114 &1130039580
 MonoBehaviour:

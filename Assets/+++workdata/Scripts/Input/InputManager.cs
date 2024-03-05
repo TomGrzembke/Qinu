@@ -20,9 +20,15 @@ public class InputManager : MonoBehaviour
         private set;
     }
 
-    public bool HasMoveInput => movementVec.magnitude > 0 || leftclickAction.IsPressed();
+    public bool HasMoveInput => movementVec.magnitude > 0 || leftclickAction.IsPressed() || rightClickAction.IsPressed();
 
     public InputAction leftclickAction
+    {
+        get;
+        private set;
+    }
+
+    public InputAction rightClickAction
     {
         get;
         private set;
@@ -38,6 +44,7 @@ public class InputManager : MonoBehaviour
         moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
 
         leftclickAction = input.Player.LeftClick;
+        rightClickAction = input.Player.RightClick;
     }
 
     void Start()

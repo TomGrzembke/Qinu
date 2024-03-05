@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class AgentController : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] bool calculateOnly;
+    [SerializeField] bool wasd = true;
     #endregion
 
     #region private fields
@@ -25,18 +27,30 @@ public class AgentController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        InputManager.Instance.SubscribeTo(ClickMove, InputManager.Instance.leftclickAction);
     }
 
     void Update()
     {
-        SetAgentPosition();
+        if (wasd)
+            SetAgentPosition();
+
+        if (calculateOnly)
+            agent.velocity = Vector2.zero;
+    }
+
+    public void ClickMove(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+            SetAgentPosition(InputManager.Instance.MousePos);
     }
 
     public void SetAgentPosition()
     {
         if (Movement == Vector2.zero)
         {
-                agent.velocity = Vector2.zero;
+            agent.velocity = Vector2.zero;
             return;
         }
 
@@ -46,6 +60,7 @@ public class AgentController : MonoBehaviour
     public void SetAgentPosition(Vector3 targetPos)
     {
         agent.SetDestination(targetPos);
+
         if (calculateOnly)
             agent.velocity = Vector2.zero;
     }

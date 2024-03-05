@@ -11321,9 +11321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 4
-  acceleration: 150
+  acceleration: 45
   decceleration: 8
-  dashForce: 50
+  dashForce: 45
   dashTime: 0.1
   dashCooldown: 2
   agent: {fileID: 1130039582}
@@ -11423,6 +11423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calculateOnly: 1
   wasd: 0
+  alwaysPathToMouse: 1
   range: 5
 --- !u!1 &1172093693
 GameObject:

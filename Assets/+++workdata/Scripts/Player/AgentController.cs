@@ -7,6 +7,7 @@ public class AgentController : MonoBehaviour
     #region serialized fields
     [SerializeField] bool calculateOnly;
     [SerializeField] bool wasd = true;
+    [SerializeField] bool alwaysPathToMouse;
     #endregion
 
     #region private fields
@@ -34,6 +35,9 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
+        if (alwaysPathToMouse)
+            SetAgentPosition(InputManager.Instance.MousePos);
+    
         if (wasd)
             SetAgentPosition();
 

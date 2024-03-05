@@ -46,8 +46,6 @@ public class PlayerController : RBGetter
     {
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
-
-        print(rb.velocity.magnitude);
     }
 
     void RightClick(InputAction.CallbackContext ctx)

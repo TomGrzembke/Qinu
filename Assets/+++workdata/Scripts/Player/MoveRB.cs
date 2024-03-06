@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerController : RBGetter
+public class MoveRB : RBGetter
 {
     #region serialized fields
 

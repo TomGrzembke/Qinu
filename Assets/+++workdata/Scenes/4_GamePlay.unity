@@ -5576,9 +5576,12 @@ GameObject:
   m_Component:
   - component: {fileID: 899189023}
   - component: {fileID: 899189022}
+  - component: {fileID: 899189028}
   - component: {fileID: 899189020}
+  - component: {fileID: 899189025}
   - component: {fileID: 899189018}
   - component: {fileID: 899189024}
+  - component: {fileID: 899189027}
   m_Layer: 0
   m_Name: QinuShadow
   m_TagString: Untagged
@@ -5630,8 +5633,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0041503906
-      value: 0.20431519
+      time: 0.001461029
+      value: 0.37319946
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5659,7 +5662,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  flipSensitivity: 0
+  flipSensitivity: 6.5
 --- !u!212 &899189022
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5762,6 +5765,62 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.08
+--- !u!114 &899189025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899189017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 4
+  acceleration: 45
+  decceleration: 8
+  dashForce: 45
+  dashTime: 0.1
+  dashCooldown: 2
+  dashInput: 0
+  agent: {fileID: 899189027}
+--- !u!195 &899189027
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899189017}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 2.0749998
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 6.9999995
+  m_BaseOffset: 3.4999998
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &899189028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899189017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a808b4edf3ef007418b4c0d7d3e48007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1183967833}
+  calculateOnly: 1
 --- !u!1 &904644935
 GameObject:
   m_ObjectHideFlags: 0
@@ -10749,7 +10808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1116077615
 Transform:
   m_ObjectHideFlags: 0
@@ -11019,6 +11078,7 @@ MonoBehaviour:
   dashForce: 45
   dashTime: 0.1
   dashCooldown: 2
+  dashInput: 1
   agent: {fileID: 1130039582}
 --- !u!114 &1130039580
 MonoBehaviour:

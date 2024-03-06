@@ -13,6 +13,7 @@ public class MoveRB : RBGetter
     [SerializeField] float dashForce = 10f;
     [SerializeField] float dashTime = 0.1f;
     [SerializeField] float dashCooldown = 0.1f;
+    [SerializeField] bool dashInput;
     [SerializeField] NavMeshAgent agent;
     Coroutine moveRoutine;
     Coroutine dashRoutine;
@@ -50,7 +51,7 @@ public class MoveRB : RBGetter
 
     void RightClick(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null)
+        if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null && dashInput)
         {
             dashRoutine = StartCoroutine(Dash());
         }

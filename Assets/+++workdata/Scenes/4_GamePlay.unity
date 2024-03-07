@@ -11072,7 +11072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
+  maxSpeed: 6
   acceleration: 45
   decceleration: 8
   dashForce: 45
@@ -11175,8 +11175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calculateOnly: 1
-  wasd: 0
-  alwaysPathToMouse: 1
   range: 5
 --- !u!58 &1130039584
 CircleCollider2D:

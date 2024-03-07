@@ -56,7 +56,11 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        if (!cam) 
+            cam = Camera.main;
+
+        if (cam)
+            mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
     /// <summary> Takes a Method and an Inputaction to subscribe them</summary>

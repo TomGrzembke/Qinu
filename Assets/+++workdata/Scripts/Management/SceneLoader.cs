@@ -3,18 +3,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
-    public enum Scenes
-    {
-        Startup,
-        Manager,
-        Pixelate,
-        MainMenu,
-        Gameplay
-    }
+public enum Scenes
+{
+    Startup,
+    Manager,
+    Pixelate,
+    MainMenu,
+    Gameplay
+}
 
 public class SceneLoader : MonoBehaviour
 {

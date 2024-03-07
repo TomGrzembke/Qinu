@@ -11,7 +11,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     #endregion
 
     #region private fields
-    Vector2 targetScale;
+    Vector3 targetScale;
     Vector3 localScale;
     bool flipState;
     float maxScale;
@@ -43,7 +43,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     {
         flipState = rb.velocity.x > 0;
         localScale = transform.localScale;
-        targetScale.y = localScale.y;
+        targetScale = localScale;
         targetScale.x = flipState ? -maxScale : maxScale;
 
         float flipTime = 0;
@@ -51,7 +51,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
         while (timeToFlip > flipTime && flipState == rb.velocity.x > 0)
         {
             flipTime += Time.deltaTime;
-            transform.localScale = Vector2.Lerp(localScale, targetScale, flipCurve.Evaluate(flipTime / timeToFlip));
+            transform.localScale = Vector3.Lerp(localScale, targetScale, flipCurve.Evaluate(flipTime / timeToFlip));
 
             yield return null;
         }

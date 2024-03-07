@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
@@ -110,7 +109,7 @@ Material:
     - _AlphaClip: 1
     - _AlphaToMask: 0
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
+    - _BlendModePreserveSpecular: 0
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
@@ -154,17 +153,17 @@ Material:
     - _SoftParticlesNearFadeDistance: 0
     - _SpecSource: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
     - _WindQuality: 0
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    - _BaseColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.28301886, g: 0.28301886, b: 0.28301886, a: 1}
+    - _Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
     - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}

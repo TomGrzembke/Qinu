@@ -27,10 +27,6 @@ public class MoveRB : RBGetter
         {
             if (agent && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1).RoundUp(agent.speed / 10);
-            if (agent == null)
-                return InputManager.Instance.MovementVec;
-            else if (!InputManager.Instance.HasMoveInput)
-                return Vector2.zero;
             else
                 return Vector2.zero;
         }

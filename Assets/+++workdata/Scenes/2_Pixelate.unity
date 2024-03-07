@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 719328494}
   - component: {fileID: 719328493}
   m_Layer: 0
-  m_Name: PixelateCamera (1)
+  m_Name: BGCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,7 +508,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 82b134c93aa014f42ac0c8c4c488292d, type: 2}
   m_TargetDisplay: 0

@@ -262,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.09}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.11, y: -1.25}
+  m_AnchoredPosition: {x: 1.96, y: -0.64}
   m_SizeDelta: {x: 3.5916, y: 2.0512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &167118118
@@ -374,7 +374,7 @@ GameObject:
   m_Layer: 0
   m_Name: ResetRight
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -387,7 +387,7 @@ Transform:
   m_GameObject: {fileID: 180869748}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.02, y: 0.72, z: 0}
+  m_LocalPosition: {x: 1.72, y: -4.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -874,7 +874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.47, y: 2.12}
+  m_AnchoredPosition: {x: -3.53, y: -0.59}
   m_SizeDelta: {x: 3.5916, y: 2.0512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461598521
@@ -7039,14 +7039,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821044898}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.29, y: -9.56, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.37, y: -2.18, z: 0}
   m_LocalScale: {x: 0.15, y: 2.259425, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1926622399}
   m_Father: {fileID: 1799204564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &821044901
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -7428,7 +7428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
+  maxSpeed: 6
   acceleration: 45
   decceleration: 8
   dashForce: 45
@@ -12507,13 +12507,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971475958}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.52, y: -1.68, z: 0}
   m_LocalScale: {x: 0.05520625, y: 9.627936, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1799204564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &971475961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12798,8 +12798,8 @@ MonoBehaviour:
   maxSpeed: 7.25
   acceleration: 45
   decceleration: 8
-  dashForce: 30
-  dashTime: 0.09
+  dashForce: 40
+  dashTime: 0.1
   dashCooldown: 1.5
   dashInput: 1
   agent: {fileID: 1130039582}
@@ -13225,7 +13225,7 @@ Transform:
   m_GameObject: {fileID: 1183967831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: -2.07, z: -0.79339}
+  m_LocalPosition: {x: -4.02, y: 1.73, z: -0.79339}
   m_LocalScale: {x: 1.110833, y: 1.110833, z: 1.110833}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15246,14 +15246,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689875737}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.45, y: 6.05, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.89, y: -2.01, z: 0}
   m_LocalScale: {x: -0.15, y: 2.259425, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 793677028}
   m_Father: {fileID: 1799204564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1689875739
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -15605,28 +15605,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.6975046, y: -3.6638327}
+    - - {x: 5.152091, y: -1.6844518}
+      - {x: 5.55567, y: -1.2225564}
+      - {x: 5.5833015, y: -4.08814}
+      - {x: -4.8232765, y: -4.0051813}
+      - {x: -4.7271476, y: -1.310942}
+      - {x: -4.289311, y: -1.5226481}
+      - {x: -4.267125, y: -2.519724}
+      - {x: -3.6343164, y: -3.3567}
       - {x: 4.3229322, y: -3.363552}
       - {x: 5.114341, y: -2.8318594}
-      - {x: 5.082311, y: 1.27013}
-      - {x: 4.3374863, y: 2.2852662}
-      - {x: 1.5207586, y: 2.2273412}
-      - {x: 1.4829926, y: 2.9496143}
-      - {x: 5.563927, y: 2.9565547}
-      - {x: 5.538773, y: -4.069503}
-      - {x: 1.391163, y: -4.066331}
-    - - {x: -0.653371, y: 2.7834463}
-      - {x: -0.6273985, y: 2.6051059}
-      - {x: -0.91628975, y: 2.2245653}
-      - {x: -3.4600375, y: 2.288294}
-      - {x: -4.2916827, y: 1.596629}
-      - {x: -4.3061957, y: -2.5325289}
-      - {x: -3.6964169, y: -3.348091}
-      - {x: -1.5320071, y: -3.3482509}
-      - {x: -0.95219916, y: -3.5936747}
-      - {x: -0.6006565, y: -4.049664}
-      - {x: -4.8500905, y: -3.990366}
-      - {x: -4.730047, y: 2.7635071}
+    - - {x: 5.071998, y: 1.2214667}
+      - {x: 5.064986, y: 0.3641721}
+      - {x: 5.5184565, y: 0.1418922}
+      - {x: 5.5782146, y: 2.9973447}
+      - {x: -4.719997, y: 3.0471637}
+      - {x: -4.7285686, y: 0.09434652}
+      - {x: -4.340497, y: 0.5166745}
+      - {x: -4.2375436, y: 1.6237285}
+      - {x: -3.3547363, y: 2.2958648}
+      - {x: 4.2600617, y: 2.267345}
   m_UseDelaunayMesh: 0
 --- !u!114 &1732220601
 MonoBehaviour:
@@ -21225,7 +21223,7 @@ GameObject:
   m_Layer: 0
   m_Name: ResetLeft
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -21238,7 +21236,7 @@ Transform:
   m_GameObject: {fileID: 1979328817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: -5.48, z: 0}
+  m_LocalPosition: {x: -5.05, y: -0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21513,7 +21511,7 @@ GameObject:
   - component: {fileID: 2076876139}
   - component: {fileID: 2076876140}
   m_Layer: 7
-  m_Name: PerspectiveTest (1)
+  m_Name: Walkable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21647,8 +21645,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -3.5882487, y: -1.9626232}
-      - {x: -3.3759272, y: 3.2489717}
-      - {x: 3.995634, y: 3.1889975}
+      - {x: -3.4668322, y: 3.21867}
+      - {x: 4.131992, y: 3.1889975}
       - {x: 4.18826, y: -1.9057642}
   m_UseDelaunayMesh: 0
 --- !u!1 &2086166966

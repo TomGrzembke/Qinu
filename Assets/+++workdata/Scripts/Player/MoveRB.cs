@@ -48,7 +48,6 @@ public class MoveRB : RBGetter
     void FixedUpdate()
     {
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
-        print(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance);
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }

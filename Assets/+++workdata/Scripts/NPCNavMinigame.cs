@@ -4,8 +4,14 @@ using UnityEngine.AI;
 public class NPCNavMinigame : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] Transform target;
+    [SerializeField] Transform puk;
     [SerializeField] bool calculateOnly = true;
+    [SerializeField] bool followBallY = true;
+    [SerializeField] bool goesToDefault = true;
+    [SerializeField] Transform arenaMiddle;
+    [SerializeField] Transform defaultPos;
+    [SerializeField] Vector3 targetPos;
+    bool PukInReach => arenaMiddle.position.x < puk.position.x;
     #endregion
 
     #region private fields
@@ -30,8 +36,22 @@ public class NPCNavMinigame : MonoBehaviour
 
     void Update()
     {
+        if (PukInReach)
+        {
+            targetPos = puk.position;
+        }
+        else if (!followBallY)
+        {
+            if (goesToDefault)
+                targetPos = defaultPos.position;
+        }
+        else
+        {
+            targetPos.x = defaultPos.position.x;
+            targetPos.y = puk.position.y;
+        }
 
-        SetAgentPosition(target.position);
+        SetAgentPosition(targetPos);
 
         if (calculateOnly)
             agent.velocity = Vector2.zero;

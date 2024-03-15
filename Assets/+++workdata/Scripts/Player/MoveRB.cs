@@ -1,3 +1,4 @@
+using MyBox;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -71,7 +72,15 @@ public class MoveRB : RBGetter
                 continue;
             }
 
-            rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
+
+            if (MoveDir.x == 0)
+            {
+                rb.AddForce(MoveDir.SetX(0.0001f) * acceleration, ForceMode2D.Force);
+            }
+            else
+            {
+                rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
+            }
 
             if (rb.velocity.magnitude > currentMaxSpeed)
             {

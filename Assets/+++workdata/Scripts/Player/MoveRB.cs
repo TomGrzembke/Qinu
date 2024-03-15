@@ -7,7 +7,12 @@ public class MoveRB : RBGetter
 {
     #region serialized fields
 
+    [SerializeField] AnimationCurve moveCurve;
+    [SerializeField] float maxSpeedDistance;
+
     [SerializeField] float maxSpeed = 5f;
+    [SerializeField] float minSpeed = 1f;
+    [SerializeField] float currentMaxSpeed;
     [SerializeField] float acceleration = 10f;
     [SerializeField] float decceleration = 10f;
     [SerializeField] float dashForce = 10f;
@@ -36,11 +41,14 @@ public class MoveRB : RBGetter
 
     protected override void AwakeInternal()
     {
+        currentMaxSpeed = maxSpeed;
         InputManager.Instance.SubscribeTo(RightClick, InputManager.Instance.rightClickAction);
     }
 
     void FixedUpdate()
     {
+        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+        print(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance);
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }
@@ -66,9 +74,9 @@ public class MoveRB : RBGetter
 
             rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
 
-            if (rb.velocity.magnitude > maxSpeed)
+            if (rb.velocity.magnitude > currentMaxSpeed)
             {
-                rb.velocity = rb.velocity.normalized * maxSpeed;
+                rb.velocity = rb.velocity.normalized * currentMaxSpeed;
             }
 
             yield return null;
@@ -89,6 +97,7 @@ public class MoveRB : RBGetter
         dashCooldownRoutine = StartCoroutine(DashCooldown());
         dashRoutine = null;
     }
+
     IEnumerator DashCooldown()
     {
         yield return new WaitForSeconds(dashCooldown);

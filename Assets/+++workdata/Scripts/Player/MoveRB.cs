@@ -21,6 +21,8 @@ public class MoveRB : RBGetter
     [SerializeField] float dashCooldown = 0.1f;
     [SerializeField] bool dashInput;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] bool dashAutomAim = true;
+    [SerializeField, ConditionalField(nameof(dashAutomAim))] Transform puk;
     Coroutine moveRoutine;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
@@ -31,8 +33,10 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (agent && agent.desiredVelocity != Vector3.zero)
-                return agent.desiredVelocity.RemoveZ().Clamp(-1, 1).RoundUp(agent.speed / 10);
+            if (agent == null)
+                return (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1);
+            else if (agent != null && agent.desiredVelocity != Vector3.zero)
+                return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
             else
                 return Vector2.zero;
         }
@@ -43,17 +47,18 @@ public class MoveRB : RBGetter
     protected override void AwakeInternal()
     {
         currentMaxSpeed = maxSpeed;
-        InputManager.Instance.SubscribeTo(RightClick, InputManager.Instance.rightClickAction);
+        InputManager.Instance.SubscribeTo(LeftClick, InputManager.Instance.leftclickAction);
     }
 
     void FixedUpdate()
     {
+        print(MoveDir);
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }
 
-    void RightClick(InputAction.CallbackContext ctx)
+    void LeftClick(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null && dashInput)
         {
@@ -95,7 +100,11 @@ public class MoveRB : RBGetter
     {
         yield return null;
         moveRoutine = null;
-        rb.AddForce(MoveDir * dashForce, ForceMode2D.Impulse);
+
+        if (dashAutomAim)
+            rb.AddForce((puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
+        else
+            rb.AddForce(MoveDir * dashForce, ForceMode2D.Impulse);
 
         if (agent)
             agent.ResetPath();

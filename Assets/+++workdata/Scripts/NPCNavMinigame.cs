@@ -1,3 +1,4 @@
+using MyBox;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,12 +7,17 @@ public class NPCNavMinigame : MonoBehaviour
     #region serialized fields
     [SerializeField] Transform puk;
     [SerializeField] bool calculateOnly = true;
-    [SerializeField] bool followBallY = true;
+    [SerializeField] bool isRight = true;
     [SerializeField] bool goesToDefault = true;
+    [SerializeField] bool followBallY = true;
+    [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;
+    [SerializeField] bool dashRandomly = true;
+    [SerializeField] float probabilityPerFrame = 10;
+    [SerializeField] MoveRB moveRB;
     [SerializeField] Transform arenaMiddle;
     [SerializeField] Transform defaultPos;
     [SerializeField] Vector3 targetPos;
-    bool PukInReach => arenaMiddle.position.x < puk.position.x;
+    bool PukInReach => isRight ? arenaMiddle.position.x < puk.position.x : arenaMiddle.position.x > puk.position.x;
     #endregion
 
     #region private fields
@@ -39,6 +45,10 @@ public class NPCNavMinigame : MonoBehaviour
         if (PukInReach)
         {
             targetPos = puk.position;
+            if (dashRandomly)
+                if (Random.Range(0, 100) <= probabilityPerFrame)
+                    moveRB.Dash();
+
         }
         else if (!followBallY)
         {
@@ -48,7 +58,10 @@ public class NPCNavMinigame : MonoBehaviour
         else
         {
             targetPos.x = defaultPos.position.x;
-            targetPos.y = puk.position.y;
+            if (!invertY)
+                targetPos.y = puk.position.y;
+            else
+                targetPos.y = -puk.position.y;
         }
 
         SetAgentPosition(targetPos);

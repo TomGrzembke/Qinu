@@ -47,7 +47,7 @@ public class MoveRB : RBGetter
     protected override void AwakeInternal()
     {
         currentMaxSpeed = maxSpeed;
-        InputManager.Instance.SubscribeTo(LeftClick, InputManager.Instance.leftclickAction);
+        InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
     }
 
     void FixedUpdate()
@@ -58,11 +58,18 @@ public class MoveRB : RBGetter
             moveRoutine = StartCoroutine(Move());
     }
 
-    void LeftClick(InputAction.CallbackContext ctx)
+    void Dash(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null && dashInput)
         {
-            dashRoutine = StartCoroutine(Dash());
+            dashRoutine = StartCoroutine(DashCor());
+        }
+    }
+    public void Dash()
+    {
+        if (dashCooldownRoutine == null)
+        {
+            dashRoutine = StartCoroutine(DashCor());
         }
     }
 
@@ -96,7 +103,7 @@ public class MoveRB : RBGetter
         }
     }
 
-    IEnumerator Dash()
+    IEnumerator DashCor()
     {
         yield return null;
         moveRoutine = null;

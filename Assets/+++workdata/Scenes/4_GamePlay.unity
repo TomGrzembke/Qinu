@@ -7814,6 +7814,7 @@ MonoBehaviour:
   maxSpeed: 3.5
   minSpeed: 5
   currentMaxSpeed: 0
+  stoppingDistance: 5
   acceleration: 45
   decceleration: 8
   dashForce: 20
@@ -13287,6 +13288,7 @@ MonoBehaviour:
   maxSpeed: 10
   minSpeed: 1
   currentMaxSpeed: 0
+  stoppingDistance: 0.3
   acceleration: 45
   decceleration: 8
   dashForce: 35
@@ -15057,6 +15059,7 @@ MonoBehaviour:
   maxSpeed: 3.5
   minSpeed: 5
   currentMaxSpeed: 0
+  stoppingDistance: 5
   acceleration: 45
   decceleration: 8
   dashForce: 20
@@ -15469,6 +15472,7 @@ MonoBehaviour:
   maxSpeed: 3.5
   minSpeed: 5
   currentMaxSpeed: 0
+  stoppingDistance: 5
   acceleration: 45
   decceleration: 8
   dashForce: 20

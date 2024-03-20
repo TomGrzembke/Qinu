@@ -12906,7 +12906,7 @@ Transform:
   m_GameObject: {fileID: 971475958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.52, y: -2.31, z: 0}
+  m_LocalPosition: {x: -1.13, y: -2.31, z: 0}
   m_LocalScale: {x: 0.05520625, y: 6.6192064, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13777,8 +13777,8 @@ Transform:
   m_GameObject: {fileID: 1183967831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.02, y: 1.73, z: -0.79339}
-  m_LocalScale: {x: 1.110833, y: 1.110833, z: 1.110833}
+  m_LocalPosition: {x: -3.81, y: 1.32, z: 0}
+  m_LocalScale: {x: 1.1372334, y: 1.1372334, z: 1.1372334}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1252709121}
@@ -14214,13 +14214,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252709120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.09311569, y: 0.32215056, z: -0.2620381, w: 0.9049224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6144015, y: 0.61440164, z: 0.6144016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1183967833}
-  m_LocalEulerAnglesHint: {x: 33.25, y: 49.072, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1252709122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16950,25 +16950,27 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 5.152091, y: -1.6844518}
-      - {x: 5.55567, y: -1.2225564}
-      - {x: 5.5833015, y: -4.08814}
-      - {x: -4.8232765, y: -4.0051813}
-      - {x: -4.7271476, y: -1.310942}
-      - {x: -4.289311, y: -1.5226481}
-      - {x: -4.267125, y: -2.519724}
-      - {x: -3.6343164, y: -3.3567}
-      - {x: 4.3229322, y: -3.363552}
-      - {x: 5.114341, y: -2.8318594}
+    - - {x: 5.0720644, y: -1.4523743}
+      - {x: 5.5396643, y: -1.1665378}
+      - {x: 5.546549, y: -3.9686956}
+      - {x: -4.529951, y: -3.9897437}
+      - {x: -4.496737, y: -1.1889602}
+      - {x: -3.9843564, y: -1.4548806}
+      - {x: -3.9843564, y: -1.4548806}
+      - {x: -3.9843564, y: -1.4548805}
+      - {x: -4.0096083, y: -2.4587328}
+      - {x: -3.4581203, y: -3.1940575}
+      - {x: 4.3069267, y: -3.2034988}
+      - {x: 5.106338, y: -2.6397953}
     - - {x: 5.071998, y: 1.2214667}
       - {x: 5.064986, y: 0.3641721}
       - {x: 5.5184565, y: 0.1418922}
       - {x: 5.5782146, y: 2.9973447}
-      - {x: -4.719997, y: 3.0471637}
-      - {x: -4.7285686, y: 0.09434652}
-      - {x: -4.340497, y: 0.5166745}
-      - {x: -4.2375436, y: 1.6237285}
-      - {x: -3.3547363, y: 2.2958648}
+      - {x: -4.5039244, y: 2.991145}
+      - {x: -4.480486, y: 0.110351935}
+      - {x: -4.081531, y: 0.48430374}
+      - {x: -4.07497, y: 1.5902774}
+      - {x: -3.298718, y: 2.2398462}
       - {x: 4.2600617, y: 2.267345}
   m_UseDelaunayMesh: 0
 --- !u!114 &1732220601

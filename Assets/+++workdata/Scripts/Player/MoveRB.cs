@@ -14,6 +14,7 @@ public class MoveRB : RBGetter
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float minSpeed = 1f;
     [SerializeField] float currentMaxSpeed;
+    [SerializeField] float stoppingDistance = 5f;
     [SerializeField] float acceleration = 10f;
     [SerializeField] float decceleration = 10f;
     [SerializeField] float dashForce = 10f;
@@ -33,7 +34,7 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (agent == null)
+            if (agent == null && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
                 return (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1);
             else if (agent != null && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);

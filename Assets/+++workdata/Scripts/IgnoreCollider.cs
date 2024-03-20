@@ -1,21 +1,22 @@
 using UnityEngine;
 
-public class HockeyBehavior : MonoBehaviour
+public class IgnoreCollider : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] Collider2D middleObj;
+    [SerializeField] Collider2D targetCol;
 
     #endregion
 
     #region private fields
     Collider2D col;
     #endregion
+
     void Awake()
     {
         col = GetComponent<Collider2D>();
     }
     void Start()
     {
-        Physics2D.IgnoreCollision(col, middleObj);
+        Physics2D.IgnoreCollision(col, targetCol);
     }
 }

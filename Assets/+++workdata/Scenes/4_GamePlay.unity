@@ -13250,9 +13250,10 @@ GameObject:
   - component: {fileID: 1130039583}
   - component: {fileID: 1130039577}
   - component: {fileID: 1130039582}
-  - component: {fileID: 1130039584}
   - component: {fileID: 1130039586}
   - component: {fileID: 1130039585}
+  - component: {fileID: 1130039588}
+  - component: {fileID: 1130039587}
   m_Layer: 0
   m_Name: Qinu
   m_TagString: Player
@@ -13474,7 +13475,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130039574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 2.075
   m_Speed: 5
@@ -13496,48 +13497,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130039574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ba55417c1410f4584df44f99446316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   calculateOnly: 1
   range: 5
---- !u!58 &1130039584
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130039574}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15908335}
-  serializedVersion: 2
-  m_Radius: 2.85
 --- !u!114 &1130039585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13593,6 +13559,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &1130039587
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130039574}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.15908335}
+  serializedVersion: 2
+  m_Radius: 2.85
+--- !u!114 &1130039588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130039574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCol: {fileID: 1386288717}
 --- !u!1 &1141256024
 GameObject:
   m_ObjectHideFlags: 0
@@ -14015,7 +14029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleObj: {fileID: 971475961}
+  targetCol: {fileID: 971475961}
 --- !u!114 &1183967838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14522,7 +14536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleObj: {fileID: 971475961}
+  targetCol: {fileID: 0}
 --- !u!212 &1261534649
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14826,13 +14840,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1329349051}
   - component: {fileID: 1329349052}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1329349051
 Transform:
   m_ObjectHideFlags: 0
@@ -14855,7 +14869,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329349050}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -15028,7 +15042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1386288715
 Transform:
   m_ObjectHideFlags: 0
@@ -16401,7 +16415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleObj: {fileID: 971475961}
+  targetCol: {fileID: 0}
 --- !u!212 &1537503233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22837,7 +22851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleObj: {fileID: 971475961}
+  targetCol: {fileID: 0}
 --- !u!212 &1966950041
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23500,7 +23514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleObj: {fileID: 971475961}
+  targetCol: {fileID: 0}
 --- !u!212 &2086166971
 SpriteRenderer:
   m_ObjectHideFlags: 0

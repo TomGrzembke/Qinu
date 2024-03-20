@@ -244,6 +244,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a514528a-c46a-472b-bc9e-436dd27e8692"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e1904117-b5ba-4129-8c9b-5071d27cc2f9"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -310,8 +321,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6d40692f-4a79-42e7-aea7-154a4ff922f2"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""7af542fb-1747-4a20-a6e7-2e60f82cac27"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -321,12 +332,23 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7af542fb-1747-4a20-a6e7-2e60f82cac27"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""6d40692f-4a79-42e7-aea7-154a4ff922f2"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightClick"",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82cea3e3-eb2e-48c1-9913-0f7aad7db9ad"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }

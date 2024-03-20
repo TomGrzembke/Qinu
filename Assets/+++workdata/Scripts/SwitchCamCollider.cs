@@ -10,19 +10,20 @@ public class SwitchCamCollider : MonoBehaviour
 
     #region private fields
     Collider2D playerCol;
-    [SerializeField] bool comesFromRight;
+    bool comesFromRight;
     #endregion
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerCol = collision;
-            comesFromRight = (transform.position.x - collision.transform.position.x) < 0;
-        }
+        if (!collision.CompareTag("Player")) return;
+
+        playerCol = collision;
+        comesFromRight = (transform.position.x - collision.transform.position.x) < 0;
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Player")) return;
+
         bool goesToRight = (transform.position.x - collision.transform.position.x) < 0;
 
         if (playerCol && comesFromRight != goesToRight)

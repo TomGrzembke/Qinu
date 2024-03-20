@@ -7,7 +7,6 @@ public class GameStateManager : MonoBehaviour
     static GameStateManager Instance;
 
     [SerializeField] SceneReference gamePlayScene;
-    [SerializeField] GameObject optionsWindow;
     void Awake()
     {
         Instance = this;
@@ -22,12 +21,10 @@ public class GameStateManager : MonoBehaviour
 
     public static void OptionsWindow()
     {
-        Instance.optionsWindow?.SetActive(!Instance.optionsWindow.activeInHierarchy);
         PauseManager.Instance.PauseLogic();
     }
     public static void CloseOptionsWindow()
     {
-        Instance.optionsWindow?.SetActive(false);
         PauseManager.Instance.PauseLogic();
     }
 
@@ -41,7 +38,7 @@ public class GameStateManager : MonoBehaviour
         Instance.StartCoroutine(Instance.ReloadGameSceneCoroutine());
     }
 
-    /// <summary> Depends on the naming (0_Scene), since its gets the first char and ints it</summary>
+    /// <summary> Depends on the naming (0_Scene)</summary>
     int GetSceneID(SceneReference sceneRef)
     {
         return sceneRef.GetSceneIndex();

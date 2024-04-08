@@ -58,7 +58,7 @@ public static class VectorExtension
         if (target.x != 0)
             target.x = target.x > 0 ? Mathf.Ceil(target.x) : Mathf.Floor(target.x);
 
-        if(target.y != 0)
+        if (target.y != 0)
             target.y = target.y > 0 ? Mathf.Ceil(target.y) : Mathf.Floor(target.y);
 
         return target;
@@ -90,6 +90,12 @@ public static class VectorExtension
         else if (axis == Axis.Z)
             target.z = value;
 
+        return target;
+    }
+
+    public static Vector3 Add(this Vector3 target, Vector3 toAdd)
+    {
+        target = new(target.x + toAdd.x, target.y + target.y, target.z + toAdd.z);
         return target;
     }
 }

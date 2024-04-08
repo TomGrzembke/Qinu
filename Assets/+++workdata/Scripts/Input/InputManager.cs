@@ -50,8 +50,8 @@ public class InputManager : MonoBehaviour
         moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
 
         mousePosAction = input.Player.MousePos;
-        mousePosAction.performed += ctx => Mouse(ctx.ReadValue<Vector2>());
-        mousePosAction.canceled += ctx => Mouse(ctx.ReadValue<Vector2>());
+        // mousePosAction.performed += ctx => MouseInput(ctx.ReadValue<Vector2>());
+        // mousePosAction.canceled += ctx => MouseInput(ctx.ReadValue<Vector2>());
 
         leftclickAction = input.Player.LeftClick;
         rightClickAction = input.Player.RightClick;
@@ -64,18 +64,21 @@ public class InputManager : MonoBehaviour
 
     void Movement(Vector2 direction) => movementVec = direction;
 
-    void Mouse(Vector2 direction)
+    void MouseInput(Vector2 direction)
     {
-        mousePos = cam.ScreenToWorldPoint(cam.transform.position.Add(direction));
+        mousePos = cam.ScreenToWorldPoint(direction);
     }
 
     void Update()
     {
-        //if (!cam) 
-        //    cam = Camera.main;
+        if (!cam)
+            cam = Camera.main;
 
-        //if (cam)
-        //    mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        if (cam)
+            mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        if (cam)
+            mousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
     }
 
     /// <summary> Takes a Method and an Inputaction to subscribe them</summary>

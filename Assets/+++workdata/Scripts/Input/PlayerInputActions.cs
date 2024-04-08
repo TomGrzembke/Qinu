@@ -332,8 +332,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ab3ac697-8626-4e79-a3c1-c01a3e252e20"",
-                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
+                    ""id"": ""fb49f226-b5d1-47e0-b58b-77e07b94e478"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -345,17 +345,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""67ea53f9-e05b-4d2e-8849-e3b44a1c050d"",
                     ""path"": ""<Touchscreen>/primaryTouch/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MousePos"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb49f226-b5d1-47e0-b58b-77e07b94e478"",
-                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

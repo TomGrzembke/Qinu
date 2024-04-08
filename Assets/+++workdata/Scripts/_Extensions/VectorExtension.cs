@@ -95,7 +95,7 @@ public static class VectorExtension
 
     public static Vector3 Add(this Vector3 target, Vector3 toAdd)
     {
-        target = new(target.x + toAdd.x, target.y + target.y, target.z + toAdd.z);
+        target = new(target.x + toAdd.x, target.y + toAdd.y, target.z + toAdd.z);
         return target;
     }
 }

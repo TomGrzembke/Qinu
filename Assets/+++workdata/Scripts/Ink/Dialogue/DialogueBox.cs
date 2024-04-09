@@ -15,7 +15,7 @@ public class DialogueBox : MonoBehaviour
     [Header("General")]
     [SerializeField] float typeSpeed = 0.03f;
     [Header("Sound")]
-    [SerializeField] DialogueSoundPlayer dialogueSoundPlayer;
+    //[SerializeField] DialogueSoundPlayer dialogueSoundPlayer;
     [SerializeField] Transform currentSoundOrigin;
 
     [SerializeField] TextMeshProUGUI dialogueSpeaker;
@@ -66,8 +66,8 @@ public class DialogueBox : MonoBehaviour
         {
             dialogueText.text += letter;
 
-            if(currentSoundOrigin != null)
-            dialogueSoundPlayer.OnDialogue(speaker, currentSoundOrigin);
+            //if(currentSoundOrigin != null)
+            //dialogueSoundPlayer.OnDialogue(speaker, currentSoundOrigin);
 
             yield return new WaitForSeconds(typeSpeed);
         }

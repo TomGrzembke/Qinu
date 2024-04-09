@@ -15,7 +15,7 @@ public class DialogueController : MonoBehaviour
     public static Action<string> InkEvent;
     GameState gameState;
 
-    [SerializeField] CharakterImageManager charakterImageManager;
+    //[SerializeField] CharakterImageManager charakterImageManager;
 
     #region Inspector
     [Header("Sound")]
@@ -156,7 +156,7 @@ public class DialogueController : MonoBehaviour
         }
 
         dialogueBox.DisplayText(dialogueLine);
-        charakterImageManager.UpdateCharImage(dialogueLine.speaker);
+        //charakterImageManager.UpdateCharImage(dialogueLine.speaker);
     }
 
     void OpenDialogue()

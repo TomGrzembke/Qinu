@@ -13,8 +13,5 @@ public class InkDialogue : MonoBehaviour
             Debug.LogError("No dialogue path given", this);
             return;
         }
-
-        FindObjectOfType<GameController>().SetSoundOrigin(transform);
-        FindObjectOfType<GameController>().StartDialogue(dialoguePath);
     }
 }

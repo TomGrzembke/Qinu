@@ -27,20 +27,15 @@ public class DialogueController : MonoBehaviour
 
     #region private
     const string speakerTag = "speaker";
-    GameState gameState;
     Story inkStory;
     #endregion
 
     #region UnityEvent Functions
     void Awake()
     {
-        gameState = FindObjectOfType<GameState>();
         inkStory = new(inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
-        inkStory.BindExternalFunction<string>("GetState", Get_State);
-        inkStory.BindExternalFunction<string, int>("AddState", Add_State);
-
     }
     void Start()
     {
@@ -180,17 +175,6 @@ public class DialogueController : MonoBehaviour
     void Event(string eventName)
     {
         InkEvent?.Invoke(eventName);
-    }
-
-    object Get_State(string id)
-    {
-        State state = gameState.Get(id);
-        return state?.amount;
-    }
-
-    void Add_State(string id, int amount)
-    {
-        gameState.Add(id, amount);
     }
     #endregion
 }

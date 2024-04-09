@@ -12,10 +12,7 @@ public class DialogueBox : MonoBehaviour
     public event Action<DialogueBox, int> ChoiceSelected;
 
     #region Inspector
-    [Header("General")]
     [SerializeField] float typeSpeed = 0.03f;
-    [Header("Sound")]
-    //[SerializeField] DialogueSoundPlayer dialogueSoundPlayer;
     [SerializeField] Transform currentSoundOrigin;
 
     [SerializeField] TextMeshProUGUI dialogueSpeaker;
@@ -140,10 +137,5 @@ public class DialogueBox : MonoBehaviour
     {
         yield return null;
         selectable.Select();
-    }
-
-    public void SetSoundOrigin(Transform newOrigin)
-    {
-        currentSoundOrigin = newOrigin;
     }
 }

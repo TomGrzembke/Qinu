@@ -6,6 +6,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public struct DialogueLine
+{
+    public string speaker;
+
+    public string text;
+
+    public List<Choice> choices;
+}
+
 public class DialogueController : MonoBehaviour
 {
     const string speakerTag = "speaker";
@@ -15,9 +24,7 @@ public class DialogueController : MonoBehaviour
     public static Action<string> InkEvent;
     GameState gameState;
 
-    //[SerializeField] CharakterImageManager charakterImageManager;
-
-    #region Inspector
+    #region SerializeField
 
     [SerializeField] TextAsset inkAsset;
 
@@ -29,9 +36,9 @@ public class DialogueController : MonoBehaviour
     #endregion
 
     #region other Syntax for Ink Speaker if speaker comes first or using a tag
-    private const string SpeakerSeparator = ":";
-    private const string EscapedColon = "::";
-    private const string EscapedColonPlaceholder = "§";
+    const string SpeakerSeparator = ":";
+    const string EscapedColon = "::";
+    const string EscapedColonPlaceholder = "§";
 
     DialogueLine ParseText(string inkLine, List<string> tags)
     {
@@ -60,7 +67,7 @@ public class DialogueController : MonoBehaviour
         // For tags
         for (int i = 0; i < tags.Count; i++)
         {
-            List<String> tagParts = tags[i].Split(SpeakerSeparator).ToList();
+            List<string> tagParts = tags[i].Split(SpeakerSeparator).ToList();
 
             switch (tagParts[0])
             {
@@ -86,14 +93,14 @@ public class DialogueController : MonoBehaviour
     void Awake()
     {
         gameState = FindObjectOfType<GameState>();
-        inkStory = new Story(inkAsset.text);
+        inkStory = new (inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
         inkStory.BindExternalFunction<string>("GetState", Get_State);
         inkStory.BindExternalFunction<string, int>("AddState", Add_State);
-        
+
     }
-    private void Start()
+     void Start()
     {
         dialogueBox.gameObject.SetActive(false);
     }
@@ -132,18 +139,22 @@ public class DialogueController : MonoBehaviour
             CloseDialogue();
             return;
         }
+
         DialogueLine dialogueLine = new();
 
         if (CanContinue())
         {
             string inkLine = inkStory.Continue();
+
             if (string.IsNullOrWhiteSpace(inkLine))
             {
                 ContinueDialogue();
                 return;
             }
+
             dialogueLine.text = inkLine;
         }
+
         dialogueLine.choices = inkStory.currentChoices;
 
         if (inkStory.currentTags?[0] != null)
@@ -152,7 +163,6 @@ public class DialogueController : MonoBehaviour
         }
 
         dialogueBox.DisplayText(dialogueLine);
-        //charakterImageManager.UpdateCharImage(dialogueLine.speaker);
     }
 
     void OpenDialogue()
@@ -257,13 +267,4 @@ public class DialogueController : MonoBehaviour
         gameState.Add(id, amount);
     }
     #endregion
-}
-
-public struct DialogueLine
-{
-    public string speaker;
-
-    public string text;
-
-    public List<Choice> choices;
 }

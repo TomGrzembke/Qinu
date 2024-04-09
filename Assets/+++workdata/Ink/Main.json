@@ -1,1 +1,1 @@
-﻿{"inkVersion":20,"root":[["\n","\n",["done",{"#f":5,"#n":"g-0"}],null],"done",{"Text":["^Body's the name","\n",{"->":".^"},"end",{"#f":1}],"Event":[{"temp=":"eventName"},"^[ Event: ","ev",{"VAR?":"eventName"},"out","/ev","^ ]","\n",{"#f":1}],"#f":1}],"listDefs":{}}
+﻿{"inkVersion":20,"root":[["\n","\n",["done",{"#f":5,"#n":"g-0"}],null],"done",{"Text":["^Body's the name ",{"#":"speaker: Body"},"\n",{"->":".^"},"end",{"#f":1}],"Event":[{"temp=":"eventName"},"^[ Event: ","ev",{"VAR?":"eventName"},"out","/ev","^ ]","\n",{"#f":1}],"#f":1}],"listDefs":{}}

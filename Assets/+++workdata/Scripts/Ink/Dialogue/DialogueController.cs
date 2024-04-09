@@ -2,7 +2,6 @@ using Ink;
 using Ink.Runtime;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -35,72 +34,18 @@ public class DialogueController : MonoBehaviour
     Story inkStory;
     #endregion
 
-    #region other Syntax for Ink Speaker if speaker comes first or using a tag
-    const string SpeakerSeparator = ":";
-    const string EscapedColon = "::";
-    const string EscapedColonPlaceholder = "§";
-
-    DialogueLine ParseText(string inkLine, List<string> tags)
-    {
-        inkLine = inkLine.Replace(EscapedColon, EscapedColonPlaceholder);
-
-        List<String> parts = inkLine.Split(SpeakerSeparator).ToList();
-        string currentSpeaker;
-        string currentText;
-
-        switch (parts.Count)
-        {
-            case 1:
-                currentSpeaker = null;
-                currentText = parts[0];
-                break;
-            case 2:
-                currentSpeaker = parts[0];
-                currentText = parts[1];
-                break;
-            default:
-                Debug.LogWarning($"Ink dialogue line was split at more {SpeakerSeparator} than extpected. " +
-                                 $"Please make sure to use {EscapedColon} for {SpeakerSeparator} inside text.", gameObject);
-                goto case 2;
-        }
-
-        // For tags
-        for (int i = 0; i < tags.Count; i++)
-        {
-            List<string> tagParts = tags[i].Split(SpeakerSeparator).ToList();
-
-            switch (tagParts[0])
-            {
-                case speakerTag:
-                    currentSpeaker = tagParts[1];
-                    //logic for portraits filtered after names
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        DialogueLine line = new()
-        {
-            speaker = currentSpeaker?.Trim(),
-            text = currentText?.Trim().Replace(EscapedColonPlaceholder, SpeakerSeparator)
-        };
-        return line;
-    }
-    #endregion
-
     #region UnityEvent Functions
     void Awake()
     {
         gameState = FindObjectOfType<GameState>();
-        inkStory = new (inkAsset.text);
+        inkStory = new(inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
         inkStory.BindExternalFunction<string>("GetState", Get_State);
         inkStory.BindExternalFunction<string, int>("AddState", Add_State);
 
     }
-     void Start()
+    void Start()
     {
         dialogueBox.gameObject.SetActive(false);
     }
@@ -108,13 +53,11 @@ public class DialogueController : MonoBehaviour
     void OnEnable()
     {
         dialogueBox.DialogueContinued += OnDialogueContinued;
-        dialogueBox.ChoiceSelected += OnChoiceSelected;
     }
 
     void OnDisable()
     {
         dialogueBox.DialogueContinued -= OnDialogueContinued;
-        dialogueBox.ChoiceSelected -= OnChoiceSelected;
     }
 
     #endregion
@@ -154,8 +97,6 @@ public class DialogueController : MonoBehaviour
 
             dialogueLine.text = inkLine;
         }
-
-        dialogueLine.choices = inkStory.currentChoices;
 
         if (inkStory.currentTags?[0] != null)
         {
@@ -216,13 +157,10 @@ public class DialogueController : MonoBehaviour
     {
         return inkStory.canContinue;
     }
-    bool HasChoice()
-    {
-        return inkStory.currentChoices.Count > 0;
-    }
+
     bool IsAtEnd()
     {
-        return !CanContinue() && !HasChoice();
+        return !CanContinue();
     }
 
     void OnInkError(string message, ErrorType type)
@@ -243,10 +181,6 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    void OnChoiceSelected(DialogueBox dialogueBox, int choiceIndex)
-    {
-        SelectChoice(choiceIndex);
-    }
     void OnDialogueContinued(DialogueBox dialogueBox)
     {
         ContinueDialogue();

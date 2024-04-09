@@ -18,13 +18,9 @@ public class DialogueController : MonoBehaviour
     //[SerializeField] CharakterImageManager charakterImageManager;
 
     #region Inspector
-    [Header("Sound")]
-    [SerializeField] Transform currentSoundOrigin;
 
-    [Header("Ink")]
     [SerializeField] TextAsset inkAsset;
 
-    [Header("UI")]
     [SerializeField] DialogueBox dialogueBox;
     #endregion
 
@@ -162,7 +158,6 @@ public class DialogueController : MonoBehaviour
     void OpenDialogue()
     {
         dialogueBox.gameObject.SetActive(true);
-        dialogueBox.SetSoundOrigin(currentSoundOrigin);
         dialogueOpened?.Invoke();
     }
 
@@ -262,11 +257,6 @@ public class DialogueController : MonoBehaviour
         gameState.Add(id, amount);
     }
     #endregion
-
-    public void SetSoundOrigin(Transform newOrigin)
-    {
-        currentSoundOrigin = newOrigin;
-    }
 }
 
 public struct DialogueLine

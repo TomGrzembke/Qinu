@@ -16,21 +16,18 @@ public struct DialogueLine
 
 public class DialogueController : MonoBehaviour
 {
-    const string speakerTag = "speaker";
     public static Action dialogueOpened;
     public static Action dialogueClosed;
-
     public static Action<string> InkEvent;
-    GameState gameState;
 
     #region SerializeField
-
     [SerializeField] TextAsset inkAsset;
-
     [SerializeField] DialogueBox dialogueBox;
     #endregion
 
     #region private
+    const string speakerTag = "speaker";
+    GameState gameState;
     Story inkStory;
     #endregion
 
@@ -118,12 +115,6 @@ public class DialogueController : MonoBehaviour
         dialogueBox.gameObject.SetActive(false);
         dialogueClosed?.Invoke();
     }
-
-    void SelectChoice(int choiceIndex)
-    {
-        inkStory.ChooseChoiceIndex(choiceIndex);
-        ContinueDialogue();
-    }
     #endregion
 
     #region Ink
@@ -185,6 +176,7 @@ public class DialogueController : MonoBehaviour
     {
         ContinueDialogue();
     }
+
     void Event(string eventName)
     {
         InkEvent?.Invoke(eventName);
@@ -193,7 +185,7 @@ public class DialogueController : MonoBehaviour
     object Get_State(string id)
     {
         State state = gameState.Get(id);
-        return state != null ? state.amount : null;
+        return state?.amount;
     }
 
     void Add_State(string id, int amount)

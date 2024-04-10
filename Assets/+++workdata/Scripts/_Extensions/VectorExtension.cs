@@ -98,4 +98,52 @@ public static class VectorExtension
         target = new(target.x + toAdd.x, target.y + toAdd.y, target.z + toAdd.z);
         return target;
     }
+
+    public static bool IsBetween(this Vector2 target, Vector2 bottomLeft, Vector2 topRight)
+    {
+        Vector2 bottomRight = new(topRight.x, bottomLeft.y);
+        Vector2 topLeft = new(bottomLeft.x, topRight.y);
+        Vector2 nearestPoint = new();
+        float nearestDistance = 100;
+
+        CheckIfCloser(target, bottomLeft, ref nearestPoint, ref nearestDistance);
+        CheckIfCloser(target, bottomRight, ref nearestPoint, ref nearestDistance);
+        CheckIfCloser(target, topLeft, ref nearestPoint, ref nearestDistance);
+        CheckIfCloser(target, topRight, ref nearestPoint, ref nearestDistance);
+
+        if (nearestPoint == bottomLeft)
+            if (target.x > nearestPoint.x && target.y > nearestPoint.y)
+                return true;
+            else
+                return false;
+
+        else if (nearestPoint == bottomRight)
+            if (target.x < nearestPoint.x && target.y > nearestPoint.y)
+                return true;
+            else
+                return false;
+
+        else if (nearestPoint == topLeft)
+            if (target.x > nearestPoint.x && target.y < nearestPoint.y)
+                return true;
+            else
+                return false;
+
+        else if (nearestPoint == topRight)
+            if (target.x < nearestPoint.x && target.y < nearestPoint.y)
+                return true;
+            else
+                return false;
+
+        return false;
+    }
+
+    static void CheckIfCloser(Vector2 target, Vector2 point, ref Vector2 nearestPoint, ref float nearestDistance)
+    {
+        if (Vector2.Distance(target, point) < nearestDistance)
+        {
+            nearestDistance = Vector2.Distance(target, point);
+            nearestPoint = point;
+        }
+    }
 }

@@ -5,7 +5,13 @@ public class InkDialogue : MonoBehaviour
     #region Inspector
     [SerializeField] string dialoguePath;
     [SerializeField] DialogueController dialogueController;
+    [SerializeField] bool onStart;
     #endregion
+    void Start()
+    {
+        if (onStart)
+            StartDialogue();
+    }
 
     public void StartDialogue()
     {

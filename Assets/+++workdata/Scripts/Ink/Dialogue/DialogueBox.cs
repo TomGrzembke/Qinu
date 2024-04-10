@@ -2,8 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections.Generic;
 using Ink.Runtime;
+using System.Collections.Generic;
 using System.Collections;
 
 public class DialogueBox : MonoBehaviour
@@ -26,12 +26,12 @@ public class DialogueBox : MonoBehaviour
     #region UnityEvents
     void Awake()
     {
-        continueButton.onClick.AddListener(() => { DialogueContinued?.Invoke(this); });
+        continueButton?.onClick.AddListener(() => { DialogueContinued?.Invoke(this); });
     }
 
     void OnEnable()
     {
-        dialogueSpeaker.SetText(string.Empty);
+        dialogueSpeaker?.SetText(string.Empty);
         dialogueText.SetText(string.Empty);
     }
 
@@ -39,7 +39,7 @@ public class DialogueBox : MonoBehaviour
     {
         if (dialogueLine.speaker != null)
         {
-            dialogueSpeaker.SetText(dialogueLine.speaker);
+            dialogueSpeaker?.SetText(dialogueLine.speaker);
         }
 
         if (displayLineCoroutine != null)
@@ -50,16 +50,18 @@ public class DialogueBox : MonoBehaviour
         DisplayButtons(dialogueLine.choices);
     }
 
-    IEnumerator DisplayLine(String line, string speaker)
+    IEnumerator DisplayLine(string line, string speaker)
     {
+        yield return null;
         dialogueText.text = "";
 
-        foreach (char letter in line.ToCharArray())
+        for (int i = 0; i < line.Length; i++)
         {
-            dialogueText.text += letter;
+            dialogueText.text += line[i];
 
             yield return new WaitForSeconds(typeSpeed);
         }
+
     }
 
     void DisplayButtons(List<Choice> choices)
@@ -73,13 +75,13 @@ public class DialogueBox : MonoBehaviour
 
     public void ShowContinueButton(bool show)
     {
-        continueButton.gameObject.SetActive(show);
+        continueButton?.gameObject.SetActive(show);
     }
     #endregion
 
     IEnumerator DelayedSelection(Selectable selectable)
     {
         yield return null;
-        selectable.Select();
+        selectable?.Select();
     }
 }

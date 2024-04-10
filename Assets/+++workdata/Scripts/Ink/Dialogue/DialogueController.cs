@@ -37,10 +37,6 @@ public class DialogueController : MonoBehaviour
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
     }
-    void Start()
-    {
-        dialogueBox.gameObject.SetActive(false);
-    }
 
     void OnEnable()
     {
@@ -69,7 +65,7 @@ public class DialogueController : MonoBehaviour
 
     void ContinueDialogue()
     {
-        if (IsAtEnd())
+        if (!CanContinue())
         {
             CloseDialogue();
             return;
@@ -77,18 +73,16 @@ public class DialogueController : MonoBehaviour
 
         DialogueLine dialogueLine = new();
 
-        if (CanContinue())
+        string inkLine = inkStory.Continue();
+
+        if (string.IsNullOrWhiteSpace(inkLine))
         {
-            string inkLine = inkStory.Continue();
-
-            if (string.IsNullOrWhiteSpace(inkLine))
-            {
-                ContinueDialogue();
-                return;
-            }
-
-            dialogueLine.text = inkLine;
+            ContinueDialogue();
+            return;
         }
+
+        dialogueLine.text = inkLine;
+
 
         if (inkStory.currentTags?[0] != null)
         {
@@ -142,11 +136,6 @@ public class DialogueController : MonoBehaviour
     bool CanContinue()
     {
         return inkStory.canContinue;
-    }
-
-    bool IsAtEnd()
-    {
-        return !CanContinue();
     }
 
     void OnInkError(string message, ErrorType type)

@@ -52,7 +52,6 @@ public class FlipObjectOnVelocity : MonoBehaviour
         {
             flipTime += Time.deltaTime;
             transform.localScale = Vector3.Lerp(localScale, targetScale, flipCurve.Evaluate(flipTime / timeToFlip));
-
             yield return null;
         }
 

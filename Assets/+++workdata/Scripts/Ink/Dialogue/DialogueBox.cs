@@ -52,7 +52,6 @@ public class DialogueBox : MonoBehaviour
 
     IEnumerator DisplayLine(string line, string speaker)
     {
-        yield return null;
         dialogueText.text = "";
 
         for (int i = 0; i < line.Length; i++)

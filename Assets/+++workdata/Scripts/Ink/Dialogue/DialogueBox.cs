@@ -13,15 +13,10 @@ public class DialogueBox : MonoBehaviour
 
     #region Inspector
     [SerializeField] float typeSpeed = 0.03f;
-    [SerializeField] Transform currentSoundOrigin;
 
     [SerializeField] TextMeshProUGUI dialogueSpeaker;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
-
-    [Header("Choices")]
-    [SerializeField] Transform choiceContainer;
-    [SerializeField] Button choiceButtonPrefab;
     #endregion
 
     #region private
@@ -31,7 +26,7 @@ public class DialogueBox : MonoBehaviour
     #region UnityEvents
     void Awake()
     {
-        continueButton.onClick.AddListener(() =>{ DialogueContinued?.Invoke(this); });
+        continueButton.onClick.AddListener(() => { DialogueContinued?.Invoke(this); });
     }
 
     void OnEnable()
@@ -47,7 +42,7 @@ public class DialogueBox : MonoBehaviour
             dialogueSpeaker.SetText(dialogueLine.speaker);
         }
 
-        if(displayLineCoroutine != null)
+        if (displayLineCoroutine != null)
             StopCoroutine(displayLineCoroutine);
 
         displayLineCoroutine = StartCoroutine(DisplayLine(dialogueLine.text, dialogueLine.speaker));
@@ -63,9 +58,6 @@ public class DialogueBox : MonoBehaviour
         {
             dialogueText.text += letter;
 
-            //if(currentSoundOrigin != null)
-            //dialogueSoundPlayer.OnDialogue(speaker, currentSoundOrigin);
-
             yield return new WaitForSeconds(typeSpeed);
         }
     }
@@ -74,62 +66,14 @@ public class DialogueBox : MonoBehaviour
     {
         Selectable newSelection;
 
-        if (choices == null || choices.Count == 0)
-        {
-            ShowContinueButton(true);
-            Showchoices(false);
-            newSelection = continueButton;
-        }
-        else
-        {
-            ClearChoices();
-            List<Button> choiceButtons = GenerateChoices(choices);
-
-            ShowContinueButton(false);
-            Showchoices(true);
-            newSelection = choiceButtons[0];
-        }
+        ShowContinueButton(true);
+        newSelection = continueButton;
         StartCoroutine(DelayedSelection(newSelection));
-    }
-    void ClearChoices()
-    {
-        foreach (Transform child in choiceContainer)
-        {
-            Destroy(child.gameObject);
-        }
     }
 
     public void ShowContinueButton(bool show)
     {
         continueButton.gameObject.SetActive(show);
-    }
-
-    public void Showchoices(bool show)
-    {
-        choiceContainer.gameObject.SetActive(show);
-    }
-
-    List<Button> GenerateChoices(List<Choice> choices)
-    {
-        List<Button> choiceButtons = new List<Button>(choices.Count);
-
-        for (int i = 0; i < choices.Count; i++)
-        {
-            Choice choice = choices[i];
-            Button button = Instantiate(choiceButtonPrefab, choiceContainer);
-
-            int index = i;
-            button.onClick.AddListener(() => ChoiceSelected?.Invoke(this, index));
-
-
-            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.SetText(choice.text);
-            button.name = choice.text;
-
-            choiceButtons.Add(button);
-        }
-
-        return choiceButtons;
     }
     #endregion
 

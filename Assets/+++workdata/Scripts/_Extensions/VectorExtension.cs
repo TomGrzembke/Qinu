@@ -25,6 +25,11 @@ public static class VectorExtension
     {
         return target.RemoveZ() + new Vector2(a, b);
     }
+    public static Vector2 Add(this Vector2 target, float a, float b)
+    {
+        return target + new Vector2(a, b);
+    }
+
 
     public static Vector3 Add(this Vector3 target, float a, float b, float c)
     {

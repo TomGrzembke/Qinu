@@ -15779,12 +15779,12 @@ GameObject:
   - component: {fileID: 1386288717}
   - component: {fileID: 1386288716}
   m_Layer: 0
-  m_Name: QinuShadow (1)
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1386288715
 Transform:
   m_ObjectHideFlags: 0
@@ -15794,8 +15794,8 @@ Transform:
   m_GameObject: {fileID: 1386288714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.64, y: 1.15, z: 0}
-  m_LocalScale: {x: -0.3658211, y: 0.3658211, z: 0.3658211}
+  m_LocalPosition: {x: -4.62, y: 2.88, z: 0}
+  m_LocalScale: {x: 0.42623878, y: 0.42623875, z: 0.42623875}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1799204564}
@@ -15854,9 +15854,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.054468952}
+  m_Offset: {x: -0.107639685, y: -0.84587795}
   serializedVersion: 2
-  m_Radius: 3.1344702
+  m_Radius: 2.4025753
 --- !u!50 &1386288718
 Rigidbody2D:
   serializedVersion: 4
@@ -16025,7 +16025,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e30bdfb5ca9f53e4e9702dd511f9bc60, type: 2}
+  - {fileID: 2100000, guid: ef4d04937f4585244b6aa56f2c9ed4b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16046,8 +16046,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1647630378, guid: e7867d17ed2fb304caf897646eeffe26, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -1647630378, guid: 3de5932f8dd2d6746945c6bb421a1e38, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -7883,28 +7883,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.001461029
-      value: 0.37319946
-      inSlope: 0
-      outSlope: 0
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.619555
-      value: 0.58245367
-      inSlope: 0.17393437
-      outSlope: 0.17393437
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -7912,7 +7903,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  flipSensitivity: 5.18
+  flipSensitivity: 6
 --- !u!212 &899189022
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8051,16 +8042,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxSpeedDistance: 1
-  maxSpeed: 3.5
+  maxSpeedDistance: 0.88
+  maxSpeed: 3
   minSpeed: 5
   currentMaxSpeed: 0
   stoppingDistance: 5
   acceleration: 45
-  decceleration: 8
+  decceleration: 9.69
   dashForce: 20
   dashTime: 0.2
-  dashCooldown: 2
+  dashCooldown: 0.4
   dashInput: 0
   agent: {fileID: 899189027}
   dashAutomAim: 1

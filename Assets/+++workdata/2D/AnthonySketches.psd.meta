@@ -118,7 +118,7 @@ TextureImporter:
         width: 342
         height: 684
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,6 +126,27 @@ TextureImporter:
       bones: []
       spriteID: c5b9f01488f7eae4887dcf2b028d00b8
       internalID: 1806849164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnthonySketches_1
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 98
+        width: 368
+        height: 701
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34f6c1f431b57674e88e7bf271c1f46f
+      internalID: 2110145013
       vertices: []
       indices: 
       edges: []
@@ -142,6 +163,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       AnthonySketches_0: 1806849164
+      AnthonySketches_1: 2110145013
       QinuSketches_0: -1647630378
       QinuSketches_1: -567010029
       QinuSketches_2: 1587554185

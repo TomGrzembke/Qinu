@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary> Flips the object with rb context</summary>
 public class FlipObjectOnVelocity : MonoBehaviour
 {
     #region serialized fields
@@ -11,8 +10,8 @@ public class FlipObjectOnVelocity : MonoBehaviour
     #endregion
 
     #region private fields
+    Vector3 localScale;
     Vector3 targetScale;
-    Vector3 localScale => transform.localScale;
     bool flipState;
     float maxScale;
     Rigidbody2D rb;
@@ -34,13 +33,16 @@ public class FlipObjectOnVelocity : MonoBehaviour
     {
         if (rb.velocity.magnitude <= flipSensitivity) return;
 
-        flipRoutine ??= StartCoroutine(Flip());
-        
+        if (flipRoutine == null)
+            flipRoutine = StartCoroutine(Flip());
+
     }
 
     IEnumerator Flip()
     {
         flipState = rb.velocity.x > 0;
+        localScale = transform.localScale;
+
         targetScale = localScale;
         targetScale.x = flipState ? -maxScale : maxScale;
 

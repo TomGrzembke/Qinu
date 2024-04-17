@@ -21,8 +21,8 @@ public class MoveRB : RBGetter
     [SerializeField] float dashTime = 0.1f;
     [SerializeField] float dashCooldown = 0.1f;
     [SerializeField] bool dashInput;
-    [SerializeField] NavMeshAgent agent;
     [SerializeField] bool dashAutomAim = true;
+    [SerializeField] NavMeshAgent agent;
     [SerializeField, ConditionalField(nameof(dashAutomAim))] Transform puk;
     Coroutine moveRoutine;
     Coroutine dashRoutine;

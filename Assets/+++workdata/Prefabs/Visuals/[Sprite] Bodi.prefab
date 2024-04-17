@@ -10,18 +10,22 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2678853848379604295, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_Name
-      value: '[Sprite] Bodi'
+      value: '[Sprite] Pamo'
       objectReference: {fileID: 0}
     - target: {fileID: 6026651789657524329, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2097355991, guid: 8f9a5983183a99044b4e4e947dc58ff0, type: 3}
+      objectReference: {fileID: 936894794, guid: 3de5932f8dd2d6746945c6bb421a1e38, type: 3}
     - target: {fileID: 6026651789657524329, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0a494f46bff1ea42bb1b8fcc4fc7060, type: 2}
     - target: {fileID: 8154764816718264686, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}

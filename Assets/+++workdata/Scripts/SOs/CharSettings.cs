@@ -1,14 +1,8 @@
 using UnityEngine;
 
 [System.Serializable]
-public class CharSettings : MonoBehaviour
+public class CharSettings
 {
-    #region serialized fields
-
-    #endregion
-
-    #region private fields
-
-    #endregion
-
+    [field: SerializeField] public CharNPCSettings CharNPCSettings { get; private set; }
+    [field: SerializeField] public CharRigidSettings CharRigidSettings { get; private set; }
 }

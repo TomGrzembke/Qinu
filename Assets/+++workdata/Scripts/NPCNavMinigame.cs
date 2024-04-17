@@ -6,18 +6,19 @@ public class NPCNavMinigame : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] Transform puk;
-    [SerializeField] bool calculateOnly = true;
     [SerializeField] bool isRight = true;
+
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
     [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;
     [SerializeField] bool dashRandomly = true;
     [SerializeField] float probabilityPerFrame = 10;
+
     [SerializeField] MoveRB moveRB;
     [SerializeField] Transform arenaMiddle;
     [SerializeField] Transform defaultPos;
     [SerializeField] Vector3 targetPos;
-    bool PukInReach => isRight ? arenaMiddle.position.x < puk.position.x : arenaMiddle.position.x > puk.position.x;
+    bool PukOnSide => isRight ? arenaMiddle.position.x < puk.position.x : arenaMiddle.position.x > puk.position.x;
     #endregion
 
     #region private fields
@@ -42,7 +43,7 @@ public class NPCNavMinigame : MonoBehaviour
 
     void Update()
     {
-        if (PukInReach)
+        if (PukOnSide)
         {
             targetPos = puk.position;
             if (dashRandomly)
@@ -66,7 +67,6 @@ public class NPCNavMinigame : MonoBehaviour
 
         SetAgentPosition(targetPos);
 
-        if (calculateOnly)
             agent.velocity = Vector2.zero;
     }
 
@@ -74,7 +74,6 @@ public class NPCNavMinigame : MonoBehaviour
     {
         agent.SetDestination(targetPos);
 
-        if (calculateOnly)
             agent.velocity = Vector2.zero;
     }
 

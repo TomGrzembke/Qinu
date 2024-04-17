@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8154764816718264686}
-  - component: {fileID: 2999051435343675787}
   - component: {fileID: 8523064361346453057}
   - component: {fileID: 7953238053786489971}
   - component: {fileID: 3822254324265408848}
@@ -38,25 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2999051435343675787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2678853848379604295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36edbb94a82c2d44db5a199ea08211a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Puk>k__BackingField: {fileID: 0}
-  <ArenaMiddle>k__BackingField: {fileID: 0}
-  <DefaultPosLeft>k__BackingField: []
-  <DefaultPosRight>k__BackingField: []
-  pukRB: {fileID: 0}
-  ballResetLeft: {fileID: 0}
-  ballResetRight: {fileID: 0}
 --- !u!114 &8523064361346453057
 MonoBehaviour:
   m_ObjectHideFlags: 0

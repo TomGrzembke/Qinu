@@ -33,8 +33,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     {
         if (rb.velocity.magnitude <= flipSensitivity) return;
 
-        if (flipRoutine == null)
-            flipRoutine = StartCoroutine(Flip());
+        flipRoutine ??= StartCoroutine(Flip());
 
     }
 

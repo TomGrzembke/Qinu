@@ -7,23 +7,27 @@ using UnityEngine.InputSystem;
 public class MoveRB : RBGetter
 {
     #region serialized fields
+    [SerializeField] CharSO charSO;
 
-    [SerializeField] AnimationCurve moveCurve;
-    [SerializeField] float maxSpeedDistance;
+    #region Lambda expressions
+    AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
+    float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
+    float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
+    float minSpeed => charSO.CharSettings.CharRigidSettings.MinSpeed;
+    float stoppingDistance => charSO.CharSettings.CharRigidSettings.StoppingDistance;
+    float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
+    float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
+    float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
+    float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
+    float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
+    bool dashInput => charSO.CharSettings.CharRigidSettings.DashInput;
+    bool mouseInput => charSO.CharSettings.CharRigidSettings.MouseInput;
+    bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
+    #endregion 
 
-    [SerializeField] float maxSpeed = 5f;
-    [SerializeField] float minSpeed = 1f;
-    [SerializeField] float currentMaxSpeed;
-    [SerializeField] float stoppingDistance = 5f;
-    [SerializeField] float acceleration = 10f;
-    [SerializeField] float decceleration = 10f;
-    [SerializeField] float dashForce = 10f;
-    [SerializeField] float dashTime = 0.1f;
-    [SerializeField] float dashCooldown = 0.1f;
-    [SerializeField] bool dashInput;
-    [SerializeField] bool dashAutomAim = true;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField, ConditionalField(nameof(dashAutomAim))] Transform puk;
+    [SerializeField] Transform puk;
+    float currentMaxSpeed;
     Coroutine moveRoutine;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
@@ -53,7 +57,8 @@ public class MoveRB : RBGetter
 
     void FixedUpdate()
     {
-        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+        if (mouseInput)
+            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }

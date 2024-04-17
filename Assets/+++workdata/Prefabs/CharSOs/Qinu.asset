@@ -14,21 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
-      <GoesToDefault>k__BackingField: 1
-      <FollowBallY>k__BackingField: 1
+      <GoesToDefault>k__BackingField: 0
+      <FollowBallY>k__BackingField: 0
       <InvertY>k__BackingField: 0
-      <DashRandomly>k__BackingField: 1
+      <DashRandomly>k__BackingField: 0
       <ProbabilityPerFrame>k__BackingField: 0.001
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 5
+      <MoveCurve>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <MaxSpeedDistance>k__BackingField: 1
+      <MaxSpeed>k__BackingField: 6.6
       <MinSpeed>k__BackingField: 1
-      <CurrentMaxSpeed>k__BackingField: 0
-      <StoppingDistance>k__BackingField: 5
-      <Acceleration>k__BackingField: 10
+      <StoppingDistance>k__BackingField: 1
+      <Acceleration>k__BackingField: 133.8
       <Decceleration>k__BackingField: 10
-      <DashForce>k__BackingField: 10
+      <DashForce>k__BackingField: 22.56
       <DashTime>k__BackingField: 0.1
       <DashCooldown>k__BackingField: 0.1
-      <DashInput>k__BackingField: 0
-      <DashAutomAim>k__BackingField: 1
+      <DashInput>k__BackingField: 1
+      <MouseInput>k__BackingField: 1
+      <DashAutomAim>k__BackingField: 0
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}

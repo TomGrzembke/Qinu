@@ -588,7 +588,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1647630378, guid: 3de5932f8dd2d6746945c6bb421a1e38, type: 3}
+  m_Sprite: {fileID: 936894794, guid: 3de5932f8dd2d6746945c6bb421a1e38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13662,43 +13662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSpeedDistance: 7
-  maxSpeed: 10
-  minSpeed: 1
-  currentMaxSpeed: 0
-  stoppingDistance: 1
-  acceleration: 45
-  decceleration: 8
-  dashForce: 35
-  dashTime: 0.1
-  dashCooldown: 0.5
-  dashInput: 1
+  charSO: {fileID: 11400000, guid: fb0575f9dad636a459e80c4a0ee23f6c, type: 2}
   agent: {fileID: 0}
-  dashAutomAim: 0
   puk: {fileID: 1183967833}
 --- !u!114 &1130039580
 MonoBehaviour:
@@ -15508,43 +15473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSpeedDistance: 1
-  maxSpeed: 3.5
-  minSpeed: 5
-  currentMaxSpeed: 0
-  stoppingDistance: 5
-  acceleration: 45
-  decceleration: 8
-  dashForce: 20
-  dashTime: 0.2
-  dashCooldown: 2
-  dashInput: 0
+  charSO: {fileID: 0}
   agent: {fileID: 1386288716}
-  dashAutomAim: 1
   puk: {fileID: 1183967833}
 --- !u!114 &1386288720
 MonoBehaviour:
@@ -15606,7 +15536,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puk: {fileID: 1183967833}
-  calculateOnly: 1
   isRight: 0
   goesToDefault: 1
   followBallY: 1
@@ -16045,43 +15974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSpeedDistance: 1
-  maxSpeed: 3.5
-  minSpeed: 5
-  currentMaxSpeed: 0
-  stoppingDistance: 5
-  acceleration: 45
-  decceleration: 8
-  dashForce: 7
-  dashTime: 1
-  dashCooldown: 2
-  dashInput: 0
+  charSO: {fileID: 0}
   agent: {fileID: 1437098941}
-  dashAutomAim: 1
   puk: {fileID: 1183967833}
 --- !u!114 &1437098945
 MonoBehaviour:
@@ -16143,7 +16037,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puk: {fileID: 1183967833}
-  calculateOnly: 1
   isRight: 1
   goesToDefault: 1
   followBallY: 1
@@ -24367,7 +24260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puk: {fileID: 1183967833}
-  calculateOnly: 1
   isRight: 1
   goesToDefault: 1
   followBallY: 1
@@ -24488,43 +24380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSpeedDistance: 0.88
-  maxSpeed: 3
-  minSpeed: 5
-  currentMaxSpeed: 0
-  stoppingDistance: 5
-  acceleration: 45
-  decceleration: 9.69
-  dashForce: 20
-  dashTime: 0.2
-  dashCooldown: 0.4
-  dashInput: 0
+  charSO: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
   agent: {fileID: 5005357523930403394}
-  dashAutomAim: 1
   puk: {fileID: 1183967833}
 --- !u!50 &8531361593297466542
 Rigidbody2D:

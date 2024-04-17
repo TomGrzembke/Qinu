@@ -12,28 +12,28 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Rigidbody2D pukRB;
     [SerializeField] Transform ballResetLeft;
     [SerializeField] Transform ballResetRight;
+    [SerializeField] TextMeshProUGUI leftCounterTxt;
+    [SerializeField] TextMeshProUGUI rightCounterTxt;
+    [SerializeField] Vector2 pointCounter;
     #endregion
 
     #region private fields
 
     #endregion
 
-    #region private fields
-
-    #endregion
 
     public void Goal(int goalID)
     {
-        //if (goalID == 0)
-        //{
-        //    pointCounter.y += 1;
-        //    rightCounterTxt.text = pointCounter.y.ToString();
-        //}
-        //else
-        //{
-        //    pointCounter.x += 1;
-        //    leftCounterTxt.text = pointCounter.x.ToString();
-        //}
+        if (goalID == 0)
+        {
+            pointCounter.y += 1;
+            rightCounterTxt.text = pointCounter.y.ToString();
+        }
+        else
+        {
+            pointCounter.x += 1;
+            leftCounterTxt.text = pointCounter.x.ToString();
+        }
 
         pukRB.velocity = Vector2.zero;
         pukRB.transform.position = goalID == 0 ? ballResetLeft.position : ballResetRight.position;

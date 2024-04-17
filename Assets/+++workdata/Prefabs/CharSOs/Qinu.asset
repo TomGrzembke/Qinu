@@ -44,15 +44,15 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      <MaxSpeedDistance>k__BackingField: 1
-      <MaxSpeed>k__BackingField: 6.6
+      <MaxSpeedDistance>k__BackingField: 7
+      <MaxSpeed>k__BackingField: 10
       <MinSpeed>k__BackingField: 1
       <StoppingDistance>k__BackingField: 1
-      <Acceleration>k__BackingField: 133.8
-      <Decceleration>k__BackingField: 10
-      <DashForce>k__BackingField: 22.56
+      <Acceleration>k__BackingField: 45
+      <Decceleration>k__BackingField: 8
+      <DashForce>k__BackingField: 35
       <DashTime>k__BackingField: 0.1
-      <DashCooldown>k__BackingField: 0.1
+      <DashCooldown>k__BackingField: 0
       <DashInput>k__BackingField: 1
       <MouseInput>k__BackingField: 1
       <DashAutomAim>k__BackingField: 0

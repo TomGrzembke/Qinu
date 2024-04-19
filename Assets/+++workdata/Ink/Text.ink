@@ -1,5 +1,5 @@
 == Text
-Body's the name #speaker: Body
+Bodi's the name #speaker: Body
 
 -> Text
  -> END

@@ -4,5 +4,5 @@ using UnityEngine;
 public class CharSO : ScriptableObject
 {
     [field: SerializeField] public CharSettings CharSettings { get; private set; } 
-    [field: SerializeField] public GameObject VisualPrefab { get; private set; } 
+    [field: SerializeField] public GameObject VisualPrefab { get; private set; }
 }

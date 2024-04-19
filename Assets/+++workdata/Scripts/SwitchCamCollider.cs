@@ -12,6 +12,7 @@ public class SwitchCamCollider : MonoBehaviour
     Collider2D playerCol;
     bool comesFromRight;
     #endregion
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;

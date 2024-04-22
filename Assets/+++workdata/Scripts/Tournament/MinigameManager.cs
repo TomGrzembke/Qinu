@@ -5,11 +5,11 @@ public class MinigameManager : MonoBehaviour
 {
     #region serialized fields
     [field: SerializeField] public Transform Puk { get; private set; }
+    [SerializeField] Rigidbody2D pukRB;
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosLeft { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }
 
-    [SerializeField] Rigidbody2D pukRB;
     [SerializeField] Transform ballResetLeft;
     [SerializeField] Transform ballResetRight;
     [SerializeField] TextMeshProUGUI leftCounterTxt;

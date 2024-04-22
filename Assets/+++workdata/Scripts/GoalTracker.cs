@@ -3,7 +3,7 @@ using UnityEngine;
 public class GoalTracker : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] HockeyController hockeyController;
+    [SerializeField] MinigameManager minigameManager;
     [SerializeField] bool leftSide;
     [SerializeField] ParticleSystem goalParticles;
     #endregion
@@ -16,7 +16,7 @@ public class GoalTracker : MonoBehaviour
     {
         if (other.CompareTag("Puk"))
         {
-            hockeyController.Goal(leftSide);
+            minigameManager.Goal(leftSide == false ? 0 : 1);
             goalParticles.Play();
         }
     }

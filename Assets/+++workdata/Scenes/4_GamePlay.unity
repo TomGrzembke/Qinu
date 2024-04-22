@@ -982,6 +982,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289621291}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &343745502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343745503}
+  m_Layer: 0
+  m_Name: DefaultPosLeft (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &343745503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343745502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.24, y: 0.99, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1732220599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350108682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1097,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1291071324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &365903682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 365903683}
+  - component: {fileID: 365903684}
+  - component: {fileID: 365903686}
+  - component: {fileID: 365903685}
+  m_Layer: 0
+  m_Name: ---Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &365903683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365903682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &365903684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365903682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36edbb94a82c2d44db5a199ea08211a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Puk>k__BackingField: {fileID: 1183967833}
+  pukRB: {fileID: 1183967834}
+  <ArenaMiddle>k__BackingField: {fileID: 971475960}
+  <DefaultPosLeft>k__BackingField:
+  - {fileID: 60282861}
+  - {fileID: 343745503}
+  <DefaultPosRight>k__BackingField:
+  - {fileID: 1061938405}
+  - {fileID: 1023619034}
+  ballResetLeft: {fileID: 180869749}
+  ballResetRight: {fileID: 1979328818}
+  leftCounterTxt: {fileID: 461598521}
+  rightCounterTxt: {fileID: 167118118}
+  pointCounter: {x: 0, y: 0}
+--- !u!114 &365903685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365903682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93532db498e6bf642bc422c822b152ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &365903686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365903682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec5cf8f4e087844d85d37768b84fb60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CharStandings>k__BackingField: []
+  <AvailableChars>k__BackingField:
+  - {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+  - {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
+  - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
+  - {fileID: 3832746447698499432, guid: 16f8edc494261d44d8c544e32d8445e3, type: 3}
+  - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
 --- !u!1 &404009626
 GameObject:
   m_ObjectHideFlags: 0
@@ -7708,7 +7830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3598cc41af9612942ab406f1034b21a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hockeyController: {fileID: 1799204565}
+  minigameManager: {fileID: 365903684}
   leftSide: 1
   goalParticles: {fileID: 1926622401}
 --- !u!1 &894181583
@@ -13138,6 +13260,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1291071324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1023619033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023619034}
+  m_Layer: 0
+  m_Name: DefaultPosRight (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023619034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023619033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.65, y: 1.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1732220599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061938404
 GameObject:
   m_ObjectHideFlags: 0
@@ -17116,7 +17269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3598cc41af9612942ab406f1034b21a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hockeyController: {fileID: 1799204565}
+  minigameManager: {fileID: 365903684}
   leftSide: 0
   goalParticles: {fileID: 793677030}
 --- !u!1 &1717724887
@@ -17310,7 +17463,9 @@ Transform:
   m_Children:
   - {fileID: 141327023}
   - {fileID: 1061938405}
+  - {fileID: 1023619034}
   - {fileID: 60282861}
+  - {fileID: 343745503}
   m_Father: {fileID: 1799204564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1732220600
@@ -17841,7 +17996,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1799204564}
-  - component: {fileID: 1799204565}
   m_Layer: 0
   m_Name: HockeyArena
   m_TagString: Untagged
@@ -17880,24 +18034,6 @@ Transform:
   - {fileID: 1437098940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1799204565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799204563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49096678207e16642bc5e351b5b161b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pukRB: {fileID: 1183967834}
-  ballResetLeft: {fileID: 1979328818}
-  ballResetRight: {fileID: 180869749}
-  leftCounterTxt: {fileID: 461598521}
-  rightCounterTxt: {fileID: 167118118}
-  pointCounter: {x: 0, y: 0}
 --- !u!1 &1922421637
 GameObject:
   m_ObjectHideFlags: 0
@@ -24363,6 +24499,7 @@ CircleCollider2D:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 365903683}
   - {fileID: 1062741102}
   - {fileID: 252058440}
   - {fileID: 1291071324}

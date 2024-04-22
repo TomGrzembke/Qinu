@@ -1169,6 +1169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93532db498e6bf642bc422c822b152ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <RoundAmount>k__BackingField: 0
+  <GameState>k__BackingField: 0
 --- !u!114 &365903686
 MonoBehaviour:
   m_ObjectHideFlags: 0

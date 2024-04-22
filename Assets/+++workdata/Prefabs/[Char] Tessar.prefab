@@ -88,10 +88,10 @@ PrefabInstance:
     - target: {fileID: 1037485291734859549, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1647630378, guid: 910482f51c239c642aca527798459ef5, type: 3}
+      objectReference: {fileID: -567010029, guid: 910482f51c239c642aca527798459ef5, type: 3}
     - target: {fileID: 2372656900463247186, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
       propertyPath: m_BoneTransforms.Array.size
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3237137991316426266, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
       propertyPath: m_LocalScale.x

@@ -1,8 +1,7 @@
 using MyBox;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class NPCNavMinigame : MonoBehaviour
+public class NPCNavMinigame : NavCalc
 {
     #region serialized fields
     [SerializeField] Transform puk;
@@ -24,22 +23,6 @@ public class NPCNavMinigame : MonoBehaviour
     #region private fields
 
     #endregion
-
-    #region serialized fields
-
-    #endregion
-
-    #region private fields
-    NavMeshAgent agent;
-    #endregion
-
-    void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-
-    }
 
     void Update()
     {
@@ -67,14 +50,7 @@ public class NPCNavMinigame : MonoBehaviour
 
         SetAgentPosition(targetPos);
 
-            agent.velocity = Vector2.zero;
-    }
-
-    public void SetAgentPosition(Vector3 targetPos)
-    {
-        agent.SetDestination(targetPos);
-
-            agent.velocity = Vector2.zero;
+        agent.velocity = Vector2.zero;
     }
 
     void OnDrawGizmosSelected()

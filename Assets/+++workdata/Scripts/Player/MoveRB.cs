@@ -27,6 +27,7 @@ public class MoveRB : RBGetter
 
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform puk;
+    bool inputDisabled;
     float currentMaxSpeed;
     Coroutine moveRoutine;
     Coroutine dashRoutine;
@@ -38,8 +39,9 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (agent == null && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
+            if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
                 return (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1);
+
             else if (agent != null && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
             else
@@ -53,6 +55,7 @@ public class MoveRB : RBGetter
     {
         currentMaxSpeed = maxSpeed;
         InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
+        InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
 
     void FixedUpdate()
@@ -72,10 +75,13 @@ public class MoveRB : RBGetter
     }
     public void Dash()
     {
-        if (dashCooldownRoutine == null)
-        {
-            dashRoutine = StartCoroutine(DashCor());
-        }
+        if (dashCooldownRoutine != null) return;
+        dashRoutine = StartCoroutine(DashCor());
+    }
+    public void DisableInput(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        inputDisabled = !inputDisabled;
     }
 
     IEnumerator Move()

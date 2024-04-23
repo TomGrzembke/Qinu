@@ -50,8 +50,6 @@ public class InputManager : MonoBehaviour
         moveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
 
         mousePosAction = input.Player.MousePos;
-        // mousePosAction.performed += ctx => MouseInput(ctx.ReadValue<Vector2>());
-        // mousePosAction.canceled += ctx => MouseInput(ctx.ReadValue<Vector2>());
 
         leftclickAction = input.Player.LeftClick;
         rightClickAction = input.Player.RightClick;

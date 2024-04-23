@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Char] Pamo'
       objectReference: {fileID: 0}
+    - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: charSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
     - target: {fileID: 4491615955301986986, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Radius
       value: 1.7303796
@@ -25,12 +29,24 @@ PrefabInstance:
       value: -0.18540311
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.64645
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.64645
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.64645
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.51
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.03
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.z

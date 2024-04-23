@@ -3,12 +3,28 @@ using UnityEngine;
 public class CharManager : MonoBehaviour
 {
     #region serialized fields
-    [field: SerializeField] public GameObject[] CharPrefabs { get; private set; } 
-    [field: SerializeField] public GameObject[] Chars { get; private set; } 
+    public static CharManager Instance;
+    [field: SerializeField] public CharNav[] CharNavs { get; private set; }
     #endregion
 
     #region private fields
-    
+
     #endregion
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public void PathTo(GameObject gO, Vector3 pos)
+    {
+        for (int i = 0; i < CharNavs.Length; i++)
+        {
+            if (gO == CharNavs[i].gameObject)
+            {
+                CharNavs[i].ActivateNavCalc();
+                CharNavs[i].NavCalc.SetAgentPosition(pos);
+            }
+        }
+    }
 }

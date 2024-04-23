@@ -12,13 +12,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Char] Athony'
       objectReference: {fileID: 0}
+    - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: charSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d91da144f5087d44acebdd29bdce75e, type: 2}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.41468683
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.41468683
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.41468683
+      objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.41
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.z

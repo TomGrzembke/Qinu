@@ -14,8 +14,8 @@ public class CharRigidSettings
     [field: SerializeField] public bool DashInput { get; private set; }
     [field: SerializeField] public bool DashAutomAim { get; private set; } = true;
 
-    [Space]
-    [SerializeField, ReadOnly] string mouseInput = "MouseInput";
+    [Space(20)]
+    [SerializeField, ShowOnly] string mouseInputHeader;
     [field: SerializeField] public bool MouseInput { get; private set; }
     [field: SerializeField] public float MaxSpeedDistance { get; private set; } = .7f;
     [field: SerializeField] public AnimationCurve MoveCurve { get; private set; } = AnimationCurve.EaseInOut(0, 0, 1, 1);

@@ -4,7 +4,8 @@ public class IgnoreCollider : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] Collider2D targetCol;
-
+    [SerializeField] LayerMask ignoreLayer;
+    [SerializeField] LayerMask layerToIgnore;
     #endregion
 
     #region private fields
@@ -15,8 +16,13 @@ public class IgnoreCollider : MonoBehaviour
     {
         col = GetComponent<Collider2D>();
     }
+
     void Start()
     {
-        Physics2D.IgnoreCollision(col, targetCol);
+        if (targetCol != null)
+            Physics2D.IgnoreCollision(col, targetCol);
+
+        if (ignoreLayer.value != 0 && layerToIgnore.value != 0)
+            Physics2D.IgnoreLayerCollision(ignoreLayer.GetLayerID(), layerToIgnore.GetLayerID());
     }
 }

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Char] Tessar'
       objectReference: {fileID: 0}
+    - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: charSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 6cebfa2017379a94ab716af51e01fc18, type: 2}
     - target: {fileID: 4491615955301986986, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Radius
       value: 2.1121917

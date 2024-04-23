@@ -4,6 +4,7 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     #region serialized fields
+    public static MinigameManager Instance;
     [field: SerializeField] public Transform Puk { get; private set; }
     [SerializeField] Rigidbody2D pukRB;
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
@@ -21,6 +22,10 @@ public class MinigameManager : MonoBehaviour
 
     #endregion
 
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public void Goal(int goalID)
     {

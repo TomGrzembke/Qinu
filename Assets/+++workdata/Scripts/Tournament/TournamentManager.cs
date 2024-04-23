@@ -44,7 +44,8 @@ public class TournamentManager : MonoBehaviour
 
         if (RoundAmount == 0)
         {
-            CharManager.Instance.PathTo(AvailableChars[2], new(8, 5));
+            CharManager.Instance.PathGOTo(AvailableChars[2], 
+                MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position);
         }
         else if (RoundAmount == 1)
         {

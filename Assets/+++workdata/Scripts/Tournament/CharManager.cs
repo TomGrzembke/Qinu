@@ -16,7 +16,7 @@ public class CharManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PathTo(GameObject gO, Vector3 pos)
+    public void PathGOTo(GameObject gO, Vector3 pos)
     {
         for (int i = 0; i < CharNavs.Length; i++)
         {

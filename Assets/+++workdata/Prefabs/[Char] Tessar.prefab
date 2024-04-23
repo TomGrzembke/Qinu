@@ -25,12 +25,24 @@ PrefabInstance:
       value: -0.48310852
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4967518
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4967518
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4967518
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.25
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.z
@@ -85,14 +97,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7004819885984797505}
     m_Modifications:
-    - target: {fileID: 1037485291734859549, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -567010029, guid: 910482f51c239c642aca527798459ef5, type: 3}
-    - target: {fileID: 2372656900463247186, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
-      propertyPath: m_BoneTransforms.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3237137991316426266, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

@@ -1,6 +1,5 @@
 using MyBox;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -72,6 +71,8 @@ public class TournamentManager : MonoBehaviour
         leftPlayers.Add(AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
         rightPlayers.Add(GetLowestPlayRate());
+
+        CharManager.Instance.PathGOTo(lastPlayed, GetRandomDefaultPos(1));
     }
 
     void ClearSideLists()
@@ -84,28 +85,40 @@ public class TournamentManager : MonoBehaviour
     {
         ClearSideLists();
         var first = GetLowestPlayRate();
+        var second = GetLowestPlayRate(first);
         leftPlayers.Add(first);
-        rightPlayers.Add(GetLowestPlayRate(first));
+        rightPlayers.Add(second);
+
+        CharManager.Instance.PathGOTo(first, GetRandomDefaultPos(0));
+        CharManager.Instance.PathGOTo(second, GetRandomDefaultPos(1));
     }
     void Calc2v2()
     {
         ClearSideLists();
         leftPlayers.Add(AvailableChars[0]);
+
         GameObject first = GetLowestPlayRate();
         GameObject second = GetLowestPlayRate(first);
         GameObject third = GetLowestPlayRate(first, second);
+
         leftPlayers.Add(third);
         rightPlayers.Add(second);
         rightPlayers.Add(first);
+
+        CharManager.Instance.PathGOTo(third, GetRandomDefaultPos(0));
+        CharManager.Instance.PathGOTo(second, GetRandomDefaultPos(1));
+        CharManager.Instance.PathGOTo(first, GetRandomDefaultPos(1));
     }
 
     #region Rounds
     int RoundZero()
     {
-        CharManager.Instance.PathGOTo(AvailableChars[2], GetRandomDefaultPos(1));
+        GameObject bodi = AvailableChars[2];
+        CharManager.Instance.PathGOTo(bodi, GetRandomDefaultPos(1));
         CurrentGameMode = GameMode.Bodi;
+        lastPlayed = bodi;
         leftPlayers.Add(AvailableChars[0]);
-        rightPlayers.Add(AvailableChars[2]);
+        rightPlayers.Add(bodi);
         return 0;
     }
     int FirstRound()

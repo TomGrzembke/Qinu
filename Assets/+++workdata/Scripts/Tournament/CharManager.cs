@@ -16,15 +16,19 @@ public class CharManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PathGOTo(GameObject gO, Vector3 pos)
+    public CharNav PathGOTo(GameObject gO, Vector3 pos)
     {
+        CharNav target = null;
         for (int i = 0; i < CharNavs.Length; i++)
         {
             if (gO == CharNavs[i].gameObject)
             {
+                target = CharNavs[i];
                 CharNavs[i].ActivateNavCalc();
                 CharNavs[i].NavCalc.SetAgentPosition(pos);
             }
         }
+
+        return target;
     }
 }

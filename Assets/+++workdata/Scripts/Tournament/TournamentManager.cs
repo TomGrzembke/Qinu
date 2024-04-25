@@ -1,7 +1,8 @@
 using MyBox;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TournamentManager : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class TournamentManager : MonoBehaviour
     {
         InGame,
         Village
+    }
+    public enum GameMode
+    {
+        Bodi,
+        a1v1,
+        a2v2,
+        watch1v1
     }
 
     #region serialized fields
@@ -20,6 +28,7 @@ public class TournamentManager : MonoBehaviour
     #endregion
 
     #region private fields
+    [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
 
     #endregion
     void Start()
@@ -41,25 +50,66 @@ public class TournamentManager : MonoBehaviour
     {
         if (gameState == GameState.InGame) return;
 
-
-        if (RoundAmount == 0)
+        int round = RoundAmount switch
         {
-            CharManager.Instance.PathGOTo(AvailableChars[2], 
-                MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position);
-        }
-        else if (RoundAmount == 1)
-        {
+            0 => RoundZero(),
+            1 => proc1(),
+            2 => proc2(),
+            3 => proc3(),
+            _ => false
+        };
 
-        }
-        else
+        switch (RoundAmount)
         {
+            case 0:
+                RoundZero();
+                break;
+            case 1:
+                FirstRound();
 
+                break;
+            case 2:
+                CurrentGameMode = GameMode.a1v1;
+
+                break;
+            case 3:
+                CurrentGameMode = GameMode.a2v2;
+
+                break;
+            case 4:
+                CurrentGameMode = GameMode.watch1v1;
+                break;
+            default:
+                int gameModeLength = Enum.GetValues(typeof(GameMode)).Length;
+                CurrentGameMode = (GameMode)Random.Range(0, gameModeLength + 1);
+                break;
         }
 
         gameState = GameState.InGame;
         RoundAmount++;
     }
 
+    #region Rounds
+    void RoundZero()
+    {
+        CharManager.Instance.PathGOTo(AvailableChars[1], MinigameManager.Instance.DefaultPosLeft
+            [Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position);
+        CurrentGameMode = GameMode.Bodi;
+    }
+    void FirstRound()
+    {
+        CurrentGameMode = GameMode.a1v1;
+    }
+    #endregion
+
+    /// <param name="sideIndex">left = 0, right = 1</param>
+    Vector3 GetRandomDefaultPos(int sideIndex)
+    {
+        if (sideIndex == 0)
+            return MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position;
+        else
+            return MinigameManager.Instance.DefaultPosRight[Random.Range(0, MinigameManager.Instance.DefaultPosRight.Length)].position;
+    }
 }
 
 [System.Serializable]

@@ -72,7 +72,8 @@ public class InputManager : MonoBehaviour
         if (!cam)
             cam = Camera.main;
 
-        mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        if (cam)
+            mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         if (Input.touchCount > 0)
             mousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);

@@ -7565,7 +7565,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 68df5c05c18c75c4fa062b6786041f45, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -8345,6 +8345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1918158304}
     m_Modifications:
+    - target: {fileID: 2557352436595592477, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
       propertyPath: m_Name
       value: '[Char] Tessar'
@@ -17682,6 +17686,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3944670978598778843, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4625634304648856309, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
       propertyPath: m_Layer
       value: 8

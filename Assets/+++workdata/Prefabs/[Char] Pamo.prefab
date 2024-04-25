@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.18540311
       objectReference: {fileID: 0}
+    - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 8498007629361954147}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.64645
@@ -89,7 +93,7 @@ PrefabInstance:
       addedObject: {fileID: 1456692243618727644}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2678853848379604295, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 8498007629361954147}
   m_SourcePrefab: {fileID: 100100000, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
 --- !u!1 &3832746447698499432 stripped

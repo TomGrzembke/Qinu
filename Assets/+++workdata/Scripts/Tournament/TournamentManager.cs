@@ -12,13 +12,13 @@ public class TournamentManager : MonoBehaviour
     }
     public enum GameMode
     {
-        a1v1,
-        a2v2,
         Bodi,
-        watch1v1
+        a1v1,
+        a2v2
     }
 
     #region serialized fields
+    public static TournamentManager Instance;
     [field: SerializeField] public float RoundAmount { get; private set; }
     [field: SerializeField] public GameState gameState { get; private set; }
     [SerializeField] float RoundsTilWin = 5;
@@ -32,6 +32,11 @@ public class TournamentManager : MonoBehaviour
     #region private fields
     GameObject lastPlayed;
     #endregion
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         for (int i = 0; i < CharManager.Instance.CharNavs.Length; i++)
@@ -57,7 +62,6 @@ public class TournamentManager : MonoBehaviour
             1 => FirstRound(),
             2 => SecondRound(),
             3 => ThirdRound(),
-            4 => FourthRound(),
             _ => RandomCalcRound()
         };
 
@@ -70,7 +74,7 @@ public class TournamentManager : MonoBehaviour
         ClearSideLists();
         leftPlayers.Add(AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
-        rightPlayers.Add(GetLowestPlayRate());
+        rightPlayers.Add(lastPlayed);
 
         CharManager.Instance.PathGOTo(lastPlayed, GetRandomDefaultPos(1));
     }
@@ -81,17 +85,6 @@ public class TournamentManager : MonoBehaviour
         rightPlayers.Clear();
     }
 
-    void Calc1v1Watch()
-    {
-        ClearSideLists();
-        var first = GetLowestPlayRate();
-        var second = GetLowestPlayRate(first);
-        leftPlayers.Add(first);
-        rightPlayers.Add(second);
-
-        CharManager.Instance.PathGOTo(first, GetRandomDefaultPos(0));
-        CharManager.Instance.PathGOTo(second, GetRandomDefaultPos(1));
-    }
     void Calc2v2()
     {
         ClearSideLists();
@@ -144,15 +137,9 @@ public class TournamentManager : MonoBehaviour
 
         return 0;
     }
-    int FourthRound()
-    {
-        CurrentGameMode = GameMode.watch1v1;
-        Calc1v1Watch();
-        return 0;
-    }
     int RandomCalcRound()
     {
-        CurrentGameMode = (GameMode)Random.Range(0, 2);
+        CurrentGameMode = (GameMode)Random.Range(1, 3);
         if (CurrentGameMode == GameMode.a1v1)
             Calc1v1();
         else if (CurrentGameMode == GameMode.a2v2)
@@ -162,14 +149,21 @@ public class TournamentManager : MonoBehaviour
     }
     #endregion
 
-    /// <param name="sideIndex">left = 0, right = 1</param>
+    /// <returns>left = 0, right = 1</returns>
     Vector3 GetRandomDefaultPos(int sideIndex)
     {
-        if (sideIndex == 0)
-            return MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position;
-        else
-            return MinigameManager.Instance.DefaultPosRight[Random.Range(0, MinigameManager.Instance.DefaultPosRight.Length)].position;
+        return GetRandomDefaultTrans(sideIndex).position;
     }
+
+    /// <returns>left = 0, right = 1</returns>
+    public Transform GetRandomDefaultTrans(int sideIndex)
+    {
+        if (sideIndex == 0)
+            return MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)];
+        else
+            return MinigameManager.Instance.DefaultPosRight[Random.Range(0, MinigameManager.Instance.DefaultPosRight.Length)];
+    }
+
     GameObject GetLowestPlayRate(GameObject exclude = null, GameObject exclude2 = null)
     {
         GameObject lowestPlayRateChar = new();

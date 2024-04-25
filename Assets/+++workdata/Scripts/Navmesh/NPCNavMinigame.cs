@@ -4,9 +4,11 @@ using UnityEngine;
 public class NPCNavMinigame : NavCalc
 {
     #region serialized fields
-    [SerializeField] Transform puk;
     [SerializeField] bool isRight = true;
+    [SerializeField] Transform arenaMiddle;
+    [SerializeField] Transform defaultPos;
 
+    [SerializeField] Transform puk;
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
     [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;
@@ -14,9 +16,8 @@ public class NPCNavMinigame : NavCalc
     [SerializeField] float probabilityPerFrame = 10;
 
     [SerializeField] MoveRB moveRB;
-    [SerializeField] Transform arenaMiddle;
-    [SerializeField] Transform defaultPos;
     [SerializeField] Vector3 targetPos;
+    [SerializeField] Collider2D col;
     bool PukOnSide => isRight ? arenaMiddle.position.x < puk.position.x : arenaMiddle.position.x > puk.position.x;
     #endregion
 
@@ -52,8 +53,27 @@ public class NPCNavMinigame : NavCalc
 
         agent.velocity = Vector2.zero;
     }
+    public void SideSettings(bool _isRight, Transform _arenaMiddle = null)
+    {
+        isRight = _isRight;
+
+        if (_arenaMiddle != null)
+            arenaMiddle = _arenaMiddle;
+
+        if (defaultPos == null)
+            defaultPos = TournamentManager.Instance.GetRandomDefaultTrans(_isRight ? 1 : 0);
+    }
 
     void OnDrawGizmosSelected()
     {
+    }
+
+    void OnEnable()
+    {
+        col.enabled = true;
+    }
+    void OnDisable()
+    {
+        col.enabled = false;
     }
 }

@@ -29,7 +29,6 @@ public class NavCalc : MonoBehaviour
 
         agent.velocity = Vector2.zero;
     }
-
     void OnDrawGizmosSelected()
     {
     }

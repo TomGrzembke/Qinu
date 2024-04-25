@@ -1029,6 +1029,7 @@ MonoBehaviour:
   - {fileID: 1601400603}
   - {fileID: 15874255}
   - {fileID: 215230873}
+  <CurrentGameMode>k__BackingField: 0
 --- !u!1 &404009626
 GameObject:
   m_ObjectHideFlags: 0
@@ -11398,6 +11399,22 @@ PrefabInstance:
     - target: {fileID: 1275408991224469072, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330097512505930034, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_Radius
+      value: 2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335189432649078917, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_Radius
+      value: 2.3704815
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335189432649078917, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335189432649078917, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.10504549
       objectReference: {fileID: 0}
     - target: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_Name

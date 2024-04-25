@@ -13,9 +13,9 @@ public class TournamentManager : MonoBehaviour
     }
     public enum GameMode
     {
-        Bodi,
         a1v1,
         a2v2,
+        Bodi,
         watch1v1
     }
 
@@ -50,55 +50,62 @@ public class TournamentManager : MonoBehaviour
     {
         if (gameState == GameState.InGame) return;
 
-        int round = RoundAmount switch
+        int a = RoundAmount switch
         {
             0 => RoundZero(),
-            1 => proc1(),
-            2 => proc2(),
-            3 => proc3(),
-            _ => false
+            1 => FirstRound(),
+            2 => SecondRound(),
+            3 => ThirdRound(),
+            4 => FourthRound(),
+            _ => RandomCalcRound()
         };
-
-        switch (RoundAmount)
-        {
-            case 0:
-                RoundZero();
-                break;
-            case 1:
-                FirstRound();
-
-                break;
-            case 2:
-                CurrentGameMode = GameMode.a1v1;
-
-                break;
-            case 3:
-                CurrentGameMode = GameMode.a2v2;
-
-                break;
-            case 4:
-                CurrentGameMode = GameMode.watch1v1;
-                break;
-            default:
-                int gameModeLength = Enum.GetValues(typeof(GameMode)).Length;
-                CurrentGameMode = (GameMode)Random.Range(0, gameModeLength + 1);
-                break;
-        }
 
         gameState = GameState.InGame;
         RoundAmount++;
     }
 
+
+
     #region Rounds
-    void RoundZero()
+    int RoundZero()
     {
         CharManager.Instance.PathGOTo(AvailableChars[1], MinigameManager.Instance.DefaultPosLeft
             [Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)].position);
         CurrentGameMode = GameMode.Bodi;
+
+        return 0;
     }
-    void FirstRound()
+    int FirstRound()
     {
         CurrentGameMode = GameMode.a1v1;
+
+        return 0;
+    }
+    int SecondRound()
+    {
+        CurrentGameMode = GameMode.a1v1;
+
+        return 0;
+    }
+    int RandomCalcRound()
+    {
+        CurrentGameMode = (GameMode)Random.Range(0, 2);
+
+        return 0;
+    }
+
+    int FourthRound()
+    {
+        CurrentGameMode = GameMode.watch1v1;
+
+        return 0;
+    }
+
+    int ThirdRound()
+    {
+        CurrentGameMode = GameMode.a2v2;
+
+        return 0;
     }
     #endregion
 

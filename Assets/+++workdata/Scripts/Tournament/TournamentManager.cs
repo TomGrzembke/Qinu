@@ -52,7 +52,7 @@ public class TournamentManager : MonoBehaviour
     }
 
     [ButtonMethod]
-    public void StartGame()
+    public void InitializeGame()
     {
         if (gameState == GameState.InGame) return;
 

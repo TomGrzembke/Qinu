@@ -43,5 +43,7 @@ public class MinigameManager : MonoBehaviour
         pukRB.velocity = Vector2.zero;
         pukRB.transform.position = goalID == 0 ? ballResetLeft.position : ballResetRight.position;
 
+        //if(pointCounter.x == 5)
+
     }
 }

@@ -6,6 +6,7 @@ public class GoalTracker : MonoBehaviour
     [SerializeField] MinigameManager minigameManager;
     [SerializeField] bool leftSide;
     [SerializeField] ParticleSystem goalParticles;
+    [field: SerializeField] public ParticleSystem wonParticles { get; private set; } 
     #endregion
 
     #region private fields
@@ -16,8 +17,13 @@ public class GoalTracker : MonoBehaviour
     {
         if (other.CompareTag("Puk"))
         {
-            minigameManager.Goal(leftSide == false ? 0 : 1);
+            minigameManager.Goal(leftSide == false ? 0 : 1, this);
             goalParticles.Play();
         }
+    }
+
+    public void WonParticle()
+    {
+        wonParticles.Play();
     }
 }

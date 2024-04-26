@@ -11,12 +11,15 @@ public class CharNav : MonoBehaviour
 
     #endregion
 
-    public void ActivateNavCalc()
+    public void ActivateNavCalc(Transform targetPos = null)
     {
         if (NavCalc != null)
             NavCalc.enabled = true;
         if (NPCNavMinigame != null)
             NPCNavMinigame.enabled = false;
+
+        if(targetPos != null)
+            NavCalc.SetAgentPosition(targetPos); 
     }
 
     public void ChangeToArena(int sideID)

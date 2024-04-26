@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class NavCalc : MonoBehaviour
 {
     #region serialized fields
-
+    [field: SerializeField] public Transform homePos { get; private set; } 
     #endregion
 
     #region private fields
@@ -29,6 +29,12 @@ public class NavCalc : MonoBehaviour
 
         agent.velocity = Vector2.zero;
     }
+
+    public void SetAgentPosition(Transform targetTrans)
+    {
+        SetAgentPosition(targetTrans.position);
+    }
+
     void OnDrawGizmosSelected()
     {
     }

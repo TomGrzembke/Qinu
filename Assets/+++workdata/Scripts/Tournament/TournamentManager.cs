@@ -1,4 +1,5 @@
 using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,6 +9,7 @@ public class TournamentManager : MonoBehaviour
     public enum GameState
     {
         InGame,
+        AfterGame,
         Village
     }
     public enum GameMode
@@ -27,6 +29,7 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameObject> rightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> leftPlayers { get; private set; }
+    [SerializeField] float afterCombatTime = 3;
     #endregion
 
     #region private fields
@@ -148,7 +151,15 @@ public class TournamentManager : MonoBehaviour
     #endregion
     public void SideWon(int sideID)
     {
+        StartCoroutine(AfterGameCor(sideID));
+    }
+
+    IEnumerator AfterGameCor(int sideID)
+    {
+        gameState = GameState.AfterGame;
+        yield return new WaitForSeconds(afterCombatTime);
         gameState = GameState.Village;
+
         CharacterStats left0Stats = GetCharacterStats(leftPlayers[0]);
         CharacterStats right0Stats = GetCharacterStats(rightPlayers[0]);
 
@@ -162,9 +173,9 @@ public class TournamentManager : MonoBehaviour
         right0Stats.TimesPlayed += 1;
 
         left0Stats.CharNav.ActivateNavCalc();
-        right0Stats.CharNav.ActivateNavCalc();
+        right0Stats.CharNav.ActivateNavCalc(right0Stats.CharNav.NavCalc.homePos);
 
-        if (CurrentGameMode != GameMode.a2v2) return;
+        if (CurrentGameMode != GameMode.a2v2) yield break;
 
         CharacterStats left1Stats = GetCharacterStats(leftPlayers[1]);
         CharacterStats right1Stats = GetCharacterStats(rightPlayers[1]);
@@ -178,8 +189,8 @@ public class TournamentManager : MonoBehaviour
         left1Stats.TimesPlayed += 1;
         left1Stats.TimesPlayed += 1;
 
-        left1Stats.CharNav.ActivateNavCalc();
-        right1Stats.CharNav.ActivateNavCalc();
+        left1Stats.CharNav.ActivateNavCalc(left1Stats.CharNav.NavCalc.homePos);
+        right1Stats.CharNav.ActivateNavCalc(right1Stats.CharNav.NavCalc.homePos);
     }
 
     /// <returns>left = 0, right = 1</returns>

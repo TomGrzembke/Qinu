@@ -29,7 +29,7 @@ public class MinigameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Goal(int goalID)
+    public void Goal(int goalID, GoalTracker goalTracker = null)
     {
         if (goalID == 0)
         {
@@ -49,12 +49,15 @@ public class MinigameManager : MonoBehaviour
         {
             TournamentManager.Instance.SideWon(0);
             ResetArena();
+            if (goalTracker != null)
+                goalTracker.WonParticle();
         }
         else if (pointCounter.y == pointsTilWin)
         {
             TournamentManager.Instance.SideWon(0);
             ResetArena();
-
+            if (goalTracker != null)
+                goalTracker.WonParticle();
         }
     }
 

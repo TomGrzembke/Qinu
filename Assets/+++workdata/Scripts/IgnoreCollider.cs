@@ -3,7 +3,7 @@ using UnityEngine;
 public class IgnoreCollider : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] Collider2D targetCol;
+    [SerializeField] Collider2D[] targetCol;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] LayerMask layerToIgnore;
     #endregion
@@ -19,8 +19,11 @@ public class IgnoreCollider : MonoBehaviour
 
     void Start()
     {
-        if (targetCol != null)
-            Physics2D.IgnoreCollision(col, targetCol);
+        if (targetCol.Length > 0)
+            for (int i = 0; i < targetCol.Length; i++)
+            {
+                Physics2D.IgnoreCollision(col, targetCol[i]);
+            }
 
         if (ignoreLayer.value != 0 && layerToIgnore.value != 0)
             Physics2D.IgnoreLayerCollision(ignoreLayer.GetLayerID(), layerToIgnore.GetLayerID());

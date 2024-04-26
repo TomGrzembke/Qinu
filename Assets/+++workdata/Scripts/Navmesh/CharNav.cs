@@ -13,8 +13,10 @@ public class CharNav : MonoBehaviour
 
     public void ActivateNavCalc()
     {
-        NavCalc.enabled = true;
-        NPCNavMinigame.enabled = false;
+        if (NavCalc != null)
+            NavCalc.enabled = true;
+        if (NPCNavMinigame != null)
+            NPCNavMinigame.enabled = false;
     }
 
     public void ChangeToArena(int sideID)

@@ -55,8 +55,7 @@ public class TournamentManager : MonoBehaviour
     public void InitializeGame()
     {
         if (gameState == GameState.InGame) return;
-
-        int a = RoundAmount switch
+        _ = RoundAmount switch
         {
             0 => RoundZero(),
             1 => FirstRound(),
@@ -122,7 +121,6 @@ public class TournamentManager : MonoBehaviour
         return 0;
     }
 
-
     int SecondRound()
     {
         CurrentGameMode = GameMode.a1v1;
@@ -148,6 +146,41 @@ public class TournamentManager : MonoBehaviour
         return 0;
     }
     #endregion
+    public void SideWon(int sideID)
+    {
+        gameState = GameState.Village;
+        CharacterStats left0Stats = GetCharacterStats(leftPlayers[0]);
+        CharacterStats right0Stats = GetCharacterStats(rightPlayers[0]);
+
+        if (sideID == 0)
+            left0Stats.Wins += 1;
+
+        else if (sideID == 1)
+            right0Stats.Wins += 1;
+
+        left0Stats.TimesPlayed += 1;
+        right0Stats.TimesPlayed += 1;
+
+        left0Stats.CharNav.ActivateNavCalc();
+        right0Stats.CharNav.ActivateNavCalc();
+
+        if (CurrentGameMode != GameMode.a2v2) return;
+
+        CharacterStats left1Stats = GetCharacterStats(leftPlayers[1]);
+        CharacterStats right1Stats = GetCharacterStats(rightPlayers[1]);
+
+        if (sideID == 0)
+            left1Stats.Wins += 1;
+
+        else if (sideID == 1)
+            right1Stats.Wins += 1;
+
+        left1Stats.TimesPlayed += 1;
+        left1Stats.TimesPlayed += 1;
+
+        left1Stats.CharNav.ActivateNavCalc();
+        right1Stats.CharNav.ActivateNavCalc();
+    }
 
     /// <returns>left = 0, right = 1</returns>
     Vector3 GetRandomDefaultPos(int sideIndex)
@@ -183,6 +216,18 @@ public class TournamentManager : MonoBehaviour
         }
         return lowestPlayRateChar;
     }
+
+    CharacterStats GetCharacterStats(GameObject goSearched)
+    {
+        CharacterStats characterStats = new(goSearched);
+        for (int i = 0; i < CharStats.Count; i++)
+        {
+            if (CharStats[i].CharGO == goSearched)
+                characterStats = CharStats[i];
+        }
+
+        return characterStats;
+    }
 }
 
 [System.Serializable]
@@ -192,10 +237,12 @@ public class CharacterStats
     {
         CharGO = charGO;
         Name = CharGO.name;
+        CharNav = CharGO.GetComponent<CharNav>();
     }
 
     [HideInInspector] public string Name;
-    [field: SerializeField] public int TimesPlayed { get; private set; }
-    [field: SerializeField] public int Wins { get; private set; }
+    public int TimesPlayed;
+    public int Wins;
     [field: SerializeField] public GameObject CharGO { get; private set; }
+    [field: SerializeField] public CharNav CharNav { get; private set; }
 }

@@ -5,6 +5,8 @@ public class MinigameManager : MonoBehaviour
 {
     #region serialized fields
     public static MinigameManager Instance;
+    [SerializeField] float pointsTilWin = 5;
+    [SerializeField] Vector2 pointCounter;
     [field: SerializeField] public Transform Puk { get; private set; }
     [SerializeField] Rigidbody2D pukRB;
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
@@ -15,7 +17,7 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Transform ballResetRight;
     [SerializeField] TextMeshProUGUI leftCounterTxt;
     [SerializeField] TextMeshProUGUI rightCounterTxt;
-    [SerializeField] Vector2 pointCounter;
+    [SerializeField] Transform pukResetPos;
     #endregion
 
     #region private fields
@@ -43,7 +45,24 @@ public class MinigameManager : MonoBehaviour
         pukRB.velocity = Vector2.zero;
         pukRB.transform.position = goalID == 0 ? ballResetLeft.position : ballResetRight.position;
 
-        //if(pointCounter.x == 5)
+        if (pointCounter.x == pointsTilWin)
+        {
+            TournamentManager.Instance.SideWon(0);
+            ResetArena();
+        }
+        else if (pointCounter.y == pointsTilWin)
+        {
+            TournamentManager.Instance.SideWon(0);
+            ResetArena();
 
+        }
+    }
+
+    void ResetArena()
+    {
+        pointCounter = new();
+        Puk.position = pukResetPos.position;
+        rightCounterTxt.text = pointCounter.y.ToString();
+        leftCounterTxt.text = pointCounter.x.ToString();
     }
 }

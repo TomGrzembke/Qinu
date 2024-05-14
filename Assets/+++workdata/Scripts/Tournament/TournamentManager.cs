@@ -29,6 +29,7 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<CharacterStats> CharStats { get; private set; }
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
+    [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
     [field: SerializeField] public List<GameObject> rightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> leftPlayers { get; private set; }
     [SerializeField] float afterCombatTime = 3;

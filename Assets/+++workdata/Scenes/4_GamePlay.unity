@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 365903683}
   - component: {fileID: 365903684}
   - component: {fileID: 365903685}
+  - component: {fileID: 365903686}
   m_Layer: 0
   m_Name: ---Manager
   m_TagString: Untagged
@@ -1168,9 +1169,29 @@ MonoBehaviour:
   - {fileID: 15874255}
   - {fileID: 215230873}
   <CurrentGameMode>k__BackingField: 0
+  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
   <rightPlayers>k__BackingField: []
   <leftPlayers>k__BackingField: []
   afterCombatTime: 3
+--- !u!114 &365903686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365903682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCol: []
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  layerToIgnore:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &404009626
 GameObject:
   m_ObjectHideFlags: 0
@@ -8279,6 +8300,10 @@ PrefabInstance:
       propertyPath: puk
       value: 
       objectReference: {fileID: 1183967833}
+    - target: {fileID: 3335189432649078917, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
       propertyPath: m_Name
       value: '[Char] Tessar'
@@ -8981,7 +9006,7 @@ Transform:
   m_GameObject: {fileID: 1245425548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.8, y: -2.2, z: 0}
+  m_LocalPosition: {x: -13.59, y: -2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9519,7 +9544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1436385510
 Transform:
   m_ObjectHideFlags: 0
@@ -10820,6 +10845,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 2.6
       objectReference: {fileID: 0}
+    - target: {fileID: 1330097512505930034, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2672593879288869759, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: puk
       value: 
@@ -10903,10 +10932,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1860423465}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
 --- !u!4 &1860423449 stripped
 Transform:
@@ -10924,25 +10950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1860423465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357995332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetCol: []
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  layerToIgnore:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &1867373897
 GameObject:
   m_ObjectHideFlags: 0

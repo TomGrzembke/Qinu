@@ -26,6 +26,6 @@ public class IgnoreCollider : MonoBehaviour
             }
 
         if (ignoreLayer.value != 0 && layerToIgnore.value != 0)
-            Physics2D.IgnoreLayerCollision(ignoreLayer.GetLayerID(), layerToIgnore.GetLayerID());
+            Physics2D.IgnoreLayerCollision(ignoreLayer.GetLayerID(), layerToIgnore.GetLayerID(), true);
     }
 }

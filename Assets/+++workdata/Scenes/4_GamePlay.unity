@@ -1088,7 +1088,6 @@ GameObject:
   - component: {fileID: 365903683}
   - component: {fileID: 365903684}
   - component: {fileID: 365903685}
-  - component: {fileID: 365903686}
   m_Layer: 0
   m_Name: ---Manager
   m_TagString: Untagged
@@ -1157,10 +1156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93532db498e6bf642bc422c822b152ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cage: {fileID: 1078603537}
   <RoundAmount>k__BackingField: 0
-  <gameState>k__BackingField: 1
   RoundsTilWin: 5
+  <gameState>k__BackingField: 1
   <CharStats>k__BackingField: []
   <AvailableChars>k__BackingField:
   - {fileID: 1199928778}
@@ -1169,29 +1167,11 @@ MonoBehaviour:
   - {fileID: 15874255}
   - {fileID: 215230873}
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
+  <FirstGameModes>k__BackingField: 02000000010000000100000002000000
   <rightPlayers>k__BackingField: []
   <leftPlayers>k__BackingField: []
   afterCombatTime: 3
---- !u!114 &365903686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365903682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetCol: []
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  layerToIgnore:
-    serializedVersion: 2
-    m_Bits: 256
+  cage: {fileID: 1078603537}
 --- !u!1 &404009626
 GameObject:
   m_ObjectHideFlags: 0
@@ -8312,6 +8292,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 6193099038533515315, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -8392,6 +8376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1148146594 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3335189432649078917, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
+  m_PrefabInstance: {fileID: 1148146583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1148146600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8404,13 +8393,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCol: []
+  targetCol:
+  - {fileID: 1860423459}
+  - {fileID: 1989402326627472803}
+  - {fileID: 589874323075437211}
+  - {fileID: 1148146594}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   layerToIgnore:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!1 &1169021954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10873,6 +10866,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 6503981461860879854, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: <homePos>k__BackingField
       value: 
@@ -10932,7 +10929,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1860423465}
   m_SourcePrefab: {fileID: 100100000, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
 --- !u!4 &1860423449 stripped
 Transform:
@@ -10950,6 +10950,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1860423459 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3335189432649078917, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+  m_PrefabInstance: {fileID: 1860423448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1860423465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357995332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCol:
+  - {fileID: 1860423459}
+  - {fileID: 1989402326627472803}
+  - {fileID: 589874323075437211}
+  - {fileID: 1148146594}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  layerToIgnore:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1867373897
 GameObject:
   m_ObjectHideFlags: 0
@@ -11970,6 +11998,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 3944670978598778843, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -12062,6 +12094,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &589874323075437211 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8498007629361954147, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
+  m_PrefabInstance: {fileID: 589874323075437200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &589874323075437217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12074,13 +12111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCol: []
+  targetCol:
+  - {fileID: 1860423459}
+  - {fileID: 1989402326627472803}
+  - {fileID: 589874323075437211}
+  - {fileID: 1148146594}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   layerToIgnore:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!1001 &1989402326627472792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12104,6 +12145,10 @@ PrefabInstance:
     - target: {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
+      propertyPath: m_TagString
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 4350041508595115883, guid: 8f8e285916384274eb9f960859583b28, type: 3}
       propertyPath: m_Layer
@@ -12189,6 +12234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1989402326627472803 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3335189432649078917, guid: 8f8e285916384274eb9f960859583b28, type: 3}
+  m_PrefabInstance: {fileID: 1989402326627472792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1989402326627472809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12201,13 +12251,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39632d3e4fca3624bb226ffcd6db02eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCol: []
+  targetCol:
+  - {fileID: 1860423459}
+  - {fileID: 1989402326627472803}
+  - {fileID: 589874323075437211}
+  - {fileID: 1148146594}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   layerToIgnore:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!1001 &4843322246685116136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12422,12 +12476,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1515330404318159026, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      insertIndex: 8
+      insertIndex: 7
       addedObject: {fileID: 1199928787}
   m_SourcePrefab: {fileID: 100100000, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
 --- !u!1660057539 &9223372036854775807

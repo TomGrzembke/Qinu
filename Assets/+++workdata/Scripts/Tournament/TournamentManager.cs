@@ -22,10 +22,9 @@ public class TournamentManager : MonoBehaviour
 
     #region serialized fields
     public static TournamentManager Instance;
-    [SerializeField] GameObject cage;
-    [field: SerializeField] public float RoundAmount { get; private set; }
-    [field: SerializeField] public GameState gameState { get; private set; }
+    [field: SerializeField] public int RoundAmount { get; private set; }
     [SerializeField] float RoundsTilWin = 5;
+    [field: SerializeField] public GameState gameState { get; private set; }
     [field: SerializeField] public List<CharacterStats> CharStats { get; private set; }
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
@@ -33,6 +32,7 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<GameObject> rightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> leftPlayers { get; private set; }
     [SerializeField] float afterCombatTime = 3;
+    [SerializeField] GameObject cage;
     #endregion
 
     #region private fields
@@ -63,14 +63,11 @@ public class TournamentManager : MonoBehaviour
     public void InitializeGame()
     {
         if (gameState == GameState.InGame) return;
-        _ = RoundAmount switch
-        {
-            0 => RoundZero(),
-            1 => FirstRound(),
-            2 => SecondRound(),
-            3 => ThirdRound(),
-            _ => RandomCalcRound()
-        };
+
+        if (RoundAmount < FirstGameModes.Count)
+            CustomRound(FirstGameModes[RoundAmount]);
+        else
+            RandomCalcRound();
 
         gameState = GameState.InGame;
         RoundAmount++;
@@ -111,7 +108,7 @@ public class TournamentManager : MonoBehaviour
     }
 
     #region Rounds
-    int RoundZero()
+    void BodiRound()
     {
         GameObject bodi = AvailableChars[2];
         CharManager.Instance.PathGOTo(bodi, GetRandomDefaultPos(1));
@@ -119,40 +116,29 @@ public class TournamentManager : MonoBehaviour
         lastPlayed = bodi;
         leftPlayers.Add(AvailableChars[0]);
         rightPlayers.Add(bodi);
-        return 0;
     }
-    int FirstRound()
+
+    void CustomRound(GameMode gameMode)
     {
-        CurrentGameMode = GameMode.a1v1;
+        CurrentGameMode = gameMode;
 
-        Calc1v1();
-        return 0;
+        if(CurrentGameMode == GameMode.a1v1)
+            Calc1v1();
+        else if (CurrentGameMode == GameMode.a2v2)
+            Calc2v2();
+        else
+            BodiRound();
     }
 
-    int SecondRound()
-    {
-        CurrentGameMode = GameMode.a1v1;
-        Calc1v1();
-
-        return 0;
-    }
-    int ThirdRound()
-    {
-        CurrentGameMode = GameMode.a2v2;
-        Calc2v2();
-
-        return 0;
-    }
-    int RandomCalcRound()
+    void RandomCalcRound()
     {
         CurrentGameMode = (GameMode)Random.Range(1, 3);
         if (CurrentGameMode == GameMode.a1v1)
             Calc1v1();
         else if (CurrentGameMode == GameMode.a2v2)
             Calc2v2();
-
-        return 0;
     }
+
     #endregion
     public void SideWon(int sideID)
     {

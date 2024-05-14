@@ -47,7 +47,7 @@ public class MinigameManager : MonoBehaviour
 
         if (pointCounter.x == pointsTilWin)
         {
-            TournamentManager.Instance.SideWon(0);
+            TournamentManager.Instance.SideWon(1);
             ResetArena();
             if (goalTracker != null)
                 goalTracker.WonParticle();

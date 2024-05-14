@@ -1,6 +1,7 @@
 using MyBox;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +22,7 @@ public class TournamentManager : MonoBehaviour
 
     #region serialized fields
     public static TournamentManager Instance;
+    [SerializeField] GameObject cage;
     [field: SerializeField] public float RoundAmount { get; private set; }
     [field: SerializeField] public GameState gameState { get; private set; }
     [SerializeField] float RoundsTilWin = 5;
@@ -52,6 +54,8 @@ public class TournamentManager : MonoBehaviour
         {
             CharStats.Add(new(AvailableChars[i]));
         }
+
+        InitializeGame();
     }
 
     [ButtonMethod]
@@ -156,6 +160,8 @@ public class TournamentManager : MonoBehaviour
 
     IEnumerator AfterGameCor(int sideID)
     {
+        yield return new WaitForSeconds(.3f);
+        cage.SetActive(true);
         gameState = GameState.AfterGame;
         yield return new WaitForSeconds(afterCombatTime);
         gameState = GameState.Village;
@@ -175,8 +181,16 @@ public class TournamentManager : MonoBehaviour
         left0Stats.CharNav.ActivateNavCalc();
         right0Stats.CharNav.ActivateNavCalc(right0Stats.CharNav.NavCalc.homePos);
 
-        if (CurrentGameMode != GameMode.a2v2) yield break;
+        if (CurrentGameMode == GameMode.a2v2)
+            Cleanup2v2(sideID);
 
+        yield return new WaitForSeconds(afterCombatTime);
+        InitializeGame();
+        cage.SetActive(false);
+    }
+
+    void Cleanup2v2(int sideID)
+    {
         CharacterStats left1Stats = GetCharacterStats(leftPlayers[1]);
         CharacterStats right1Stats = GetCharacterStats(rightPlayers[1]);
 

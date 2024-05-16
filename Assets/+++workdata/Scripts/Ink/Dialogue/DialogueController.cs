@@ -16,13 +16,15 @@ public struct DialogueLine
 
 public class DialogueController : MonoBehaviour
 {
+    public static DialogueController Instance;
     public static Action dialogueOpened;
     public static Action dialogueClosed;
     public static Action<string> InkEvent;
 
     #region SerializeField
     [SerializeField] TextAsset inkAsset;
-    [SerializeField] DialogueBox dialogueBox;
+    [field: SerializeField] public float typeSpeed { get; private set; } = 0.05f;
+    [SerializeField] GameObject[] speakerBoxParents;
     #endregion
 
     #region private
@@ -33,19 +35,10 @@ public class DialogueController : MonoBehaviour
     #region UnityEvent Functions
     void Awake()
     {
+        Instance = this;
         inkStory = new(inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
-    }
-
-    void OnEnable()
-    {
-        dialogueBox.DialogueContinued += OnDialogueContinued;
-    }
-
-    void OnDisable()
-    {
-        dialogueBox.DialogueContinued -= OnDialogueContinued;
     }
 
     #endregion
@@ -63,7 +56,7 @@ public class DialogueController : MonoBehaviour
         ContinueDialogue();
     }
 
-    void ContinueDialogue()
+    public void ContinueDialogue()
     {
         if (!CanContinue())
         {
@@ -89,20 +82,34 @@ public class DialogueController : MonoBehaviour
             dialogueLine = HandleTags(inkStory.currentTags, dialogueLine);
         }
 
-        dialogueBox.DisplayText(dialogueLine);
+        GetDialogueBox(dialogueLine)?.DisplayText(dialogueLine);
     }
 
     void OpenDialogue()
     {
-        dialogueBox.gameObject.SetActive(true);
         dialogueOpened?.Invoke();
     }
 
     void CloseDialogue()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        dialogueBox.gameObject.SetActive(false);
         dialogueClosed?.Invoke();
+    }
+
+    DialogueBox GetDialogueBox(DialogueLine dialogueLine)
+    {
+        string speaker = dialogueLine.speaker;
+
+        for (int i = 0; i < speakerBoxParents.Length; i++)
+        {
+            if (!speakerBoxParents[i].name.Contains(speaker)) continue;
+
+            speakerBoxParents[i].gameObject.SetActive(true);
+            return speakerBoxParents[i].GetComponentInChildren<DialogueBox>();
+
+        }
+
+        return null;
     }
     #endregion
 

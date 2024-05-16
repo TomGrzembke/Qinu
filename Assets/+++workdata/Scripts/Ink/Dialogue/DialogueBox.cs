@@ -1,26 +1,22 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using Ink.Runtime;
-using System.Collections.Generic;
-using System.Collections;
 
 public class DialogueBox : MonoBehaviour
 {
     public event Action<DialogueBox> DialogueContinued;
-    public event Action<DialogueBox, int> ChoiceSelected;
 
     #region Inspector
-    [SerializeField] float typeSpeed = 0.03f;
-
-    [SerializeField] TextMeshProUGUI dialogueSpeaker;
+    [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
     #endregion
 
     #region private
     Coroutine displayLineCoroutine;
+    float typeSpeed => DialogueController.Instance.typeSpeed / typeSpeedMultiplier;
     #endregion
 
     #region UnityEvents
@@ -31,23 +27,16 @@ public class DialogueBox : MonoBehaviour
 
     void OnEnable()
     {
-        dialogueSpeaker?.SetText(string.Empty);
         dialogueText.SetText(string.Empty);
     }
 
     public void DisplayText(DialogueLine dialogueLine)
     {
-        if (dialogueLine.speaker != null)
-        {
-            dialogueSpeaker?.SetText(dialogueLine.speaker);
-        }
-
         if (displayLineCoroutine != null)
             StopCoroutine(displayLineCoroutine);
 
         displayLineCoroutine = StartCoroutine(DisplayLine(dialogueLine.text, dialogueLine.speaker));
 
-        DisplayButtons(dialogueLine.choices);
     }
 
     IEnumerator DisplayLine(string line, string speaker)
@@ -60,27 +49,10 @@ public class DialogueBox : MonoBehaviour
 
             yield return new WaitForSeconds(typeSpeed);
         }
+        yield return new WaitForSeconds(1f);
 
-    }
-
-    void DisplayButtons(List<Choice> choices)
-    {
-        Selectable newSelection;
-
-        ShowContinueButton(true);
-        newSelection = continueButton;
-        StartCoroutine(DelayedSelection(newSelection));
-    }
-
-    public void ShowContinueButton(bool show)
-    {
-        continueButton?.gameObject.SetActive(show);
+        DialogueController.Instance.ContinueDialogue();
+        transform.parent.gameObject.SetActive(false);
     }
     #endregion
-
-    IEnumerator DelayedSelection(Selectable selectable)
-    {
-        yield return null;
-        selectable?.Select();
-    }
 }

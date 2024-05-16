@@ -1,5 +1,5 @@
 == Text
-Bodi's the name #speaker: Body
-
--> Text
+Am I lonely? #speaker: Qinu
+Yes #speaker: Main
+And alone. #speaker: Qinu
  -> END

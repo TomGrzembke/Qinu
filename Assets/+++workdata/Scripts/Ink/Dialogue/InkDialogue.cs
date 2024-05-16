@@ -4,7 +4,6 @@ public class InkDialogue : MonoBehaviour
 {
     #region Inspector
     [SerializeField] string dialoguePath;
-    [SerializeField] DialogueController dialogueController;
     [SerializeField] bool onStart;
     #endregion
     void Start()
@@ -21,6 +20,6 @@ public class InkDialogue : MonoBehaviour
             return;
         }
 
-        dialogueController.StartDialogue(dialoguePath);
+        DialogueController.Instance.StartDialogue(dialoguePath);
     }
 }

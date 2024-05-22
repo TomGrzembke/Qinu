@@ -7,6 +7,7 @@ public class AttachToGO : MonoBehaviour
     #region private fields
    
     #endregion
+
     void Update()
     {
         transform.position = attachTo.position;

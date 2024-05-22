@@ -1,7 +1,6 @@
 using MyBox;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -122,7 +121,7 @@ public class TournamentManager : MonoBehaviour
     {
         CurrentGameMode = gameMode;
 
-        if(CurrentGameMode == GameMode.a1v1)
+        if (CurrentGameMode == GameMode.a1v1)
             Calc1v1();
         else if (CurrentGameMode == GameMode.a2v2)
             Calc2v2();

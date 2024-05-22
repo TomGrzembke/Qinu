@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1790193273527780712, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790193273527780712, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2678853848379604295, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Name
       value: '[Char] Athony'
@@ -16,6 +24,14 @@ PrefabInstance:
       propertyPath: charSO
       value: 
       objectReference: {fileID: 11400000, guid: 3d91da144f5087d44acebdd29bdce75e, type: 2}
+    - target: {fileID: 4668081049126706427, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668081049126706427, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.41468683

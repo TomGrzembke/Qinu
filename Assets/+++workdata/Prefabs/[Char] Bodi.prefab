@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1790193273527780712, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790193273527780712, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833478834251732333, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Name
+      value: SecondDialoguePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 2678853848379604295, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Name
       value: '[Char] Bodi'
@@ -23,6 +35,18 @@ PrefabInstance:
     - target: {fileID: 4491615955301986986, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Offset.y
       value: -0.07448428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668081049126706427, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668081049126706427, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445744495270310648, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Name
+      value: DialoguePoint
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x

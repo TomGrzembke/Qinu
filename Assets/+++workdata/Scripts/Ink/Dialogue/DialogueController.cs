@@ -106,9 +106,9 @@ public class DialogueController : MonoBehaviour
 
             speakerBoxParents[i].gameObject.SetActive(true);
             return speakerBoxParents[i].GetComponentInChildren<DialogueBox>();
-
         }
 
+        Debug.Log(dialogueLine.speaker + " has no DialogueBox in " + nameof(speakerBoxParents));
         return null;
     }
     #endregion

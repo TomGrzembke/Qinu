@@ -37,6 +37,42 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Ability0"",
+                    ""type"": ""Value"",
+                    ""id"": ""00c1d2f7-7cd9-410d-8b37-b220281ac52f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Value"",
+                    ""id"": ""a111fc11-6670-4671-aabe-15436f9c4bec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Value"",
+                    ""id"": ""568fbf71-ba6b-412a-9a55-700afcc8ad84"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability3"",
+                    ""type"": ""Value"",
+                    ""id"": ""3548f6b1-d365-4e0f-b6c3-254f892efdff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""PassThrough"",
                     ""id"": ""4afa3374-a1be-44f4-b850-25a183e58155"",
@@ -351,6 +387,138 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""MousePos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f07013ba-b240-4eef-9476-c3deaa46763d"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be1f3427-da41-4ec5-8b1e-6449b8dcbaab"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5493280-ee57-4032-8ebb-88757fddeb6a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ae891f7-d6c5-4bb2-a1a6-4f9299ee6e8d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""115cbed3-8bfc-4626-a104-1965b370a631"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff98b746-a90f-47a3-a9a5-e5b0aeb1ab0a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""372ee11e-4513-4e9b-b132-0e0cebfdb4b8"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7edfb73b-9699-428c-8ed5-50e068e28d67"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98ee3649-7b4d-487c-9c9d-55b893bacad9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccf0a434-7199-4d93-8d17-edffeff34d75"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd1efbc6-2b4f-451a-bed0-09857e38476f"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d95465f-e034-4332-ab0d-b0e1a9f84d81"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -388,6 +556,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Ability0 = m_Player.FindAction("Ability0", throwIfNotFound: true);
+        m_Player_Ability1 = m_Player.FindAction("Ability1", throwIfNotFound: true);
+        m_Player_Ability2 = m_Player.FindAction("Ability2", throwIfNotFound: true);
+        m_Player_Ability3 = m_Player.FindAction("Ability3", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
@@ -461,6 +633,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Ability0;
+    private readonly InputAction m_Player_Ability1;
+    private readonly InputAction m_Player_Ability2;
+    private readonly InputAction m_Player_Ability3;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_LeftClick;
@@ -474,6 +650,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Ability0 => m_Wrapper.m_Player_Ability0;
+        public InputAction @Ability1 => m_Wrapper.m_Player_Ability1;
+        public InputAction @Ability2 => m_Wrapper.m_Player_Ability2;
+        public InputAction @Ability3 => m_Wrapper.m_Player_Ability3;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
@@ -494,6 +674,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Ability0.started += instance.OnAbility0;
+            @Ability0.performed += instance.OnAbility0;
+            @Ability0.canceled += instance.OnAbility0;
+            @Ability1.started += instance.OnAbility1;
+            @Ability1.performed += instance.OnAbility1;
+            @Ability1.canceled += instance.OnAbility1;
+            @Ability2.started += instance.OnAbility2;
+            @Ability2.performed += instance.OnAbility2;
+            @Ability2.canceled += instance.OnAbility2;
+            @Ability3.started += instance.OnAbility3;
+            @Ability3.performed += instance.OnAbility3;
+            @Ability3.canceled += instance.OnAbility3;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -525,6 +717,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Ability0.started -= instance.OnAbility0;
+            @Ability0.performed -= instance.OnAbility0;
+            @Ability0.canceled -= instance.OnAbility0;
+            @Ability1.started -= instance.OnAbility1;
+            @Ability1.performed -= instance.OnAbility1;
+            @Ability1.canceled -= instance.OnAbility1;
+            @Ability2.started -= instance.OnAbility2;
+            @Ability2.performed -= instance.OnAbility2;
+            @Ability2.canceled -= instance.OnAbility2;
+            @Ability3.started -= instance.OnAbility3;
+            @Ability3.performed -= instance.OnAbility3;
+            @Ability3.canceled -= instance.OnAbility3;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -615,6 +819,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAbility0(InputAction.CallbackContext context);
+        void OnAbility1(InputAction.CallbackContext context);
+        void OnAbility2(InputAction.CallbackContext context);
+        void OnAbility3(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);

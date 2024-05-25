@@ -9,8 +9,6 @@ public class AbilitySlotManager : MonoBehaviour
     [SerializeField] GameObject playerGFX;
     public Transform MousePos => mousePos;
     [SerializeField] Transform mousePos;
-    //public StatusManager StatusManager => statusManager;
-    //[SerializeField] StatusManager statusManager;
 
     [SerializeField] AbilitySlot[] abilitySlots;
     #endregion
@@ -31,9 +29,9 @@ public class AbilitySlotManager : MonoBehaviour
         }
     }
 
-    public void ActivateSlot(int slotIndex, bool deactivate = false)
+    public void ActivateSlot(int slotIndex, bool performed = true)
     {
-        abilitySlots[slotIndex].Execute(deactivate);
+        abilitySlots[slotIndex].Execute(performed);
     }
 
     public void AddNewAbility(GameObject newPrefab, int slotIndex)

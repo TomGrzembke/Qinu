@@ -74,10 +74,10 @@ public class AbilitySlot : MonoBehaviour
         if (currentAbility)
             currentAbility.EnterAbility(abilitySlotManager, abilityImage);
     }
-    public void Execute(bool deactivate = false)
+    public void Execute(bool performed = true)
     {
         if (currentAbility)
-            currentAbility.Execute(abilitySlotManager, deactivate);
+            currentAbility.Execute(abilitySlotManager, performed);
     }
 
     public void SetSlotIndex(int index)

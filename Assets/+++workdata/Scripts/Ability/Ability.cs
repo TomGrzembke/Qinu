@@ -16,6 +16,7 @@ public abstract class Ability : MonoBehaviour
     Image abilityImage;
     Coroutine coolDownCor;
     #endregion
+
     public void EnterAbility(AbilitySlotManager _abilitySlotManager, Image _abilityImage)
     {
         abilitySlotManager = _abilitySlotManager;
@@ -23,12 +24,12 @@ public abstract class Ability : MonoBehaviour
         OnInitialized(_abilitySlotManager);
     }
 
-    public virtual void Execute(AbilitySlotManager _abilitySlotManager, bool deactivate = false)
+    public virtual void Execute(AbilitySlotManager _abilitySlotManager, bool performed = true)
     {
         if (coolDownCor != null) return;
 
         abilitySlotManager = _abilitySlotManager;
-        if (!deactivate)
+        if (performed)
         {
             coolDownCor = StartCoroutine(Cooldown());
             ExecuteInternal();

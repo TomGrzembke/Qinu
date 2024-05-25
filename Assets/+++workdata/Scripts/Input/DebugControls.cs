@@ -8,7 +8,7 @@ public class DebugControls : MonoBehaviour
     [SerializeField] UnityEvent asteriskEvent;
     [SerializeField] UnityEvent num7;
 
-    [SerializeField] GameObject[] toggleUIAsterisk;
+    [SerializeField] CanvasGroup[] cgToggleUIAsterisk;
     #endregion
 
     #region private fields
@@ -38,9 +38,9 @@ public class DebugControls : MonoBehaviour
     }
     public void CallAsteriskEvent()
     {
-        for (int i = 0; i < toggleUIAsterisk.Length; i++)
+        for (int i = 0; i < cgToggleUIAsterisk.Length; i++)
         {
-            toggleUIAsterisk[i].SetActive(!toggleUIAsterisk[i].activeInHierarchy);
+            cgToggleUIAsterisk[i].alpha = cgToggleUIAsterisk[i].alpha == 0 ? 1 : 0;
         }
 
         asteriskEvent?.Invoke();

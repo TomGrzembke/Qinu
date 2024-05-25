@@ -3,14 +3,12 @@ using UnityEngine;
 public class AbilitySlotManager : MonoBehaviour
 {
     #region serialized fields
-    public GameObject PlayerObj => playerObj;
-    [SerializeField] GameObject playerObj;
-    public GameObject PlayerGFX => playerGFX;
-    [SerializeField] GameObject playerGFX;
-    public Transform MousePos => mousePos;
-    [SerializeField] Transform mousePos;
-
     [SerializeField] AbilitySlot[] abilitySlots;
+    [Header("Ability getter")]
+    [SerializeField] GameObject playerObj;
+    public GameObject PlayerObj => playerObj;
+    [field: SerializeField] public Transform MousePos { get; private set; } 
+
     #endregion
 
     #region private fields

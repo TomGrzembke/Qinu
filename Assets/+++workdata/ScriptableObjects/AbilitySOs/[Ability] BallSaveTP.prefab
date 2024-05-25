@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8062961282074160858
+--- !u!1001 &4468833469184344
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_Name
-      value: '[Ability] Tuna Dash'
+      value: '[Ability] BallSaveTP'
       objectReference: {fileID: 0}
     - target: {fileID: 2594324437627521025, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,25 +58,26 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8661168195554542875}
+      addedObject: {fileID: 6394417112036137357}
   m_SourcePrefab: {fileID: 100100000, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
---- !u!1 &8574770232140604388 stripped
+--- !u!1 &1807404598548903014 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
-  m_PrefabInstance: {fileID: 8062961282074160858}
+  m_PrefabInstance: {fileID: 4468833469184344}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8661168195554542875
+--- !u!114 &6394417112036137357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574770232140604388}
+  m_GameObject: {fileID: 1807404598548903014}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3908d3d5c28ecad45808768d45a0bc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 3
-  abilitySO: {fileID: 11400000, guid: 2cb7a9844fca4694f8462e04b83adb7e, type: 2}
-  dashTime: 0.5
+  cooldown: 2
+  abilitySO: {fileID: 11400000, guid: a26a4a1d48e25414cad120f80b97e0b0, type: 2}
+  tpTime: 0.3
+  spaceToAdd: 3

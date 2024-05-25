@@ -5,9 +5,10 @@ public class AbilitySlotManager : MonoBehaviour
     #region serialized fields
     [SerializeField] AbilitySlot[] abilitySlots;
     [Header("Ability getter")]
-    [SerializeField] GameObject playerObj;
-    public GameObject PlayerObj => playerObj;
-    [field: SerializeField] public Transform MousePos { get; private set; } 
+    [SerializeField] Transform playerObj;
+    public Transform PlayerObj => playerObj;
+    [field: SerializeField] public Transform Puk { get; private set; }  
+    
 
     #endregion
 

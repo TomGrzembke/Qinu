@@ -10,6 +10,7 @@ public class SizeUp : Ability
 
     #region private fields
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
+    FlipObjectOnVelocity flipObjectOnVelocity;
     Coroutine saveRoutine;
     #endregion
 
@@ -26,14 +27,16 @@ public class SizeUp : Ability
 
     protected override void OnInitializedInternal()
     {
+        flipObjectOnVelocity = SlotManager.PlayerObj.GetComponent<FlipObjectOnVelocity>();
     }
 
     IEnumerator TPBall()
     {
-        Vector3 originalScale = SlotManager.PlayerObj.localScale;
-        SlotManager.PlayerObj.localScale = SlotManager.PlayerObj.localScale * timesSize;
+        float originalScale = flipObjectOnVelocity.MaxScale;
+        flipObjectOnVelocity.SetMaxScale(flipObjectOnVelocity.MaxScale * timesSize);
+
         yield return new WaitForSeconds(duration);
-        SlotManager.PlayerObj.localScale = originalScale;
+        flipObjectOnVelocity.SetMaxScale(originalScale);
         saveRoutine = null;
     }
 }

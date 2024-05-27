@@ -1052,6 +1052,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 255
       objectReference: {fileID: 0}
+    - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5927273810323007435, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: slotIndex
       value: 2
@@ -1191,6 +1195,18 @@ PrefabInstance:
     - target: {fileID: 930458143027363087, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186571963366714183, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1aea5a257cc12934e89d187ef618a2c4, type: 3}
+    - target: {fileID: 2186571963366714183, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.a
+      value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6603079353805448941, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Name
@@ -1573,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 255
       objectReference: {fileID: 0}
+    - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5927273810323007435, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: slotIndex
       value: 1
@@ -1760,6 +1780,10 @@ PrefabInstance:
     - target: {fileID: 2186571963366714183, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Color.a
       value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5927273810323007435, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: slotIndex

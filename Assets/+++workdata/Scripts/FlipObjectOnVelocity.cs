@@ -13,7 +13,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     Vector3 localScale;
     Vector3 targetScale;
     bool flipState;
-    float maxScale;
+    [field: SerializeField] public float MaxScale { get; private set; }
     Rigidbody2D rb;
     Coroutine flipRoutine;
     #endregion
@@ -21,7 +21,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        maxScale = transform.localScale.x;
+        MaxScale = transform.localScale.x;
     }
 
     void Update()
@@ -33,6 +33,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     {
         if (rb.velocity.magnitude <= flipSensitivity) return;
 
+        //Only start if null
         flipRoutine ??= StartCoroutine(Flip());
 
     }
@@ -43,7 +44,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
         localScale = transform.localScale;
 
         targetScale = localScale;
-        targetScale.x = flipState ? -maxScale : maxScale;
+        targetScale.x = flipState ? -MaxScale : MaxScale;
 
         float flipTime = 0;
 
@@ -55,5 +56,13 @@ public class FlipObjectOnVelocity : MonoBehaviour
         }
 
         flipRoutine = null;
+    }
+
+    public void SetMaxScale(float newScale)
+    {
+        MaxScale = newScale;
+        transform.localScale = new(newScale, newScale, 1);
+        localScale = transform.localScale;
+        targetScale = localScale;
     }
 }

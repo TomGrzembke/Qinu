@@ -19,7 +19,6 @@ public class AbilitySlot : MonoBehaviour
     public Ability CurrentAbility => currentAbility;
     #endregion
 
-
     void Start()
     {
         OnValidateCall();

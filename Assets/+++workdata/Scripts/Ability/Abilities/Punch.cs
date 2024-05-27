@@ -34,6 +34,7 @@ public class Punch : Ability
     {
         GameObject punch = Instantiate(punchPrefab, slotManager.PlayerObj.position, Quaternion.identity);
         punch.transform.parent = slotManager.PlayerObj.transform;
+
         yield return new WaitForSeconds(punchTime);
         Destroy(punch);
         punchRoutine = null;

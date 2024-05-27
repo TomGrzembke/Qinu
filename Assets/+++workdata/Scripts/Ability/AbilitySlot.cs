@@ -15,21 +15,8 @@ public class AbilitySlot : MonoBehaviour
 
     #region private fields
     AbilitySlotManager AbilitySlotManager => AbilitySlotManager.Instance;
-    public bool occupied { get; private set; }
+    public bool Occupied { get; private set; }
     #endregion
-
-    void Start()
-    {
-        OnValidateCall();
-    }
-
-    void OnValidateCall()
-    {
-        if (Application.isPlaying)
-            if (currentAbilityPrefab)
-                AbilitySlotManager.AddNewAbility(currentAbilityPrefab, slotIndex);
-        RefreshPicture();
-    }
 
     void RefreshPicture()
     {
@@ -41,14 +28,14 @@ public class AbilitySlot : MonoBehaviour
 
         if (!abilityImage.sprite)
         {
-            occupied = false;
+            Occupied = false;
         }
         else
         {
-            occupied = true;
+            Occupied = true;
         }
 
-        abilityImage.SetAlpha(occupied ? 255 : 0);
+        abilityImage.SetAlpha(Occupied ? 255 : 0);
         if (tempAbility)
             numberObject.SetActive(tempAbility.IsActive);
     }

@@ -43,7 +43,7 @@ public class AbilitySlotManager : MonoBehaviour
         {
             if (abilitySlots[i].CurrentAbilityPrefab == newPrefab)
                 break;
-            else if (!abilitySlots[i].occupied)
+            else if (!abilitySlots[i].Occupied)
             {
                 abilitySlots[i].ChangeAbilityPrefab(newPrefab);
                // RewardWindow.Instance.GiveReward(newPrefab);

@@ -9,12 +9,12 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] GameObject currentAbilityPrefab;
     [SerializeField] int slotIndex;
     [SerializeField] Image abilityImage;
-    [SerializeField] AbilitySlotManager abilitySlotManager;
     [SerializeField] GameObject numberObject;
     [SerializeField] Ability currentAbility;
     #endregion
 
     #region private fields
+    AbilitySlotManager AbilitySlotManager => AbilitySlotManager.Instance;
     public bool occupied { get; private set; }
     public Ability CurrentAbility => currentAbility;
     #endregion
@@ -27,8 +27,8 @@ public class AbilitySlot : MonoBehaviour
     void OnValidateCall()
     {
         if (Application.isPlaying)
-            if (currentAbilityPrefab && abilitySlotManager)
-                abilitySlotManager.AddNewAbility(currentAbilityPrefab, slotIndex);
+            if (currentAbilityPrefab && AbilitySlotManager)
+                AbilitySlotManager.AddNewAbility(currentAbilityPrefab, slotIndex);
         RefreshPicture();
     }
 
@@ -54,16 +54,16 @@ public class AbilitySlot : MonoBehaviour
             numberObject.SetActive(tempAbility.IsActive);
     }
 
-    public void ChangeAbilityPrefab(GameObject newAbilityPrefab, AbilitySlotManager _abilitySlotManager)
+    public void ChangeAbilityPrefab(GameObject newAbilityPrefab)
     {
-        if (currentAbility && newAbilityPrefab != currentAbilityPrefab)
+        if (currentAbility)
             DestroyImmediate(currentAbility.gameObject, true);
+
         currentAbilityPrefab = newAbilityPrefab;
 
         if (currentAbilityPrefab)
         {
             currentAbility = Instantiate(newAbilityPrefab, gameObject.transform).GetComponent<Ability>();
-            abilitySlotManager = _abilitySlotManager;
             EnterAbility();
         }
         RefreshPicture();
@@ -71,12 +71,12 @@ public class AbilitySlot : MonoBehaviour
     public void EnterAbility()
     {
         if (currentAbility)
-            currentAbility.EnterAbility(abilitySlotManager, abilityImage);
+            currentAbility.EnterAbility(abilityImage);
     }
     public void Execute(bool performed = true)
     {
         if (currentAbility)
-            currentAbility.Execute(abilitySlotManager, performed);
+            currentAbility.Execute(performed);
     }
 
     public void SetSlotIndex(int index)

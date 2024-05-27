@@ -9,7 +9,7 @@ public class BallTPSaveAbility : Ability
     #endregion
 
     #region private fields
-    AbilitySlotManager slotManager;
+    AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Coroutine saveRoutine;
     #endregion
 
@@ -24,15 +24,14 @@ public class BallTPSaveAbility : Ability
             saveRoutine = StartCoroutine(TPBall());
     }
 
-    protected override void OnInitializedInternal(AbilitySlotManager _abilitySlotManager)
+    protected override void OnInitializedInternal()
     {
-        slotManager = _abilitySlotManager;
     }
 
     IEnumerator TPBall()
     {
         yield return new WaitForSeconds(tpTime);
-        slotManager.Puk.position = slotManager.PlayerObj.position.Add(new(spaceToAdd, 0, 0));
+        SlotManager.Puk.position = SlotManager.PlayerObj.position.Add(new(spaceToAdd, 0, 0));
         saveRoutine = null;
     }
 }

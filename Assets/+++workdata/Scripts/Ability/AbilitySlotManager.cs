@@ -9,7 +9,6 @@ public class AbilitySlotManager : MonoBehaviour
     public Transform PlayerObj => playerObj;
     [field: SerializeField] public Transform Puk { get; private set; }  
     
-
     #endregion
 
     #region private fields
@@ -23,7 +22,7 @@ public class AbilitySlotManager : MonoBehaviour
         for (int i = 0; i < abilitySlots.Length; i++)
         {
             abilitySlots[i].SetSlotIndex(i);
-            if (abilitySlots[i].CurrentAbility)
+            if (abilitySlots[i].CurrentAbilityPrefab)
                 AddNewAbility(abilitySlots[i].CurrentAbilityPrefab, i);
         }
     }
@@ -35,7 +34,7 @@ public class AbilitySlotManager : MonoBehaviour
 
     public void AddNewAbility(GameObject newPrefab, int slotIndex)
     {
-        abilitySlots[slotIndex].ChangeAbilityPrefab(newPrefab, this);
+        abilitySlots[slotIndex].ChangeAbilityPrefab(newPrefab);
     }
 
     public void AddNewAbility(GameObject newPrefab)
@@ -46,7 +45,7 @@ public class AbilitySlotManager : MonoBehaviour
                 break;
             else if (!abilitySlots[i].occupied)
             {
-                abilitySlots[i].ChangeAbilityPrefab(newPrefab, this);
+                abilitySlots[i].ChangeAbilityPrefab(newPrefab);
                // RewardWindow.Instance.GiveReward(newPrefab);
                 break;
             }

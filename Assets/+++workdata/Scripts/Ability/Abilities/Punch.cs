@@ -10,7 +10,7 @@ public class Punch : Ability
     #endregion
 
     #region private fields
-    AbilitySlotManager slotManager;
+    AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Coroutine punchRoutine;
     #endregion
 
@@ -25,15 +25,15 @@ public class Punch : Ability
             punchRoutine = StartCoroutine(PunchRoutine());
     }
 
-    protected override void OnInitializedInternal(AbilitySlotManager _abilitySlotManager)
+    protected override void OnInitializedInternal()
     {
-        slotManager = _abilitySlotManager;
+
     }
 
     IEnumerator PunchRoutine()
     {
-        GameObject punch = Instantiate(punchPrefab, slotManager.PlayerObj.position, Quaternion.identity);
-        punch.transform.parent = slotManager.PlayerObj.transform;
+        GameObject punch = Instantiate(punchPrefab, SlotManager.PlayerObj.position, Quaternion.identity);
+        punch.transform.parent = SlotManager.PlayerObj.transform;
 
         yield return new WaitForSeconds(punchTime);
         Destroy(punch);

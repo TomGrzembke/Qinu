@@ -12,23 +12,21 @@ public abstract class Ability : MonoBehaviour
     #endregion
 
     #region private fields
-    protected AbilitySlotManager abilitySlotManager;
+    protected AbilitySlotManager abilitySlotManager => AbilitySlotManager.Instance;
     Image abilityImage;
     Coroutine coolDownCor;
     #endregion
 
-    public void EnterAbility(AbilitySlotManager _abilitySlotManager, Image _abilityImage)
+    public void EnterAbility(Image _abilityImage)
     {
-        abilitySlotManager = _abilitySlotManager;
         abilityImage = _abilityImage;
-        OnInitialized(_abilitySlotManager);
+        OnInitialized();
     }
 
-    public virtual void Execute(AbilitySlotManager _abilitySlotManager, bool performed = true)
+    public virtual void Execute(bool performed = true)
     {
         if (coolDownCor != null) return;
 
-        abilitySlotManager = _abilitySlotManager;
         if (performed)
         {
             coolDownCor = StartCoroutine(Cooldown());
@@ -37,13 +35,13 @@ public abstract class Ability : MonoBehaviour
         else
             DeExecuteInternal();
     }
-    public void OnInitialized(AbilitySlotManager _abilitySlotManager)
+    public void OnInitialized()
     {
-        OnInitializedInternal(_abilitySlotManager);
+        OnInitializedInternal();
     }
     protected abstract void ExecuteInternal();
     protected abstract void DeExecuteInternal();
-    protected abstract void OnInitializedInternal(AbilitySlotManager _abilitySlotManager);
+    protected abstract void OnInitializedInternal();
 
     IEnumerator Cooldown()
     {

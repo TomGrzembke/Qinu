@@ -7894,7 +7894,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05520625, y: 6.6192064, z: 1}
+  m_LocalScale: {x: 0.05520625, y: 6.275835, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 934199744}
@@ -10878,6 +10878,10 @@ PrefabInstance:
       propertyPath: <Puk>k__BackingField
       value: 
       objectReference: {fileID: 1183967833}
+    - target: {fileID: 670621559330331272, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: <Middle>k__BackingField
+      value: 
+      objectReference: {fileID: 971475960}
     - target: {fileID: 1974256918480187765, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: slotIndex
       value: 0
@@ -10998,6 +11002,10 @@ PrefabInstance:
       propertyPath: slotIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3333659650563606263, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: currentAbilityPrefab
+      value: 
+      objectReference: {fileID: 328120642978159602, guid: e2d5a716cd59ef84f8e3be29526f4c92, type: 3}
     - target: {fileID: 4668961792276199044, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

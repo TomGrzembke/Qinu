@@ -607,6 +607,7 @@ MonoBehaviour:
   - {fileID: 3333659650563606263}
   playerObj: {fileID: 0}
   <Puk>k__BackingField: {fileID: 0}
+  <Middle>k__BackingField: {fileID: 0}
 --- !u!114 &8699634701818451974
 MonoBehaviour:
   m_ObjectHideFlags: 0

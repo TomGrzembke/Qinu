@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3531565337462885180
+--- !u!1001 &2132286704461551308
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_Name
-      value: '[Ability] TunaSpeed'
+      value: '[Ability] Move Middle'
       objectReference: {fileID: 0}
     - target: {fileID: 2594324437627521025, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,35 +52,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5997259191278457779, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
-      propertyPath: abilitySprite
-      value: 
-      objectReference: {fileID: -96938834, guid: c1f1abec6ea6e0d4ebb6cd067fb679e9, type: 3}
-    m_RemovedComponents:
-    - {fileID: 5997259191278457779, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4881679325616854785}
+      addedObject: {fileID: 5242705848960350990}
   m_SourcePrefab: {fileID: 100100000, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
---- !u!1 &2889186154452174338 stripped
+--- !u!1 &328120642978159602 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
-  m_PrefabInstance: {fileID: 3531565337462885180}
+  m_PrefabInstance: {fileID: 2132286704461551308}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4881679325616854785
+--- !u!114 &5242705848960350990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2889186154452174338}
+  m_GameObject: {fileID: 328120642978159602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a35dfb7c99b9e74c9b68f4f873e7bf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 988c1de72ffe07e46828626238f29345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
-  abilitySO: {fileID: 11400000, guid: 1d0dea423d7c9dc4db9c8d6d7b81358e, type: 2}
+  cooldown: 7
+  abilitySO: {fileID: 11400000, guid: 55d18297255563443a770d2b3f1d1e7f, type: 2}
+  spaceToAdd: 1.5
+  movedTime: 4
+  timeToLerpTo: 1
+  timeToLerpBack: 1.5

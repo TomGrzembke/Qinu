@@ -7,7 +7,9 @@ public class AbilitySlotManager : MonoBehaviour
     [Header("Ability getter")]
     [SerializeField] Transform playerObj;
     public Transform PlayerObj => playerObj;
-    [field: SerializeField] public Transform Puk { get; private set; }  
+    [field: SerializeField] public Transform Puk { get; private set; }
+    [field: SerializeField] public Transform Middle { get; private set; }   
+    
     
     #endregion
 

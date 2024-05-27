@@ -12,7 +12,6 @@ public abstract class Ability : MonoBehaviour
     #endregion
 
     #region private fields
-    protected AbilitySlotManager abilitySlotManager => AbilitySlotManager.Instance;
     Image abilityImage;
     Coroutine coolDownCor;
     #endregion

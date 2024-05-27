@@ -7893,7 +7893,7 @@ Transform:
   m_GameObject: {fileID: 971475958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: -2.31, z: 0}
+  m_LocalPosition: {x: -1.47, y: -2.31, z: 0}
   m_LocalScale: {x: 0.05520625, y: 6.6192064, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8938,7 +8938,7 @@ Transform:
   m_GameObject: {fileID: 1183967831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.22, y: 1.73, z: 0}
+  m_LocalPosition: {x: -4.034, y: 1.599, z: 0}
   m_LocalScale: {x: 0.7458479, y: 0.7458479, z: 0.7458479}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9083,11 +9083,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1183967831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09de1feb1a1d5b944884c7f9fc078ea8, type: 3}
+  m_Script: {fileID: 11500000, guid: 78196b3303f79f340908b38ab6d8a6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedLimit: 37
+  speedStep: 4
+  vPointSpeedMax: 0
+  vPointSpeedMin: 0
   currentSpeed: 0
+  vPoints: 1
+  timesToSwitch: 3
+  timesSwitched: 3
 --- !u!1 &1192526679
 GameObject:
   m_ObjectHideFlags: 0

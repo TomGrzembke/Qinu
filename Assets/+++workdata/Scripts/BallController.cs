@@ -4,16 +4,11 @@ using UnityEngine;
 public class BallController : RBGetter
 {
     #region serialized fields
-    [SerializeField] float speedStep = 4;
-    [SerializeField] float vPointSpeedMax;
-    [SerializeField] float vPointSpeedMin;
-    [SerializeField] float currentSpeed;
-    [SerializeField] int vPoints = 1;
-    [SerializeField] int timesToSwitch = 180;
+    [SerializeField, ShowOnly] float currentSpeed;
+    [SerializeField] float maxSpeed;
     #endregion
 
     #region private fields
-    [SerializeField] int timesSwitched = 180;
     #endregion
 
     protected override void AwakeInternal()
@@ -24,54 +19,20 @@ public class BallController : RBGetter
     {
         currentSpeed = rb.velocity.magnitude;
 
-        if (rb.velocity.magnitude > CalculateSpeedLimit(vPoints))
+        if (rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity = rb.velocity.normalized * CalculateSpeedLimit(vPoints);
+            rb.velocity = rb.velocity.normalized * maxSpeed;
         }
-        else if (rb.velocity.magnitude < vPointSpeedMin)
-        {
-            rb.velocity = rb.velocity.normalized * vPointSpeedMin;
-        }
-
-        CalculateVPointGroupSwitch(currentSpeed);
     }
 
-    int CalculateVPointGroup(float velocity)
+    public void AddBallMaxSpeed(float add)
     {
-        float vPointGroup = (velocity - 16) / speedStep;
-        if (vPointGroup <= 0)
-            vPointGroup = 1;
+        maxSpeed += add;
+        currentSpeed = rb.velocity.magnitude;
 
-        return vPointGroup.RoundToInt();
-    }
-
-    void CalculateVPointGroupSwitch(float velocity)
-    {
-        if (velocity < vPointSpeedMin && velocity != 0)
-            timesSwitched--;
-        else if (velocity > vPointSpeedMax)
-            timesSwitched--;
-
-        if (timesSwitched > 0) return;
-
-        if (velocity < vPointSpeedMin && velocity != 0)
-            vPoints++;
-        else if (velocity > vPointSpeedMax)
-            vPoints--;
-
-        timesSwitched = timesToSwitch;
-
-    }
-
-    float CalculateSpeedLimit(int vPoint)
-    {
-        vPointSpeedMax = (vPoint * speedStep) + 16;
-
-        if (vPoint != 1)
-            vPointSpeedMin = vPointSpeedMax - speedStep;
+        if (currentSpeed + add > 1)
+            rb.velocity = rb.velocity.normalized * (currentSpeed + add);
         else
-            vPointSpeedMin = 0;
-
-        return vPointSpeedMax;
+            rb.velocity = rb.velocity.normalized;
     }
 }

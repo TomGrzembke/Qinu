@@ -8956,7 +8956,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.2
+  m_Mass: 0.3
   m_LinearDrag: 0.2
   m_AngularDrag: 0.2
   m_GravityScale: 0
@@ -9086,13 +9086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78196b3303f79f340908b38ab6d8a6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedStep: 4
-  vPointSpeedMax: 0
-  vPointSpeedMin: 0
   currentSpeed: 0
-  vPoints: 1
-  timesToSwitch: 3
-  timesSwitched: 3
+  maxSpeed: 27
 --- !u!1 &1192526679
 GameObject:
   m_ObjectHideFlags: 0
@@ -10886,6 +10881,10 @@ PrefabInstance:
       propertyPath: slotIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1974256918480187765, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: currentAbilityPrefab
+      value: 
+      objectReference: {fileID: 531495242901862061, guid: 375c7a6476028024298fdb457fd0f90b, type: 3}
     - target: {fileID: 2084748541406570198, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -11038,6 +11037,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8787681790189133731, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: currentAbilityPrefab
+      value: 
+      objectReference: {fileID: 5099258617928411589, guid: d71ef7708c418584789970fcf5a52d9a, type: 3}
     - target: {fileID: 8804379403292385493, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: slotIndex
       value: 0

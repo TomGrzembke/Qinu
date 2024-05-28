@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_Name
-      value: '[Ability] Move Middle'
+      value: '[Ability] MoveMiddle'
       objectReference: {fileID: 0}
     - target: {fileID: 2594324437627521025, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 7
   abilitySO: {fileID: 11400000, guid: 55d18297255563443a770d2b3f1d1e7f, type: 2}
-  spaceToAdd: 1.5
+  spaceToAdd: 3
   movedTime: 4
   timeToLerpTo: 1
   timeToLerpBack: 1.5

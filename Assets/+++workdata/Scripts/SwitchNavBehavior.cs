@@ -25,9 +25,9 @@ public class SwitchNavBehavior : MonoBehaviour
     {
         if (!collision.CompareTag("NPC")) return;
 
+
         CharNav charNav = collision.transform.parent.GetComponent<CharNav>();
         bool goesToRight = (transform.position.x - collision.transform.position.x) < 0;
-
 
         if (!nPCsTracked.TryGetValue(charNav, out bool comesFromRight)) return;
         if (comesFromRight == goesToRight) return;
@@ -41,5 +41,6 @@ public class SwitchNavBehavior : MonoBehaviour
             charNav.ChangeToArena(comesFromRight == goesToRight ? 0 : 1);
 
         nPCsTracked.Remove(charNav);
+        print(goesToRight);
     }
 }

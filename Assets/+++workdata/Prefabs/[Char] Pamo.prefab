@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Char] Pamo'
       objectReference: {fileID: 0}
+    - target: {fileID: 2678853848379604295, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678853848379604295, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: charSO
       value: 
@@ -50,23 +58,23 @@ PrefabInstance:
       objectReference: {fileID: 8498007629361954147}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.64645
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.64645
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.64645
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.51
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.03
+      value: -13.56
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalPosition.z
@@ -78,15 +86,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -99,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4491615955301986986, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
@@ -124,7 +136,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3832746447698499432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -165,6 +177,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7004819885984797505}
     m_Modifications:
+    - target: {fileID: 1037485291734859549, guid: cd42c452505ff86408158bceb51e834f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3237137991316426266, guid: cd42c452505ff86408158bceb51e834f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -208,6 +224,10 @@ PrefabInstance:
     - target: {fileID: 8712820266890463795, guid: cd42c452505ff86408158bceb51e834f, type: 3}
       propertyPath: m_Name
       value: '[Sprite] Pamo'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712820266890463795, guid: cd42c452505ff86408158bceb51e834f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

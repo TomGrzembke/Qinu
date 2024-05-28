@@ -12,7 +12,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
     #region private fields
     Vector3 localScale;
     Vector3 targetScale;
-    bool flipState;
+    [field: SerializeField] public bool FlipState { get; private set; } 
     [field: SerializeField] public float MaxScale { get; private set; }
     Rigidbody2D rb;
     Coroutine flipRoutine;
@@ -40,11 +40,11 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     IEnumerator Flip()
     {
-        flipState = rb.velocity.x > 0;
+        FlipState = rb.velocity.x > 0;
         localScale = transform.localScale;
 
         targetScale = localScale;
-        targetScale.x = flipState ? -MaxScale : MaxScale;
+        targetScale.x = FlipState ? -MaxScale : MaxScale;
 
         float flipTime = 0;
 

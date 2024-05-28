@@ -30,9 +30,9 @@ public class ChangeBallSpeed : Ability
 
     IEnumerator TPBall()
     {
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(amount);
+        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(amount, true);
         yield return new WaitForSeconds(changedTime);
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(-amount);
+        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(-amount, false);
         saveRoutine = null;
     }
 }

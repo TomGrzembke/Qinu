@@ -25,10 +25,12 @@ public class BallController : RBGetter
         }
     }
 
-    public void AddBallMaxSpeed(float add)
+    public void AddBallMaxSpeed(float add, bool showImpact = false)
     {
         maxSpeed += add;
         currentSpeed = rb.velocity.magnitude;
+
+        if(!showImpact ) return;
 
         if (currentSpeed + add > 1)
             rb.velocity = rb.velocity.normalized * (currentSpeed + add);

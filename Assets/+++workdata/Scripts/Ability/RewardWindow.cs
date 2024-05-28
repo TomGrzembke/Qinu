@@ -15,8 +15,6 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] TextMeshProUGUI titelText;
     [SerializeField] TextMeshProUGUI descriptionText;
     [SerializeField] float fadeTime = 2;
-    [SerializeField] float currencyFadeTime = 2;
-    [SerializeField] float currencyActiveAfterCalc = 2;
     [SerializeField] TextMeshProUGUI rewardText;
     [SerializeField] CanvasGroup rewardTextCanvasGroup;
     #endregion

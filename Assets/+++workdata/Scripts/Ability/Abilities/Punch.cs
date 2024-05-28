@@ -5,7 +5,6 @@ public class Punch : Ability
 {
     #region serialized fields
     [SerializeField] float punchTime = .3f;
-    [SerializeField] float spaceToPunch = 3;
     [SerializeField] GameObject punchPrefab;
     #endregion
 

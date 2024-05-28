@@ -8,14 +8,6 @@ public class AgentController : MonoBehaviour
     #endregion
 
     #region private fields
-
-    #endregion
-
-    #region serialized fields
-    [SerializeField] float range = 5;
-    #endregion
-
-    #region private fields
     NavMeshAgent agent;
     #endregion
 

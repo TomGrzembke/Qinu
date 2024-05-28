@@ -703,8 +703,6 @@ MonoBehaviour:
   titelText: {fileID: 0}
   descriptionText: {fileID: 0}
   fadeTime: 2
-  currencyFadeTime: 2
-  currencyActiveAfterCalc: 2
   rewardText: {fileID: 0}
   rewardTextCanvasGroup: {fileID: 0}
 --- !u!1 &9171497803892760580

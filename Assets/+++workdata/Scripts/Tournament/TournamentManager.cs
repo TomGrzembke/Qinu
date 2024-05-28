@@ -44,10 +44,10 @@ public class TournamentManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < CharManager.Instance.CharNavs.Length; i++)
+        for (int i = 0; i < CharManager.Instance.CharPrefabs.Length; i++)
         {
-            if (!AvailableChars.Contains(CharManager.Instance.CharNavs[i].gameObject))
-                AvailableChars.Add(CharManager.Instance.CharNavs[i].gameObject);
+            if (!AvailableChars.Contains(CharManager.Instance.CharPrefabs[i].gameObject))
+                AvailableChars.Add(CharManager.Instance.CharPrefabs[i].gameObject);
         }
 
         for (int i = 0; i < AvailableChars.Count; i++)
@@ -79,7 +79,7 @@ public class TournamentManager : MonoBehaviour
         lastPlayed = GetLowestPlayRate(lastPlayed);
         rightPlayers.Add(lastPlayed);
 
-        CharManager.Instance.PathGOTo(lastPlayed, GetRandomDefaultPos(1));
+        CharManager.Instance.InitializeChar(lastPlayed, GetRandomDefaultPos(1));
     }
 
     void ClearSideLists()
@@ -101,16 +101,16 @@ public class TournamentManager : MonoBehaviour
         rightPlayers.Add(second);
         rightPlayers.Add(first);
 
-        CharManager.Instance.PathGOTo(third, GetRandomDefaultPos(0));
-        CharManager.Instance.PathGOTo(second, GetRandomDefaultPos(1));
-        CharManager.Instance.PathGOTo(first, GetRandomDefaultPos(1));
+        CharManager.Instance.InitializeChar(third, GetRandomDefaultPos(0));
+        CharManager.Instance.InitializeChar(second, GetRandomDefaultPos(1));
+        CharManager.Instance.InitializeChar(first, GetRandomDefaultPos(1));
     }
 
     #region Rounds
     void BodiRound()
     {
         GameObject bodi = AvailableChars[2];
-        CharManager.Instance.PathGOTo(bodi, GetRandomDefaultPos(1));
+        CharManager.Instance.InitializeChar(bodi, GetRandomDefaultPos(1));
         CurrentGameMode = GameMode.Bodi;
         lastPlayed = bodi;
         leftPlayers.Add(AvailableChars[0]);
@@ -165,7 +165,7 @@ public class TournamentManager : MonoBehaviour
         right0Stats.TimesPlayed += 1;
 
         left0Stats.CharNav.ActivateNavCalc();
-        right0Stats.CharNav.ActivateNavCalc(right0Stats.CharNav.NavCalc.homePos);
+        right0Stats.CharNav.ActivateNavCalc(right0Stats.CharNav.NavCalc.HomePos);
 
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
@@ -189,8 +189,8 @@ public class TournamentManager : MonoBehaviour
         left1Stats.TimesPlayed += 1;
         left1Stats.TimesPlayed += 1;
 
-        left1Stats.CharNav.ActivateNavCalc(left1Stats.CharNav.NavCalc.homePos);
-        right1Stats.CharNav.ActivateNavCalc(right1Stats.CharNav.NavCalc.homePos);
+        left1Stats.CharNav.ActivateNavCalc(left1Stats.CharNav.NavCalc.HomePos);
+        right1Stats.CharNav.ActivateNavCalc(right1Stats.CharNav.NavCalc.HomePos);
     }
 
     /// <returns>left = 0, right = 1</returns>

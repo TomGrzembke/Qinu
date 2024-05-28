@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharManager : MonoBehaviour
 {
     #region serialized fields
     public static CharManager Instance;
-    [field: SerializeField] public CharNav[] CharNavs { get; private set; }
+    [field: SerializeField] public GameObject[] CharPrefabs { get; private set; }
+    [field: SerializeField] public List<GameObject> CharsSpawned { get; private set; }
+    [SerializeField] Transform leftSpawn;
+    [SerializeField] Transform rightSpawn;
     #endregion
 
     #region private fields
@@ -16,16 +20,22 @@ public class CharManager : MonoBehaviour
         Instance = this;
     }
 
-    public CharNav PathGOTo(GameObject gO, Vector3 pos)
+    public CharNav InitializeChar(GameObject gO, Vector3 PathPos)
     {
-        CharNav target = null;
-        for (int i = 0; i < CharNavs.Length; i++)
+        if (!CharsSpawned.Contains(gO))
         {
-            if (gO == CharNavs[i].gameObject)
+            Instantiate(gO,transform);
+            CharsSpawned.Add(gO);
+        }
+
+        CharNav target = null;
+        for (int i = 0; i < CharPrefabs.Length; i++)
+        {
+            if (gO == CharPrefabs[i].gameObject)
             {
-                target = CharNavs[i];
-                CharNavs[i].ActivateNavCalc();
-                CharNavs[i].NavCalc.SetAgentPosition(pos);
+                target = CharPrefabs[i].GetComponent<CharNav>();
+                target.ActivateNavCalc();
+                target.NavCalc.SetAgentPosition(PathPos);
             }
         }
 

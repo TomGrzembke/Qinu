@@ -21,7 +21,7 @@ public class PunchController : MonoBehaviour
     #endregion
 
     #region private fields
-    Collider2D pukCol;
+    Collider2D targetCol;
 
     Coroutine attackCoroutine;
     Coroutine cooldownCoroutine;
@@ -29,23 +29,23 @@ public class PunchController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Puk"))
-            pukCol = collision;
+        if (collision.CompareTag("Puk") || collision.CompareTag("NPC"))
+            targetCol = collision;
 
-        if (pukCol)
-            AttackTarget(pukCol.transform);
+        if (collision.CompareTag("Puk") || (collision.CompareTag("NPC")))
+            AttackTarget(targetCol.transform);
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Puk"))
-            pukCol = null;
+            targetCol = null;
     }
 
     void Update()
     {
-        if (pukCol)
-            AttackTarget(pukCol.transform);
+        if (targetCol)
+            AttackTarget(targetCol.transform);
     }
 
     public void AttackTarget(Transform target)

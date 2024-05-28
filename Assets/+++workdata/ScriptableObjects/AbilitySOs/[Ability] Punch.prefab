@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75902c0c373e3540ad07062fb5351cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 4
+  cooldown: 10
   abilitySO: {fileID: 11400000, guid: ae368d90d28215c41b62986f4729aeed, type: 2}
-  punchTime: 2
+  punchTime: 6
   spaceToPunch: 3
   punchPrefab: {fileID: 287724407541472641, guid: 69c7142e1168bc1488f0401198b1ceaa, type: 3}

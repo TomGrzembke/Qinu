@@ -19,6 +19,11 @@ public class IgnoreParentFlip : MonoBehaviour
 
     void Update()
     {
+        if (!parentTrans)
+        {
+            parentTrans = transform.parent;
+        }
+
         if (xState != parentTrans.localScale.x > 0)
         {
             transform.localScale = transform.localScale.SetX(-transform.localScale.x);

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8611998861859434681}
   - component: {fileID: 6223954652784506133}
   - component: {fileID: 5373933334166133005}
-  - component: {fileID: 5405713275021561606}
+  - component: {fileID: 5550508266659321270}
   m_Layer: 0
   m_Name: PunchHand
   m_TagString: Untagged
@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.15, y: -1.79, z: 0}
-  m_LocalScale: {x: 0.34593, y: 0.34593, z: 0.34593}
+  m_LocalScale: {x: -0.13577992, y: 0.13577992, z: 0.13577992}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5782293215199291672}
@@ -87,8 +87,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToAttack: 1
-  cooldownForNextAttack: 2
-  attackWindupTime: 0.7
+  timeToAttack: 0.3
+  cooldownForNextAttack: 2.19
+  attackWindupTime: 0.4
   percentAlphaWindupAttackLock: 0.4
   rotationMinus: 0
   defaultRotation: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fbd8ea7f6afee438ef6209b522231c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &5405713275021561606
-CircleCollider2D:
+--- !u!60 &5550508266659321270
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,9 +155,27 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.648206, y: 9.033377}
-  serializedVersion: 2
-  m_Radius: 97.78778
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 16.375525, y: 67.635925}
+      - {x: -53.923058, y: 54.182747}
+      - {x: -56.38349, y: -2.3568645}
+      - {x: -39.208893, y: -55.961723}
+      - {x: 3.8055987, y: -57.33751}
+      - {x: 104.24535, y: -50.579014}
+      - {x: 166.93933, y: 7.611881}
+      - {x: 104.47696, y: 61.45849}
+  m_UseDelaunayMesh: 0
 --- !u!1 &691684338737331149
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4436039210078354745}
   - component: {fileID: 5615812240558291161}
+  - component: {fileID: 7022773048715436619}
   - component: {fileID: 402502515426282300}
   m_Layer: 0
   m_Name: PunchHand
@@ -243,6 +262,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7022773048715436619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691684338737331149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb1d2c459ad5e941952a684bcbd14d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Puk
+  secondTrigger: NPC
+  strength: 100
+  forceMode: 1
 --- !u!60 &402502515426282300
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -252,7 +287,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 691684338737331149}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 20e7b77df8dd61d449e1d37505590abd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -272,7 +307,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

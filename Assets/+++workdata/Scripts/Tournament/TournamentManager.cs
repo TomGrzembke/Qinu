@@ -97,9 +97,9 @@ public class TournamentManager : MonoBehaviour
         GameObject second = GetLowestPlayRate(first);
         GameObject third = GetLowestPlayRate(first, second);
 
-        third = CharManager.Instance.InitializeChar(third, false);
-        second = CharManager.Instance.InitializeChar(second, true);
         first = CharManager.Instance.InitializeChar(first, true);
+        second = CharManager.Instance.InitializeChar(second, true);
+        third = CharManager.Instance.InitializeChar(third, false);
 
         leftPlayers.Add(third);
         rightPlayers.Add(second);

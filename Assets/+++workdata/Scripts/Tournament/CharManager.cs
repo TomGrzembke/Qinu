@@ -22,14 +22,16 @@ public class CharManager : MonoBehaviour
 
     public GameObject InitializeChar(GameObject gO, bool isRight)
     {
-        GameObject newChar = null;
+        GameObject newChar = gO;
+        NPCNav target;
         if (!CharsSpawned.Contains(gO))
         {
             newChar = Instantiate(gO, transform);
             CharsSpawned.Add(gO);
+            target = gO.GetComponent<NPCNav>();
+            target.SetArenaMode(NPCNav.ArenaMode.ToArena);
         }
 
-        NPCNav target;
 
         for (int i = 0; i < CharPrefabs.Length; i++)
         {

@@ -3,7 +3,16 @@ using UnityEngine;
 
 public class NPCNav : NavCalc
 {
+    public enum ArenaMode
+    {
+        ToArena,
+        Arena,
+        Despawn
+    }
+
     #region serialized fields
+    [SerializeField] ArenaMode arenaMode;
+
     [SerializeField] bool isRight = true;
 
     [SerializeField] bool goesToDefault = true;
@@ -16,7 +25,6 @@ public class NPCNav : NavCalc
     [SerializeField] Vector3 targetPos;
     [SerializeField] Collider2D col;
 
-    [SerializeField] bool inArena;
     [SerializeField] Transform defaultTrans;
 
     Transform Puk => MinigameManager.Instance.Puk;
@@ -31,17 +39,18 @@ public class NPCNav : NavCalc
     void Start()
     {
         SideSettings(isRight);
-
-        SetAgentPosition(defaultTrans);
     }
 
     void Update()
     {
-        if (inArena)
+        if (arenaMode == ArenaMode.ToArena)
+            targetPos = defaultTrans.position;
+        else if (arenaMode == ArenaMode.Arena)
             InArena();
+        else if (arenaMode == ArenaMode.Despawn)
+            targetPos = DespawnPos.position;
 
         SetAgentPosition(targetPos);
-
         agent.velocity = Vector2.zero;
     }
 
@@ -82,7 +91,7 @@ public class NPCNav : NavCalc
 
     public void GoHome()
     {
-        inArena = false;
+        arenaMode = ArenaMode.Despawn;
         SetAgentPosition(DespawnPos);
     }
 
@@ -102,11 +111,11 @@ public class NPCNav : NavCalc
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Arena"))
-            inArena = true;
+            arenaMode = ArenaMode.Arena;
     }
-    void OnTriggerExit2D(Collider2D collision)
+
+    public void SetArenaMode(ArenaMode newMode)
     {
-        if (collision.CompareTag("Arena"))
-            inArena = false;
+        arenaMode = newMode;
     }
 }

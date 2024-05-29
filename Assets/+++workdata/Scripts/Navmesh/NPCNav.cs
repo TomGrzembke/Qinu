@@ -15,9 +15,10 @@ public class NPCNav : NavCalc
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
     [SerializeField] Collider2D col;
-    bool inArena;
 
-    Transform defaultTrans;
+    [SerializeField] bool inArena;
+    [SerializeField] Transform defaultTrans;
+
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
     bool PukOnSide => isRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
@@ -30,15 +31,14 @@ public class NPCNav : NavCalc
     void Start()
     {
         SideSettings(isRight);
+
+        SetAgentPosition(defaultTrans);
     }
 
     void Update()
     {
         if (inArena)
             InArena();
-        else
-            if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
-            targetPos = defaultTrans.position;
 
         SetAgentPosition(targetPos);
 
@@ -58,11 +58,14 @@ public class NPCNav : NavCalc
         else if (!followBallY)
         {
             if (goesToDefault)
-                targetPos = defaultTrans.position;
+                if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
+                    targetPos = defaultTrans.position;
         }
         else
         {
-            targetPos.x = defaultTrans.position.x;
+            if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
+                targetPos.x = defaultTrans.position.x;
+
             if (!invertY)
                 targetPos.y = Puk.position.y;
             else
@@ -77,14 +80,10 @@ public class NPCNav : NavCalc
         defaultTrans = TournamentManager.Instance.GetRandomDefaultTrans(isRight ? 1 : 0);
     }
 
-    public void SetDefaultPos(Transform targetTrans)
-    {
-        defaultTrans = targetTrans;
-    }
-
     public void GoHome()
     {
         inArena = false;
+        SetAgentPosition(DespawnPos);
     }
 
     void OnDrawGizmosSelected()
@@ -108,6 +107,6 @@ public class NPCNav : NavCalc
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Arena"))
-            inArena = true;
+            inArena = false;
     }
 }

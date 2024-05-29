@@ -20,11 +20,12 @@ public class CharManager : MonoBehaviour
         Instance = this;
     }
 
-    public void InitializeChar(GameObject gO, bool isRight)
+    public GameObject InitializeChar(GameObject gO, bool isRight)
     {
+        GameObject newChar = null;
         if (!CharsSpawned.Contains(gO))
         {
-            Instantiate(gO, transform);
+            newChar = Instantiate(gO, transform);
             CharsSpawned.Add(gO);
         }
 
@@ -38,6 +39,6 @@ public class CharManager : MonoBehaviour
                 target.SideSettings(isRight);
             }
         }
-
+        return newChar;
     }
 }

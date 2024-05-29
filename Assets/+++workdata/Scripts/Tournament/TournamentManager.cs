@@ -77,9 +77,9 @@ public class TournamentManager : MonoBehaviour
         ClearSideLists();
         leftPlayers.Add(AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
-        rightPlayers.Add(lastPlayed);
 
-        CharManager.Instance.InitializeChar(lastPlayed, true);
+        GameObject newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
+        rightPlayers.Add(newChar);
     }
 
     void ClearSideLists()
@@ -97,22 +97,22 @@ public class TournamentManager : MonoBehaviour
         GameObject second = GetLowestPlayRate(first);
         GameObject third = GetLowestPlayRate(first, second);
 
+        third = CharManager.Instance.InitializeChar(third, false);
+        second = CharManager.Instance.InitializeChar(second, true);
+        first = CharManager.Instance.InitializeChar(first, true);
+
         leftPlayers.Add(third);
         rightPlayers.Add(second);
         rightPlayers.Add(first);
-
-        CharManager.Instance.InitializeChar(third, false);
-        CharManager.Instance.InitializeChar(second, true);
-        CharManager.Instance.InitializeChar(first, true);
     }
 
     #region Rounds
     void BodiRound()
     {
         GameObject bodi = AvailableChars[2];
-        CharManager.Instance.InitializeChar(bodi, true);
         CurrentGameMode = GameMode.Bodi;
         lastPlayed = bodi;
+        bodi = CharManager.Instance.InitializeChar(bodi, true);
         leftPlayers.Add(AvailableChars[0]);
         rightPlayers.Add(bodi);
     }

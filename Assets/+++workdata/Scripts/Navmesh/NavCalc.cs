@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class NavCalc : MonoBehaviour
 {
     #region serialized fields
-    [field: SerializeField] public Transform HomePos { get; private set; } 
+    public Transform DespawnPos =>  MinigameManager.Instance.DespawnPos;
     #endregion
 
     #region private fields

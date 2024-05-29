@@ -12,6 +12,7 @@ public class MinigameManager : MonoBehaviour
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosLeft { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }
+    [field: SerializeField] public Transform DespawnPos { get; private set; } 
 
     [SerializeField] Transform ballResetLeft;
     [SerializeField] Transform ballResetRight;

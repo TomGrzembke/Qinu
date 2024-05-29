@@ -1,14 +1,11 @@
 using MyBox;
 using UnityEngine;
 
-public class NPCNavMinigame : NavCalc
+public class NPCNav : NavCalc
 {
     #region serialized fields
     [SerializeField] bool isRight = true;
-    [SerializeField] Transform arenaMiddle;
-    [SerializeField] Transform defaultPos;
 
-    [SerializeField] Transform puk;
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
     [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;
@@ -18,7 +15,11 @@ public class NPCNavMinigame : NavCalc
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
     [SerializeField] Collider2D col;
-    bool PukOnSide => isRight ? arenaMiddle.position.x < puk.position.x : arenaMiddle.position.x > puk.position.x;
+
+    Transform defaultPos;
+    Transform Puk => MinigameManager.Instance.Puk;
+    Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
+    bool PukOnSide => isRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
     #endregion
 
     #region private fields
@@ -27,9 +28,18 @@ public class NPCNavMinigame : NavCalc
 
     void Update()
     {
+        InArena();
+
+        SetAgentPosition(targetPos);
+
+        agent.velocity = Vector2.zero;
+    }
+
+    void InArena()
+    {
         if (PukOnSide)
         {
-            targetPos = puk.position;
+            targetPos = Puk.position;
             if (dashRandomly)
                 if (Random.Range(0, 100) <= probabilityPerFrame)
                     moveRB.Dash();
@@ -44,24 +54,22 @@ public class NPCNavMinigame : NavCalc
         {
             targetPos.x = defaultPos.position.x;
             if (!invertY)
-                targetPos.y = puk.position.y;
+                targetPos.y = Puk.position.y;
             else
-                targetPos.y = -puk.position.y;
+                targetPos.y = -Puk.position.y;
         }
-
-        SetAgentPosition(targetPos);
-
-        agent.velocity = Vector2.zero;
     }
-    public void SideSettings(bool _isRight, Transform _arenaMiddle = null)
+
+    public void SideSettings(bool _isRight)
     {
         isRight = _isRight;
 
-        if (_arenaMiddle != null)
-            arenaMiddle = _arenaMiddle;
+        defaultPos = TournamentManager.Instance.GetRandomDefaultTrans(_isRight ? 1 : 0);
+    }
 
-        if (defaultPos == null)
-            defaultPos = TournamentManager.Instance.GetRandomDefaultTrans(_isRight ? 1 : 0);
+    public void SetDefaultPos(Transform targetTrans)
+    {
+        defaultPos = targetTrans;
     }
 
     void OnDrawGizmosSelected()

@@ -4,7 +4,7 @@ public class CharNav : MonoBehaviour
 {
     #region serialized fields
     [field: SerializeField] public NavCalc NavCalc { get; private set; }
-    [field: SerializeField] public NPCNavMinigame NPCNavMinigame { get; private set; }
+    [field: SerializeField] public NPCNav NPCNavMinigame { get; private set; }
     #endregion
 
     #region private fields

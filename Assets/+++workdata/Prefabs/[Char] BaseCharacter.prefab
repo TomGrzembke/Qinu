@@ -41,8 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8154764816718264686}
   - component: {fileID: 8523064361346453057}
-  - component: {fileID: 2821101573320614701}
-  - component: {fileID: 5359104721499891649}
   - component: {fileID: 7953238053786489971}
   - component: {fileID: 3822254324265408848}
   - component: {fileID: 3565451610172718577}
@@ -111,33 +109,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flipSensitivity: 6
---- !u!114 &2821101573320614701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2678853848379604295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <NavCalc>k__BackingField: {fileID: 5359104721499891649}
-  <NPCNavMinigame>k__BackingField: {fileID: 7953238053786489971}
---- !u!114 &5359104721499891649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2678853848379604295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ae71daebabf3347bebe0a616849abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <homePos>k__BackingField: {fileID: 0}
+  <FlipState>k__BackingField: 0
+  <MaxScale>k__BackingField: 0
 --- !u!114 &7953238053786489971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,12 +118,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2678853848379604295}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a808b4edf3ef007418b4c0d7d3e48007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <homePos>k__BackingField: {fileID: 0}
+  <HomePos>k__BackingField: {fileID: 0}
   isRight: 1
   arenaMiddle: {fileID: 0}
   defaultPos: {fileID: 0}

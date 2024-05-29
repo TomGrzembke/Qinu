@@ -20,25 +20,24 @@ public class CharManager : MonoBehaviour
         Instance = this;
     }
 
-    public CharNav InitializeChar(GameObject gO, Vector3 PathPos)
+    public void InitializeChar(GameObject gO, bool isRight)
     {
         if (!CharsSpawned.Contains(gO))
         {
-            Instantiate(gO,transform);
+            Instantiate(gO, transform);
             CharsSpawned.Add(gO);
         }
 
-        CharNav target = null;
+        NPCNav target;
+
         for (int i = 0; i < CharPrefabs.Length; i++)
         {
             if (gO == CharPrefabs[i].gameObject)
             {
-                target = CharPrefabs[i].GetComponent<CharNav>();
-                target.ActivateNavCalc();
-                target.NavCalc.SetAgentPosition(PathPos);
+                target = CharPrefabs[i].GetComponent<NPCNav>();
+                target.SideSettings(isRight);
             }
         }
 
-        return target;
     }
 }

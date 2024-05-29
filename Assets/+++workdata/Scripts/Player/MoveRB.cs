@@ -26,7 +26,7 @@ public class MoveRB : RBGetter
     #endregion 
 
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform puk;
+    Transform Puk => MinigameManager.Instance.Puk;
     bool inputDisabled;
     float currentMaxSpeed;
     Coroutine moveRoutine;
@@ -120,7 +120,7 @@ public class MoveRB : RBGetter
         moveRoutine = null;
 
         if (dashAutomAim)
-            rb.AddForce((puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
+            rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
         else
             rb.AddForce(MoveDir * dashForce, ForceMode2D.Impulse);
 

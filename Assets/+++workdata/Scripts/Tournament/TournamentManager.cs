@@ -164,8 +164,7 @@ public class TournamentManager : MonoBehaviour
         left0Stats.TimesPlayed += 1;
         right0Stats.TimesPlayed += 1;
 
-        left0Stats.CharNav.ActivateNavCalc();
-        right0Stats.CharNav.ActivateNavCalc(right0Stats.CharNav.NavCalc.HomePos);
+        rightPlayers[0].GetComponent<NPCNav>().GoHome();
 
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
@@ -189,8 +188,8 @@ public class TournamentManager : MonoBehaviour
         left1Stats.TimesPlayed += 1;
         left1Stats.TimesPlayed += 1;
 
-        left1Stats.CharNav.ActivateNavCalc(left1Stats.CharNav.NavCalc.HomePos);
-        right1Stats.CharNav.ActivateNavCalc(right1Stats.CharNav.NavCalc.HomePos);
+        leftPlayers[1].GetComponent<NPCNav>().GoHome();
+        rightPlayers[1].GetComponent<NPCNav>().GoHome();
     }
 
     /// <returns>left = 0, right = 1</returns>
@@ -248,12 +247,10 @@ public class CharacterStats
     {
         CharGO = charGO;
         Name = CharGO.name;
-        CharNav = CharGO.GetComponent<CharNav>();
     }
 
     [HideInInspector] public string Name;
     public int TimesPlayed;
     public int Wins;
     [field: SerializeField] public GameObject CharGO { get; private set; }
-    [field: SerializeField] public CharNav CharNav { get; private set; }
 }

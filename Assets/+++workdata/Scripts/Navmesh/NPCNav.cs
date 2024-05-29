@@ -15,8 +15,9 @@ public class NPCNav : NavCalc
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
     [SerializeField] Collider2D col;
+    bool inArena;
 
-    Transform defaultPos;
+    Transform defaultTrans;
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
     bool PukOnSide => isRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
@@ -26,9 +27,18 @@ public class NPCNav : NavCalc
 
     #endregion
 
+    void Start()
+    {
+        SideSettings(isRight);
+    }
+
     void Update()
     {
-        InArena();
+        if (inArena)
+            InArena();
+        else
+            if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
+            targetPos = defaultTrans.position;
 
         SetAgentPosition(targetPos);
 
@@ -48,11 +58,11 @@ public class NPCNav : NavCalc
         else if (!followBallY)
         {
             if (goesToDefault)
-                targetPos = defaultPos.position;
+                targetPos = defaultTrans.position;
         }
         else
         {
-            targetPos.x = defaultPos.position.x;
+            targetPos.x = defaultTrans.position.x;
             if (!invertY)
                 targetPos.y = Puk.position.y;
             else
@@ -64,12 +74,17 @@ public class NPCNav : NavCalc
     {
         isRight = _isRight;
 
-        defaultPos = TournamentManager.Instance.GetRandomDefaultTrans(_isRight ? 1 : 0);
+        defaultTrans = TournamentManager.Instance.GetRandomDefaultTrans(isRight ? 1 : 0);
     }
 
     public void SetDefaultPos(Transform targetTrans)
     {
-        defaultPos = targetTrans;
+        defaultTrans = targetTrans;
+    }
+
+    public void GoHome()
+    {
+        inArena = false;
     }
 
     void OnDrawGizmosSelected()
@@ -83,5 +98,16 @@ public class NPCNav : NavCalc
     void OnDisable()
     {
         col.enabled = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Arena"))
+            inArena = true;
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Arena"))
+            inArena = true;
     }
 }

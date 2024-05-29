@@ -125,9 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HomePos>k__BackingField: {fileID: 0}
   isRight: 1
-  arenaMiddle: {fileID: 0}
-  defaultPos: {fileID: 0}
-  puk: {fileID: 0}
   goesToDefault: 1
   followBallY: 1
   invertY: 0
@@ -150,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charSO: {fileID: 0}
   agent: {fileID: 173636337912830749}
-  puk: {fileID: 0}
 --- !u!50 &3565451610172718577
 Rigidbody2D:
   serializedVersion: 4
@@ -227,7 +223,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.2
+  m_StoppingDistance: 0.35
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

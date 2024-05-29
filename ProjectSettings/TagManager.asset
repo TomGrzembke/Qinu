@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Puk
   - NPC
+  - Arena
   layers:
   - Default
   - TransparentFX

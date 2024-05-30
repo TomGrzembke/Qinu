@@ -26,7 +26,7 @@ public class CharNav : MonoBehaviour
     {
         NavCalc.enabled = false;
         NPCNavMinigame.enabled = true;
-        NPCNavMinigame.SideSettings(sideID != 0);
+        //NPCNavMinigame.SideSettings(sideID != 0);
     }
 
     void OnEnable()

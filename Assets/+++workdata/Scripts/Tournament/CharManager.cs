@@ -28,17 +28,16 @@ public class CharManager : MonoBehaviour
         {
             newChar = Instantiate(gO, transform);
             CharsSpawned.Add(gO);
-            target = gO.GetComponent<NPCNav>();
-            target.SetArenaMode(NPCNav.ArenaMode.ToArena);
         }
 
 
-        for (int i = 0; i < CharPrefabs.Length; i++)
+        for (int i = 0; i < CharsSpawned.Count; i++)
         {
-            if (gO == CharPrefabs[i].gameObject)
+            if (gO == CharsSpawned[i])
             {
-                target = CharPrefabs[i].GetComponent<NPCNav>();
+                target = newChar.GetComponent<NPCNav>();
                 target.SideSettings(isRight);
+                target.SetArenaMode(NPCNav.ArenaMode.ToArena);
             }
         }
         return newChar;

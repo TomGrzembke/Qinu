@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a808b4edf3ef007418b4c0d7d3e48007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arenaMode: 0
   isRight: 1
   goesToDefault: 1
   followBallY: 1
@@ -131,7 +132,6 @@ MonoBehaviour:
   moveRB: {fileID: 3822254324265408848}
   targetPos: {x: 0, y: 0, z: 0}
   col: {fileID: 4491615955301986986}
-  inArena: 0
   defaultTrans: {fileID: 0}
 --- !u!114 &3822254324265408848
 MonoBehaviour:
@@ -218,7 +218,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2678853848379604295}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2.0749998
+  m_Radius: 0.01
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

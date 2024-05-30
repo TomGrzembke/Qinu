@@ -13,7 +13,7 @@ public class NPCNav : NavCalc
     #region serialized fields
     [SerializeField] ArenaMode arenaMode;
 
-    [SerializeField] bool isRight = true;
+    [SerializeField] bool isRight;
 
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
@@ -35,11 +35,6 @@ public class NPCNav : NavCalc
     #region private fields
 
     #endregion
-
-    void Start()
-    {
-        SideSettings(isRight);
-    }
 
     void Update()
     {

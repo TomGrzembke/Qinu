@@ -28,8 +28,8 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
-    [field: SerializeField] public List<GameObject> rightPlayers { get; private set; }
-    [field: SerializeField] public List<GameObject> leftPlayers { get; private set; }
+    [field: SerializeField] public List<GameObject> RightPlayers { get; private set; }
+    [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
     [SerializeField] float afterCombatTime = 3;
     [SerializeField] GameObject cage;
     #endregion
@@ -75,23 +75,23 @@ public class TournamentManager : MonoBehaviour
     void Calc1v1()
     {
         ClearSideLists();
-        leftPlayers.Add(AvailableChars[0]);
+        LeftPlayers.Add(AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
 
         GameObject newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
-        rightPlayers.Add(newChar);
+        RightPlayers.Add(newChar);
     }
 
     void ClearSideLists()
     {
-        leftPlayers.Clear();
-        rightPlayers.Clear();
+        LeftPlayers.Clear();
+        RightPlayers.Clear();
     }
 
     void Calc2v2()
     {
         ClearSideLists();
-        leftPlayers.Add(AvailableChars[0]);
+        LeftPlayers.Add(AvailableChars[0]);
 
         GameObject first = GetLowestPlayRate();
         GameObject second = GetLowestPlayRate(first);
@@ -101,9 +101,9 @@ public class TournamentManager : MonoBehaviour
         second = CharManager.Instance.InitializeChar(second, true);
         third = CharManager.Instance.InitializeChar(third, false);
 
-        leftPlayers.Add(third);
-        rightPlayers.Add(second);
-        rightPlayers.Add(first);
+        RightPlayers.Add(first);
+        RightPlayers.Add(second);
+        LeftPlayers.Add(third);
     }
 
     #region Rounds
@@ -113,8 +113,8 @@ public class TournamentManager : MonoBehaviour
         CurrentGameMode = GameMode.Bodi;
         lastPlayed = bodi;
         bodi = CharManager.Instance.InitializeChar(bodi, true);
-        leftPlayers.Add(AvailableChars[0]);
-        rightPlayers.Add(bodi);
+        LeftPlayers.Add(AvailableChars[0]);
+        RightPlayers.Add(bodi);
     }
 
     void CustomRound(GameMode gameMode)
@@ -152,8 +152,8 @@ public class TournamentManager : MonoBehaviour
         yield return new WaitForSeconds(afterCombatTime);
         gameState = GameState.Village;
 
-        CharacterStats left0Stats = GetCharacterStats(leftPlayers[0]);
-        CharacterStats right0Stats = GetCharacterStats(rightPlayers[0]);
+        CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
+        CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (sideID == 0)
             left0Stats.Wins += 1;
@@ -164,7 +164,7 @@ public class TournamentManager : MonoBehaviour
         left0Stats.TimesPlayed += 1;
         right0Stats.TimesPlayed += 1;
 
-        rightPlayers[0].GetComponent<NPCNav>().GoHome();
+        RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
@@ -176,8 +176,8 @@ public class TournamentManager : MonoBehaviour
 
     void Cleanup2v2(int sideID)
     {
-        CharacterStats left1Stats = GetCharacterStats(leftPlayers[1]);
-        CharacterStats right1Stats = GetCharacterStats(rightPlayers[1]);
+        CharacterStats left1Stats = GetCharacterStats(LeftPlayers[1]);
+        CharacterStats right1Stats = GetCharacterStats(RightPlayers[1]);
 
         if (sideID == 0)
             left1Stats.Wins += 1;
@@ -188,8 +188,8 @@ public class TournamentManager : MonoBehaviour
         left1Stats.TimesPlayed += 1;
         left1Stats.TimesPlayed += 1;
 
-        leftPlayers[1].GetComponent<NPCNav>().GoHome();
-        rightPlayers[1].GetComponent<NPCNav>().GoHome();
+        LeftPlayers[1].GetComponent<NPCNav>().GoHome();
+        RightPlayers[1].GetComponent<NPCNav>().GoHome();
     }
 
     /// <returns>left = 0, right = 1</returns>

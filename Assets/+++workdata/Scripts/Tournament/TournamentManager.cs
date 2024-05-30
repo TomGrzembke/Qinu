@@ -164,13 +164,18 @@ public class TournamentManager : MonoBehaviour
         CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (sideID == 0)
-            left0Stats.Wins += 1;
-
+        {
+            right0Stats.Wins--;
+            left0Stats.Wins++;
+        }
         else if (sideID == 1)
-            right0Stats.Wins += 1;
+        {
+            right0Stats.Wins++;
+            left0Stats.Wins--;
+        }
 
-        left0Stats.TimesPlayed += 1;
-        right0Stats.TimesPlayed += 1;
+        left0Stats.TimesPlayed ++;
+        right0Stats.TimesPlayed ++;
 
         RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
@@ -188,13 +193,18 @@ public class TournamentManager : MonoBehaviour
         CharacterStats right1Stats = GetCharacterStats(RightPlayers[1]);
 
         if (sideID == 0)
-            left1Stats.Wins += 1;
-
+        {
+            left1Stats.Wins++;
+            right1Stats.Wins--;
+        }
         else if (sideID == 1)
-            right1Stats.Wins += 1;
+        {
+            left1Stats.Wins--;
+            right1Stats.Wins++;
+        }
 
-        left1Stats.TimesPlayed += 1;
-        left1Stats.TimesPlayed += 1;
+        left1Stats.TimesPlayed++;
+        right1Stats.TimesPlayed++;
 
         LeftPlayers[1].GetComponent<NPCNav>().GoHome();
         RightPlayers[1].GetComponent<NPCNav>().GoHome();

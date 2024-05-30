@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <RoundAmount>k__BackingField: 0
   RoundsTilWin: 5
-  <gameState>k__BackingField: 1
+  <gameState>k__BackingField: 2
   <CharStats>k__BackingField: []
   <AvailableChars>k__BackingField:
   - {fileID: 1199928778}

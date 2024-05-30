@@ -30,7 +30,6 @@ public class CharManager : MonoBehaviour
             CharsSpawned.Add(gO);
         }
 
-
         for (int i = 0; i < CharsSpawned.Count; i++)
         {
             if (gO == CharsSpawned[i])

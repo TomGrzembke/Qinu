@@ -4851,10 +4851,7 @@ GameObject:
   - component: {fileID: 7380229762919659093}
   - component: {fileID: 281730897870352152}
   - component: {fileID: 8159841771566686583}
-  - component: {fileID: 957628969189390439}
   - component: {fileID: 6498385389996183294}
-  - component: {fileID: 5524319602458730906}
-  - component: {fileID: 3789834968936634904}
   - component: {fileID: 7119062691497510257}
   m_Layer: 8
   m_Name: '[Player] Qinu'
@@ -4896,7 +4893,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charSO: {fileID: 11400000, guid: fb0575f9dad636a459e80c4a0ee23f6c, type: 2}
   agent: {fileID: 0}
-  puk: {fileID: 0}
 --- !u!114 &281730897870352152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4959,20 +4955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pSystem: {fileID: 7395996233613215974}
---- !u!114 &957628969189390439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811716013710717747}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ba55417c1410f4584df44f99446316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calculateOnly: 1
-  range: 5
 --- !u!50 &6498385389996183294
 Rigidbody2D:
   serializedVersion: 4
@@ -5000,42 +4982,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!195 &5524319602458730906
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811716013710717747}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 2.075
-  m_Speed: 5
-  m_Acceleration: 1116.5
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 7
-  m_BaseOffset: -0.035
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &3789834968936634904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811716013710717747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e516cbc253537e45abdab2ac03a1c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <NavCalc>k__BackingField: {fileID: 0}
-  <NPCNavMinigame>k__BackingField: {fileID: 0}
 --- !u!58 &7119062691497510257
 CircleCollider2D:
   m_ObjectHideFlags: 0

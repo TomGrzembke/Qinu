@@ -14,6 +14,7 @@ public class NPCNav : NavCalc
     [SerializeField] ArenaMode arenaMode;
 
     [SerializeField] bool isRight;
+    [SerializeField] float stoppingDistance = 2;
 
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
@@ -62,19 +63,20 @@ public class NPCNav : NavCalc
         else if (!followBallY)
         {
             if (goesToDefault)
-                if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
-                    targetPos = defaultTrans.position;
+                targetPos = defaultTrans.position;
         }
         else
         {
-            if (Vector3.Distance(targetPos, defaultTrans.position) < 2)
-                targetPos.x = defaultTrans.position.x;
+            targetPos.x = defaultTrans.position.x;
 
             if (!invertY)
                 targetPos.y = Puk.position.y;
             else
                 targetPos.y = -Puk.position.y;
         }
+
+        if (Vector3.Distance(targetPos, defaultTrans.position) < stoppingDistance)
+            targetPos = transform.position;
     }
 
     public void SideSettings(bool _isRight)

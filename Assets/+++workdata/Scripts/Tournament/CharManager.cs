@@ -22,17 +22,16 @@ public class CharManager : MonoBehaviour
 
     public GameObject InitializeChar(GameObject gO, bool isRight)
     {
-        GameObject newChar = gO;
         NPCNav target;
-        if (!CharsSpawned.Contains(gO))
+        if (!CheckIfCloneAvailable(gO, out GameObject newChar))
         {
             newChar = Instantiate(gO, transform);
-            CharsSpawned.Add(gO);
+            CharsSpawned.Add(newChar);
         }
 
         for (int i = 0; i < CharsSpawned.Count; i++)
         {
-            if (gO == CharsSpawned[i])
+            if (newChar == CharsSpawned[i])
             {
                 target = newChar.GetComponent<NPCNav>();
                 target.SideSettings(isRight);
@@ -40,5 +39,21 @@ public class CharManager : MonoBehaviour
             }
         }
         return newChar;
+    }
+
+    bool CheckIfCloneAvailable(GameObject inGO, out GameObject outGO)
+    {
+        outGO = inGO;
+
+        for (int i = 0; i < CharsSpawned.Count; i++)
+        {
+            if (CharsSpawned[i].name.Contains(inGO.name))
+            {
+                outGO = CharsSpawned[i];
+                return true;
+            }
+        }
+
+        return false;
     }
 }

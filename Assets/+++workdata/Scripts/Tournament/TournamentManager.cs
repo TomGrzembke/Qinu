@@ -72,6 +72,12 @@ public class TournamentManager : MonoBehaviour
         RoundAmount++;
     }
 
+    [ButtonMethod]
+    public void WinGame()
+    {
+        SideWon(0);
+    }
+
     void Calc1v1()
     {
         ClearSideLists();
@@ -139,6 +145,8 @@ public class TournamentManager : MonoBehaviour
     }
 
     #endregion
+
+    /// <param name="sideID">0 = left, 1 = right</param>
     public void SideWon(int sideID)
     {
         StartCoroutine(AfterGameCor(sideID));

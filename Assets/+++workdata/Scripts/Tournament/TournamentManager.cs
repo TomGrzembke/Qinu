@@ -155,6 +155,7 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         yield return new WaitForSeconds(.3f);
+        MinigameManager.Instance.ResetInternal();
         cage.SetActive(true);
         gameState = GameState.AfterGame;
 
@@ -176,8 +177,8 @@ public class TournamentManager : MonoBehaviour
             left0Stats.Wins--;
         }
 
-        left0Stats.TimesPlayed ++;
-        right0Stats.TimesPlayed ++;
+        left0Stats.TimesPlayed++;
+        right0Stats.TimesPlayed++;
 
         RightPlayers[0].GetComponent<NPCNav>().GoHome();
 

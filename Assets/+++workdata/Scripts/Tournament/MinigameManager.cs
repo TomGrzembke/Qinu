@@ -69,7 +69,7 @@ public class MinigameManager : MonoBehaviour
         leftCounterTxt.text = pointCounter.x.ToString();
     }
 
-    void ResetInternal()
+    public void ResetInternal()
     {
         pointCounter = new();
         Puk.position = pukResetPos.position;

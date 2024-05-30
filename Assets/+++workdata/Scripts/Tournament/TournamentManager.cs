@@ -157,7 +157,9 @@ public class TournamentManager : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         cage.SetActive(true);
         gameState = GameState.AfterGame;
+
         yield return new WaitForSeconds(afterCombatTime);
+        MinigameManager.Instance.ResetArena();
         gameState = GameState.Village;
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);

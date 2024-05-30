@@ -24,7 +24,6 @@ public class NPCNav : NavCalc
 
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
-    [SerializeField] Collider2D col;
 
     [SerializeField] Transform defaultTrans;
 
@@ -96,19 +95,10 @@ public class NPCNav : NavCalc
     {
     }
 
-    void OnEnable()
-    {
-        col.enabled = true;
-    }
-    void OnDisable()
-    {
-        col.enabled = false;
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Arena"))
-            arenaMode = ArenaMode.Arena;
+            SetArenaMode(ArenaMode.Arena);
     }
 
     public void SetArenaMode(ArenaMode newMode)

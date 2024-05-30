@@ -44,7 +44,7 @@ public class CharManager : MonoBehaviour
     bool CheckIfCloneAvailable(GameObject inGO, out GameObject outGO)
     {
         outGO = inGO;
-        CharsSpawned.CleanList();
+        CleanList();
 
         for (int i = 0; i < CharsSpawned.Count; i++)
         {
@@ -56,5 +56,10 @@ public class CharManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void CleanList()
+    {
+        CharsSpawned.CleanList();
     }
 }

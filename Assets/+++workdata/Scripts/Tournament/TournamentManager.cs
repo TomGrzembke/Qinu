@@ -169,8 +169,6 @@ public class TournamentManager : MonoBehaviour
         GameState = GameStateEnum.Village;
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
-        OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
-
         CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (sideID == 0)
@@ -186,6 +184,8 @@ public class TournamentManager : MonoBehaviour
 
         left0Stats.TimesPlayed++;
         right0Stats.TimesPlayed++;
+
+        OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
 
         RightPlayers[0].GetComponent<NPCNav>().GoHome();
 

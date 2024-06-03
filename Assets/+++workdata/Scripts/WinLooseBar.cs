@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,9 @@ public class WinLooseBar : MonoBehaviour
     [SerializeField] Slider bar;
     #endregion
 
-    void OnEnable()
+    IEnumerator Start()
     {
+        yield return null;
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
     }
 

@@ -33,6 +33,19 @@ public class RewardWindow : MonoBehaviour
         essentialUICanvasGroup = essentialUI.GetComponent<CanvasGroup>();
     }
 
+    IEnumerator Start()
+    {
+        yield return null;
+
+        AbilitySlot[] abilitySlots = AbilitySlotManager.Instance.AbilitySlots;
+
+        for (int i = 0; i < abilitySlots.Length; i++)
+        {
+            if (abilitySlots[i].CurrentAbilityPrefab)
+                rewardsReceived.Add(abilitySlots[i].CurrentAbilityPrefab);
+        }
+    }
+
     public void OpenRewardWindow()
     {
         if (currentRewarWindowCoroutine != null)
@@ -61,6 +74,12 @@ public class RewardWindow : MonoBehaviour
         }
 
         OpenRewardWindow();
+    }
+
+    [ButtonMethod]
+    public void RemoveReward()
+    {
+        rewardsReceived.Remove(AbilitySlotManager.Instance.RemoveRandomAbility());
     }
 
     public GameObject[] PickThreeRewards()
@@ -121,12 +140,14 @@ public class RewardWindow : MonoBehaviour
             essentialUICanvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
             rewardWindowCanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
+        rewardWindowCanvasGroup.interactable = true;
         rewardWindowCanvasGroup.alpha = 1;
         essentialUICanvasGroup.alpha = 0;
     }
 
     IEnumerator HideCoroutine()
     {
+        rewardWindowCanvasGroup.interactable = false;
         essentialUICanvasGroup.alpha = 0;
         essentialUI.SetActive(true);
         rewardWindowCanvasGroup.alpha = 0;

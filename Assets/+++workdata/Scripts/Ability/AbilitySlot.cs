@@ -10,6 +10,7 @@ public class AbilitySlot : MonoBehaviour
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
     [SerializeField] int slotIndex;
     [SerializeField] Image abilityImage;
+    [SerializeField] Image abilityImageBG;
     [SerializeField] GameObject numberObject;
     #endregion
 
@@ -48,6 +49,11 @@ public class AbilitySlot : MonoBehaviour
     {
         if (CurrentAbility)
             DestroyImmediate(CurrentAbility.gameObject, true);
+
+        if (newAbilityPrefab == null)
+            abilityImageBG.color = Color.red;
+        else
+            abilityImageBG.color = Color.gray;
 
         currentAbilityPrefab = newAbilityPrefab;
 

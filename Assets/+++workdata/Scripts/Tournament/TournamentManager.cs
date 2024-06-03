@@ -195,7 +195,11 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitForSeconds(afterCombatTime);
 
-        RewardWindow.Instance.GiveReward();
+        if (sideID == 0)
+            RewardWindow.Instance.GiveReward();
+        else
+            RewardWindow.Instance.RemoveReward();
+
 
         InitializeGame();
         cage.SetActive(false);

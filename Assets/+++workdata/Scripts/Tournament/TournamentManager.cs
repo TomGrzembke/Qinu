@@ -1,4 +1,5 @@
 using MyBox;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class TournamentManager : MonoBehaviour
 {
-    public enum GameState
+    public enum GameStateEnum
     {
         InGame,
         AfterGame,
@@ -19,19 +20,23 @@ public class TournamentManager : MonoBehaviour
         a2v2
     }
 
-    #region serialized fields
+    #region public fields
     public static TournamentManager Instance;
     [field: SerializeField] public int RoundAmount { get; private set; }
-    [SerializeField] float RoundsTilWin = 5;
-    [field: SerializeField] public GameState gameState { get; private set; }
+    [field: SerializeField] public GameStateEnum GameState { get; private set; }
     [field: SerializeField] public List<CharacterStats> CharStats { get; private set; }
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
     [field: SerializeField] public List<GameObject> RightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
-    [SerializeField] float afterCombatTime = 3;
+    public event Action<float> OnPlayerMatchEnd;
+    #endregion
+
+    #region [SerializeField]
     [SerializeField] GameObject cage;
+    [SerializeField] float afterCombatTime = 3;
+    [SerializeField] float RoundsTilWin = 5;
     #endregion
 
     #region private fields
@@ -61,14 +66,14 @@ public class TournamentManager : MonoBehaviour
     [ButtonMethod]
     public void InitializeGame()
     {
-        if (gameState == GameState.InGame) return;
+        if (GameState == GameStateEnum.InGame) return;
 
         if (RoundAmount < FirstGameModes.Count)
             CustomRound(FirstGameModes[RoundAmount]);
         else
             RandomCalcRound();
 
-        gameState = GameState.InGame;
+        GameState = GameStateEnum.InGame;
         RoundAmount++;
     }
 
@@ -157,13 +162,15 @@ public class TournamentManager : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         MinigameManager.Instance.ResetInternal();
         cage.SetActive(true);
-        gameState = GameState.AfterGame;
+        GameState = GameStateEnum.AfterGame;
 
         yield return new WaitForSeconds(afterCombatTime);
         MinigameManager.Instance.ResetArena();
-        gameState = GameState.Village;
+        GameState = GameStateEnum.Village;
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
+        OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
+
         CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (sideID == 0)
@@ -258,6 +265,13 @@ public class TournamentManager : MonoBehaviour
         }
 
         return characterStats;
+    }
+
+    public void RegisterOnPlayerMatchEnd(Action<float> callback, bool getInstantCallback = false)
+    {
+        OnPlayerMatchEnd += callback;
+        if (getInstantCallback)
+            callback(CharStats[0].Wins);
     }
 }
 

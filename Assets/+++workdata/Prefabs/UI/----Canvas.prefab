@@ -699,12 +699,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardWindow: {fileID: 6873739084667817840}
   essentialUI: {fileID: 2144689464540087408}
-  rewardImage: {fileID: 0}
-  titelText: {fileID: 0}
-  descriptionText: {fileID: 0}
+  choiceButtonTexts: []
   fadeTime: 2
   rewardText: {fileID: 0}
   rewardTextCanvasGroup: {fileID: 0}
+  possibleRewards: []
+  rewardsReceived: []
+  rewards: []
 --- !u!1 &9171497803892760580
 GameObject:
   m_ObjectHideFlags: 0

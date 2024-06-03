@@ -1,8 +1,8 @@
 using MyBox;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RewardWindow : MonoBehaviour
 {
@@ -11,15 +11,16 @@ public class RewardWindow : MonoBehaviour
     #region serialized fields
     [SerializeField] GameObject rewardWindow;
     [SerializeField] GameObject essentialUI;
-    [SerializeField] Image rewardImage;
-    [SerializeField] TextMeshProUGUI titelText;
-    [SerializeField] TextMeshProUGUI descriptionText;
+
+    [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
+
     [SerializeField] float fadeTime = 2;
-    [SerializeField] TextMeshProUGUI rewardText;
-    [SerializeField] CanvasGroup rewardTextCanvasGroup;
+    [SerializeField] List<GameObject> possibleRewards;
+    [SerializeField] List<GameObject> rewardsReceived;
     #endregion
 
     #region private fields
+    GameObject[] rewards;
     CanvasGroup rewardWindowCanvasGroup;
     CanvasGroup essentialUICanvasGroup;
     Coroutine currentRewarWindowCoroutine;
@@ -32,7 +33,6 @@ public class RewardWindow : MonoBehaviour
         essentialUICanvasGroup = essentialUI.GetComponent<CanvasGroup>();
     }
 
-    [ButtonMethod]
     public void OpenRewardWindow()
     {
         if (currentRewarWindowCoroutine != null)
@@ -41,18 +41,59 @@ public class RewardWindow : MonoBehaviour
         currentRewarWindowCoroutine = StartCoroutine(ShowCoroutine());
     }
 
-    public void GiveReward(GameObject reward)
+    [ButtonMethod]
+    public void GiveReward()
     {
-        if (!reward) return;
-        Ability ability = reward.GetComponent<Ability>();
-        rewardImage.sprite = ability.AbilitySO.abilitySprite;
-        titelText.text = ability.AbilitySO.abilityTitel;
-        descriptionText.text = ability.AbilitySO.abilityDescription;
-        SoundManager.Instance.PlaySound(SoundType.SkillAcquired);
+        rewards = PickThreeRewards();
+        string currentText;
 
-        PauseManager.Instance.PauseLogic(true);
+        for (int i = 0; i < choiceButtonTexts.Length; i++)
+        {
+            if (rewards[i].TryGetComponent(out Ability ability))
+                currentText = ability.AbilitySO.abilityTitel;
+            else
+            {
+                Debug.Log(rewards[i].name + " has no Ability Script");
+                currentText = "Random";
+            }
+
+            choiceButtonTexts[i].text = currentText;
+        }
 
         OpenRewardWindow();
+    }
+
+    public GameObject[] PickThreeRewards()
+    {
+        GameObject[] rewards = new GameObject[3];
+        rewards[0] = GetRandomReward();
+        rewards[1] = GetRandomReward(rewards[0]);
+        rewards[2] = GetRandomReward(rewards[0], rewards[1]);
+
+        return rewards;
+    }
+
+    public GameObject GetRandomReward(GameObject priorChoice1 = null, GameObject priorChoice2 = null)
+    {
+        GameObject randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
+
+        if (randomObject == null)
+            GetRandomReward();
+        if (rewardsReceived.Contains(randomObject))
+            return GetRandomReward();
+        if (randomObject == priorChoice1)
+            return GetRandomReward();
+        if (randomObject == priorChoice2)
+            return GetRandomReward();
+
+        return randomObject;
+    }
+
+    public void RewardPicked(int buttonID)
+    {
+        AbilitySlotManager.Instance.AddNewAbility(rewards[buttonID]);
+        rewardsReceived.Add(rewards[buttonID]);
+        Close();
     }
 
     [ButtonMethod]

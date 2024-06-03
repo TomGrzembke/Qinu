@@ -7,16 +7,20 @@ public class AbilitySlot : MonoBehaviour
     #region serialized fields
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
-    [field: SerializeField] public Ability CurrentAbility { get; private set; } 
+    [field: SerializeField] public Ability CurrentAbility { get; private set; }
     [SerializeField] int slotIndex;
     [SerializeField] Image abilityImage;
     [SerializeField] GameObject numberObject;
     #endregion
 
     #region private fields
-    AbilitySlotManager AbilitySlotManager => AbilitySlotManager.Instance;
     public bool Occupied { get; private set; }
     #endregion
+
+    void OnValidate()
+    {
+        RefreshPicture();
+    }
 
     void RefreshPicture()
     {

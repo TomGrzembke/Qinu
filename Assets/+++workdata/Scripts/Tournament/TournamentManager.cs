@@ -160,13 +160,10 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         yield return new WaitForSeconds(.3f);
+
         MinigameManager.Instance.ResetInternal();
         cage.SetActive(true);
         GameState = GameStateEnum.AfterGame;
-
-        yield return new WaitForSeconds(afterCombatTime);
-        MinigameManager.Instance.ResetArena();
-        GameState = GameStateEnum.Village;
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
         CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
@@ -187,12 +184,19 @@ public class TournamentManager : MonoBehaviour
 
         OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
 
+        yield return new WaitForSeconds(afterCombatTime);
+        MinigameManager.Instance.ResetArena();
+        GameState = GameStateEnum.Village;
+
         RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
 
         yield return new WaitForSeconds(afterCombatTime);
+
+        RewardWindow.Instance.GiveReward();
+
         InitializeGame();
         cage.SetActive(false);
     }

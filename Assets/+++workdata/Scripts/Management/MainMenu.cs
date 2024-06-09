@@ -4,7 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     void Start()
     {
-        PauseManager.Instance.PauseLogic(false);
+        //PauseManager.Instance.PauseLogic(false);
     }
     public void StartGame()
     {

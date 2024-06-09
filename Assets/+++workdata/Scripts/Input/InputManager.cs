@@ -83,8 +83,14 @@ public class InputManager : MonoBehaviour
     /// <param name="method"></param>
     public void SubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
     {
-        inputAction.performed += ctx => method(ctx);
-        inputAction.canceled += ctx => method(ctx);
+        inputAction.performed += method;
+        inputAction.canceled += method;
+    }
+
+    public void DesubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
+    {
+        inputAction.performed -= method;
+        inputAction.canceled -= method;
     }
 
     #region OnEnable/Disable

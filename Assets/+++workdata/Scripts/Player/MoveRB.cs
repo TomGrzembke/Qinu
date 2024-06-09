@@ -58,6 +58,12 @@ public class MoveRB : RBGetter
         InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
 
+    void OnDisable()
+    {
+        InputManager.Instance.DesubscribeTo(Dash, InputManager.Instance.leftclickAction);
+        InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
+    }
+
     void FixedUpdate()
     {
         if (mouseInput)
@@ -73,6 +79,7 @@ public class MoveRB : RBGetter
             dashRoutine = StartCoroutine(DashCor());
         }
     }
+
     public void Dash()
     {
         if (dashCooldownRoutine != null) return;

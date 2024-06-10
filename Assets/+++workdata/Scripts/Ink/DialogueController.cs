@@ -122,18 +122,19 @@ public class DialogueController : MonoBehaviour
     Transform GetDialogueTarget(DialogueLine dialogueLine, int id = 0)
     {
         string speaker = dialogueLine.speaker;
+        List<GameObject> chars = CharManager.Instance.CharsSpawned;
 
-        for (int i = 0; i < speakerBoxParents.Length; i++)
+        for (int i = 0; i < chars.Count; i++)
         {
-            if (!speakerBoxParents[i].name.Contains(speaker)) continue;
+            if (!chars[i].name.Contains(speaker)) continue;
 
             if (id == 0)
-                return speakerBoxParents[i].gameObject.GetComponentInChildren<NPCNav>()?.TopTextTarget;
+                return chars[i].GetComponentInChildren<NPCNav>()?.TopTextTarget;
             else if (id == 1)
-                return speakerBoxParents[i].gameObject.GetComponentInChildren<NPCNav>()?.BotTextTarget;
+                return chars[i].GetComponentInChildren<NPCNav>()?.BotTextTarget;
         }
 
-        Debug.Log(dialogueLine.speaker + " has no DialogueTarget in " + nameof(NPCNav));
+        Debug.Log(dialogueLine.speaker + " isn't in scene");
         return null;
     }
     #endregion

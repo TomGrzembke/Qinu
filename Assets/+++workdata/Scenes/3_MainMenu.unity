@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Player] Qinu'
       objectReference: {fileID: 0}
+    - target: {fileID: 4496410115892118337, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5253925689188546159, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -212,6 +216,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5253925689188546159, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: charSO
+      value: 
+      objectReference: {fileID: 11400000, guid: a83d85d404d456b47884671a7bf7072b, type: 2}
     - target: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.59815687
@@ -579,11 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1526.761
+      value: -962.48
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -196.5712
+      value: -118.86
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_LocalScale.x
@@ -627,11 +639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 175
+      value: 170.3
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 95.8
       objectReference: {fileID: 0}
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -648,6 +660,14 @@ PrefabInstance:
     - target: {fileID: 6093336454104391783, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741215737724316170, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741215737724316170, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7434161201423111507, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_Name
@@ -1439,7 +1459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1536,7 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa484b69962e4d64ba5fe5dd3c6cb1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: Quit
+  buttonName: Credits
   additionalSettings: 1
   scaleOnClick: 0.75
   scaleTime: 0.075
@@ -1680,7 +1700,7 @@ GameObject:
   - component: {fileID: 4226469164708468186}
   - component: {fileID: 1507735391623419781}
   m_Layer: 0
-  m_Name: '[Button] Quit'
+  m_Name: '[Button] Credits'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1777,7 +1797,7 @@ GameObject:
   - component: {fileID: 7622375257815383598}
   - component: {fileID: 2884690314605236915}
   m_Layer: 0
-  m_Name: '[Text] Quit'
+  m_Name: '[Text] Credits'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

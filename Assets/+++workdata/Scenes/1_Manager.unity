@@ -530,8 +530,12 @@ MonoBehaviour:
   <FirstGameModes>k__BackingField: 00000000010000000100000002000000
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
-  afterCombatTime: 3
+  afterCombatTime: 7
   RoundsTilWin: 5
+  afterCombatTalk:
+  - Start
+  - Text
+  - Bodi
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

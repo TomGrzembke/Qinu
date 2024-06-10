@@ -36,9 +36,11 @@ public class TournamentManager : MonoBehaviour
     #region [SerializeField]
     [SerializeField] float afterCombatTime = 3;
     [SerializeField] float RoundsTilWin = 5;
+    [SerializeField] List<string> afterCombatTalk;
     #endregion
 
     #region private fields
+    int afterCombatTalkTimes = -1;
     GameObject lastPlayed;
     #endregion
     void Awake()
@@ -158,6 +160,11 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         yield return new WaitForSeconds(.3f);
+
+        if (afterCombatTalkTimes < afterCombatTalk.Count)
+            DialogueController.Instance.StartDialogue(afterCombatTalk[++afterCombatTalkTimes]);
+
+
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);

@@ -14,6 +14,7 @@ public enum Scenes
     Manager,
     Pixelate,
     MainMenu,
+    Intro,
     Gameplay
 }
 

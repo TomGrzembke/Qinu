@@ -94,7 +94,7 @@ public class RewardWindow : MonoBehaviour
 
     public GameObject GetRandomReward(GameObject priorChoice1 = null, GameObject priorChoice2 = null)
     {
-        GameObject randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
+        var randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
 
         if (randomObject == null)
             GetRandomReward();

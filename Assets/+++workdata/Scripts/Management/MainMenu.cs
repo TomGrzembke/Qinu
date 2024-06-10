@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    void Start()
-    {
-        //PauseManager.Instance.PauseLogic(false);
-    }
     public void StartGame()
     {
         GameStateManager.StartGame();

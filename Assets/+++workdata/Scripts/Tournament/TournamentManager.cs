@@ -89,7 +89,7 @@ public class TournamentManager : MonoBehaviour
         LeftPlayers.Add(AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
 
-        GameObject newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
+        var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
         RightPlayers.Add(newChar);
     }
 
@@ -104,9 +104,9 @@ public class TournamentManager : MonoBehaviour
         ClearSideLists();
         LeftPlayers.Add(AvailableChars[0]);
 
-        GameObject first = GetLowestPlayRate();
-        GameObject second = GetLowestPlayRate(first);
-        GameObject third = GetLowestPlayRate(first, second);
+        var first = GetLowestPlayRate();
+        var second = GetLowestPlayRate(first);
+        var third = GetLowestPlayRate(first, second);
 
         first = CharManager.Instance.InitializeChar(first, true);
         second = CharManager.Instance.InitializeChar(second, true);

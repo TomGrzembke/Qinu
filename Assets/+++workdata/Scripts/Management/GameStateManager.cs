@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
 {
     static GameStateManager Instance;
 
-    [SerializeField] SceneReference gamePlayScene;
+    [SerializeField] SceneReference introScene;
     void Awake()
     {
         Instance = this;
@@ -16,7 +16,7 @@ public class GameStateManager : MonoBehaviour
 
     public static void StartGame()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu, Instance.GetSceneID(Instance.gamePlayScene)));
+        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu, Instance.GetSceneID(Instance.introScene)));
     }
 
     public static void OptionsWindow()
@@ -30,7 +30,7 @@ public class GameStateManager : MonoBehaviour
 
     public static void GoToMainMenu()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine(Instance.GetSceneID(Instance.gamePlayScene), (int)Scenes.MainMenu));
+        Instance.StartCoroutine(Instance.LoadScenesCoroutine(Instance.GetSceneID(Instance.introScene), (int)Scenes.MainMenu));
     }
 
     public static void ReloadGameScene()
@@ -57,8 +57,8 @@ public class GameStateManager : MonoBehaviour
     {
         LoadingScreen.Show(this);
         yield return new WaitForSeconds(.3f);
-        yield return SceneLoader.Instance.UnloadSceneViaIndex(GetSceneID(Instance.gamePlayScene));
-        yield return SceneLoader.Instance.LoadSceneViaIndex(GetSceneID(Instance.gamePlayScene));
+        yield return SceneLoader.Instance.UnloadSceneViaIndex(GetSceneID(Instance.introScene));
+        yield return SceneLoader.Instance.LoadSceneViaIndex(GetSceneID(Instance.introScene));
         LoadingScreen.Hide(this);
     }
 }

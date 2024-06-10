@@ -7,7 +7,7 @@ public class GameSettings : MonoBehaviour
 {
     #region Serilized Fields
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider musicSlider, sfxSlider;
+    [SerializeField] Slider masterSlider;
     [SerializeField] Toggle screenToggle;
     [SerializeField] float onSFXChangedCooldown = 0.1f;
     #endregion
@@ -19,34 +19,21 @@ public class GameSettings : MonoBehaviour
 
     void Start()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
 
         GetScreenToggle();
     }
 
-    public void OnMusicSliderChanged()
+    public void OnMasterSliderChanged()
     {
-        float volume = musicSlider.value;
+        float volume = masterSlider.value;
 
-        if (volume == musicSlider.minValue)
+        if (volume == masterSlider.minValue)
             volume = -60;
 
-        audioMixer.SetFloat("musicVolume", volume);
-        PlayerPrefs.SetFloat("musicVolume", volume);
-    }
-
-    public void OnSfxSliderChanged()
-    {
-        float volume = sfxSlider.value;
-
-        if (volume == sfxSlider.minValue)
-            volume = -60;
-
-        audioMixer.SetFloat("sfxVolume", volume);
-        PlayerPrefs.SetFloat("sfxVolume", volume);
-        sfxSlider.value = volume;
+        audioMixer.SetFloat("masterVolume", volume);
+        PlayerPrefs.SetFloat("masterVolume", volume);
+        masterSlider.value = volume;
 
         if (sfxChangedCoroutine == null && sfxEmitSound)
             sfxChangedCoroutine = StartCoroutine(PlayOnSFXChangedCor());
@@ -73,7 +60,7 @@ public class GameSettings : MonoBehaviour
 
     IEnumerator PlayOnSFXChangedCor()
     {
-        SoundManager.Instance.PlaySound(SoundType.OnSfxChanged);
+        //SoundManager.Instance.PlaySound(SoundType.OnSfxChanged);
         yield return new WaitForSecondsRealtime(onSFXChangedCooldown);
         sfxChangedCoroutine = null;
     }

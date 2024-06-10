@@ -176,6 +176,7 @@ MonoBehaviour:
   typeSpeedMultiplier: 1
   dialogueText: {fileID: 5563108861160147545}
   continueButton: {fileID: 0}
+  <CamFollow>k__BackingField: {fileID: 0}
 --- !u!114 &3362037165148789134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1787411200643894124}
+  - component: {fileID: 5990111870831217482}
   m_Layer: 0
   m_Name: MainDialogue
   m_TagString: Untagged
@@ -449,7 +451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7664997262151867161}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -458,3 +460,43 @@ Transform:
   - {fileID: 4416023143156942273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5990111870831217482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664997262151867161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8ab9f0e4787ab49bafed1cd306dd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topTarget: {fileID: 0}
+  botTarget: {fileID: 0}
+  followCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  sensitivity: 0.9
+  yMargin: 0

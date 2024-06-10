@@ -15,7 +15,7 @@ public class StartupManager : MonoBehaviour
 
         yield return SceneLoader.LoadScene(sceneToLoad);
 
-        for (int i = (int)Scenes.MainMenu; i < (int)Scenes.Gameplay; i++)
+        for (int i = (int)Scenes.MainMenu; i < (int)Scenes.Gameplay + 1; i++)
         {
             if (sceneToLoad != GetSceneEnum(i) && SceneManager.GetSceneByBuildIndex(i).IsValid())
                 yield return SceneLoader.UnloadScene(GetSceneEnum(i));

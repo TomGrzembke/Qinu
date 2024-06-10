@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 212703834}
   - component: {fileID: 212703833}
   m_Layer: 0
-  m_Name: WinLooseBAr
+  m_Name: WinLooseBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

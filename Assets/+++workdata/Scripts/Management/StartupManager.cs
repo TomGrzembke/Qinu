@@ -15,14 +15,24 @@ public class StartupManager : MonoBehaviour
 
         yield return SceneLoader.LoadScene(sceneToLoad);
 
-        if (!SceneManager.GetSceneByBuildIndex((int)Scenes.Gameplay).IsValid() && 
-            !SceneManager.GetSceneByBuildIndex((int)Scenes.Intro).IsValid())
-            yield return SceneLoader.LoadScene(Scenes.MainMenu);
-        else
-            yield return SceneLoader.UnloadScene(Scenes.MainMenu);
+        for (int i = (int)Scenes.MainMenu; i < (int)Scenes.Gameplay; i++)
+        {
+            if (sceneToLoad != GetSceneEnum(i) && SceneManager.GetSceneByBuildIndex(i).IsValid())
+                yield return SceneLoader.UnloadScene(GetSceneEnum(i));
+        }
 
         LoadingScreen.Hide(this);
         SceneLoader.UnloadScene(Scenes.Startup);
+    }
+
+    public Scenes GetSceneEnum(int index)
+    {
+        if (index == (int)Scenes.MainMenu)
+            return Scenes.MainMenu;
+        else if (index == (int)Scenes.Intro)
+            return Scenes.Intro;
+        else
+            return Scenes.Gameplay;
     }
 
 }

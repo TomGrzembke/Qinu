@@ -26,6 +26,7 @@ public class DialogueController : MonoBehaviour
     [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
     [SerializeField] Transform offText;
     [SerializeField] GameObject[] speakerBoxParents;
+    [SerializeField] bool debugMessages;
     #endregion
 
     #region private
@@ -115,7 +116,8 @@ public class DialogueController : MonoBehaviour
             return speakerBoxParents[i].GetComponentInChildren<DialogueBox>();
         }
 
-        Debug.Log(dialogueLine.speaker + " has no DialogueBox in " + nameof(speakerBoxParents));
+        if (debugMessages)
+            Debug.Log(dialogueLine.speaker + " has no DialogueBox in " + nameof(speakerBoxParents));
         return null;
     }
 
@@ -134,7 +136,8 @@ public class DialogueController : MonoBehaviour
                 return chars[i].GetComponentInChildren<NPCNav>()?.BotTextTarget;
         }
 
-        Debug.Log(dialogueLine.speaker + " isn't in scene");
+        if (debugMessages)
+            Debug.Log(dialogueLine.speaker + " isn't in scene");
         return null;
     }
     #endregion

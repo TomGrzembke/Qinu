@@ -176,7 +176,7 @@ MonoBehaviour:
   typeSpeedMultiplier: 1
   dialogueText: {fileID: 5563108861160147545}
   continueButton: {fileID: 0}
-  <CamFollow>k__BackingField: {fileID: 0}
+  <CamFollow>k__BackingField: {fileID: 5990111870831217482}
 --- !u!114 &3362037165148789134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,5 +498,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  sensitivity: 0.9
-  yMargin: 0
+  sensitivity: 0.01
+  yMargin: 2.5

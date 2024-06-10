@@ -34,7 +34,6 @@ public class TournamentManager : MonoBehaviour
     #endregion
 
     #region [SerializeField]
-    [SerializeField] GameObject cage;
     [SerializeField] float afterCombatTime = 3;
     [SerializeField] float RoundsTilWin = 5;
     #endregion
@@ -60,7 +59,6 @@ public class TournamentManager : MonoBehaviour
             CharStats.Add(new(AvailableChars[i]));
         }
 
-        InitializeGame();
     }
 
     [ButtonMethod]
@@ -162,7 +160,7 @@ public class TournamentManager : MonoBehaviour
         yield return new WaitForSeconds(.3f);
 
         MinigameManager.Instance.ResetInternal();
-        cage.SetActive(true);
+        MinigameManager.Instance.Cage.SetActive(true);
         GameState = GameStateEnum.AfterGame;
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
@@ -202,7 +200,7 @@ public class TournamentManager : MonoBehaviour
 
 
         InitializeGame();
-        cage.SetActive(false);
+        MinigameManager.Instance.Cage.SetActive(false);
     }
 
     void Cleanup2v2(int sideID)

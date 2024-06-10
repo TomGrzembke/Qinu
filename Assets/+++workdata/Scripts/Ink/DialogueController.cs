@@ -23,7 +23,8 @@ public class DialogueController : MonoBehaviour
 
     #region SerializeField
     [SerializeField] TextAsset inkAsset;
-    [field: SerializeField] public float typeSpeed { get; private set; } = 0.05f;
+    [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
+    [SerializeField] Transform offText;
     [SerializeField] GameObject[] speakerBoxParents;
     #endregion
 
@@ -82,7 +83,13 @@ public class DialogueController : MonoBehaviour
             dialogueLine = HandleTags(inkStory.currentTags, dialogueLine);
         }
 
-        GetDialogueBox(dialogueLine)?.DisplayText(dialogueLine);
+        DialogueBox dialogueBox = GetDialogueBox(dialogueLine);
+
+        if (!dialogueBox) return;
+
+        dialogueBox.CamFollow?.SetTargets(GetDialogueTarget(dialogueLine, 0), GetDialogueTarget(dialogueLine, 0));
+        dialogueBox.DisplayText(dialogueLine);
+
     }
 
     void OpenDialogue()
@@ -109,6 +116,24 @@ public class DialogueController : MonoBehaviour
         }
 
         Debug.Log(dialogueLine.speaker + " has no DialogueBox in " + nameof(speakerBoxParents));
+        return null;
+    }
+
+    Transform GetDialogueTarget(DialogueLine dialogueLine, int id = 0)
+    {
+        string speaker = dialogueLine.speaker;
+
+        for (int i = 0; i < speakerBoxParents.Length; i++)
+        {
+            if (!speakerBoxParents[i].name.Contains(speaker)) continue;
+
+            if (id == 0)
+                return speakerBoxParents[i].gameObject.GetComponentInChildren<NPCNav>()?.TopTextTarget;
+            else if (id == 1)
+                return speakerBoxParents[i].gameObject.GetComponentInChildren<NPCNav>()?.BotTextTarget;
+        }
+
+        Debug.Log(dialogueLine.speaker + " has no DialogueTarget in " + nameof(NPCNav));
         return null;
     }
     #endregion

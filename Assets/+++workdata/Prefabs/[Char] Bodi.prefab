@@ -80,6 +80,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: <BotTextTarget>k__BackingField
+      value: 
+      objectReference: {fileID: 632085850976808775}
+    - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: <TopTextTarget>k__BackingField
+      value: 
+      objectReference: {fileID: 5824789347529995988}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25
@@ -140,6 +148,10 @@ PrefabInstance:
       propertyPath: flipSensitivity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: <FlipState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5223198363457165606, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
@@ -149,6 +161,16 @@ PrefabInstance:
       addedObject: {fileID: 7518983536893158210}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+--- !u!4 &632085850976808775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1790193273527780712, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+  m_PrefabInstance: {fileID: 1161249169788054063}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5824789347529995988 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4668081049126706427, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+  m_PrefabInstance: {fileID: 1161249169788054063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7004819885984797505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}

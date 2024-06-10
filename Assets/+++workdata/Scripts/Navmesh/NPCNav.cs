@@ -26,6 +26,8 @@ public class NPCNav : NavCalc
     [SerializeField] Vector3 targetPos;
 
     [SerializeField] Transform defaultTrans;
+    [field: SerializeField] public Transform TopTextTarget { get; private set; } 
+    [field: SerializeField] public Transform BotTextTarget { get; private set; } 
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;

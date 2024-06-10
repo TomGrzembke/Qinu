@@ -31,6 +31,7 @@ public class FollowGameObjectInCam : MonoBehaviour
         if (topTarget.position.RemoveZ().IsBetween(bottomLeft, topRight))
             target = topTarget;
         else
+            if (botTarget)
             target = botTarget;
 
 
@@ -41,5 +42,14 @@ public class FollowGameObjectInCam : MonoBehaviour
     void OnDrawGizmos()
     {
 
+    }
+
+    public void SetTargets(Transform _topTarget, Transform _botTarget = null)
+    {
+        if (_topTarget != null)
+            topTarget = _topTarget;
+
+        if (_botTarget != null)
+            botTarget = _botTarget;
     }
 }

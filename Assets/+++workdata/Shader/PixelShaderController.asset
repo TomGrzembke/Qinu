@@ -15,4 +15,5 @@ MonoBehaviour:
   pixelRes: 550
   screenRes: {x: 1920, y: 1080}
   pixelartMat: {fileID: 2100000, guid: 5d6deb9f34c61d148851ba13c8508c92, type: 2}
-  col: {r: 1, g: 1, b: 1, a: 1}
+  col: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+  lineSize: 1

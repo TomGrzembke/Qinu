@@ -12,11 +12,12 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
+    [field: SerializeField] public FollowGameObjectInCam CamFollow { get; private set; } 
     #endregion
 
     #region private
     Coroutine displayLineCoroutine;
-    float typeSpeed => DialogueController.Instance.typeSpeed / typeSpeedMultiplier;
+    float typeSpeed => DialogueController.Instance.TypeSpeed / typeSpeedMultiplier;
     #endregion
 
     #region UnityEvents

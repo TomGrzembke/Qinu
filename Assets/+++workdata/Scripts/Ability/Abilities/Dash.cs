@@ -10,19 +10,20 @@ public class Dash : Ability
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
 
     #endregion
+    protected override void OnInitializedInternal()
+    {
+       
+        //InputManager.Instance.SubscribeTo(SlotManager.PlayerObj.GetComponent<MoveRB>().Dash, InputManager.Instance.);
+    }
 
     protected override void DeExecuteInternal()
     {
-        throw new System.NotImplementedException();
+
     }
 
     protected override void ExecuteInternal()
     {
-        throw new System.NotImplementedException();
+        SlotManager.PlayerObj.GetComponent<MoveRB>().Dash();
     }
 
-    protected override void OnInitializedInternal()
-    {
-        throw new System.NotImplementedException();
-    }
 }

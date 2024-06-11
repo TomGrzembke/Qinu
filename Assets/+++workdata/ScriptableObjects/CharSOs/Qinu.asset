@@ -24,7 +24,7 @@ MonoBehaviour:
       <StoppingDistance>k__BackingField: 1
       <Acceleration>k__BackingField: 60
       <Decceleration>k__BackingField: 8
-      <DashEnabled>k__BackingField: 0
+      <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 30
       <DashTime>k__BackingField: 0.1
       <DashCooldown>k__BackingField: 0

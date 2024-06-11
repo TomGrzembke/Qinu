@@ -82,12 +82,11 @@ public class MoveRB : RBGetter
             moveRoutine = StartCoroutine(Move());
     }
 
-    void Dash(InputAction.CallbackContext ctx)
+    public void Dash(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && dashRoutine == null && dashCooldownRoutine == null && dashInput)
-        {
-            dashRoutine = StartCoroutine(DashCor());
-        }
+        if (!ctx.performed || dashRoutine != null || !dashInput) return;
+
+        Dash();
     }
 
     public void Dash()
@@ -135,7 +134,6 @@ public class MoveRB : RBGetter
     IEnumerator DashCor()
     {
         if (!dashEnabled) yield break;
-
         yield return null;
         moveRoutine = null;
 

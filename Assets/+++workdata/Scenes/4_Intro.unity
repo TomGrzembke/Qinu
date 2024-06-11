@@ -1436,6 +1436,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1974256918480187765, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: currentAbilityPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2084748541406570198, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1618,7 +1622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863068386771436289, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877363276899402137, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8066222396484384203, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1652,6 +1660,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8787681790189133731, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: currentAbilityPrefab
+      value: 
+      objectReference: {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}
     - target: {fileID: 9171497803892760580, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Name
       value: '[Canvas]'

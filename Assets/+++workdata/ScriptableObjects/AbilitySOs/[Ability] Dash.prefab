@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_Name
-      value: '[Ability] Base'
+      value: '[Ability] Dash'
       objectReference: {fileID: 0}
     - target: {fileID: 2594324437627521025, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,5 +55,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3452736064031978812}
   m_SourcePrefab: {fileID: 100100000, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
+--- !u!1 &4689076530784505703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1808987488691653950, guid: 359cdf45cfcbaf3438ae6aaf66ac499c, type: 3}
+  m_PrefabInstance: {fileID: 6343358332918530649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3452736064031978812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689076530784505703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb0987f121d0b94b89fc4c1b8284e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0.5
+  abilitySO: {fileID: 11400000, guid: 5029a9bbcf3cff4439e5d98b4a165385, type: 2}

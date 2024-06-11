@@ -1954,6 +1954,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HockeyArena
       objectReference: {fileID: 0}
+    - target: {fileID: 9183279463788232208, guid: 1b3907bc0adc3da45881584a5e6fe1fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.015224
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183279463788232208, guid: 1b3907bc0adc3da45881584a5e6fe1fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1121
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2019,8 +2027,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6753232124772957753, guid: 52f48f209e53cf24ba19ad466afdf6c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4412284480121286682}
   m_SourcePrefab: {fileID: 100100000, guid: 52f48f209e53cf24ba19ad466afdf6c3, type: 3}
+--- !u!1 &1431782520318334855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6753232124772957753, guid: 52f48f209e53cf24ba19ad466afdf6c3, type: 3}
+  m_PrefabInstance: {fileID: 5649477985261660606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4412284480121286682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431782520318334855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82c3928bf95cd144911bd2625007319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameRate: 240
 --- !u!4 &1516451958600079752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6588061803075645494, guid: 52f48f209e53cf24ba19ad466afdf6c3, type: 3}

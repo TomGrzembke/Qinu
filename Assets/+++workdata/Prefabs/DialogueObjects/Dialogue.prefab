@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 2009357494415187605}
   - component: {fileID: 8639886682119824135}
   - component: {fileID: 4995209753401717895}
-  - component: {fileID: 6765123174500377167}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -109,20 +108,6 @@ MonoBehaviour:
   - {fileID: 4090097470563449650}
   - {fileID: 5284503793797742906}
   debugMessages: 0
---- !u!114 &6765123174500377167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3621050707426847758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8a104a44c561849ab4c737c4d478bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialoguePath: Bodi
-  onStart: 1
 --- !u!1 &6004489942920372105
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 6004489942920372105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.73, y: 3.79, z: 0}
+  m_LocalPosition: {x: 2.54, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -186,6 +171,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5004313823777714748, guid: c1290dbfad3554846a250bc145b75de6, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004313823777714748, guid: c1290dbfad3554846a250bc145b75de6, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: e56928acbe80c28448feedc14ca01aae, type: 2}
     - target: {fileID: 5876436590586540406, guid: c1290dbfad3554846a250bc145b75de6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -255,11 +248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 793941224037972895, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2496277298519893078, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3201792397708258015, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_fontColor.b
@@ -280,11 +273,15 @@ PrefabInstance:
     - target: {fileID: 3637228661507877836, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: botTarget
       value: 
-      objectReference: {fileID: 5592537986447856102}
+      objectReference: {fileID: 0}
     - target: {fileID: 3637228661507877836, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: topTarget
       value: 
-      objectReference: {fileID: 5592537986447856102}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076820618783170711, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 74d672f67df20ff4c88176457c0cebe0, type: 2}
     - target: {fileID: 8760915471606885354, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -348,6 +345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2009357494415187605}
     m_Modifications:
+    - target: {fileID: 194611233071655224, guid: c0e8b0900556c78489839d30cffc443e, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 833b27402db5a0b4a87dbc54487887fc, type: 2}
     - target: {fileID: 3419173294337974853, guid: c0e8b0900556c78489839d30cffc443e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -420,6 +421,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4293717248
       objectReference: {fileID: 0}
+    - target: {fileID: 8829690740753572720, guid: c0e8b0900556c78489839d30cffc443e, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 833b27402db5a0b4a87dbc54487887fc, type: 2}
     - target: {fileID: 8829690740753572720, guid: c0e8b0900556c78489839d30cffc443e, type: 3}
       propertyPath: m_fontColorGradient.topLeft.b
       value: 0.32156864
@@ -507,6 +512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2646919133293817195, guid: f32b4aaf3616e574e9b9cb1794d50924, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: bb907132454ff4b4191c963e0cecd916, type: 2}
     - target: {fileID: 4797603504375293488, guid: f32b4aaf3616e574e9b9cb1794d50924, type: 3}
       propertyPath: botTarget
       value: 
@@ -531,6 +540,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4278255593
       objectReference: {fileID: 0}
+    - target: {fileID: 6665758445365159715, guid: f32b4aaf3616e574e9b9cb1794d50924, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: bb907132454ff4b4191c963e0cecd916, type: 2}
     - target: {fileID: 6665758445365159715, guid: f32b4aaf3616e574e9b9cb1794d50924, type: 3}
       propertyPath: m_fontColorGradient.topLeft.b
       value: 0
@@ -588,11 +601,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1787411200643894124, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 1787411200643894124, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 1787411200643894124, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -626,6 +639,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823022924045090833, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f7f8669975527243b31ee1f1e23e71b, type: 2}
     - target: {fileID: 5990111870831217482, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: botTarget
       value: 
@@ -713,14 +730,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7171519344062910139, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171519344062910139, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bb2eb30f413fe84b9e5cd85b58442bf, type: 2}
     - target: {fileID: 7968334710520716963, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
       propertyPath: botTarget
       value: 
-      objectReference: {fileID: 5592537986447856102}
+      objectReference: {fileID: 0}
     - target: {fileID: 7968334710520716963, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
       propertyPath: topTarget
       value: 
-      objectReference: {fileID: 5592537986447856102}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

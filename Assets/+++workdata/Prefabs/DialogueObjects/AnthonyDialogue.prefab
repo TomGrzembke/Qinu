@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5563108861160147545, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 74d672f67df20ff4c88176457c0cebe0, type: 2}
     - target: {fileID: 7664997262151867161, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: m_Name
-      value: MainDialogue
+      value: AnthonyDialogue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

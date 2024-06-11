@@ -17,6 +17,7 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
     [SerializeField] List<GameObject> rewardsReceived;
+    [field: SerializeField] public bool InAbilitySelect { get; private set; } 
     #endregion
 
     #region private fields
@@ -75,6 +76,28 @@ public class RewardWindow : MonoBehaviour
 
         OpenRewardWindow();
     }
+    public void GiveReward(GameObject specified)
+    {
+        string currentText;
+        GameObject[] _rewards = new GameObject[3];
+
+        for (int i = 0; i < choiceButtonTexts.Length; i++)
+        {
+            if (specified.TryGetComponent(out Ability ability))
+                currentText = ability.AbilitySO.abilityTitel;
+            else
+            {
+                Debug.Log(specified.name + " has no Ability Script");
+                currentText = "Random";
+            }
+
+            choiceButtonTexts[i].text = currentText;
+            _rewards[i] = specified;
+        }
+        rewards = _rewards;
+
+        OpenRewardWindow();
+    }
 
     [ButtonMethod]
     public void RemoveReward()
@@ -127,6 +150,7 @@ public class RewardWindow : MonoBehaviour
     }
     IEnumerator ShowCoroutine()
     {
+        InAbilitySelect = true;
         essentialUI.SetActive(true);
         rewardWindow.SetActive(true);
         essentialUICanvasGroup.alpha = 1;
@@ -161,5 +185,6 @@ public class RewardWindow : MonoBehaviour
             essentialUICanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
         essentialUICanvasGroup.alpha = 1;
+        InAbilitySelect = false;
     }
 }

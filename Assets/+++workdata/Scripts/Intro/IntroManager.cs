@@ -12,6 +12,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] float waitBeforeSpeaking = 2;
 
     [SerializeField] string[] dialogues;
+    [SerializeField] GameObject dashAbilityPrefab;
     #endregion
 
     #region private fields
@@ -28,5 +29,24 @@ public class IntroManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        while (DialogueController.Instance.InDialogue)
+        {
+            yield return null;
+        }
+
+        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect)
+        {
+            yield return null;
+        }
+
+        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+    }
+
+    public void GainDash()
+    {
+        RewardWindow.Instance.GiveReward(dashAbilityPrefab);
     }
 }

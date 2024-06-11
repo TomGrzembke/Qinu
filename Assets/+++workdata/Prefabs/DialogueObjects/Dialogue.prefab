@@ -84,7 +84,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e403de836462cc34a80ee434866df6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkEvents: []
+  inkEvents:
+  - name: Problems
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: GainDash
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: IntroManager, Assembly-CSharp
+          m_MethodName: GainDash
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4995209753401717895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkAsset: {fileID: 4900000, guid: 866e37c1b36fbcd468417c6a2a11cc88, type: 3}
+  <InDialogue>k__BackingField: 0
   <TypeSpeed>k__BackingField: 0.08
   offText: {fileID: 5592537986447856102}
   speakerBoxParents:
@@ -243,6 +276,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2009357494415187605}
     m_Modifications:
     - target: {fileID: 793941224037972895, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 793941224037972895, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_Name
       value: AnthonyDialogue
       objectReference: {fileID: 0}
@@ -277,6 +314,34 @@ PrefabInstance:
     - target: {fileID: 3637228661507877836, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: topTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161109936747413080, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161109936747413080, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161109936747413080, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.758
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161109936747413080, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076820618783170711, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.86274517
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076820618783170711, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076820618783170711, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9058824
       objectReference: {fileID: 0}
     - target: {fileID: 6076820618783170711, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_fontColorGradientPreset

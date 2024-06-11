@@ -23,6 +23,7 @@ public class DialogueController : MonoBehaviour
 
     #region SerializeField
     [SerializeField] TextAsset inkAsset;
+    [field: SerializeField] public bool InDialogue { get; private set; }
     [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
     [SerializeField] Transform offText;
     [SerializeField] GameObject[] speakerBoxParents;
@@ -31,6 +32,7 @@ public class DialogueController : MonoBehaviour
 
     #region private
     const string speakerTag = "speaker";
+    string lastSpeaker;
     Story inkStory;
     #endregion
 
@@ -79,10 +81,18 @@ public class DialogueController : MonoBehaviour
         dialogueLine.text = inkLine;
 
 
-        if (inkStory.currentTags?[0] != null)
+        if (inkStory.currentTags.Count > 0)
         {
             dialogueLine = HandleTags(inkStory.currentTags, dialogueLine);
         }
+
+
+        if (dialogueLine.speaker == null)
+            if (lastSpeaker != null)
+                dialogueLine.speaker = lastSpeaker;
+
+        lastSpeaker = dialogueLine.speaker;
+
 
         DialogueBox dialogueBox = GetDialogueBox(dialogueLine);
 
@@ -95,12 +105,14 @@ public class DialogueController : MonoBehaviour
 
     void OpenDialogue()
     {
+        InDialogue = true;
         dialogueOpened?.Invoke();
     }
 
     void CloseDialogue()
     {
         EventSystem.current.SetSelectedGameObject(null);
+        InDialogue = false;
         dialogueClosed?.Invoke();
     }
 

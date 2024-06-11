@@ -56,22 +56,12 @@ public class MoveRB : RBGetter
     {
         currentMaxSpeed = maxSpeed;
 
-        InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
         InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.DesubscribeTo(Dash, InputManager.Instance.leftclickAction);
         InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
-    }
-
-    public void EnableDash(bool enabled)
-    {
-        if (enabled)
-            InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
-        else
-            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
 
     void FixedUpdate()
@@ -80,13 +70,6 @@ public class MoveRB : RBGetter
             currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
-    }
-
-    public void Dash(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed || dashRoutine != null || !dashInput) return;
-
-        Dash();
     }
 
     public void Dash()
@@ -134,13 +117,14 @@ public class MoveRB : RBGetter
     IEnumerator DashCor()
     {
         if (!dashEnabled) yield break;
+
         yield return null;
         moveRoutine = null;
 
         if (dashAutomAim)
             rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
         else
-            rb.AddForce(MoveDir * dashForce, ForceMode2D.Impulse);
+            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce, ForceMode2D.Impulse);
 
         if (agent)
             agent.ResetPath();

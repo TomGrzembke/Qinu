@@ -8,12 +8,11 @@ public class Dash : Ability
 
     #region non serilized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-
+    MoveRB moveRB;
     #endregion
     protected override void OnInitializedInternal()
     {
-       
-        //InputManager.Instance.SubscribeTo(SlotManager.PlayerObj.GetComponent<MoveRB>().Dash, InputManager.Instance.);
+        moveRB = SlotManager.PlayerObj.GetComponent<MoveRB>();
     }
 
     protected override void DeExecuteInternal()
@@ -23,7 +22,7 @@ public class Dash : Ability
 
     protected override void ExecuteInternal()
     {
-        SlotManager.PlayerObj.GetComponent<MoveRB>().Dash();
+        moveRB.Dash();
     }
 
 }

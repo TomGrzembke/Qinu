@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkAsset: {fileID: 4900000, guid: 866e37c1b36fbcd468417c6a2a11cc88, type: 3}
-  <TypeSpeed>k__BackingField: 0.05
+  <TypeSpeed>k__BackingField: 0.08
   offText: {fileID: 5592537986447856102}
   speakerBoxParents:
   - {fileID: 4357699413906773883}

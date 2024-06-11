@@ -23,6 +23,7 @@ public class MoveRB : RBGetter
     bool dashInput => charSO.CharSettings.CharRigidSettings.DashInput;
     bool mouseInput => charSO.CharSettings.CharRigidSettings.MouseInput;
     bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
+    bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
     #endregion 
 
     [SerializeField] NavMeshAgent agent;
@@ -54,6 +55,7 @@ public class MoveRB : RBGetter
     protected override void AwakeInternal()
     {
         currentMaxSpeed = maxSpeed;
+
         InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
         InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
@@ -62,6 +64,14 @@ public class MoveRB : RBGetter
     {
         InputManager.Instance.DesubscribeTo(Dash, InputManager.Instance.leftclickAction);
         InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
+    }
+
+    public void EnableDash(bool enabled)
+    {
+        if (enabled)
+            InputManager.Instance.SubscribeTo(Dash, InputManager.Instance.leftclickAction);
+        else
+            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
     }
 
     void FixedUpdate()
@@ -85,6 +95,7 @@ public class MoveRB : RBGetter
         if (dashCooldownRoutine != null) return;
         dashRoutine = StartCoroutine(DashCor());
     }
+
     public void DisableInput(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
@@ -123,6 +134,8 @@ public class MoveRB : RBGetter
 
     IEnumerator DashCor()
     {
+        if (!dashEnabled) yield break;
+
         yield return null;
         moveRoutine = null;
 

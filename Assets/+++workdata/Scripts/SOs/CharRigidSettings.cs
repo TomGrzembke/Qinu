@@ -8,6 +8,7 @@ public class CharRigidSettings
     [field: SerializeField] public float StoppingDistance { get; private set; } = 1;
     [field: SerializeField] public float Acceleration { get; private set; } = 10f;
     [field: SerializeField] public float Decceleration { get; private set; } = 10f;
+    [field: SerializeField] public bool DashEnabled { get; private set; } = true;
     [field: SerializeField] public float DashForce { get; private set; } = 10f;
     [field: SerializeField] public float DashTime { get; private set; } = 0.1f;
     [field: SerializeField] public float DashCooldown { get; private set; } = 0.1f;

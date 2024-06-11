@@ -1824,6 +1824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Char] Athony'
       objectReference: {fileID: 0}
+    - target: {fileID: 5824789347529995988, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28315
@@ -1996,6 +2000,22 @@ PrefabInstance:
       propertyPath: topTarget
       value: 
       objectReference: {fileID: 1437835580}
+    - target: {fileID: 417993918362666237, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417993918362666237, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417993918362666237, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.758
+      objectReference: {fileID: 0}
+    - target: {fileID: 417993918362666237, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.75
+      objectReference: {fileID: 0}
     - target: {fileID: 1587454330565401138, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_fontColor.b
       value: 0.86274517
@@ -2052,6 +2072,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 4307683499165126991, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307683499165126991, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284503793797742906, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget
       value: 

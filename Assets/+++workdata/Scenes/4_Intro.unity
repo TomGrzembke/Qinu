@@ -833,6 +833,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpeed: 0
   maxSpeed: 27
+--- !u!4 &1299979007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5824789347529995988, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+  m_PrefabInstance: {fileID: 1884003979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1325435093
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,12 +956,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1507134082}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1335534815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+  m_PrefabInstance: {fileID: 1884003979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1335534820 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9097840968643591772, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
   m_PrefabInstance: {fileID: 1884003979}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1335534815}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a808b4edf3ef007418b4c0d7d3e48007, type: 3}
@@ -1162,6 +1172,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!4 &1734773579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 632085850976808775, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
+  m_PrefabInstance: {fileID: 1884003979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1776940511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,6 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d452426a19ec34b49aebaa51661d3e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cage: {fileID: 1078603537}
   ballObject: {fileID: 1183967831}
   scoreCG: {fileID: 383668005}
   uiCG: {fileID: 1555166828}
@@ -1709,7 +1725,8 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
-  <CharsSpawned>k__BackingField: []
+  <CharsSpawned>k__BackingField:
+  - {fileID: 1335534815}
   leftSpawn: {fileID: 1981629235}
   rightSpawn: {fileID: 222077828}
 --- !u!4 &1979328818 stripped
@@ -1816,6 +1833,22 @@ PrefabInstance:
       propertyPath: topTarget
       value: 
       objectReference: {fileID: 1437835580}
+    - target: {fileID: 5284503793797742906, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986912195538902771, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: botTarget
+      value: 
+      objectReference: {fileID: 1734773579}
+    - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: topTarget
+      value: 
+      objectReference: {fileID: 1299979007}
     - target: {fileID: 8161587160872434710, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.96

@@ -4,7 +4,7 @@ using UnityEngine;
 public class IntroManager : MonoBehaviour
 {
     #region serialized fields
-    [SerializeField] GameObject Cage;
+    [SerializeField] GameObject cage;
     [SerializeField] GameObject ballObject;
     [SerializeField] CanvasGroup scoreCG;
     [SerializeField] CanvasGroup uiCG;

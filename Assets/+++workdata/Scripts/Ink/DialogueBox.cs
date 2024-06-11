@@ -36,24 +36,24 @@ public class DialogueBox : MonoBehaviour
         if (displayLineCoroutine != null)
             StopCoroutine(displayLineCoroutine);
 
-        displayLineCoroutine = StartCoroutine(DisplayLine(dialogueLine.text, dialogueLine.speaker));
+        displayLineCoroutine = StartCoroutine(DisplayLine(dialogueLine));
 
     }
 
-    IEnumerator DisplayLine(string line, string speaker)
+    IEnumerator DisplayLine(DialogueLine dialogueLine)
     {
         dialogueText.text = "";
 
-        for (int i = 0; i < line.Length; i++)
+        for (int i = 0; i < dialogueLine.text.Length; i++)
         {
-            dialogueText.text += line[i];
+            dialogueText.text += dialogueLine.text[i];
 
             yield return new WaitForSeconds(typeSpeed);
         }
         yield return new WaitForSeconds(1f);
 
-        DialogueController.Instance.ContinueDialogue();
         transform.parent.gameObject.SetActive(false);
+        DialogueController.Instance.ContinueDialogue();
     }
     #endregion
 }

@@ -1901,6 +1901,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_text
+      value: E
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 50c3eb503935c2b4cba549e586ef9374, type: 2}
     - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -2058,13 +2082,37 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280427042
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 50c3eb503935c2b4cba549e586ef9374, type: 2}
     - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927273810323007435, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: currentAbilityPrefab
@@ -2541,8 +2589,40 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_text
+      value: W
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280427042
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 50c3eb503935c2b4cba549e586ef9374, type: 2}
     - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927273810323007435, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
@@ -2682,6 +2762,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_text
+      value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746084416563010625, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_fontColorGradientPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 50c3eb503935c2b4cba549e586ef9374, type: 2}
     - target: {fileID: 5109318440995846641, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Layer
       value: 0

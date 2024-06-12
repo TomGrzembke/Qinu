@@ -30,6 +30,7 @@ public class FollowGameObjectInCam : MonoBehaviour
         Vector2 bottomLeft = cam.ScreenToWorldPoint(Vector2.zero);
         Vector2 topRight = cam.ScreenToWorldPoint(new(width, height)).Add(0, -yMargin);
 
+        target = topTarget;
         if (useTopAndBotTarget)
             if (topTarget.position.RemoveZ().IsBetween(bottomLeft, topRight))
                 target = topTarget;

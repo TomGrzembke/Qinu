@@ -13,7 +13,7 @@ public class NPCNav : NavCalc
     #region serialized fields
     [SerializeField] ArenaMode arenaMode;
 
-    [SerializeField] bool isRight;
+    [field: SerializeField] public bool IsRight { get; private set; } 
     [SerializeField] float stoppingDistance = 2;
 
     [SerializeField] bool goesToDefault = true;
@@ -31,7 +31,7 @@ public class NPCNav : NavCalc
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
-    bool PukOnSide => isRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
+    bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
     #endregion
 
     #region private fields
@@ -82,9 +82,9 @@ public class NPCNav : NavCalc
 
     public void SideSettings(bool _isRight)
     {
-        isRight = _isRight;
+        IsRight = _isRight;
 
-        defaultTrans = TournamentManager.Instance.GetRandomDefaultTrans(isRight ? 1 : 0);
+        defaultTrans = TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
     }
 
     public void GoHome()

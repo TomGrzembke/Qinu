@@ -27,6 +27,8 @@ public class DialogueController : MonoBehaviour
     [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
     [SerializeField] Transform offText;
     [SerializeField] GameObject[] speakerBoxParents;
+    [SerializeField] Transform topLeft;
+    [SerializeField] Transform topRight;
     [SerializeField] bool debugMessages;
     #endregion
 
@@ -98,7 +100,7 @@ public class DialogueController : MonoBehaviour
 
         if (!dialogueBox) return;
 
-        dialogueBox.CamFollow?.SetTargets(GetDialogueTarget(dialogueLine, 0), GetDialogueTarget(dialogueLine, 0));
+        dialogueBox.CamFollow?.SetTargets(GetDialogueTarget(dialogueLine));
         dialogueBox.DisplayText(dialogueLine);
 
     }
@@ -133,7 +135,7 @@ public class DialogueController : MonoBehaviour
         return null;
     }
 
-    Transform GetDialogueTarget(DialogueLine dialogueLine, int id = 0)
+    Transform GetDialogueTarget(DialogueLine dialogueLine)
     {
         string speaker = dialogueLine.speaker;
         List<GameObject> chars = CharManager.Instance.CharsSpawned;
@@ -142,10 +144,12 @@ public class DialogueController : MonoBehaviour
         {
             if (!chars[i].name.Contains(speaker)) continue;
 
-            if (id == 0)
-                return chars[i].GetComponentInChildren<NPCNav>()?.TopTextTarget;
-            else if (id == 1)
-                return chars[i].GetComponentInChildren<NPCNav>()?.BotTextTarget;
+            NPCNav nPCNav = chars[i].GetComponentInChildren<NPCNav>();
+
+            if (nPCNav.IsRight)
+                return topRight;
+            else
+                return topLeft;
         }
 
         if (debugMessages)

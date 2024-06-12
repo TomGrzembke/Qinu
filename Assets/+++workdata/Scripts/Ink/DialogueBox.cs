@@ -12,12 +12,13 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
-    [field: SerializeField] public FollowGameObjectInCam CamFollow { get; private set; } 
+    [field: SerializeField] public FollowGameObjectInCam CamFollow { get; private set; }
     #endregion
 
     #region private
     Coroutine displayLineCoroutine;
     float typeSpeed => DialogueController.Instance.TypeSpeed / typeSpeedMultiplier;
+    const string textAlpha = "<color=#00000000>";
     #endregion
 
     #region UnityEvents
@@ -36,7 +37,7 @@ public class DialogueBox : MonoBehaviour
         if (displayLineCoroutine != null)
             StopCoroutine(displayLineCoroutine);
 
-        displayLineCoroutine = StartCoroutine(DisplayLine(dialogueLine));
+        displayLineCoroutine = StartCoroutine(DisplayLineAlpha(dialogueLine));
 
     }
 
@@ -50,6 +51,31 @@ public class DialogueBox : MonoBehaviour
 
             yield return new WaitForSeconds(typeSpeed);
         }
+        yield return new WaitForSeconds(1f);
+
+        transform.parent.gameObject.SetActive(false);
+        DialogueController.Instance.ContinueDialogue();
+    }
+
+    IEnumerator DisplayLineAlpha(DialogueLine dialogueLine)
+    {
+        dialogueText.text = "";
+        string originalText = dialogueLine.text;
+        string displayedText = "";
+        int alphaIndex = 0;
+
+        foreach (char c in originalText.ToCharArray())
+        {
+            alphaIndex++;
+            dialogueText.text = originalText;
+
+            displayedText = dialogueText.text.Insert(alphaIndex, textAlpha);
+            dialogueText.text = displayedText;
+
+            yield return new WaitForSeconds(typeSpeed);
+
+        }
+
         yield return new WaitForSeconds(1f);
 
         transform.parent.gameObject.SetActive(false);

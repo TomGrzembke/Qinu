@@ -1,12 +1,10 @@
 == Welcome
 Welcome Qinu! #speaker: Anthony
-I'm Anthony the emotion of empathy
-Your arrival means that your host surpressed an emotion fully. 
-Don't worry you are safe in this data segment. 
-
-You're held captive by the problems which surpress you.
-Most can't see the problems of others. You may not be able to see them yourself.
+I'm Anthony the emotion of empathy.
+Your a surpressed emotion and held captive by your problems.
 ~Event ("Problems") 
+Most can't see the problems of others. 
+Don't worry you are safe and stored in this data segment. 
  -> END
  
  == Abilities

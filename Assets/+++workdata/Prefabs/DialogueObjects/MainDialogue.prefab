@@ -346,7 +346,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 97.10288, y: 23.229113, z: 86.05256, w: 25.125135}
+  m_margin: {x: 97.10288, y: 24.765436, z: 91.07434, w: 23.905113}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8ab9f0e4787ab49bafed1cd306dd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useTopAndBotTarget: 0
   topTarget: {fileID: 0}
   botTarget: {fileID: 0}
   followCurve:
@@ -629,7 +630,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 97.10288, y: 23.229113, z: 86.05256, w: 24.541431}
+  m_margin: {x: 97.10288, y: 24.155426, z: 91.24871, w: 24.202538}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

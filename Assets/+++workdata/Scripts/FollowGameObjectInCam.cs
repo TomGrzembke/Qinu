@@ -1,10 +1,12 @@
+using MyBox;
 using UnityEngine;
 
 public class FollowGameObjectInCam : MonoBehaviour
 {
     #region serialized fields
+    [SerializeField] bool useTopAndBotTarget = false;
     [SerializeField] Transform topTarget;
-    [SerializeField] Transform botTarget;
+    [SerializeField, ConditionalField(nameof(useTopAndBotTarget))] Transform botTarget;
     [SerializeField] AnimationCurve followCurve;
     [SerializeField] float sensitivity = .9f;
     [SerializeField] float yMargin;
@@ -28,11 +30,12 @@ public class FollowGameObjectInCam : MonoBehaviour
         Vector2 bottomLeft = cam.ScreenToWorldPoint(Vector2.zero);
         Vector2 topRight = cam.ScreenToWorldPoint(new(width, height)).Add(0, -yMargin);
 
-        if (topTarget.position.RemoveZ().IsBetween(bottomLeft, topRight))
-            target = topTarget;
-        else
-            if (botTarget)
-            target = botTarget;
+        if (useTopAndBotTarget)
+            if (topTarget.position.RemoveZ().IsBetween(bottomLeft, topRight))
+                target = topTarget;
+            else
+                if (botTarget)
+                target = botTarget;
 
 
         transform.position =

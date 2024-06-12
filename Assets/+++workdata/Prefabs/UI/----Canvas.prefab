@@ -1515,6 +1515,7 @@ MonoBehaviour:
   - {fileID: 8574770232140604388, guid: 053b0effef475454a83687d9e5fa5197, type: 3}
   - {fileID: 8766142505129722052, guid: 6b865d881f5002449bdd58eb65141861, type: 3}
   rewardsReceived: []
+  <InAbilitySelect>k__BackingField: 0
 --- !u!1 &9171497803892760580
 GameObject:
   m_ObjectHideFlags: 0

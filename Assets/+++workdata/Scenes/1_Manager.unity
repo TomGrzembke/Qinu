@@ -527,7 +527,7 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
+  <FirstGameModes>k__BackingField: 02000000010000000100000002000000
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
   afterCombatTime: 7

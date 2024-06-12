@@ -1,10 +1,12 @@
 == Welcome
 Welcome Qinu! #speaker: Anthony
 I'm Anthony the emotion of empathy.
-Your a surpressed emotion and held captive by your problems.
-~Event ("Problems") 
+What am I? #speaker: Qinu
+Your a surpressed emotion. #speaker: Anthony
+Captivity is caused by your problems
+~Event ("Problems")
 Most can't see the problems of others. 
-Don't worry you are safe and stored in this data segment. 
+Don't worry you are safe and stored in this data segment.
  -> END
  
  == Abilities
@@ -15,4 +17,4 @@ Don't worry you are safe and stored in this data segment.
  
  == AbilityGained
   Activate it by thinking Q. #speaker: Anthony
-   -> END
+ -> END

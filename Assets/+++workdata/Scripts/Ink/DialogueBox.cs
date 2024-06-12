@@ -13,6 +13,7 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
     [field: SerializeField] public FollowGameObjectInCam CamFollow { get; private set; }
+
     #endregion
 
     #region private

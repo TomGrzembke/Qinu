@@ -56,12 +56,12 @@ public class MoveRB : RBGetter
     {
         currentMaxSpeed = maxSpeed;
 
-        InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
+        InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.rightClickAction);
+        InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
     }
 
     void FixedUpdate()

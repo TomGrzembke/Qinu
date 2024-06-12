@@ -43,6 +43,11 @@ public class IntroManager : MonoBehaviour
         }
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect)
+        {
+            yield return null;
+        }
     }
 
     public void GainDash()

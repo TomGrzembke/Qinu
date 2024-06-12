@@ -18,3 +18,11 @@ Don't worry you are safe and stored in this data segment.
  == AbilityGained
   Activate it by thinking Q. #speaker: Anthony
  -> END
+ 
+ ==Ball
+ You will be competing for your freedom.
+    ~Event ("Blocker")
+ It sounds sinister, but it's just Air hockey really!
+ Here's a Data point which serves a ball.
+   ~Event ("Ball")
+ -> END

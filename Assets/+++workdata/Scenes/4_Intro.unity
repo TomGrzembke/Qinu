@@ -2467,7 +2467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7062270732835656002, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: voice
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget

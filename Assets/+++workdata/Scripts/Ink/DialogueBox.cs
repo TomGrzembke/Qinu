@@ -9,6 +9,7 @@ public class DialogueBox : MonoBehaviour
     public event Action<DialogueBox> DialogueContinued;
 
     #region Inspector
+    [SerializeField] SoundType voice;
     [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] Button continueButton;
@@ -72,6 +73,7 @@ public class DialogueBox : MonoBehaviour
 
             displayedText = dialogueText.text.Insert(alphaIndex, textAlpha);
             dialogueText.text = displayedText;
+            SoundManager.Instance.PlayVoice(voice);
 
             yield return new WaitForSeconds(typeSpeed);
 

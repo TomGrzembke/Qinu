@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] SoundBankSO soundBank;
     [SerializeField] AudioSource globalMusicSource;
     [SerializeField] AudioSource globalSFXSource;
+    [SerializeField] DialogueSoundPlayer soundPlayer;
     #endregion
 
     #region private fields
@@ -15,6 +16,11 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    public void PlayVoice(SoundType type)
+    {
+        soundPlayer.PlaySound(type);
     }
 
     public void PlaySound(SoundType type, AudioSource localSource = null)
@@ -82,10 +88,11 @@ public enum SoundType
     ButtonClickConfirm,
     ButtonClickBack,
 
-    Bubble,
     SkillAcquired,
     Stun,
     PointCounter,
     PointCounterDown,
-    OnSfxChanged
+    OnSfxChanged,
+    Anthony,
+    Qinu
 }

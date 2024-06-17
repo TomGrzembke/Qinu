@@ -756,7 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RoundAmount>k__BackingField: 0
-  <GameState>k__BackingField: 2
+  <GameState>k__BackingField: 0
   <CharStats>k__BackingField: []
   <AvailableChars>k__BackingField:
   - {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
@@ -765,7 +765,7 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 02000000010000000100000002000000
+  <FirstGameModes>k__BackingField: 01000000010000000100000002000000
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
   afterCombatTime: 7

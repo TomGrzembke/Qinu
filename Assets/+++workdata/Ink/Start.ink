@@ -34,3 +34,10 @@ Let's play a bit!
 You win a round by scoring 3 Goals!
     ~Event ("GoalActive")
  -> END
+ 
+   ==IntroMatchEnd
+Now that was a match!
+    ~Event ("ShowBar")
+    The bar goes up if you win and down if you loose.
+    Don't let it reach the left.
+ -> END

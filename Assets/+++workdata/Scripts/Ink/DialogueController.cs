@@ -1,6 +1,7 @@
 using Ink;
 using Ink.Runtime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,6 +34,7 @@ public class DialogueController : MonoBehaviour
     #endregion
 
     #region private
+    float oldSpeed;
     const string speakerTag = "speaker";
     string lastSpeaker;
     Story inkStory;
@@ -45,6 +47,7 @@ public class DialogueController : MonoBehaviour
         inkStory = new(inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
+        oldSpeed = TypeSpeed;
     }
 
     #endregion
@@ -216,6 +219,18 @@ public class DialogueController : MonoBehaviour
     void Event(string eventName)
     {
         InkEvent?.Invoke(eventName);
+    }
+
+    public void BoostTypeSpeed(float newSpeed)
+    {
+        StartCoroutine(BoostTypeSpeedCoroutine(newSpeed));
+    }
+
+    IEnumerator BoostTypeSpeedCoroutine(float newSpeed)
+    {
+        TypeSpeed = newSpeed;
+        yield return new WaitForSeconds(4);
+        TypeSpeed = oldSpeed;
     }
     #endregion
 }

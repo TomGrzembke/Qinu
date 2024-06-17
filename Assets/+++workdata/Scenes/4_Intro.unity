@@ -521,6 +521,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &543805755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+  m_PrefabInstance: {fileID: 436436415987836075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa678a0658f999a41a0e3d65008d1fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &711858827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7788407233946303912, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
@@ -995,7 +1006,19 @@ MonoBehaviour:
       m_Calls: []
   num7:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 543805755}
+        m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
+        m_MethodName: BoostTypeSpeed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.01
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   cgToggleUIAsterisk:
   - {fileID: 1555166828}
 --- !u!4 &1120151241
@@ -2088,6 +2111,7 @@ MonoBehaviour:
   - AbilityGained
   - Ball
   - ActivateGoals
+  - IntroMatchEnd
   dashAbilityPrefab: {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}
 --- !u!1 &1877918423
 GameObject:

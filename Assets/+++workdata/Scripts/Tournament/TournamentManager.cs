@@ -11,7 +11,7 @@ public class TournamentManager : MonoBehaviour
     {
         InGame,
         AfterGame,
-        Village
+        OutOfGame
     }
     public enum GameMode
     {
@@ -31,6 +31,7 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<GameObject> RightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
     public event Action<float> OnPlayerMatchEnd;
+    public event Action<bool> OnMatchEnd;
     #endregion
 
     #region [SerializeField]
@@ -189,7 +190,7 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitForSeconds(afterCombatTime);
         MinigameManager.Instance.ResetArena();
-        GameState = GameStateEnum.Village;
+        GameState = GameStateEnum.OutOfGame;
 
         RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
@@ -283,6 +284,12 @@ public class TournamentManager : MonoBehaviour
         OnPlayerMatchEnd += callback;
         if (getInstantCallback)
             callback(CharStats[0].Wins);
+    }
+    public void RegisterOnMatchEnd(Action<bool> callback, bool getInstantCallback = false)
+    {
+        OnMatchEnd += callback;
+        if (getInstantCallback)
+            callback(GameStateEnum.InGame == GameState);
     }
 }
 

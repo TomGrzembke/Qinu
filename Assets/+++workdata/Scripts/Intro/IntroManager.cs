@@ -24,6 +24,7 @@ public class IntroManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(IntroCoroutine());
+        TournamentManager.Instance.LeftPlayerAdd();
     }
 
     IEnumerator IntroCoroutine()
@@ -50,7 +51,6 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
         Vector3 pukPos = MinigameManager.Instance.Puk.position;
@@ -67,7 +67,7 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-        
+
     }
 
     public void GainDash()

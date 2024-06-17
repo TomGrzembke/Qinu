@@ -86,12 +86,10 @@ public class DialogueController : MonoBehaviour
 
         dialogueLine.text = inkLine;
 
-
         if (inkStory.currentTags.Count > 0)
         {
             dialogueLine = HandleTags(inkStory.currentTags, dialogueLine);
         }
-
 
         if (dialogueLine.speaker == null)
             if (lastSpeaker != null)
@@ -222,18 +220,18 @@ public class DialogueController : MonoBehaviour
         InkEvent?.Invoke(eventName);
     }
 
-    public void BoostTypeSpeed(float newSpeed)
+    public void BoostTypeSpeed(float typeTime)
     {
         if (debugTextSpeedCor != null)
             StopCoroutine(debugTextSpeedCor);
 
-        debugTextSpeedCor = StartCoroutine(BoostTypeSpeedCoroutine(newSpeed));
+        debugTextSpeedCor = StartCoroutine(BoostTypeSpeedCoroutine(typeTime));
     }
 
-    IEnumerator BoostTypeSpeedCoroutine(float newSpeed)
+    IEnumerator BoostTypeSpeedCoroutine(float typeTime)
     {
-        TypeSpeed = newSpeed;
-        yield return new WaitForSeconds(4);
+        TypeSpeed /= 10;
+        yield return new WaitForSeconds(typeTime);
         TypeSpeed = oldSpeed;
     }
     #endregion

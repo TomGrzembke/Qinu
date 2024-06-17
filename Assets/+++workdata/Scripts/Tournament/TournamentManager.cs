@@ -105,7 +105,7 @@ public class TournamentManager : MonoBehaviour
     void Calc2v2()
     {
         ClearSideLists();
-        LeftPlayers.Add(AvailableChars[0]);
+        LeftPlayerAdd();
 
         var first = GetLowestPlayRate();
         var second = GetLowestPlayRate(first);
@@ -127,7 +127,7 @@ public class TournamentManager : MonoBehaviour
         CurrentGameMode = GameMode.Bodi;
         lastPlayed = bodi;
         bodi = CharManager.Instance.InitializeChar(bodi, true);
-        LeftPlayers.Add(AvailableChars[0]);
+        LeftPlayerAdd();
         RightPlayers.Add(bodi);
     }
 
@@ -173,21 +173,27 @@ public class TournamentManager : MonoBehaviour
         OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
-        CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);
+
+        CharacterStats right0Stats = null;
+        if (RightPlayers.Count > 0)
+            right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (sideID == 0)
         {
-            right0Stats.Wins--;
+            if (right0Stats != null)
+                right0Stats.Wins--;
             left0Stats.Wins++;
         }
         else if (sideID == 1)
         {
-            right0Stats.Wins++;
+            if (right0Stats != null)
+                right0Stats.Wins++;
             left0Stats.Wins--;
         }
 
         left0Stats.TimesPlayed++;
-        right0Stats.TimesPlayed++;
+        if (right0Stats != null)
+            right0Stats.TimesPlayed++;
 
         OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
 
@@ -195,7 +201,8 @@ public class TournamentManager : MonoBehaviour
         MinigameManager.Instance.ResetArena();
         GameState = GameStateEnum.OutOfGame;
 
-        RightPlayers[0].GetComponent<NPCNav>().GoHome();
+        if (RightPlayers.Count > 0)
+            RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
@@ -293,6 +300,10 @@ public class TournamentManager : MonoBehaviour
         OnMatchEnd += callback;
         if (getInstantCallback)
             callback(GameStateEnum.InGame == GameState);
+    }
+    public void LeftPlayerAdd()
+    {
+        LeftPlayers.Add(AvailableChars[0]);
     }
 }
 

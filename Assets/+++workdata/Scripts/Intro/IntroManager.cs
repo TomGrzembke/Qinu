@@ -17,8 +17,9 @@ public class IntroManager : MonoBehaviour
     #endregion
 
     #region private fields
-    int dialogueID = -1;
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
+    int dialogueID = -1;
+    [SerializeField] bool skipTutPoint;
     #endregion
 
     void Start()
@@ -32,21 +33,21 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (DialogueController.Instance.InDialogue)
+        while (DialogueController.Instance.InDialogue && !TriggerSkipTutPoint())
         {
             yield return null;
         }
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect)
+        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect && !TriggerSkipTutPoint())
         {
             yield return null;
         }
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (!InputManager.Instance.Ability0Action.IsPressed())
+        while (!InputManager.Instance.Ability0Action.IsPressed() && !TriggerSkipTutPoint())
         {
             yield return null;
         }
@@ -54,7 +55,7 @@ public class IntroManager : MonoBehaviour
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
         Vector3 pukPos = MinigameManager.Instance.Puk.position;
-        while (MinigameManager.Instance.Puk.position == pukPos)
+        while (MinigameManager.Instance.Puk.position == pukPos && !TriggerSkipTutPoint())
         {
             yield return null;
         }
@@ -62,7 +63,7 @@ public class IntroManager : MonoBehaviour
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (IsPlaying)
+        while (IsPlaying && !TriggerSkipTutPoint())
         {
             yield return null;
         }
@@ -75,5 +76,19 @@ public class IntroManager : MonoBehaviour
         RewardWindow.Instance.GiveReward(dashAbilityPrefab);
     }
 
+    bool TriggerSkipTutPoint()
+    {
+        if (skipTutPoint)
+        {
+            skipTutPoint = false;
+            return true;
+        }
 
+        return false;
+    }
+
+    public void SetSkipTutPoint()
+    {
+        skipTutPoint = true;
+    }
 }

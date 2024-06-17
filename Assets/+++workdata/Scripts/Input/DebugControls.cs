@@ -48,8 +48,6 @@ public class DebugControls : MonoBehaviour
     public void CallSlashEvent()
     {
         slashEvent?.Invoke();
-        GameStateManager.StartGameScene();
-        TournamentManager.Instance.InitializeGame();
     }
 
 }

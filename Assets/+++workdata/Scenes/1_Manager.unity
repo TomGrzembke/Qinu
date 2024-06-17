@@ -770,10 +770,7 @@ MonoBehaviour:
   <LeftPlayers>k__BackingField: []
   afterCombatTime: 7
   RoundsTilWin: 5
-  afterCombatTalk:
-  - Start
-  - Text
-  - Bodi
+  afterCombatTalk: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

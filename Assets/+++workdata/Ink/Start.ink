@@ -1,9 +1,9 @@
 == Welcome
 Welcome Qinu! #speaker: Anthony
-I'm Anthony the emotion of empathy.
+I'm Anthony the spirit of empathy.
 What am I? #speaker: Qinu
-Your a surpressed emotion. #speaker: Anthony
-Captivity is caused by your problems
+Your a surpressed thought. #speaker: Anthony
+Captivity is caused by your problems.
 ~Event ("Problems")
 Most can't see the problems of others. 
 Don't worry you are safe and stored in this data segment.
@@ -26,4 +26,11 @@ Don't worry you are safe and stored in this data segment.
  It sounds sinister, but it's just Air hockey really!
  Here's a Data point which serves as a ball.
    ~Event ("Ball")
+Let's play a bit!
+    ~Event ("AnthonyActive")
+ -> END
+ 
+  ==ActivateGoals
+You win a round by scoring 3 Goals!
+    ~Event ("GoalActive")
  -> END

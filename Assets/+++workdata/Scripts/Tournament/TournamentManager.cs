@@ -164,8 +164,6 @@ public class TournamentManager : MonoBehaviour
         if (afterCombatTalkTimes < afterCombatTalk.Count)
             DialogueController.Instance.StartDialogue(afterCombatTalk[++afterCombatTalkTimes]);
 
-
-
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);
         GameState = GameStateEnum.AfterGame;

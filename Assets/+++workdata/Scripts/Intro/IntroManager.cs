@@ -10,6 +10,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] CanvasGroup uiCG;
     [SerializeField] NPCNav anthonyNav;
     [SerializeField] float waitBeforeSpeaking = 2;
+    [SerializeField] float playTimeBeforeGoalsOpen = 7;
 
     [SerializeField] string[] dialogues;
     [SerializeField] GameObject dashAbilityPrefab;
@@ -50,6 +51,15 @@ public class IntroManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(waitBeforeSpeaking);
+        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        Vector3 pukPos = MinigameManager.Instance.Puk.position;
+        while (MinigameManager.Instance.Puk.position == pukPos)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
+
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
     }
 

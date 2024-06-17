@@ -18,22 +18,12 @@ public class IntroManager : MonoBehaviour
 
     #region private fields
     int dialogueID = -1;
-    bool isPlaying;
+    bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     #endregion
 
     void Start()
     {
         StartCoroutine(IntroCoroutine());
-        TournamentManager.Instance.RegisterOnMatchEnd(MatchEnded);
-    }
-
-    void OnDisable()
-    {
-        TournamentManager.Instance.OnMatchEnd -= MatchEnded;
-    }
-    void MatchEnded(bool value)
-    {
-        isPlaying = value;
     }
 
     IEnumerator IntroCoroutine()
@@ -72,7 +62,7 @@ public class IntroManager : MonoBehaviour
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (isPlaying)
+        while (IsPlaying)
         {
             yield return null;
         }

@@ -76,6 +76,8 @@ public class TournamentManager : MonoBehaviour
 
         GameState = GameStateEnum.InGame;
         RoundAmount++;
+
+        OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
     }
 
     [ButtonMethod]
@@ -162,12 +164,13 @@ public class TournamentManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.3f);
 
-        if (afterCombatTalkTimes < afterCombatTalk.Count)
+        if (afterCombatTalkTimes + 1 < afterCombatTalk.Count)
             DialogueController.Instance.StartDialogue(afterCombatTalk[++afterCombatTalkTimes]);
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);
         GameState = GameStateEnum.AfterGame;
+        OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
 
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
         CharacterStats right0Stats = GetCharacterStats(RightPlayers[0]);

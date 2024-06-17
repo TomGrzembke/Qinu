@@ -2501,6 +2501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: <TypeSpeed>k__BackingField
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 7062270732835656002, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: voice
       value: 10

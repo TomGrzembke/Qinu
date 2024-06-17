@@ -38,6 +38,7 @@ public class DialogueController : MonoBehaviour
     const string speakerTag = "speaker";
     string lastSpeaker;
     Story inkStory;
+    Coroutine debugTextSpeedCor;
     #endregion
 
     #region UnityEvent Functions
@@ -223,7 +224,10 @@ public class DialogueController : MonoBehaviour
 
     public void BoostTypeSpeed(float newSpeed)
     {
-        StartCoroutine(BoostTypeSpeedCoroutine(newSpeed));
+        if (debugTextSpeedCor != null)
+            StopCoroutine(debugTextSpeedCor);
+
+        debugTextSpeedCor = StartCoroutine(BoostTypeSpeedCoroutine(newSpeed));
     }
 
     IEnumerator BoostTypeSpeedCoroutine(float newSpeed)

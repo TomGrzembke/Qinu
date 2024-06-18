@@ -24,6 +24,9 @@ public class WinLooseBar : MonoBehaviour
 
     void OnValueChanged(float value)
     {
+        if (cor != null)
+            StopCoroutine(cor);
+
         cor = StartCoroutine(ChangeValue(value));
     }
 

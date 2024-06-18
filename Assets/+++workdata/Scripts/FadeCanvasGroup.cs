@@ -5,7 +5,7 @@ using UnityEngine;
 public class FadeCanvasGroup : MonoBehaviour
 {
     [SerializeField] float fadeTime = 2;
-    Dictionary<CanvasGroup, Coroutine> fadeCoroutines = new();
+    readonly Dictionary<CanvasGroup, Coroutine> fadeCoroutines = new();
     public static FadeCanvasGroup Instance;
 
     void Awake()

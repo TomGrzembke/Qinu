@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class IntroManager : MonoBehaviour
@@ -21,58 +23,55 @@ public class IntroManager : MonoBehaviour
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     int dialogueID = -1;
     [SerializeField] bool skipTutPoint;
+    Task task;
     #endregion
 
-    void Start()
+    async Task Start()
     {
-        StartCoroutine(IntroCoroutine());
+        await IntroCoroutine();
+        //yield return new WaitForSeconds(.1f);
+        //StartCoroutine(IntroCoroutine());
         TournamentManager.Instance.LeftPlayerAdd();
         TournamentManager.Instance.RightPlayerAdd(anthony);
     }
 
-    async IEnumerator IntroCoroutine()
+    async Task IntroCoroutine()
     {
-        yield return new WaitForSeconds(waitBeforeSpeaking);
+        
+        await new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (DialogueController.Instance.InDialogue && !TriggerSkipTutPoint())
+        await new WaitUntil(() => !DialogueController.Instance.InDialogue);
+
+        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        //Vector3 pukPos = MinigameManager.Instance.Puk.position;
+        //while (MinigameManager.Instance.Puk.position.Equals(pukPos) && !TriggerSkipTutPoint())
+
+
+        //yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
+
+        //DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
+
+        //while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect && !TriggerSkipTutPoint())
         {
-            yield return null;
+            //yield return null;
         }
 
+        //DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        Vector3 pukPos = MinigameManager.Instance.Puk.position;
-        while (MinigameManager.Instance.Puk.position.Equals(pukPos) && !TriggerSkipTutPoint())
+        //while (!InputManager.Instance.Ability0Action.IsPressed() && !TriggerSkipTutPoint())
         {
-            yield return null;
+            //yield return null;
         }
 
-        yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
+        //DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect && !TriggerSkipTutPoint())
+        //while (IsPlaying && !TriggerSkipTutPoint())
         {
-            yield return null;
+            //yield return null;
         }
-
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        while (!InputManager.Instance.Ability0Action.IsPressed() && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        while (IsPlaying && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
+        //DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
     }
 
     public void GainDash()

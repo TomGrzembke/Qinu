@@ -41,7 +41,7 @@ public class MoveRB : RBGetter
         get
         {
             if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
-                return (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1);
+                return (InputManager.Instance.MousePos - transform.position.RemoveZ());
 
             else if (agent != null && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
@@ -95,15 +95,7 @@ public class MoveRB : RBGetter
                 continue;
             }
 
-
-            if (MoveDir.x == 0)
-            {
-                rb.AddForce(MoveDir.SetX(0.0001f) * acceleration, ForceMode2D.Force);
-            }
-            else
-            {
-                rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
-            }
+            rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
 
             if (rb.velocity.magnitude > currentMaxSpeed)
             {

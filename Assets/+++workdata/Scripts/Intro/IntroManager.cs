@@ -30,9 +30,8 @@ public class IntroManager : MonoBehaviour
         TournamentManager.Instance.RightPlayerAdd(anthony);
     }
 
-    IEnumerator IntroCoroutine()
+    async IEnumerator IntroCoroutine()
     {
-
         yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
@@ -41,13 +40,15 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
 
+
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
         Vector3 pukPos = MinigameManager.Instance.Puk.position;
-        while (MinigameManager.Instance.Puk.position == pukPos && !TriggerSkipTutPoint())
+        while (MinigameManager.Instance.Puk.position.Equals(pukPos) && !TriggerSkipTutPoint())
         {
             yield return null;
         }
+
         yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
 
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);

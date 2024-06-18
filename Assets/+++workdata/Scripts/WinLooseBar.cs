@@ -33,7 +33,7 @@ public class WinLooseBar : MonoBehaviour
 
         while (timeFaded < changeTime)
         {
-            bar.value = Mathf.Lerp(bar.value, value, changeTime / timeFaded);
+            bar.value = Mathf.Lerp(bar.value, value, changeTime / changeTime);
             timeFaded += Time.deltaTime;
             yield return null;
         }

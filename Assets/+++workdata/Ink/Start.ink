@@ -16,7 +16,7 @@ Don't worry you are safe and stored in this data segment.
  -> END
  
  == AbilityGained
-  Activate it by thinking Q. #speaker: Anthony
+  Activate it by pressing Q. #speaker: Anthony
  -> END
  
  ==Ball

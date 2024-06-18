@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkAsset: {fileID: 4900000, guid: 866e37c1b36fbcd468417c6a2a11cc88, type: 3}
   <InDialogue>k__BackingField: 0
-  <TypeSpeed>k__BackingField: 0.08
+  <TypeSpeed>k__BackingField: 0.07
   offText: {fileID: 5592537986447856102}
   speakerBoxParents:
   - {fileID: 4357699413906773883}
@@ -188,6 +188,22 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: ActivateAbilities
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FadeCanvasGroup, Assembly-CSharp
+          m_MethodName: FadeIn
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -252,6 +268,78 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+  - name: AnthonyActive
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - name: GoalActive
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Toggle
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Toggle
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FadeCanvasGroup, Assembly-CSharp
+          m_MethodName: FadeIn
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: ShowBar
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FadeCanvasGroup, Assembly-CSharp
+          m_MethodName: FadeIn
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &5159723320303605678
 GameObject:
@@ -464,6 +552,10 @@ PrefabInstance:
     - target: {fileID: 793941224037972895, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328581690933914599, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
+      propertyPath: voice
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2496277298519893078, guid: 1870ee268230c9747b5bc432557c30fc, type: 3}
       propertyPath: m_IsActive
@@ -894,6 +986,10 @@ PrefabInstance:
       propertyPath: m_fontColorGradientPreset
       value: 
       objectReference: {fileID: 11400000, guid: 6f7f8669975527243b31ee1f1e23e71b, type: 2}
+    - target: {fileID: 4687094399772724065, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
+      propertyPath: voice
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5990111870831217482, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: botTarget
       value: 
@@ -1004,6 +1100,10 @@ PrefabInstance:
     - target: {fileID: 7968334710520716963, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
       propertyPath: topTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989174634319666824, guid: 322b67fe9b8b0a14aa550748979ccd85, type: 3}
+      propertyPath: voice
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

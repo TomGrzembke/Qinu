@@ -6,7 +6,10 @@ public class WinLooseBar : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] Slider bar;
+    [SerializeField] float changeTime = 2;
+    [SerializeField] AnimationCurve animCurve;
     #endregion
+    Coroutine cor;
 
     IEnumerator Start()
     {
@@ -21,6 +24,18 @@ public class WinLooseBar : MonoBehaviour
 
     void OnValueChanged(float value)
     {
-        bar.value = value;
+        cor = StartCoroutine(ChangeValue(value));
+    }
+
+    IEnumerator ChangeValue(float value)
+    {
+        float timeFaded = 0;
+
+        while (timeFaded < changeTime)
+        {
+            bar.value = Mathf.Lerp(bar.value, value, changeTime / timeFaded);
+            timeFaded += Time.deltaTime;
+            yield return null;
+        }
     }
 }

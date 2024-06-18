@@ -225,6 +225,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 5409652872727008301}
+  changeTime: 2
+  animCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5409652872727008301
 MonoBehaviour:
   m_ObjectHideFlags: 0

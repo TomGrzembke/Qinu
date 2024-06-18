@@ -21,6 +21,7 @@ Let's play a bit!
  
   == Abilities
  You will be able to use 4 ability slots. #speaker: Anthony
+   ~Event ("ActivateAbilities")
  Here's your first one! #speaker: Anthony
   ~Event ("GainDash")
  -> END

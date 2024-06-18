@@ -20,8 +20,8 @@ Let's play a bit!
  -> END
  
   == Abilities
+     ~Event ("ActivateAbilities")
  You will be able to use 4 ability slots. #speaker: Anthony
-   ~Event ("ActivateAbilities")
  Here's your first one! #speaker: Anthony
   ~Event ("GainDash")
  -> END
@@ -41,4 +41,5 @@ Good match!
     ~Event ("ShowBar")
 The bar goes up if you win and down if you loose.
 Don't let it reach the left.
+Now Meet the others!
  -> END

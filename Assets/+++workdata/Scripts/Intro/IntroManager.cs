@@ -14,6 +14,7 @@ public class IntroManager : MonoBehaviour
 
     [SerializeField] string[] dialogues;
     [SerializeField] GameObject dashAbilityPrefab;
+    [SerializeField] GameObject anthony;
     #endregion
 
     #region private fields
@@ -26,6 +27,7 @@ public class IntroManager : MonoBehaviour
     {
         StartCoroutine(IntroCoroutine());
         TournamentManager.Instance.LeftPlayerAdd();
+        TournamentManager.Instance.RightPlayerAdd(anthony);
     }
 
     IEnumerator IntroCoroutine()

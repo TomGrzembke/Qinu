@@ -305,6 +305,10 @@ public class TournamentManager : MonoBehaviour
     {
         LeftPlayers.Add(AvailableChars[0]);
     }
+    public void RightPlayerAdd(GameObject charGO)
+    {
+        RightPlayers.Add(charGO);
+    }
 }
 
 [System.Serializable]

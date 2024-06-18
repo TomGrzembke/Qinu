@@ -40,6 +40,7 @@ You win a round by scoring 3 Goals!
 Good match!
     ~Event ("ShowBar")
 The bar goes up if you win and down if you loose.
+    ~Event ("UpdateBar")
 Don't let it reach the left.
 Now Meet the others!
  -> END

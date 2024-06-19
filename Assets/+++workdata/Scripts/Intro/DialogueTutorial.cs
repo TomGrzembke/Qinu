@@ -17,7 +17,6 @@ public class DialogueTutorial : MonoBehaviour
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     Coroutine storySegmentCor;
     Vector3 pukPos;
-    bool skipTutPoint;
 
     #endregion
 
@@ -34,7 +33,7 @@ public class DialogueTutorial : MonoBehaviour
     {
         for (int i = 0; i < dialogueSegment.Count; i++)
         {
-            yield return new WaitUntil(() => storySegmentCor == null || TriggerSkipTutPoint());
+            yield return new WaitUntil(() => storySegmentCor == null);
             storySegmentCor = StartCoroutine(StorySegmentCor(dialogueSegment[i]));
         }
     }
@@ -83,20 +82,10 @@ public class DialogueTutorial : MonoBehaviour
         RewardWindow.Instance.GiveReward(dashAbilityPrefab);
     }
 
-    bool TriggerSkipTutPoint()
+    public void SkipTutorial()
     {
-        if (skipTutPoint)
-        {
-            skipTutPoint = false;
-            return true;
-        }
-
-        return false;
-    }
-
-    public void SetSkipTutPoint()
-    {
-        skipTutPoint = true;
+        StopCoroutine(storySegmentCor);
+        eventsOfTutorial.InvokeAllEvents();
     }
 }
 

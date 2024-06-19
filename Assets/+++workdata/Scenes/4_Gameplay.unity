@@ -641,8 +641,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1839296516}
-        m_TargetAssemblyTypeName: IntroManager, Assembly-CSharp
-        m_MethodName: SetSkipTutPoint
+        m_TargetAssemblyTypeName: DialogueTutorial, Assembly-CSharp
+        m_MethodName: SkipTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -692,6 +692,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
   m_PrefabInstance: {fileID: 5674910289240462904}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1163362081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8639886682119824135, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+  m_PrefabInstance: {fileID: 436436415987836075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e403de836462cc34a80ee434866df6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1183967831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +1988,7 @@ MonoBehaviour:
     condition: 1
   dashAbilityPrefab: {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}
   anthony: {fileID: 1335534815}
-  skipTutPoint: 0
+  eventsOfTutorial: {fileID: 1163362081}
 --- !u!1 &1877918423
 GameObject:
   m_ObjectHideFlags: 0

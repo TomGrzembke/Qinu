@@ -35,42 +35,21 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (DialogueController.Instance.InDialogue && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-
-
+        yield return new WaitUntil(() => !DialogueController.Instance.InDialogue || TriggerSkipTutPoint());
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
         Vector3 pukPos = MinigameManager.Instance.Puk.position;
-        while (MinigameManager.Instance.Puk.position.Equals(pukPos) && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-
+        yield return new WaitUntil(() => !MinigameManager.Instance.Puk.position.Equals(pukPos) || TriggerSkipTutPoint());
         yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
-
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (DialogueController.Instance.InDialogue || RewardWindow.Instance.InAbilitySelect && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-
+        yield return new WaitUntil(() => !DialogueController.Instance.InDialogue && !RewardWindow.Instance.InAbilitySelect || TriggerSkipTutPoint());
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (!InputManager.Instance.Ability0Action.IsPressed() && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
-
+        yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed() || TriggerSkipTutPoint());
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
-        while (IsPlaying && !TriggerSkipTutPoint())
-        {
-            yield return null;
-        }
+        yield return new WaitUntil(() => !IsPlaying || TriggerSkipTutPoint());
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
 
     }

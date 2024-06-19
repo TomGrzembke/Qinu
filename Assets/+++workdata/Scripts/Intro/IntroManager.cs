@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IntroManager : MonoBehaviour
 {
     #region serialized fields
+    [SerializeField] List<DialogueSegment> dialogueSegment;
+
     [SerializeField] GameObject cage;
     [SerializeField] GameObject ballObject;
     [SerializeField] CanvasGroup scoreCG;
@@ -54,6 +58,43 @@ public class IntroManager : MonoBehaviour
 
     }
 
+    IEnumerator StorySegmentCor(DialogueSegment dialogueSegment)
+    {
+        yield return new WaitForSeconds(dialogueSegment.beforeWaitSeconds);
+        DialogueController.Instance.StartDialogue(dialogueSegment.dialogueName);
+        yield return new WaitForSeconds(dialogueSegment.afterWaitSeconds);
+
+        yield return new WaitUntil(() => CheckCondition(dialogueSegment));
+    }
+
+    bool CheckCondition(DialogueSegment dialogueSegment)
+    {
+        switch (dialogueSegment.condition)
+        {
+            case ContineCondition.DialogueSingle:
+                return true;
+
+            case ContineCondition.DialogueWait:
+                return !DialogueController.Instance.InDialogue;
+
+            case ContineCondition.WaitBallMove:
+                Vector3 pukPos = MinigameManager.Instance.Puk.position;
+                return !MinigameManager.Instance.Puk.position.Equals(pukPos);
+
+            case ContineCondition.WaitAbilitySelect:
+                return !RewardWindow.Instance.InAbilitySelect;
+
+            case ContineCondition.ButtonPressed:
+                return InputManager.Instance.Ability0Action.IsPressed();
+
+            case ContineCondition.InRound:
+                return !IsPlaying;
+
+            default:
+                return true;
+        }
+    }
+
     public void GainDash()
     {
         RewardWindow.Instance.GiveReward(dashAbilityPrefab);
@@ -74,4 +115,23 @@ public class IntroManager : MonoBehaviour
     {
         skipTutPoint = true;
     }
+}
+
+public enum ContineCondition
+{
+    DialogueSingle,
+    DialogueWait,
+    WaitBallMove,
+    WaitAbilitySelect,
+    ButtonPressed,
+    InRound
+}
+
+[Serializable]
+public class DialogueSegment
+{
+    public float beforeWaitSeconds;
+    public string dialogueName;
+    public float afterWaitSeconds;
+    public ContineCondition condition;
 }

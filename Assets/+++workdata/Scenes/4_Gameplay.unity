@@ -1961,6 +1961,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d452426a19ec34b49aebaa51661d3e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueSegment:
+  - beforeWaitSeconds: 2
+    dialogueName: Welcome
+    afterWaitSeconds: 0
+    condition: 1
+  - beforeWaitSeconds: 0
+    dialogueName: Ball
+    afterWaitSeconds: 0
+    condition: 2
+  - beforeWaitSeconds: 7
+    dialogueName: Abilities
+    afterWaitSeconds: 0
+    condition: 3
+  - beforeWaitSeconds: 0
+    dialogueName: AbilityGained
+    afterWaitSeconds: 0
+    condition: 4
+  - beforeWaitSeconds: 0.15
+    dialogueName: ActivateGoals
+    afterWaitSeconds: 0
+    condition: 5
+  - beforeWaitSeconds: 0
+    dialogueName: IntroMatchEnd
+    afterWaitSeconds: 0
+    condition: 1
   cage: {fileID: 1078603537}
   ballObject: {fileID: 1183967831}
   scoreCG: {fileID: 383668005}
@@ -2302,6 +2327,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 812732749}
+    - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: <TimeBetweenDialogue>k__BackingField
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget
       value: 

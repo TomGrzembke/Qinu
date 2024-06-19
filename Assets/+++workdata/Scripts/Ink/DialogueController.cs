@@ -23,6 +23,7 @@ public class DialogueController : MonoBehaviour
     public static Action<string> InkEvent;
 
     #region SerializeField
+    [field: SerializeField] public float TimeBetweenDialogue { get; private set; } = 1; 
     [SerializeField] TextAsset inkAsset;
     [field: SerializeField] public bool InDialogue { get; private set; }
     [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;

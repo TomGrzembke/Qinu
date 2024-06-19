@@ -79,7 +79,7 @@ public class DialogueBox : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(DialogueController.Instance.TimeBetweenDialogue);
 
         transform.parent.gameObject.SetActive(false);
         DialogueController.Instance.ContinueDialogue();

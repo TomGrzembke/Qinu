@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class IntroManager : MonoBehaviour
@@ -24,38 +25,27 @@ public class IntroManager : MonoBehaviour
     #region private fields
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     int dialogueID = -1;
+    Coroutine storySegmentCor;
+    Vector3 pukPos;
     [SerializeField] bool skipTutPoint;
     #endregion
 
     void Start()
     {
+        pukPos = MinigameManager.Instance.Puk.position;
+
         StartCoroutine(IntroCoroutine());
         TournamentManager.Instance.LeftPlayerAdd();
         TournamentManager.Instance.RightPlayerAdd(anthony);
     }
-
+    
     IEnumerator IntroCoroutine()
     {
-        yield return new WaitForSeconds(waitBeforeSpeaking);
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        yield return new WaitUntil(() => !DialogueController.Instance.InDialogue || TriggerSkipTutPoint());
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        Vector3 pukPos = MinigameManager.Instance.Puk.position;
-        yield return new WaitUntil(() => !MinigameManager.Instance.Puk.position.Equals(pukPos) || TriggerSkipTutPoint());
-        yield return new WaitForSeconds(playTimeBeforeGoalsOpen);
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        yield return new WaitUntil(() => !DialogueController.Instance.InDialogue && !RewardWindow.Instance.InAbilitySelect || TriggerSkipTutPoint());
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed() || TriggerSkipTutPoint());
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
-        yield return new WaitUntil(() => !IsPlaying || TriggerSkipTutPoint());
-        DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);
-
+        for (int i = 0; i < dialogueSegment.Count; i++)
+        {
+            yield return new WaitUntil(() => storySegmentCor == null);
+            storySegmentCor = StartCoroutine(StorySegmentCor(dialogueSegment[i]));
+        }
     }
 
     IEnumerator StorySegmentCor(DialogueSegment dialogueSegment)
@@ -65,6 +55,7 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(dialogueSegment.afterWaitSeconds);
 
         yield return new WaitUntil(() => CheckCondition(dialogueSegment));
+        storySegmentCor = null;
     }
 
     bool CheckCondition(DialogueSegment dialogueSegment)
@@ -78,10 +69,11 @@ public class IntroManager : MonoBehaviour
                 return !DialogueController.Instance.InDialogue;
 
             case ContineCondition.WaitBallMove:
-                Vector3 pukPos = MinigameManager.Instance.Puk.position;
-                return !MinigameManager.Instance.Puk.position.Equals(pukPos);
+                if (DialogueController.Instance.InDialogue) return false;
+                return Vector3.Distance(pukPos, MinigameManager.Instance.Puk.position) > 1;
 
             case ContineCondition.WaitAbilitySelect:
+                if (DialogueController.Instance.InDialogue) return false;
                 return !RewardWindow.Instance.InAbilitySelect;
 
             case ContineCondition.ButtonPressed:

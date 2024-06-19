@@ -2250,6 +2250,10 @@ PrefabInstance:
       propertyPath: topTarget
       value: 
       objectReference: {fileID: 1437835580}
+    - target: {fileID: 1670208073099970307, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: voice
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2009357494415187605, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2294,6 +2298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 4473087045494989175, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 812732749}
     - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget
       value: 

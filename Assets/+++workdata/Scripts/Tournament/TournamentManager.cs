@@ -36,7 +36,7 @@ public class TournamentManager : MonoBehaviour
 
     #region [SerializeField]
     [SerializeField] float afterCombatTime = 3;
-    [SerializeField] float RoundsTilWin = 5;
+    [field: SerializeField] public float RoundsTilWin { get; private set; } = 5;
     [SerializeField] List<string> afterCombatTalk;
     #endregion
 

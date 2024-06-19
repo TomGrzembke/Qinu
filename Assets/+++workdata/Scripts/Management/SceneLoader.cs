@@ -63,7 +63,10 @@ public class SceneLoader : MonoBehaviour
     {
         return StartCoroutine(UnloadSceneViaIndexCo(index, onLoadingFinished));
     }
-
+    public Coroutine UnloadSceneViaScene(Scene scene, Action onLoadingFinished = null)
+    {
+        return StartCoroutine(UnloadSceneViaCor(scene, onLoadingFinished));
+    }
     IEnumerator UnloadSceneViaIndexCo(int index, Action onLoadingFinished = null)
     {
         var scene = SceneManager.GetSceneByBuildIndex(index);
@@ -76,6 +79,17 @@ public class SceneLoader : MonoBehaviour
         yield return SceneManager.UnloadSceneAsync(index);
         onLoadingFinished?.Invoke();
     }
+    IEnumerator UnloadSceneViaCor(Scene scene, Action onLoadingFinished = null)
+    {
+        if (!scene.isLoaded)
+        {
+            onLoadingFinished?.Invoke();
+            yield break;
+        }
+
+        yield return SceneManager.UnloadSceneAsync(scene);
+        onLoadingFinished?.Invoke();
+    }
 
     public static Coroutine LoadScene(Scenes scenes, Action onLoadingFinished = null)
     {
@@ -85,6 +99,10 @@ public class SceneLoader : MonoBehaviour
     public static Coroutine UnloadScene(Scenes scenes, Action onLoadingFinished = null)
     {
         return Instance.UnloadSceneViaIndex((int)scenes, onLoadingFinished);
+    }
+    public static Coroutine UnloadScene(Scene scene, Action onLoadingFinished = null)
+    {
+        return Instance.UnloadSceneViaScene(scene, onLoadingFinished);
     }
 
 #if UNITY_EDITOR

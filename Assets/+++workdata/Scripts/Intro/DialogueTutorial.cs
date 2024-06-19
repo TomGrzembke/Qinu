@@ -1,33 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class IntroManager : MonoBehaviour
+public class DialogueTutorial : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] List<DialogueSegment> dialogueSegment;
 
-    [SerializeField] GameObject cage;
-    [SerializeField] GameObject ballObject;
-    [SerializeField] CanvasGroup scoreCG;
-    [SerializeField] CanvasGroup uiCG;
-    [SerializeField] NPCNav anthonyNav;
-    [SerializeField] float waitBeforeSpeaking = 2;
-    [SerializeField] float playTimeBeforeGoalsOpen = 7;
-
-    [SerializeField] string[] dialogues;
     [SerializeField] GameObject dashAbilityPrefab;
     [SerializeField] GameObject anthony;
+    [SerializeField] InkEvents eventsOfTutorial;
     #endregion
 
     #region private fields
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
-    int dialogueID = -1;
     Coroutine storySegmentCor;
     Vector3 pukPos;
-    [SerializeField] bool skipTutPoint;
+    bool skipTutPoint;
+
     #endregion
 
     void Start()
@@ -38,12 +29,12 @@ public class IntroManager : MonoBehaviour
         TournamentManager.Instance.LeftPlayerAdd();
         TournamentManager.Instance.RightPlayerAdd(anthony);
     }
-    
+
     IEnumerator IntroCoroutine()
     {
         for (int i = 0; i < dialogueSegment.Count; i++)
         {
-            yield return new WaitUntil(() => storySegmentCor == null);
+            yield return new WaitUntil(() => storySegmentCor == null || TriggerSkipTutPoint());
             storySegmentCor = StartCoroutine(StorySegmentCor(dialogueSegment[i]));
         }
     }

@@ -1374,17 +1374,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
   m_PrefabInstance: {fileID: 1884003979}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1335534820 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9097840968643591772, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
-  m_PrefabInstance: {fileID: 1884003979}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335534815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a808b4edf3ef007418b4c0d7d3e48007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1335534822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
@@ -1986,20 +1975,6 @@ MonoBehaviour:
     dialogueName: IntroMatchEnd
     afterWaitSeconds: 0
     condition: 1
-  cage: {fileID: 1078603537}
-  ballObject: {fileID: 1183967831}
-  scoreCG: {fileID: 383668005}
-  uiCG: {fileID: 1555166828}
-  anthonyNav: {fileID: 1335534820}
-  waitBeforeSpeaking: 2
-  playTimeBeforeGoalsOpen: 7
-  dialogues:
-  - Welcome
-  - Ball
-  - Abilities
-  - AbilityGained
-  - ActivateGoals
-  - IntroMatchEnd
   dashAbilityPrefab: {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}
   anthony: {fileID: 1335534815}
   skipTutPoint: 0

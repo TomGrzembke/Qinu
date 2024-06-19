@@ -27,16 +27,22 @@ public class InkEvents : MonoBehaviour
     {
         foreach (InkEvent inkEvent in inkEvents)
         {
-            if(inkEvent.name == eventName)
+            if (inkEvent.name == eventName)
             {
                 inkEvent.onEvent.Invoke();
                 return;
             }
         }
     }
+    public void InvokeAllEvents()
+    {
+        foreach (InkEvent inkEvent in inkEvents)
+            inkEvent.onEvent.Invoke();
+    }
 }
 
-[Serializable] public struct InkEvent
+[Serializable]
+public struct InkEvent
 {
     public string name;
 

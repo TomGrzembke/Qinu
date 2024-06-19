@@ -30,7 +30,7 @@ public class IntroManager : MonoBehaviour
         TournamentManager.Instance.RightPlayerAdd(anthony);
     }
 
-    async IEnumerator IntroCoroutine()
+    IEnumerator IntroCoroutine()
     {
         yield return new WaitForSeconds(waitBeforeSpeaking);
         DialogueController.Instance.StartDialogue(dialogues[++dialogueID]);

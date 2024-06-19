@@ -29,8 +29,6 @@ public class StartupManager : MonoBehaviour
     {
         if (index == (int)Scenes.MainMenu)
             return Scenes.MainMenu;
-        else if (index == (int)Scenes.Intro)
-            return Scenes.Intro;
         else
             return Scenes.Gameplay;
     }

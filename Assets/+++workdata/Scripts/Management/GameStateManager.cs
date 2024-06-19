@@ -19,11 +19,6 @@ public class GameStateManager : MonoBehaviour
         Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu, Instance.GetSceneID(Instance.introScene)));
     }
 
-    public static void StartGameScene()
-    {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.Intro, (int)Scenes.Gameplay));
-    }
-
     public static void OptionsWindow()
     {
         PauseManager.Instance.PauseLogic();

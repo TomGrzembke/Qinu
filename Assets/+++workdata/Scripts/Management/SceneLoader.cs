@@ -14,8 +14,8 @@ public enum Scenes
     Manager,
     Pixelate,
     MainMenu,
-    Intro,
-    Gameplay
+    Gameplay,
+    End
 }
 
 public class SceneLoader : MonoBehaviour

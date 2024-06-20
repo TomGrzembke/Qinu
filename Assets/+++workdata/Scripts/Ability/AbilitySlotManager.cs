@@ -60,4 +60,36 @@ public class AbilitySlotManager : MonoBehaviour
             }
         }
     }
+
+    public bool CheckIfSlotAvailable()
+    {
+        for (int i = 0; i < AbilitySlots.Length; i++)
+        {
+            if (!AbilitySlots[i].Occupied)
+                return true;
+        }
+
+        return false;
+    }
+
+    public string GetAvailableSlotKey()
+    {
+        int slotID = -1;
+        for (int i = 0; i < AbilitySlots.Length; i++)
+        {
+            if (!AbilitySlots[i].Occupied)
+                slotID = i;
+        }
+
+        if (slotID == 0)
+            return "Q";
+        else if (slotID == 1)
+            return "W";
+        else if (slotID == 2)
+            return "E";
+        else if (slotID == 3)
+            return "R";
+
+        return "Apparently No";
+    }
 }

@@ -43,6 +43,7 @@ public class TournamentManager : MonoBehaviour
     #region private fields
     int afterCombatTalkTimes = -1;
     GameObject lastPlayed;
+    bool firstMatch = true;
     #endregion
     void Awake()
     {
@@ -127,6 +128,7 @@ public class TournamentManager : MonoBehaviour
         CurrentGameMode = GameMode.Bodi;
         lastPlayed = bodi;
         bodi = CharManager.Instance.InitializeChar(bodi, true);
+        ClearSideLists();
         LeftPlayerAdd();
         RightPlayers.Add(bodi);
     }
@@ -171,11 +173,11 @@ public class TournamentManager : MonoBehaviour
         MinigameManager.Instance.Cage.SetActive(true);
 
         GameState = GameStateEnum.AfterGame;
-
         OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
         OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
 
-        yield return new WaitForSeconds(afterCombatTime);
+        yield return new WaitForSeconds(.5f);
+        yield return new WaitUntil(() => CheckOutOfInteraction());
 
         MinigameManager.Instance.ResetArena();
         GameState = GameStateEnum.OutOfGame;
@@ -186,16 +188,25 @@ public class TournamentManager : MonoBehaviour
         if (CurrentGameMode == GameMode.a2v2)
             Cleanup2v2(sideID);
 
-        yield return new WaitForSeconds(afterCombatTime);
+        yield return new WaitUntil(() => CheckOutOfInteraction());
 
-        if (sideID == 0)
-            RewardWindow.Instance.GiveReward();
-        else
-            RewardWindow.Instance.RemoveReward();
+        if (!firstMatch)
+            if (sideID == 0)
+                RewardWindow.Instance.GiveReward();
+            else
+                RewardWindow.Instance.RemoveReward();
 
+        firstMatch = false;
+
+        yield return new WaitUntil(() => CheckOutOfInteraction());
 
         InitializeGame();
         MinigameManager.Instance.Cage.SetActive(false);
+    }
+
+    bool CheckOutOfInteraction()
+    {
+        return !DialogueController.Instance.InDialogue && !RewardWindow.Instance.InAbilitySelect;
     }
 
     CharacterStats UpdateCharStats(int sideWon)
@@ -206,8 +217,13 @@ public class TournamentManager : MonoBehaviour
         if (RightPlayers.Count > 0)
             right0Stats = GetCharacterStats(RightPlayers[0]);
 
+        if (firstMatch)
+            return left0Stats;
+
         left0Stats.Wins += sideWon == 0 ? 1 : -1;
         left0Stats.TimesPlayed++;
+
+        firstMatch = false;
 
         if (right0Stats != null)
         {
@@ -216,7 +232,6 @@ public class TournamentManager : MonoBehaviour
         }
 
         return left0Stats;
-
     }
 
     void Cleanup2v2(int sideID)

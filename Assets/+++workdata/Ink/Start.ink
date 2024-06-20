@@ -38,7 +38,6 @@ You win a round by scoring 3 Goals!
  
    ==IntroMatchEnd
 Good match!
-    ~Event ("ShowBar")
 The bar goes up if you win 
     ~Event ("BarUp")
 and down if you loose.

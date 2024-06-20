@@ -8,14 +8,16 @@ public class WinLooseBar : MonoBehaviour
     #region serialized fields
     [SerializeField] Slider bar;
     [SerializeField] float changeTime = 2;
+    [SerializeField] float fadeOut = 6;
     [SerializeField] AnimationCurve animCurve;
+    [SerializeField] CanvasGroup canvasGroup;
     #endregion
     Coroutine cor;
 
     IEnumerator Start()
     {
         yield return null;
-        TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
+        TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged);
     }
 
     void OnDisable()
@@ -33,6 +35,13 @@ public class WinLooseBar : MonoBehaviour
 
     IEnumerator ChangeValue(float value)
     {
+        if (canvasGroup.alpha == 0)
+        {
+            FadeCanvasGroup.Instance.FadeIn(canvasGroup);
+            yield return new WaitForSeconds(FadeCanvasGroup.Instance.FadeTime);
+        }
+
+        canvasGroup.alpha = 1;
         float timeFaded = 0;
         float barStartValue = bar.value;
 
@@ -43,6 +52,9 @@ public class WinLooseBar : MonoBehaviour
             yield return null;
         }
         bar.value = value;
+
+        yield return new WaitForSeconds(fadeOut);
+        FadeCanvasGroup.Instance.FadeOut(canvasGroup);
     }
 
     [ButtonMethod]
@@ -50,6 +62,7 @@ public class WinLooseBar : MonoBehaviour
     {
         OnValueChanged(bar.value + 1);
     }
+
     [ButtonMethod]
     public void TestMinusOne()
     {

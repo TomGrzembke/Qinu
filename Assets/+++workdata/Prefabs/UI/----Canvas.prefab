@@ -226,12 +226,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 5409652872727008301}
   changeTime: 2
+  fadeOut: 2
   animCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  canvasGroup: {fileID: 0}
 --- !u!114 &5409652872727008301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,6 +1126,7 @@ MonoBehaviour:
   - {fileID: 7318746240359722923}
   - {fileID: 3340480655183352242}
   - {fileID: 2884690313885966129}
+  keySlotDescription: {fileID: 0}
   fadeTime: 0.7
   possibleRewards:
   - {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}

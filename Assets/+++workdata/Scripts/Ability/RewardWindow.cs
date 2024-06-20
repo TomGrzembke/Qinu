@@ -13,6 +13,7 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] GameObject essentialUI;
 
     [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
+    [SerializeField] TextMeshProUGUI keySlotDescription;
 
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
@@ -64,6 +65,8 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void GiveReward()
     {
+        if (!AbilitySlotManager.Instance.CheckIfSlotAvailable())  return;
+
         rewards = PickThreeRewards();
         string currentText;
 
@@ -79,28 +82,7 @@ public class RewardWindow : MonoBehaviour
 
             choiceButtonTexts[i].text = currentText;
         }
-
-        OpenRewardWindow(true);
-    }
-    public void GiveReward(GameObject specified)
-    {
-        string currentText;
-        GameObject[] _rewards = new GameObject[3];
-
-        for (int i = 0; i < choiceButtonTexts.Length; i++)
-        {
-            if (specified.TryGetComponent(out Ability ability))
-                currentText = ability.AbilitySO.abilityTitel;
-            else
-            {
-                Debug.Log(specified.name + " has no Ability Script");
-                currentText = "Random";
-            }
-
-            choiceButtonTexts[i].text = currentText;
-            _rewards[i] = specified;
-        }
-        rewards = _rewards;
+        keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
 
         OpenRewardWindow(true);
     }

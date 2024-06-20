@@ -4,7 +4,7 @@ I'm Anthony the spirit of empathy.
 What am I? #speaker: Qinu
 Your a surpressed thought. #speaker: Anthony
 Captivity is caused by your problems.
-~Event ("Problems")
+    ~Event ("Problems")
 Most can't see the problems of others. 
 Don't worry you are safe and stored in this data segment.
  -> END
@@ -20,10 +20,10 @@ Let's play a bit!
  -> END
  
   == Abilities
-     ~Event ("ActivateAbilities")
+    ~Event ("ActivateAbilities")
  You will be able to use 4 ability slots. #speaker: Anthony
  Here's your first one! #speaker: Anthony
-  ~Event ("GainDash")
+    ~Event ("GainDash")
  -> END
  
  == AbilityGained
@@ -39,8 +39,11 @@ You win a round by scoring 3 Goals!
    ==IntroMatchEnd
 Good match!
     ~Event ("ShowBar")
-The bar goes up if you win and down if you loose.
-    ~Event ("UpdateBar")
+The bar goes up if you win 
+    ~Event ("BarUp")
+and down if you loose.
+    ~Event ("BarDown")
 Don't let it reach the left.
+    ~Event ("UpdateBar")
 Now Meet the others!
  -> END

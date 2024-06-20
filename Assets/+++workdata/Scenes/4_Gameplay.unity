@@ -2655,6 +2655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaVisuals
       objectReference: {fileID: 0}
+    - target: {fileID: 7114566934664067068, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 7639881426955993055, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: minigameManager
       value: 
@@ -2717,7 +2721,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 403934487544241783, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Name
@@ -2729,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3599863210591958256, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4496410115892118337, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Layer

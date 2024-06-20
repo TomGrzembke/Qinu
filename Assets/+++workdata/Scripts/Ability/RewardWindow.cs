@@ -47,8 +47,14 @@ public class RewardWindow : MonoBehaviour
         }
     }
 
-    public void OpenRewardWindow()
+    public void OpenRewardWindow(bool showAll = false)
     {
+        if (showAll)
+            for (int i = 0; i < choiceButtonTexts.Length; i++)
+            {
+                choiceButtonTexts[i].gameObject.SetActive(true);
+            }
+
         if (currentRewarWindowCoroutine != null)
             StopCoroutine(currentRewarWindowCoroutine);
 
@@ -74,7 +80,7 @@ public class RewardWindow : MonoBehaviour
             choiceButtonTexts[i].text = currentText;
         }
 
-        OpenRewardWindow();
+        OpenRewardWindow(true);
     }
     public void GiveReward(GameObject specified)
     {
@@ -91,14 +97,12 @@ public class RewardWindow : MonoBehaviour
                 currentText = "Random";
             }
 
-            choiceButtonTexts[0].gameObject.SetActive(true);
-            choiceButtonTexts[1].text = currentText;
-            choiceButtonTexts[2].gameObject.SetActive(true);
+            choiceButtonTexts[i].text = currentText;
             _rewards[i] = specified;
         }
         rewards = _rewards;
 
-        OpenRewardWindow();
+        OpenRewardWindow(true);
     }
     public void GiveSingleReward(GameObject specified)
     {

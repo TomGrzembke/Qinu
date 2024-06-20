@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7796029457258464286}
   - component: {fileID: 8974800620927859665}
   - component: {fileID: 6409354309746379133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[PS]Goal'
   m_TagString: Untagged
   m_Icon: {fileID: 0}

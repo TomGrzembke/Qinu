@@ -39,8 +39,9 @@ public class FollowGameObjectInCam : MonoBehaviour
                 target = botTarget;
 
 
-        transform.position =
-            Vector3.Lerp(transform.position, target.position, followCurve.Evaluate(Vector3.Distance(transform.position, target.position) * sensitivity));
+        if (target)
+            transform.position =
+                Vector3.Lerp(transform.position, target.position, followCurve.Evaluate(Vector3.Distance(transform.position, target.position) * sensitivity));
     }
 
     void OnDrawGizmos()

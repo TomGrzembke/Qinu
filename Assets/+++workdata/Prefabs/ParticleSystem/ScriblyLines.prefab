@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6498885087516003626}
   - component: {fileID: 7272854230347783236}
   - component: {fileID: 8651434601320399643}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: ScriblyLines
   m_TagString: Untagged
   m_Icon: {fileID: 0}

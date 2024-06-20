@@ -169,35 +169,14 @@ public class TournamentManager : MonoBehaviour
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);
+
         GameState = GameStateEnum.AfterGame;
+
         OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
-
-        CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
-
-        CharacterStats right0Stats = null;
-        if (RightPlayers.Count > 0)
-            right0Stats = GetCharacterStats(RightPlayers[0]);
-
-        if (sideID == 0)
-        {
-            if (right0Stats != null)
-                right0Stats.Wins--;
-            left0Stats.Wins++;
-        }
-        else if (sideID == 1)
-        {
-            if (right0Stats != null)
-                right0Stats.Wins++;
-            left0Stats.Wins--;
-        }
-
-        left0Stats.TimesPlayed++;
-        if (right0Stats != null)
-            right0Stats.TimesPlayed++;
-
-        OnPlayerMatchEnd?.Invoke(left0Stats.Wins);
+        OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
 
         yield return new WaitForSeconds(afterCombatTime);
+
         MinigameManager.Instance.ResetArena();
         GameState = GameStateEnum.OutOfGame;
 
@@ -217,6 +196,27 @@ public class TournamentManager : MonoBehaviour
 
         InitializeGame();
         MinigameManager.Instance.Cage.SetActive(false);
+    }
+
+    CharacterStats UpdateCharStats(int sideWon)
+    {
+        CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
+        CharacterStats right0Stats = null;
+
+        if (RightPlayers.Count > 0)
+            right0Stats = GetCharacterStats(RightPlayers[0]);
+
+        left0Stats.Wins += sideWon == 0 ? 1 : -1;
+        left0Stats.TimesPlayed++;
+
+        if (right0Stats != null)
+        {
+            right0Stats.Wins += sideWon == 0 ? 1 : -1;
+            right0Stats.TimesPlayed++;
+        }
+
+        return left0Stats;
+
     }
 
     void Cleanup2v2(int sideID)

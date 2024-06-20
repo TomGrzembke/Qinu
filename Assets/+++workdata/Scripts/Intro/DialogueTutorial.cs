@@ -79,7 +79,7 @@ public class DialogueTutorial : MonoBehaviour
 
     public void GainDash()
     {
-        RewardWindow.Instance.GiveReward(dashAbilityPrefab);
+        RewardWindow.Instance.GiveSingleReward(dashAbilityPrefab);
     }
 
     public void SkipTutorial()

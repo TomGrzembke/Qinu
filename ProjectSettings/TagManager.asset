@@ -19,8 +19,8 @@ TagManager:
   - Character
   - Cage
   - Blocker
-  - 
-  - 
+  - PlayerBlocker
+  - Player
   - 
   - 
   - 

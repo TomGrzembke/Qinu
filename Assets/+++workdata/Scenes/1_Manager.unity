@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef986fee0abf56746a2b9fd882f71956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 5
 --- !u!4 &332062366
 Transform:
   m_ObjectHideFlags: 0
@@ -809,11 +810,11 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 01000000010000000100000002000000
+  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
   afterCombatTime: 7
-  RoundsTilWin: 5
+  <RoundsTilWin>k__BackingField: 5
   afterCombatTalk: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -48,7 +48,7 @@ public class RewardWindow : MonoBehaviour
         }
     }
 
-    public void OpenRewardWindow(bool showAll = false)
+    public void OpenRewardWindow(bool showAll = true)
     {
         if (showAll)
             for (int i = 0; i < choiceButtonTexts.Length; i++)
@@ -84,7 +84,7 @@ public class RewardWindow : MonoBehaviour
         }
         keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
 
-        OpenRewardWindow(true);
+        OpenRewardWindow();
     }
     public void GiveSingleReward(GameObject specified)
     {
@@ -106,8 +106,9 @@ public class RewardWindow : MonoBehaviour
         _rewards[1] = specified;
 
         rewards = _rewards;
+        keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
 
-        OpenRewardWindow();
+        OpenRewardWindow(false);
     }
 
     [ButtonMethod]

@@ -78,7 +78,10 @@ public class AbilitySlotManager : MonoBehaviour
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
             if (!AbilitySlots[i].Occupied)
+            {
                 slotID = i;
+                break;
+            }
         }
 
         if (slotID == 0)

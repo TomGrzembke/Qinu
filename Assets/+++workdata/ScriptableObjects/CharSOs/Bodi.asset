@@ -59,3 +59,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       <MinSpeed>k__BackingField: 1
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: eca1a620bf69b3540a440a737b3c7d7b, type: 3}
+  <charAestheticSettings>k__BackingField:
+    <PrimaryColor>k__BackingField: {r: 0.83921576, g: 0.59607846, b: 0.098039225, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}

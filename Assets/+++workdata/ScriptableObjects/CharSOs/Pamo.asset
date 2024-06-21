@@ -16,7 +16,7 @@ MonoBehaviour:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <FollowBallY>k__BackingField: 1
-      <InvertY>k__BackingField: 0
+      <InvertY>k__BackingField: 1
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.001
     <CharRigidSettings>k__BackingField:
@@ -68,3 +68,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       <MinSpeed>k__BackingField: 1
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: cd42c452505ff86408158bceb51e834f, type: 3}
+  <charAestheticSettings>k__BackingField:
+    <PrimaryColor>k__BackingField: {r: 0.08235294, g: 0.8352942, b: 0.8745099, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: 1964eb1db4f89dc4b9493e4bb75dd022, type: 3}

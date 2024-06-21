@@ -646,6 +646,7 @@ MonoBehaviour:
   rightScoreTxt: {fileID: 167118118}
   rightArenaSR: {fileID: 1653395791}
   arenaMiddle: {fileID: 1323748080}
+  colorBlendTime: 2
 --- !u!4 &669689617
 Transform:
   m_ObjectHideFlags: 0

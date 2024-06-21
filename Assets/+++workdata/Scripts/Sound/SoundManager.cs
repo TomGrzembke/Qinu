@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
@@ -8,14 +10,21 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource globalMusicSource;
     [SerializeField] AudioSource globalSFXSource;
     [SerializeField] DialogueSoundPlayer soundPlayer;
+
+    [Header("Music")]
+    [SerializeField] float musicBlendTime;
     #endregion
 
     #region private fields
     SoundTypeSO[] SoundTypes => soundBank.soundTypes;
+    Coroutine musicRoutine;
+    float originalMusicVolume;
     #endregion
+
     void Awake()
     {
         Instance = this;
+        originalMusicVolume = globalMusicSource.volume;
     }
 
     public void PlayVoice(SoundType type)
@@ -78,6 +87,39 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    #region Music
+    public void PlayMusic(AudioClip clip)
+    {
+        if(musicRoutine != null)
+            StopCoroutine(musicRoutine);
+
+        musicRoutine = StartCoroutine(BlendMusic(clip));
+    }
+
+    IEnumerator BlendMusic(AudioClip clip)
+    {
+        float timeWentBy = 0;
+
+        while (timeWentBy < musicBlendTime)
+        {
+            timeWentBy += Time.deltaTime;
+            globalMusicSource.volume = Mathf.Lerp(originalMusicVolume, 0, timeWentBy / musicBlendTime);
+            yield return null;
+        }
+
+        globalMusicSource.volume = 0;
+        globalMusicSource.clip = clip;
+        globalMusicSource.Play();
+        timeWentBy = 0;
+
+        while (timeWentBy < musicBlendTime)
+        {
+            timeWentBy += Time.deltaTime;
+            globalMusicSource.volume = Mathf.Lerp(0, originalMusicVolume, timeWentBy / musicBlendTime);
+            yield return null;
+        }
+    }
+    #endregion
 }
 
 public enum SoundType

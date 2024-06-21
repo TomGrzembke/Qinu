@@ -60,5 +60,5 @@ MonoBehaviour:
       <MinSpeed>k__BackingField: 1
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 0b115e4cb6530ef44b45bc5e0bc122b2, type: 3}
   <charAestheticSettings>k__BackingField:
-    <PrimaryColor>k__BackingField: {r: 0.75686276, g: 0.7764706, b: 0.12156863, a: 1}
+    <PrimaryColor>k__BackingField: {r: 0.94356596, g: 0.9716981, b: 0.03208439, a: 1}
     <Music>k__BackingField: {fileID: 8300000, guid: f819775f53079d04894a12488b55a2cf, type: 3}

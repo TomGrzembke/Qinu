@@ -428,6 +428,7 @@ MonoBehaviour:
   globalMusicSource: {fileID: 1276738477}
   globalSFXSource: {fileID: 1166766558}
   soundPlayer: {fileID: 1180918135}
+  musicBlendTime: 1.3
 --- !u!4 &1180918134
 Transform:
   m_ObjectHideFlags: 0

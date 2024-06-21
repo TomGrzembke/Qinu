@@ -27,7 +27,12 @@ Let's play a bit!
  -> END
  
  == AbilityGained
+    ~Event ("QHelp")
   Activate it by pressing Q. #speaker: Anthony
+ -> END
+ 
+  == QHelp
+  Q activates your first Slot. #speaker: Anthony
  -> END
  
   ==ActivateGoals

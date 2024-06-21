@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3.7
       objectReference: {fileID: 0}
+    - target: {fileID: 4742904774018199448, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: <CharSO>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
     - target: {fileID: 5445744495270310648, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Name
       value: DialoguePoint

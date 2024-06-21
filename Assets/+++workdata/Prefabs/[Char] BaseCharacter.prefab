@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8154764816718264686}
+  - component: {fileID: 4742904774018199448}
   - component: {fileID: 8523064361346453057}
   - component: {fileID: 7953238053786489971}
   - component: {fileID: 3822254324265408848}
@@ -70,6 +71,19 @@ Transform:
   - {fileID: 1790193273527780712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4742904774018199448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678853848379604295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539bbddfeb0a8fa4cb694753cb637779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CharSO>k__BackingField: {fileID: 0}
 --- !u!114 &8523064361346453057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arenaMode: 0
-  isRight: 1
+  <IsRight>k__BackingField: 0
   stoppingDistance: 2
   goesToDefault: 1
   followBallY: 1
@@ -132,8 +146,9 @@ MonoBehaviour:
   probabilityPerFrame: 0.001
   moveRB: {fileID: 3822254324265408848}
   targetPos: {x: 0, y: 0, z: 0}
-  col: {fileID: 1437530471901252514}
   defaultTrans: {fileID: 0}
+  <TopTextTarget>k__BackingField: {fileID: 0}
+  <BotTextTarget>k__BackingField: {fileID: 0}
 --- !u!114 &3822254324265408848
 MonoBehaviour:
   m_ObjectHideFlags: 0

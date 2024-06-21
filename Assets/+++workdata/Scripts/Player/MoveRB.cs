@@ -1,4 +1,3 @@
-using MyBox;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,10 +5,8 @@ using UnityEngine.InputSystem;
 
 public class MoveRB : RBGetter
 {
-    #region serialized fields
-    [SerializeField] CharSO charSO;
-
     #region Lambda expressions
+
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
@@ -27,15 +24,15 @@ public class MoveRB : RBGetter
     #endregion 
 
     [SerializeField] NavMeshAgent agent;
+
+    #region private fields
     Transform Puk => MinigameManager.Instance.Puk;
     bool inputDisabled;
     float currentMaxSpeed;
     Coroutine moveRoutine;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
-    #endregion
-
-    #region private fields
+    CharSO charSO;
     public Vector2 MoveDir
     {
         get
@@ -54,6 +51,7 @@ public class MoveRB : RBGetter
 
     protected override void AwakeInternal()
     {
+        charSO = GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
 
         InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);

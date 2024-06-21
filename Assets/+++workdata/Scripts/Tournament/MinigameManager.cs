@@ -4,6 +4,7 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     #region serialized fields
+    [field: SerializeField] public CharSwitch CharSwitchManager { get; private set; } 
     public static MinigameManager Instance;
     [SerializeField] float pointsTilWin = 5;
     [SerializeField] Vector2 pointCounter;

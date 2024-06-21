@@ -95,6 +95,12 @@ public class TournamentManager : MonoBehaviour
 
         var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
         RightPlayers.Add(newChar);
+        SwitchChars();
+    }
+
+    void SwitchChars()
+    {
+        MinigameManager.Instance.CharSwitchManager.Calculate(RightPlayers);
     }
 
     void ClearSideLists()
@@ -119,6 +125,7 @@ public class TournamentManager : MonoBehaviour
         RightPlayers.Add(first);
         RightPlayers.Add(second);
         LeftPlayers.Add(third);
+        SwitchChars();
     }
 
     #region Rounds
@@ -131,6 +138,7 @@ public class TournamentManager : MonoBehaviour
         ClearSideLists();
         LeftPlayerAdd();
         RightPlayers.Add(bodi);
+        SwitchChars();
     }
 
     void CustomRound(GameMode gameMode)

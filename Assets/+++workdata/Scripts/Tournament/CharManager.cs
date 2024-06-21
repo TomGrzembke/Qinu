@@ -25,7 +25,7 @@ public class CharManager : MonoBehaviour
         NPCNav target;
         if (!CheckIfCloneAvailable(gO, out GameObject newChar))
         {
-            newChar = Instantiate(gO, transform);
+            newChar = Instantiate(gO, isRight ? rightSpawn.position : leftSpawn.position, Quaternion.identity, transform);
             CharsSpawned.Add(newChar);
         }
 

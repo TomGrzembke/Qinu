@@ -90,7 +90,9 @@ public class SoundManager : MonoBehaviour
     #region Music
     public void PlayMusic(AudioClip clip)
     {
-        if(musicRoutine != null)
+        if (clip == globalMusicSource.clip) return;
+
+        if (musicRoutine != null)
             StopCoroutine(musicRoutine);
 
         musicRoutine = StartCoroutine(BlendMusic(clip));

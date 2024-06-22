@@ -11,6 +11,7 @@ public class DialogueTutorial : MonoBehaviour
     [SerializeField] GameObject dashAbilityPrefab;
     [SerializeField] GameObject anthony;
     [SerializeField] InkEvents eventsOfTutorial;
+    [SerializeField] AudioClip startMusic;
     #endregion
 
     #region private fields
@@ -22,6 +23,9 @@ public class DialogueTutorial : MonoBehaviour
 
     void Start()
     {
+        if (startMusic)
+            SoundManager.Instance.PlayMusic(startMusic);
+
         pukPos = MinigameManager.Instance.Puk.position;
 
         StartCoroutine(IntroCoroutine());

@@ -3154,6 +3154,7 @@ MonoBehaviour:
   dashAbilityPrefab: {fileID: 4689076530784505703, guid: 68a637347ad6ce34c9fed1bd7077f8b6, type: 3}
   anthony: {fileID: 1335534815}
   eventsOfTutorial: {fileID: 1163362081}
+  startMusic: {fileID: 8300000, guid: 80de8c08e31d1354eab5336ed14fa03c, type: 3}
 --- !u!1 &1868462567
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,12 +14,14 @@ public class MoveMiddle : Ability
 
     #region private fields
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
+    Vector3 fromPos;
+    Vector3 toPos;
     Coroutine saveRoutine;
     #endregion
 
     protected override void DeExecuteInternal()
     {
-
+        SlotManager.Middle.position = fromPos;
     }
 
     protected override void ExecuteInternal()
@@ -30,13 +32,12 @@ public class MoveMiddle : Ability
 
     protected override void OnInitializedInternal()
     {
+        fromPos = SlotManager.Middle.position;
+        toPos = SlotManager.Middle.position.Add(spaceToAdd, 0);
     }
 
     IEnumerator TPBall()
     {
-        Vector3 fromPos = SlotManager.Middle.position;
-        Vector3 toPos = SlotManager.Middle.position.Add(spaceToAdd, 0);
-
         float lerpTime = 0;
 
         while (lerpTime < timeToLerpTo)

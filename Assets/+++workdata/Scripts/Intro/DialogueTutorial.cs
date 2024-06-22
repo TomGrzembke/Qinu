@@ -26,11 +26,13 @@ public class DialogueTutorial : MonoBehaviour
         if (startMusic)
             SoundManager.Instance.PlayMusic(startMusic);
 
-        pukPos = MinigameManager.Instance.Puk.position;
+        if (MinigameManager.Instance)
+            pukPos = MinigameManager.Instance.Puk.position;
 
         StartCoroutine(IntroCoroutine());
         TournamentManager.Instance.LeftPlayerAdd();
-        TournamentManager.Instance.RightPlayerAdd(anthony);
+        if (anthony)
+            TournamentManager.Instance.RightPlayerAdd(anthony);
     }
 
     IEnumerator IntroCoroutine()

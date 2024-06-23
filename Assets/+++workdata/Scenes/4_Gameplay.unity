@@ -2594,9 +2594,65 @@ PrefabInstance:
       propertyPath: minigameManager
       value: 
       objectReference: {fileID: 365903684}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: VelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: VelocityModule.x.scalar
+      value: -0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305760268129303806, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387267690791464336, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387267690791464336, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.32
+      objectReference: {fileID: 0}
     - target: {fileID: 2960978859951807565, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Name
       value: ArenaVisuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600941373455626383, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497992036794535358, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.18123223
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497992036794535358, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.18123223
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497992036794535358, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.18123223
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497992036794535358, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497992036794535358, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.86
       objectReference: {fileID: 0}
     - target: {fileID: 7639881426955993055, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: minigameManager

@@ -31,14 +31,11 @@ public class LoadingScreen : MonoBehaviour
     {
         if (loadingInstigator.Count > 0)
             Show();
-        else
-            gameObject.SetActive(false);
     }
 
     public void Show()
     {
         canvasGroup.alpha = 1;
-        gameObject.SetActive(true);
     }
 
     public void Hide()
@@ -57,8 +54,6 @@ public class LoadingScreen : MonoBehaviour
             canvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
         }
         canvasGroup.alpha = 0;
-        gameObject.SetActive(false);
-
     }
 
     void Awake() => OnValidateCall();

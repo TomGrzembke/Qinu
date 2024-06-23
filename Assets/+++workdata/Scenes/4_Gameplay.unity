@@ -3034,6 +3034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Player] Qinu'
       objectReference: {fileID: 0}
+    - target: {fileID: 7119062691497510257, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: f17b1f03d0b14604dad43d851f339043, type: 2}
     - target: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.156

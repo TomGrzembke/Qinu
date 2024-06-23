@@ -95,4 +95,9 @@ public class AbilitySlotManager : MonoBehaviour
 
         return "Apparently No";
     }
+
+    public bool GetAbilitySlotPerformed(int index)
+    {
+        return AbilitySlots[index].Performed;
+    }
 }

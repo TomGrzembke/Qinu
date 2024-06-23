@@ -16,6 +16,7 @@ public class DialogueTutorial : MonoBehaviour
 
     #region private fields
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
+    bool Ability0Pressed => InputManager.Instance.Ability0Action.IsPressed() || AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
     Coroutine storySegmentCor;
     Vector3 pukPos;
 
@@ -73,7 +74,8 @@ public class DialogueTutorial : MonoBehaviour
                 return !RewardWindow.Instance.InAbilitySelect;
 
             case ContineCondition.ButtonPressed:
-                return InputManager.Instance.Ability0Action.IsPressed();
+
+                return Ability0Pressed;
 
             case ContineCondition.InRound:
                 return !IsPlaying;

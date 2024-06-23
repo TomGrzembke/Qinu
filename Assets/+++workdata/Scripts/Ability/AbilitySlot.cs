@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class AbilitySlot : MonoBehaviour
 {
     #region serialized fields
+    [field: SerializeField] public bool Performed { get; private set; } 
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
@@ -71,6 +72,7 @@ public class AbilitySlot : MonoBehaviour
     }
     public void Execute(bool performed = true)
     {
+        Performed = performed;
         if (CurrentAbility)
             CurrentAbility.Execute(performed);
     }

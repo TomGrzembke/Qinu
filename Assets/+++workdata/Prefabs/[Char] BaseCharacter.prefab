@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3822254324265408848}
   - component: {fileID: 3565451610172718577}
   - component: {fileID: 173636337912830749}
-  - component: {fileID: 1437530471901252514}
+  - component: {fileID: 5295608182062773719}
   m_Layer: 0
   m_Name: '[Char] BaseCharacter'
   m_TagString: Untagged
@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charSO: {fileID: 0}
   agent: {fileID: 173636337912830749}
 --- !u!50 &3565451610172718577
 Rigidbody2D:
@@ -212,8 +211,8 @@ NavMeshAgent:
   m_BaseOffset: -0.035
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!70 &1437530471901252514
-CapsuleCollider2D:
+--- !u!58 &5295608182062773719
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -244,9 +243,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07824659, y: 0.052164316}
-  m_Size: {x: 6.1859303, y: 6.2164493}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0.10366583}
+  serializedVersion: 2
+  m_Radius: 2.884315
 --- !u!1 &5445744495270310648
 GameObject:
   m_ObjectHideFlags: 0

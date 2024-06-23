@@ -216,7 +216,8 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitUntil(() => CheckOutOfInteraction());
 
-        InitializeGame();
+        if (CharStats[0].Wins != RoundsTilWin)
+            InitializeGame();
         MinigameManager.Instance.Cage.SetActive(false);
     }
 

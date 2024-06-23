@@ -137,6 +137,10 @@ public enum SoundType
     PointCounter,
     PointCounterDown,
     OnSfxChanged,
+    Qinu,
     Anthony,
-    Qinu
+    Boid,
+    Pamo,
+    Tessar,
+    Reaf
 }

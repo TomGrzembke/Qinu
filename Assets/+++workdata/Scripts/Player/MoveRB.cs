@@ -97,7 +97,7 @@ public class MoveRB : RBGetter
 
             if (rb.velocity.magnitude > currentMaxSpeed)
             {
-                rb.velocity = rb.velocity.normalized * currentMaxSpeed;
+                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed ;
             }
 
             yield return null;

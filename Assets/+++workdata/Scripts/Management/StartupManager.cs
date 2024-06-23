@@ -8,7 +8,6 @@ public class StartupManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return null;
-        LoadingScreen.Show(this);
 
         yield return SceneLoader.LoadScene(Scenes.Manager);
         yield return SceneLoader.LoadScene(Scenes.Pixelate);
@@ -21,7 +20,6 @@ public class StartupManager : MonoBehaviour
                 yield return SceneLoader.UnloadScene(GetSceneEnum(i));
         }
 
-        LoadingScreen.Hide(this);
         SceneLoader.UnloadScene(Scenes.Startup);
     }
 

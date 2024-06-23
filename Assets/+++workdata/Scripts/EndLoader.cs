@@ -1,3 +1,4 @@
+using MyBox;
 using System.Collections;
 using UnityEngine;
 
@@ -5,8 +6,13 @@ public class EndLoader : MonoBehaviour
 {
     #region serialized fields
     [SerializeField] Scenes sceneToLoad = Scenes.End;
-    #endregion
+    [SerializeField] string toEndDialogue = "toEnd";
+    [SerializeField] float transitionEndTime = 2f;
 
+    #endregion
+    float currentScore;
+    [field: SerializeField] public Vector3 QinuEndPos { get; private set; } 
+    [field: SerializeField] public bool WonGame { get; private set; } 
     #region private fields
 
     #endregion
@@ -24,10 +30,30 @@ public class EndLoader : MonoBehaviour
 
     void OnValueChanged(float value)
     {
-        if (value == TournamentManager.Instance.RoundsTilWin)
-        {
-            SceneLoader.LoadScene(Scenes.End);
-            SceneLoader.UnloadScene(Scenes.Gameplay);
-        }
+        currentScore = value;
+        if (value != TournamentManager.Instance.RoundsTilWin || value != -TournamentManager.Instance.RoundsTilWin) return;
+        LoadEnd();
+    }
+
+    [ButtonMethod]
+    void LoadEnd()
+    {
+        if (currentScore > 0) WonGame = true;
+        else WonGame = false;
+
+        QinuEndPos = TournamentManager.Instance.LeftPlayers[0].transform.position;
+
+        DialogueController.Instance.StartDialogue(toEndDialogue);
+
+        StartCoroutine(LoadNext());
+    }
+
+    IEnumerator LoadNext()
+    {
+        yield return new WaitUntil(() => !DialogueController.Instance.InDialogue);
+
+        yield return new WaitForSeconds(transitionEndTime);
+        SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.End);
+        SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
     }
 }

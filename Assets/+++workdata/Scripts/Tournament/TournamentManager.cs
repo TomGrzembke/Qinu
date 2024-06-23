@@ -90,12 +90,20 @@ public class TournamentManager : MonoBehaviour
     void Calc1v1()
     {
         ClearSideLists();
-        LeftPlayers.Add(AvailableChars[0]);
+        AddToList(LeftPlayers, AvailableChars[0]);
         lastPlayed = GetLowestPlayRate(lastPlayed);
 
         var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
-        RightPlayers.Add(newChar);
+        AddToList(RightPlayers, newChar);
         SwitchChars();
+    }
+
+    void AddToList(List<GameObject> list, GameObject toAdd)
+    {
+        list.CleanList();
+        if (!list.Contains(toAdd))
+            list.Add(toAdd);
+        list.CleanList();
     }
 
     void SwitchChars()
@@ -122,9 +130,9 @@ public class TournamentManager : MonoBehaviour
         second = CharManager.Instance.InitializeChar(second, true);
         third = CharManager.Instance.InitializeChar(third, false);
 
-        RightPlayers.Add(first);
-        RightPlayers.Add(second);
-        LeftPlayers.Add(third);
+        AddToList(RightPlayers, first);
+        AddToList(RightPlayers, second);
+        AddToList(LeftPlayers, third);
         SwitchChars();
     }
 
@@ -137,7 +145,7 @@ public class TournamentManager : MonoBehaviour
         bodi = CharManager.Instance.InitializeChar(bodi, true);
         ClearSideLists();
         LeftPlayerAdd();
-        RightPlayers.Add(bodi);
+        AddToList(RightPlayers, bodi);
         SwitchChars();
     }
 
@@ -326,11 +334,11 @@ public class TournamentManager : MonoBehaviour
     }
     public void LeftPlayerAdd()
     {
-        LeftPlayers.Add(AvailableChars[0]);
+        AddToList(LeftPlayers, AvailableChars[0]);
     }
     public void RightPlayerAdd(GameObject charGO)
     {
-        RightPlayers.Add(charGO);
+        AddToList(RightPlayers, charGO);
     }
 }
 

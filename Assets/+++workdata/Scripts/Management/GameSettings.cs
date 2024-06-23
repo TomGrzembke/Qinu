@@ -7,7 +7,8 @@ public class GameSettings : MonoBehaviour
 {
     #region Serilized Fields
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider masterSlider;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
     [SerializeField] Toggle screenToggle;
     [SerializeField] float onSFXChangedCooldown = 0.1f;
     #endregion
@@ -19,21 +20,34 @@ public class GameSettings : MonoBehaviour
 
     void Start()
     {
-        masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
 
         GetScreenToggle();
     }
 
-    public void OnMasterSliderChanged()
+    public void OnMusicSliderChanged()
     {
-        float volume = masterSlider.value;
+        float volume = musicSlider.value;
 
-        if (volume == masterSlider.minValue)
+        if (volume == musicSlider.minValue)
             volume = -60;
 
-        audioMixer.SetFloat("masterVolume", volume);
-        PlayerPrefs.SetFloat("masterVolume", volume);
-        masterSlider.value = volume;
+        audioMixer.SetFloat("musicVolume", volume);
+        PlayerPrefs.SetFloat("musicVolume", volume);
+        musicSlider.value = volume;
+    }
+
+    public void OnSfxSliderChanged()
+    {
+        float volume = sfxSlider.value;
+
+        if (volume == sfxSlider.minValue)
+            volume = -60;
+
+        audioMixer.SetFloat("sfxVolume", volume);
+        PlayerPrefs.SetFloat("sfxVolume", volume);
+        sfxSlider.value = volume;
 
         if (sfxChangedCoroutine == null && sfxEmitSound)
             sfxChangedCoroutine = StartCoroutine(PlayOnSFXChangedCor());
@@ -60,7 +74,7 @@ public class GameSettings : MonoBehaviour
 
     IEnumerator PlayOnSFXChangedCor()
     {
-        //SoundManager.Instance.PlaySound(SoundType.OnSfxChanged);
+        SoundManager.Instance.PlaySound(SoundType.OnSfxChanged);
         yield return new WaitForSecondsRealtime(onSFXChangedCooldown);
         sfxChangedCoroutine = null;
     }

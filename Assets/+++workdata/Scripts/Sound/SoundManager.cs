@@ -139,7 +139,7 @@ public enum SoundType
     OnSfxChanged,
     Qinu,
     Anthony,
-    Boid,
+    Bodi,
     Pamo,
     Tessar,
     Reaf

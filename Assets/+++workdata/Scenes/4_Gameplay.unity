@@ -1797,6 +1797,10 @@ PrefabInstance:
       propertyPath: topTarget
       value: 
       objectReference: {fileID: 1437835580}
+    - target: {fileID: 1670208073099970307, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: voice
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1992354443001235060, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget
       value: 
@@ -1861,6 +1865,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 812732749}
+    - target: {fileID: 7062270732835656002, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: voice
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8081983687213535593, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: botTarget
       value: 

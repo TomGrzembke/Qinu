@@ -36,7 +36,7 @@ Let's play a bit!
  -> END
  
   ==ActivateGoals
-Now that's a dash, what do you think silent spirits?
+Now that's a dash, what do you think friends?
     ~Event ("SilentSpiritsExclamation")
 You win a round by scoring 3 Goals!
     ~Event ("GoalActive")

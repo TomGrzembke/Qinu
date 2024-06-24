@@ -24,6 +24,7 @@ public class MoveRB : RBGetter
     #endregion 
 
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] bool disableInputRightclick;
 
     #region private fields
     Transform Puk => MinigameManager.Instance.Puk;
@@ -54,12 +55,14 @@ public class MoveRB : RBGetter
         charSO = GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
 
-        InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+        if (disableInputRightclick)
+            InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+        if (disableInputRightclick)
+            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
     }
 
     void FixedUpdate()
@@ -97,7 +100,7 @@ public class MoveRB : RBGetter
 
             if (rb.velocity.magnitude > currentMaxSpeed)
             {
-                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed ;
+                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
             }
 
             yield return null;

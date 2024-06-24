@@ -15,4 +15,5 @@ qinu
 inuq
 nuqi
 uniq.
+~Event ("MainMenu")
  -> END

@@ -6,6 +6,7 @@ using UnityEngine;
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] float fadeTime = 2;
+    [SerializeField] float loadingTime = 1;
     [SerializeField] CanvasGroup canvasGroup;
 
     static List<object> loadingInstigator = new();
@@ -46,6 +47,7 @@ public class LoadingScreen : MonoBehaviour
 
     IEnumerator HideCoroutine()
     {
+        yield return new WaitForSeconds(loadingTime);
         float time = 0;
         while (time < fadeTime)
         {

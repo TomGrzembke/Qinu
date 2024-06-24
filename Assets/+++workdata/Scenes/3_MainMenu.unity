@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 26972847}
   - component: {fileID: 26972849}
   - component: {fileID: 26972848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 106103771}
   - component: {fileID: 106103773}
   - component: {fileID: 106103772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 546176736}
   - component: {fileID: 546176738}
   - component: {fileID: 546176737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,6 +675,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716308052}
     m_Modifications:
+    - target: {fileID: 202541592375166426, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 508382253163179497, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 800346645992277569, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.0030517578
@@ -686,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 1260551094302617196, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574039320740601652, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2188248896344872444, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchorMax.x
@@ -802,6 +814,10 @@ PrefabInstance:
     - target: {fileID: 2869553404523544698, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070803013243832538, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5931891682475679404, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_Sprite
@@ -927,6 +943,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 7434161201423111507, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798803199564782780, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8755350703757414401, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.7949829
@@ -954,7 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 716308052}
   - component: {fileID: 716308053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1022,7 +1046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4496410115892118337, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5253925689188546159, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Sprite
@@ -1114,7 +1138,7 @@ GameObject:
   - component: {fileID: 870525458}
   - component: {fileID: 870525460}
   - component: {fileID: 870525459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,6 +1272,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 716308052}
     m_Modifications:
+    - target: {fileID: 202541592375166426, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 508382253163179497, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 800346645992277569, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.0030517578
@@ -1259,6 +1291,10 @@ PrefabInstance:
     - target: {fileID: 1260551094302617196, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574039320740601652, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2188248896344872444, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1375,6 +1411,10 @@ PrefabInstance:
     - target: {fileID: 2869553404523544698, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070803013243832538, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5931891682475679404, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_Sprite
@@ -1500,6 +1540,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 7434161201423111507, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798803199564782780, guid: 55345339763b3824bbca277791f26dac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8755350703757414401, guid: 55345339763b3824bbca277791f26dac, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.7949829
@@ -1539,7 +1587,7 @@ GameObject:
   - component: {fileID: 1031238482}
   - component: {fileID: 1031238484}
   - component: {fileID: 1031238483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,7 +1720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303371262}
   - component: {fileID: 1303371263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1744,7 +1792,7 @@ GameObject:
   - component: {fileID: 1600996847}
   - component: {fileID: 1600996849}
   - component: {fileID: 1600996848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2000,7 +2048,7 @@ GameObject:
   - component: {fileID: 1739118818}
   - component: {fileID: 1739118820}
   - component: {fileID: 1739118819}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2219,11 +2267,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859916684957013933, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 1859916684957013933, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.02
+      value: 3.32
       objectReference: {fileID: 0}
     - target: {fileID: 1859916684957013933, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2263,11 +2311,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384758876425480167, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2384758876425480167, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124974765966431868, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8597344718861538997, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
@@ -2285,7 +2337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2024197290}
   - component: {fileID: 2024197291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2704,7 +2756,7 @@ GameObject:
   - component: {fileID: 4845777444141553852}
   - component: {fileID: 2616889944215178932}
   - component: {fileID: 7318746240177218089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Text] Play'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2749,7 +2801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120480026688672661}
   - component: {fileID: 2881954297305204632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[LayoutGroup] RewardWindow (1)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2804,8 +2856,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
+  m_sharedMaterial: {fileID: 7111155575338065015, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2925,8 +2977,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Options
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
+  m_sharedMaterial: {fileID: 7111155575338065015, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3005,7 +3057,7 @@ GameObject:
   - component: {fileID: 6307051005514378005}
   - component: {fileID: 4392364971766143833}
   - component: {fileID: 1350854085566650630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Button] Options'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3042,7 +3094,7 @@ GameObject:
   - component: {fileID: 5896507697999521174}
   - component: {fileID: 4226469164708468186}
   - component: {fileID: 1507735391623419781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Button] Credits'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3139,7 +3191,7 @@ GameObject:
   - component: {fileID: 1055736265428396070}
   - component: {fileID: 7622375257815383598}
   - component: {fileID: 2884690314605236915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Text] Credits'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3165,7 +3217,7 @@ GameObject:
   - component: {fileID: 645428107644315301}
   - component: {fileID: 8042199762015203501}
   - component: {fileID: 3340480655873301552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Text] Options'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3298,8 +3350,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
+  m_sharedMaterial: {fileID: 7111155575338065015, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3499,7 +3551,7 @@ GameObject:
   - component: {fileID: 2039436709529982220}
   - component: {fileID: 8592442798800905536}
   - component: {fileID: 6446233516715583263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: '[Button] Play'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3520,7 +3572,7 @@ GameObject:
   - component: {fileID: 8423637334118267800}
   - component: {fileID: 3924434967281241788}
   - component: {fileID: 7863068386958069379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ----Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

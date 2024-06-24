@@ -13,12 +13,14 @@ public abstract class Ability : MonoBehaviour
 
     #region private fields
     Image abilityImage;
+    Image abilityImageBG;
     Coroutine coolDownCor;
     #endregion
 
-    public void EnterAbility(Image _abilityImage)
+    public void EnterAbility(Image _abilityImage, Image _abilityImageBG)
     {
         abilityImage = _abilityImage;
+        abilityImageBG = _abilityImageBG;
         OnInitialized();
     }
 
@@ -48,6 +50,7 @@ public abstract class Ability : MonoBehaviour
         while (wentByTime < cooldown)
         {
             wentByTime += Time.deltaTime;
+            abilityImageBG.fillAmount = wentByTime / cooldown;
             abilityImage.fillAmount = wentByTime / cooldown;
             yield return null;
         }

@@ -68,7 +68,7 @@ public class AbilitySlot : MonoBehaviour
     public void EnterAbility()
     {
         if (CurrentAbility)
-            CurrentAbility.EnterAbility(abilityImage);
+            CurrentAbility.EnterAbility(abilityImage, abilityImageBG);
     }
     public void Execute(bool performed = true)
     {

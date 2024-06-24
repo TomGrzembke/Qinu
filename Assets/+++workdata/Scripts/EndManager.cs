@@ -23,4 +23,9 @@ public class EndManager : MonoBehaviour
     }
 
 
+    public void ToMainMenu()
+    {
+        SceneLoader.Instance.LoadSceneViaIndex(Scenes.MainMenu);
+        SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
+    }
 }

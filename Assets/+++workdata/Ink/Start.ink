@@ -7,7 +7,7 @@ Welcome Qinu! #speaker: Anthony
  == Ball
  I'm Anthony the spirit of empathy.
  What am I? #speaker: Qinu
- Your a surpressed thought. #speaker: Anthony
+ Your a surpressed feeling. #speaker: Anthony
  A spirit held captive by your problems.
     ~Event ("Problems")
  Don't worry you are safe and stored in this data segment.

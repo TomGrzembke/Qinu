@@ -1355,6 +1355,10 @@ PrefabInstance:
       propertyPath: m_FillOrigin
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3360150961138467078, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: fadeOut
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3834690920962228015, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_SizeDelta.x
       value: 62.74
@@ -1553,7 +1557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148645716094638220, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8497463449826459910, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_AnchorMax.y

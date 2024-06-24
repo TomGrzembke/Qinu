@@ -1,25 +1,22 @@
 == Welcome
 Welcome Qinu! #speaker: Anthony
-I'm Anthony the spirit of empathy.
-What am I? #speaker: Qinu
-Your a surpressed thought. #speaker: Anthony
-Captivity is caused by your problems.
-    ~Event ("Problems")
-Most can't see the problems of others. 
-Don't worry you are safe and stored in this data segment.
+    ~Event ("Blocker")
+    ~Event ("Ball")
  -> END
  
  == Ball
- You will be competing for your freedom.
-    ~Event ("Blocker")
- It sounds sinister, but it's just Air hockey really!
- Here's a Data point which serves as a ball.
-   ~Event ("Ball")
-Let's play a bit!
+ I'm Anthony the spirit of empathy.
+ What am I? #speaker: Qinu
+ Your a surpressed thought. #speaker: Anthony
+ A spirit held captive by your problems.
+    ~Event ("Problems")
+ Don't worry you are safe and stored in this data segment.
+ It sounds sinister, you will be competing for your freedom.
+ Let's play a bit!
     ~Event ("AnthonyActive")
  -> END
  
-  == Abilities
+ == Abilities
     ~Event ("ActivateAbilities")
  You will be able to use 4 ability slots. #speaker: Anthony
  Here's your first one! #speaker: Anthony

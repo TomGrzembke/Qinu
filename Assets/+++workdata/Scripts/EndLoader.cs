@@ -8,21 +8,25 @@ public class EndLoader : MonoBehaviour
     [SerializeField] Scenes sceneToLoad = Scenes.End;
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
-
+    public static EndLoader Instance;
     #endregion
-    float currentScore;
-    [field: SerializeField] public Vector3 QinuEndPos { get; private set; } 
-    [field: SerializeField] public bool WonGame { get; private set; } 
+    [field: SerializeField] public Vector3 QinuEndPos { get; private set; }
+    [field: SerializeField] public bool WonGame { get; private set; }
     #region private fields
 
+    float currentScore;
     #endregion
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     IEnumerator Start()
     {
         yield return null;
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
     }
-
     void OnDisable()
     {
         TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
@@ -31,6 +35,10 @@ public class EndLoader : MonoBehaviour
     void OnValueChanged(float value)
     {
         currentScore = value;
+
+        if (currentScore > 0) WonGame = true;
+        else WonGame = false;
+
         if (value != TournamentManager.Instance.RoundsTilWin || value != -TournamentManager.Instance.RoundsTilWin) return;
         LoadEnd();
     }
@@ -38,9 +46,6 @@ public class EndLoader : MonoBehaviour
     [ButtonMethod]
     void LoadEnd()
     {
-        if (currentScore > 0) WonGame = true;
-        else WonGame = false;
-
         QinuEndPos = TournamentManager.Instance.LeftPlayers[0].transform.position;
 
         DialogueController.Instance.StartDialogue(toEndDialogue);

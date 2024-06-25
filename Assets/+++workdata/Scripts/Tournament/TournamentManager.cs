@@ -52,11 +52,12 @@ public class TournamentManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < CharManager.Instance.CharPrefabs.Length; i++)
-        {
-            if (!AvailableChars.Contains(CharManager.Instance.CharPrefabs[i].gameObject))
-                AvailableChars.Add(CharManager.Instance.CharPrefabs[i].gameObject);
-        }
+        if (CharManager.Instance)
+            for (int i = 0; i < CharManager.Instance.CharPrefabs.Length; i++)
+            {
+                if (!AvailableChars.Contains(CharManager.Instance.CharPrefabs[i].gameObject))
+                    AvailableChars.Add(CharManager.Instance.CharPrefabs[i].gameObject);
+            }
 
         for (int i = 0; i < AvailableChars.Count; i++)
         {
@@ -181,9 +182,10 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         yield return new WaitForSeconds(.3f);
+        string someString = "";
 
         if (afterCombatTalkTimes + 1 < afterCombatTalk.Count)
-            DialogueController.Instance.StartDialogue(afterCombatTalk[++afterCombatTalkTimes]);
+            DialogueController.Instance.StartDialogue(someString);
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);

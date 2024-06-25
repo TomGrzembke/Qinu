@@ -24,15 +24,21 @@ public class UIButton : MonoBehaviour
 
     void OnValidate()
     {
+        OnValidateCall();
+    }
+
+    void Awake()
+    {
+        OnValidateCall();
+    }
+
+    private void OnValidateCall()
+    {
         name = buttonNameSyntax + " " + buttonName;
         textComponent = GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent == null) return;
         textComponent.text = buttonName;
         textComponent.name = textNameSyntax + " " + buttonName;
-    }
-    void Awake()
-    {
-        normalCol = textComponent.color;
     }
 
     public void ClickedAnim()
@@ -66,10 +72,6 @@ public class UIButton : MonoBehaviour
 
     public void OnHover(bool condition)
     {
-        if (condition)
-            textComponent.color = hoverCol;
-        else
-            textComponent.color = normalCol;
 
     }
 }

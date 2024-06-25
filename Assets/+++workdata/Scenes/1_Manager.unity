@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 1
+  loadingTime: 1
   canvasGroup: {fileID: 987567735}
 --- !u!1 &1016315264
 GameObject:
@@ -1423,7 +1424,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1730354770}
-  - component: {fileID: 1730354769}
   m_Layer: 0
   m_Name: '[ScreenManager]'
   m_TagString: Untagged
@@ -1431,19 +1431,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1730354769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730354768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a14d2f5a17782499fa906b5de3b89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 987567736}
 --- !u!4 &1730354770
 Transform:
   m_ObjectHideFlags: 0

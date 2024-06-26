@@ -35,7 +35,7 @@ public class CharManager : MonoBehaviour
             {
                 target = newChar.GetComponent<NPCNav>();
                 target.SideSettings(isRight);
-                target.SetArenaMode(NPCNav.ArenaMode.ToArena);
+                target.ToArena();
             }
         }
         return newChar;

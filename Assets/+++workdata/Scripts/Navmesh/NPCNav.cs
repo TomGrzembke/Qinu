@@ -13,7 +13,7 @@ public class NPCNav : NavCalc
     #region serialized fields
     [SerializeField] ArenaMode arenaMode;
 
-    [field: SerializeField] public bool IsRight { get; private set; } 
+    [field: SerializeField] public bool IsRight { get; private set; }
     [SerializeField] float stoppingDistance = 2;
 
     [SerializeField] bool goesToDefault = true;
@@ -26,8 +26,8 @@ public class NPCNav : NavCalc
     [SerializeField] Vector3 targetPos;
 
     [SerializeField] Transform defaultTrans;
-    [field: SerializeField] public Transform TopTextTarget { get; private set; } 
-    [field: SerializeField] public Transform BotTextTarget { get; private set; } 
+    [field: SerializeField] public Transform TopTextTarget { get; private set; }
+    [field: SerializeField] public Transform BotTextTarget { get; private set; }
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
@@ -106,5 +106,11 @@ public class NPCNav : NavCalc
     public void SetArenaMode(ArenaMode newMode)
     {
         arenaMode = newMode;
+    }
+
+    public void ToArena()
+    {
+        if (arenaMode != ArenaMode.Arena)
+            arenaMode = ArenaMode.ToArena;
     }
 }

@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction Ability0Action { get; private set; }  
 
     public bool HasMoveInput => MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
+    bool usedTouch;
 
     void Awake()
     {
@@ -51,11 +52,14 @@ public class InputManager : MonoBehaviour
         if (!cam)
             cam = Camera.main;
 
-        if (cam)
+        if (cam && !usedTouch)
             MousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         if (Input.touchCount > 0)
+        {
             MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
+            usedTouch = true;
+        }
     }
 
     /// <summary> Takes a Method and an Inputaction to subscribe them</summary>

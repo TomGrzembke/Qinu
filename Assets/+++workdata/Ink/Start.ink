@@ -11,7 +11,7 @@ Welcome Qinu! #speaker: Anthony
  A spirit held captive by your problems.
     ~Event ("Problems")
  Don't worry you are safe and stored in this data segment.
- It sounds sinister, you will be competing for your freedom.
+ You will be competing for your freedom.
  Let's play a bit!
     ~Event ("AnthonyActive")
  -> END

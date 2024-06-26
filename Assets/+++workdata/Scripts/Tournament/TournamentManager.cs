@@ -107,9 +107,15 @@ public class TournamentManager : MonoBehaviour
         list.CleanList();
     }
 
+    List<GameObject> UseList(List<GameObject> list)
+    {
+        list.CleanList();
+        return list;
+    }
+
     void SwitchChars()
     {
-        MinigameManager.Instance.CharSwitchManager.Calculate(RightPlayers);
+        MinigameManager.Instance.CharSwitchManager.Calculate(UseList(RightPlayers));
     }
 
     void ClearSideLists()
@@ -200,7 +206,7 @@ public class TournamentManager : MonoBehaviour
         MinigameManager.Instance.ResetArena();
         GameState = GameStateEnum.OutOfGame;
 
-        if (RightPlayers.Count > 0)
+        if (UseList(RightPlayers).Count > 0)
             RightPlayers[0].GetComponent<NPCNav>().GoHome();
 
         if (CurrentGameMode == GameMode.a2v2)
@@ -233,7 +239,7 @@ public class TournamentManager : MonoBehaviour
         CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
         CharacterStats right0Stats = null;
 
-        if (RightPlayers.Count > 0)
+        if (UseList(RightPlayers).Count > 0)
             right0Stats = GetCharacterStats(RightPlayers[0]);
 
         if (firstMatch)
@@ -255,8 +261,8 @@ public class TournamentManager : MonoBehaviour
 
     void Cleanup2v2(int sideID)
     {
-        CharacterStats left1Stats = GetCharacterStats(LeftPlayers[1]);
-        CharacterStats right1Stats = GetCharacterStats(RightPlayers[1]);
+        CharacterStats left1Stats = GetCharacterStats(UseList(LeftPlayers)[1]);
+        CharacterStats right1Stats = GetCharacterStats(UseList(RightPlayers)[1]);
 
         if (sideID == 0)
         {
@@ -272,8 +278,8 @@ public class TournamentManager : MonoBehaviour
         left1Stats.TimesPlayed++;
         right1Stats.TimesPlayed++;
 
-        LeftPlayers[1].GetComponent<NPCNav>().GoHome();
-        RightPlayers[1].GetComponent<NPCNav>().GoHome();
+        UseList(LeftPlayers)[1].GetComponent<NPCNav>().GoHome();
+        UseList(RightPlayers)[1].GetComponent<NPCNav>().GoHome();
     }
 
     /// <returns>left = 0, right = 1</returns>
@@ -350,6 +356,7 @@ public class CharacterStats
 {
     public CharacterStats(GameObject charGO)
     {
+        if(charGO == null) return;
         CharGO = charGO;
         Name = CharGO.name;
     }

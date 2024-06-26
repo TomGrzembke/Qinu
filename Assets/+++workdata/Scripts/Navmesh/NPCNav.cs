@@ -41,7 +41,11 @@ public class NPCNav : NavCalc
     void Update()
     {
         if (arenaMode == ArenaMode.ToArena)
+        {
             targetPos = defaultTrans.position;
+            if (Vector3.Distance(targetPos, transform.position) < 2)
+                arenaMode = ArenaMode.Arena;
+        }
         else if (arenaMode == ArenaMode.Arena)
             InArena();
         else if (arenaMode == ArenaMode.Despawn)

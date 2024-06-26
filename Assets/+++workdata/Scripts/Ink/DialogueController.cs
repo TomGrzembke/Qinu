@@ -142,6 +142,7 @@ public class DialogueController : MonoBehaviour
     {
         string speaker = dialogueLine.speaker;
         List<GameObject> chars = CharManager.Instance.CharsSpawned;
+        chars.CleanList();
 
         for (int i = 0; i < chars.Count; i++)
         {

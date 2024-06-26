@@ -2,6 +2,7 @@ using MyBox;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -109,8 +110,13 @@ public class TournamentManager : MonoBehaviour
 
     List<GameObject> UseList(List<GameObject> list)
     {
-        list.CleanList();
+        CleanList(list);
         return list;
+    }
+
+    void CleanList(List<GameObject> list)
+    {
+        list.CleanList();
     }
 
     void SwitchChars()
@@ -236,11 +242,14 @@ public class TournamentManager : MonoBehaviour
 
     CharacterStats UpdateCharStats(int sideWon)
     {
-        CharacterStats left0Stats = GetCharacterStats(LeftPlayers[0]);
+        CharacterStats left0Stats = null;
         CharacterStats right0Stats = null;
 
+        if (LeftPlayers.Count > 0)
+            left0Stats = GetCharacterStats(LeftPlayers[0]);
+
         if (UseList(RightPlayers).Count > 0)
-            right0Stats = GetCharacterStats(RightPlayers[0]);
+            right0Stats = GetCharacterStats(UseList(RightPlayers)[0]);
 
         if (firstMatch)
             return left0Stats;
@@ -261,25 +270,43 @@ public class TournamentManager : MonoBehaviour
 
     void Cleanup2v2(int sideID)
     {
-        CharacterStats left1Stats = GetCharacterStats(UseList(LeftPlayers)[1]);
-        CharacterStats right1Stats = GetCharacterStats(UseList(RightPlayers)[1]);
+        CleanList(LeftPlayers);
+        CleanList(RightPlayers);
 
-        if (sideID == 0)
+        if (LeftPlayers.Count > 1)
         {
-            left1Stats.Wins++;
-            right1Stats.Wins--;
+            CharacterStats left1Stats = GetCharacterStats(LeftPlayers[1]);
+            if (sideID == 0)
+                left1Stats.Wins++;
+
+            else if (sideID == 1)
+                left1Stats.Wins--;
+
+            left1Stats.TimesPlayed++;
         }
-        else if (sideID == 1)
+
+        if (RightPlayers.Count > 1)
         {
-            left1Stats.Wins--;
-            right1Stats.Wins++;
+            CharacterStats right1Stats = GetCharacterStats(RightPlayers[1]);
+            if (sideID == 0)
+                right1Stats.Wins++;
+
+            else if (sideID == 1)
+                right1Stats.Wins--;
+
+            right1Stats.TimesPlayed++;
         }
 
-        left1Stats.TimesPlayed++;
-        right1Stats.TimesPlayed++;
-
-        UseList(LeftPlayers)[1].GetComponent<NPCNav>().GoHome();
-        UseList(RightPlayers)[1].GetComponent<NPCNav>().GoHome();
+        try
+        {
+            LeftPlayers[1].GetComponent<NPCNav>().GoHome();
+        }
+        catch { print("left index 1 error"); }
+        try
+        {
+            RightPlayers[1].GetComponent<NPCNav>().GoHome();
+        }
+        catch { print("right index 1 error"); }
     }
 
     /// <returns>left = 0, right = 1</returns>
@@ -356,7 +383,7 @@ public class CharacterStats
 {
     public CharacterStats(GameObject charGO)
     {
-        if(charGO == null) return;
+        if (charGO == null) return;
         CharGO = charGO;
         Name = CharGO.name;
     }

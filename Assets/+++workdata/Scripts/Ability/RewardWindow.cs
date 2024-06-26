@@ -155,8 +155,6 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void Close()
     {
-        //PauseManager.Instance.PauseLogic(false);
-
         if (currentRewarWindowCoroutine != null)
             StopCoroutine(currentRewarWindowCoroutine);
 
@@ -164,6 +162,7 @@ public class RewardWindow : MonoBehaviour
     }
     IEnumerator ShowCoroutine()
     {
+        Cursor.visible = true;
         InAbilitySelect = true;
         essentialUI.SetActive(true);
         rewardWindow.SetActive(true);
@@ -185,6 +184,7 @@ public class RewardWindow : MonoBehaviour
 
     IEnumerator HideCoroutine()
     {
+        Cursor.visible = false;
         rewardWindowCanvasGroup.interactable = false;
         essentialUICanvasGroup.alpha = 0;
         essentialUI.SetActive(true);

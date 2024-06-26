@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7d40351e1746b428071ee5db8ffb0b, type: 3}
   m_Name: BGPixelShaderController
   m_EditorClassIdentifier: 
-  pixelRes: 350
+  pixelRes: 412
   screenRes: {x: 1920, y: 1080}
   pixelartMat: {fileID: 2100000, guid: 7b66fbf195e617d42a470781731b8ba3, type: 2}
   col: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}

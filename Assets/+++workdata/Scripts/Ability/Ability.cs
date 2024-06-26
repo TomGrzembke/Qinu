@@ -9,6 +9,7 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected AbilitySO abilitySO;
     public AbilitySO AbilitySO => abilitySO;
     public bool IsActive => cooldown > 0;
+    GameObject numberObject;
     #endregion
 
     #region private fields
@@ -17,10 +18,11 @@ public abstract class Ability : MonoBehaviour
     Coroutine coolDownCor;
     #endregion
 
-    public void EnterAbility(Image _abilityImage, Image _abilityImageBG)
+    public void EnterAbility(Image _abilityImage, Image _abilityImageBG, GameObject _numberObject)
     {
         abilityImage = _abilityImage;
         abilityImageBG = _abilityImageBG;
+        numberObject = _numberObject;
         OnInitialized();
     }
 
@@ -32,9 +34,11 @@ public abstract class Ability : MonoBehaviour
         {
             coolDownCor = StartCoroutine(Cooldown());
             ExecuteInternal();
+            numberObject.SetActive(false);
         }
         else
             DeExecuteInternal();
+        
     }
     public void OnInitialized()
     {
@@ -55,6 +59,7 @@ public abstract class Ability : MonoBehaviour
             yield return null;
         }
 
+        numberObject.SetActive(true);
         coolDownCor = null;
     }
 }

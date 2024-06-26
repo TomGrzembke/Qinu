@@ -11,6 +11,7 @@ public class GameStateManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(Instance.gameObject);
+        Cursor.visible = false;
     }
 
 

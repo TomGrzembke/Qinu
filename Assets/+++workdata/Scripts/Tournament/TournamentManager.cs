@@ -194,10 +194,9 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         yield return new WaitForSeconds(.3f);
-        string someString = "";
 
         if (afterCombatTalkTimes + 1 < afterCombatTalk.Count)
-            DialogueController.Instance.StartDialogue(someString);
+            DialogueController.Instance.StartDialogue("");
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);

@@ -44,7 +44,7 @@ public class EndLoader : MonoBehaviour
     }
 
     [ButtonMethod]
-    void LoadEnd()
+    public void LoadEnd()
     {
         QinuEndPos = TournamentManager.Instance.LeftPlayers[0].transform.position;
 
@@ -58,7 +58,7 @@ public class EndLoader : MonoBehaviour
         yield return new WaitUntil(() => !DialogueController.Instance.InDialogue);
 
         yield return new WaitForSeconds(transitionEndTime);
-        SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.End);
+        SceneLoader.Instance.LoadSceneViaIndex(Scenes.End);
         SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
     }
 }

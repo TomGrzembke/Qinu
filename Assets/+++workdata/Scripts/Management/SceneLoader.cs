@@ -41,7 +41,6 @@ public class SceneLoader : MonoBehaviour
         return LoadSceneViaIndex((int)scene, onLoadingFinished);
     }
 
-
     public Coroutine LoadSceneViaIndex(int index, Action onLoadingFinished = null)
     {
         return StartCoroutine(LoadSceneViaIndexCo(index, onLoadingFinished));

@@ -14,6 +14,6 @@ He will regain joy with your help.
  -> END
  
  ==Won2
- Goodby Qinu. #speaker: Anthony
+ Goodbye Qinu. #speaker: Anthony
     ~Event ("MainMenu")
   -> END

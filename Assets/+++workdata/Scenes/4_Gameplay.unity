@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharSwitchManager>k__BackingField: {fileID: 669689616}
-  pointsTilWin: 1
+  pointsTilWin: 3
   pointCounter: {x: 0, y: 0}
   <Puk>k__BackingField: {fileID: 1183967833}
   pukRB: {fileID: 1183967834}

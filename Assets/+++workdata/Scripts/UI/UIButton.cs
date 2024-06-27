@@ -9,13 +9,12 @@ public class UIButton : MonoBehaviour
     #region serialized fields
     [SerializeField] string buttonName;
     [SerializeField] bool additionalSettings;
-    [SerializeField] Color hoverCol;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleOnClick = .75f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleTime = .075f;
+    [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleHover = .95f;
     #endregion
 
     #region private fields
-    Color normalCol;
     readonly string buttonNameSyntax = "[Button]";
     readonly string textNameSyntax = "[Text]";
     TextMeshProUGUI textComponent;
@@ -72,6 +71,9 @@ public class UIButton : MonoBehaviour
 
     public void OnHover(bool condition)
     {
-
+        if (condition)
+            transform.localScale = new Vector3(scaleHover, scaleHover);
+        else
+            transform.localScale = Vector3.one;
     }
 }

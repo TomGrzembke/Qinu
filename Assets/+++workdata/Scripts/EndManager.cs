@@ -32,8 +32,8 @@ public class EndManager : MonoBehaviour
 
     public void ToMainMenu()
     {
-        SceneLoader.Instance.LoadSceneViaIndex(Scenes.MainMenu);
         SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
+        SceneLoader.Instance.LoadSceneViaIndex(Scenes.MainMenu);
     }
 
     public void SuckQinuIn()
@@ -50,8 +50,9 @@ public class EndManager : MonoBehaviour
         {
             timeWentBy += Time.deltaTime;
             qinu.position = Vector3.Lerp(originalPos, capsuleTrans.position, suckInCurve.Evaluate(timeWentBy / suckInTime));
-            qinu.gameObject.SetActive(false);
             yield return null;
         }
+        
+        qinu.gameObject.SetActive(false);
     }
 }

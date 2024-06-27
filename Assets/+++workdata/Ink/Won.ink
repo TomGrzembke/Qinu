@@ -11,5 +11,9 @@ You will be released to your host again. #speaker: Anthony
 Your the uniquness of an old man who has lost his partner.
     ~Event ("SuckQinuIn")
 He will regain joy with your help.
-    ~Event ("MainMenu")
  -> END
+ 
+ ==Won2
+ Goodby Qinu. #speaker: Anthony
+    ~Event ("MainMenu")
+  -> END

@@ -58,6 +58,8 @@ public class NPCNav : NavCalc
 
     void InArena()
     {
+        if(!MinigameManager.Instance) return;
+
         if (PukOnSide)
         {
             targetPos = Puk.position;

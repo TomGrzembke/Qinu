@@ -63,6 +63,9 @@ public class MoveRB : RBGetter
     {
         if (disableInputRightclick)
             InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+
+        StopAllCoroutines();
+        rb.velocity = Vector3.zero;
     }
 
     void FixedUpdate()

@@ -388,6 +388,41 @@ MonoBehaviour:
   winDialogue: {fileID: 1445272405}
   looseDialogue: {fileID: 1250450115}
   qinu: {fileID: 1130039576}
+  suckInTime: 2
+  suckInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7212776
+      value: 0.02489075
+      inSlope: 0.013199516
+      outSlope: 0.013199516
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13716114
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  capsuleTrans: {fileID: 5461304708212537143}
 --- !u!1001 &681304881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -971,6 +1006,10 @@ MonoBehaviour:
     dialogueName: Won
     afterWaitSeconds: 0
     condition: 1
+  - beforeWaitSeconds: 2
+    dialogueName: Won2
+    afterWaitSeconds: 0
+    condition: 1
   dashAbilityPrefab: {fileID: 0}
   anthony: {fileID: 0}
   eventsOfTutorial: {fileID: 8208236600390223788}
@@ -1238,6 +1277,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1684308041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+  m_PrefabInstance: {fileID: 5674910289240462904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684308030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1734773579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 632085850976808775, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
@@ -22987,29 +23037,6 @@ PolygonCollider2D:
       - {x: 3.7191782, y: -3.1797152}
       - {x: 4.825767, y: -2.0350463}
       - {x: 4.8223076, y: -1.2036155}
-    - []
-    - []
-    - - {x: -3.6399999, y: 3.0349998}
-      - {x: -3.1699998, y: 3.0149999}
-      - {x: -1.0799999, y: 3.0249999}
-      - {x: -1.0699999, y: 3.0349998}
-      - {x: 3.648821, y: 3.0484366}
-      - {x: 4.61, y: 2.2549999}
-      - {x: 4.6560163, y: 1.3439479}
-      - {x: 4.6645865, y: 1.2501888}
-      - {x: 4.7945805, y: 1.2797455}
-      - {x: 4.8211365, y: 1.8412666}
-      - {x: 4.7523794, y: 2.1491132}
-      - {x: 3.9626865, y: 2.9848378}
-      - {x: 3.7218907, y: 3.2202373}
-      - {x: -3.7070057, y: 3.267368}
-      - {x: -4.922019, y: 2.093846}
-      - {x: -4.890895, y: 1.2786665}
-      - {x: -4.85672, y: 1.2499297}
-      - {x: -4.789491, y: 1.2499298}
-      - {x: -4.73, y: 1.275}
-      - {x: -4.69, y: 2.055}
-      - {x: -4.37, y: 2.355}
   m_UseDelaunayMesh: 0
 --- !u!222 &7808921853412774626
 CanvasRenderer:
@@ -23836,6 +23863,34 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: win
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: SuckQinuIn
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1684308041}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 537710840}
+          m_TargetAssemblyTypeName: EndManager, Assembly-CSharp
+          m_MethodName: SuckQinuIn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!212 &8214531555871907214

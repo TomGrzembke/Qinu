@@ -56,6 +56,7 @@ public class AbilitySlot : MonoBehaviour
         {
             abilityImageBG.color = Color.red;
             lostVFX.Play();
+            numberObject.SetActive(false);
         }
         else
             abilityImageBG.color = Color.gray;

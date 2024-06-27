@@ -24,8 +24,11 @@ public class SituationalDialogue : MonoBehaviour
         if (charName.Contains("(Clone)"))
             charName = charName.Split("(")[0];
 
+        charName = charName.Trim();
+
         if(!CharCounts.ContainsKey(charName)) 
         {
+            
             CharCounts.Add(charName, 0);
         }
 

@@ -42,6 +42,7 @@ public class TournamentManager : MonoBehaviour
     [SerializeField] AnimationCurve slowMoCurve;
     [SerializeField] float blendTime = 0.3f;
     [SerializeField] float blendTimeScale = .8f;
+    Coroutine blendRoutine;
     #endregion
 
     #region private fields
@@ -197,9 +198,12 @@ public class TournamentManager : MonoBehaviour
 
     IEnumerator AfterGameCor(int sideID)
     {
-        StartCoroutine(BlendTimeScale());
+        if (blendRoutine != null)
+            StopCoroutine(blendRoutine);
 
-        yield return new WaitForSeconds(blendTimeScale * 2);
+        blendRoutine = StartCoroutine(BlendTimeScale());
+
+        yield return new WaitUntil(() => blendRoutine == null);
 
         SituationalDialogue.Instance.StartDialogue(UseList(RightPlayers)[0].name);
 
@@ -400,6 +404,8 @@ public class TournamentManager : MonoBehaviour
             Time.timeScale = Mathf.Lerp(blendTimeScale, 1, timeBlended / blendTime);
             yield return null;
         }
+
+        blendRoutine = null;
     }
 }
 

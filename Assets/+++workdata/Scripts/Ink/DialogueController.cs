@@ -63,7 +63,16 @@ public class DialogueController : MonoBehaviour
     public void StartDialogue(string dialoguePath)
     {
         OpenDialogue();
+        try
+        {
         inkStory.ChoosePathString(dialoguePath);
+
+        }
+        catch
+        {
+            Debug.LogWarning(dialoguePath + " doesn't exist");
+        }
+
         ContinueDialogue();
     }
 

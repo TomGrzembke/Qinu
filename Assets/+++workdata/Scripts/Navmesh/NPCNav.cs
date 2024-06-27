@@ -42,7 +42,8 @@ public class NPCNav : NavCalc
     {
         if (arenaMode == ArenaMode.ToArena)
         {
-            targetPos = defaultTrans.position;
+            if (defaultTrans)
+                targetPos = defaultTrans.position;
             if (Vector3.Distance(targetPos, transform.position) < 2)
                 arenaMode = ArenaMode.Arena;
         }

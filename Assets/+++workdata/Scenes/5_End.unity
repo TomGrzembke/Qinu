@@ -11386,6 +11386,7 @@ GameObject:
   - component: {fileID: 5461304708212537143}
   - component: {fileID: 4751828473479553057}
   - component: {fileID: 4795707712957258172}
+  - component: {fileID: 5461304708212537144}
   m_Layer: 6
   m_Name: EndCapsule
   m_TagString: Untagged
@@ -19573,6 +19574,36 @@ Transform:
   - {fileID: 5874737799302992893}
   m_Father: {fileID: 1467216489803142013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5461304708212537144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036374208518234580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdaa52bdc32b684ea8a595aa74595ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEvent1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 537710840}
+        m_TargetAssemblyTypeName: EndManager, Assembly-CSharp
+        m_MethodName: DeactivateQinu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onEvent2:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &5465287539743915002
 RectTransform:
   m_ObjectHideFlags: 0

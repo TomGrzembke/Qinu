@@ -52,7 +52,11 @@ public class EndManager : MonoBehaviour
             qinu.position = Vector3.Lerp(originalPos, capsuleTrans.position, suckInCurve.Evaluate(timeWentBy / suckInTime));
             yield return null;
         }
-        
+
+    }
+
+    public void DeactivateQinu()
+    {
         qinu.gameObject.SetActive(false);
     }
 }

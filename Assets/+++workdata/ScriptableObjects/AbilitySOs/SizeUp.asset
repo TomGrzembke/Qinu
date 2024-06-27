@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SizeUp
   m_EditorClassIdentifier: 
   abilitySprite: {fileID: -567010029, guid: e7867d17ed2fb304caf897646eeffe26, type: 3}
-  abilityTitel: SizeUp
+  abilityTitel: Size Up
   abilityDescription: 

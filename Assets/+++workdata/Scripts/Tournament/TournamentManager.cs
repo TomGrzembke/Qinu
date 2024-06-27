@@ -2,7 +2,6 @@ using MyBox;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,6 +38,11 @@ public class TournamentManager : MonoBehaviour
     [SerializeField] float afterCombatTime = 3;
     [field: SerializeField] public float RoundsTilWin { get; private set; } = 5;
     [SerializeField] List<string> afterCombatTalk;
+
+    [Header("SlowMo")]
+    [SerializeField] AnimationCurve slowMoCurve;
+    [SerializeField] float blendTime = 0.3f;
+    [SerializeField] float blendTimeScale = .8f;
     #endregion
 
     #region private fields
@@ -46,6 +50,7 @@ public class TournamentManager : MonoBehaviour
     GameObject lastPlayed;
     bool firstMatch = true;
     #endregion
+
     void Awake()
     {
         Instance = this;
@@ -193,7 +198,9 @@ public class TournamentManager : MonoBehaviour
 
     IEnumerator AfterGameCor(int sideID)
     {
-        yield return new WaitForSeconds(.3f);
+        StartCoroutine(BlendTimeScale());
+
+        yield return new WaitForSeconds(blendTimeScale * 2);
 
         if (afterCombatTalkTimes + 1 < afterCombatTalk.Count)
             DialogueController.Instance.StartDialogue("");
@@ -374,6 +381,27 @@ public class TournamentManager : MonoBehaviour
     public void RightPlayerAdd(GameObject charGO)
     {
         AddToList(RightPlayers, charGO);
+    }
+
+    IEnumerator BlendTimeScale()
+    {
+        float timeBlended = 0;
+
+        while (timeBlended < blendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(1, blendTimeScale, slowMoCurve.Evaluate(timeBlended / blendTime));
+            yield return null;
+        }
+
+        timeBlended = 0;
+
+        while (timeBlended < blendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(blendTimeScale, 1, timeBlended / blendTime);
+            yield return null;
+        }
     }
 }
 

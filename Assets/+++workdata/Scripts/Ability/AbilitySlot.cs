@@ -13,6 +13,7 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] Image abilityImage;
     [SerializeField] Image abilityImageBG;
     [SerializeField] GameObject numberObject;
+    [SerializeField] ParticleSystem lostVFX;
     #endregion
 
     #region private fields
@@ -52,7 +53,10 @@ public class AbilitySlot : MonoBehaviour
             DestroyImmediate(CurrentAbility.gameObject, true);
 
         if (newAbilityPrefab == null)
+        {
             abilityImageBG.color = Color.red;
+            lostVFX.Play();
+        }
         else
             abilityImageBG.color = Color.gray;
 

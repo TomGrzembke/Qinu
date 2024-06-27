@@ -37,7 +37,6 @@ public class TournamentManager : MonoBehaviour
     #region [SerializeField]
     [SerializeField] float afterCombatTime = 3;
     [field: SerializeField] public float RoundsTilWin { get; private set; } = 5;
-    [SerializeField] List<string> afterCombatTalk;
 
     [Header("SlowMo")]
     [SerializeField] AnimationCurve slowMoCurve;
@@ -202,8 +201,7 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitForSeconds(blendTimeScale * 2);
 
-        if (afterCombatTalkTimes + 1 < afterCombatTalk.Count)
-            DialogueController.Instance.StartDialogue("");
+        SituationalDialogue.Instance.StartDialogue(UseList(RightPlayers)[0].name);
 
         MinigameManager.Instance.ResetInternal();
         MinigameManager.Instance.Cage.SetActive(true);

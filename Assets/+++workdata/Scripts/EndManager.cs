@@ -53,6 +53,7 @@ public class EndManager : MonoBehaviour
             yield return null;
         }
 
+        qinu.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     public void DeactivateQinu()

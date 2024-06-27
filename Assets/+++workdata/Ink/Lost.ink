@@ -2,7 +2,9 @@
 This part is why I hate my being. #speaker: Anthony
 Anthony! What's going on? Did I loose? #speaker: Qinu
 I hope you understand that I have to do this. #speaker: Anthony
+    ~Event ("OpenCapsuleLoose")
 I'll visit you the first few years.
+    ~Event ("SuckQinuIn")
 Years? Are you storing me in those capsules?! #speaker: Qinu
     ~Event ("Problems")
 There are too many problems on you, I cant help you anymore. #speaker: Anthony

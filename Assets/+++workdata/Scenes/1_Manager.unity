@@ -271,7 +271,7 @@ MonoBehaviour:
   toEndDialogue: ToEnd
   transitionEndTime: 2
   <QinuEndPos>k__BackingField: {x: 0, y: 0, z: 0}
-  <WonGame>k__BackingField: 1
+  <WonGame>k__BackingField: 0
 --- !u!4 &332062366
 Transform:
   m_ObjectHideFlags: 0

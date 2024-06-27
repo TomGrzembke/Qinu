@@ -1006,7 +1006,7 @@ MonoBehaviour:
     dialogueName: Won
     afterWaitSeconds: 0
     condition: 1
-  - beforeWaitSeconds: 2
+  - beforeWaitSeconds: 3
     dialogueName: Won2
     afterWaitSeconds: 0
     condition: 1
@@ -1536,6 +1536,10 @@ PrefabInstance:
     - target: {fileID: 8148645716094638220, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_Alpha
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423637333969384986, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8497463449826459910, guid: e89900a626429f24ebb34bcdc1ff9724, type: 3}
       propertyPath: m_AnchorMax.y
@@ -23891,6 +23895,34 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: OpenCapsuleLoose
+    onEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4795707712957258172}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: open
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4795707712957258172}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: loose
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!212 &8214531555871907214

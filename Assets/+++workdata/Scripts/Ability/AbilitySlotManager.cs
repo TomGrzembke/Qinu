@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class AbilitySlotManager : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [field: SerializeField] public AbilitySlot[] AbilitySlots { get; private set; }
     [Header("Ability getter")]
     [SerializeField] Transform playerObj;
     public Transform PlayerObj => playerObj;
     [field: SerializeField] public Transform Puk { get; private set; }
     [field: SerializeField] public Transform Middle { get; private set; }
-
-
     #endregion
 
-    #region private fields
+    #region Non Serialized
     public static AbilitySlotManager Instance;
     #endregion
 

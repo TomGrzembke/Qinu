@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary> Responsible for the UI and distrebution of abilities</summary>
 public class RewardWindow : MonoBehaviour
 {
-    public static RewardWindow Instance;
-
-    #region serialized fields
+    #region Serialized
     [SerializeField] GameObject rewardWindow;
     [SerializeField] GameObject essentialUI;
 
@@ -19,9 +18,11 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] List<GameObject> possibleRewards;
     [SerializeField] List<GameObject> rewardsReceived;
     [field: SerializeField] public bool InAbilitySelect { get; private set; }
+
     #endregion
 
-    #region private fields
+    #region Non Serialized
+    public static RewardWindow Instance;
     GameObject[] rewards;
     CanvasGroup rewardWindowCanvasGroup;
     CanvasGroup essentialUICanvasGroup;
@@ -65,19 +66,19 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void GiveReward()
     {
-        if (!AbilitySlotManager.Instance.CheckIfSlotAvailable())  return;
+        if (!AbilitySlotManager.Instance.CheckIfSlotAvailable()) return;
 
         rewards = PickThreeRewards();
-        string currentText;
+        string currentText = "";
 
         for (int i = 0; i < choiceButtonTexts.Length; i++)
         {
-            if (rewards[i].TryGetComponent(out Ability ability))
+            if (rewards[i] != null && rewards[i].TryGetComponent(out Ability ability))
                 currentText = ability.AbilitySO.abilityTitel;
             else
             {
-                Debug.Log(rewards[i].name + " has no Ability Script");
-                currentText = "Random";
+                Debug.Log(i + " has no Ability Script");
+                choiceButtonTexts[i].gameObject.SetActive(false);
             }
 
             choiceButtonTexts[i].text = currentText;
@@ -127,18 +128,17 @@ public class RewardWindow : MonoBehaviour
         return rewards;
     }
 
+    /// <summary> Gets a random reward and repeats if it isn't applicable </summary>
     public GameObject GetRandomReward(GameObject priorChoice1 = null, GameObject priorChoice2 = null)
     {
-        var randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
 
-        if (randomObject == null)
-            GetRandomReward();
-        if (rewardsReceived.Contains(randomObject))
-            return GetRandomReward();
-        if (randomObject == priorChoice1)
-            return GetRandomReward();
-        if (randomObject == priorChoice2)
-            return GetRandomReward();
+        GameObject randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
+
+        bool applicableAbility = randomObject != null && !rewardsReceived.Contains(randomObject)
+            && randomObject != priorChoice1 && randomObject != priorChoice2;
+
+        if (!applicableAbility)
+            return GetRandomReward(priorChoice1, priorChoice2);
 
         return randomObject;
     }
@@ -160,14 +160,18 @@ public class RewardWindow : MonoBehaviour
 
         currentRewarWindowCoroutine = StartCoroutine(HideCoroutine());
     }
+
     IEnumerator ShowCoroutine()
     {
         Cursor.visible = true;
         InAbilitySelect = true;
+
         essentialUI.SetActive(true);
         rewardWindow.SetActive(true);
+
         essentialUICanvasGroup.alpha = 1;
         rewardWindowCanvasGroup.alpha = 0;
+
         float time = 0;
 
         while (time < fadeTime)

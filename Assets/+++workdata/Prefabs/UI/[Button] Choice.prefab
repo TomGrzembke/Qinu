@@ -188,9 +188,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonName: Choice
   additionalSettings: 0
-  hoverCol: {r: 0, g: 0, b: 0, a: 0}
   scaleOnClick: 0.9
   scaleTime: 0.5
+  scaleHover: 0.95
 --- !u!222 &1407733329399678771
 CanvasRenderer:
   m_ObjectHideFlags: 0

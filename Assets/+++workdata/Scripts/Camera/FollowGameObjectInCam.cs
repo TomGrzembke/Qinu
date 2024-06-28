@@ -18,6 +18,7 @@ public class FollowGameObjectInCam : MonoBehaviour
     float width;
     float height;
     #endregion
+
     void Start()
     {
         target = topTarget;
@@ -25,6 +26,7 @@ public class FollowGameObjectInCam : MonoBehaviour
         width = Screen.width;
         height = Screen.height;
     }
+
     void Update()
     {
         Vector2 bottomLeft = cam.ScreenToWorldPoint(Vector2.zero);

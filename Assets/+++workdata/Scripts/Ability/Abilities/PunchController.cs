@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class PunchController : MonoBehaviour
 {
-    #region serialized fields
-
+    #region Serialized
     [Header("Stinger Info")]
 
     [SerializeField] Transform handGFX;
     [SerializeField] Transform handTarget;
     [SerializeField] AnimationCurve animationCurve;
 
-    [Header("Time Info")][SerializeField] float timeToAttack = 1;
+    [Header("Time Info")]
+    [SerializeField] float timeToAttack = 1;
     [SerializeField] float cooldownForNextAttack = 2;
     [SerializeField] float attackWindupTime = .7f;
     [SerializeField] float percentAlphaWindupAttackLock = 0.4f;
@@ -20,7 +20,7 @@ public class PunchController : MonoBehaviour
     [SerializeField] float defaultRotation;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Collider2D targetCol;
 
     Coroutine attackCoroutine;
@@ -29,11 +29,11 @@ public class PunchController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Puk") || collision.CompareTag("NPC"))
-            targetCol = collision;
+        if (!(collision.CompareTag("Puk") || collision.CompareTag("NPC"))) return;
 
-        if (collision.CompareTag("Puk") || (collision.CompareTag("NPC")))
-            AttackTarget(targetCol.transform);
+        targetCol = collision;
+        AttackTarget(targetCol.transform);
+
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -62,7 +62,7 @@ public class PunchController : MonoBehaviour
         Vector3 currentTargetPos = target.position;
         while (currentAttackWindupTime < attackWindupTime)
         {
-            HandRotationFrame(currentAttackWindupTime, target.position);
+            HandFrameRotation(currentAttackWindupTime, target.position);
 
             currentAttackWindupTime += Time.deltaTime;
 
@@ -74,7 +74,7 @@ public class PunchController : MonoBehaviour
 
         while (attackTime < timeToAttack)
         {
-            HandRotationFrame(attackTime, target.position);
+            HandFrameRotation(attackTime, target.position);
             attackTime += Time.deltaTime;
             handTarget.position = Vector3.Lerp(currentHandPos, currentTargetPos, animationCurve.Evaluate(attackTime / timeToAttack));
             yield return null;
@@ -84,7 +84,7 @@ public class PunchController : MonoBehaviour
         attackCoroutine = null;
     }
 
-    void HandRotationFrame(float currentTime, Vector3 attackPos)
+    void HandFrameRotation(float currentTime, Vector3 attackPos)
     {
         Vector3 vectorToTarget = attackPos - handGFX.position;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotationMinus;

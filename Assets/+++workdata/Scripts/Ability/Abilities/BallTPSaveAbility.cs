@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
+//The indiviual function for the current ability 
 public class BallTPSaveAbility : Ability
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] float tpTime = .3f;
     [SerializeField] float spaceToAdd = 3;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Coroutine saveRoutine;
     #endregion

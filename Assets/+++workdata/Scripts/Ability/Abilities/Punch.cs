@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+//The indiviual function for the current ability 
 public class Punch : Ability
 {
     #region serialized fields
@@ -10,7 +11,7 @@ public class Punch : Ability
 
     #region private fields
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    Coroutine punchRoutine;
+    Coroutine abilityRoutine;
     #endregion
 
     protected override void DeExecuteInternal()
@@ -20,8 +21,8 @@ public class Punch : Ability
 
     protected override void ExecuteInternal()
     {
-        if (punchRoutine == null)
-            punchRoutine = StartCoroutine(PunchRoutine());
+        if (abilityRoutine == null)
+            abilityRoutine = StartCoroutine(PunchRoutine());
     }
 
     protected override void OnInitializedInternal()
@@ -36,6 +37,6 @@ public class Punch : Ability
 
         yield return new WaitForSeconds(punchTime);
         Destroy(punch);
-        punchRoutine = null;
+        abilityRoutine = null;
     }
 }

@@ -15,7 +15,6 @@ public class NPCNav : NavCalc
 
     [field: SerializeField] public bool IsRight { get; private set; }
     [SerializeField] float stoppingDistance = 2;
-
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool followBallY = true;
     [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;

@@ -2,17 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> The template and function for all abilities </summary>
 public abstract class Ability : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] protected float cooldown;
     [SerializeField] protected AbilitySO abilitySO;
+    #endregion
+
+    #region Non Serialized
     public AbilitySO AbilitySO => abilitySO;
     public bool IsActive => cooldown > 0;
     GameObject numberObject;
-    #endregion
 
-    #region private fields
     Image abilityImage;
     Image abilityImageBG;
     Coroutine coolDownCor;

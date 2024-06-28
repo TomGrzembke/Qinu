@@ -1,16 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
+//The indiviual function for the current ability 
 public class ChangeBallSpeed : Ability
 {
-    #region serialized fields
-    [SerializeField] float amount = 10;
-    [SerializeField] float changedTime = 3;
+    #region Serialized
+    [SerializeField] float speedAmount = 10;
+    [SerializeField] float duration = 3;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    Coroutine saveRoutine;
+    Coroutine abilityRoutine;
     #endregion
 
     protected override void DeExecuteInternal()
@@ -20,8 +21,8 @@ public class ChangeBallSpeed : Ability
 
     protected override void ExecuteInternal()
     {
-        if (saveRoutine == null)
-            saveRoutine = StartCoroutine(TPBall());
+        if (abilityRoutine == null)
+            abilityRoutine = StartCoroutine(TPBall());
     }
 
     protected override void OnInitializedInternal()
@@ -30,9 +31,9 @@ public class ChangeBallSpeed : Ability
 
     IEnumerator TPBall()
     {
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(amount, true);
-        yield return new WaitForSeconds(changedTime);
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(-amount, false);
-        saveRoutine = null;
+        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(speedAmount, true);
+        yield return new WaitForSeconds(duration);
+        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(-speedAmount, false);
+        abilityRoutine = null;
     }
 }

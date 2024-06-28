@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public static class SceneReferenceExtensions
 {
-    /// <summary> Custom made method to acces a build index id through name</summary>
+    /// <summary> Custom made method to access a build index id through name</summary>
     public static int GetSceneIndex(this SceneReference scene)
     {
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)

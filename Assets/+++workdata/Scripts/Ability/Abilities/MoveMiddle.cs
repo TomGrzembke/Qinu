@@ -1,22 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
+//The indiviual function for the current ability 
 public class MoveMiddle : Ability
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] float spaceToAdd = 3;
 
     [Header("Time")]
     [SerializeField] float movedTime = 4;
     [SerializeField] float timeToLerpTo = 1;
     [SerializeField] float timeToLerpBack = 3;
+
     #endregion
 
-    #region private fields
+    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Vector3 fromPos;
     Vector3 toPos;
-    Coroutine saveRoutine;
+    Coroutine abilityRoutine;
     #endregion
 
     protected override void DeExecuteInternal()
@@ -26,8 +28,8 @@ public class MoveMiddle : Ability
 
     protected override void ExecuteInternal()
     {
-        if (saveRoutine == null)
-            saveRoutine = StartCoroutine(TPBall());
+        if (abilityRoutine == null)
+            abilityRoutine = StartCoroutine(TPBall());
     }
 
     protected override void OnInitializedInternal()
@@ -58,7 +60,7 @@ public class MoveMiddle : Ability
             yield return null;
         }
 
-        saveRoutine = null;
+        abilityRoutine = null;
 
     }
 }

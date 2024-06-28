@@ -104,6 +104,7 @@ public static class VectorExtension
         return target;
     }
 
+    /// <summary> Checks if the target is in between a box created by the inout of the bottom left and top right provided </summary>
     public static bool IsBetween(this Vector2 target, Vector2 bottomLeft, Vector2 topRight)
     {
         Vector2 bottomRight = new(topRight.x, bottomLeft.y);

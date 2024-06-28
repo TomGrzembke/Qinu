@@ -1,14 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
+//The indiviual function for the current ability 
 public class SizeUp : Ability
 {
-    #region serialized fields
+
+    #region Serialized
     [SerializeField] float timesSize = 1.3f;
     [SerializeField] float duration = 3;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     FlipObjectOnVelocity flipObjectOnVelocity;
     Coroutine saveRoutine;

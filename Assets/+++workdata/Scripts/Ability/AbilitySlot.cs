@@ -2,9 +2,10 @@ using MyBox;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Handles the image and execution of abilities </summary>
 public class AbilitySlot : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [field: SerializeField] public bool Performed { get; private set; } 
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
@@ -16,7 +17,7 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] ParticleSystem lostVFX;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     public bool Occupied { get; private set; }
     #endregion
 

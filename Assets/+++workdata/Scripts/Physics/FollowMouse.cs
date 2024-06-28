@@ -3,11 +3,11 @@ using UnityEngine.InputSystem;
 
 public class FollowMouse : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] Camera cam;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Transform trans;
     Vector3 camPos;
     #endregion
@@ -20,6 +20,6 @@ public class FollowMouse : MonoBehaviour
     void Update()
     {
         camPos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        trans.position = new Vector3(camPos.x, camPos.y, 0);
+        trans.position = new (camPos.x, camPos.y, 0);
     }
 }

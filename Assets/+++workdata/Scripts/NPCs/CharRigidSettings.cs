@@ -12,7 +12,6 @@ public class CharRigidSettings
     [field: SerializeField] public float DashForce { get; private set; } = 10f;
     [field: SerializeField] public float DashTime { get; private set; } = 0.1f;
     [field: SerializeField] public float DashCooldown { get; private set; } = 0.1f;
-    [field: SerializeField] public bool DashInput { get; private set; }
     [field: SerializeField] public bool DashAutomAim { get; private set; } = true;
 
     [Space(20)]

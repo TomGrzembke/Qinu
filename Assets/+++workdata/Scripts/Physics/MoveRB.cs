@@ -3,10 +3,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
+/// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MoveRB : RBGetter
 {
-    #region Lambda expressions
+    #region Serialized
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] bool disableInputRightclick;
+    #endregion
 
+    #region Non Serialized
+    #region Lambda expressions
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
@@ -17,16 +23,11 @@ public class MoveRB : RBGetter
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
     float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
     float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
-    bool dashInput => charSO.CharSettings.CharRigidSettings.DashInput;
     bool mouseInput => charSO.CharSettings.CharRigidSettings.MouseInput;
     bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
     #endregion 
 
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] bool disableInputRightclick;
-
-    #region private fields
     Transform Puk => MinigameManager.Instance.Puk;
     bool inputDisabled;
     float currentMaxSpeed;
@@ -34,6 +35,7 @@ public class MoveRB : RBGetter
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
     CharSO charSO;
+
     public Vector2 MoveDir
     {
         get

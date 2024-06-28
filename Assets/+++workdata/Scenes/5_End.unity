@@ -1799,7 +1799,7 @@ MonoBehaviour:
     dialogueName: Won
     afterWaitSeconds: 0
     condition: 1
-  - beforeWaitSeconds: 3
+  - beforeWaitSeconds: 2
     dialogueName: Won2
     afterWaitSeconds: 0
     condition: 1

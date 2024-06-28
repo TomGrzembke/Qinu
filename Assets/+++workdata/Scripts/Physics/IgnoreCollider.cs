@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class IgnoreCollider : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] Collider2D[] targetCol;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] LayerMask layerToIgnore;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Collider2D col;
     #endregion
 

@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class RBLimiter : RBGetter
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] float speedLimit;
     [SerializeField] float currentSpeed;
     #endregion
 
-    #region private fields
-
-    #endregion
     protected override void AwakeInternal()
     {
     }

@@ -3,11 +3,11 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] bool calculateOnly;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     NavMeshAgent agent;
     #endregion
 

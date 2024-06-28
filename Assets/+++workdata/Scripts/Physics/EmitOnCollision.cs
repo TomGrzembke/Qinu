@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EmitOnCollision : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] ParticleSystem pSystem;
     #endregion
 

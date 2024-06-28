@@ -28,7 +28,7 @@ MonoBehaviour:
       <DashForce>k__BackingField: 10
       <DashTime>k__BackingField: 0.1
       <DashCooldown>k__BackingField: 0.1
-      <DashInput>k__BackingField: 0
+      <DashInput>k__BackingField: 1
       <DashAutomAim>k__BackingField: 1
       mouseInputHeader: 
       <MouseInput>k__BackingField: 0

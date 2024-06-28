@@ -126,7 +126,7 @@ public class TournamentManager : MonoBehaviour
 
     void SwitchChars()
     {
-        MinigameManager.Instance.CharSwitchManager.Calculate(UseList(RightPlayers));
+        MinigameManager.Instance.CharSwitchManager.BlendColors(UseList(RightPlayers));
     }
 
     void ClearSideLists()

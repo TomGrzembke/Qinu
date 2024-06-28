@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class EmitProblemsOnLoose : MonoBehaviour
+[RequireComponent(typeof(ParticleSystem))]
+public class EmitParticlesOnPlayerLoose : MonoBehaviour
 {
-    #region serialized fields
-    [SerializeField] ParticleSystem problemPS;
+    #region Serialized
     [SerializeField] float negativeMultiplier = 7;
     #endregion
 
-    #region private fields
+    #region Non Serialized
+    ParticleSystem particleSys;
     ParticleSystem.EmissionModule emissionModule;
     #endregion
 
     void Awake()
     {
-        emissionModule = problemPS.emission;
+        particleSys = GetComponent<ParticleSystem>();
+        emissionModule = particleSys.emission;
     }
+
     void OnEnable()
     {
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(Emit);
@@ -30,6 +33,6 @@ public class EmitProblemsOnLoose : MonoBehaviour
         if (amount < 0)
             amount *= negativeMultiplier;
         emissionModule.rateOverTime = -(amount - TournamentManager.Instance.RoundsTilWin);
-        problemPS.Play();
+        particleSys.Play();
     }
 }

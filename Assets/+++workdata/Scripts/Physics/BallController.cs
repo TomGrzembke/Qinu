@@ -1,14 +1,11 @@
-using MyBox;
 using UnityEngine;
 
+/// <summary> Handles the max speed of the ball, is used for speed ups and slow downs </summary>
 public class BallController : RBGetter
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField, ShowOnly] float currentSpeed;
     [SerializeField] float maxSpeed;
-    #endregion
-
-    #region private fields
     #endregion
 
     protected override void AwakeInternal()
@@ -19,10 +16,9 @@ public class BallController : RBGetter
     {
         currentSpeed = rb.velocity.magnitude;
 
-        if (rb.velocity.magnitude > maxSpeed)
-        {
+        if (rb.velocity.magnitude > maxSpeed)  
             rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
+
     }
 
     public void AddBallMaxSpeed(float add, bool showImpact = false)
@@ -30,7 +26,7 @@ public class BallController : RBGetter
         maxSpeed += add;
         currentSpeed = rb.velocity.magnitude;
 
-        if(!showImpact ) return;
+        if (!showImpact) return;
 
         if (currentSpeed + add > 1)
             rb.velocity = rb.velocity.normalized * (currentSpeed + add);

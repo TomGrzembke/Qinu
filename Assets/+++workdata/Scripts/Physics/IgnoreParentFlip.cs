@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class IgnoreParentFlip : MonoBehaviour
 {
-    #region serialized fields
-
-    #endregion
-
-    #region private fields
+    #region Non Serialized
     Transform parentTrans;
-    bool xState; 
+    bool xState;
     #endregion
 
     void Awake()
@@ -20,9 +16,7 @@ public class IgnoreParentFlip : MonoBehaviour
     void Update()
     {
         if (!parentTrans)
-        {
             parentTrans = transform.parent;
-        }
 
         if (xState != parentTrans.localScale.x > 0)
         {

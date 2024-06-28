@@ -13,5 +13,4 @@ public class SoundTypeSO : ScriptableObject
         if (result != SoundType.Null)
             soundType = result;
     }
-    
 }

@@ -1,17 +1,21 @@
 using UnityEngine;
 
+/// <summary> Attempts to visualize an animator in a limited framerate</summary>
+[RequireComponent(typeof(Animator))]
 public class AnimFrameRate : MonoBehaviour
 {
-    Animator anim;
+    #region Serialized
     [SerializeField] int frameRate = 12;
+    #endregion
+
+    #region Non Serialized
+    Animator anim;
     float lastRenderTime = 0;
     float savedAnimSpeed;
     string clipName;
+    #endregion
 
-    void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
+    void Awake() => anim = GetComponent<Animator>();
 
     void Start()
     {

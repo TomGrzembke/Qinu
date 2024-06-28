@@ -1,28 +1,32 @@
 using UnityEngine;
 
+/// <summary> used for local speed ups </summary>
+[RequireComponent (typeof(Collider2D))]
 public class AddSpeedOnTrigger : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] string triggerTag = "puk";
     [SerializeField] string secondTrigger = "NPC";
     [SerializeField] float strength = 5;
     [SerializeField] ForceMode2D forceMode;
     #endregion
 
-    #region private fields
-
+    #region Non Serialized
+    Rigidbody2D currentRb;
     #endregion
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(triggerTag))
-            collision.GetComponent<Rigidbody2D>().AddForce(new(strength, transform.position.y - collision.transform.position.y), forceMode);
+        currentRb = null;
 
-        if (collision.CompareTag(secondTrigger))
-            if (collision.GetComponent<Rigidbody2D>())
-                collision.GetComponent<Rigidbody2D>().AddForce(new(strength, transform.position.y - collision.transform.position.y), forceMode);
-            else if (collision.transform.parent.GetComponent<Rigidbody2D>())
-                collision.transform.parent.GetComponent<Rigidbody2D>().AddForce(new(strength, transform.position.y - collision.transform.position.y), forceMode);
+        Vector2 calculatedForce = new(strength, transform.position.y - collision.transform.position.y);
 
+        if (collision.CompareTag(triggerTag) || collision.CompareTag(secondTrigger))
+            currentRb = collision.GetComponent<Rigidbody2D>();
+        else
+            collision.transform.parent.TryGetComponent(out currentRb);
+
+        if (currentRb)
+            currentRb.AddForce(calculatedForce, forceMode);
     }
 }

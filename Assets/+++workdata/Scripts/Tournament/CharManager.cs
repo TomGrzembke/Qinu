@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> Manages spawning and current active characters </summary>
 public class CharManager : MonoBehaviour
 {
-    #region serialized fields
-    public static CharManager Instance;
+    #region Serialized
     [field: SerializeField] public GameObject[] CharPrefabs { get; private set; }
     [field: SerializeField] public List<GameObject> CharsSpawned { get; private set; }
     [SerializeField] Transform leftSpawn;
     [SerializeField] Transform rightSpawn;
     #endregion
 
-    #region private fields
-
+    #region Non Serialized
+    public static CharManager Instance;
     #endregion
 
     void Awake()

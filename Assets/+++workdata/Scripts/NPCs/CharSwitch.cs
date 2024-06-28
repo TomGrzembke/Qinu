@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary> Switches the color of the given assets on character change </summary>
 public class CharSwitch : MonoBehaviour
 {
-    #region serialized fields
-    //[SerializeField] TextMeshProUGUI leftScoreTxt;
+    #region Serialized
     [SerializeField] TextMeshProUGUI rightScoreTxt;
     [SerializeField] SpriteRenderer rightArenaSR;
     [SerializeField] SpriteRenderer arenaMiddle;
     [SerializeField] float colorBlendTime = 2;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     CharAestheticSettings rightCharAestheticSettings;
     #endregion
 
-    public void Calculate(List<GameObject> rightPlayers)
+    public void BlendColors(List<GameObject> rightPlayers)
     {
         rightCharAestheticSettings = rightPlayers[0].GetComponent<CharSOHolder>().CharSO.charAestheticSettings;
 
         Color primaryCol = rightCharAestheticSettings.PrimaryColor;
-        StartCoroutine(BlendColor(rightScoreTxt, primaryCol));
-        StartCoroutine(BlendColor(rightArenaSR, primaryCol));
-        StartCoroutine(BlendColor(arenaMiddle, primaryCol));
+        StartCoroutine(BlendColorCor(rightScoreTxt, primaryCol));
+        StartCoroutine(BlendColorCor(rightArenaSR, primaryCol));
+        StartCoroutine(BlendColorCor(arenaMiddle, primaryCol));
         SoundManager.Instance.PlayMusic(rightCharAestheticSettings.Music);
     }
 
-    IEnumerator BlendColor(SpriteRenderer target, Color newCol)
+    IEnumerator BlendColorCor(SpriteRenderer target, Color newCol)
     {
         float timeWentBy = 0;
         Color oldCol = target.color;
@@ -40,7 +40,7 @@ public class CharSwitch : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator BlendColor(TextMeshProUGUI target, Color newCol)
+    IEnumerator BlendColorCor(TextMeshProUGUI target, Color newCol)
     {
         float timeWentBy = 0;
         Color oldCol = target.color;

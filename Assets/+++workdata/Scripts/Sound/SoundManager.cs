@@ -1,21 +1,19 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
-    #region serialized fields
-    public static SoundManager Instance;
+    #region Serialized
     [SerializeField] SoundBankSO soundBank;
     [SerializeField] AudioSource globalMusicSource;
     [SerializeField] AudioSource globalSFXSource;
     [SerializeField] DialogueSoundPlayer soundPlayer;
-
     [Header("Music")]
     [SerializeField] float musicBlendTime;
     #endregion
 
-    #region private fields
+    #region Non Serialized
+    public static SoundManager Instance;
     SoundTypeSO[] SoundTypes => soundBank.soundTypes;
     Coroutine musicRoutine;
     float originalMusicVolume;

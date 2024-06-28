@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary> Manages goals, resets and the ball </summary>
 public class MinigameManager : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [field: SerializeField] public CharSwitch CharSwitchManager { get; private set; } 
     public static MinigameManager Instance;
     [SerializeField] float pointsTilWin = 5;
     [SerializeField] Vector2 pointCounter;
     [field: SerializeField] public Transform Puk { get; private set; }
-    [SerializeField] Rigidbody2D pukRB;
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosLeft { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }
@@ -20,11 +20,8 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Transform ballResetRight;
     [SerializeField] TextMeshProUGUI leftCounterTxt;
     [SerializeField] TextMeshProUGUI rightCounterTxt;
+    [SerializeField] Rigidbody2D pukRB;
     [SerializeField] Transform pukResetPos;
-    #endregion
-
-    #region private fields
-
     #endregion
 
     void Awake()
@@ -32,7 +29,7 @@ public class MinigameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Goal(int goalID, GoalTracker goalTracker = null)
+    public void Goal(int goalID, GoalParticles goalTracker = null)
     {
         if (goalID == 0)
         {

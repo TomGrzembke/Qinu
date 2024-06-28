@@ -1,20 +1,27 @@
 using UnityEngine;
 
+/// <summary> Emits sounds depending on a ParticleSystem</summary>
 public class ParticleSound : MonoBehaviour
 {
-    #region serialized fields
+    enum PlayType
+    {
+        IsEmmiting,
+        ParticleCount
+    }
+
+    #region Serialized
     [SerializeField] ParticleSystem _particleSystem;
     [SerializeField] AudioSource audioSource;
     [SerializeField] SoundType soundType;
     [SerializeField] PlayType playType;
     [SerializeField] int frequencyDividedBy = 5;
     [SerializeField] bool randomizePitch;
-    [SerializeField] float bubbleAmountMultiplier = 1;
+    [SerializeField] float soundAmountMultiplier = 1;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     int frequencyCounter;
-    float BubbleMultiplier => -(-1 + (_particleSystem.particleCount * 2.5f + 1) / 100f);
+    float SoundMultiplier => -(-1 + (_particleSystem.particleCount * 2.5f + 1) / 100f);
     #endregion
 
     void Update()
@@ -24,7 +31,7 @@ public class ParticleSound : MonoBehaviour
             if (frequencyCounter < frequencyDividedBy) return;
 
         if (playType == PlayType.ParticleCount)
-            if (frequencyCounter < frequencyDividedBy + (bubbleAmountMultiplier * BubbleMultiplier)) return;
+            if (frequencyCounter < frequencyDividedBy + (soundAmountMultiplier * SoundMultiplier)) return;
 
         if (randomizePitch)
             audioSource.pitch = Random.Range(0.7f, 2);
@@ -44,9 +51,4 @@ public class ParticleSound : MonoBehaviour
         frequencyCounter = 0;
     }
 
-    enum PlayType
-    {
-        IsEmmiting,
-        ParticleCount
-    }
 }

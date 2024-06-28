@@ -1,18 +1,19 @@
 using Cinemachine;
 using UnityEngine;
 
-public class SwitchCamCollider : MonoBehaviour
+/// <summary> Switches the priority of 2 CMvcams on trigger </summary>
+public class SwitchCamTrigger : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] CinemachineVirtualCamera leftCam;
     [SerializeField] CinemachineVirtualCamera rightCam;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Collider2D playerCol;
     bool comesFromRight;
     #endregion
-
+   
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;

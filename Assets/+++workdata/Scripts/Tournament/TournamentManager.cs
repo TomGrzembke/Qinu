@@ -23,15 +23,14 @@ public class TournamentManager : MonoBehaviour
 
     #region Serialized
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
-    [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
+    [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
     [field: SerializeField] public List<CharacterStats> CharStats { get; private set; }
-    [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public List<GameObject> RightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
+    [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public float WinPoints { get; private set; } = 5;
 
-    [SerializeField] float afterCombatTime = 3;
     [Header("SlowMo")]
     [SerializeField] AnimationCurve slowMoCurve;
     [SerializeField] float blendTime = 0.3f;

@@ -15,14 +15,10 @@ public struct DialogueLine
     public List<Choice> choices;
 }
 
+/// <summary> Handles all dialogue incoming calls</summary>
 public class DialogueController : MonoBehaviour
 {
-    public static DialogueController Instance;
-    public static Action dialogueOpened;
-    public static Action dialogueClosed;
-    public static Action<string> InkEvent;
-
-    #region SerializeField
+    #region Serialized
     [field: SerializeField] public float TimeBetweenDialogue { get; private set; } = 1; 
     [SerializeField] TextAsset inkAsset;
     [field: SerializeField] public bool InDialogue { get; private set; }
@@ -34,7 +30,12 @@ public class DialogueController : MonoBehaviour
     [SerializeField] bool debugMessages;
     #endregion
 
-    #region private
+    #region Non Serialized
+    public static DialogueController Instance;
+    public static Action dialogueOpened;
+    public static Action dialogueClosed;
+    public static Action<string> InkEvent;
+
     float oldSpeed;
     const string speakerTag = "speaker";
     string lastSpeaker;

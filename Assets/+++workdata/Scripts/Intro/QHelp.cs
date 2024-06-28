@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class QHelp : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] float waitTillHelp = 7;
     [SerializeField] string dialoguePath = "QHelp";
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Coroutine qHelpCor;
     #endregion
 

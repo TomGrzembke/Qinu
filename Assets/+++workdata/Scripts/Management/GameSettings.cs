@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
-    #region Serilized Fields
+    #region Serialized
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
@@ -13,7 +13,7 @@ public class GameSettings : MonoBehaviour
     [SerializeField] float onSFXChangedCooldown = 0.1f;
     #endregion
 
-    #region private
+    #region Non Serialized
     Coroutine sfxChangedCoroutine;
     bool sfxEmitSound;
     #endregion

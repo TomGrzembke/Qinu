@@ -2,18 +2,19 @@ using MyBox;
 using System.Collections;
 using UnityEngine;
 
+/// <summary> Used as a transition to the end scene </summary>
 public class EndLoader : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] Scenes sceneToLoad = Scenes.End;
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
-    public static EndLoader Instance;
-    #endregion
     [field: SerializeField] public Vector3 QinuEndPos { get; private set; }
     [field: SerializeField] public bool WonGame { get; private set; }
-    #region private fields
+    #endregion
 
+    #region Non Serialized
+    public static EndLoader Instance;
     float currentScore;
     #endregion
 
@@ -27,6 +28,7 @@ public class EndLoader : MonoBehaviour
         yield return null;
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
     }
+
     void OnDisable()
     {
         TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;

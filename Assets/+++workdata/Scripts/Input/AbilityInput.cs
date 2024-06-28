@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class AbilityInput : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] AbilitySlotManager abilitySlotManager;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     PlayerInputActions inputActions;
     #endregion
 

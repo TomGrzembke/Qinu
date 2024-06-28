@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary> Mostly used for a dialogue speed up or to get to a certain game state more quickly </summary>
 public class DebugControls : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] UnityEvent slashEvent;
     [SerializeField] UnityEvent asteriskEvent;
     [SerializeField] UnityEvent num7;
@@ -11,7 +12,7 @@ public class DebugControls : MonoBehaviour
     [SerializeField] CanvasGroup[] cgToggleUIAsterisk;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     PlayerInputActions inputActions;
     #endregion
 

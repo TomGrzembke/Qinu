@@ -5,11 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class LoadingScreen : MonoBehaviour
 {
+    #region Serialized
     [SerializeField] float fadeTime = 2;
     [SerializeField] float loadingTime = 1;
     [SerializeField] CanvasGroup canvasGroup;
+    #endregion
 
+    #region Non Serialized
     static List<object> loadingInstigator = new();
+    #endregion
+
     public static void Show(object instigator)
     {
         loadingInstigator.Add(instigator);

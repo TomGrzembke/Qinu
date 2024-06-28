@@ -2,18 +2,23 @@ using MyBox;
 using System.Collections;
 using UnityEngine;
 
+/// <summary> Used for calling management methods from buttons or in scene besides the Manager scene</summary>
 public class GameStateManager : MonoBehaviour
 {
-    static GameStateManager Instance;
-
+    #region Serialized
     [SerializeField] SceneReference introScene;
+    #endregion
+
+    #region Non Serialized
+    static GameStateManager Instance;
+    #endregion
+
     void Awake()
     {
         Instance = this;
         DontDestroyOnLoad(Instance.gameObject);
         Cursor.visible = false;
     }
-
 
     public static void StartGame()
     {

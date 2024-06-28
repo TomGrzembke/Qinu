@@ -4,11 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Prints the dialogue lines on call</summary>
 public class DialogueBox : MonoBehaviour
 {
-    public event Action<DialogueBox> DialogueContinued;
-
-    #region Inspector
+    #region Serialized
     [SerializeField] SoundType voice;
     [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
@@ -17,11 +16,13 @@ public class DialogueBox : MonoBehaviour
 
     #endregion
 
-    #region private
+    #region Non Serialized
+    public event Action<DialogueBox> DialogueContinued;
     Coroutine displayLineCoroutine;
     float typeSpeed => DialogueController.Instance.TypeSpeed / typeSpeedMultiplier;
     const string textAlpha = "<color=#00000000>";
     #endregion
+
 
     #region UnityEvents
     void Awake()

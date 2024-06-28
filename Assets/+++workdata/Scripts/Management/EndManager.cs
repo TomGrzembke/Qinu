@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary> Additional function for the end scene </summary>
 public class EndManager : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] DialogueTutorial winDialogue;
     [SerializeField] DialogueTutorial looseDialogue;
     [SerializeField] Transform qinu;
@@ -12,11 +13,6 @@ public class EndManager : MonoBehaviour
     [SerializeField] float suckInTime = 2;
     [SerializeField] AnimationCurve suckInCurve;
     [SerializeField] Transform capsuleTrans;
-
-    #endregion
-
-    #region private fields
-
     #endregion
 
     void Start()

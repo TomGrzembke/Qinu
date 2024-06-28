@@ -1,9 +1,10 @@
 using MyBox;
 using UnityEngine;
 
+/// <summary> Checks if gameobject is in screen and adjusts itself if not (WIP) </summary>
 public class FollowGameObjectInCam : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] bool useTopAndBotTarget = false;
     [SerializeField] Transform topTarget;
     [SerializeField, ConditionalField(nameof(useTopAndBotTarget))] Transform botTarget;
@@ -12,7 +13,7 @@ public class FollowGameObjectInCam : MonoBehaviour
     [SerializeField] float yMargin;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Transform target;
     Camera cam;
     float width;

@@ -4,10 +4,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
-    PlayerInputActions input;
-    Camera cam;
-
+    #region Serialized
     [field: SerializeField] public Vector2 MousePos { get; private set; } 
     [field: SerializeField] public Vector2 MovementVec { get; private set; }
     [field: SerializeField] public InputAction MoveAction { get; private set; }  
@@ -15,9 +12,16 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction LeftclickAction { get; private set; }  
     [field: SerializeField] public InputAction RightClickAction { get; private set; }  
     [field: SerializeField] public InputAction Ability0Action { get; private set; }  
+    #endregion
 
+    #region Non Serialized
+    public static InputManager Instance;
+    PlayerInputActions input;
+    Camera cam;
     public bool HasMoveInput => MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
     bool usedTouch;
+    #endregion
+
 
     void Awake()
     {

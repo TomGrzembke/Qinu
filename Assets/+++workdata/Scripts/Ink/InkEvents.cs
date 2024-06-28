@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary> Stores InkEvents that get called from the ink file </summary>
 public class InkEvents : MonoBehaviour
 {
-    #region Inspector
+    #region Serialized
     [SerializeField] List<InkEvent> inkEvents;
-    #endregion
-
-    #region Unity Event Functions
-
     #endregion
 
     void OnEnable()

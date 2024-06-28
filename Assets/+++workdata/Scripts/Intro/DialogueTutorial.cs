@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> Uses a list of dialogue segements to create a custom dynamic sequence of dialogue and gameplay </summary>
 public class DialogueTutorial : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] List<DialogueSegment> dialogueSegment;
 
     [SerializeField] GameObject dashAbilityPrefab;
@@ -14,12 +15,11 @@ public class DialogueTutorial : MonoBehaviour
     [SerializeField] AudioClip startMusic;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     bool Ability0Pressed => InputManager.Instance.Ability0Action.IsPressed() || AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
     Coroutine storySegmentCor;
     Vector3 pukPos;
-
     #endregion
 
     void Start()

@@ -1,11 +1,13 @@
 using UnityEngine;
 
+/// <summary> Just contains a StartDialogue method</summary>
 public class InkDialogue : MonoBehaviour
 {
-    #region Inspector
+    #region Serialized
     [SerializeField] string dialoguePath;
     [SerializeField] bool onStart;
     #endregion
+
     void Start()
     {
         if (onStart)

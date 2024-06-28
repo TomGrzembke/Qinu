@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class FadeCanvasGroup : MonoBehaviour
 {
+    #region Serialized
     [field: SerializeField] public float FadeTime { get; private set; } = 1;
-    Dictionary<CanvasGroup, Coroutine> fadeCoroutines = new();
+    #endregion
+
+    #region Non Serialized
     public static FadeCanvasGroup Instance;
+    Dictionary<CanvasGroup, Coroutine> fadeCoroutines = new();
+    #endregion
 
     void Awake()
     {

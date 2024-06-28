@@ -20,6 +20,7 @@ public enum Scenes
 
 public class SceneLoader : MonoBehaviour
 {
+    #region Non Serialized
     static SceneLoader _instance;
 
     public static SceneLoader Instance
@@ -35,6 +36,7 @@ public class SceneLoader : MonoBehaviour
             return _instance;
         }
     }
+    #endregion
 
     public Coroutine LoadSceneViaIndex(Scenes scene, Action onLoadingFinished = null)
     {

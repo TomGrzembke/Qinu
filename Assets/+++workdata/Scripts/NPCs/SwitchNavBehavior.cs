@@ -38,7 +38,7 @@ public class SwitchNavBehavior : MonoBehaviour
         if (goesToRight)
             charNav.ActivateNavCalc();
         else
-            charNav.ChangeToArena(comesFromRight == goesToRight ? 0 : 1);
+            charNav.ChangeToArena();
 
         nPCsTracked.Remove(charNav);
         print(goesToRight);

@@ -16,12 +16,12 @@ MonoBehaviour:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <FollowBallY>k__BackingField: 1
-      <InvertY>k__BackingField: 1
+      <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.001
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 10
-      <StoppingDistance>k__BackingField: 2
+      <StoppingDistance>k__BackingField: 1
       <Acceleration>k__BackingField: 17.03
       <Decceleration>k__BackingField: 1
       <DashEnabled>k__BackingField: 1

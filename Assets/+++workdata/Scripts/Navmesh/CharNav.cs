@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class CharNav : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [field: SerializeField] public NavCalc NavCalc { get; private set; }
     [field: SerializeField] public NPCNav NPCNavMinigame { get; private set; }
-    #endregion
-
-    #region private fields
-
     #endregion
 
     public void ActivateNavCalc(Transform targetPos = null)
     {
         if (NavCalc != null)
             NavCalc.enabled = true;
+
         if (NPCNavMinigame != null)
             NPCNavMinigame.enabled = false;
 
@@ -22,15 +19,9 @@ public class CharNav : MonoBehaviour
             NavCalc.SetAgentPosition(targetPos); 
     }
 
-    public void ChangeToArena(int sideID)
+    public void ChangeToArena()
     {
         NavCalc.enabled = false;
         NPCNavMinigame.enabled = true;
-        //NPCNavMinigame.SideSettings(sideID != 0);
-    }
-
-    void OnEnable()
-    {
-
     }
 }

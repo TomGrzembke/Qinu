@@ -2,9 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary> Loads scenes as a script in the first scene, also used for quicker scene debugging and automatic unloading </summary>
 public class StartupManager : MonoBehaviour
 {
     [SerializeField] Scenes sceneToLoad = Scenes.MainMenu;
+
     IEnumerator Start()
     {
         yield return null;

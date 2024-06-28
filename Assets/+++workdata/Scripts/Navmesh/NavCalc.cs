@@ -3,29 +3,25 @@ using UnityEngine.AI;
 
 public class NavCalc : MonoBehaviour
 {
-    #region serialized fields
-    public Transform DespawnPos =>  MinigameManager.Instance.DespawnPos;
-    #endregion
-
-    #region private fields
+    #region Non Serialized
+    public Transform DespawnPos => MinigameManager.Instance.DespawnPos;
     protected NavMeshAgent agent;
+    protected CharSOHolder sOHolder;
     #endregion
 
-    void Start()
-    {
-
-    }
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        sOHolder = GetComponent<CharSOHolder>();
 
     }
 
     public void SetAgentPosition(Vector3 targetPos)
     {
-        agent.SetDestination(targetPos);
+        if (Vector3.Distance(transform.position, targetPos) > sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance)
+            agent.SetDestination(targetPos);
 
         agent.velocity = Vector2.zero;
     }

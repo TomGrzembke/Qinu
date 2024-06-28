@@ -3,14 +3,13 @@ using UnityEngine.UI;
 
 public class OnHoverChangeCol : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] Image[] objects;
     [SerializeField] Color toSetCol;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     Color defaultCol;
-
     #endregion
 
     void Awake()

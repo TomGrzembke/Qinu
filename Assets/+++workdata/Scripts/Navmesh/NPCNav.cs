@@ -1,6 +1,7 @@
 using MyBox;
 using UnityEngine;
 
+/// <summary> NPC movement with ArenaMode states </summary>
 public class NPCNav : NavCalc
 {
     public enum ArenaMode
@@ -10,14 +11,12 @@ public class NPCNav : NavCalc
         Despawn
     }
 
-    #region serialized fields
+    #region Serialized
     [SerializeField] ArenaMode arenaMode;
 
     [field: SerializeField] public bool IsRight { get; private set; }
     [SerializeField] float stoppingDistance = 2;
     [SerializeField] bool goesToDefault = true;
-    [SerializeField] bool followBallY = true;
-    [SerializeField, ConditionalField(nameof(followBallY))] bool invertY;
     [SerializeField] bool dashRandomly = true;
     [SerializeField] float probabilityPerFrame = 10;
 
@@ -27,14 +26,14 @@ public class NPCNav : NavCalc
     [SerializeField] Transform defaultTrans;
     [field: SerializeField] public Transform TopTextTarget { get; private set; }
     [field: SerializeField] public Transform BotTextTarget { get; private set; }
+    #endregion
 
+    #region Non Serialized
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
-    #endregion
-
-    #region private fields
-
+    bool InvertY => sOHolder.CharSO.CharSettings.CharNPCSettings.InvertY;
+    bool FollowBallY => sOHolder.CharSO.CharSettings.CharNPCSettings.FollowBallY;
     #endregion
 
     void Update()
@@ -57,7 +56,7 @@ public class NPCNav : NavCalc
 
     void InArena()
     {
-        if(!MinigameManager.Instance) return;
+        if (!MinigameManager.Instance) return;
 
         if (PukOnSide)
         {
@@ -67,7 +66,7 @@ public class NPCNav : NavCalc
                     moveRB.Dash();
 
         }
-        else if (!followBallY)
+        else if (!FollowBallY)
         {
             if (goesToDefault)
                 targetPos = defaultTrans.position;
@@ -76,7 +75,7 @@ public class NPCNav : NavCalc
         {
             targetPos.x = defaultTrans.position.x;
 
-            if (!invertY)
+            if (!InvertY)
                 targetPos.y = Puk.position.y;
             else
                 targetPos.y = -Puk.position.y;

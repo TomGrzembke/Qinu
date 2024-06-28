@@ -15,12 +15,23 @@ public class LoadingScreen : MonoBehaviour
     static List<object> loadingInstigator = new();
     #endregion
 
+    void Awake() => OnValidateCall();
+
+    void OnValidate() => OnValidateCall();
+
+    void OnValidateCall()
+    {
+        if (canvasGroup == null)
+            canvasGroup = GetComponent<CanvasGroup>();
+    }
+
     public static void Show(object instigator)
     {
         loadingInstigator.Add(instigator);
         if (ScreenManager.Instance != null)
             ScreenManager.Instance.LoadingScreen.Show();
     }
+
     public static void Hide(object instigator)
     {
         loadingInstigator.Remove(instigator);
@@ -30,7 +41,6 @@ public class LoadingScreen : MonoBehaviour
 
         if (loadingInstigator.Count == 0)
             ScreenManager.Instance.LoadingScreen.Hide();
-
     }
 
     public void Initialize()
@@ -63,16 +73,4 @@ public class LoadingScreen : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
-    void Awake() => OnValidateCall();
-
-    void OnValidate()
-    {
-        OnValidateCall();
-    }
-
-    void OnValidateCall()
-    {
-        if (canvasGroup == null)
-            canvasGroup = GetComponent<CanvasGroup>();
-    }
 }

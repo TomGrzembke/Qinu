@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    #region serialized fields
+    #region Non Serialized
     public static PauseManager Instance;
-    #endregion
-
-    #region private fields
     PlayerInputActions inputActions;
     bool paused;
     #endregion

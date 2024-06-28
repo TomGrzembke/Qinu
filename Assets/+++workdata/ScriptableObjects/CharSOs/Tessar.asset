@@ -16,18 +16,18 @@ MonoBehaviour:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <FollowBallY>k__BackingField: 1
-      <InvertY>k__BackingField: 0
+      <InvertY>k__BackingField: 1
       <DashRandomly>k__BackingField: 1
-      <ProbabilityPerFrame>k__BackingField: 0.001
+      <ProbabilityPerFrame>k__BackingField: 0.00001
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 9
-      <StoppingDistance>k__BackingField: 3
-      <Acceleration>k__BackingField: 10
-      <Decceleration>k__BackingField: 10
+      <StoppingDistance>k__BackingField: 0.7
+      <Acceleration>k__BackingField: 31.35
+      <Decceleration>k__BackingField: 15
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 20
+      <DashForce>k__BackingField: 30
       <DashTime>k__BackingField: 0.1
-      <DashCooldown>k__BackingField: 0.1
+      <DashCooldown>k__BackingField: 0.2
       <DashInput>k__BackingField: 0
       <DashAutomAim>k__BackingField: 1
       mouseInputHeader: 

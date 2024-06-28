@@ -9,16 +9,17 @@ public class MusicManager : MonoBehaviour
         Ingame,
         Sunfish
     }
-    #region serialized fields
+
+    #region Serialized
     [SerializeField] float fadeTime = 3;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip mainMenuClip;
     [SerializeField] AudioClip ingameClip;
     [SerializeField] AudioClip sunfishClip;
-    public static MusicManager Instance;
     #endregion
 
-    #region private fields
+    #region Non Serialized
+    public static MusicManager Instance;
     AudioClip playedLast;
     Coroutine fadeRoutine;
     #endregion

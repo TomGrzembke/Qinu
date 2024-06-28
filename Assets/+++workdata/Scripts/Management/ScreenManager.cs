@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> Initializes static scripts </summary>
 public class ScreenManager : MonoBehaviour
 {
     public static ScreenManager Instance;

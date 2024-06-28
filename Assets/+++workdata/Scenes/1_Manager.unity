@@ -1798,21 +1798,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93532db498e6bf642bc422c822b152ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RoundAmount>k__BackingField: 0
   <GameState>k__BackingField: 0
+  <CurrentGameMode>k__BackingField: 0
+  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
   <CharStats>k__BackingField: []
+  <RightPlayers>k__BackingField: []
+  <LeftPlayers>k__BackingField: []
   <AvailableChars>k__BackingField:
   - {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
   - {fileID: 3832746447698499432, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
   - {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
-  <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
-  <RightPlayers>k__BackingField: []
-  <LeftPlayers>k__BackingField: []
-  afterCombatTime: 7
-  <RoundsTilWin>k__BackingField: 5
+  <WinPoints>k__BackingField: 5
   slowMoCurve:
     serializedVersion: 2
     m_Curve:

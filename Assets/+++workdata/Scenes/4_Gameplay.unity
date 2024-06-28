@@ -6281,6 +6281,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 812732749}
     - target: {fileID: 1820666378183949730, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Name
+      value: BGAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820666378183949730, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

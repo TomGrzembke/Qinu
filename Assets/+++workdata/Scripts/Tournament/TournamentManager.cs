@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TournamentManager;
 using Random = UnityEngine.Random;
 
 /// <summary> Manages what happens after a match in terms of clean up and next matches </summary>
@@ -40,7 +41,6 @@ public class TournamentManager : MonoBehaviour
     #region Non Serialized
     public static TournamentManager Instance;
     public event Action<float> OnPlayerMatchEnd;
-    public event Action<bool> OnMatchEnd;
     Coroutine blendRoutine;
     GameObject lastPlayed;
     bool firstMatch = true;
@@ -51,57 +51,83 @@ public class TournamentManager : MonoBehaviour
 
     void Start()
     {
-        if (CharManager.Instance)
-            for (int i = 0; i < CharManager.Instance.CharPrefabs.Length; i++)
-            {
-                GameObject toAdd = CharManager.Instance.CharPrefabs[i].gameObject;
-
-                if (!AvailableChars.Contains(toAdd))
-                    AvailableChars.Add(toAdd);
-            }
-
         for (int i = 0; i < AvailableChars.Count; i++)
         {
             CharStats.Add(new(AvailableChars[i]));
         }
-
     }
 
     public void InitializeGame()
     {
         if (GameState == GameStateEnum.InGame) return;
 
-        if (roundAmount < FirstGameModes.Count)
-            CustomRound(FirstGameModes[roundAmount]);
-        else
-            RandomCalcRound();
-
         GameState = GameStateEnum.InGame;
+
+        StartMode();
+
         roundAmount++;
-
-        OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
     }
 
-    [ButtonMethod]
-    public void WinGame()
+    void StartMode()
     {
-        SideWon(0);
+        DetermineWhichMode();
+
+        if (CurrentGameMode == GameMode.a1v1)
+            Calc1v1();
+        else if (CurrentGameMode == GameMode.a2v2)
+            Calc2v2();
+        else if(CurrentGameMode == GameMode.Bodi)
+            BodiRound();
     }
 
-    [ButtonMethod]
-    public void LooseGame()
+    void DetermineWhichMode()
     {
-        SideWon(1);
+        if (roundAmount < FirstGameModes.Count)
+            CurrentGameMode = FirstGameModes[roundAmount];
+        else
+            CurrentGameMode = (GameMode)Random.Range(1, 3);
     }
 
     void Calc1v1()
     {
         ClearSideLists();
-        AddToList(LeftPlayers, AvailableChars[0]);
+        LeftPlayerAdd();
         lastPlayed = GetLowestPlayRate(lastPlayed);
 
         var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
         AddToList(RightPlayers, newChar);
+        SwitchChars();
+    }
+
+    void Calc2v2()
+    {
+        ClearSideLists();
+        LeftPlayerAdd();
+
+        var first = GetLowestPlayRate();
+        var second = GetLowestPlayRate(first);
+        var third = GetLowestPlayRate(first, second);
+
+        first = CharManager.Instance.InitializeChar(first, true);
+        second = CharManager.Instance.InitializeChar(second, true);
+        third = CharManager.Instance.InitializeChar(third, false);
+
+        AddToList(RightPlayers, first);
+        AddToList(RightPlayers, second);
+        AddToList(LeftPlayers, third);
+        SwitchChars();
+    }
+
+    void BodiRound()
+    {
+        ClearSideLists();
+        LeftPlayerAdd();
+
+        GameObject bodi = AvailableChars[2];
+        lastPlayed = bodi;
+
+        bodi = CharManager.Instance.InitializeChar(bodi, true);
+        AddToList(RightPlayers, bodi);
         SwitchChars();
     }
 
@@ -135,61 +161,6 @@ public class TournamentManager : MonoBehaviour
         RightPlayers.Clear();
     }
 
-    void Calc2v2()
-    {
-        ClearSideLists();
-        LeftPlayerAdd();
-
-        var first = GetLowestPlayRate();
-        var second = GetLowestPlayRate(first);
-        var third = GetLowestPlayRate(first, second);
-
-        first = CharManager.Instance.InitializeChar(first, true);
-        second = CharManager.Instance.InitializeChar(second, true);
-        third = CharManager.Instance.InitializeChar(third, false);
-
-        AddToList(RightPlayers, first);
-        AddToList(RightPlayers, second);
-        AddToList(LeftPlayers, third);
-        SwitchChars();
-    }
-
-    #region Rounds
-    void BodiRound()
-    {
-        GameObject bodi = AvailableChars[2];
-        CurrentGameMode = GameMode.Bodi;
-        lastPlayed = bodi;
-        bodi = CharManager.Instance.InitializeChar(bodi, true);
-        ClearSideLists();
-        LeftPlayerAdd();
-        AddToList(RightPlayers, bodi);
-        SwitchChars();
-    }
-
-    void CustomRound(GameMode gameMode)
-    {
-        CurrentGameMode = gameMode;
-
-        if (CurrentGameMode == GameMode.a1v1)
-            Calc1v1();
-        else if (CurrentGameMode == GameMode.a2v2)
-            Calc2v2();
-        else
-            BodiRound();
-    }
-
-    void RandomCalcRound()
-    {
-        CurrentGameMode = (GameMode)Random.Range(1, 3);
-        if (CurrentGameMode == GameMode.a1v1)
-            Calc1v1();
-        else if (CurrentGameMode == GameMode.a2v2)
-            Calc2v2();
-    }
-
-    #endregion
-
     /// <param name="sideID">0 = left, 1 = right</param>
     public void SideWon(int sideID)
     {
@@ -211,7 +182,6 @@ public class TournamentManager : MonoBehaviour
         MinigameManager.Instance.Cage.SetActive(true);
 
         GameState = GameStateEnum.AfterGame;
-        OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
         OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
 
         yield return new WaitForSeconds(.5f);
@@ -370,16 +340,12 @@ public class TournamentManager : MonoBehaviour
         if (getInstantCallback)
             callback(CharStats[0].Wins);
     }
-    public void RegisterOnMatchEnd(Action<bool> callback, bool getInstantCallback = false)
-    {
-        OnMatchEnd += callback;
-        if (getInstantCallback)
-            callback(GameStateEnum.InGame == GameState);
-    }
+
     public void LeftPlayerAdd()
     {
         AddToList(LeftPlayers, AvailableChars[0]);
     }
+
     public void RightPlayerAdd(GameObject charGO)
     {
         AddToList(RightPlayers, charGO);
@@ -406,6 +372,18 @@ public class TournamentManager : MonoBehaviour
         }
 
         blendRoutine = null;
+    }
+
+    [ButtonMethod]
+    public void WinGame()
+    {
+        SideWon(0);
+    }
+
+    [ButtonMethod]
+    public void LooseGame()
+    {
+        SideWon(1);
     }
 }
 

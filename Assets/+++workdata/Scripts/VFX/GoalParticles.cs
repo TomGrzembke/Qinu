@@ -13,7 +13,7 @@ public class GoalParticles : MonoBehaviour
     {
         if (!other.CompareTag("Puk")) return;
 
-        minigameManager.Goal(leftSide == false ? 0 : 1, this);
+        minigameManager.Goal(leftSide == true ? 0 : 1, this);
         goalParticles.Play();
 
     }

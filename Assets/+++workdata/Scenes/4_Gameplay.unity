@@ -243,7 +243,6 @@ MonoBehaviour:
   pointsTilWin: 3
   pointCounter: {x: 0, y: 0}
   <Puk>k__BackingField: {fileID: 1183967833}
-  pukRB: {fileID: 1183967834}
   <ArenaMiddle>k__BackingField: {fileID: 971475960}
   <DefaultPosLeft>k__BackingField:
   - {fileID: 60282861}
@@ -261,8 +260,9 @@ MonoBehaviour:
   <Cage>k__BackingField: {fileID: 1078603537}
   ballResetLeft: {fileID: 180869749}
   ballResetRight: {fileID: 1979328818}
-  leftCounterTxt: {fileID: 167118118}
-  rightCounterTxt: {fileID: 461598521}
+  leftCounterTxt: {fileID: 461598521}
+  rightCounterTxt: {fileID: 167118118}
+  pukRB: {fileID: 1183967834}
   pukResetPos: {fileID: 711858827}
 --- !u!225 &383668005 stripped
 CanvasGroup:
@@ -1723,7 +1723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 033c7fc977a59b2408bf06ebb414bf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  problemPS: {fileID: 1064644862}
   negativeMultiplier: 7
 --- !u!1001 &1129750415
 PrefabInstance:

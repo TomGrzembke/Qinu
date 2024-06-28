@@ -32,7 +32,7 @@ public class EmitParticlesOnPlayerLoose : MonoBehaviour
     {
         if (amount < 0)
             amount *= negativeMultiplier;
-        emissionModule.rateOverTime = -(amount - TournamentManager.Instance.RoundsTilWin);
+        emissionModule.rateOverTime = -(amount - TournamentManager.Instance.WinPoints);
         particleSys.Play();
     }
 }

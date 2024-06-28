@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class WinLooseBar : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] Slider bar;
     [SerializeField] float changeTime = 2;
     [SerializeField] float fadeOut = 6;
     [SerializeField] AnimationCurve animCurve;
     [SerializeField] CanvasGroup canvasGroup;
     #endregion
+
+    #region Non Serialized
     Coroutine cor;
+    #endregion
+
 
     IEnumerator Start()
     {
@@ -20,10 +24,7 @@ public class WinLooseBar : MonoBehaviour
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged);
     }
 
-    void OnDisable()
-    {
-        TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
-    }
+    void OnDisable() => TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
 
     void OnValueChanged(float value)
     {

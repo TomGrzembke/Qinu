@@ -5,8 +5,7 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     #region Serialized
-    [field: SerializeField] public CharSwitch CharSwitchManager { get; private set; } 
-    public static MinigameManager Instance;
+    [field: SerializeField] public CharSwitch CharSwitchManager { get; private set; }
     [SerializeField] float pointsTilWin = 5;
     [SerializeField] Vector2 pointCounter;
     [field: SerializeField] public Transform Puk { get; private set; }
@@ -14,7 +13,7 @@ public class MinigameManager : MonoBehaviour
     [field: SerializeField] public Transform[] DefaultPosLeft { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }
     [field: SerializeField] public Transform DespawnPos { get; private set; }
-    [field: SerializeField] public GameObject Cage { get; private set; } 
+    [field: SerializeField] public GameObject Cage { get; private set; }
 
     [SerializeField] Transform ballResetLeft;
     [SerializeField] Transform ballResetRight;
@@ -24,6 +23,10 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Transform pukResetPos;
     #endregion
 
+    #region Non Serialized
+    public static MinigameManager Instance;
+    #endregion
+
     void Awake()
     {
         Instance = this;
@@ -31,41 +34,31 @@ public class MinigameManager : MonoBehaviour
 
     public void Goal(int goalID, GoalParticles goalTracker = null)
     {
-        if (goalID == 0)
-        {
+        bool goalInLeft = goalID == 0;
+
+        if (goalInLeft)
             pointCounter.y += 1;
-            rightCounterTxt.text = pointCounter.y.ToString();
-        }
         else
-        {
             pointCounter.x += 1;
-            leftCounterTxt.text = pointCounter.x.ToString();
-        }
+
+        UpdateCounter();
 
         pukRB.velocity = Vector2.zero;
-        pukRB.transform.position = goalID == 0 ? ballResetLeft.position : ballResetRight.position;
+        pukRB.transform.position = goalInLeft ? ballResetRight.position : ballResetLeft.position;
 
-        if (pointCounter.x == pointsTilWin)
-        {
-            TournamentManager.Instance.SideWon(1);
-            ResetInternal();
-            if (goalTracker != null)
-                goalTracker.WonParticle();
-        }
-        else if (pointCounter.y == pointsTilWin)
-        {
-            TournamentManager.Instance.SideWon(0);
-            ResetInternal();
-            if (goalTracker != null)
-                goalTracker.WonParticle();
-        }
+
+        //Returns if no side won yet
+        if (!(pointCounter.x == pointsTilWin || pointCounter.y == pointsTilWin)) return;
+
+        TournamentManager.Instance.SideWon(goalID == 0 ? 1 : 0);
+        goalTracker?.WonParticle();
+        ResetInternal();
     }
 
     public void ResetArena()
     {
         ResetInternal();
-        rightCounterTxt.text = pointCounter.y.ToString();
-        leftCounterTxt.text = pointCounter.x.ToString();
+        UpdateCounter();
     }
 
     public void ResetInternal()
@@ -73,4 +66,11 @@ public class MinigameManager : MonoBehaviour
         pointCounter = new();
         Puk.position = pukResetPos.position;
     }
+
+    void UpdateCounter()
+    {
+        rightCounterTxt.text = pointCounter.y.ToString();
+        leftCounterTxt.text = pointCounter.x.ToString();
+    }
+
 }

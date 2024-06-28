@@ -41,7 +41,7 @@ public class EndLoader : MonoBehaviour
         if (currentScore > 0) WonGame = true;
         else WonGame = false;
 
-        if (value != TournamentManager.Instance.RoundsTilWin && value != -TournamentManager.Instance.RoundsTilWin) return;
+        if (value != TournamentManager.Instance.WinPoints && value != -TournamentManager.Instance.WinPoints) return;
         LoadEnd();
     }
 

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] float amountOfParallax;
     [SerializeField] Transform camTrans;
-
     #endregion
 
-    #region private fields
+    #region Non Serialized
     float startingPos;
+    float xPos;
     #endregion
 
     void Start()
@@ -21,8 +21,8 @@ public class ParallaxEffect : MonoBehaviour
 
     void Update()
     {
-        float Xpos = camTrans.position.x * amountOfParallax;
+        xPos = camTrans.position.x * amountOfParallax;
 
-        transform.position = transform.position.SetX(Xpos + startingPos);
+        transform.position = transform.position.SetX(xPos + startingPos);
     }
 }

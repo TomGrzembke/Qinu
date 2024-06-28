@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary> Manages what happens after a match in terms of clean up and next matches </summary>
 public class TournamentManager : MonoBehaviour
 {
     public enum GameStateEnum
@@ -20,49 +21,44 @@ public class TournamentManager : MonoBehaviour
         a2v2
     }
 
-    #region public fields
-    public static TournamentManager Instance;
-    [field: SerializeField] public int RoundAmount { get; private set; }
+    #region Serialized
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
+    [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
+    [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<CharacterStats> CharStats { get; private set; }
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
-    [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
-    [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
     [field: SerializeField] public List<GameObject> RightPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
-    public event Action<float> OnPlayerMatchEnd;
-    public event Action<bool> OnMatchEnd;
-    #endregion
+    [field: SerializeField] public float WinPoints { get; private set; } = 5;
 
-    #region [SerializeField]
     [SerializeField] float afterCombatTime = 3;
-    [field: SerializeField] public float RoundsTilWin { get; private set; } = 5;
-
     [Header("SlowMo")]
     [SerializeField] AnimationCurve slowMoCurve;
     [SerializeField] float blendTime = 0.3f;
     [SerializeField] float blendTimeScale = .8f;
-    Coroutine blendRoutine;
     #endregion
 
-    #region private fields
-    int afterCombatTalkTimes = -1;
+    #region Non Serialized
+    public static TournamentManager Instance;
+    public event Action<float> OnPlayerMatchEnd;
+    public event Action<bool> OnMatchEnd;
+    Coroutine blendRoutine;
     GameObject lastPlayed;
     bool firstMatch = true;
+    int roundAmount;
     #endregion
 
-    void Awake()
-    {
-        Instance = this;
-    }
+    void Awake() => Instance = this;
 
     void Start()
     {
         if (CharManager.Instance)
             for (int i = 0; i < CharManager.Instance.CharPrefabs.Length; i++)
             {
-                if (!AvailableChars.Contains(CharManager.Instance.CharPrefabs[i].gameObject))
-                    AvailableChars.Add(CharManager.Instance.CharPrefabs[i].gameObject);
+                GameObject toAdd = CharManager.Instance.CharPrefabs[i].gameObject;
+
+                if (!AvailableChars.Contains(toAdd))
+                    AvailableChars.Add(toAdd);
             }
 
         for (int i = 0; i < AvailableChars.Count; i++)
@@ -72,18 +68,17 @@ public class TournamentManager : MonoBehaviour
 
     }
 
-    [ButtonMethod]
     public void InitializeGame()
     {
         if (GameState == GameStateEnum.InGame) return;
 
-        if (RoundAmount < FirstGameModes.Count)
-            CustomRound(FirstGameModes[RoundAmount]);
+        if (roundAmount < FirstGameModes.Count)
+            CustomRound(FirstGameModes[roundAmount]);
         else
             RandomCalcRound();
 
         GameState = GameStateEnum.InGame;
-        RoundAmount++;
+        roundAmount++;
 
         OnMatchEnd?.Invoke(GameState == GameStateEnum.InGame);
     }
@@ -92,6 +87,12 @@ public class TournamentManager : MonoBehaviour
     public void WinGame()
     {
         SideWon(0);
+    }
+
+    [ButtonMethod]
+    public void LooseGame()
+    {
+        SideWon(1);
     }
 
     void Calc1v1()
@@ -238,7 +239,7 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitUntil(() => CheckOutOfInteraction());
 
-        if (CharStats[0].Wins != RoundsTilWin)
+        if (CharStats[0].Wins != WinPoints)
             InitializeGame();
         MinigameManager.Instance.Cage.SetActive(false);
     }

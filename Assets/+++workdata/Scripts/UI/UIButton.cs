@@ -3,10 +3,10 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-/// <summary> Attach this to the text component of a button to match its naming </summary>
+/// <summary> Attach this to the text component of a button to match its naming and get some basic scale animations </summary>
 public class UIButton : MonoBehaviour
 {
-    #region serialized fields
+    #region Serialized
     [SerializeField] string buttonName;
     [SerializeField] bool additionalSettings;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleOnClick = .75f;
@@ -14,22 +14,16 @@ public class UIButton : MonoBehaviour
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleHover = .95f;
     #endregion
 
-    #region private fields
+    #region Non Serialized
     readonly string buttonNameSyntax = "[Button]";
     readonly string textNameSyntax = "[Text]";
     TextMeshProUGUI textComponent;
     Coroutine scaleRoutine;
     #endregion
 
-    void OnValidate()
-    {
-        OnValidateCall();
-    }
+    void OnValidate() => OnValidateCall();
 
-    void Awake()
-    {
-        OnValidateCall();
-    }
+    void Awake() => OnValidateCall();
 
     private void OnValidateCall()
     {

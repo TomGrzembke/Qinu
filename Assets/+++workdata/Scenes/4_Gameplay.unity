@@ -264,6 +264,9 @@ MonoBehaviour:
   rightCounterTxt: {fileID: 167118118}
   pukRB: {fileID: 1183967834}
   pukResetPos: {fileID: 711858827}
+  ballSFXSpeed:
+  - 15
+  - 25
 --- !u!225 &383668005 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 9026155591334266037, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}

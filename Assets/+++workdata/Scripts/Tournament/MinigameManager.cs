@@ -21,6 +21,7 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI rightCounterTxt;
     [SerializeField] Rigidbody2D pukRB;
     [SerializeField] Transform pukResetPos;
+    [SerializeField] float[] ballSFXSpeed;
     #endregion
 
     #region Non Serialized
@@ -43,11 +44,10 @@ public class MinigameManager : MonoBehaviour
 
         UpdateCounter();
 
-        SoundManager.Instance.PlaySound(SoundType.GoalShot);
+        GoalSound();
 
         pukRB.velocity = Vector2.zero;
         pukRB.transform.position = goalInLeft ? ballResetRight.position : ballResetLeft.position;
-
 
         //Returns if no side won yet
         if (!(pointCounter.x == pointsTilWin || pointCounter.y == pointsTilWin)) return;
@@ -55,6 +55,19 @@ public class MinigameManager : MonoBehaviour
         TournamentManager.Instance.SideWon(goalID == 0 ? 1 : 0);
         goalTracker?.WonParticle();
         ResetInternal();
+    }
+
+    /// <summary> Depends on rb velocity</summary>
+    void GoalSound()
+    {
+        float ballSpeed = pukRB.velocity.magnitude;
+
+        if (ballSpeed < ballSFXSpeed[0])
+            SoundManager.Instance.PlaySound(SoundType.GoalShotSoft);
+        else if (ballSpeed < ballSFXSpeed[1])
+            SoundManager.Instance.PlaySound(SoundType.GoalShotMiddle);
+        else
+            SoundManager.Instance.PlaySound(SoundType.GoalShotHard);
     }
 
     public void ResetArena()

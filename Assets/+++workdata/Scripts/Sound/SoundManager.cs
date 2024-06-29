@@ -137,12 +137,14 @@ public enum SoundType
     PointCounterDown = 9,
     OnSfxChanged = 10,
     BallHit = 11,
-    GoalShot = 12,
     Qinu = 13,
     Anthony = 14,
     Bodi = 15,
     Pamo = 16,
     Tessar = 17,
     Reaf = 18,
+    GoalShotHard = 19,
+    GoalShotMiddle = 20,
+    GoalShotSoft = 21,
 
 }

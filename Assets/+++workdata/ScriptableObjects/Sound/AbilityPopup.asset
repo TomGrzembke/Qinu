@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d127bd2c19d2f9b418635383f0418b36, type: 3}
-  m_Name: Qinu
+  m_Name: AbilityPopup
   m_EditorClassIdentifier: 
-  soundType: 13
+  soundType: 6
   clips:
-  - {fileID: 8300000, guid: bd50ffbcfac3c064fb328c0731031df8, type: 3}
+  - {fileID: 8300000, guid: bdd3a360cca663c4a843cbb23a7d049d, type: 3}

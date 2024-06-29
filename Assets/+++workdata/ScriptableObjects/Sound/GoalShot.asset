@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d127bd2c19d2f9b418635383f0418b36, type: 3}
+  m_Name: GoalShot
+  m_EditorClassIdentifier: 
+  soundType: 12
+  clips:
+  - {fileID: 8300000, guid: a8e1353ecc90e154f85d454637e4ffa3, type: 3}
+  - {fileID: 8300000, guid: 934d03ec5b26e474d9b19ebab920e75f, type: 3}
+  - {fileID: 8300000, guid: b891b48a112282142b0569756b95044d, type: 3}
+  - {fileID: 8300000, guid: 0e6a7fad750c38040af83c25558797d3, type: 3}
+  - {fileID: 8300000, guid: 9613cf79afaaeab4a95a7e84f757866d, type: 3}
+  - {fileID: 8300000, guid: ea8415160d3f3c549b2f8881661154fb, type: 3}

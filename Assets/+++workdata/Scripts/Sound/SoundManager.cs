@@ -131,14 +131,18 @@ public enum SoundType
     ButtonClickBack,
 
     SkillAcquired,
+    AbilityPopup,
     Stun,
     PointCounter,
     PointCounterDown,
     OnSfxChanged,
+    BallHit,
+    GoalShot,
     Qinu,
     Anthony,
     Bodi,
     Pamo,
     Tessar,
-    Reaf
+    Reaf,
+
 }

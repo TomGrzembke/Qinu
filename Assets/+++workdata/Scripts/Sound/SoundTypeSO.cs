@@ -10,6 +10,10 @@ public class SoundTypeSO : ScriptableObject
     void OnValidate()
     {
         Enum.TryParse<SoundType>(name, out var result);
+
+        if(result == SoundType.Null)
+            Enum.TryParse(name.Remove(5), out result); //in case of the naming voice
+
         if (result != SoundType.Null)
             soundType = result;
     }

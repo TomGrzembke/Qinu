@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d127bd2c19d2f9b418635383f0418b36, type: 3}
-  m_Name: Anthony
+  m_Name: AnthonyVoice
   m_EditorClassIdentifier: 
-  soundType: 10
+  soundType: 14
   clips:
   - {fileID: 8300000, guid: 8388b4203e573394fb5432f97504cc7a, type: 3}
   - {fileID: 8300000, guid: b9dd413e6298f9346b47c65f621c88e3, type: 3}

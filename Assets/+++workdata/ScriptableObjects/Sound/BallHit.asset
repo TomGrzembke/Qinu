@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d127bd2c19d2f9b418635383f0418b36, type: 3}
-  m_Name: Qinu
+  m_Name: BallHit
   m_EditorClassIdentifier: 
-  soundType: 13
+  soundType: 11
   clips:
-  - {fileID: 8300000, guid: bd50ffbcfac3c064fb328c0731031df8, type: 3}
+  - {fileID: 8300000, guid: 08936a9515216ac4fa40be9f7083320f, type: 3}

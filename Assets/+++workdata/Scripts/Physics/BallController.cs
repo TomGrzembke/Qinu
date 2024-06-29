@@ -6,6 +6,7 @@ public class BallController : RBGetter
     #region Serialized
     [SerializeField, ShowOnly] float currentSpeed;
     [SerializeField] float maxSpeed;
+    [SerializeField] float sfxSpeedMargin = 20;
     #endregion
 
     protected override void AwakeInternal()
@@ -32,5 +33,12 @@ public class BallController : RBGetter
             rb.velocity = rb.velocity.normalized * (currentSpeed + add);
         else
             rb.velocity = rb.velocity.normalized;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision == null) return;
+        if(sfxSpeedMargin > currentSpeed) return;
+        SoundManager.Instance.PlaySound(SoundType.BallHit);
     }
 }

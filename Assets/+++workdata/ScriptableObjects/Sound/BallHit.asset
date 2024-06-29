@@ -15,3 +15,5 @@ MonoBehaviour:
   soundType: 11
   clips:
   - {fileID: 8300000, guid: 08936a9515216ac4fa40be9f7083320f, type: 3}
+  - {fileID: 8300000, guid: 93d065c752dfe894ebc533c2b50bc94b, type: 3}
+  - {fileID: 8300000, guid: 9f9dbcaf5958c1c4c829b4367a1b3756, type: 3}

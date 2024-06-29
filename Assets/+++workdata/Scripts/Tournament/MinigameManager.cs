@@ -42,6 +42,7 @@ public class MinigameManager : MonoBehaviour
             pointCounter.x += 1;
 
         UpdateCounter();
+
         SoundManager.Instance.PlaySound(SoundType.GoalShot);
 
         pukRB.velocity = Vector2.zero;

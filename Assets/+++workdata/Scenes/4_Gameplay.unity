@@ -6901,6 +6901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puk
       objectReference: {fileID: 0}
+    - target: {fileID: 3291632717088686755, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
+      propertyPath: sfxSpeedMargin
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8597344718861538997, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
       propertyPath: targetCol.Array.data[0]
       value: 

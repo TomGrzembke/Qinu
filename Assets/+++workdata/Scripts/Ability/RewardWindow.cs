@@ -60,6 +60,7 @@ public class RewardWindow : MonoBehaviour
         if (currentRewarWindowCoroutine != null)
             StopCoroutine(currentRewarWindowCoroutine);
 
+        SoundManager.Instance.PlaySound(SoundType.AbilityPopup);
         currentRewarWindowCoroutine = StartCoroutine(ShowCoroutine());
     }
 

@@ -11,6 +11,7 @@ public class WinLooseBar : MonoBehaviour
     [SerializeField] float fadeOut = 6;
     [SerializeField] AnimationCurve animCurve;
     [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] ParticleSystem wonSystem;
     #endregion
 
     #region Non Serialized
@@ -53,6 +54,9 @@ public class WinLooseBar : MonoBehaviour
             yield return null;
         }
         bar.value = value;
+
+        if (value > 0)
+            wonSystem.Play();
 
         yield return new WaitForSeconds(fadeOut);
         FadeCanvasGroup.Instance.FadeOut(canvasGroup);

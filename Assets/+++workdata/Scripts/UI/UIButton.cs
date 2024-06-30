@@ -12,6 +12,7 @@ public class UIButton : MonoBehaviour
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleOnClick = .75f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleTime = .075f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleHover = .95f;
+    [SerializeField] SoundType onClickSFX = SoundType.ButtonClick;
     #endregion
 
     #region Non Serialized
@@ -42,6 +43,8 @@ public class UIButton : MonoBehaviour
             StopCoroutine(scaleRoutine);
 
         scaleRoutine = StartCoroutine(ScaleAnim());
+
+        SoundManager.Instance.PlaySound(onClickSFX);
     }
 
     IEnumerator ScaleAnim()

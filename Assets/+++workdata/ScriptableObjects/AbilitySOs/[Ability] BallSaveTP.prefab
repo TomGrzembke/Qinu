@@ -79,5 +79,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   abilitySO: {fileID: 11400000, guid: a26a4a1d48e25414cad120f80b97e0b0, type: 2}
-  tpTime: 0.25
+  tpTime: 0.4
   spaceToAdd: 3

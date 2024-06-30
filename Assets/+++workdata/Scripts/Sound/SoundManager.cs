@@ -137,6 +137,7 @@ public enum SoundType
     PointCounterDown = 9,
     OnSfxChanged = 10,
     BallHit = 11,
+    AbilityCooldown = 12,
     Qinu = 13,
     Anthony = 14,
     Bodi = 15,

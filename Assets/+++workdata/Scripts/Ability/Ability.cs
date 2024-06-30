@@ -30,7 +30,12 @@ public abstract class Ability : MonoBehaviour
 
     public virtual void Execute(bool performed = true)
     {
-        if (coolDownCor != null) return;
+        if (coolDownCor != null)
+        {
+            if (performed)
+                SoundManager.Instance.PlaySound(SoundType.AbilityCooldown);
+            return;
+        }
 
         if (performed)
         {
@@ -40,7 +45,7 @@ public abstract class Ability : MonoBehaviour
         }
         else
             DeExecuteInternal();
-        
+
     }
     public void OnInitialized()
     {

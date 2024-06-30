@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d127bd2c19d2f9b418635383f0418b36, type: 3}
+  m_Name: AbilityCooldown
+  m_EditorClassIdentifier: 
+  soundType: 12
+  clips:
+  - {fileID: 8300000, guid: 0f9d8cab144b0a24da2c3b95473600d0, type: 3}
+  - {fileID: 8300000, guid: 611bee4294abb9b4084249fa0b0e09ac, type: 3}
+  - {fileID: 8300000, guid: e3b4372002212f14e8760d12bfd5e3f1, type: 3}
+  - {fileID: 8300000, guid: 5e27fa2d81c5aaa40a203f0670123b37, type: 3}
+  - {fileID: 8300000, guid: 688f59da8f28676459815ce1a06c0cbb, type: 3}
+  - {fileID: 8300000, guid: 40cfee04035aac74db1e9df0fccd4e49, type: 3}
+  - {fileID: 8300000, guid: 6049e6c047ad92e4a89b2a59401452d2, type: 3}
+  - {fileID: 8300000, guid: 7f3a997f5322d544fab681e3cbbfcd04, type: 3}

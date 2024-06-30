@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: _SoundBank
   m_EditorClassIdentifier: 
   soundTypes:
+  - {fileID: 11400000, guid: 1d9a77205ebb73d4cb70e1fe2d59cce6, type: 2}
   - {fileID: 11400000, guid: 7f01c23e8be3fd24c8d028608a6074ea, type: 2}
   - {fileID: 11400000, guid: 0db74b969d092ba49b0433d1a5bd8a06, type: 2}
-  - {fileID: 11400000, guid: 1d9a77205ebb73d4cb70e1fe2d59cce6, type: 2}
   - {fileID: 11400000, guid: ee5491d8d5a29484984b9bbc72dcca7d, type: 2}
   - {fileID: 11400000, guid: 2fadb4cdd2f047842ac702552a398a77, type: 2}
   - {fileID: 11400000, guid: c3fb34c038a2e2c4397e0f705471bc73, type: 2}
@@ -29,3 +29,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f063b29e49df594cbed369fee2c82dd, type: 2}
   - {fileID: 11400000, guid: d0d00718947de98488ca76f11a17242e, type: 2}
   - {fileID: 11400000, guid: f39459d4816ae1e4a8a8adf33bcefbac, type: 2}
+  - {fileID: 11400000, guid: b038bcdf486227e4e90d7af573354922, type: 2}
+  - {fileID: 11400000, guid: 8cb84e032c9a44446918f5656d8d95a6, type: 2}

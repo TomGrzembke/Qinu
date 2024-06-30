@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundType: 2
   clips:
-  - {fileID: 8300000, guid: df75a88496654be43bb84cbf4b051372, type: 3}
-  - {fileID: 8300000, guid: 2c4238043c69fa7489ac121fe1266c7b, type: 3}
+  - {fileID: 8300000, guid: 4ed1d5c900e960d489708c85ec4b8ea1, type: 3}
+  - {fileID: 8300000, guid: 85f5bacc2be5b2d44b683cdee742a8d1, type: 3}

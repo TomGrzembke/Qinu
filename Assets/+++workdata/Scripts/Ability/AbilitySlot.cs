@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AbilitySlot : MonoBehaviour
 {
     #region Serialized
-    [field: SerializeField] public bool Performed { get; private set; } 
+    [field: SerializeField] public bool Performed { get; private set; }
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
@@ -52,7 +52,7 @@ public class AbilitySlot : MonoBehaviour
         abilityImage.SetAlpha(Occupied ? 255 : 0);
         if (tempAbility)
             numberObject.SetActive(tempAbility.IsActive);
-        else 
+        else
             numberObject.SetActive(false);
     }
 

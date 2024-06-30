@@ -261,6 +261,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   canvasGroup: {fileID: 1128176972939797528}
+  wonSystem: {fileID: 0}
+  lostSystem: {fileID: 0}
 --- !u!114 &5409652872727008301
 MonoBehaviour:
   m_ObjectHideFlags: 0

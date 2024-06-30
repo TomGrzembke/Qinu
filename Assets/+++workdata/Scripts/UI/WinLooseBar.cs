@@ -12,6 +12,7 @@ public class WinLooseBar : MonoBehaviour
     [SerializeField] AnimationCurve animCurve;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] ParticleSystem wonSystem;
+    [SerializeField] ParticleSystem lostSystem;
     #endregion
 
     #region Non Serialized
@@ -37,6 +38,8 @@ public class WinLooseBar : MonoBehaviour
 
     IEnumerator ChangeValue(float value)
     {
+        float beforeValue = bar.value;
+
         if (canvasGroup.alpha == 0)
         {
             FadeCanvasGroup.Instance.FadeIn(canvasGroup);
@@ -55,8 +58,10 @@ public class WinLooseBar : MonoBehaviour
         }
         bar.value = value;
 
-        if (value > 0)
+        if (value > beforeValue)
             wonSystem.Play();
+        else if(value < beforeValue)
+            lostSystem.Play();
 
         yield return new WaitForSeconds(fadeOut);
         FadeCanvasGroup.Instance.FadeOut(canvasGroup);

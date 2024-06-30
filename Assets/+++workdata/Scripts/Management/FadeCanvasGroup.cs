@@ -48,10 +48,11 @@ public class FadeCanvasGroup : MonoBehaviour
     IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn)
     {
         float timeFaded = 0;
+        float currentAlpha = canvasGroup.alpha;
 
         while (timeFaded < FadeTime)
         {
-            canvasGroup.alpha = Mathf.Lerp(fadeIn ? 0 : 1, fadeIn ? 1 : 0, timeFaded / FadeTime);
+            canvasGroup.alpha = Mathf.Lerp(currentAlpha, fadeIn ? 1 : 0, timeFaded / FadeTime);
             timeFaded += Time.deltaTime;
             yield return null;
         }

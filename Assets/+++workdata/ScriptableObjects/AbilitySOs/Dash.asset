@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027a8e79626a8504c9e0a1d4592d416a, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  abilitySprite: {fileID: 21300000, guid: 1223ca7d04e5a4ad08a8d648c4e2a09e, type: 3}
+  abilitySprite: {fileID: 21300000, guid: cf45f90c391d5c04397806f7a80ec5be, type: 3}
   abilityTitel: Dash
   abilityDescription: 

@@ -77,11 +77,13 @@ public class AbilitySlot : MonoBehaviour
         }
         RefreshPicture();
     }
+
     public void EnterAbility()
     {
         if (CurrentAbility)
             CurrentAbility.EnterAbility(abilityImage, abilityImageBG, numberObject, anim);
     }
+
     public void Execute(bool performed = true)
     {
         Performed = performed;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027a8e79626a8504c9e0a1d4592d416a, type: 3}
   m_Name: MoveMiddle
   m_EditorClassIdentifier: 
-  abilitySprite: {fileID: 21300000, guid: 52430ec803e4fdb499cff7224cd45dda, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 7728146f87fff604d88fb445ed494136, type: 3}
   abilityTitel: Move Middle
   abilityDescription: 

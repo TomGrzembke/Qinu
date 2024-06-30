@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -22,10 +23,21 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Rigidbody2D pukRB;
     [SerializeField] Transform pukResetPos;
     [SerializeField] float[] ballSFXSpeed;
+
+    [Header("StrongSlowMo")]
+    [SerializeField] AnimationCurve strongSlowMoCurve;
+    [SerializeField] float strongSlowMoBlendTime = .85f;
+    [SerializeField] float strongSlowMoBlendTimeScale = 0.05f;
+
+    [Header("NormalSlowMo")]
+    [SerializeField] AnimationCurve slowMoCurve;
+    [SerializeField] float slowMoBlendTime = 0.3f;
+    [SerializeField] float slowMoBlendTimeScale = .8f;
     #endregion
 
     #region Non Serialized
     public static MinigameManager Instance;
+    Coroutine blendRoutine;
     #endregion
 
     void Awake()
@@ -48,6 +60,8 @@ public class MinigameManager : MonoBehaviour
 
         pukRB.velocity = Vector2.zero;
         pukRB.transform.position = goalInLeft ? ballResetRight.position : ballResetLeft.position;
+
+        PlaySlowMo();
 
         //Returns if no side won yet
         if (!(pointCounter.x == pointsTilWin || pointCounter.y == pointsTilWin)) return;
@@ -88,4 +102,70 @@ public class MinigameManager : MonoBehaviour
         leftCounterTxt.text = pointCounter.x.ToString();
     }
 
+    public void PlaySlowMo()
+    {
+        if (blendRoutine != null)
+            StopCoroutine(blendRoutine);
+
+        blendRoutine = StartCoroutine(NormalBlendTimeScale());
+    }
+
+    public void PlayStrongSlowMo()
+    {
+        if (blendRoutine != null)
+            StopCoroutine(blendRoutine);
+
+        blendRoutine = StartCoroutine(StrongBlendTimeScale());
+    }
+
+    public bool GetSlowMoFinished()
+    {
+        return blendRoutine == null;
+    }
+
+    IEnumerator NormalBlendTimeScale()
+    {
+        float timeBlended = 0;
+
+        while (timeBlended < slowMoBlendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(1, slowMoBlendTimeScale, slowMoCurve.Evaluate(timeBlended / slowMoBlendTime));
+            yield return null;
+        }
+
+        timeBlended = 0;
+
+        while (timeBlended < slowMoBlendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(slowMoBlendTimeScale, 1, timeBlended / slowMoBlendTime);
+            yield return null;
+        }
+
+        blendRoutine = null;
+    }
+
+    IEnumerator StrongBlendTimeScale()
+    {
+        float timeBlended = 0;
+
+        while (timeBlended < strongSlowMoBlendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(1, strongSlowMoBlendTimeScale, strongSlowMoCurve.Evaluate(timeBlended / strongSlowMoBlendTime));
+            yield return null;
+        }
+
+        timeBlended = 0;
+
+        while (timeBlended < strongSlowMoBlendTime)
+        {
+            timeBlended += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(strongSlowMoBlendTimeScale, 1, timeBlended / strongSlowMoBlendTime);
+            yield return null;
+        }
+
+        blendRoutine = null;
+    }
 }

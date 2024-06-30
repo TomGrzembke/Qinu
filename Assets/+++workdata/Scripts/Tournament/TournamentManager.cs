@@ -31,16 +31,11 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public float WinPoints { get; private set; } = 5;
 
-    [Header("SlowMo")]
-    [SerializeField] AnimationCurve slowMoCurve;
-    [SerializeField] float blendTime = 0.3f;
-    [SerializeField] float blendTimeScale = .8f;
     #endregion
 
     #region Non Serialized
     public static TournamentManager Instance;
     public event Action<float> OnPlayerMatchEnd;
-    Coroutine blendRoutine;
     GameObject lastPlayed;
     bool firstMatch = true;
     int roundAmount;
@@ -168,12 +163,8 @@ public class TournamentManager : MonoBehaviour
 
     IEnumerator AfterGameCor(int sideID)
     {
-        if (blendRoutine != null)
-            StopCoroutine(blendRoutine);
-
-        blendRoutine = StartCoroutine(BlendTimeScale());
-
-        yield return new WaitUntil(() => blendRoutine == null);
+        MinigameManager.Instance.PlayStrongSlowMo();
+        yield return new WaitUntil(() => MinigameManager.Instance.GetSlowMoFinished());
 
         SituationalDialogue.Instance.StartDialogue(UseList(RightPlayers)[0].name);
 
@@ -350,29 +341,6 @@ public class TournamentManager : MonoBehaviour
     public void RightPlayerAdd(GameObject charGO)
     {
         AddToList(RightPlayers, charGO);
-    }
-
-    IEnumerator BlendTimeScale()
-    {
-        float timeBlended = 0;
-
-        while (timeBlended < blendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(1, blendTimeScale, slowMoCurve.Evaluate(timeBlended / blendTime));
-            yield return null;
-        }
-
-        timeBlended = 0;
-
-        while (timeBlended < blendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(blendTimeScale, 1, timeBlended / blendTime);
-            yield return null;
-        }
-
-        blendRoutine = null;
     }
 
     [ButtonMethod]

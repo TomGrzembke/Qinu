@@ -18,10 +18,12 @@ public abstract class Ability : MonoBehaviour
     Image abilityImage;
     Image abilityImageBG;
     Coroutine coolDownCor;
+    Animator anim;
     #endregion
 
-    public void EnterAbility(Image _abilityImage, Image _abilityImageBG, GameObject _numberObject)
+    public void EnterAbility(Image _abilityImage, Image _abilityImageBG, GameObject _numberObject, Animator _anim)
     {
+        anim = _anim;
         abilityImage = _abilityImage;
         abilityImageBG = _abilityImageBG;
         numberObject = _numberObject;
@@ -33,7 +35,10 @@ public abstract class Ability : MonoBehaviour
         if (coolDownCor != null)
         {
             if (performed)
+            {
                 SoundManager.Instance.PlaySound(SoundType.AbilityCooldown);
+                anim.SetTrigger("wobble");
+            }
             return;
         }
 

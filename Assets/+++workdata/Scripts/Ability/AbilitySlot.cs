@@ -19,7 +19,13 @@ public class AbilitySlot : MonoBehaviour
 
     #region Non Serialized
     public bool Occupied { get; private set; }
+    Animator anim;
     #endregion
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void OnValidate()
     {
@@ -74,7 +80,7 @@ public class AbilitySlot : MonoBehaviour
     public void EnterAbility()
     {
         if (CurrentAbility)
-            CurrentAbility.EnterAbility(abilityImage, abilityImageBG, numberObject);
+            CurrentAbility.EnterAbility(abilityImage, abilityImageBG, numberObject, anim);
     }
     public void Execute(bool performed = true)
     {

@@ -32,7 +32,7 @@ Off to the next Task! #speaker: Tessar
  -> END
  
  ==Bodi0
-Did I win? #speaker: Bodi
+Well played Qinu. #speaker: Bodi
  -> END
  
  ==Bodi1
@@ -46,6 +46,11 @@ I didn't enjoy that. #speaker: Bodi
  ==Bodi3
 I hope the arena is fine after that. #speaker: Bodi
  -> END
+ 
+ ==Bodi4
+ Huh. #speaker: Bodi
+ -> END
+ 
  
  ==Pamo0
 I need a recharge. #speaker: Pamo

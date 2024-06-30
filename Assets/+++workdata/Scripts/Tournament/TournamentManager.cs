@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static TournamentManager;
 using Random = UnityEngine.Random;
 
 /// <summary> Manages what happens after a match in terms of clean up and next matches </summary>
@@ -76,7 +75,7 @@ public class TournamentManager : MonoBehaviour
             Calc1v1();
         else if (CurrentGameMode == GameMode.a2v2)
             Calc2v2();
-        else if(CurrentGameMode == GameMode.Bodi)
+        else if (CurrentGameMode == GameMode.Bodi)
             BodiRound();
     }
 
@@ -182,7 +181,9 @@ public class TournamentManager : MonoBehaviour
         MinigameManager.Instance.Cage.SetActive(true);
 
         GameState = GameStateEnum.AfterGame;
-        OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
+
+        if (!firstMatch)
+            OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
 
         yield return new WaitForSeconds(.5f);
         yield return new WaitUntil(() => CheckOutOfInteraction());

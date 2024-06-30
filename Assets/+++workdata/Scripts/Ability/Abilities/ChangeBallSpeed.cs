@@ -12,6 +12,8 @@ public class ChangeBallSpeed : Ability
     #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Coroutine abilityRoutine;
+    BallVFX ballVFX;
+    BallController ballController;
     #endregion
 
     protected override void DeExecuteInternal()
@@ -22,18 +24,21 @@ public class ChangeBallSpeed : Ability
     protected override void ExecuteInternal()
     {
         if (abilityRoutine == null)
-            abilityRoutine = StartCoroutine(TPBall());
+            abilityRoutine = StartCoroutine(SpeedUpBall());
     }
 
     protected override void OnInitializedInternal()
     {
+        ballController = SlotManager.Puk.GetComponent<BallController>();
+        ballVFX = SlotManager.Puk.GetComponent<BallVFX>();
     }
 
-    IEnumerator TPBall()
+    IEnumerator SpeedUpBall()
     {
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(speedAmount, true);
+        ballVFX.ChangeSprite(abilitySO.abilitySprite, duration);
+        ballController.AddBallMaxSpeed(speedAmount, true);
         yield return new WaitForSeconds(duration);
-        SlotManager.Puk.GetComponent<BallController>().AddBallMaxSpeed(-speedAmount, false);
+        ballController.AddBallMaxSpeed(-speedAmount, false);
         abilityRoutine = null;
     }
 }

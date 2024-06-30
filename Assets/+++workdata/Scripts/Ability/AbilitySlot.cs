@@ -52,6 +52,8 @@ public class AbilitySlot : MonoBehaviour
         abilityImage.SetAlpha(Occupied ? 255 : 0);
         if (tempAbility)
             numberObject.SetActive(tempAbility.IsActive);
+        else 
+            numberObject.SetActive(false);
     }
 
     public void ChangeAbilityPrefab(GameObject newAbilityPrefab)

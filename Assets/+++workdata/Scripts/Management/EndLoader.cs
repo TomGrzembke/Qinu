@@ -6,7 +6,6 @@ using UnityEngine;
 public class EndLoader : MonoBehaviour
 {
     #region Serialized
-    [SerializeField] Scenes sceneToLoad = Scenes.End;
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
     [field: SerializeField] public Vector3 QinuEndPos { get; private set; }

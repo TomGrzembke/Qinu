@@ -33,14 +33,14 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
   ==ActivateGoals
-Now that's a dash, what do you think friends?
+Now that's a dash, what do you think friends? #speaker: Anthony
     ~Event ("SilentSpiritsExclamation")
 You win a round by scoring 3 Goals!
     ~Event ("GoalActive")
  -> END
  
    ==IntroMatchEnd
-Good match!
+Good match! #speaker: Anthony
 The bar goes up if you win 
     ~Event ("BarUp")
 and down if you loose.
@@ -48,4 +48,5 @@ and down if you loose.
 Don't let it reach the left.
     ~Event ("UpdateBar")
 Now Meet the others!
+Hi Qinu. #speaker: Bodi
  -> END

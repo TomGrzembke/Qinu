@@ -11,6 +11,7 @@ public class BallVFX : MonoBehaviour
     #region Non Serialized
     SpriteRenderer ballSR;
     Sprite originalSprite;
+    Color ballCol;
     Coroutine spriteRoutine;
     #endregion
 
@@ -18,6 +19,7 @@ public class BallVFX : MonoBehaviour
     {
         ballSR = GetComponent<SpriteRenderer>();
         originalSprite = ballSR.sprite;
+        ballCol = ballSR.color;
     }
 
     public void PlayTPVisual()
@@ -33,6 +35,7 @@ public class BallVFX : MonoBehaviour
     public void ChangeSprite(Sprite sprite, float seconds)
     {
         ballSR.sprite = sprite;
+        ballSR.color = Color.white;
         if (spriteRoutine != null)
             StopCoroutine(spriteRoutine);
 
@@ -42,6 +45,7 @@ public class BallVFX : MonoBehaviour
     IEnumerator ResetBallSprite(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        ballSR.color = ballCol;
         ballSR.sprite = originalSprite;
     }
 }

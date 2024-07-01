@@ -546,6 +546,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154790233}
   m_CullTransparentMesh: 1
+--- !u!1001 &167789443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 869161638}
+    m_Modifications:
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+      propertyPath: m_Name
+      value: '[Sprite] Anthony'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+--- !u!4 &167789444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  m_PrefabInstance: {fileID: 167789443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &269754346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2461,9 +2523,20 @@ PrefabInstance:
     - {fileID: 8159841771566686583, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
     m_RemovedGameObjects:
     - {fileID: 403934487544241783, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-    m_AddedGameObjects: []
+    - {fileID: 4496410115892118337, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+    - {fileID: 7130275679156602099, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+    - {fileID: 8194167857010311577, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 167789444}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+--- !u!4 &869161638 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+  m_PrefabInstance: {fileID: 869161637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &870525457
 GameObject:
   m_ObjectHideFlags: 0
@@ -6618,6 +6691,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  onClickSFX: 2
 --- !u!114 &3340248768621692369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6635,6 +6709,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  onClickSFX: 2
 --- !u!114 &3340480655873301552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7011,6 +7086,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  onClickSFX: 2
 --- !u!114 &7318746240177218089
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1606,24 +1606,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1127065061 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3599863210591958256, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-  m_PrefabInstance: {fileID: 5674910289240462904}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1127065064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127065061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 033c7fc977a59b2408bf06ebb414bf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  negativeMultiplier: 7
 --- !u!4 &1130039576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
@@ -2366,11 +2348,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.518
+      value: 14.53
       objectReference: {fileID: 0}
     - target: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.27
+      value: -4.42
       objectReference: {fileID: 0}
     - target: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4894,41 +4876,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1918158304}
     m_Modifications:
-    - target: {fileID: 403934487544241783, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: m_Name
-      value: '[Particle System] Blobs'
-      objectReference: {fileID: 0}
-    - target: {fileID: 904545416558132828, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.83
-      objectReference: {fileID: 0}
     - target: {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Name
       value: '[Player] Qinu'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108608643056503038, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: lengthInSec
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108608643056503038, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310422259269643853, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6498385389996183294, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7119062691497510257, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: f17b1f03d0b14604dad43d851f339043, type: 2}
-    - target: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: dashVFX
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4973,10 +4923,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3599863210591958256, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1127065064}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
 --- !u!114 &6136612168840387497
 MonoBehaviour:

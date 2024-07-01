@@ -9,6 +9,7 @@ public class MoveRB : RBGetter
     #region Serialized
     [SerializeField] NavMeshAgent agent;
     [SerializeField] bool disableInputRightclick;
+    [SerializeField] Animator anim;
     #endregion
 
     #region Non Serialized
@@ -59,6 +60,9 @@ public class MoveRB : RBGetter
 
         if (disableInputRightclick)
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+
+        if (!anim)
+            anim = GetComponent<Animator>();
     }
 
     void OnDisable()
@@ -97,6 +101,8 @@ public class MoveRB : RBGetter
             if (MoveDir == Vector2.zero)
             {
                 rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
+                if (anim)
+                    anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
                 yield return null;
                 continue;
             }
@@ -107,6 +113,9 @@ public class MoveRB : RBGetter
             {
                 rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
             }
+
+            if (anim)
+                anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
 
             yield return null;
         }
@@ -126,6 +135,9 @@ public class MoveRB : RBGetter
 
         if (agent)
             agent.ResetPath();
+
+        if (anim)
+            anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
 
         yield return new WaitForSeconds(dashTime);
 

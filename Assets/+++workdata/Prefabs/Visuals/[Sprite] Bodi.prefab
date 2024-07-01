@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2678853848379604295, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_Name
-      value: '[Sprite] Pamo'
+      value: '[Sprite] Bodi'
       objectReference: {fileID: 0}
     - target: {fileID: 6026651789657524329, guid: da27ec0da9dade140a88d6f711e7e221, type: 3}
       propertyPath: m_Sprite

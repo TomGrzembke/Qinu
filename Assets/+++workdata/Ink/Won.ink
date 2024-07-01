@@ -8,7 +8,7 @@ What happens now? #speaker: Qinu
     ~Event ("SilentSpiritsExclamationOff")
 You will be released to your host again. #speaker: Anthony
     ~Event ("OpenCapsuleWin")
-Your the uniquness of an old man who has lost his partner.
+You're the uniquness of an old man who has lost his partner.
     ~Event ("SuckQinuIn")
 He will regain joy with your help.
  -> END

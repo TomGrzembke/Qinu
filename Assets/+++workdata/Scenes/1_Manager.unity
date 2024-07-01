@@ -267,7 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef986fee0abf56746a2b9fd882f71956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 5
   toEndDialogue: ToEnd
   transitionEndTime: 2
   <QinuEndPos>k__BackingField: {x: 0, y: 0, z: 0}
@@ -872,7 +871,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1354565560947445322, guid: 6d0e9b8af0e85a049b2c7d3c278ebfa4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.503
+  m_Volume: 0.469
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1811,32 +1810,6 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
   <WinPoints>k__BackingField: 5
-  slowMoCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  blendTime: 0.85
-  blendTimeScale: 0.05
 --- !u!225 &743323638679807577
 CanvasGroup:
   m_ObjectHideFlags: 0

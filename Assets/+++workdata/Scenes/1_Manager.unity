@@ -200,12 +200,12 @@ GameObject:
   - component: {fileID: 198970872}
   - component: {fileID: 198970871}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: PostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &198970871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,7 +1496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1730354770
 Transform:
   m_ObjectHideFlags: 0
@@ -1942,13 +1942,13 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 198970872}
   - {fileID: 412481113}
   - {fileID: 887195567}
   - {fileID: 8908516026345964430}
   - {fileID: 1730354770}
   - {fileID: 1554266040}
   - {fileID: 1765349256}
-  - {fileID: 198970872}
   - {fileID: 1988446126}
   - {fileID: 1180918134}
   - {fileID: 332062366}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7716154395010377324}
   - component: {fileID: 4747105266035396992}
   - component: {fileID: 6085844958205445530}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: LostAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}

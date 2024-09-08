@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0171fe70fe06c7144ad5476fd1801d5c, type: 3}
   m_Name: PixelItselfResController
   m_EditorClassIdentifier: 
-  pixelRes: 64
+  pixelRes: 96
   pixelartMat: {fileID: 2100000, guid: c46becccc771ae243a347cb887cb5cf1, type: 2}
   col: {r: 1, g: 1, b: 1, a: 0}
   lineSize: 1

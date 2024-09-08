@@ -41,5 +41,5 @@ Material:
     - _OutlineThickness: 1
     m_Colors:
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
-    - _PixelCount: {r: 64, g: 64, b: 0, a: 0}
+    - _PixelCount: {r: 96, g: 96, b: 0, a: 0}
   m_BuildTextureStacks: []

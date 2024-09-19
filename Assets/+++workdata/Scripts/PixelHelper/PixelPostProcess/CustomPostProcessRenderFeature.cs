@@ -4,10 +4,10 @@ using UnityEngine.Rendering.Universal;
 
 public class CustomPostProcessRenderFeature : ScriptableRendererFeature
 {
-    [SerializeField] Shader pixelShader;
+    [SerializeField] Shader bloomShader;
     [SerializeField] Shader compositeShader;
 
-    Material pixelMaterial;
+    Material m_bloom;
     Material compositeMaterial;
 
 
@@ -19,14 +19,14 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
     }
     public override void Create()
     {
-        pixelMaterial = CoreUtils.CreateEngineMaterial(pixelShader);
+        m_bloom = CoreUtils.CreateEngineMaterial(bloomShader);
         compositeMaterial = CoreUtils.CreateEngineMaterial(compositeShader);
 
-        customPass = new CustomPostProcessPass(pixelMaterial, compositeMaterial);
+        customPass = new CustomPostProcessPass(m_bloom, compositeMaterial);
     }
     protected override void Dispose(bool disposing)
     {
-        CoreUtils.Destroy(pixelMaterial);
+        CoreUtils.Destroy(m_bloom);
         CoreUtils.Destroy(compositeMaterial);
     }
     public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
@@ -35,7 +35,7 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
         {
             customPass.ConfigureInput(ScriptableRenderPassInput.Depth);
             customPass.ConfigureInput(ScriptableRenderPassInput.Color);
-            customPass.SetTarget(renderer.cameraColorTargetHandle, renderer.cameraColorTargetHandle);
+            customPass.SetTarget(renderer.cameraColorTargetHandle, renderer.cameraDepthTargetHandle);
 
         }
     }

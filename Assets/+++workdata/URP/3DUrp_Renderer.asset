@@ -69,5 +69,5 @@ MonoBehaviour:
   m_Name: CustomPostProcessRenderFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  pixelShader: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
+  bloomShader: {fileID: 4800000, guid: c41b01b6dfa1f8f48809f50bfbe99061, type: 3}
   compositeShader: {fileID: -6465566751694194690, guid: af308a283594c1a4c8c2e35c722a90ec, type: 3}

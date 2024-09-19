@@ -41,7 +41,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
             bloomMipUp[i] = Shader.PropertyToID("_BloomMipUp" + i);
             bloomMipDown[i] = Shader.PropertyToID("_BloomMipDown" + i);
             m_BloomMipUp[i] = RTHandles.Alloc(bloomMipUp[i], name: "_BloomMipUp" + i);
-            m_BloomMipDown[i] = RTHandles.Alloc(m_BloomMipDown[i], name: "_BloomMipDown" + i);
+            m_BloomMipDown[i] = RTHandles.Alloc(bloomMipDown[i], name: "_BloomMipDown" + i);
         }
 
         const FormatUsage usage = FormatUsage.Linear | FormatUsage.Render;
@@ -73,8 +73,8 @@ public class CustomPostProcessPass : ScriptableRenderPass
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
             m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
-            m_composite.SetTexture("_Bloom_Texture", m_BloomMipDown[0]);
-            
+            //m_composite.SetTexture("_Bloom_Texture", m_BloomMipDown[0]);
+
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
         }
 
@@ -121,7 +121,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         // Determine the iteration count
         int maxSize = Mathf.Max(tw, th);
-        int iterations = Mathf.FloorToInt(Mathf.Log(maxSize, 26));
+        int iterations = Mathf.FloorToInt(Mathf.Log(maxSize, 2f) - 1);
         int mipCount = Mathf.Clamp(iterations, 1, m_effect.maxIterations.value);
 
         // Pre—filtering parameters
@@ -140,16 +140,16 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         for (int i = 0; i < mipCount; i++)
         {
-            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipUp[i], desc, FilterMode.Point, TextureWrapMode.Clamp,
+            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipUp[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
                 name: m_BloomMipUp[i].name);
-            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[i], desc, FilterMode.Point, TextureWrapMode.Clamp,
+            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
                 name: m_BloomMipDown[i].name);
             desc.width = Mathf.Max(1, desc.width >> 1);
             desc.height = Mathf.Max(1, desc.height >> 1);
         }
 
         Blitter.BlitCameraTexture(cmd, source, m_BloomMipDown[0], RenderBufferLoadAction.DontCare,
-            RenderBufferStoreAction.Store, m_render, 0);
+            RenderBufferStoreAction.Store, bloomMaterial, 0);
 
 
         var lastDown = m_BloomMipDown[0];
@@ -163,7 +163,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
             Blitter.BlitCameraTexture(cmd, m_BloomMipUp[i], m_BloomMipDown[i], RenderBufferLoadAction.DontCare,
                 RenderBufferStoreAction.Store, bloomMaterial, 2);
 
-            lastDown = m_BloomMipUp[i];
+            lastDown = m_BloomMipDown[i];
         }
 
         // Upsample (bilinear by default, HQ filtering does bicubic instead

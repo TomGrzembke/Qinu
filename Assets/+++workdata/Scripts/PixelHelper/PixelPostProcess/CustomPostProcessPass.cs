@@ -68,6 +68,13 @@ public class CustomPostProcessPass : ScriptableRenderPass
         using (new ProfilingScope(cmd, new ProfilingSampler("Custom Post Process Effects")))
         {
             SetupBloom(cmd, cameraColorTarget);
+
+            m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
+            m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
+            m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
+            m_composite.SetTexture("_Bloom_Texture", m_BloomMipUp[0]);
+
+            Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
         }
 
         context.ExecuteCommandBuffer(cmd);
@@ -150,8 +157,10 @@ public class CustomPostProcessPass : ScriptableRenderPass
             //Classic two pass gaussian blur — use mipUp as a temporary target
             //First pass does 2x downsampling +9—tap gaussian
             //Second pass does 9—tap gaussian using a 5—tap filter +bilinear filtering
-            Blitter.BlitCameraTexture(cmd, lastDown, m_BloomMipUp[i], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, bloomMaterial, 1);
-            Blitter.BlitCameraTexture(cmd, m_BloomMipUp[i], m_BloomMipDown[i], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, bloomMaterial, 2);
+            Blitter.BlitCameraTexture(cmd, lastDown, m_BloomMipUp[i], RenderBufferLoadAction.DontCare,
+                RenderBufferStoreAction.Store, bloomMaterial, 1);
+            Blitter.BlitCameraTexture(cmd, m_BloomMipUp[i], m_BloomMipDown[i], RenderBufferLoadAction.DontCare,
+                RenderBufferStoreAction.Store, bloomMaterial, 2);
 
             lastDown = m_BloomMipUp[i];
         }
@@ -168,7 +177,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         }
 
-        cmd.SetGlobalTexture("_BloomTexture", m_BloomMipUp[0]);
+        cmd.SetGlobalTexture("_Bloom_Texture", m_BloomMipUp[0]);
         cmd.SetGlobalFloat("_BloomIntensity", m_effect.intensity.value);
     }
 }

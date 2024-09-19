@@ -20,7 +20,7 @@ public class PixelPostProcessComponent : VolumeComponent, IPostProcessComponent
 
     public IntParameter dotsDensity = new IntParameter(10, true);
     public ClampedFloatParameter dotsCutoff = new(.4f, 0, 1, true);
-    Vector2Parameter scrollDirection = new(new());
+    public Vector2Parameter scrollDirection = new(new());
 
 
     #endregion

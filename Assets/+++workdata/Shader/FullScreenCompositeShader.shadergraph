@@ -613,7 +613,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "PixelTexture",
     "m_DefaultReferenceName": "_PixelTexture",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_BloomTexture",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",

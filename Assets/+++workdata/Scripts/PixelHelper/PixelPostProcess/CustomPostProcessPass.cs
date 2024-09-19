@@ -73,9 +73,11 @@ public class CustomPostProcessPass : ScriptableRenderPass
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
             m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
+            //m_composite.
             //m_composite.SetTexture("_Bloom_Texture", m_BloomMipDown[0]);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
+            //Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, RenderBufferLoadAction.DontCare,RenderBufferStoreAction.Store, m_composite, 0);
         }
 
         context.ExecuteCommandBuffer(cmd);
@@ -131,6 +133,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         // Material setup
         float scatter = Mathf.Lerp(0.05f, 0.95f, m_effect.scatter.value);
+
         var bloomMaterial = m_render;
 
         bloomMaterial.SetVector("_Params", new Vector4(scatter, clamp, threshold, thresholdKnee));

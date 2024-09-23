@@ -36,7 +36,6 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
             customPass.ConfigureInput(ScriptableRenderPassInput.Depth);
             customPass.ConfigureInput(ScriptableRenderPassInput.Color);
             customPass.SetTarget(renderer.cameraColorTargetHandle, renderer.cameraDepthTargetHandle);
-
         }
     }
 }

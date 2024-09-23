@@ -27,6 +27,7 @@ public class PixelPostProcessComponent : VolumeComponent, IPostProcessComponent
 
     public bool IsActive()
     {
+        
         return true;
     }
 

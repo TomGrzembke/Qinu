@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using static UnityEngine.UI.Image;
 
 [System.Serializable]
 public class CustomPostProcessPass : ScriptableRenderPass
@@ -21,6 +22,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
     int[] bloomMipDown;
     RTHandle[] m_BloomMipUp;
     RTHandle[] m_BloomMipDown;
+    RTHandle original;
     GraphicsFormat hdrFormat;
     #endregion
 
@@ -67,15 +69,17 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         using (new ProfilingScope(cmd, new ProfilingSampler("Custom Post Process Effects")))
         {
+            m_composite.SetTexture("_OriginalTex", original);
             SetupBloom(cmd, cameraColorTarget);
 
             m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
             m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
+
             //m_composite.
             //m_composite.SetTexture("_Bloom_Texture", m_BloomMipDown[0]);
-
+            
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
             //Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, RenderBufferLoadAction.DontCare,RenderBufferStoreAction.Store, m_composite, 0);
         }
@@ -113,9 +117,9 @@ public class CustomPostProcessPass : ScriptableRenderPass
         cameraDepthTarget = cameraDepthTargetHandle;
     }
 
-
     void SetupBloom(CommandBuffer cmd, RTHandle source)
     {
+
         // Start at half—res
         int downres = 1;
         int tw = m_Descriptor.width >> downres;

@@ -62,60 +62,6 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &-5425249616845389520
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98237c92a126c5c408e1be63a51d1e2c, type: 3}
-  m_Name: PixelPostProcessComponent
-  m_EditorClassIdentifier: 
-  active: 1
-  PixelRes:
-    m_OverrideState: 1
-    m_Value: 550
-  outlineCol:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-    hdr: 0
-  outlineSize:
-    m_OverrideState: 1
-    m_Value: 1
-  Enabled:
-    m_OverrideState: 1
-    m_Value: 0
-  threshold:
-    m_OverrideState: 1
-    m_Value: 0.9
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
-  scatter:
-    m_OverrideState: 1
-    m_Value: 0.7
-  clamp:
-    m_OverrideState: 1
-    m_Value: 65472
-  maxIterations:
-    m_OverrideState: 0
-    m_Value: 6
-  tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-    hdr: 0
-  dotsDensity:
-    m_OverrideState: 1
-    m_Value: 10
-  dotsCutoff:
-    m_OverrideState: 1
-    m_Value: 0.4
-  scrollDirection:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0}
 --- !u!114 &-5133983646502362601
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -231,7 +177,48 @@ MonoBehaviour:
   - {fileID: 7122315415839476791}
   - {fileID: -5011555061812347402}
   - {fileID: -8819596177145639603}
-  - {fileID: -5425249616845389520}
+  - {fileID: 2142678769594448663}
+--- !u!114 &2142678769594448663
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98237c92a126c5c408e1be63a51d1e2c, type: 3}
+  m_Name: PixelPostProcessComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  threshold:
+    m_OverrideState: 1
+    m_Value: 0.15
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.52
+  scatter:
+    m_OverrideState: 1
+    m_Value: 0.308
+  clamp:
+    m_OverrideState: 1
+    m_Value: 67339
+  maxIterations:
+    m_OverrideState: 1
+    m_Value: 10
+  tint:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.07075471, b: 0.09226316, a: 1}
+    hdr: 0
+  dotsDensity:
+    m_OverrideState: 1
+    m_Value: -34
+  dotsCutoff:
+    m_OverrideState: 1
+    m_Value: 0.222
+  scrollDirection:
+    m_OverrideState: 1
+    m_Value: {x: 0.005, y: 0.005}
 --- !u!114 &3238087862497305277
 MonoBehaviour:
   m_ObjectHideFlags: 3

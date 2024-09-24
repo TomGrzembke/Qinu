@@ -15,7 +15,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
     Material m_composite;
     Material m_DefCom;
 
-    PixelPostProcessComponent m_effect;
+    BenDayDotsComponent m_effect;
     RenderTextureDescriptor m_Descriptor;
 
     #region  blurStuff from tutorial
@@ -65,11 +65,11 @@ public class CustomPostProcessPass : ScriptableRenderPass
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
     {
         VolumeStack stack = VolumeManager.instance.stack;
-        m_effect = stack.GetComponent<PixelPostProcessComponent>();
+        m_effect = stack.GetComponent<BenDayDotsComponent>();
+
+        if (!m_effect.AnyPropertiesIsOverridden()) return;
 
         CommandBuffer cmd = CommandBufferPool.Get();
-      
-        if (!m_effect.AnyPropertiesIsOverridden()) return;
 
         using (new ProfilingScope(cmd, new ProfilingSampler("Pre Custom Post Process Effects")))
         {
@@ -84,6 +84,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
             m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
+            m_composite.SetColor("_Tint", m_effect.tint.value);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
         }

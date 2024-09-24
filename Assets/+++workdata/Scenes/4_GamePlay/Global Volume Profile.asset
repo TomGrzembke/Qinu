@@ -193,10 +193,10 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 1.12
   intensity:
     m_OverrideState: 1
-    m_Value: 0.52
+    m_Value: 146.28
   scatter:
     m_OverrideState: 1
     m_Value: 0.308
@@ -207,8 +207,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 10
   tint:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 0.07075471, b: 0.09226316, a: 1}
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 0, b: 0, a: 1}
     hdr: 0
   dotsDensity:
     m_OverrideState: 1

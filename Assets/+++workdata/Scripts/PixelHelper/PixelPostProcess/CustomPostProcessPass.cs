@@ -9,8 +9,6 @@ public class CustomPostProcessPass : ScriptableRenderPass
     RTHandle cameraColorTarget;
     RTHandle cameraDepthTarget;
 
-    Texture original;
-
     Material m_render;
     Material m_composite;
     Material m_DefCom;
@@ -71,12 +69,12 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         CommandBuffer cmd = CommandBufferPool.Get();
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Pre Custom Post Process Effects")))
+        using (new ProfilingScope(cmd, new ProfilingSampler("Pre BenDayBloom")))
         {
             SetupDef(cmd, cameraColorTarget);
         }
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Custom Post Process Effects")))
+        using (new ProfilingScope(cmd, new ProfilingSampler("BenDayBloom")))
         {
             SetupBloom(cmd, cameraColorTarget);
 
@@ -202,7 +200,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
 
-        //m_DefCom.SetTexture("_OriginalTex", source);
+        //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
         m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);
 
         Blitter.BlitCameraTexture(cmd, source, m_BloomMipDown[0], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_DefCom, 0);

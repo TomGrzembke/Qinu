@@ -2420,7 +2420,7 @@
     "m_RefNameGeneratedByDisplayName": "OriginalTexture",
     "m_DefaultReferenceName": "_OriginalTexture",
     "m_OverrideReferenceName": "_OriginalTex",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,

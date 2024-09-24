@@ -3051,7 +3051,7 @@ Transform:
   - {fileID: 275764587}
   - {fileID: 999607991}
   m_Father: {fileID: 1879812058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.254}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.139}
 --- !u!1 &1526729026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,6 +4974,10 @@ PrefabInstance:
       value: -22.6
       objectReference: {fileID: 0}
     - target: {fileID: 4583954174181929304, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583954174181929304, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
       objectReference: {fileID: 0}
@@ -6460,6 +6464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Player] Qinu'
       objectReference: {fileID: 0}
+    - target: {fileID: 5253925689188546159, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8800807559234233458, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.156

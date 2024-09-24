@@ -13,6 +13,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
     Material m_render;
     Material m_composite;
+    Material m_DefCom;
 
     PixelPostProcessComponent m_effect;
     RenderTextureDescriptor m_Descriptor;
@@ -26,10 +27,11 @@ public class CustomPostProcessPass : ScriptableRenderPass
     GraphicsFormat hdrFormat;
     #endregion
 
-    public CustomPostProcessPass(Material _renderMat, Material _compositeMaterial)
+    public CustomPostProcessPass(Material _renderMat, Material _compositeMat, Material _defComMat)
     {
         m_render = _renderMat;
-        m_composite = _compositeMaterial;
+        m_composite = _compositeMat;
+        m_DefCom = _defComMat;
 
         renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
 
@@ -67,6 +69,11 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         CommandBuffer cmd = CommandBufferPool.Get();
 
+        using (new ProfilingScope(cmd, new ProfilingSampler("Pre Custom Post Process Effects")))
+        {
+            SetupDef(cmd, cameraColorTarget);
+        }
+
         using (new ProfilingScope(cmd, new ProfilingSampler("Custom Post Process Effects")))
         {
             SetupBloom(cmd, cameraColorTarget);
@@ -75,12 +82,6 @@ public class CustomPostProcessPass : ScriptableRenderPass
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
             m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
-
-            //m_composite.SetTexture("_Bloom_Texture", m_BloomMipDown[0]);
-
-            original = RTHandles.Alloc(m_BloomMipDown[0]);
-            Debug.Log(original == null);
-            m_composite.SetTexture("_OriginalTex", original);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
         }
@@ -120,9 +121,6 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
     void SetupBloom(CommandBuffer cmd, RTHandle source)
     {
-        m_Descriptor.useMipMap = false;
-        m_Descriptor.autoGenerateMips = false;
-
         // Start at half—res
         int downres = 1;
         int tw = m_Descriptor.width >> downres;
@@ -188,9 +186,24 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         }
 
-        //cmd.SetGlobalTexture("_OriginalTex", m_BloomMipDown[0]);
         cmd.SetGlobalTexture("_Bloom_Texture", m_BloomMipUp[0]);
         cmd.SetGlobalFloat("_BloomIntensity", m_effect.intensity.value);
+    }
+
+    void SetupDef(CommandBuffer cmd, RTHandle source)
+    {
+        int tw = m_Descriptor.width;
+        int th = m_Descriptor.height;
+
+        var desc = GetCompatibleDescriptor(tw, th, hdrFormat);
+
+        RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
+
+        m_DefCom.SetTexture("_OriginalTex", source);
+        m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);
+
+        Blitter.BlitCameraTexture(cmd, source, m_BloomMipDown[0], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_DefCom, 0);
+
     }
 }
 

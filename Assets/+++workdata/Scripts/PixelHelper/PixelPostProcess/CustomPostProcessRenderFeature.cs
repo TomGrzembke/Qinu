@@ -6,23 +6,29 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
 {
     [SerializeField] Shader bloomShader;
     [SerializeField] Shader compositeShader;
+    [SerializeField] Shader defComShader;
 
     Material m_bloom;
     Material compositeMaterial;
+    Material m_defCom;
 
 
     CustomPostProcessPass customPass;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        renderer.EnqueuePass(customPass);
+        if (renderingData.cameraData.cameraType == CameraType.Game)
+        {
+            renderer.EnqueuePass(customPass);
+        }
     }
     public override void Create()
     {
         m_bloom = CoreUtils.CreateEngineMaterial(bloomShader);
         compositeMaterial = CoreUtils.CreateEngineMaterial(compositeShader);
+        m_defCom = CoreUtils.CreateEngineMaterial(defComShader);
 
-        customPass = new CustomPostProcessPass(m_bloom, compositeMaterial);
+        customPass = new CustomPostProcessPass(m_bloom, compositeMaterial, m_defCom);
     }
     protected override void Dispose(bool disposing)
     {

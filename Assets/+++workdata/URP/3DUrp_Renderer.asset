@@ -71,3 +71,4 @@ MonoBehaviour:
   m_Active: 1
   bloomShader: {fileID: 4800000, guid: c41b01b6dfa1f8f48809f50bfbe99061, type: 3}
   compositeShader: {fileID: -6465566751694194690, guid: af308a283594c1a4c8c2e35c722a90ec, type: 3}
+  defComShader: {fileID: -6465566751694194690, guid: 58fea7e1b68a919498ec12c44fceb8c4, type: 3}

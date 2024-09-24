@@ -199,7 +199,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
 
         RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
 
-        m_DefCom.SetTexture("_OriginalTex", source);
+        //m_DefCom.SetTexture("_OriginalTex", source);
         m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);
 
         Blitter.BlitCameraTexture(cmd, source, m_BloomMipDown[0], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_DefCom, 0);

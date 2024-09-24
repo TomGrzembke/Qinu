@@ -222,10 +222,10 @@ MonoBehaviour:
     hdr: 0
   dotsDensity:
     m_OverrideState: 1
-    m_Value: -17
+    m_Value: -34
   dotsCutoff:
     m_OverrideState: 1
-    m_Value: 0.423
+    m_Value: 0.222
   scrollDirection:
     m_OverrideState: 1
     m_Value: {x: 0.005, y: 0.005}

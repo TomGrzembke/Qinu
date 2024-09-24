@@ -12,7 +12,6 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
     Material compositeMaterial;
     Material m_defCom;
 
-
     CustomPostProcessPass customPass;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -33,6 +32,7 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
     protected override void Dispose(bool disposing)
     {
         CoreUtils.Destroy(m_bloom);
+        CoreUtils.Destroy(m_defCom);
         CoreUtils.Destroy(compositeMaterial);
     }
     public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)

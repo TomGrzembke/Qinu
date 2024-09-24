@@ -23,7 +23,6 @@ public class PixelPostProcessComponent : VolumeComponent, IPostProcessComponent
     public Vector2Parameter scrollDirection = new(new());
     #endregion
 
-
     public bool IsActive()
     {
         return true;

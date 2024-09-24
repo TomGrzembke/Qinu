@@ -68,6 +68,8 @@ public class CustomPostProcessPass : ScriptableRenderPass
         m_effect = stack.GetComponent<PixelPostProcessComponent>();
 
         CommandBuffer cmd = CommandBufferPool.Get();
+      
+        if (!m_effect.AnyPropertiesIsOverridden()) return;
 
         using (new ProfilingScope(cmd, new ProfilingSampler("Pre Custom Post Process Effects")))
         {

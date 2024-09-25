@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6450044009818426485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea8134b3d3816b4dba5492c4c36eedb, type: 3}
+  m_Name: MultiPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  lightModePasses:
+  - CustomPostProcessRenderFeature
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17,7 +32,8 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: 5940736418710012234}
-  m_RendererFeatureMap: 4ac16f254cbc7152
+  - {fileID: -6450044009818426485}
+  m_RendererFeatureMap: 4ac16f254cbc71528bf3229925d77ca6
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

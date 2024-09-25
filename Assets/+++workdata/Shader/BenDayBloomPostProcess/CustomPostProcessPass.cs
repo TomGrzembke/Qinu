@@ -16,14 +16,12 @@ public class CustomPostProcessPass : ScriptableRenderPass
     BenDayDotsComponent m_effect;
     RenderTextureDescriptor m_Descriptor;
 
-    #region  blurStuff from tutorial
     const int maxPyramidSize = 16;
     int[] bloomMipUp;
     int[] bloomMipDown;
     RTHandle[] m_BloomMipUp;
     RTHandle[] m_BloomMipDown;
     GraphicsFormat hdrFormat;
-    #endregion
 
     public CustomPostProcessPass(Material _renderMat, Material _compositeMat, Material _defComMat)
     {

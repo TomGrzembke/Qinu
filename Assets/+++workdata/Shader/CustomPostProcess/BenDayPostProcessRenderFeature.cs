@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class CustomPostProcessRenderFeature : ScriptableRendererFeature
+public class BenDayPostProcessRenderFeature : ScriptableRendererFeature
 {
     [SerializeField] Shader bloomShader;
     [SerializeField] Shader compositeShader;
@@ -12,7 +12,7 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
     Material compositeMaterial;
     Material m_defCom;
 
-    CustomPostProcessPass customPass;
+    BenDayPostProcessPass customPass;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
@@ -27,7 +27,7 @@ public class CustomPostProcessRenderFeature : ScriptableRendererFeature
         compositeMaterial = CoreUtils.CreateEngineMaterial(compositeShader);
         m_defCom = CoreUtils.CreateEngineMaterial(defComShader);
 
-        customPass = new CustomPostProcessPass(m_bloom, compositeMaterial, m_defCom);
+        customPass = new BenDayPostProcessPass(m_bloom, compositeMaterial, m_defCom);
     }
     protected override void Dispose(bool disposing)
     {

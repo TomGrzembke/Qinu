@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [System.Serializable]
-public class CustomPostProcessPass : ScriptableRenderPass
+public class BenDayPostProcessPass : ScriptableRenderPass
 {
     RTHandle cameraColorTarget;
     RTHandle cameraDepthTarget;
@@ -23,7 +23,7 @@ public class CustomPostProcessPass : ScriptableRenderPass
     RTHandle[] m_BloomMipDown;
     GraphicsFormat hdrFormat;
 
-    public CustomPostProcessPass(Material _renderMat, Material _compositeMat, Material _defComMat)
+    public BenDayPostProcessPass(Material _renderMat, Material _compositeMat, Material _defComMat)
     {
         m_render = _renderMat;
         m_composite = _compositeMat;

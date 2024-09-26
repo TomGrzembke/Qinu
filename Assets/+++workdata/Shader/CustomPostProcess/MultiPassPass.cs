@@ -24,7 +24,7 @@ public class MultiPassPass : ScriptableRenderPass
 
         foreach (var pass in tags)
         {
-            DrawingSettings drawingSettings = CreateDrawingSettings(pass,ref renderingData, SortingCriteria.CommonTransparent);
+            DrawingSettings drawingSettings = CreateDrawingSettings(pass,ref renderingData, SortingCriteria.CommonOpaque);
             context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings);
         }
 

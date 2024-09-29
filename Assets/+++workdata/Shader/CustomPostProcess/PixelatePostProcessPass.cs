@@ -14,7 +14,6 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     PixelPostProcessComponent m_effect;
     RenderTextureDescriptor m_Descriptor;
 
-    const int maxPyramidSize = 16;
     int mainTexID;
     RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
@@ -100,9 +99,10 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
 
         //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
-        m_composite.SetTexture("_OriginalTex", m_MainTex);
+        m_composite.SetTexture("_MainTex", source);
+        m_render.SetTexture("_MainTex", m_MainTex);
 
-        Blitter.BlitCameraTexture(cmd, source, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
+        Blitter.BlitCameraTexture(cmd, source, m_MainTex, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
 
     }
 }

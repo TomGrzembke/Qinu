@@ -15,6 +15,22 @@ MonoBehaviour:
   m_Active: 1
   lightModePasses:
   - CustomPostProcessRenderFeature
+  - PixelatePostProcessRenderFeature
+--- !u!114 &-1846508134321575666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381dc97a93062e1408b7b96971695460, type: 3}
+  m_Name: PixelatePostProcessRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  pixelShader: {fileID: 4800000, guid: 4428f126ae76d074c80bfe62058d949c, type: 3}
+  compositeShader: {fileID: -6465566751694194690, guid: 58fea7e1b68a919498ec12c44fceb8c4, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +49,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 5940736418710012234}
   - {fileID: -6450044009818426485}
-  m_RendererFeatureMap: 4ac16f254cbc71528bf3229925d77ca6
+  - {fileID: -1846508134321575666}
+  m_RendererFeatureMap: 4ac16f254cbc71528bf3229925d77ca60ea9e492a2e25fe6
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

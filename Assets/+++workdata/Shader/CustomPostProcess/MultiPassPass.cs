@@ -21,11 +21,11 @@ public class MultiPassPass : ScriptableRenderPass
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
     {
         FilteringSettings filteringSettings = FilteringSettings.defaultValue;
-
         foreach (var pass in tags)
         {
-            DrawingSettings drawingSettings = CreateDrawingSettings(pass,ref renderingData, SortingCriteria.CommonOpaque);
+            DrawingSettings drawingSettings = CreateDrawingSettings(pass, ref renderingData, SortingCriteria.CommonOpaque);
             context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings);
+
         }
 
         context.Submit();

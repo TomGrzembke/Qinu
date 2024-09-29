@@ -28,6 +28,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
         renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
 
+        //bloomMipDown[0] = Shader.PropertyToID("_BloomMipDown" + 0);
+        //m_BloomMipDown[0] = RTHandles.Alloc(bloomMipDown[0], name: "_BloomMipDown" + 0);
 
         const FormatUsage usage = FormatUsage.Linear | FormatUsage.Render;
         if (SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32, usage))
@@ -52,7 +54,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
         CommandBuffer cmd = CommandBufferPool.Get();
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Pre BenDayBloom")))
+        using (new ProfilingScope(cmd, new ProfilingSampler("Pixelate")))
         {
             SetupDef(cmd, cameraColorTarget);
         }
@@ -102,7 +104,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
         m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);
 
-        Blitter.BlitCameraTexture(cmd, source, m_BloomMipDown[0], RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
+        Blitter.BlitCameraTexture(cmd, source, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
 
     }
 }

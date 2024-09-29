@@ -15,10 +15,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     RenderTextureDescriptor m_Descriptor;
 
     const int maxPyramidSize = 16;
-    int[] bloomMipUp;
-    int[] bloomMipDown;
-    RTHandle[] m_BloomMipUp;
-    RTHandle[] m_BloomMipDown;
+    int mainTexID;
+    RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
 
     public PixelatePostProcessPass(Material _m_render, Material _m_composite)
@@ -26,10 +24,10 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         m_render = _m_render;
         m_composite = _m_composite;
 
-        renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+        renderPassEvent = (RenderPassEvent)549;
 
-        //bloomMipDown[0] = Shader.PropertyToID("_BloomMipDown" + 0);
-        //m_BloomMipDown[0] = RTHandles.Alloc(bloomMipDown[0], name: "_BloomMipDown" + 0);
+        mainTexID = Shader.PropertyToID("_MainTex");
+        m_MainTex = RTHandles.Alloc(mainTexID, name: "_MainTex");
 
         const FormatUsage usage = FormatUsage.Linear | FormatUsage.Render;
         if (SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32, usage))
@@ -99,10 +97,10 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
         var desc = GetCompatibleDescriptor(tw, th, hdrFormat);
 
-        RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
+        RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
 
         //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
-        m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);
+        m_composite.SetTexture("_OriginalTex", m_MainTex);
 
         Blitter.BlitCameraTexture(cmd, source, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
 

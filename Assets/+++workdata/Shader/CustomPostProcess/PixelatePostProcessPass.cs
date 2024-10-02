@@ -38,7 +38,6 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             hdrFormat = QualitySettings.activeColorSpace == ColorSpace.Linear
             ? GraphicsFormat.R8G8B8A8_SRGB
             : GraphicsFormat.R8G8B8A8_UNorm;
-
         }
     }
 
@@ -100,9 +99,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
         //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
         m_composite.SetTexture("_MainTex", source);
-        m_render.SetTexture("_MainTex", m_MainTex);
+        m_render.SetTexture("_MainTex", source); 
 
-        Blitter.BlitCameraTexture(cmd, source, m_MainTex, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
-
+        Blitter.BlitCameraTexture(cmd, source, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_composite, 0);
     }
 }

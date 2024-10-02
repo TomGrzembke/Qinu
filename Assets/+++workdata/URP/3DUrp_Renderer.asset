@@ -29,8 +29,8 @@ MonoBehaviour:
   m_Name: PixelatePostProcessRenderFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  pixelShader: {fileID: -6465566751694194690, guid: 40c3dfe021509724697c9a9aac57d247, type: 3}
-  compositeShader: {fileID: 4800000, guid: 4428f126ae76d074c80bfe62058d949c, type: 3}
+  pixelShader: {fileID: 4800000, guid: 4428f126ae76d074c80bfe62058d949c, type: 3}
+  compositeShader: {fileID: -6465566751694194690, guid: 40c3dfe021509724697c9a9aac57d247, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

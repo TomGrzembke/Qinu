@@ -67,13 +67,9 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
         CommandBuffer cmd = CommandBufferPool.Get();
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Pre BenDayBloom")))
-        {
-            SetupDef(cmd, cameraColorTarget);
-        }
-
         using (new ProfilingScope(cmd, new ProfilingSampler("BenDayBloom")))
         {
+            SetupDef(cmd, cameraColorTarget);
             SetupBloom(cmd, cameraColorTarget);
 
             m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
@@ -191,10 +187,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
     void SetupDef(CommandBuffer cmd, RTHandle source)
     {
-        int tw = m_Descriptor.width;
-        int th = m_Descriptor.height;
-
-        var desc = GetCompatibleDescriptor(tw, th, hdrFormat);
+        var desc = GetCompatibleDescriptor(m_Descriptor.width, m_Descriptor.height, hdrFormat);
 
         RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
 

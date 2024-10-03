@@ -53,6 +53,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         using (new ProfilingScope(cmd, new ProfilingSampler("Pre Pixelate")))
         {
             SetupDef(cmd, cameraColorTarget);
+            //m_composite.SetTexture("_OriginalTex", cameraColorTarget);
         }
 
         using (new ProfilingScope(cmd, new ProfilingSampler("Pixelate")))
@@ -64,7 +65,6 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             m_composite.SetColor("_OutlineCol", m_effect.lineCol.value);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_composite, 0);
-            Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_composite, 1);
         }
 
         context.ExecuteCommandBuffer(cmd);
@@ -108,10 +108,10 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         var desc = GetCompatibleDescriptor(tw, th, hdrFormat);
 
         m_composite.SetTexture("_MainTex", source);
-        m_render.SetTexture("_MainTex", source);
+        //m_render.SetTexture("_MainTex", source);
 
         Blitter.BlitCameraTexture(cmd, source, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_render, 0);
-        RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
+        //RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
     }
 
     void SetupPixel(CommandBuffer cmd, RTHandle source)

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df099b1bffa0bcd4ca6a704d2a208e5b, type: 3}
   m_Name: PixelPostProcessComponent
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   pixelRes:
     m_OverrideState: 1
     m_Value: 157
@@ -294,16 +294,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98237c92a126c5c408e1be63a51d1e2c, type: 3}
   m_Name: BenDayDotsComponent
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   threshold:
     m_OverrideState: 1
     m_Value: 0.27
   intensity:
     m_OverrideState: 1
-    m_Value: 2.6
+    m_Value: 3.94
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.32
   clamp:
     m_OverrideState: 1
     m_Value: 65472

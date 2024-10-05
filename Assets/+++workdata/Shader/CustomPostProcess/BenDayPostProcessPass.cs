@@ -69,7 +69,6 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
         using (new ProfilingScope(cmd, new ProfilingSampler("BenDayBloom")))
         {
-            SetupDef(cmd, cameraColorTarget);
             SetupBloom(cmd, cameraColorTarget);
 
             m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
@@ -78,6 +77,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
             m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
             m_composite.SetColor("_Tint", m_effect.tint.value);
 
+            SetupDef(cmd, cameraColorTarget);
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
         }
 

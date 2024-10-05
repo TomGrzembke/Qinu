@@ -1717,7 +1717,7 @@
         "limit"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -3075,16 +3075,16 @@
     "m_Type": "UnityEditor.ShaderGraph.BlendNode",
     "m_ObjectId": "6ce8eaf3d17448218ae17bcec92c7489",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "799a5054031b4bf5a442d695f1a686ce"
     },
     "m_Name": "Blend",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 572.0,
-            "y": -448.0,
-            "width": 208.0,
+            "x": 346.9999694824219,
+            "y": -93.99996948242188,
+            "width": 207.99996948242188,
             "height": 361.0
         }
     },
@@ -3210,9 +3210,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 337.0,
-            "y": -407.0,
-            "width": 208.0,
+            "x": 82.0000228881836,
+            "y": 65.9999771118164,
+            "width": 207.99996948242188,
             "height": 435.0
         }
     },
@@ -6248,9 +6248,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 187.0,
-            "y": -352.0,
-            "width": 133.0,
+            "x": -83.99999237060547,
+            "y": 87.0,
+            "width": 133.00003051757813,
             "height": 34.0
         }
     },

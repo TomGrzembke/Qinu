@@ -8,8 +8,8 @@ public class PixelResSO : ScriptableObject
     #region Serialized
     [Range(16, 1920)]
     public float pixelRes = 128;
-    public Vector2 screenRes = new(1920, 1080);
     public Material pixelartMat;
+    public Vector2 screenRes = new(1920, 1080);
     public Color col;
     public int lineSize = 1;
     #endregion

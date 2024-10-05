@@ -69,7 +69,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
         using (new ProfilingScope(cmd, new ProfilingSampler("BenDayBloom")))
         {
-            //SetupBloom(cmd, cameraColorTarget);
+            SetupBloom(cmd, cameraColorTarget);
 
             m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
             m_composite.SetFloat("_Density", m_effect.dotsDensity.value);

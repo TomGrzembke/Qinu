@@ -10,6 +10,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
     Material m_render;
     Material m_composite;
+    Material m_DefCom;
 
     PixelPostProcessComponent m_effect;
     RenderTextureDescriptor m_Descriptor;
@@ -18,8 +19,9 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
 
-    public PixelatePostProcessPass(Material _m_render, Material _m_composite)
+    public PixelatePostProcessPass(Material _m_render, Material _m_composite, Material _defComMat)
     {
+        m_DefCom = _defComMat;
         m_render = _m_render;
         m_composite = _m_composite;
 
@@ -59,13 +61,35 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             m_composite.SetColor("_OutlineCol", m_effect.lineCol.value);
 
             m_composite.SetTexture("_MainTex", cameraColorTarget);
-            Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_composite, 0);
+            Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
+            m_composite.SetTexture("_OriginalTex", m_MainTex);
+
+            // cmd.SetGlobalTexture("_BlitTexture", m_composite.GetTexture("_OriginalTex"));
+
+            m_render.SetTexture("_MainTex", m_MainTex);
+            //Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_render, 0);
+
+            SetupDef(cmd, cameraColorTarget);
+            Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
         }
 
         context.ExecuteCommandBuffer(cmd);
         cmd.Clear();
 
         CommandBufferPool.Release(cmd);
+    }
+
+    void SetupDef(CommandBuffer cmd, RTHandle source)
+    {
+        var desc = GetCompatibleDescriptor(m_Descriptor.width, m_Descriptor.height, hdrFormat);
+
+        RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
+
+        //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
+        m_composite.SetTexture("_OriginalTex", m_MainTex);
+
+        Blitter.BlitCameraTexture(cmd, m_MainTex, source, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store, m_DefCom, 0);
+
     }
 
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)

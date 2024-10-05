@@ -325,20 +325,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "2c1a1c5bf31b4c4ba137465b39d7d623"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "eff0ca55a3b641dcbda12b9bfb2244a6"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "37babefb875741aaba3ffcf7310e8dae"
                 },
                 "m_SlotId": 0
@@ -460,6 +446,20 @@
                     "m_Id": "eca325efe30d4bf58dc16023440d34d5"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "6ce8eaf3d17448218ae17bcec92c7489"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "eff0ca55a3b641dcbda12b9bfb2244a6"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -1693,10 +1693,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 306.99993896484377,
+            "x": 193.00001525878907,
             "y": -590.0,
-            "width": 144.00018310546876,
-            "height": 142.00003051757813
+            "width": 208.00001525878907,
+            "height": 326.0
         }
     },
     "m_Slots": [
@@ -3131,7 +3131,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_BlendMode": 15
+    "m_BlendMode": 17
 }
 
 {
@@ -5743,7 +5743,7 @@
     "m_RefNameGeneratedByDisplayName": "OriginalTex",
     "m_DefaultReferenceName": "_OriginalTex",
     "m_OverrideReferenceName": "_OriginalTex",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,

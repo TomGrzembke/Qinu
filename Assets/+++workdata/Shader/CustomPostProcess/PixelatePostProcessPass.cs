@@ -20,7 +20,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
 
-    Vector2 screenRes = new(1920, 1080);
+    Vector2 screenRes = new(839, 472);
     RangedFloat screenRatio;
     Vector2 scaling;
 
@@ -63,7 +63,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             SetupPixel();
 
             CalculatePixelScaling();
-            m_composite.SetVector("_Resolution", scaling);
+            m_composite.SetVector("_Resolution", m_effect.testPar.value);
             m_composite.SetFloat("_OutlineThickness", m_effect.lineSize.value);
             m_composite.SetColor("_OutlineCol", m_effect.lineCol.value);
             m_composite.SetTexture("_MainTex", cameraColorTarget);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BGPixelShaderController
   m_EditorClassIdentifier: 
   pixelRes: 412
-  screenRes: {x: 1920, y: 1080}
   pixelartMat: {fileID: 2100000, guid: 7b66fbf195e617d42a470781731b8ba3, type: 2}
+  screenRes: {x: 1920, y: 1080}
   col: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   lineSize: 1

@@ -171,11 +171,7 @@ MonoBehaviour:
   active: 1
   pixelRes:
     m_OverrideState: 1
-<<<<<<< HEAD
     m_Value: 385
-=======
-    m_Value: 1080
->>>>>>> 593943d6662bd20ad5b76dbd09a97ee2d39ea28d
   testPar:
     m_OverrideState: 1
     m_Value: {x: 16, y: 9}

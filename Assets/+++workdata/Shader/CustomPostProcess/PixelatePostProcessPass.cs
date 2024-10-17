@@ -20,8 +20,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
 
-    Vector2 screenRes = new(839, 472);
-    RangedFloat screenRatio;
+    Vector2 screenRatio;
     Vector2 scaling;
 
     public PixelatePostProcessPass(Material _m_render, Material _m_composite, Material _defComMat)
@@ -111,25 +110,30 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
     void SetupPixel()
     {
-        int tw = m_Descriptor.width;
-        int th = m_Descriptor.height;
+        var targetWidth = m_Descriptor.width;
+        var targetHeight = m_Descriptor.height;
 
-        var desc = GetCompatibleDescriptor(tw, th, hdrFormat);
+        var desc = GetCompatibleDescriptor(targetWidth, targetHeight, hdrFormat);
 
         RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
     }
 
     void CalculatePixelScaling()
     {
-        float pixelRes = m_effect.pixelRes.value;
+        float pixelResWidth = m_effect.pixelRes.value;
 
-        float greatestCommonFactor = CalculateGCF(screenRes.x, screenRes.y);
+        float targetWidth = m_Descriptor.width;
+        float targetHeight = m_Descriptor.height;
 
-        screenRatio.Min = screenRes.x / greatestCommonFactor;
-        screenRatio.Max = screenRes.y / greatestCommonFactor;
+        screenRatio = new(1.777543f, 1);
+        //float greatestCommonFactor = CalculateGCF(screenRatio);
 
-        scaling.x = pixelRes;
-        scaling.y = pixelRes / screenRatio.Min * screenRatio.Max;
+
+        scaling.x = pixelResWidth;
+        scaling.y = (targetHeight / targetWidth) * pixelResWidth;
+        //scaling.y = scaling.y;
+
+        //Debug.Log(greatestCommonFactor);
     }
 
     /// <summary> GCF = Greatest common factor </summary>

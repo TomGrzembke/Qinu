@@ -63,7 +63,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             SetupPixel();
 
             CalculatePixelScaling();
-            m_composite.SetVector("_Resolution", m_effect.testPar.value);
+            m_composite.SetVector("_Resolution", scaling);
             m_composite.SetFloat("_OutlineThickness", m_effect.lineSize.value);
             m_composite.SetColor("_OutlineCol", m_effect.lineCol.value);
             m_composite.SetTexture("_MainTex", cameraColorTarget);
@@ -100,7 +100,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         desc.width = width;
         desc.height = height;
         desc.graphicsFormat = format;
-        return desc;
+        return desc; 
     }
 
     public void SetTarget(RTHandle cameraColorTargetHandle, RTHandle cameraDepthTargetHandle)

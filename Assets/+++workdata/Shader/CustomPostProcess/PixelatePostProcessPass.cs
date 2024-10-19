@@ -19,7 +19,6 @@ public class PixelatePostProcessPass : ScriptableRenderPass
     RTHandle m_MainTex;
     GraphicsFormat hdrFormat;
 
-    Vector2 screenRes = new(1920, 1080);
     Vector2 screenRatio;
     Vector2 scaling;
 
@@ -123,7 +122,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         float targetWidth = m_Descriptor.width;
         float targetHeight = m_Descriptor.height;
         float greatestCommonFactor = CalculateGCF(targetWidth, targetHeight);
-        float pixelResWidth = m_effect.pixelRes.value;
+
+        float pixelResWidth = CalculatePixelRes();
 
         screenRatio.x = targetWidth / greatestCommonFactor;
         screenRatio.y = targetHeight / greatestCommonFactor;
@@ -131,6 +131,12 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         scaling.x = pixelResWidth;
         scaling.y = pixelResWidth / screenRatio.x * screenRatio.y;
 
+    }
+
+    /// <summary> Assures that the pixelRes is always even </summary>
+    float CalculatePixelRes()
+    {
+        return m_effect.pixelRes.value % 2 == 0 ? m_effect.pixelRes.value : m_effect.pixelRes.value + 1;
     }
 
     /// <summary> GCF = Greatest common factor </summary>

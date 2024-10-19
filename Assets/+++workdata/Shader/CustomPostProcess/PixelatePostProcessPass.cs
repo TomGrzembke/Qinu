@@ -67,8 +67,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             m_composite.SetTexture("_MainTex", cameraColorTarget);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
+            //m_composite.SetTexture("_OriginalTex", m_MainTex);
             m_DefCom.SetTexture("_OriginalTex", m_MainTex);
-            m_composite.SetTexture("_OriginalTex", m_MainTex);
             Blitter.BlitCameraTexture(cmd, m_MainTex, cameraColorTarget, m_DefCom, 0);
             //Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
         }

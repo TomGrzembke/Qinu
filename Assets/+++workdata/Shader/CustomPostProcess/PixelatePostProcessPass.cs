@@ -1,4 +1,3 @@
-using MyBox;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
@@ -68,7 +67,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             m_composite.SetTexture("_MainTex", cameraColorTarget);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
-
+            m_DefCom.SetTexture("_OriginalTex", m_MainTex);
             m_composite.SetTexture("_OriginalTex", m_MainTex);
             Blitter.BlitCameraTexture(cmd, m_MainTex, cameraColorTarget, m_DefCom, 0);
             //Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
@@ -99,7 +98,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         desc.width = width;
         desc.height = height;
         desc.graphicsFormat = format;
-        return desc; 
+        return desc;
     }
 
     public void SetTarget(RTHandle cameraColorTargetHandle, RTHandle cameraDepthTargetHandle)

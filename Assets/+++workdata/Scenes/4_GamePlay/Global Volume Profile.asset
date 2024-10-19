@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {x: 0.89844775, y: 0.93985116, z: 1, w: 0}
@@ -171,7 +171,7 @@ MonoBehaviour:
   active: 1
   pixelRes:
     m_OverrideState: 1
-    m_Value: 312
+    m_Value: 88
   testPar:
     m_OverrideState: 1
     m_Value: {x: 16, y: 9}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 1

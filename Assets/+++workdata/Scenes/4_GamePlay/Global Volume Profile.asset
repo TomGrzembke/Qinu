@@ -172,15 +172,16 @@ MonoBehaviour:
   pixelRes:
     m_OverrideState: 1
     m_Value: 412
-  testPar:
-    m_OverrideState: 1
-    m_Value: {x: 16, y: 9}
   lineSize:
     m_OverrideState: 1
     m_Value: 1
   lineCol:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 1, g: 0, b: 0.05513668, a: 1}
+    hdr: 0
+  ignoreCol:
+    m_OverrideState: 1
+    m_Value: {r: 0.21651602, g: 0, b: 0.2830189, a: 1}
     hdr: 0
 --- !u!114 &11400000
 MonoBehaviour:

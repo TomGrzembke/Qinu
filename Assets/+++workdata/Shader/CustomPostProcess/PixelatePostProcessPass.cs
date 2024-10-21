@@ -63,7 +63,8 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             CalculatePixelScaling();
             m_composite.SetVector("_Resolution", scaling);
             m_composite.SetFloat("_OutlineThickness", m_effect.lineSize.value);
-            m_composite.SetColor("_OutlineCol", m_effect.lineCol.value);
+            m_composite.SetColor("_OutlineColor", m_effect.lineCol.value);
+            m_composite.SetColor("_IgnoreCol", m_effect.ignoreCol.value);
             m_composite.SetTexture("_MainTex", cameraColorTarget);
 
             Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);

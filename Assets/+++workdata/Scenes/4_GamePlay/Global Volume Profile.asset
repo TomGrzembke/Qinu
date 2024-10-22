@@ -177,11 +177,11 @@ MonoBehaviour:
     m_Value: 1
   lineCol:
     m_OverrideState: 1
-    m_Value: {r: 0.7454244, g: 1, b: 0, a: 1}
+    m_Value: {r: 1, g: 0, b: 0.023427963, a: 1}
     hdr: 0
   ignoreCol:
     m_OverrideState: 1
-    m_Value: {r: 0.22702342, g: 0.6431373, b: 0, a: 1}
+    m_Value: {r: 0.30307564, g: 0.6431373, b: 0, a: 1}
     hdr: 0
 --- !u!114 &11400000
 MonoBehaviour:

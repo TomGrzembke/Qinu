@@ -181,7 +181,7 @@ MonoBehaviour:
     hdr: 0
   ignoreCol:
     m_OverrideState: 1
-    m_Value: {r: 0.30307564, g: 0.6431373, b: 0, a: 1}
+    m_Value: {r: 0.32972085, g: 0.32520467, b: 0.33962262, a: 1}
     hdr: 0
 --- !u!114 &11400000
 MonoBehaviour:

@@ -41,9 +41,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _OutlineThickness: 1
+    - _OutlineThickness: 10
     m_Colors:
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _OutlineColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0}
     - _PixelCount: {r: 32, g: 32, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2354391829338849015

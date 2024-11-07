@@ -25,7 +25,8 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _OutlineThickness: 10
+    - _8Directional: 1
+    - _OutlineThickness: 25.2
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &8925862607985699214

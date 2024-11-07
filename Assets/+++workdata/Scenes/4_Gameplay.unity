@@ -5584,6 +5584,10 @@ PrefabInstance:
       propertyPath: minigameManager
       value: 
       objectReference: {fileID: 365903684}
+    - target: {fileID: 2355124419760385123, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86921a0865d637b49ab051e4fb36b4a4, type: 2}
     - target: {fileID: 2415898544937179444, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

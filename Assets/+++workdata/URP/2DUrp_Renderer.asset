@@ -16,6 +16,26 @@ MonoBehaviour:
   bloomShader: {fileID: 4800000, guid: c41b01b6dfa1f8f48809f50bfbe99061, type: 3}
   compositeShader: {fileID: -6465566751694194690, guid: af308a283594c1a4c8c2e35c722a90ec, type: 3}
   defComShader: {fileID: -6465566751694194690, guid: 58fea7e1b68a919498ec12c44fceb8c4, type: 3}
+--- !u!114 &-2888951505743008979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 0}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +54,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 4729827939729441859}
   - {fileID: -6335562193104505625}
-  m_RendererFeatureMap: 43844a9473b9a341e7749cabc08f13a8
+  - {fileID: -2888951505743008979}
+  m_RendererFeatureMap: 43844a9473b9a341e7749cabc08f13a82dabdb6ee961e8d7
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}

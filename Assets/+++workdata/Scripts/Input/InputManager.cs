@@ -11,7 +11,9 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction MousePosAction { get; private set; }  
     [field: SerializeField] public InputAction LeftclickAction { get; private set; }  
     [field: SerializeField] public InputAction RightClickAction { get; private set; }  
-    [field: SerializeField] public InputAction Ability0Action { get; private set; }  
+    [field: SerializeField] public InputAction Ability0Action { get; private set; }
+    [SerializeField] Joystick joystickScript;  
+    
     #endregion
 
     #region Non Serialized

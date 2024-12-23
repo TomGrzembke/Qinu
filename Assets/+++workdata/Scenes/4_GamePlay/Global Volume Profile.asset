@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.89844775, y: 0.93985116, z: 1, w: 0.06788296}
+    m_Value: {x: 0.89844775, y: 0.93985116, z: 1, w: 0}
   midtones:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   color:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
@@ -74,16 +74,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 0
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.46
+    m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 1.83
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0.52
@@ -149,10 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60a22f311433c4c962b888d1393f88, type: 3}
   m_Name: PaniniProjection
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   distance:
     m_OverrideState: 1
-    m_Value: 0.024
+    m_Value: 1
   cropToFit:
     m_OverrideState: 1
     m_Value: 0
@@ -171,24 +171,17 @@ MonoBehaviour:
   active: 1
   pixelRes:
     m_OverrideState: 1
-    m_Value: 412
+    m_Value: 385
+  testPar:
+    m_OverrideState: 1
+    m_Value: {x: 16, y: 9}
   lineSize:
     m_OverrideState: 1
     m_Value: 1
   lineCol:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0.8117647, b: 0.209801, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
-  ignoreCol:
-    m_OverrideState: 1
-    m_Value: {r: 0.8962264, g: 0.629895, b: 0.629895, a: 1}
-    hdr: 0
-  colorMaskRange:
-    m_OverrideState: 1
-    m_Value: 0.5
-  colorMaskFuzziness:
-    m_OverrideState: 1
-    m_Value: 0.5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
   m_Name: ChannelMixer
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   redOutRedIn:
     m_OverrideState: 1
     m_Value: 100
@@ -310,10 +303,10 @@ MonoBehaviour:
     m_Value: 0.27
   intensity:
     m_OverrideState: 1
-    m_Value: 1.46
+    m_Value: 3.94
   scatter:
     m_OverrideState: 1
-    m_Value: 0.048
+    m_Value: 0.32
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -322,14 +315,14 @@ MonoBehaviour:
     m_Value: 6
   tint:
     m_OverrideState: 0
-    m_Value: {r: 0, g: 0.07394035, b: 0.16037738, a: 1}
+    m_Value: {r: 0, g: 0.7756293, b: 1, a: 1}
     hdr: 0
   dotsDensity:
     m_OverrideState: 1
-    m_Value: 34
+    m_Value: -42
   dotsCutoff:
     m_OverrideState: 1
-    m_Value: 0.405
+    m_Value: 0.331
   scrollDirection:
     m_OverrideState: 1
     m_Value: {x: 0.01, y: 0.01}
@@ -345,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   type:
     m_OverrideState: 1
     m_Value: 0

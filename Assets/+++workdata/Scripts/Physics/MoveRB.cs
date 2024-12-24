@@ -41,15 +41,28 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
+            if (InputManager.Instance.UsedTouch)
+                return InputManager.Instance.MovementVec;
+            else if (!HasAgent() && !inputDisabled && ShouldMoveWithMousePos())
                 return (InputManager.Instance.MousePos - transform.position.RemoveZ());
 
-            else if (agent != null && agent.desiredVelocity != Vector3.zero)
+            else if (HasAgent() && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
+
             else
                 return Vector2.zero;
         }
         private set { }
+    }
+
+    bool ShouldMoveWithMousePos()
+    {
+        return (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance;
+    }
+
+    bool HasAgent()
+    {
+        return agent != null;
     }
     #endregion
 

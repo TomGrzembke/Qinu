@@ -20,6 +20,7 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
+
         SetAgentPosition(InputManager.Instance.MousePos);
 
         if (calculateOnly)

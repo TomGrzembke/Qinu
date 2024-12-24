@@ -5,15 +5,15 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     #region Serialized
-    [field: SerializeField] public Vector2 MousePos { get; private set; } 
+    [field: SerializeField] public Vector2 MousePos { get; private set; }
     [field: SerializeField] public Vector2 MovementVec { get; private set; }
-    [field: SerializeField] public InputAction MoveAction { get; private set; }  
-    [field: SerializeField] public InputAction MousePosAction { get; private set; }  
-    [field: SerializeField] public InputAction LeftclickAction { get; private set; }  
-    [field: SerializeField] public InputAction RightClickAction { get; private set; }  
+    [field: SerializeField] public InputAction MoveAction { get; private set; }
+    [field: SerializeField] public InputAction MousePosAction { get; private set; }
+    [field: SerializeField] public InputAction LeftclickAction { get; private set; }
+    [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
-    [SerializeField] Joystick joystickScript;  
-    
+    [SerializeField] Joystick joystickScript;
+
     #endregion
 
     #region Non Serialized
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     PlayerInputActions input;
     Camera cam;
     public bool HasMoveInput => MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
-    bool usedTouch;
+   [field: SerializeField] public bool UsedTouch { get; private set; }  
     #endregion
 
 
@@ -58,15 +58,15 @@ public class InputManager : MonoBehaviour
         if (!cam)
             cam = Camera.main;
 
-        if (cam && !usedTouch)
+        if (cam && !UsedTouch)
             MousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
+        MovementVec = joystickScript.Direction;
         if (Input.touchCount > 0)
         {
-            MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
-            MovementVec = joystickScript.Direction;
-            usedTouch = true;
-            joystickScript.gameObject.SetActive(usedTouch);
+            //MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
+            UsedTouch = true;
+            joystickScript.gameObject.SetActive(UsedTouch);
         }
     }
 

@@ -2460,9 +2460,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: charSO
       value: 
       objectReference: {fileID: 11400000, guid: a83d85d404d456b47884671a7bf7072b, type: 2}
+    - target: {fileID: 7380229762919659093, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: disableInputRightclick
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8159841771566686583, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: pSystem
       value: 
@@ -6195,7 +6203,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!224 &645428107644315301
 RectTransform:

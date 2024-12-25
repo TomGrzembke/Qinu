@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
     [SerializeField] Joystick joystickScript;
+    [SerializeField] bool useJoystickDebug;
 
     #endregion
 
@@ -21,7 +22,8 @@ public class InputManager : MonoBehaviour
     PlayerInputActions input;
     Camera cam;
     public bool HasMoveInput => MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
-   [field: SerializeField] public bool UsedTouch { get; private set; }  
+    public bool UsedTouch { get; private set; }
+
     #endregion
 
 
@@ -62,7 +64,7 @@ public class InputManager : MonoBehaviour
             MousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         MovementVec = joystickScript.Direction;
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 || useJoystickDebug)
         {
             //MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
             UsedTouch = true;

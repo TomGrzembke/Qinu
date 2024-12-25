@@ -41,7 +41,7 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (InputManager.Instance.UsedTouch)
+            if (!HasAgent() && InputManager.Instance.UsedTouch)
                 return InputManager.Instance.MovementVec;
             else if (!HasAgent() && !inputDisabled && ShouldMoveWithMousePos())
                 return (InputManager.Instance.MousePos - transform.position.RemoveZ());

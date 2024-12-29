@@ -37,12 +37,15 @@ public class MoveRB : RBGetter
     Coroutine dashCooldownRoutine;
     CharSO charSO;
 
+    Vector2 rbVel;
+
     public Vector2 MoveDir
     {
         get
         {
             if (!HasAgent() && InputManager.Instance.UsedTouch)
                 return InputManager.Instance.MovementVec;
+
             else if (!HasAgent() && !inputDisabled && ShouldMoveWithMousePos())
                 return (InputManager.Instance.MousePos - transform.position.RemoveZ());
 
@@ -87,12 +90,17 @@ public class MoveRB : RBGetter
         rb.velocity = Vector3.zero;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (mouseInput)
-            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+        if (!InputManager.Instance.UsedTouch)
+            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, 
+                moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
+
+        Debug.Log(rbVel);
+        rbVel = rb.velocity;
     }
 
     public void Dash()
@@ -116,6 +124,7 @@ public class MoveRB : RBGetter
                 rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
                 if (anim)
                     anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
+
                 yield return null;
                 continue;
             }

@@ -1,9 +1,9 @@
-using MyBox;
 using UnityEngine;
 
 [System.Serializable]
 public class CharRigidSettings
 {
+    [field: SerializeField] public float MinSpeed { get; private set; } = 1f;
     [field: SerializeField] public float MaxSpeed { get; private set; } = 5f;
     [field: SerializeField] public float StoppingDistance { get; private set; } = 1;
     [field: SerializeField] public float Acceleration { get; private set; } = 10f;
@@ -19,5 +19,4 @@ public class CharRigidSettings
     [field: SerializeField] public bool MouseInput { get; private set; }
     [field: SerializeField] public float MaxSpeedDistance { get; private set; } = .7f;
     [field: SerializeField] public AnimationCurve MoveCurve { get; private set; } = AnimationCurve.EaseInOut(0, 0, 1, 1);
-    [field: SerializeField] public float MinSpeed { get; private set; } = 1f;
 }

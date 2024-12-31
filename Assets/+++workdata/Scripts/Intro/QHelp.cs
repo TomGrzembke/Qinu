@@ -26,7 +26,7 @@ public class QHelp : MonoBehaviour
 
     IEnumerator QCheckCor()
     {
-        yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed());
+        yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed() || AbilitySlotManager.Instance.GetAbilitySlotPerformed(0));
         StopCoroutine(qHelpCor);
     }
 }

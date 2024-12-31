@@ -1602,53 +1602,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a4ee1aa2394a34bbc71ef1d37905f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MousePos>k__BackingField: {x: 0, y: 0}
+  <MousePos>k__BackingField: {x: -15.997881, y: -9}
   <MovementVec>k__BackingField: {x: 0, y: 0}
   <MoveAction>k__BackingField:
     m_Name: Move
     m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0ce25161-56cd-4aa1-96ff-b0e1afa35bac
+    m_ExpectedControlType: Vector2
+    m_Id: 88f63d39-fd03-46f5-a8bd-6d32350eae30
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
-    m_Flags: 0
+    m_Flags: -1
   <MousePosAction>k__BackingField:
-    m_Name: Mouse Pos
+    m_Name: MousePos
     m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: f831c4fc-8a3d-4d35-b901-e403eb46cf63
+    m_ExpectedControlType: Vector2
+    m_Id: 19786746-eeb3-4359-8a52-b7097b1b853a
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
-    m_Flags: 0
+    m_Flags: -1
   <LeftclickAction>k__BackingField:
-    m_Name: Leftclick
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 9c975df7-a68c-4ab3-b1f6-065f0ac9070c
+    m_Name: LeftClick
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 250e2195-44d9-4c56-a443-cb1d50fbf53e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   <RightClickAction>k__BackingField:
-    m_Name: Right Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 820ae1f3-06b0-44c6-8516-124cfed8fd7b
+    m_Name: RightClick
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: fee5a0f1-d589-4fc8-8729-084217538fc2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   <Ability0Action>k__BackingField:
-    m_Name: Ability 0
+    m_Name: Ability0
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 363c906a-cee6-42bd-9d28-0c17e77fea96
+    m_Id: 00c1d2f7-7cd9-410d-8b37-b220281ac52f
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
-    m_Flags: 0
+    m_Flags: -1
   joystickScript: {fileID: 2124426330}
   useJoystickDebug: 1
 --- !u!1 &1709975291
@@ -2159,6 +2159,30 @@ PrefabInstance:
     - target: {fileID: 8170153791668043271, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 391.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 391.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 323.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

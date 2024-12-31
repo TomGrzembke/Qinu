@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// <summary> used for local speed ups </summary>
+/// <summary> used for local acceleration ups </summary>
 [RequireComponent (typeof(Collider2D))]
 public class AddSpeedOnTrigger : MonoBehaviour
 {

@@ -1,3 +1,5 @@
-7z a JoystickTesting.zip ./JoystickTesting/* 
+7z a temp.zip C:/UnityProjects/_Builds/Qinu/JoystickTesting/* 
 
-butler push "C:\UnityProjects\_Builds\Qinu\JoyStickTesting.zip" tom-grzembke/qinu:HTML
+butler push .\temp.zip tom-grzembke/qinu:HTML
+
+del .\temp.zip

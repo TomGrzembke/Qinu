@@ -63,9 +63,9 @@ public class InputManager : MonoBehaviour
         if (cam && !UsedTouch)
             MousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        MovementVec = joystickScript.Direction;
         if (Input.touchCount > 0 || useJoystickDebug)
         {
+            MovementVec = joystickScript.Direction;
             //MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
             UsedTouch = true;
             joystickScript.gameObject.SetActive(UsedTouch);

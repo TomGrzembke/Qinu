@@ -122,8 +122,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flipSensitivity: 6
-  <FlipState>k__BackingField: 0
-  <MaxScale>k__BackingField: 0
 --- !u!114 &7953238053786489971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,8 +138,6 @@ MonoBehaviour:
   <IsRight>k__BackingField: 0
   stoppingDistance: 2
   goesToDefault: 1
-  followBallY: 1
-  invertY: 0
   dashRandomly: 1
   probabilityPerFrame: 0.001
   moveRB: {fileID: 3822254324265408848}
@@ -163,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 173636337912830749}
   disableInputRightclick: 0
+  anim: {fileID: 0}
 --- !u!50 &3565451610172718577
 Rigidbody2D:
   serializedVersion: 4

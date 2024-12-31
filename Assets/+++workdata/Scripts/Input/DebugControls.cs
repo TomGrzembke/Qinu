@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary> Mostly used for a dialogue speed up or to get to a certain game state more quickly </summary>
+/// <summary> Mostly used for a dialogue acceleration up or to get to a certain game state more quickly </summary>
 public class DebugControls : MonoBehaviour
 {
     #region Serialized

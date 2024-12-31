@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// <summary> Handles the max speed of the ball, is used for speed ups and slow downs </summary>
+/// <summary> Handles the max acceleration of the ball, is used for acceleration ups and slow downs </summary>
 public class BallController : RBGetter
 {
     #region Serialized

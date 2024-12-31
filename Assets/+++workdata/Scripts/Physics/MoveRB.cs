@@ -90,16 +90,15 @@ public class MoveRB : RBGetter
         rb.velocity = Vector3.zero;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!InputManager.Instance.UsedTouch)
-            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, 
-                moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+        //if (!InputManager.Instance.UsedTouch)
+        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed,
+            moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
 
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
 
-        Debug.Log(rbVel);
         rbVel = rb.velocity;
     }
 
@@ -131,10 +130,7 @@ public class MoveRB : RBGetter
 
             rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
 
-            if (rb.velocity.magnitude > currentMaxSpeed)
-            {
-                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
-            }
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, currentMaxSpeed);
 
             if (anim)
                 anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);

@@ -21,12 +21,12 @@ MonoBehaviour:
       <ProbabilityPerFrame>k__BackingField: 0.001
     <CharRigidSettings>k__BackingField:
       <MinSpeed>k__BackingField: 0.1
-      <MaxSpeed>k__BackingField: 3
+      <MaxSpeed>k__BackingField: 5
       <StoppingDistance>k__BackingField: 1
-      <Acceleration>k__BackingField: 200
+      <Acceleration>k__BackingField: 320
       <Decceleration>k__BackingField: 9
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 60
+      <DashForce>k__BackingField: 70
       <DashTime>k__BackingField: 0.1
       <DashCooldown>k__BackingField: 0.1
       <DashAutomAim>k__BackingField: 1
@@ -38,21 +38,21 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

@@ -171,7 +171,7 @@ MonoBehaviour:
   active: 1
   pixelRes:
     m_OverrideState: 1
-    m_Value: 412
+    m_Value: 105
   lineSize:
     m_OverrideState: 1
     m_Value: 1

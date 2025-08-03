@@ -103,6 +103,42 @@ public static class VectorExtension
         target = new(target.x + toAdd.x, target.y + toAdd.y, target.z + toAdd.z);
         return target;
     }
+    
+    public static Vector3 ChangeX(this Vector3 target, float value)
+    {
+        target.x = value;
+        return target;
+    }
+
+    public static Vector3 ChangeY(this Vector3 target, float value)
+    {
+        target.y = value;
+        return target;
+    }
+
+    public static Vector3 ChangeZ(this Vector3 target, float value)
+    {
+        target.z = value;
+        return target;
+    }
+
+    public static Vector3 AddX(this Vector3 target, float value)
+    {
+        target.x += value;
+        return target;
+    }
+
+    public static Vector3 AddY(this Vector3 target, float value)
+    {
+        target.y += value;
+        return target;
+    }
+
+    public static Vector3 AddZ(this Vector3 target, float value)
+    {
+        target.z += value;
+        return target;
+    }
 
     /// <summary> Checks if the target is in between a box created by the inout of the bottom left and top right provided </summary>
     public static bool IsBetween(this Vector2 target, Vector2 bottomLeft, Vector2 topRight)

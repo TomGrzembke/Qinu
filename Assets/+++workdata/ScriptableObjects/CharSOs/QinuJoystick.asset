@@ -23,10 +23,10 @@ MonoBehaviour:
       <MinSpeed>k__BackingField: 0.1
       <MaxSpeed>k__BackingField: 5
       <StoppingDistance>k__BackingField: 1
-      <Acceleration>k__BackingField: 320
+      <Acceleration>k__BackingField: 370
       <Decceleration>k__BackingField: 9
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 70
+      <DashForce>k__BackingField: 55
       <DashTime>k__BackingField: 0.1
       <DashCooldown>k__BackingField: 0.1
       <DashAutomAim>k__BackingField: 1

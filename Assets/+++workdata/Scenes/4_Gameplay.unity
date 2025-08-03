@@ -7111,6 +7111,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7313825319390368262, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: <CharSO>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: f86ddaed2a225834da80bbaaa10be3f7, type: 2}
     - target: {fileID: 7377190939817686560, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: 5

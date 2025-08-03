@@ -144,7 +144,9 @@ public class MoveRB : RBGetter
         if (!dashEnabled) yield break;
 
         yield return null;
-        moveRoutine = null;
+
+        if (moveRoutine != null)
+            ClearMoveRoutine();
 
         if (dashAutomAim)
             rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
@@ -161,6 +163,12 @@ public class MoveRB : RBGetter
 
         dashCooldownRoutine = StartCoroutine(DashCooldown());
         dashRoutine = null;
+    }
+
+    private void ClearMoveRoutine()
+    {
+        StopCoroutine(moveRoutine);
+        moveRoutine = null;
     }
 
     IEnumerator DashCooldown()

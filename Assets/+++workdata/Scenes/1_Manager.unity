@@ -1386,7 +1386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1476322198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1650,7 +1650,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: -1
   joystickScript: {fileID: 2124426330}
-  useJoystickDebug: 1
+  useJoystickDebug: 0
 --- !u!1 &1709975291
 GameObject:
   m_ObjectHideFlags: 0

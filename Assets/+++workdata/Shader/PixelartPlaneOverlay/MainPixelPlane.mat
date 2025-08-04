@@ -65,7 +65,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
-    - _PixelCount: {r: 120, g: 67.5, b: 0, a: 0}
+    - _PixelCount: {r: 240, g: 135, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1782895802980672460

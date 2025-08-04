@@ -21,21 +21,11 @@ public class CamFollowAfterPixel : MonoBehaviour
 
         if (Mathf.Abs(xDifference) >= camFollowPixelDistance.x)
         {
-            var newX = xDifference > 0 ? camFollowPixelDistance.x : -camFollowPixelDistance.x;
-
-            transform.position = transform.position.AddX(newX);
+            transform.position = transform.position.ChangeX(mainCamTrans.position.x);
 
             var xPixelDifference = transform.position.x % camFollowPixelDistance.x;
-
             
-            if (xPixelDifference < camFollowPixelDistance.x) //Tried to force grid here
-            {
-                //transform.position = transform.position.AddX(-xPixelDifference);
-            }
-            else
-            {
-                //transform.position = transform.position.AddX(camFollowPixelDistance.x - xPixelDifference);
-            }
+            transform.position = transform.position.AddX(-xPixelDifference);
         }
 
         if (Mathf.Abs(yDifference) >= camFollowPixelDistance.y)

@@ -1047,11 +1047,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 16375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: de7bc5451b0a7c44d854d3401725fd70, type: 2}
   m_TargetDisplay: 0
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91b693a3e547b14b96957e2ab807994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camFollowPixelDistance: {x: 0.1328084, y: 0.1328084}
+  camFollowPixelDistance: {x: 0.08145833, y: 0.08145833}
   pixelResSO: {fileID: 11400000, guid: c0e61dea782ea2c4896ffb05f006fed6, type: 2}
 --- !u!1 &999607990
 GameObject:
@@ -1226,7 +1226,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2216,7 +2216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659475565}
   - component: {fileID: 1659475564}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2285,8 +2285,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 16, y: 9, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 19.55, y: 10.996875, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 938471599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2368,8 +2368,8 @@ Transform:
   m_GameObject: {fileID: 1715982348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.26678, y: 2.7666, z: -9.9361515}
-  m_LocalScale: {x: 0.13212606, y: 0.1328084, z: 1}
+  m_LocalPosition: {x: -3.13632, y: 2.850905, z: -9.9361515}
+  m_LocalScale: {x: 0.08112951, y: 0.08120503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 1259669027}
   - component: {fileID: 1259669029}
   - component: {fileID: 1259669028}
+  - component: {fileID: 1259669030}
   m_Layer: 7
   m_Name: QinuSketches_0
   m_TagString: Untagged
@@ -1748,6 +1749,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1259669030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201316280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82c3928bf95cd144911bd2625007319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameRate: 12
 --- !u!1 &1297350272
 GameObject:
   m_ObjectHideFlags: 0

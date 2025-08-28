@@ -1,5 +1,6 @@
 using MyBox;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary> Allows for pixelcamsnap settings to achieve pixelate recalculation as wished, CamChangeEditorListener utilizes this for settings updates</summary>
 public class CamFollowAfterPixel : MonoBehaviour
@@ -14,7 +15,7 @@ public class CamFollowAfterPixel : MonoBehaviour
 
     [SerializeField]  Material pixelMat;
 
-    [SerializeField]  float macroPixelMultiplier = 1;
+    [Tooltip("Higher means it will wait more macro pixels until it moves along"),SerializeField]  float macroPixelFollowMultiplier = 1;
     [SerializeField, ShowOnly]  Vector2 camFollowPixelDistance;
     [SerializeField, ShowOnly]  Vector2 macroPixelSize;
 
@@ -43,8 +44,8 @@ public class CamFollowAfterPixel : MonoBehaviour
         macroPixelSize.x = viewWidth / pixelCount.x;
         macroPixelSize.y = viewHeight / pixelCount.y;
 
-        camFollowPixelDistance.x = macroPixelSize.x * macroPixelMultiplier / 2;
-        camFollowPixelDistance.y = macroPixelSize.y * macroPixelMultiplier;
+        camFollowPixelDistance.x = macroPixelSize.x * macroPixelFollowMultiplier / 2;
+        camFollowPixelDistance.y = macroPixelSize.y * macroPixelFollowMultiplier;
 
 
         pixelPlane.localScale = new(viewWidth, viewHeight,

@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyAttribute.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyAttribute.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyDrawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +109,7 @@
       <workItem from="1754553352485" duration="626000" />
       <workItem from="1756316728738" duration="8713000" />
       <workItem from="1756369479037" duration="3000" />
-      <workItem from="1756369495709" duration="8553000" />
+      <workItem from="1756369495709" duration="9450000" />
     </task>
     <servers />
   </component>

@@ -4,19 +4,19 @@ using UnityEngine;
 /// <summary> Allows for pixelcamsnap settings to achieve pixelate recalculation as wished, CamChangeEditorListener utilizes this for settings updates</summary>
 public class CamFollowAfterPixel : MonoBehaviour
 {
-    private Camera mainCam;
-    private Transform mainCamTrans;
-    [SerializeField] private Camera cam;
+     Camera mainCam;
+     Transform mainCamTrans;
+    [SerializeField]  Camera cam;
 
-    [SerializeField] private PixelResSO pixelResSO;
+    [SerializeField]  PixelResSO pixelResSO;
 
-    [SerializeField] private Transform pixelPlane;
+    [SerializeField]  Transform pixelPlane;
 
-    [SerializeField] private Material pixelMat;
+    [SerializeField]  Material pixelMat;
 
-    [SerializeField] private float macroPixelMultiplier = 1;
-    [SerializeField, ShowOnly] private Vector2 camFollowPixelDistance;
-    [SerializeField, ShowOnly] private Vector2 macroPixelSize;
+    [SerializeField]  float macroPixelMultiplier = 1;
+    [SerializeField, ShowOnly]  Vector2 camFollowPixelDistance;
+    [SerializeField, ShowOnly]  Vector2 macroPixelSize;
 
     void Awake()
     {
@@ -43,8 +43,8 @@ public class CamFollowAfterPixel : MonoBehaviour
         macroPixelSize.x = viewWidth / pixelCount.x;
         macroPixelSize.y = viewHeight / pixelCount.y;
 
-        camFollowPixelDistance.x = macroPixelSize.x * macroPixelMultiplier;
-        camFollowPixelDistance.y = macroPixelSize.y * macroPixelMultiplier / 2;
+        camFollowPixelDistance.x = macroPixelSize.x * macroPixelMultiplier / 2;
+        camFollowPixelDistance.y = macroPixelSize.y * macroPixelMultiplier;
 
 
         pixelPlane.localScale = new(viewWidth, viewHeight,

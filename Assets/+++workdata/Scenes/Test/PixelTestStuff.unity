@@ -2574,6 +2574,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 605655844000600853, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 605655844000600853, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 16311
       objectReference: {fileID: 0}
@@ -2617,9 +2621,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: macroPixelSize.x
+      value: 0.041666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: macroPixelSize.y
+      value: 0.074074075
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: macroPixelMultiplier
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: camFollowPixelDistance.x
+      value: 2.0833335
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: camFollowPixelDistance.y
+      value: 7.4074073
+      objectReference: {fileID: 0}
     - target: {fileID: 8024852509217365567, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: m_Name
       value: PixelCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951774522426260180, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951774522426260180, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

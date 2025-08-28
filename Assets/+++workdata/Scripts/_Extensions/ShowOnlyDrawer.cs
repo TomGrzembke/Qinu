@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 
+public class ShowOnlyAttribute : PropertyAttribute { }
+
 /// <summary> Adds a Labelfield thats read only on serialized fields by using the [ShowOnly] attribute </summary>
 [CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
 public class ShowOnlyDrawer : PropertyDrawer
@@ -23,6 +25,9 @@ public class ShowOnlyDrawer : PropertyDrawer
                 break;
             case SerializedPropertyType.String:
                 valueStr = prop.stringValue;
+                break;
+            case SerializedPropertyType.Vector2:
+                valueStr = prop.vector2Value.ToString();
                 break;
             default:
                 valueStr = "(not supported)";

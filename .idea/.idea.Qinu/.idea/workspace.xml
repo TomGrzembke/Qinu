@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/_Extensions/ShowOnlyDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +22,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Runtime/RendererFeatures/FullScreenPassRendererFeature.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MyCameraScriptEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.domybest.mybox@f3b54077f2/Extensions/MyExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Runtime/RendererFeatures/FullScreenPassRendererFeature.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/2b/ba8bbde9/Camera.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/e3/a7cff781/PropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4f70cf68b8b24a78aa3a87c1d6120925958800/c5/0eb15c6e/SerializedObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4f70cf68b8b24a78aa3a87c1d6120925958800/dd/80a4f681/Editor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/574a6b83c2d440099e345550185555c42d600/1d/3feb2b46/GUILayoutOption.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -100,6 +112,9 @@
       <workItem from="1754240516872" duration="3000" />
       <workItem from="1754338290084" duration="4702000" />
       <workItem from="1754553352485" duration="626000" />
+      <workItem from="1756316728738" duration="8713000" />
+      <workItem from="1756369479037" duration="3000" />
+      <workItem from="1756369495709" duration="8553000" />
     </task>
     <servers />
   </component>

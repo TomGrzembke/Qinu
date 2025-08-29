@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary> Can calculate and set values for a pixelart material and enhances it's usability (depending on screen size) </summary>
 [CreateAssetMenu]
-public class RT_PixelResSO : ScriptableObject
+public class RT_PixelateCalculatorSO : ScriptableObject
 {
     #region Serialized
 

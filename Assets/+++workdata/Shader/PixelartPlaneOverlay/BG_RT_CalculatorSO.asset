@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cecd03edaef30840913efffdd456d4a, type: 3}
-  m_Name: BG_RT_PixelResSO
+  m_Name: BG_RT_CalculatorSO
   m_EditorClassIdentifier: 
   pixelRes: 440
   pixelartMat: {fileID: 2100000, guid: dfb6cac6e3d66f247be61e2f9c90b9a5, type: 2}

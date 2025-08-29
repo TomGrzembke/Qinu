@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary> Allows for pixelcamsnap settings to achieve pixelate recalculation as wished, CamChangeEditorListener utilizes this for settings updates</summary>
 public class CamFollowAfterPixel : MonoBehaviour
 {
     [Header("Data Set")]
     #pragma warning disable
-    [SerializeField, ShowOnly] private string info = $"Utilizes {nameof(PixelateDataSO)} with {nameof(RT_PixelResSO)} as context, as data settings";
+    [SerializeField, ShowOnly] private string info = $"Utilizes {nameof(PixelateDataSO)} with {nameof(RT_PixelateCalculatorSO)} as context, as data settings";
     #pragma warning restore
     
     [SerializeField] private PixelateDataSO pixelateDataSO;
-    [SerializeField] RT_PixelResSO pixelResSO;
+    [FormerlySerializedAs("pixelResSO")] [SerializeField] RT_PixelateCalculatorSO pixelateCalculatorSo;
     
     [Header("Scene Related")]
     [SerializeField] Camera cam;
@@ -47,13 +48,13 @@ public class CamFollowAfterPixel : MonoBehaviour
     
     public void CalculateMarginPixelValues()
     {
-        var layerSettings = pixelateDataSO.GetPixelateLayerSettings(pixelResSO);
+        var layerSettings = pixelateDataSO.GetPixelateLayerSettings(pixelateCalculatorSo);
         macroPixelFollowMultiplier = layerSettings.macroPixelFollowMultiplier;
         cam.orthographicSize = layerSettings.camOrthoSize;
         
         float viewHeight = cam.orthographicSize * 2f;
         float viewWidth = viewHeight * cam.aspect;
-        pixelCount = pixelResSO.GetPixelCount();
+        pixelCount = pixelateCalculatorSo.GetPixelCount();
         macroPixelSize.x = viewWidth / pixelCount.x;
         macroPixelSize.y = viewHeight / pixelCount.y;
 

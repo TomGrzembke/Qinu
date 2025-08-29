@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class PixelateLayerSettings
@@ -17,7 +18,7 @@ public class PixelateLayerSettings
         "Multiplies the size of one macro pixel (how big a 'pixel' of the pixelation effect is displayed' and snaps the cam in that value")]
     public int macroPixelFollowMultiplier = 10;
 
-    public RT_PixelResSO rTPixelResSO;
+    [FormerlySerializedAs("rTPixelResSO")] public RT_PixelateCalculatorSO pixelateCalculatorSo;
 
 }
 
@@ -44,18 +45,18 @@ public class PixelateDataSO : ScriptableObject
     {
         foreach (var setting in pixelateLayerSettings)
         {
-            var pixelResCalculator = setting.rTPixelResSO;
+            var pixelResCalculator = setting.pixelateCalculatorSo;
             pixelResCalculator.SetPixelationParameter(setting.pixelRes, setting.outlineColor, setting.outlineSize);
         }
         
         onChanged?.Invoke();
     }
 
-    public PixelateLayerSettings GetPixelateLayerSettings(RT_PixelResSO calculateSO)
+    public PixelateLayerSettings GetPixelateLayerSettings(RT_PixelateCalculatorSO calculateSO)
     {
         foreach (var setting in pixelateLayerSettings)
         {
-            if (setting.rTPixelResSO == calculateSO)
+            if (setting.pixelateCalculatorSo == calculateSO)
                 return setting;
         }
 

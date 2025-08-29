@@ -14,9 +14,8 @@ public class PixelateLayerSettings
 
     public int camOrthoSize = 10;
 
-    [Tooltip(
-        "Multiplies the size of one macro pixel (how big a 'pixel' of the pixelation effect is displayed' and snaps the cam in that value")]
-    public int macroPixelFollowMultiplier = 10;
+    [Tooltip("Multiplies the size of one macro pixel (how big a 'pixel' of the pixelation effect is displayed' and snaps the cam in that value")]
+    public float macroPixelFollowMultiplier = 10;
 
     [FormerlySerializedAs("rTPixelResSO")] public RT_PixelateCalculatorSO pixelateCalculatorSo;
 

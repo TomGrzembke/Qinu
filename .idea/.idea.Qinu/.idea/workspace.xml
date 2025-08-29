@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelResSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelateCalculatorSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelResSO.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelateCalculatorSO.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelateDataSO.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelateDataSO.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +116,7 @@
       <workItem from="1756369479037" duration="3000" />
       <workItem from="1756369495709" duration="9450000" />
       <workItem from="1756393332362" duration="11000" />
-      <workItem from="1756463649656" duration="7799000" />
+      <workItem from="1756463649656" duration="8962000" />
     </task>
     <servers />
   </component>

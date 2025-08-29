@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: pixelResSO
       value: 
-      objectReference: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}
+      objectReference: {fileID: 11400000, guid: 7d500459db3d60541a2c2f4485a0a95f, type: 2}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: pixelCount.x
       value: 440
@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: pixelCount.y
       value: 440
       objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelateDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 52e8bf0b519a4ff4ba0fb1dc37e064f1, type: 2}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.x
       value: 0.045454547
@@ -2688,6 +2692,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: info
+      value: Utilizes PixelateDataSO RT_PixelResSO as context, as data settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: pixelResSO
       value: 
       objectReference: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}
@@ -2699,6 +2707,10 @@ PrefabInstance:
       propertyPath: pixelCount.y
       value: 440
       objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelateDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 52e8bf0b519a4ff4ba0fb1dc37e064f1, type: 2}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.x
       value: 0.045454547

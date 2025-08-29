@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,11 +18,12 @@ public class PixelateLayerSettings
     public int macroPixelFollowMultiplier = 10;
 
     public RT_PixelResSO rTPixelResSO;
+
 }
 
 /// <summary> Can calculate and set values for a pixelart material and enhances it's usability (depending on screen size) </summary>
 [CreateAssetMenu]
-public class PixelateRenderDataSO : ScriptableObject
+public class PixelateDataSO : ScriptableObject
 {
     #region Serialized
 
@@ -30,6 +32,7 @@ public class PixelateRenderDataSO : ScriptableObject
     #endregion
 
     #region Non Serialized
+    public Action onChanged;
 
     #endregion
 
@@ -44,5 +47,18 @@ public class PixelateRenderDataSO : ScriptableObject
             var pixelResCalculator = setting.rTPixelResSO;
             pixelResCalculator.SetPixelationParameter(setting.pixelRes, setting.outlineColor, setting.outlineSize);
         }
+        
+        onChanged?.Invoke();
+    }
+
+    public PixelateLayerSettings GetPixelateLayerSettings(RT_PixelResSO calculateSO)
+    {
+        foreach (var setting in pixelateLayerSettings)
+        {
+            if (setting.rTPixelResSO == calculateSO)
+                return setting;
+        }
+
+        return null;
     }
 }

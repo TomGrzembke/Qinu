@@ -3,22 +3,28 @@ using UnityEngine;
 /// <summary> Allows for pixelcamsnap settings to achieve pixelate recalculation as wished, CamChangeEditorListener utilizes this for settings updates</summary>
 public class CamFollowAfterPixel : MonoBehaviour
 {
-    Camera mainCam;
-    Transform mainCamTrans;
-    [SerializeField] Camera cam;
-
+    [Header("Data Set")]
+    #pragma warning disable
+    [SerializeField, ShowOnly] private string info = $"Utilizes {nameof(PixelateDataSO)} with {nameof(RT_PixelResSO)} as context, as data settings";
+    #pragma warning restore
+    
+    [SerializeField] private PixelateDataSO pixelateDataSO;
     [SerializeField] RT_PixelResSO pixelResSO;
-
+    
+    [Header("Scene Related")]
+    [SerializeField] Camera cam;
     [SerializeField] Transform pixelPlane;
-
     [SerializeField] Material pixelMat;
 
-    [Tooltip("Higher means it will wait more macro pixels until it moves along"), SerializeField]
-    float macroPixelFollowMultiplier = 1;
-
+    [Header("Debug")]
     [SerializeField, ShowOnly] Vector2 camFollowPixelDistance;
     [SerializeField, ShowOnly] Vector2 macroPixelSize;
     [SerializeField, ShowOnly] Vector2 pixelCount;
+    
+    [Tooltip("Higher means it will wait more macro pixels until it moves along")]
+    float macroPixelFollowMultiplier = 1;
+    Camera mainCam;
+    Transform mainCamTrans;
 
     void Awake()
     {
@@ -33,11 +39,18 @@ public class CamFollowAfterPixel : MonoBehaviour
 
     private void OnValidate()
     {
+        pixelateDataSO.onChanged -= CalculateMarginPixelValues;
+        pixelateDataSO.onChanged += CalculateMarginPixelValues;
+        
         CalculateMarginPixelValues();
     }
     
     public void CalculateMarginPixelValues()
     {
+        var layerSettings = pixelateDataSO.GetPixelateLayerSettings(pixelResSO);
+        macroPixelFollowMultiplier = layerSettings.macroPixelFollowMultiplier;
+        cam.orthographicSize = layerSettings.camOrthoSize;
+        
         float viewHeight = cam.orthographicSize * 2f;
         float viewWidth = viewHeight * cam.aspect;
         pixelCount = pixelResSO.GetPixelCount();
@@ -47,9 +60,8 @@ public class CamFollowAfterPixel : MonoBehaviour
         camFollowPixelDistance.x = macroPixelSize.x * macroPixelFollowMultiplier / 2;
         camFollowPixelDistance.y = macroPixelSize.y * macroPixelFollowMultiplier;
 
+        pixelPlane.localScale = new(viewWidth, viewHeight, pixelPlane.localScale.z);
 
-        pixelPlane.localScale = new(viewWidth, viewHeight,
-            pixelPlane.localScale.z);
     }
 
     public void HandleCameraChange()

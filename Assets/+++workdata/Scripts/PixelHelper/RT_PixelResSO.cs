@@ -1,25 +1,27 @@
 using MyBox;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> Can calculate and set values for a pixelart material and enhances it's usability (depending on screen size) </summary>
 [CreateAssetMenu]
-public class PixelResSO : ScriptableObject
+public class RT_PixelResSO : ScriptableObject
 {
     #region Serialized
 
-    [Range(16, 1920)] public float pixelRes = 128;
     public Material pixelartMat;
-    public Vector2 screenRes = new(1920, 1080);
-    public Color col;
-    public int lineSize = 1;
+
+    public RenderTexture pixelateTexture;
+
     [SerializeField, ShowOnly] Vector2 pixelCount;
 
     #endregion
 
     #region Non Serialized
 
-    RangedFloat screenRatio;
+    float pixelRes = 128;
+    Color col;
+    int lineSize = 1;
+
+    RangedFloat assetRatio;
 
     #endregion
 
@@ -29,13 +31,15 @@ public class PixelResSO : ScriptableObject
 
     public void ValidateCall()
     {
-        float greatestCommonFactor = CalculateGCF(screenRes.x, screenRes.y);
+        var planesRes = new Vector2(pixelateTexture.width, pixelateTexture.height);
 
-        screenRatio.Min = screenRes.x / greatestCommonFactor;
-        screenRatio.Max = screenRes.y / greatestCommonFactor;
+        float greatestCommonFactor = CalculateGCF(planesRes.x, planesRes.y);
+
+        assetRatio.Min = planesRes.x / greatestCommonFactor;
+        assetRatio.Max = planesRes.y / greatestCommonFactor;
 
         pixelCount.x = pixelRes;
-        pixelCount.y = pixelRes / screenRatio.Min * screenRatio.Max;
+        pixelCount.y = pixelRes / assetRatio.Min * assetRatio.Max;
 
         pixelartMat.SetVector("_PixelCount", pixelCount);
         pixelartMat.SetColor("_OutlineColor", col);
@@ -55,5 +59,13 @@ public class PixelResSO : ScriptableObject
     public Vector2 GetPixelCount()
     {
         return pixelCount;
+    }
+
+    public void SetPixelationParameter(float pixelRes, Color col, int lineSize)
+    {
+        this.pixelRes = pixelRes;
+        this.col = col;
+        this.lineSize = lineSize;
+        ValidateCall();
     }
 }

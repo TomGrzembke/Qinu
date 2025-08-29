@@ -1,23 +1,24 @@
-using MyBox;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> Allows for pixelcamsnap settings to achieve pixelate recalculation as wished, CamChangeEditorListener utilizes this for settings updates</summary>
 public class CamFollowAfterPixel : MonoBehaviour
 {
-     Camera mainCam;
-     Transform mainCamTrans;
-    [SerializeField]  Camera cam;
+    Camera mainCam;
+    Transform mainCamTrans;
+    [SerializeField] Camera cam;
 
-    [SerializeField]  PixelResSO pixelResSO;
+    [SerializeField] RT_PixelResSO pixelResSO;
 
-    [SerializeField]  Transform pixelPlane;
+    [SerializeField] Transform pixelPlane;
 
-    [SerializeField]  Material pixelMat;
+    [SerializeField] Material pixelMat;
 
-    [Tooltip("Higher means it will wait more macro pixels until it moves along"),SerializeField]  float macroPixelFollowMultiplier = 1;
-    [SerializeField, ShowOnly]  Vector2 camFollowPixelDistance;
-    [SerializeField, ShowOnly]  Vector2 macroPixelSize;
+    [Tooltip("Higher means it will wait more macro pixels until it moves along"), SerializeField]
+    float macroPixelFollowMultiplier = 1;
+
+    [SerializeField, ShowOnly] Vector2 camFollowPixelDistance;
+    [SerializeField, ShowOnly] Vector2 macroPixelSize;
+    [SerializeField, ShowOnly] Vector2 pixelCount;
 
     void Awake()
     {
@@ -34,13 +35,12 @@ public class CamFollowAfterPixel : MonoBehaviour
     {
         CalculateMarginPixelValues();
     }
-
-    [ButtonMethod]
+    
     public void CalculateMarginPixelValues()
     {
         float viewHeight = cam.orthographicSize * 2f;
         float viewWidth = viewHeight * cam.aspect;
-        var pixelCount = pixelMat.GetVector("_PixelCount");
+        pixelCount = pixelResSO.GetPixelCount();
         macroPixelSize.x = viewWidth / pixelCount.x;
         macroPixelSize.y = viewHeight / pixelCount.y;
 

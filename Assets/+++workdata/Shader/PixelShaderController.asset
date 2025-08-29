@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7d40351e1746b428071ee5db8ffb0b, type: 3}
   m_Name: PixelShaderController
   m_EditorClassIdentifier: 
-  pixelRes: 550
+  pixelRes: 559
   pixelartMat: {fileID: 2100000, guid: 5d6deb9f34c61d148851ba13c8508c92, type: 2}
   screenRes: {x: 1920, y: 1080}
   col: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
   lineSize: 1
+  pixelCount: {x: 559, y: 314.4375}

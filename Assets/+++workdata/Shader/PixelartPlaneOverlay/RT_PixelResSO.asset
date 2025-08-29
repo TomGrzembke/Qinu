@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cecd03edaef30840913efffdd456d4a, type: 3}
+  m_Name: RT_PixelResSO
+  m_EditorClassIdentifier: 
+  pixelRes: 440
+  pixelartMat: {fileID: 2100000, guid: d555b55c3d324eb4bb38746f9d0a65b0, type: 2}
+  col: {r: 1, g: 1, b: 1, a: 0}
+  lineSize: 1
+  pixelCount: {x: 440, y: 440}
+  pixelateTexture: {fileID: 8400000, guid: de7bc5451b0a7c44d854d3401725fd70, type: 2}

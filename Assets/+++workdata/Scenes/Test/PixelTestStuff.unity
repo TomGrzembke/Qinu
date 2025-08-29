@@ -331,20 +331,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelMat
+      value: 
+      objectReference: {fileID: 2100000, guid: dfb6cac6e3d66f247be61e2f9c90b9a5, type: 2}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelResSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelCount.x
+      value: 440
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelCount.y
+      value: 440
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.x
-      value: 0.041666668
+      value: 0.045454547
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.y
-      value: 0.041666668
+      value: 0.045454547
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: camFollowPixelDistance.x
-      value: 2.0833335
+      value: 2.2727273
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: camFollowPixelDistance.y
-      value: 4.166667
+      value: 4.5454545
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelFollowMultiplier
@@ -941,7 +957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855770644}
   - component: {fileID: 855770645}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TessarSingleImage (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +973,7 @@ Transform:
   m_GameObject: {fileID: 855770643}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.039, y: -0.4, z: 0}
   m_LocalScale: {x: 0.3566423, y: 0.3566423, z: 0.3566423}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1235,7 +1251,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1355,7 +1371,7 @@ Transform:
   m_GameObject: {fileID: 1012530360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 2.3, z: 0}
+  m_LocalPosition: {x: 0.296, y: 2.278, z: 0}
   m_LocalScale: {x: 0.35563728, y: 0.35563728, z: 0.35563728}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2667,13 +2683,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2924584271894903028, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelResSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelCount.x
+      value: 440
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
+      propertyPath: pixelCount.y
+      value: 440
+      objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.x
-      value: 0.041666668
+      value: 0.045454547
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelSize.y
-      value: 0.041666668
+      value: 0.045454547
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelMultiplier
@@ -2681,11 +2713,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: camFollowPixelDistance.x
-      value: 2.0833335
+      value: 2.2727273
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: camFollowPixelDistance.y
-      value: 4.166667
+      value: 4.5454545
       objectReference: {fileID: 0}
     - target: {fileID: 5387406295171181178, guid: d9079cbcb81ee4f418a98ce280f457b4, type: 3}
       propertyPath: macroPixelFollowMultiplier

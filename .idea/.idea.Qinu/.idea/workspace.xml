@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelateDataSO.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelateDataSO.asset.meta" beforeDir="false" />
-    </list>
+    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,11 +14,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateRenderDataSO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelResSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelateCalculatorSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.domybest.mybox@f3b54077f2/Extensions/MyExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Runtime/RendererFeatures/FullScreenPassRendererFeature.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Zugzwang/Assets/_Workdata/GameWorld/Character/Scripts/AutoMove.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/2b/ba8bbde9/Camera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/e3/a7cff781/PropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4f70cf68b8b24a78aa3a87c1d6120925958800/c5/0eb15c6e/SerializedObject.cs" root0="SKIP_HIGHLIGHTING" />
@@ -116,7 +111,7 @@
       <workItem from="1756369479037" duration="3000" />
       <workItem from="1756369495709" duration="9450000" />
       <workItem from="1756393332362" duration="11000" />
-      <workItem from="1756463649656" duration="8962000" />
+      <workItem from="1756463649656" duration="9832000" />
     </task>
     <servers />
   </component>

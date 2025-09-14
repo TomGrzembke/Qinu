@@ -16,14 +16,14 @@ MonoBehaviour:
   - name: Primary
     outlineColor: {r: 1, g: 1, b: 1, a: 0}
     outlineSize: 1
-    pixelRes: 440
-    camOrthoSize: 10
+    pixelRes: 550
+    camOrthoSize: 18
     macroPixelFollowMultiplier: 100
     pixelateCalculatorSo: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}
   - name: BG
-    outlineColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
+    outlineColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
     outlineSize: 1
-    pixelRes: 440
-    camOrthoSize: 10
+    pixelRes: 412.5
+    camOrthoSize: 18
     macroPixelFollowMultiplier: 100
     pixelateCalculatorSo: {fileID: 11400000, guid: 7d500459db3d60541a2c2f4485a0a95f, type: 2}

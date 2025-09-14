@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="" />
+    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test/Main Camera.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test/Main Camera.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test/TestCamSway.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test/TestCamSway.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/Test/PixelTestStuff.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/FullScreenBendayComposite.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/FullScreenBendayComposite.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlane.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlane.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlaneBG.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlaneBG.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTextureBG.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTextureBG.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/_MainPixelateDataSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/_MainPixelateDataSO.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,6 +128,7 @@
       <workItem from="1756369495709" duration="9450000" />
       <workItem from="1756393332362" duration="11000" />
       <workItem from="1756463649656" duration="9832000" />
+      <workItem from="1757853219956" duration="762000" />
     </task>
     <servers />
   </component>

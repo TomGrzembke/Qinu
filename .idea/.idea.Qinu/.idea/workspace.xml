@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/2D/NotyConcept.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/2D/NotyConcept.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/Main Camera 1.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/Main Camera 1.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/Test.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/TestCamIdle.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/TestCamIdle.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/NPCs/CharRigidSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/NPCs/CharRigidSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/UI/WinLooseBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/UI/WinLooseBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp.asset" afterDir="false" />
-    </list>
+    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +117,7 @@
       <workItem from="1756463649656" duration="9832000" />
       <workItem from="1757853219956" duration="1854000" />
       <workItem from="1760277079021" duration="9000" />
-      <workItem from="1760277108492" duration="1772000" />
+      <workItem from="1760277108492" duration="2192000" />
     </task>
     <servers />
   </component>

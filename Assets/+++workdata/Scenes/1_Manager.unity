@@ -1808,7 +1808,8 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
-  <WinPoints>k__BackingField: 5
+  <WinPoints>k__BackingField: 8
+  <LoosePoints>k__BackingField: 4
 --- !u!225 &743323638679807577
 CanvasGroup:
   m_ObjectHideFlags: 0

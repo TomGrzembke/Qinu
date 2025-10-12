@@ -80,10 +80,10 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.29
+    m_Value: 0.78
   intensity:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 0.27
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -171,7 +171,7 @@ MonoBehaviour:
   active: 0
   pixelRes:
     m_OverrideState: 1
-    m_Value: 105
+    m_Value: 235
   lineSize:
     m_OverrideState: 1
     m_Value: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
   m_Name: ChannelMixer
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   redOutRedIn:
     m_OverrideState: 1
     m_Value: 100
@@ -307,10 +307,10 @@ MonoBehaviour:
   active: 0
   threshold:
     m_OverrideState: 1
-    m_Value: -2.97
+    m_Value: -2.48
   intensity:
     m_OverrideState: 1
-    m_Value: 1.6
+    m_Value: 3.11
   scatter:
     m_OverrideState: 1
     m_Value: 0
@@ -321,12 +321,12 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0.07394035, b: 0.16037738, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.85395354, g: 1, b: 0.1745283, a: 1}
     hdr: 0
   dotsDensity:
     m_OverrideState: 1
-    m_Value: 63
+    m_Value: -32
   dotsCutoff:
     m_OverrideState: 1
     m_Value: 0.31

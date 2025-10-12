@@ -1,9 +1,9 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
 public class ShowOnlyAttribute : PropertyAttribute { }
 
+#if UNITY_EDITOR
 /// <summary> Adds a Labelfield thats read only on serialized fields by using the [ShowOnly] attribute </summary>
 [CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
 public class ShowOnlyDrawer : PropertyDrawer

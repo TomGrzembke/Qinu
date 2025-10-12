@@ -30,6 +30,7 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public List<GameObject> LeftPlayers { get; private set; }
     [field: SerializeField] public List<GameObject> AvailableChars { get; private set; }
     [field: SerializeField] public float WinPoints { get; private set; } = 5;
+    [field: SerializeField] public float LoosePoints { get; private set; } = 5;
 
     #endregion
 

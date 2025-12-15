@@ -94,6 +94,7 @@ public class GameStateManager : MonoBehaviour
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.MainMenu);
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Manager);
 
         yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.Startup);
     }

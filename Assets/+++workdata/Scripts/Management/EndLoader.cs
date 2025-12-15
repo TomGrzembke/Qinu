@@ -42,8 +42,7 @@ public class EndLoader : MonoBehaviour
 
         print(value);
         
-        if (value != -TournamentManager.Instance.LoosePoints) return;
-        if (value != TournamentManager.Instance.WinPoints) return;
+        if (value != -TournamentManager.Instance.LoosePoints && value != TournamentManager.Instance.WinPoints) return;
         LoadEnd();
     }
 

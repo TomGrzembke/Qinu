@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 1
-  loadingTime: 1
+  loadingTime: 0
   canvasGroup: {fileID: 987567735}
 --- !u!1 &1016315264
 GameObject:

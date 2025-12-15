@@ -1,17 +1,15 @@
-using MyBox;
 using System.Collections;
+using MyBox;
 using UnityEngine;
 
 /// <summary> Used for calling management methods from buttons or in scene besides the Manager scene</summary>
 public class GameStateManager : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] SceneReference introScene;
-    #endregion
 
-    #region Non Serialized
     static GameStateManager Instance;
-    #endregion
+
+    static Coroutine resetRoutine;
 
     void Awake()
     {
@@ -22,13 +20,25 @@ public class GameStateManager : MonoBehaviour
 
     public static void StartGame()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu, Instance.GetSceneID(Instance.introScene)));
+        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu,
+            Instance.GetSceneID(Instance.introScene)));
+    }
+
+    public static void ResetGame()
+    {
+        if (resetRoutine != null)
+        {
+            return;
+        }
+        
+        resetRoutine = Instance.StartCoroutine(Instance.RestartGameCoroutine());
     }
 
     public static void OptionsWindow()
     {
         PauseManager.Instance.PauseLogic();
     }
+
     public static void CloseOptionsWindow()
     {
         PauseManager.Instance.PauseLogic();
@@ -36,7 +46,8 @@ public class GameStateManager : MonoBehaviour
 
     public static void GoToMainMenu()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine(Instance.GetSceneID(Instance.introScene), (int)Scenes.MainMenu));
+        Instance.StartCoroutine(Instance.LoadScenesCoroutine(Instance.GetSceneID(Instance.introScene),
+            (int)Scenes.MainMenu));
     }
 
     public static void ReloadGameScene()
@@ -66,5 +77,24 @@ public class GameStateManager : MonoBehaviour
         yield return SceneLoader.Instance.UnloadSceneViaIndex(GetSceneID(Instance.introScene));
         yield return SceneLoader.Instance.LoadSceneViaIndex(GetSceneID(Instance.introScene));
         LoadingScreen.Hide(this);
+    }
+
+    IEnumerator RestartGameCoroutine()
+    {
+        LoadingScreen.Show(this);
+
+        yield return Reset();
+
+        LoadingScreen.Hide(this);
+        resetRoutine = null;
+    }
+
+    IEnumerator Reset()
+    {
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.MainMenu);
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
+
+        yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.Startup);
     }
 }

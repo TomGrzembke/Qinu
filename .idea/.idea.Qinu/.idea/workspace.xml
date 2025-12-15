@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="" />
+    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/DebugControls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/DebugControls.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlane.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlane.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlaneBG.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/MainPixelPlaneBG.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTexture.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTextureBG.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/SinglePlaneMainTextureBG.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +60,7 @@
     &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;PixelateItself&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -61,6 +76,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../_Builds/Qinu/TalkAndPlay\Qinu.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\UnityProjects\_Builds\Qinu\TalkAndPlay" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.37f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\UnityProjects\SemesterProjects\Qinu -debugCodeOptimization" />
@@ -117,7 +140,10 @@
       <workItem from="1756463649656" duration="9832000" />
       <workItem from="1757853219956" duration="1854000" />
       <workItem from="1760277079021" duration="9000" />
-      <workItem from="1760277108492" duration="2192000" />
+      <workItem from="1760277108492" duration="3675000" />
+      <workItem from="1761231072187" duration="819000" />
+      <workItem from="1762908713408" duration="3548000" />
+      <workItem from="1762970636258" duration="1447000" />
     </task>
     <servers />
   </component>

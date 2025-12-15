@@ -9,28 +9,32 @@ public class StartupManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return null;
-
         yield return SceneLoader.LoadScene(Scenes.Manager);
         yield return SceneLoader.LoadScene(Scenes.Pixelate);
 
+#if UNITY_EDITOR
         yield return SceneLoader.LoadScene(sceneToLoad);
-
-        for (int i = (int)Scenes.MainMenu; i < (int)Scenes.Gameplay + 1; i++)
-        {
-            if (sceneToLoad != GetSceneEnum(i) && SceneManager.GetSceneByBuildIndex(i).IsValid())
-                yield return SceneLoader.UnloadScene(GetSceneEnum(i));
-        }
+        yield return UnloadExtraScenes();
+#else
+        yield return SceneLoader.LoadScene(Scenes.MainMenu);
+#endif
 
         SceneLoader.UnloadScene(Scenes.Startup);
     }
 
-    public Scenes GetSceneEnum(int index)
+    IEnumerator UnloadExtraScenes()
     {
-        if (index == (int)Scenes.MainMenu)
-            return Scenes.MainMenu;
-        else
-            return Scenes.Gameplay;
+        for (int i = (int)Scenes.MainMenu; i < (int)Scenes.Gameplay + 1; i++)
+        {
+            if (sceneToLoad == GetSceneEnum(i)) continue;
+            if (!SceneManager.GetSceneByBuildIndex(i).IsValid()) continue;
+            
+            yield return SceneLoader.UnloadScene(GetSceneEnum(i));
+        }
     }
 
+    public Scenes GetSceneEnum(int index)
+    {
+        return (Scenes)index;
+    }
 }

@@ -10,17 +10,16 @@ using UnityEditor.SceneManagement;
 #endif
 public enum Scenes
 {
-    Startup,
-    Manager,
-    Pixelate,
-    MainMenu,
-    Gameplay,
-    End
+    Startup = 0,
+    Manager = 1,
+    Pixelate = 2,
+    MainMenu = 3,
+    Gameplay = 4,
+    End = 5,
 }
 
 public class SceneLoader : MonoBehaviour
 {
-    #region Non Serialized
     static SceneLoader _instance;
 
     public static SceneLoader Instance
@@ -36,7 +35,6 @@ public class SceneLoader : MonoBehaviour
             return _instance;
         }
     }
-    #endregion
 
     public Coroutine LoadSceneViaIndex(Scenes scene, Action onLoadingFinished = null)
     {
@@ -75,6 +73,7 @@ public class SceneLoader : MonoBehaviour
     IEnumerator UnloadSceneViaIndexCo(int index, Action onLoadingFinished = null)
     {
         var scene = SceneManager.GetSceneByBuildIndex(index);
+        
         if (!scene.isLoaded)
         {
             onLoadingFinished?.Invoke();

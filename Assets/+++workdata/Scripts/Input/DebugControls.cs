@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 /// <summary> Mostly used for a dialogue speed up or to get to a certain game state more quickly </summary>
 public class DebugControls : MonoBehaviour
@@ -22,6 +23,7 @@ public class DebugControls : MonoBehaviour
         inputActions.Player.Debug7.performed += ctx => CallNum7(num7);
         inputActions.Player.DebugAsterisk.performed += ctx => CallAsteriskEvent();
         inputActions.Player.DebugSlash.performed += ctx => CallSlashEvent();
+        inputActions.Player.Reset.performed += CallResetEvent;
     }
 
     void OnEnable()
@@ -31,6 +33,9 @@ public class DebugControls : MonoBehaviour
     void OnDisable()
     {
         inputActions.Disable();
+        
+        inputActions = new();
+        inputActions.Player.Reset.performed -= CallResetEvent;
     }
 
     public void CallNum7(UnityEvent givenEvent)
@@ -51,4 +56,9 @@ public class DebugControls : MonoBehaviour
         slashEvent?.Invoke();
     }
 
+    
+    public void CallResetEvent(InputAction.CallbackContext ctx)
+    {
+        GameStateManager.ResetGame();
+    }
 }

@@ -9,12 +9,12 @@ public class Dash : Ability
 
     #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    MoveRB moveRB;
+    MovePlayer moveRB;
     #endregion
 
     protected override void OnInitializedInternal()
     {
-        moveRB = SlotManager.PlayerObj.GetComponent<MoveRB>();
+        moveRB = SlotManager.PlayerObj.GetComponent<MovePlayer>();
     }
 
     protected override void DeExecuteInternal()

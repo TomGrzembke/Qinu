@@ -4976,7 +4976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8800807559234233458}
   - component: {fileID: 7313825319390368262}
-  - component: {fileID: 7380229762919659093}
+  - component: {fileID: 6154612333215874295}
   - component: {fileID: 281730897870352152}
   - component: {fileID: 8159841771566686583}
   - component: {fileID: 6498385389996183294}
@@ -5022,7 +5022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharSO>k__BackingField: {fileID: 11400000, guid: fb0575f9dad636a459e80c4a0ee23f6c, type: 2}
---- !u!114 &7380229762919659093
+--- !u!114 &6154612333215874295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5031,7 +5031,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2811716013710717747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f4465234e01c24fb6be9dca09b4247, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ffc0029e0c20be43a396d3b16e0d3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
@@ -5156,9 +5156,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15908335}
+  m_Offset: {x: 0.10813904, y: -0.34243274}
   serializedVersion: 2
-  m_Radius: 2.85
+  m_Radius: 3.0991914
 --- !u!212 &6281397530000882116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5570,28 +5570,52 @@ PrefabInstance:
     m_TransformParent: {fileID: 8800807559234233458}
     m_Modifications:
     - target: {fileID: 1037485291734859549, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037485291734859549, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037485291734859549, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1037485291734859549, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_SpriteTileMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037485291734859549, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 4033260243221036220}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -7.180173
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.49578857
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_Bounds.m_Center.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.5262053
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.864439
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
+      propertyPath: m_Bounds.m_Extent.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2372656900463247186, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
       propertyPath: m_BoneTransforms.Array.size

@@ -34,11 +34,9 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] float slowMoBlendTime = 0.3f;
     [SerializeField] float slowMoBlendTimeScale = .8f;
     #endregion
-
-    #region Non Serialized
+    
     public static MinigameManager Instance;
     Coroutine blendRoutine;
-    #endregion
 
     void Awake()
     {

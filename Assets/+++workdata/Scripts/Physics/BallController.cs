@@ -3,11 +3,9 @@ using UnityEngine;
 /// <summary> Handles the max speed of the ball, is used for speed ups and slow downs </summary>
 public class BallController : RBGetter
 {
-    #region Serialized
     [SerializeField, ShowOnly] float currentSpeed;
     [SerializeField] float maxSpeed;
     [SerializeField] float sfxSpeedMargin = 20;
-    #endregion
 
     protected override void AwakeInternal()
     {

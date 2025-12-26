@@ -6,16 +6,12 @@ using UnityEngine;
 /// <summary> Switches the color of the given assets on character change </summary>
 public class CharSwitch : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] TextMeshProUGUI rightScoreTxt;
     [SerializeField] SpriteRenderer rightArenaSR;
     [SerializeField] SpriteRenderer arenaMiddle;
     [SerializeField] float colorBlendTime = 2;
-    #endregion
 
-    #region Non Serialized
     CharAestheticSettings rightCharAestheticSettings;
-    #endregion
 
     public void BlendColors(List<GameObject> rightPlayers)
     {

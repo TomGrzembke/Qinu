@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/LoadingScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/LoadingScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/NPCs/CharSwitch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/NPCs/CharSwitch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/BallController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/BallController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MoveRB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MoveRB.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/MinigameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/MinigameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,10 +104,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14376">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="14376" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -133,7 +138,8 @@
       <workItem from="1761231072187" duration="819000" />
       <workItem from="1762908713408" duration="3548000" />
       <workItem from="1762970636258" duration="1447000" />
-      <workItem from="1765754344244" duration="3687000" />
+      <workItem from="1765754344244" duration="4349000" />
+      <workItem from="1766016699188" duration="963000" />
     </task>
     <servers />
   </component>
@@ -144,24 +150,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs</url>
-          <line>37</line>
-          <properties documentPath="C:\UnityProjects\SemesterProjects\Qinu\Assets\+++workdata\Scripts\Management\EndLoader.cs" initialLine="37" containingFunctionPresentation="Method 'OnValueChanged'">
-            <startOffsets>
-              <option value="915" />
-            </startOffsets>
-            <endOffsets>
-              <option value="936" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

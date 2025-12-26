@@ -42,7 +42,7 @@ public class MoveRB : RBGetter
         get
         {
             if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
-                return (InputManager.Instance.MousePos - transform.position.RemoveZ());
+                return InputManager.Instance.MousePos - transform.position.RemoveZ();
 
             else if (agent != null && agent.desiredVelocity != Vector3.zero)
                 return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);

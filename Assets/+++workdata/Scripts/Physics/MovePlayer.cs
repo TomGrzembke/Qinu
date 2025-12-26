@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
-public class MoveRB : RBGetter
+public class MovePlayer : RBGetter
 {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] bool disableInputRightclick;

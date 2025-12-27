@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8523064361346453057}
   - component: {fileID: 7953238053786489971}
   - component: {fileID: 3822254324265408848}
+  - component: {fileID: 8040409890454107378}
   - component: {fileID: 3565451610172718577}
   - component: {fileID: 173636337912830749}
   - component: {fileID: 5295608182062773719}
@@ -122,8 +123,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flipSensitivity: 6
-  <FlipState>k__BackingField: 0
-  <MaxScale>k__BackingField: 0
 --- !u!114 &7953238053786489971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,8 +139,6 @@ MonoBehaviour:
   <IsRight>k__BackingField: 0
   stoppingDistance: 2
   goesToDefault: 1
-  followBallY: 1
-  invertY: 0
   dashRandomly: 1
   probabilityPerFrame: 0.001
   moveRB: {fileID: 3822254324265408848}
@@ -163,6 +160,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 173636337912830749}
   disableInputRightclick: 0
+  anim: {fileID: 0}
+--- !u!114 &8040409890454107378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678853848379604295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d16ade466990904ea6e22b9a514a8e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  rb: {fileID: 3565451610172718577}
 --- !u!50 &3565451610172718577
 Rigidbody2D:
   serializedVersion: 4

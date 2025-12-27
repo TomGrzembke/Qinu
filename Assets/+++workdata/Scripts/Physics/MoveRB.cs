@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 public class MoveRB : RBGetter
 {
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] bool disableInputRightclick;
-    [SerializeField] Animator anim;
     
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
@@ -36,13 +34,23 @@ public class MoveRB : RBGetter
     {
         get
         {
-            if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
-                return InputManager.Instance.MousePos - transform.position.RemoveZ();
+            if (agent != null)
+            {
+                Vector2 velocity = agent.desiredVelocity.RemoveZ();
+                return velocity != Vector2.zero ? velocity.Clamp(-1, 1) : Vector2.zero;
+            }
+            
+            if (!inputDisabled)
+            {
+                Vector2 direction = InputManager.Instance.MousePos - transform.position.RemoveZ();
+                
+                if (direction.sqrMagnitude > stoppingDistance * stoppingDistance)
+                {
+                    return direction;
+                }
+            }
 
-            else if (agent != null && agent.desiredVelocity != Vector3.zero)
-                return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
-            else
-                return Vector2.zero;
+            return Vector2.zero;
         }
         private set { }
     }
@@ -51,19 +59,10 @@ public class MoveRB : RBGetter
     {
         charSO = GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
-
-        if (disableInputRightclick)
-            InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
-
-        if (!anim)
-            anim = GetComponent<Animator>();
     }
 
     void OnDisable()
     {
-        if (disableInputRightclick)
-            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
-
         StopAllCoroutines();
         rb.velocity = Vector3.zero;
     }
@@ -95,9 +94,8 @@ public class MoveRB : RBGetter
             if (MoveDir == Vector2.zero)
             {
                 rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-                if (anim)
-                    anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
-                yield return null;
+                yield return new WaitForFixedUpdate();
+
                 continue;
             }
 
@@ -108,10 +106,8 @@ public class MoveRB : RBGetter
                 rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
             }
 
-            if (anim)
-                anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
+            yield return new WaitForFixedUpdate();
 
-            yield return null;
         }
     }
 
@@ -119,7 +115,8 @@ public class MoveRB : RBGetter
     {
         if (!dashEnabled) yield break;
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
+
         moveRoutine = null;
 
         if (dashAutomAim)
@@ -129,9 +126,6 @@ public class MoveRB : RBGetter
 
         if (agent)
             agent.ResetPath();
-
-        if (anim)
-            anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
 
         yield return new WaitForSeconds(dashTime);
 

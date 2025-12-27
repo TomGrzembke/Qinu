@@ -540,6 +540,10 @@ PrefabInstance:
       value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: charSO
       value: 
       objectReference: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
@@ -595,6 +599,10 @@ PrefabInstance:
       propertyPath: <TopTextTarget>k__BackingField
       value: 
       objectReference: {fileID: 5824789347529995988}
+    - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 4987811965207254390}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.31

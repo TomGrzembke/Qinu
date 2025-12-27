@@ -1,15 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MovePlayer : RBGetter
 {
-    [SerializeField] NavMeshAgent agent;
     [SerializeField] bool disableInputRightclick;
-    [SerializeField] Animator anim;
-    
+
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
@@ -36,13 +33,16 @@ public class MovePlayer : RBGetter
     {
         get
         {
-            if (agent == null && !inputDisabled && (InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1).magnitude > stoppingDistance)
-                return InputManager.Instance.MousePos - transform.position.RemoveZ();
+            if (inputDisabled) return Vector2.zero;
 
-            else if (agent != null && agent.desiredVelocity != Vector3.zero)
-                return agent.desiredVelocity.RemoveZ().Clamp(-1, 1);
-            else
+            Vector2 direction = InputManager.Instance.MousePos - transform.position.RemoveZ();
+            
+            if (direction.sqrMagnitude <= stoppingDistance)
+            {
                 return Vector2.zero;
+            }
+
+            return direction;
         }
         private set { }
     }
@@ -54,9 +54,6 @@ public class MovePlayer : RBGetter
 
         if (disableInputRightclick)
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
-
-        if (!anim)
-            anim = GetComponent<Animator>();
     }
 
     void OnDisable()
@@ -71,7 +68,9 @@ public class MovePlayer : RBGetter
     void FixedUpdate()
     {
         if (mouseInput)
-            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
+            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed,
+                moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) /maxSpeedDistance));
+        
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }
@@ -95,9 +94,8 @@ public class MovePlayer : RBGetter
             if (MoveDir == Vector2.zero)
             {
                 rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-                if (anim)
-                    anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
-                yield return null;
+                yield return new WaitForFixedUpdate();
+
                 continue;
             }
 
@@ -105,33 +103,26 @@ public class MovePlayer : RBGetter
 
             if (rb.velocity.magnitude > currentMaxSpeed)
             {
-                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
+                rb.velocity = rb.velocity.normalized * currentMaxSpeed;
             }
+            
+            yield return new WaitForFixedUpdate();
 
-            if (anim)
-                anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
-
-            yield return null;
         }
     }
 
     IEnumerator DashCor()
     {
         if (!dashEnabled) yield break;
-
-        yield return null;
+        
+        yield return new WaitForFixedUpdate();
         moveRoutine = null;
 
         if (dashAutomAim)
             rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
         else
-            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce, ForceMode2D.Impulse);
-
-        if (agent)
-            agent.ResetPath();
-
-        if (anim)
-            anim.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
+            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce,
+                ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashTime);
 
@@ -148,6 +139,5 @@ public class MovePlayer : RBGetter
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
     }
 }

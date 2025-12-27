@@ -5219,6 +5219,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1918158304}
     m_Modifications:
+    - target: {fileID: 222933248188153509, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: smoothAlpha
+      value: 0.066
+      objectReference: {fileID: 0}
     - target: {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Name
       value: '[Player] Qinu'
@@ -5255,6 +5259,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: disableInputRightclick
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6281397530000882116, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Enabled
       value: 0

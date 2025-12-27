@@ -615,6 +615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 6162423594604544534}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25

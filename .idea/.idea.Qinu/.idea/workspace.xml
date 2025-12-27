@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Debug.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Debug/CapFPS.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Debug/CapFPS.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/[Sprite] Pamo.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/[Sprite] Pamo.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Animation/[Sprite] Tessar.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Animation/[Sprite] Tessar.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Anthony.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Anthony.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] BaseCharacter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] BaseCharacter.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Bodi.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Bodi.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Pamo.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Pamo.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Tessar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Char] Tessar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Player] Qinu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Prefabs/[Player] Qinu.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Ability/Abilities/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Ability/Abilities/Dash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MoveRB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MoveRB.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +38,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../PersonalProjects/Pongball/Assets/+++Workdata/Scripts/Player/IndividualFlipperBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../PersonalProjects/Pongball/Assets/+++Workdata/Shader/PixelResSO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/RT_PixelateCalculatorSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Shader/PixelartPlaneOverlay/CamFollowAfterPixel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.domybest.mybox@f3b54077f2/Attributes/MinMaxRangeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.domybest.mybox@f3b54077f2/Extensions/MyExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Zugzwang/Assets/_Workdata/GameWorld/Character/Scripts/AutoMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/2b/ba8bbde9/Camera.cs" root0="SKIP_HIGHLIGHTING" />
@@ -135,6 +155,8 @@
       <workItem from="1762970636258" duration="1447000" />
       <workItem from="1765754344244" duration="4349000" />
       <workItem from="1766016699188" duration="963000" />
+      <workItem from="1766787631884" duration="2493000" />
+      <workItem from="1766790250184" duration="5079000" />
     </task>
     <servers />
   </component>

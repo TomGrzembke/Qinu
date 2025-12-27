@@ -128,6 +128,14 @@ PrefabInstance:
       propertyPath: <TopTextTarget>k__BackingField
       value: 
       objectReference: {fileID: 5824789347529995988}
+    - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 456022883932376987}
+    - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: smoothAlpha
+      value: 0.923
+      objectReference: {fileID: 0}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28315
@@ -264,6 +272,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+--- !u!95 &456022883932376987 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8002069718123910136, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  m_PrefabInstance: {fileID: 7591114480819543139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5023081198252249721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3237137991316426266, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}

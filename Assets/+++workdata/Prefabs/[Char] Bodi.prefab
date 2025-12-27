@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: <TopTextTarget>k__BackingField
       value: 
       objectReference: {fileID: 5824789347529995988}
+    - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 6400950437495545288}
     - target: {fileID: 8154764816718264686, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25

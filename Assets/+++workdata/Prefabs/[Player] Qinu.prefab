@@ -4979,6 +4979,7 @@ GameObject:
   - component: {fileID: 6154612333215874295}
   - component: {fileID: 281730897870352152}
   - component: {fileID: 8159841771566686583}
+  - component: {fileID: 222933248188153509}
   - component: {fileID: 6498385389996183294}
   - component: {fileID: 7119062691497510257}
   - component: {fileID: 6281397530000882116}
@@ -5034,9 +5035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffc0029e0c20be43a396d3b16e0d3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
   disableInputRightclick: 0
-  anim: {fileID: 6061717989868166903}
 --- !u!114 &281730897870352152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,6 +5096,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pSystem: {fileID: 7395996233613215974}
+--- !u!114 &222933248188153509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811716013710717747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d16ade466990904ea6e22b9a514a8e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 6061717989868166903}
+  rb: {fileID: 0}
 --- !u!50 &6498385389996183294
 Rigidbody2D:
   serializedVersion: 4

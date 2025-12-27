@@ -30,7 +30,7 @@ public class GameStateManager : MonoBehaviour
         {
             return;
         }
-        
+
         resetRoutine = Instance.StartCoroutine(Instance.RestartGameCoroutine());
     }
 
@@ -61,31 +61,43 @@ public class GameStateManager : MonoBehaviour
         return sceneRef.GetSceneIndex();
     }
 
+    public void ShowLoadScreen(bool condition)
+    {
+        if (LoadingScreen.Instance == null) return;
+
+        if (condition)
+        {
+            LoadingScreen.Instance.Show(this);
+            return;
+        }
+
+        LoadingScreen.Instance.Hide(this);
+    }
+
     IEnumerator LoadScenesCoroutine(int oldScene, int newScene)
     {
         yield return null;
-        LoadingScreen.Show(this);
+        ShowLoadScreen(true);
         yield return SceneLoader.Instance.LoadSceneViaIndex(newScene);
         yield return SceneLoader.Instance.UnloadSceneViaIndex(oldScene);
-        LoadingScreen.Hide(this);
+        ShowLoadScreen(false);
     }
 
     IEnumerator ReloadGameSceneCoroutine()
     {
-        LoadingScreen.Show(this);
+        ShowLoadScreen(true);
+
         yield return new WaitForSeconds(.3f);
         yield return SceneLoader.Instance.UnloadSceneViaIndex(GetSceneID(Instance.introScene));
         yield return SceneLoader.Instance.LoadSceneViaIndex(GetSceneID(Instance.introScene));
-        LoadingScreen.Hide(this);
+        ShowLoadScreen(false);
     }
 
     IEnumerator RestartGameCoroutine()
     {
-        LoadingScreen.Show(this);
-
+        ShowLoadScreen(true);
         yield return Reset();
-
-        LoadingScreen.Hide(this);
+        ShowLoadScreen(false);
         resetRoutine = null;
     }
 
@@ -97,5 +109,7 @@ public class GameStateManager : MonoBehaviour
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Manager);
 
         yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.Startup);
+        
+        Destroy(gameObject);
     }
 }

@@ -9,10 +9,22 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] float loadingTime = 1;
     [SerializeField] CanvasGroup canvasGroup;
 
-
     static List<object> loadingInstigator = new();
+    public static LoadingScreen Instance;
 
-    void Awake() => OnValidateCall();
+    void OnDestroy()
+    {
+        loadingInstigator.Clear();
+        StopAllCoroutines();
+    }
+
+    void Awake()
+    {
+        Instance = this;
+
+        OnValidateCall();
+        Initialize();
+    }
 
     void OnValidate() => OnValidateCall();
 
@@ -22,32 +34,34 @@ public class LoadingScreen : MonoBehaviour
             canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public static void Show(object instigator)
+    public void Show(object instigator)
     {
         loadingInstigator.Add(instigator);
-        if (ScreenManager.Instance != null)
-            ScreenManager.Instance.LoadingScreen.Show();
+        Show();
     }
 
-    public static void Hide(object instigator)
+    public void Hide(object instigator)
     {
         loadingInstigator.Remove(instigator);
 
-        if (ScreenManager.Instance == null)
-            return;
-
         if (loadingInstigator.Count == 0)
-            ScreenManager.Instance.LoadingScreen.Hide();
+            Hide();
     }
 
     public void Initialize()
     {
+        loadingInstigator.Clear();
+
         if (loadingInstigator.Count > 0)
+        {
             Show();
+        }
     }
 
     public void Show()
     {
+        if (canvasGroup == null) return;
+
         canvasGroup.alpha = 1;
     }
 
@@ -67,7 +81,7 @@ public class LoadingScreen : MonoBehaviour
             time += Time.unscaledDeltaTime;
             canvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
         }
+
         canvasGroup.alpha = 0;
     }
-
 }

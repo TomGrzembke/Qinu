@@ -7,15 +7,10 @@
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_GamePlay/Global Volume Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/EndLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Tournament/TournamentManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/VFX/EmitParticlesOnPlayerLoose.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/VFX/EmitParticlesOnPlayerLoose.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/URP/2DUrp_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/LoadingScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/LoadingScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/SceneLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/ScreenManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/ScreenManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +32,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.domybest.mybox@f3b54077f2/Extensions/MyReflection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.12/Runtime/RendererFeatures/FullScreenPassRendererFeature.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Zugzwang/Assets/_Workdata/GameWorld/Character/Scripts/AutoMove.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/44e21b3bccd141868a07fe9acbd62d68.SourceCodeCombined.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/07eb119eb6bf489084898eccf06816c8.SourceCodeCombined.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/2b/ba8bbde9/Camera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/e3/a7cff781/PropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/37cc348edc804f4cb176b63962c716e7177200/4b/6997c522/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
@@ -112,10 +107,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16720">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="16720" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -151,6 +146,8 @@
       <workItem from="1766787631884" duration="2493000" />
       <workItem from="1766790250184" duration="7978000" />
       <workItem from="1766848041617" duration="5513000" />
+      <workItem from="1766859703832" duration="713000" />
+      <workItem from="1766860438105" duration="1400000" />
     </task>
     <servers />
   </component>

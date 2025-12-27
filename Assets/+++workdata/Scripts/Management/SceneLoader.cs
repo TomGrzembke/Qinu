@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
+
 public enum Scenes
 {
     Startup = 0,
@@ -48,32 +49,37 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneViaIndexCo(int index, Action onLoadingFinished)
     {
-
-        LoadingScreen.Show(this);
+        ShowLoadScreen(true);
         var scene = SceneManager.GetSceneByBuildIndex(index);
         if (scene.isLoaded)
         {
             onLoadingFinished?.Invoke();
-            LoadingScreen.Hide(this);
+            ShowLoadScreen(false);
+
             yield break;
         }
 
         yield return SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
-        LoadingScreen.Hide(this);
+
+        ShowLoadScreen(false);
+
         onLoadingFinished?.Invoke();
     }
+
     public Coroutine UnloadSceneViaIndex(int index, Action onLoadingFinished = null)
     {
         return StartCoroutine(UnloadSceneViaIndexCo(index, onLoadingFinished));
     }
+
     public Coroutine UnloadSceneViaScene(Scene scene, Action onLoadingFinished = null)
     {
         return StartCoroutine(UnloadSceneViaCor(scene, onLoadingFinished));
     }
+
     IEnumerator UnloadSceneViaIndexCo(int index, Action onLoadingFinished = null)
     {
         var scene = SceneManager.GetSceneByBuildIndex(index);
-        
+
         if (!scene.isLoaded)
         {
             onLoadingFinished?.Invoke();
@@ -83,6 +89,7 @@ public class SceneLoader : MonoBehaviour
         yield return SceneManager.UnloadSceneAsync(index);
         onLoadingFinished?.Invoke();
     }
+
     IEnumerator UnloadSceneViaCor(Scene scene, Action onLoadingFinished = null)
     {
         if (!scene.isLoaded)
@@ -95,6 +102,20 @@ public class SceneLoader : MonoBehaviour
         onLoadingFinished?.Invoke();
     }
 
+    public void ShowLoadScreen(bool condition)
+    {
+        if (LoadingScreen.Instance == null) return;
+
+        if (condition)
+        {
+            LoadingScreen.Instance.Show(this);
+            return;
+        }
+        
+        LoadingScreen.Instance.Hide(this);
+    }
+
+
     public static Coroutine LoadScene(Scenes scenes, Action onLoadingFinished = null)
     {
         return Instance.LoadSceneViaIndex(scenes, onLoadingFinished);
@@ -104,10 +125,12 @@ public class SceneLoader : MonoBehaviour
     {
         return Instance.UnloadSceneViaIndex((int)scenes, onLoadingFinished);
     }
+
     public static Coroutine UnloadScene(Scene scene, Action onLoadingFinished = null)
     {
         return Instance.UnloadSceneViaScene(scene, onLoadingFinished);
     }
+
 
 #if UNITY_EDITOR
     [MenuItem("ThisGame/Load Startup Scene")]
@@ -117,5 +140,4 @@ public class SceneLoader : MonoBehaviour
         EditorSceneManager.OpenScene(scene.path, OpenSceneMode.Additive);
     }
 #endif
-
 }

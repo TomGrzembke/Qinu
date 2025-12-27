@@ -11,6 +11,6 @@ public class ScreenManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        loadingScreen.Initialize();
+        //loadingScreen.Initialize();
     }
 }

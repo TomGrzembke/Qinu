@@ -10,6 +10,7 @@ namespace FastScriptReload.Editor.GUI
     [InitializeOnLoad]
     public class ProjectWindowReloadStatusIndicatorDrawer
     {
+    #if UNITY_EDITOR
         private static Texture HelpTexture;
         
         private static bool IsEnabled;
@@ -81,5 +82,6 @@ Please click for more details.")),
                 }
             }
         }
+        #endif
     }
 }

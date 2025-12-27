@@ -115,6 +115,7 @@ public class MovePlayer : RBGetter
     {
         if (!dashEnabled) yield break;
         
+        
         yield return new WaitForFixedUpdate();
         moveRoutine = null;
 

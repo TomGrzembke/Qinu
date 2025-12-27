@@ -3,22 +3,19 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class EmitParticlesOnPlayerLoose : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] float negativeMultiplier = 7;
-    #endregion
 
-    #region Non Serialized
     ParticleSystem particleSys;
     ParticleSystem.EmissionModule emissionModule;
-    #endregion
 
     void Awake()
     {
         particleSys = GetComponent<ParticleSystem>();
         emissionModule = particleSys.emission;
+
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(Emit);
     }

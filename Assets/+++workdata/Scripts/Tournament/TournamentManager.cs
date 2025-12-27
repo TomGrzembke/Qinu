@@ -14,6 +14,7 @@ public class TournamentManager : MonoBehaviour
         AfterGame,
         OutOfGame
     }
+
     public enum GameMode
     {
         Bodi,
@@ -21,7 +22,6 @@ public class TournamentManager : MonoBehaviour
         a2v2
     }
 
-    #region Serialized
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
@@ -32,19 +32,27 @@ public class TournamentManager : MonoBehaviour
     [field: SerializeField] public float WinPoints { get; private set; } = 5;
     [field: SerializeField] public float LoosePoints { get; private set; } = 5;
 
-    #endregion
-
-    #region Non Serialized
     public static TournamentManager Instance;
+
     public event Action<float> OnPlayerMatchEnd;
     GameObject lastPlayed;
     bool firstMatch = true;
     int roundAmount;
-    #endregion
+    
+    
+    private void OnEnable()
+    {
+        Instance = this;
+    }
 
-    void Awake() => Instance = this;
+    private void OnDisable()
+    {
+        if (Instance != this) return;
 
-    void Start()
+        OnPlayerMatchEnd = null;
+    }
+
+    void Awake()
     {
         for (int i = 0; i < AvailableChars.Count; i++)
         {
@@ -272,12 +280,19 @@ public class TournamentManager : MonoBehaviour
         {
             LeftPlayers[1].GetComponent<NPCNav>().GoHome();
         }
-        catch { print("left index 1 error"); }
+        catch
+        {
+            print("left index 1 error");
+        }
+
         try
         {
             RightPlayers[1].GetComponent<NPCNav>().GoHome();
         }
-        catch { print("right index 1 error"); }
+        catch
+        {
+            print("right index 1 error");
+        }
     }
 
     /// <returns>left = 0, right = 1</returns>
@@ -290,9 +305,11 @@ public class TournamentManager : MonoBehaviour
     public Transform GetRandomDefaultTrans(int sideIndex)
     {
         if (sideIndex == 0)
-            return MinigameManager.Instance.DefaultPosLeft[Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)];
+            return MinigameManager.Instance.DefaultPosLeft[
+                Random.Range(0, MinigameManager.Instance.DefaultPosLeft.Length)];
         else
-            return MinigameManager.Instance.DefaultPosRight[Random.Range(0, MinigameManager.Instance.DefaultPosRight.Length)];
+            return MinigameManager.Instance.DefaultPosRight[
+                Random.Range(0, MinigameManager.Instance.DefaultPosRight.Length)];
     }
 
     GameObject GetLowestPlayRate(GameObject exclude = null, GameObject exclude2 = null)
@@ -302,7 +319,8 @@ public class TournamentManager : MonoBehaviour
         for (int i = 1; i < CharStats.Count; i++)
         {
             if (CharStats[i].TimesPlayed == lowestTimesPlayed)
-                if (Random.Range(0, 2) == 0) continue;
+                if (Random.Range(0, 2) == 0)
+                    continue;
 
             if (CharStats[i].TimesPlayed <= lowestTimesPlayed)
             {
@@ -312,6 +330,7 @@ public class TournamentManager : MonoBehaviour
                 lowestPlayRateChar = CharStats[i].CharGO;
             }
         }
+
         return lowestPlayRateChar;
     }
 

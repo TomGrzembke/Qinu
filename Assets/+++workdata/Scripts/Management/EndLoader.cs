@@ -1,3 +1,4 @@
+using System;
 using MyBox;
 using System.Collections;
 using UnityEngine;
@@ -6,15 +7,19 @@ using UnityEngine;
 public class EndLoader : MonoBehaviour
 {
     #region Serialized
+
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
     [field: SerializeField] public Vector3 QinuEndPos { get; private set; }
     [field: SerializeField] public bool WonGame { get; private set; }
+
     #endregion
 
     #region Non Serialized
+
     public static EndLoader Instance;
     float currentScore;
+
     #endregion
 
     void Awake()
@@ -22,9 +27,14 @@ public class EndLoader : MonoBehaviour
         Instance = this;
     }
 
-    IEnumerator Start()
+    // IEnumerator Start()
+    // {
+    //     yield return null;
+    //     TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
+    // }
+
+    void OnEnable()
     {
-        yield return null;
         TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
     }
 
@@ -39,9 +49,9 @@ public class EndLoader : MonoBehaviour
 
         if (currentScore > 0) WonGame = true;
         else WonGame = false;
-        
+
         if (value != -TournamentManager.Instance.LoosePoints && value != TournamentManager.Instance.WinPoints) return;
-        
+
         LoadEnd();
     }
 

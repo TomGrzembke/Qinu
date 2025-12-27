@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class MovePlayer : RBGetter
 {
     [SerializeField] bool disableInputRightclick;
-    [SerializeField] float outOfReachValue = 1;
     [SerializeField] float outOfReachMinTime = 1;
 
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
@@ -35,11 +34,11 @@ public class MovePlayer : RBGetter
     CharSO charSO;
     float currentOutOfReachTime;
 
-    Vector2 collisionPosition;
     int cachedFlipSideX;
     int cachedFlipSideY;
 
     Vector2 collisionDirection;
+    bool isCursorReset;
 
     public Vector2 MoveDir
     {
@@ -47,9 +46,12 @@ public class MovePlayer : RBGetter
         {
             if (inputDisabled) return Vector2.zero;
 
-            if (currentOutOfReachTime > outOfReachMinTime) return Vector2.zero;
+            if (currentOutOfReachTime > outOfReachMinTime)
+            {
+                return Vector2.zero;
+            }
 
-            Vector2 direction = InputManager.Instance.MousePos - transform.position.RemoveZ();
+            Vector2 direction = GetMousePosition() - transform.position.RemoveZ();
 
             if (direction.sqrMagnitude <= stoppingDistance)
             {
@@ -85,6 +87,8 @@ public class MovePlayer : RBGetter
 
         OutOfReachMonitoring();
 
+        SetBackCursorOnConfined();
+
         if (MoveDir == Vector2.zero)
         {
             rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
@@ -98,52 +102,91 @@ public class MovePlayer : RBGetter
         ClampVelocity();
     }
 
+    private void SetBackCursorOnConfined()
+    {
+        if (currentOutOfReachTime <= outOfReachMinTime) return;
+        if (Cursor.visible) return;
+        //if(isCursorReset) return;
+
+        isCursorReset = true;
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        Mouse.current.WarpCursorPosition(screenPosition);
+    }
+
     private void OutOfReachMonitoring()
     {
-        if (collisionPosition == Vector2.zero) return;
+        if (collisionDirection == Vector2.zero) return;
+        var mouseSingleDirection = GetAxisDirection(GetMousePosition() - transform.position.RemoveZ());
 
-        var outOfReach = Vector2.Distance(transform.position, collisionPosition) > outOfReachValue;
-
-        int currentFlipSideX = Mathf.Clamp(transform.position.RemoveZ().x - InputManager.Instance.MousePos.x, -1, 1).RoundToInt();
-
-        if (currentFlipSideX != cachedFlipSideX && cachedFlipSideX != 0)
+        if (collisionDirection.x != 0)
         {
-            currentOutOfReachTime = 0;
-            collisionPosition = Vector2.zero;
-            cachedFlipSideX = 0;
-
-            return;
+            if (mouseSingleDirection.x != collisionDirection.x)
+            {
+                ResetCollisionConstraint();
+            }
         }
-
-        cachedFlipSideX = currentFlipSideX;
-        
-        int currentFlipSideY = Mathf.Clamp(transform.position.RemoveZ().y - InputManager.Instance.MousePos.y, -1, 1).RoundToInt();
-        if (currentFlipSideY != cachedFlipSideY && cachedFlipSideY != 0)
+        else
         {
-            currentOutOfReachTime = 0;
-            collisionPosition = Vector2.zero;
-            cachedFlipSideY = 0;
-
-            return;
-        }
-        
-        cachedFlipSideY = currentFlipSideY;
-        
-        if (outOfReach)
-        {
-            currentOutOfReachTime = 0;
-            collisionPosition = Vector2.zero;
-            return;
+            if (mouseSingleDirection.y != collisionDirection.y)
+            {
+                ResetCollisionConstraint();
+            }
         }
 
         currentOutOfReachTime += Time.deltaTime;
     }
 
+    private void ResetCollisionConstraint()
+    {
+        currentOutOfReachTime = 0;
+        collisionDirection = Vector2.zero;
+
+        isCursorReset = false;
+    }
+
     void CalculateMaxSpeed()
     {
         var mouseDistanceAlpha =
-            Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance;
+            Vector2.Distance(transform.position, GetMousePosition()) / maxSpeedDistance;
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(mouseDistanceAlpha));
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.collider.CompareTag("Puk")) return;
+        
+        if (collisionDirection != Vector2.zero) return;
+
+        collisionDirection = GetSingleAxisDirection(MoveDir);
+    }
+
+    Vector2 GetSingleAxisDirection(Vector2 input)
+    {
+        if (Mathf.Abs(input.x) < Mathf.Abs(input.y))
+        {
+            input.x = 0;
+        }
+        else
+        {
+            input.y = 0;
+        }
+
+        return GetAxisDirection(input);
+    }
+
+    Vector2 GetAxisDirection(Vector2 input)
+    {
+        input = input.Clamp(-1, 1);
+
+        input = input.ToVector2Int();
+
+        return input;
+    }
+
+
+    Vector2 GetMousePosition()
+    {
+        return InputManager.Instance.MousePos;
     }
 
     void ClampVelocity()
@@ -155,6 +198,8 @@ public class MovePlayer : RBGetter
 
     public void Dash()
     {
+        ResetCollisionConstraint();
+
         if (dashCooldownRoutine != null) return;
         dashRoutine = StartCoroutine(DashCor());
     }
@@ -192,23 +237,5 @@ public class MovePlayer : RBGetter
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (collisionPosition != Vector2.zero) return;
-
-        collisionPosition = transform.position;
-
-        collisionDirection = MoveDir.Clamp(-1, 1);
-
-        if (Mathf.Abs(collisionDirection.x)  < Mathf.Abs(collisionDirection.y))
-        {
-            collisionDirection.x = 0;
-        }
-        else
-        {
-            collisionDirection.y = 0;
-        }
     }
 }

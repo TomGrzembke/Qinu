@@ -5383,7 +5383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: outOfReachMinTime
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: disableInputRightclick

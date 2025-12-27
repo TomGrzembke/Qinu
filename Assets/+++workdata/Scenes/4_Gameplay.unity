@@ -3734,6 +3734,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b3c3bc4f5abbba4d9dc4583d5c5a9a9, type: 2}
+    - target: {fileID: 2670882042028567057, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5938573
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670882042028567057, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00529629
+      objectReference: {fileID: 0}
     - target: {fileID: 2903068616902479814, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 4096
@@ -5369,6 +5377,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: outOfReachValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: outOfReachMinTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: disableInputRightclick
       value: 1

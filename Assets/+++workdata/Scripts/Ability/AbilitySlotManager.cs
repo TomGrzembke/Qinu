@@ -39,7 +39,7 @@ public class AbilitySlotManager : MonoBehaviour
 
     public GameObject RemoveRandomAbility()
     {
-        int number = Random.Range(0, AbilitySlots.Length);
+        int number = Random.Range(1, AbilitySlots.Length);
         GameObject prefab = AbilitySlots[number].CurrentAbilityPrefab;
         AbilitySlots[number].ChangeAbilityPrefab(null);
         return prefab;

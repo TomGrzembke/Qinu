@@ -21,7 +21,6 @@ public class MovePlayer : RBGetter
 
     float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
 
-    //bool mouseInput => charSO.CharSettings.CharRigidSettings.MouseInput;
     bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
 
@@ -34,11 +33,7 @@ public class MovePlayer : RBGetter
     CharSO charSO;
     float currentOutOfReachTime;
 
-    int cachedFlipSideX;
-    int cachedFlipSideY;
-
     Vector2 collisionDirection;
-    bool isCursorReset;
 
     public Vector2 MoveDir
     {
@@ -106,31 +101,22 @@ public class MovePlayer : RBGetter
     {
         if (currentOutOfReachTime <= outOfReachMinTime) return;
         if (Cursor.visible) return;
-        //if(isCursorReset) return;
 
-        isCursorReset = true;
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         Mouse.current.WarpCursorPosition(screenPosition);
     }
 
-    private void OutOfReachMonitoring()
+    void OutOfReachMonitoring()
     {
         if (collisionDirection == Vector2.zero) return;
-        var mouseSingleDirection = GetAxisDirection(GetMousePosition() - transform.position.RemoveZ());
+        var relativeMousPos = GetMousePosition() - transform.position.RemoveZ();
+        var mouseSingleDirection = GetAxisDirection(relativeMousPos);
 
-        if (collisionDirection.x != 0)
+        // Dot - means it points in a different direction, 0 would be perpendicular (rechtwinklich)
+        if (Vector2.Dot(mouseSingleDirection, collisionDirection) <= 0)
         {
-            if (mouseSingleDirection.x != collisionDirection.x)
-            {
-                ResetCollisionConstraint();
-            }
-        }
-        else
-        {
-            if (mouseSingleDirection.y != collisionDirection.y)
-            {
-                ResetCollisionConstraint();
-            }
+            ResetCollisionConstraint();
+            return;
         }
 
         currentOutOfReachTime += Time.deltaTime;
@@ -140,8 +126,6 @@ public class MovePlayer : RBGetter
     {
         currentOutOfReachTime = 0;
         collisionDirection = Vector2.zero;
-
-        isCursorReset = false;
     }
 
     void CalculateMaxSpeed()
@@ -153,8 +137,8 @@ public class MovePlayer : RBGetter
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.CompareTag("Puk")) return;
-        
+        if (other.collider.CompareTag("Puk")) return;
+
         if (collisionDirection != Vector2.zero) return;
 
         collisionDirection = GetSingleAxisDirection(MoveDir);

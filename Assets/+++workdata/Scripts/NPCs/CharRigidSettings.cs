@@ -17,7 +17,6 @@ public class CharRigidSettings
 
     [Space(20)]
     [SerializeField,ShowOnly] string mouseInputHeader;
-    [field: SerializeField] public bool MouseInput { get; private set; }
     [field: SerializeField] public float MaxSpeedDistance { get; private set; } = .7f;
     [field: SerializeField] public AnimationCurve MoveCurve { get; private set; } = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [field: SerializeField] public float MinSpeed { get; private set; } = 1f;

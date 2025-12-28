@@ -18,7 +18,6 @@ public class MoveRB : RBGetter
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
     float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
     float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
-    bool mouseInput => charSO.CharSettings.CharRigidSettings.MouseInput;
     bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
 
@@ -69,8 +68,6 @@ public class MoveRB : RBGetter
 
     void FixedUpdate()
     {
-        if (mouseInput)
-            currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(Vector2.Distance(transform.position, InputManager.Instance.MousePos) / maxSpeedDistance));
         if (moveRoutine == null && dashRoutine == null)
             moveRoutine = StartCoroutine(Move());
     }

@@ -27,36 +27,12 @@ public class MovePlayer : RBGetter
     Transform Puk => MinigameManager.Instance.Puk;
     bool inputDisabled;
     float currentMaxSpeed;
-    Coroutine moveRoutine;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
     CharSO charSO;
     float currentOutOfReachTime;
 
     Vector2 collisionDirection;
-
-    public Vector2 MoveDir
-    {
-        get
-        {
-            if (inputDisabled) return Vector2.zero;
-
-            if (currentOutOfReachTime > outOfReachMinTime)
-            {
-                return Vector2.zero;
-            }
-
-            Vector2 direction = GetMousePosition() - transform.position.RemoveZ();
-
-            if (direction.sqrMagnitude <= stoppingDistance)
-            {
-                return Vector2.zero;
-            }
-
-            return direction;
-        }
-        private set { }
-    }
 
     protected override void AwakeInternal()
     {
@@ -76,6 +52,20 @@ public class MovePlayer : RBGetter
         rb.velocity = Vector3.zero;
     }
 
+    public Vector2 GetMoveDir()
+    {
+        if (inputDisabled) return Vector2.zero;
+
+        if (currentOutOfReachTime > outOfReachMinTime) return Vector2.zero;
+
+
+        Vector2 direction = GetMousePosition() - transform.position.RemoveZ();
+
+        if (direction.sqrMagnitude <= stoppingDistance) return Vector2.zero;
+
+        return direction;
+    }
+
     void FixedUpdate()
     {
         if (dashRoutine != null) return;
@@ -84,17 +74,23 @@ public class MovePlayer : RBGetter
 
         SetBackCursorOnConfined();
 
-        if (MoveDir == Vector2.zero)
-        {
-            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-            return;
-        }
-
-        rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
+        if (!Accelerate()) return;
 
         CalculateMaxSpeed();
 
         ClampVelocity();
+    }
+
+    bool Accelerate()
+    {
+        if (GetMoveDir() == Vector2.zero)
+        {
+            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
+            return false;
+        }
+
+        rb.AddForce(GetMoveDir() * acceleration, ForceMode2D.Force);
+        return true;
     }
 
     private void SetBackCursorOnConfined()
@@ -141,7 +137,7 @@ public class MovePlayer : RBGetter
 
         if (collisionDirection != Vector2.zero) return;
 
-        collisionDirection = GetSingleAxisDirection(MoveDir);
+        collisionDirection = GetSingleAxisDirection(GetMoveDir());
     }
 
     Vector2 GetSingleAxisDirection(Vector2 input)

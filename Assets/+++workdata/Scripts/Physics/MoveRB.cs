@@ -1,18 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MoveRB : RBGetter
 {
     [SerializeField] NavMeshAgent agent;
     
-    AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
-    float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
-    float minSpeed => charSO.CharSettings.CharRigidSettings.MinSpeed;
-    float stoppingDistance => charSO.CharSettings.CharRigidSettings.StoppingDistance;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
@@ -22,36 +17,17 @@ public class MoveRB : RBGetter
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
 
     Transform Puk => MinigameManager.Instance.Puk;
-    bool inputDisabled;
     float currentMaxSpeed;
-    Coroutine moveRoutine;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
     CharSO charSO;
 
-    public Vector2 MoveDir
+    public Vector2 GetMoveDir()
     {
-        get
-        {
-            if (agent != null)
-            {
-                Vector2 velocity = agent.desiredVelocity.RemoveZ();
-                return velocity != Vector2.zero ? velocity.Clamp(-1, 1) : Vector2.zero;
-            }
-            
-            if (!inputDisabled)
-            {
-                Vector2 direction = InputManager.Instance.MousePos - transform.position.RemoveZ();
-                
-                if (direction.sqrMagnitude > stoppingDistance * stoppingDistance)
-                {
-                    return direction;
-                }
-            }
-
-            return Vector2.zero;
-        }
-        private set { }
+        if (agent == null) return Vector2.zero;
+        
+        Vector2 velocity = agent.desiredVelocity.RemoveZ();
+        return velocity != Vector2.zero ? velocity.Clamp(-1, 1) : Vector2.zero;
     }
 
     protected override void AwakeInternal()
@@ -68,8 +44,20 @@ public class MoveRB : RBGetter
 
     void FixedUpdate()
     {
-        if (moveRoutine == null && dashRoutine == null)
-            moveRoutine = StartCoroutine(Move());
+        if (dashRoutine != null) return;
+
+        if (GetMoveDir() == Vector2.zero)
+        {
+            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
+            return;
+        }
+
+        rb.AddForce(GetMoveDir() * acceleration, ForceMode2D.Force);
+
+        if (rb.velocity.magnitude > currentMaxSpeed)
+        {
+            rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
+        }
     }
 
     public void Dash()
@@ -78,48 +66,17 @@ public class MoveRB : RBGetter
         dashRoutine = StartCoroutine(DashCor());
     }
 
-    public void DisableInput(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed) return;
-        inputDisabled = !inputDisabled;
-    }
-
-    IEnumerator Move()
-    {
-        while (dashRoutine == null)
-        {
-            if (MoveDir == Vector2.zero)
-            {
-                rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-                yield return new WaitForFixedUpdate();
-
-                continue;
-            }
-
-            rb.AddForce(MoveDir * acceleration, ForceMode2D.Force);
-
-            if (rb.velocity.magnitude > currentMaxSpeed)
-            {
-                rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
-            }
-
-            yield return new WaitForFixedUpdate();
-
-        }
-    }
-
     IEnumerator DashCor()
     {
         if (!dashEnabled) yield break;
 
         yield return new WaitForFixedUpdate();
 
-        moveRoutine = null;
-
         if (dashAutomAim)
             rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
         else
-            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce, ForceMode2D.Impulse);
+            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce,
+                ForceMode2D.Impulse);
 
         if (agent)
             agent.ResetPath();
@@ -139,6 +96,5 @@ public class MoveRB : RBGetter
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
     }
 }

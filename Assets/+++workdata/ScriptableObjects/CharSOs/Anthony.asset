@@ -18,20 +18,18 @@ MonoBehaviour:
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
-      <ProbabilityPerFrame>k__BackingField: 0.001
+      <ProbabilityPerFrame>k__BackingField: 0.000001
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 7
-      <StoppingDistance>k__BackingField: 1
-      <Acceleration>k__BackingField: 10
+      <MaxSpeed>k__BackingField: 5
+      <StoppingDistance>k__BackingField: 0.5
+      <Acceleration>k__BackingField: 50
       <Decceleration>k__BackingField: 10
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 10
-      <DashTime>k__BackingField: 0.1
-      <DashCooldown>k__BackingField: 0.1
-      <DashInput>k__BackingField: 1
+      <DashForce>k__BackingField: 11
+      <DashTime>k__BackingField: 0.2
+      <DashCooldown>k__BackingField: 3
       <DashAutomAim>k__BackingField: 1
       mouseInputHeader: 
-      <MouseInput>k__BackingField: 0
       <MaxSpeedDistance>k__BackingField: 0.7
       <MoveCurve>k__BackingField:
         serializedVersion: 2

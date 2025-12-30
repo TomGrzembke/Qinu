@@ -4,25 +4,33 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    #region Serialized
-    [field: SerializeField] public Vector2 MousePos { get; private set; } 
+    [field: SerializeField] public Vector2 MousePos { get; private set; }
+    [field: SerializeField] public Vector2 MouseDelta { get; private set; }
     [field: SerializeField] public Vector2 MovementVec { get; private set; }
-    [field: SerializeField] public InputAction MoveAction { get; private set; }  
-    [field: SerializeField] public InputAction MousePosAction { get; private set; }  
-    [field: SerializeField] public InputAction LeftclickAction { get; private set; }  
-    [field: SerializeField] public InputAction RightClickAction { get; private set; }  
-    [field: SerializeField] public InputAction Ability0Action { get; private set; }  
-    #endregion
-
-    #region Non Serialized
+    [field: SerializeField] public InputAction MoveAction { get; private set; }
+    [field: SerializeField] public InputAction MousePosAction { get; private set; }
+    [field: SerializeField] public InputAction LeftclickAction { get; private set; }
+    [field: SerializeField] public InputAction RightClickAction { get; private set; }
+    [field: SerializeField] public InputAction Ability0Action { get; private set; }
+    
+    
     public static InputManager Instance;
     PlayerInputActions input;
-    Camera cam;
-    public bool HasMoveInput => MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
+
+    Camera Cam;
+    Camera GetCam()
+    {
+        if (Cam == null) Cam = Camera.main;
+
+        return Cam;
+    }
+
+    public bool HasMoveInput =>
+        MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
+
     bool usedTouch;
-    #endregion
-
-
+    
+    
     void Awake()
     {
         Instance = this;
@@ -39,29 +47,25 @@ public class InputManager : MonoBehaviour
         Ability0Action = input.Player.Ability0;
     }
 
-    void Start()
-    {
-        cam = Camera.main;
-    }
-
     void Movement(Vector2 direction) => MovementVec = direction;
 
-    void MouseInput(Vector2 direction)
+    void MouseInput(Vector2 delta)
     {
-        MousePos = cam.ScreenToWorldPoint(direction);
+        MouseDelta = delta;
+        MousePos = GetCam().ScreenToWorldPoint(delta);
     }
 
     void Update()
     {
-        if (!cam)
-            cam = Camera.main;
-
-        if (cam && !usedTouch)
-            MousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        if (!usedTouch)
+        {
+            MouseDelta = Mouse.current.position.ReadValue();
+            MousePos = GetCam().ScreenToWorldPoint(MouseDelta);
+        }
 
         if (Input.touchCount > 0)
         {
-            MousePos = cam.ScreenToWorldPoint(Input.GetTouch(0).position);
+            MousePos = GetCam().ScreenToWorldPoint(Input.GetTouch(0).position);
             usedTouch = true;
         }
     }
@@ -81,6 +85,7 @@ public class InputManager : MonoBehaviour
     }
 
     #region OnEnable/Disable
+
     void OnEnable()
     {
         input.Enable();
@@ -90,5 +95,6 @@ public class InputManager : MonoBehaviour
     {
         input.Disable();
     }
+
     #endregion
 }

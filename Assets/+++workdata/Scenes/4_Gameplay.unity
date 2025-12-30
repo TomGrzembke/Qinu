@@ -1911,6 +1911,90 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7004819885984797505, guid: ad59ffea9a47deb4fa76b102b2ee854a, type: 3}
   m_PrefabInstance: {fileID: 1884003979}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1427128685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427128686}
+  - component: {fileID: 1427128687}
+  m_Layer: 7
+  m_Name: VirtualMouseDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1427128686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427128685}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1427128687
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427128685}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.2, y: 0.2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!4 &1428660244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4310422259269643853, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
@@ -3750,6 +3834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaVisuals
       objectReference: {fileID: 0}
+    - target: {fileID: 4063315267758958187, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411840656826846758, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3910,6 +3998,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8229564902950262472, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15218942
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229564902950262472, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7169812
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229564902950262472, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Color.r
+      value: 0.15218942
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229564902950262472, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8301546287407327549, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3921,6 +4025,18 @@ PrefabInstance:
     - target: {fileID: 8512932057823229739, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.465271
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775755508404223699, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868779386249628413, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868779386249628413, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8884954733639748135, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Controller
@@ -5398,6 +5514,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: virtualMouseDebug
+      value: 
+      objectReference: {fileID: 1427128686}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: disableInputRightclick
       value: 1
       objectReference: {fileID: 0}
@@ -5407,15 +5527,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7119062691497510257, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Radius
-      value: 3.0991914
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 7119062691497510257, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Offset.x
-      value: 0.10813904
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7119062691497510257, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Offset.y
-      value: -0.34243274
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7377190939817686560, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -6086,6 +6206,7 @@ SceneRoots:
   - {fileID: 1988446126}
   - {fileID: 332062366}
   - {fileID: 1120151241}
+  - {fileID: 1427128686}
   - {fileID: 1062514702}
   - {fileID: 365903683}
   - {fileID: 669689617}

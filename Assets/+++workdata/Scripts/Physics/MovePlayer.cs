@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using MyBox;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MovePlayer : RBGetter
 {
     [SerializeField] bool disableInputRightclick;
     [SerializeField] float outOfReachMinTime = 1;
+    [SerializeField] Transform virtualMouseDebug;
 
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
@@ -34,6 +38,17 @@ public class MovePlayer : RBGetter
 
     Vector2 collisionDirection;
 
+    Volume postProcessVolume;
+    LensDistortion lensDistortion;
+    
+    Camera Cam;
+    Camera GetCam()
+    {
+        if (Cam == null) Cam = Camera.main;
+
+        return Cam;
+    }
+
     protected override void AwakeInternal()
     {
         charSO = GetComponent<CharSOHolder>().CharSO;
@@ -41,6 +56,12 @@ public class MovePlayer : RBGetter
 
         if (disableInputRightclick)
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+    }
+
+    void Start()
+    {
+        postProcessVolume = FindObjectOfType<Volume>();
+        postProcessVolume.profile.TryGet(out lensDistortion);
     }
 
     void OnDisable()
@@ -98,7 +119,7 @@ public class MovePlayer : RBGetter
         if (currentOutOfReachTime <= outOfReachMinTime) return;
         if (Cursor.visible) return;
 
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 screenPosition = GetCam().WorldToScreenPoint(transform.position);
         Mouse.current.WarpCursorPosition(screenPosition);
     }
 
@@ -166,7 +187,52 @@ public class MovePlayer : RBGetter
 
     Vector2 GetMousePosition()
     {
-        return InputManager.Instance.MousePos;
+        var mousePos = GetCam().ScreenToWorldPoint(GetDistortedMouseDelta());
+
+        if (virtualMouseDebug != null)
+        {
+            virtualMouseDebug.position = mousePos.RemoveZ();
+        }
+
+        return mousePos.RemoveZ();
+    }
+
+    Vector2 GetDistortedMouseDelta()
+    {
+        Vector2 rawMousePos = Input.mousePosition;
+
+        if (!lensDistortion.active || lensDistortion.intensity.value == 0)
+        {
+            return rawMousePos;
+        }
+        float width = Screen.width;
+        float height = Screen.height;
+        float aspect = width / height;
+        
+        float intensity = lensDistortion.intensity.value * 0.1f;
+        float xMult = lensDistortion.xMultiplier.value;
+        float yMult = lensDistortion.yMultiplier.value;
+        float scale = lensDistortion.scale.value;
+        Vector2 center = lensDistortion.center.value;
+        
+        Vector2 uv = new Vector2(rawMousePos.x / width, rawMousePos.y / height);
+        Vector2 coord = (uv - center) * 2.0f;
+        coord.x *= aspect;
+
+
+        Vector2 guess = coord / scale; 
+
+        for (int i = 0; i < 2; i++)
+        {
+            float r2 = (guess.x * guess.x * xMult) + (guess.y * guess.y * yMult);
+            float f = 1.0f + r2 * intensity;
+            guess = (coord / scale) / f;
+        }
+        
+        guess.x /= aspect;
+        Vector2 finalUV = (guess * 0.5f) + center;
+
+        return new Vector2(finalUV.x * width, finalUV.y * height);
     }
 
     void ClampVelocity()

@@ -40,8 +40,11 @@ public class MovePlayer : RBGetter
 
     Volume postProcessVolume;
     LensDistortion lensDistortion;
-    
+
+    Vector2 virtualMouseOffset;
+
     Camera Cam;
+
     Camera GetCam()
     {
         if (Cam == null) Cam = Camera.main;
@@ -62,6 +65,8 @@ public class MovePlayer : RBGetter
     {
         postProcessVolume = FindObjectOfType<Volume>();
         postProcessVolume.profile.TryGet(out lensDistortion);
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void OnDisable()
@@ -79,8 +84,7 @@ public class MovePlayer : RBGetter
 
         if (currentOutOfReachTime > outOfReachMinTime) return Vector2.zero;
 
-
-        Vector2 direction = GetMousePosition() - transform.position.RemoveZ();
+        Vector2 direction = GetVirtualMousePosition() - transform.position.RemoveZ();
 
         if (direction.sqrMagnitude <= stoppingDistance) return Vector2.zero;
 
@@ -93,6 +97,8 @@ public class MovePlayer : RBGetter
 
         OutOfReachMonitoring();
 
+        VirtualCursorDebug();
+
         SetBackCursorOnConfined();
 
         if (!Accelerate()) return;
@@ -100,6 +106,13 @@ public class MovePlayer : RBGetter
         CalculateMaxSpeed();
 
         ClampVelocity();
+    }
+
+    private void VirtualCursorDebug()
+    {
+        if (virtualMouseDebug == null) return;
+
+        virtualMouseDebug.position = GetVirtualMousePosition();
     }
 
     bool Accelerate()
@@ -116,17 +129,27 @@ public class MovePlayer : RBGetter
 
     private void SetBackCursorOnConfined()
     {
-        if (currentOutOfReachTime <= outOfReachMinTime) return;
-        if (Cursor.visible) return;
+        if (TryFirstVisibleCursorFrame()) return;
 
-        Vector2 screenPosition = GetCam().WorldToScreenPoint(transform.position);
-        Mouse.current.WarpCursorPosition(screenPosition);
+        if (Cursor.visible) return;
+        if (currentOutOfReachTime <= outOfReachMinTime) return;
+
+        virtualMouseOffset = transform.position.RemoveZ() - GetMousePosition();
+    }
+
+    bool TryFirstVisibleCursorFrame()
+    {
+        if (virtualMouseOffset == Vector2.zero || !Cursor.visible) return false;
+        
+        virtualMouseOffset = Vector2.zero;
+        Mouse.current.WarpCursorPosition(GetCam().WorldToScreenPoint(transform.position));
+        return true;
     }
 
     void OutOfReachMonitoring()
     {
         if (collisionDirection == Vector2.zero) return;
-        var relativeMousPos = GetMousePosition() - transform.position.RemoveZ();
+        var relativeMousPos = GetVirtualMousePosition() - transform.position.RemoveZ();
         var mouseSingleDirection = GetAxisDirection(relativeMousPos);
 
         // Dot - means it points in a different direction, 0 would be perpendicular (rechtwinklich)
@@ -148,7 +171,7 @@ public class MovePlayer : RBGetter
     void CalculateMaxSpeed()
     {
         var mouseDistanceAlpha =
-            Vector2.Distance(transform.position, GetMousePosition()) / maxSpeedDistance;
+            Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance;
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(mouseDistanceAlpha));
     }
 
@@ -184,43 +207,43 @@ public class MovePlayer : RBGetter
         return input;
     }
 
-
     Vector2 GetMousePosition()
     {
-        var mousePos = GetCam().ScreenToWorldPoint(GetDistortedMouseDelta());
+        var mousePos = GetCam().ScreenToWorldPoint(GetDistortedMouseDelta()).RemoveZ();
 
-        if (virtualMouseDebug != null)
-        {
-            virtualMouseDebug.position = mousePos.RemoveZ();
-        }
+        return mousePos;
+    }
 
-        return mousePos.RemoveZ();
+    Vector2 GetVirtualMousePosition()
+    {
+        return GetMousePosition() + virtualMouseOffset;
     }
 
     Vector2 GetDistortedMouseDelta()
     {
-        Vector2 rawMousePos = Input.mousePosition;
+        Vector2 rawMousePos = InputManager.Instance.MouseDelta;
 
         if (!lensDistortion.active || lensDistortion.intensity.value == 0)
         {
             return rawMousePos;
         }
+
         float width = Screen.width;
         float height = Screen.height;
         float aspect = width / height;
-        
+
         float intensity = lensDistortion.intensity.value * 0.1f;
         float xMult = lensDistortion.xMultiplier.value;
         float yMult = lensDistortion.yMultiplier.value;
         float scale = lensDistortion.scale.value;
         Vector2 center = lensDistortion.center.value;
-        
+
         Vector2 uv = new Vector2(rawMousePos.x / width, rawMousePos.y / height);
         Vector2 coord = (uv - center) * 2.0f;
         coord.x *= aspect;
 
 
-        Vector2 guess = coord / scale; 
+        Vector2 guess = coord / scale;
 
         for (int i = 0; i < 2; i++)
         {
@@ -228,7 +251,7 @@ public class MovePlayer : RBGetter
             float f = 1.0f + r2 * intensity;
             guess = (coord / scale) / f;
         }
-        
+
         guess.x /= aspect;
         Vector2 finalUV = (guess * 0.5f) + center;
 

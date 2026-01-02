@@ -115,7 +115,7 @@ public class MovePlayer : RBGetter
     {
         if (TryFirstVisibleCursorFrame()) return;
 
-        if (Cursor.visible) return;
+        if (Cursor.lockState == CursorLockMode.Confined) return;
         if (currentOutOfReachTime <= outOfReachMinTime) return;
 
         virtualMouseOffset = transform.position.RemoveZ() - GetMousePosition();
@@ -123,7 +123,8 @@ public class MovePlayer : RBGetter
 
     bool TryFirstVisibleCursorFrame()
     {
-        if (virtualMouseOffset == Vector2.zero || !Cursor.visible) return false;
+        if (virtualMouseOffset == Vector2.zero) return false;
+        if (Cursor.lockState == CursorLockMode.Locked) return false;
 
         virtualMouseOffset = Vector2.zero;
         return true;

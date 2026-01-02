@@ -136,7 +136,7 @@ public class InputManager : MonoBehaviour
 
     void CalculateMouseDelta()
     {
-        if (!Cursor.visible)
+        if (Cursor.lockState == CursorLockMode.Locked)
         {
             additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier;
             additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier;

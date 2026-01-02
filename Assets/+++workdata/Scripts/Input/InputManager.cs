@@ -15,12 +15,13 @@ public class InputManager : MonoBehaviour
 
     [Header("Cursor Confinement settings")] [SerializeField]
     int deltaSpeedModifier = 20;
+
     [SerializeField] int edgeThreshold = 50;
 
     public static InputManager Instance;
 
     const int CenterGraceDistance = 2;
-    readonly Vector2 StartingVirtualCursorPoint = new (265, 270);
+    readonly Vector2 StartingVirtualCursorPoint = new(265, 270);
 
     PlayerInputActions input;
     Camera Cam;
@@ -55,7 +56,12 @@ public class InputManager : MonoBehaviour
         Ability0Action = input.Player.Ability0;
     }
 
-    void Start()
+    public void InitMainMenu()
+    {
+        ShowCursor();
+    }
+    
+    public void InitGameplayScene()
     {
         MouseDelta = StartingVirtualCursorPoint;
         HideCursor();
@@ -75,6 +81,7 @@ public class InputManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         additionalDelta = MouseDelta;
     }
+
     void Update()
     {
         CalculateMousePos();

@@ -5,18 +5,14 @@ using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Toggle screenToggle;
     [SerializeField] float onSFXChangedCooldown = 0.1f;
-    #endregion
-
-    #region Non Serialized
+    
     Coroutine sfxChangedCoroutine;
     bool sfxEmitSound;
-    #endregion
 
     void Start()
     {
@@ -24,6 +20,7 @@ public class GameSettings : MonoBehaviour
         sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
 
         GetScreenToggle();
+        InputManager.Instance.ShowCursor();
     }
 
     public void OnMusicSliderChanged()

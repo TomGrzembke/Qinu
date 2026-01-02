@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf9382b30a11b3479e9da42129df38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 6
+  cooldown: 20
   abilitySO: {fileID: 11400000, guid: 2d864a0f9387a594da713a502fcab07b, type: 2}
   timesSize: 1.8
-  duration: 3
+  duration: 9

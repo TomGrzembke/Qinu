@@ -13,13 +13,16 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
-    [Header("Cursor Confinement settings")]
-    [SerializeField] int deltaSpeedModifier = 20;
+    [Header("Cursor Confinement settings")] [SerializeField]
+    int deltaSpeedModifier = 20;
     [SerializeField] int edgeThreshold = 50;
 
     public static InputManager Instance;
-    PlayerInputActions input;
 
+    const int CenterGraceDistance = 2;
+    readonly Vector2 StartingVirtualCursorPoint = new (265, 270);
+
+    PlayerInputActions input;
     Camera Cam;
 
     Camera GetCam()
@@ -52,8 +55,26 @@ public class InputManager : MonoBehaviour
         Ability0Action = input.Player.Ability0;
     }
 
+    void Start()
+    {
+        MouseDelta = StartingVirtualCursorPoint;
+        HideCursor();
+    }
+
     void Movement(Vector2 direction) => MovementVec = direction;
 
+    public void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        additionalDelta = MouseDelta;
+    }
     void Update()
     {
         CalculateMousePos();
@@ -70,29 +91,37 @@ public class InputManager : MonoBehaviour
 
         if (usedTouch) return;
 
-        CalculateMouseEdgeDelta();
-
-        MouseDelta = Mouse.current.position.ReadValue() + additionalDelta;
+        CalculateMouseDelta();
         MousePos = GetCam().ScreenToWorldPoint(MouseDelta);
     }
 
-    void CalculateMouseEdgeDelta()
+    void CalculateMouseDelta()
     {
-        if (Cursor.visible)
+        if (!Cursor.visible)
         {
-            additionalDelta = Vector2.zero;
+            additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier;
+            additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier;
+            MouseDelta = additionalDelta;
             return;
         }
 
-        if (!IsCursorAtEdge()) return;
-        
-        additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier;
-        additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier;
+        if (IsCursorAtCenter()) return;
+        MouseDelta = GetTrueMousePosition();
+    }
+
+    bool IsCursorAtCenter()
+    {
+        var newMouseDelta = GetTrueMousePosition();
+        float width = Screen.width;
+        float height = Screen.height;
+        var middle = new Vector2(width / 2, height / 2);
+
+        return Vector2.Distance(newMouseDelta, middle) < CenterGraceDistance;
     }
 
     bool IsCursorAtEdge()
     {
-        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Vector2 mousePos = GetTrueMousePosition();
 
         bool hitLeft = mousePos.x <= edgeThreshold;
         bool hitRight = mousePos.x >= Screen.width - edgeThreshold;
@@ -101,6 +130,11 @@ public class InputManager : MonoBehaviour
         bool atEdge = hitLeft || hitRight || hitBottom || hitTop;
 
         return atEdge;
+    }
+
+    Vector2 GetTrueMousePosition()
+    {
+        return Mouse.current.position.ReadValue();
     }
 
     /// <summary> Takes a Method and an Inputaction to subscribe them</summary>
@@ -116,7 +150,7 @@ public class InputManager : MonoBehaviour
         inputAction.performed -= method;
         inputAction.canceled -= method;
     }
-    
+
 
     void OnEnable()
     {
@@ -127,5 +161,4 @@ public class InputManager : MonoBehaviour
     {
         input.Disable();
     }
-    
 }

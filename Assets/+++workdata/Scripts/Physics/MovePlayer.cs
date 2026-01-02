@@ -65,8 +65,6 @@ public class MovePlayer : RBGetter
     {
         postProcessVolume = FindObjectOfType<Volume>();
         postProcessVolume.profile.TryGet(out lensDistortion);
-
-        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void OnDisable()

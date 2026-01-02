@@ -164,7 +164,9 @@ public class RewardWindow : MonoBehaviour
 
     IEnumerator ShowCoroutine()
     {
-        Cursor.visible = true;
+        InputManager.Instance.ShowCursor();
+
+        
         InAbilitySelect = true;
 
         essentialUI.SetActive(true);
@@ -189,7 +191,8 @@ public class RewardWindow : MonoBehaviour
 
     IEnumerator HideCoroutine()
     {
-        Cursor.visible = false;
+        InputManager.Instance.HideCursor();
+
         rewardWindowCanvasGroup.interactable = false;
         essentialUICanvasGroup.alpha = 0;
         essentialUI.SetActive(true);

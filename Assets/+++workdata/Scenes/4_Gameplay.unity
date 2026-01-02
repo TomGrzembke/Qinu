@@ -1966,7 +1966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1427128686}
   - component: {fileID: 1427128687}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: VirtualMouseDebug
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -5563,17 +5563,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: outOfReachMinTime
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: virtualMouseDebug
       value: 
       objectReference: {fileID: 1427128686}
-    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
-      propertyPath: disableInputRightclick
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6281397530000882116, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Enabled
       value: 0

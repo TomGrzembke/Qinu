@@ -2,8 +2,6 @@ using System.Collections;
 using MyBox;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MovePlayer : RBGetter
@@ -21,9 +19,7 @@ public class MovePlayer : RBGetter
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
     float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
-
     float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
-
     bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
 
@@ -32,16 +28,13 @@ public class MovePlayer : RBGetter
     float currentMaxSpeed;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
+    
     CharSO charSO;
     float currentOutOfReachTime;
-
+    
     Vector2 collisionDirection;
-
-    Volume postProcessVolume;
-    LensDistortion lensDistortion;
-
     Vector2 virtualMouseOffset;
-
+    
     Camera Cam;
 
     Camera GetCam()
@@ -60,12 +53,6 @@ public class MovePlayer : RBGetter
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
     }
 
-    void Start()
-    {
-        postProcessVolume = FindObjectOfType<Volume>();
-        postProcessVolume.profile.TryGet(out lensDistortion);
-    }
-
     void OnDisable()
     {
         if (disableInputRightclick)
@@ -75,13 +62,13 @@ public class MovePlayer : RBGetter
         rb.velocity = Vector3.zero;
     }
 
-    public Vector2 GetMoveDir()
+    Vector2 GetMoveDir()
     {
         if (inputDisabled) return Vector2.zero;
 
         if (currentOutOfReachTime > outOfReachMinTime) return Vector2.zero;
 
-        Vector2 direction = GetVirtualMousePosition() - transform.position.RemoveZ();
+        Vector2 direction = GetRawDirection(GetVirtualMousePosition());
 
         if (direction.sqrMagnitude <= stoppingDistance) return Vector2.zero;
 
@@ -105,7 +92,7 @@ public class MovePlayer : RBGetter
         ClampVelocity();
     }
 
-    private void VirtualCursorDebug()
+    void VirtualCursorDebug()
     {
         if (virtualMouseDebug == null) return;
 
@@ -124,7 +111,7 @@ public class MovePlayer : RBGetter
         return true;
     }
 
-    private void SetBackCursorOnConfined()
+    void SetBackCursorOnConfined()
     {
         if (TryFirstVisibleCursorFrame()) return;
 
@@ -137,19 +124,18 @@ public class MovePlayer : RBGetter
     bool TryFirstVisibleCursorFrame()
     {
         if (virtualMouseOffset == Vector2.zero || !Cursor.visible) return false;
-        
+
         virtualMouseOffset = Vector2.zero;
-        Mouse.current.WarpCursorPosition(GetCam().WorldToScreenPoint(transform.position));
         return true;
     }
 
     void OutOfReachMonitoring()
     {
         if (collisionDirection == Vector2.zero) return;
-        var relativeMousPos = GetVirtualMousePosition() - transform.position.RemoveZ();
+        var relativeMousPos = GetRawDirection(GetVirtualMousePosition());
         var mouseSingleDirection = GetAxisDirection(relativeMousPos);
 
-        // Dot - means it points in a different direction, 0 would be perpendicular (rechtwinklich)
+        // Dot: minus means it points in a different direction, 0 would be perpendicular (rechtwinklich)
         if (Vector2.Dot(mouseSingleDirection, collisionDirection) <= 0)
         {
             ResetCollisionConstraint();
@@ -167,8 +153,7 @@ public class MovePlayer : RBGetter
 
     void CalculateMaxSpeed()
     {
-        var mouseDistanceAlpha =
-            Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance;
+        var mouseDistanceAlpha = Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance;
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(mouseDistanceAlpha));
     }
 
@@ -183,14 +168,8 @@ public class MovePlayer : RBGetter
 
     Vector2 GetSingleAxisDirection(Vector2 input)
     {
-        if (Mathf.Abs(input.x) < Mathf.Abs(input.y))
-        {
-            input.x = 0;
-        }
-        else
-        {
-            input.y = 0;
-        }
+        if (Mathf.Abs(input.x) < Mathf.Abs(input.y)) input.x = 0;
+        else input.y = 0;
 
         return GetAxisDirection(input);
     }
@@ -198,7 +177,6 @@ public class MovePlayer : RBGetter
     Vector2 GetAxisDirection(Vector2 input)
     {
         input = input.Clamp(-1, 1);
-
         input = input.ToVector2Int();
 
         return input;
@@ -206,7 +184,8 @@ public class MovePlayer : RBGetter
 
     Vector2 GetMousePosition()
     {
-        var mousePos = GetCam().ScreenToWorldPoint(GetDistortedMouseDelta()).RemoveZ();
+        var distortedMouseDelta = InputManager.Instance.GetDistortedMouseDelta();
+        var mousePos = GetCam().ScreenToWorldPoint(distortedMouseDelta);
 
         return mousePos;
     }
@@ -214,45 +193,6 @@ public class MovePlayer : RBGetter
     Vector2 GetVirtualMousePosition()
     {
         return GetMousePosition() + virtualMouseOffset;
-    }
-
-    Vector2 GetDistortedMouseDelta()
-    {
-        Vector2 rawMousePos = InputManager.Instance.MouseDelta;
-
-        if (!lensDistortion.active || lensDistortion.intensity.value == 0)
-        {
-            return rawMousePos;
-        }
-
-        float width = Screen.width;
-        float height = Screen.height;
-        float aspect = width / height;
-
-        float intensity = lensDistortion.intensity.value * 0.1f;
-        float xMult = lensDistortion.xMultiplier.value;
-        float yMult = lensDistortion.yMultiplier.value;
-        float scale = lensDistortion.scale.value;
-        Vector2 center = lensDistortion.center.value;
-
-        Vector2 uv = new Vector2(rawMousePos.x / width, rawMousePos.y / height);
-        Vector2 coord = (uv - center) * 2.0f;
-        coord.x *= aspect;
-
-
-        Vector2 guess = coord / scale;
-
-        for (int i = 0; i < 2; i++)
-        {
-            float r2 = (guess.x * guess.x * xMult) + (guess.y * guess.y * yMult);
-            float f = 1.0f + r2 * intensity;
-            guess = (coord / scale) / f;
-        }
-
-        guess.x /= aspect;
-        Vector2 finalUV = (guess * 0.5f) + center;
-
-        return new Vector2(finalUV.x * width, finalUV.y * height);
     }
 
     void ClampVelocity()
@@ -270,7 +210,7 @@ public class MovePlayer : RBGetter
         dashRoutine = StartCoroutine(DashCor());
     }
 
-    public void DisableInput(InputAction.CallbackContext ctx)
+    void DisableInput(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         inputDisabled = !inputDisabled;
@@ -280,18 +220,19 @@ public class MovePlayer : RBGetter
     {
         if (!dashEnabled) yield break;
 
-        yield return new WaitForFixedUpdate();
-
-        if (dashAutomAim)
-            rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
-        else
-            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce,
-                ForceMode2D.Impulse);
+        rb.AddForce(GetDashDirection() * dashForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashTime);
 
         dashCooldownRoutine = StartCoroutine(DashCooldown());
         dashRoutine = null;
+    }
+
+    Vector2 GetDashDirection()
+    {
+        if (dashAutomAim) return GetRawDirection(Puk.position).normalized;
+
+        return GetRawDirection(GetVirtualMousePosition()).normalized;
     }
 
     IEnumerator DashCooldown()
@@ -301,7 +242,9 @@ public class MovePlayer : RBGetter
         dashCooldownRoutine = null;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    /// <summary> Subtracted given vector with transform.pos </summary>
+    Vector2 GetRawDirection(Vector3 vecToCompare)
     {
+        return vecToCompare - transform.position;
     }
 }

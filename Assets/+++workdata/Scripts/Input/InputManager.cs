@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,10 +16,11 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
     [Header("Cursor Confinement settings")] [SerializeField]
-    int deltaSpeedModifier = 20;
+    const int deltaSpeedModifier = 20;
 
     [SerializeField] int edgeThreshold = 50;
-
+    [SerializeField] float virtualMouseYOffset = 3;
+    
     public static InputManager Instance;
 
     const int CenterGraceDistance = 2;
@@ -25,6 +28,36 @@ public class InputManager : MonoBehaviour
 
     PlayerInputActions input;
     Camera Cam;
+    bool usedTouch;
+    Vector2 additionalDelta;
+
+    Volume postProcessVolume;
+    LensDistortion lensDistortion;
+
+
+    /// <summary> Takes a Method and an Inputaction to subscribe them</summary>
+    /// <param name="method"></param>
+    public void SubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
+    {
+        inputAction.performed += method;
+        inputAction.canceled += method;
+    }
+
+    public void DesubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
+    {
+        inputAction.performed -= method;
+        inputAction.canceled -= method;
+    }
+
+    void OnEnable()
+    {
+        input.Enable();
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+    }
 
     Camera GetCam()
     {
@@ -32,13 +65,6 @@ public class InputManager : MonoBehaviour
 
         return Cam;
     }
-
-    public bool HasMoveInput =>
-        MovementVec.magnitude > 0 || LeftclickAction.IsPressed() || RightClickAction.IsPressed();
-
-    bool usedTouch;
-
-    private Vector2 additionalDelta;
 
     void Awake()
     {
@@ -56,11 +82,17 @@ public class InputManager : MonoBehaviour
         Ability0Action = input.Player.Ability0;
     }
 
+    void Start()
+    {
+        postProcessVolume = FindObjectOfType<Volume>();
+        postProcessVolume.profile.TryGet(out lensDistortion);
+    }
+
     public void InitMainMenu()
     {
         ShowCursor();
     }
-    
+
     public void InitGameplayScene()
     {
         MouseDelta = StartingVirtualCursorPoint;
@@ -144,28 +176,41 @@ public class InputManager : MonoBehaviour
         return Mouse.current.position.ReadValue();
     }
 
-    /// <summary> Takes a Method and an Inputaction to subscribe them</summary>
-    /// <param name="method"></param>
-    public void SubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
+    public Vector2 GetDistortedMouseDelta()
     {
-        inputAction.performed += method;
-        inputAction.canceled += method;
-    }
+        var rawMousePos = MouseDelta;
 
-    public void DesubscribeTo(Action<InputAction.CallbackContext> method, InputAction inputAction)
-    {
-        inputAction.performed -= method;
-        inputAction.canceled -= method;
-    }
+        if (!lensDistortion.active || lensDistortion.intensity.value == 0)
+        {
+            return rawMousePos;
+        }
 
+        float width = Screen.width;
+        float height = Screen.height;
+        var aspect = width / height;
 
-    void OnEnable()
-    {
-        input.Enable();
-    }
+        var intensity = lensDistortion.intensity.value * 0.1f;
+        var xMult = lensDistortion.xMultiplier.value;
+        var yMult = -lensDistortion.yMultiplier.value + virtualMouseYOffset;
+        var scale = lensDistortion.scale.value;
+        var center = lensDistortion.center.value;
 
-    void OnDisable()
-    {
-        input.Disable();
+        var uv = new Vector2(rawMousePos.x / width, rawMousePos.y / height);
+        var coord = (uv - center) * 2.0f;
+        coord.x *= aspect;
+
+        Vector2 guess = coord / scale;
+
+        for (int i = 0; i < 2; i++)
+        {
+            var r2 = (guess.x * guess.x * xMult) + (guess.y * guess.y * yMult);
+            var f = 1.0f + r2 * intensity;
+            guess = (coord / scale) / f;
+        }
+
+        guess.x /= aspect;
+        var finalUV = (guess * 0.5f) + center;
+
+        return new Vector2(finalUV.x * width, finalUV.y * height);
     }
 }

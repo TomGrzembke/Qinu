@@ -5035,7 +5035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffc0029e0c20be43a396d3b16e0d3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableInputRightclick: 0
+  disableInputRightclick: 1
+  outOfReachMinTime: 0.4
+  virtualMouseDebug: {fileID: 0}
+  virtualMouseYOffset: 3
 --- !u!114 &281730897870352152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5110,6 +5113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6061717989868166903}
   rb: {fileID: 0}
+  smoothAlpha: 0.5
 --- !u!50 &6498385389996183294
 Rigidbody2D:
   serializedVersion: 4

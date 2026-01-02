@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/0_Startup.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/3_MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/3_MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/VersioningTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/VersioningTracker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +147,7 @@
       <workItem from="1766864933906" duration="10212000" />
       <workItem from="1766960518550" duration="4665000" />
       <workItem from="1767106468841" duration="19757000" />
-      <workItem from="1767373668864" duration="8066000" />
+      <workItem from="1767373668864" duration="8643000" />
     </task>
     <servers />
   </component>

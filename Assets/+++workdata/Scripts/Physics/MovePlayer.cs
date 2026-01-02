@@ -28,13 +28,13 @@ public class MovePlayer : RBGetter
     float currentMaxSpeed;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
-    
+
     CharSO charSO;
     float currentOutOfReachTime;
-    
+
     Vector2 collisionDirection;
     Vector2 virtualMouseOffset;
-    
+
     Camera Cam;
 
     Camera GetCam()
@@ -132,7 +132,12 @@ public class MovePlayer : RBGetter
 
     void OutOfReachMonitoring()
     {
-        if (collisionDirection == Vector2.zero) return;
+        if (collisionDirection == Vector2.zero)
+        {
+            currentOutOfReachTime = 0;
+            return;
+        }
+        
         var relativeMousPos = GetRawDirection(GetVirtualMousePosition());
         var mouseSingleDirection = GetAxisDirection(relativeMousPos);
 
@@ -149,6 +154,17 @@ public class MovePlayer : RBGetter
     private void ResetCollisionConstraint()
     {
         currentOutOfReachTime = 0;
+
+        if (Cursor.lockState == CursorLockMode.Confined)
+        {
+            collisionDirection = Vector2.zero;
+            return;
+        }
+
+        //Makes sure that the player actually moved away from the wall.
+        var moveDirection = GetAxisDirection(GetMoveDir());
+        if (Vector2.Dot(moveDirection, collisionDirection) >= 0) return;
+
         collisionDirection = Vector2.zero;
     }
 
@@ -161,8 +177,6 @@ public class MovePlayer : RBGetter
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("Puk")) return;
-
-        if (collisionDirection != Vector2.zero) return;
 
         collisionDirection = GetSingleAxisDirection(GetMoveDir());
     }

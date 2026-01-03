@@ -12,7 +12,7 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
     public void OnPreprocessBuild(BuildReport report)
     {
         // Find the VersionData file
-        string[] guids = AssetDatabase.FindAssets("t:VersionDataSO");
+        string[] guids = AssetDatabase.FindAssets($"t:{nameof(VersionDataSO)}");
         if (guids.Length == 0)
         {
             Debug.Log(nameof(BuildVersionProcessor) + " Didnt find VersionDataSO");

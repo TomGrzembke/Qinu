@@ -1307,6 +1307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MousePos>k__BackingField: {x: 0, y: 0}
+  <MouseDelta>k__BackingField: {x: 0, y: 0}
   <MovementVec>k__BackingField: {x: 0, y: 0}
   <MoveAction>k__BackingField:
     m_Name: Move
@@ -1353,6 +1354,9 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  deltaSpeedModifier: 20
+  edgeThreshold: 50
+  virtualMouseYOffset: 3
 --- !u!1 &1709975291
 GameObject:
   m_ObjectHideFlags: 0

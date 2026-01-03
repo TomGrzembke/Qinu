@@ -15,9 +15,9 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
-    [Header("Cursor Confinement settings")] [SerializeField]
-    const int deltaSpeedModifier = 20;
-
+    [Header("Cursor Confinement settings")] 
+    
+    [SerializeField] int deltaSpeedModifier = 80;
     [SerializeField] int edgeThreshold = 50;
     [SerializeField] float virtualMouseYOffset = 3;
     

@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/VersionData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/VersionData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +155,7 @@
       <workItem from="1766864933906" duration="10212000" />
       <workItem from="1766960518550" duration="4665000" />
       <workItem from="1767106468841" duration="19757000" />
-      <workItem from="1767373668864" duration="19331000" />
+      <workItem from="1767373668864" duration="20993000" />
     </task>
     <servers />
   </component>

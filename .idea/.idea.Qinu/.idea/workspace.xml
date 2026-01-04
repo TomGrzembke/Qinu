@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="" />
+    <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Ink/SituationalDialogue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Ink/SituationalDialogue.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,6 +154,8 @@
       <workItem from="1766960518550" duration="4665000" />
       <workItem from="1767106468841" duration="19757000" />
       <workItem from="1767373668864" duration="20995000" />
+      <workItem from="1767451502940" duration="571000" />
+      <workItem from="1767547922956" duration="703000" />
     </task>
     <servers />
   </component>

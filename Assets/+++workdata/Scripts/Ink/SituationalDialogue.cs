@@ -4,13 +4,10 @@ using UnityEngine;
 /// <summary> Handles the input from a spawned character and converts the name to a usable default dialogue string </summary>
 public class SituationalDialogue : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] Dictionary<string, int> CharCounts = new();
-    #endregion
 
-    #region Non Serialized
+
     public static SituationalDialogue Instance;
-    #endregion
 
     void Awake()
     {

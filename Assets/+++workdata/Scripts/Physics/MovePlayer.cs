@@ -84,8 +84,8 @@ public class MovePlayer : RBGetter
         VirtualCursorDebug();
 
         SetBackCursorOnConfined();
-
-        if (!Accelerate()) return;
+        
+        Accelerate();
 
         CalculateMaxSpeed();
 
@@ -99,16 +99,22 @@ public class MovePlayer : RBGetter
         virtualMouseDebug.position = GetVirtualMousePosition();
     }
 
-    bool Accelerate()
+    void Accelerate()
     {
+        Vector2 currentVel = rb.velocity;
+
         if (GetMoveDir() == Vector2.zero)
         {
-            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
-            return false;
+            currentVel -= currentVel * decceleration * Time.fixedDeltaTime;
+
+            if (currentVel.magnitude < 0.01f) currentVel = Vector2.zero;
+        }
+        else
+        {
+            currentVel += GetMoveDir() * (acceleration / rb.mass) * Time.fixedDeltaTime;
         }
 
-        rb.AddForce(GetMoveDir() * acceleration, ForceMode2D.Force);
-        return true;
+        rb.velocity = currentVel;
     }
 
     void SetBackCursorOnConfined()
@@ -137,7 +143,7 @@ public class MovePlayer : RBGetter
             currentOutOfReachTime = 0;
             return;
         }
-        
+
         var relativeMousPos = GetRawDirection(GetVirtualMousePosition());
         var mouseSingleDirection = GetAxisDirection(relativeMousPos);
 

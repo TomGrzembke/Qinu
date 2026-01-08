@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/CharSOs/Qinu.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/VersionData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/ScriptableObjects/VersionData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Shader/DefFullScreenComposite.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Shader/DefFullScreenComposite.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +161,7 @@
       <workItem from="1767373668864" duration="20995000" />
       <workItem from="1767451502940" duration="571000" />
       <workItem from="1767547922956" duration="3255000" />
+      <workItem from="1767832255833" duration="3054000" />
     </task>
     <servers />
   </component>

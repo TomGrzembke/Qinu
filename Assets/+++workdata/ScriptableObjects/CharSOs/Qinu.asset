@@ -20,9 +20,9 @@ MonoBehaviour:
       <DashRandomly>k__BackingField: 0
       <ProbabilityPerFrame>k__BackingField: 0.001
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 19
-      <StoppingDistance>k__BackingField: 0.6
-      <Acceleration>k__BackingField: 100
+      <MaxSpeed>k__BackingField: 45
+      <StoppingDistance>k__BackingField: 0.1
+      <Acceleration>k__BackingField: 10000
       <Decceleration>k__BackingField: 20
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 60
@@ -30,7 +30,7 @@ MonoBehaviour:
       <DashCooldown>k__BackingField: 0
       <DashAutomAim>k__BackingField: 1
       mouseInputHeader: 
-      <MaxSpeedDistance>k__BackingField: 17.75
+      <MaxSpeedDistance>k__BackingField: 2
       <MoveCurve>k__BackingField:
         serializedVersion: 2
         m_Curve:
@@ -55,7 +55,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      <MinSpeed>k__BackingField: 5
+      <MinSpeed>k__BackingField: 0.1
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: b3b6fc5487300fd4bb1e2db52a085be1, type: 3}
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.19215688, g: 0.54901963, b: 0.18823531, a: 1}

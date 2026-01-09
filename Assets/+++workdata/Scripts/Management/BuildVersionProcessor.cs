@@ -4,12 +4,12 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class BuildVersionProcessor : IPreprocessBuildWithReport
+public class BuildVersionProcessor : IPostprocessBuildWithReport
 {
     // This ensures it runs before the build
     public int callbackOrder => 0;
 
-    public void OnPreprocessBuild(BuildReport report)
+    public void OnPostprocessBuild(BuildReport report)
     {
         // Find the VersionData file
         string[] guids = AssetDatabase.FindAssets($"t:{nameof(VersionDataSO)}");

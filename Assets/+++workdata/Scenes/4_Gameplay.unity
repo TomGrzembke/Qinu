@@ -4183,6 +4183,10 @@ PrefabInstance:
       value: 2.5938573
       objectReference: {fileID: 0}
     - target: {fileID: 2670882042028567057, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_Offset.x
+      value: 9.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670882042028567057, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Offset.y
       value: -0.00529629
       objectReference: {fileID: 0}
@@ -5881,6 +5885,18 @@ PrefabInstance:
       propertyPath: virtualMouseDebug
       value: 
       objectReference: {fileID: 1427128686}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: cachedDirectionAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: cachedDirectionPercentage
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: maxCachedDirectionPercentage
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6281397530000882116, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: m_Enabled
       value: 0

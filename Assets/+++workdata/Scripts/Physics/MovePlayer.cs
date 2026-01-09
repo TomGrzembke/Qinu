@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using MyBox;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,6 +36,11 @@ public class MovePlayer : RBGetter
     Vector2 collisionDirection;
     Vector2 virtualMouseOffset;
 
+    List<Vector2> cachedDirections = new();
+
+    [SerializeField] float cachedDirectionAmount = 3;
+    [SerializeField] float maxCachedDirectionPercentage = 0.3f;
+
     Camera Cam;
 
     Camera GetCam()
@@ -64,15 +70,55 @@ public class MovePlayer : RBGetter
 
     Vector2 GetMoveDir()
     {
-        if (inputDisabled) return Vector2.zero;
-
-        if (currentOutOfReachTime > outOfReachMinTime) return Vector2.zero;
+        if (inputDisabled) return ResetMoveDirection();
+        
+        if (currentOutOfReachTime > outOfReachMinTime)  return ResetMoveDirection();
 
         Vector2 direction = GetRawDirection(GetVirtualMousePosition());
 
-        if (direction.sqrMagnitude <= stoppingDistance) return Vector2.zero;
+        if (direction.sqrMagnitude <= stoppingDistance) return ResetMoveDirection();
+
+        cachedDirections.Add(direction);
+
+        if (cachedDirections.Count > cachedDirectionAmount)
+        {
+            cachedDirections.Remove(cachedDirections[0]);
+        }
+
+        direction = GetAveragedDirection(direction);
 
         return direction;
+    }
+
+    Vector2 ResetMoveDirection()
+    {
+        cachedDirections.Clear();
+
+        return Vector2.zero;
+    }
+
+    Vector2 GetAveragedDirection(Vector2 direction)
+    {
+        if (cachedDirections.Count == 0) return direction;
+        
+        Vector2 cachedAverage = Vector2.zero;
+
+        for (int i = 0; i < cachedDirections.Count; i++)
+        {
+            cachedAverage += cachedDirections[i];
+        }
+
+        cachedAverage /= cachedDirections.Count;
+
+        var blendAlpha = Mathf.Clamp(GetMouseDistanceAlpha(), 0, maxCachedDirectionPercentage);
+        direction = Vector2.Lerp(direction, cachedAverage, blendAlpha);
+
+        return direction;
+    }
+
+    float GetMouseDistanceAlpha()
+    {
+        return moveCurve.Evaluate(Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance);
     }
 
     void FixedUpdate()
@@ -84,7 +130,7 @@ public class MovePlayer : RBGetter
         VirtualCursorDebug();
 
         SetBackCursorOnConfined();
-        
+
         Accelerate();
 
         CalculateMaxSpeed();
@@ -176,8 +222,7 @@ public class MovePlayer : RBGetter
 
     void CalculateMaxSpeed()
     {
-        var mouseDistanceAlpha = Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance;
-        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, moveCurve.Evaluate(mouseDistanceAlpha));
+        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, GetMouseDistanceAlpha());
     }
 
     private void OnCollisionEnter2D(Collision2D other)

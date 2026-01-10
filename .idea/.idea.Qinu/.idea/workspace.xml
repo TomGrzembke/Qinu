@@ -7,12 +7,6 @@
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/3_MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/3_MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Input/PlayerInputActions.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/GameStateManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/MainMenu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/PauseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/PauseManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +23,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Animation/SpeedAnimInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/BuildVersionProcessor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/SceneCursorInit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/ToggleObjects.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/VersionDataSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/Management/VersioningTracker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/+++workdata/Scripts/PixelHelper/PixelateDataSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -165,7 +160,7 @@
       <workItem from="1767547922956" duration="3255000" />
       <workItem from="1767832255833" duration="4165000" />
       <workItem from="1767915053812" duration="6306000" />
-      <workItem from="1768004682279" duration="3823000" />
+      <workItem from="1768004682279" duration="5088000" />
     </task>
     <servers />
   </component>

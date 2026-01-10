@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
     PlayerInputActions inputActions;
     [SerializeField] GameObject objectToToggle;
     bool paused;
+    CursorLockMode lastCursorState;
 
     void Awake()
     {
@@ -14,6 +15,8 @@ public class PauseManager : MonoBehaviour
         inputActions = new();
 
         inputActions.Player.Pause.performed += ctx => PauseLogic();
+
+        lastCursorState = Cursor.lockState;
     }
 
     public void PauseLogic()
@@ -26,6 +29,7 @@ public class PauseManager : MonoBehaviour
         paused = _paused;
         Time.timeScale = paused ? 0 : 1; //Could slowmow blend this 
 
+
         objectToToggle.SetActive(paused);
 
         HandleCursor();
@@ -35,13 +39,15 @@ public class PauseManager : MonoBehaviour
     {
         if (paused)
         {
+            lastCursorState = Cursor.lockState;
             InputManager.Instance.ShowCursor();
             return;
         }
 
-        if (SceneManager.GetSceneByBuildIndex((int)Scenes.MainMenu).isLoaded) return;
+        if (lastCursorState != CursorLockMode.Locked) return;
 
         InputManager.Instance.HideCursor();
+        lastCursorState = Cursor.lockState;
     }
 
     public void OnEnable()

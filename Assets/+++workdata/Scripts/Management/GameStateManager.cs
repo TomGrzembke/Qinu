@@ -36,16 +36,6 @@ public class GameStateManager : MonoBehaviour
         resetRoutine = Instance.StartCoroutine(Instance.RestartGameCoroutine());
     }
 
-    public static void OptionsWindow()
-    {
-        PauseManager.Instance.PauseLogic();
-    }
-
-    public static void CloseOptionsWindow()
-    {
-        PauseManager.Instance.PauseLogic();
-    }
-
     public static void GoToMainMenu()
     {
         Instance.StartCoroutine(Instance.ToMainMenuCor());

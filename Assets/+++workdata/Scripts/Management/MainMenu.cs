@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -7,15 +6,17 @@ public class MainMenu : MonoBehaviour
     {
         GameStateManager.StartGame();
     }
-    public void OptionsWindow()
-    {
-        GameStateManager.OptionsWindow();
-    }
     
     public void GoToMainMenu()
     {
         GameStateManager.GoToMainMenu();
     }
+    
+    public void Resume()
+    {
+        PauseManager.Instance.PauseLogic(false);
+    }
+    
     public void QuitGame()
     {
         Application.Quit();

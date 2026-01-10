@@ -1,39 +1,49 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-    #region Non Serialized
     public static PauseManager Instance;
     PlayerInputActions inputActions;
+    [SerializeField] GameObject objectToToggle;
     bool paused;
-    #endregion
 
     void Awake()
     {
         Instance = this;
         inputActions = new();
 
-        inputActions.Player.Pause.performed += ctx => PauseButton();
-    }
-
-    void PauseButton()
-    {
-        GameStateManager.OptionsWindow();
+        inputActions.Player.Pause.performed += ctx => PauseLogic();
     }
 
     public void PauseLogic()
     {
-        paused = !paused;
-        Time.timeScale = paused ? 0 : 1;
+        PauseLogic(!paused);
     }
 
-    public void PauseLogic(bool condition)
+    public void PauseLogic(bool _paused)
     {
-        paused = condition;
-        Time.timeScale = paused ? 0 : 1;
+        paused = _paused;
+        Time.timeScale = paused ? 0 : 1; //Could slowmow blend this 
+
+        objectToToggle.SetActive(paused);
+
+        HandleCursor();
     }
 
-    #region OnEnable/Disable
+    void HandleCursor()
+    {
+        if (paused)
+        {
+            InputManager.Instance.ShowCursor();
+            return;
+        }
+
+        if (SceneManager.GetSceneByBuildIndex((int)Scenes.MainMenu).isLoaded) return;
+
+        InputManager.Instance.HideCursor();
+    }
+
     public void OnEnable()
     {
         inputActions.Enable();
@@ -43,5 +53,4 @@ public class PauseManager : MonoBehaviour
     {
         inputActions.Disable();
     }
-    #endregion
 }

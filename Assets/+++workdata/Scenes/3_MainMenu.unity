@@ -6560,9 +6560,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2084748542331431764}
     m_Modifications:
+    - target: {fileID: 513955329955343932, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 513955329955343932, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 513955329955343932, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 513955329955343932, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1747254795765386177, guid: a76193985eb95514ba672ad7082579b1, type: 3}
       propertyPath: m_Name
       value: '[LayoutGroup] Buttons'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439505324403787544, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439505324403787544, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439505324403787544, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439505324403787544, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3550921982225711013, guid: a76193985eb95514ba672ad7082579b1, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6576,6 +6608,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 942601830}
+    - target: {fileID: 3703638541573412018, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703638541573412018, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703638541573412018, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703638541573412018, guid: a76193985eb95514ba672ad7082579b1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4964354085167733419, guid: a76193985eb95514ba672ad7082579b1, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

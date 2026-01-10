@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class MainMenu : MonoBehaviour
     public void OptionsWindow()
     {
         GameStateManager.OptionsWindow();
+    }
+    
+    public void GoToMainMenu()
+    {
+        GameStateManager.GoToMainMenu();
     }
     public void QuitGame()
     {

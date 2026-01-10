@@ -1,6 +1,8 @@
 using System.Collections;
 using MyBox;
+using UnityEditor.SearchService;
 using UnityEngine;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 /// <summary> Used for calling management methods from buttons or in scene besides the Manager scene</summary>
 public class GameStateManager : MonoBehaviour
@@ -46,13 +48,7 @@ public class GameStateManager : MonoBehaviour
 
     public static void GoToMainMenu()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine(Instance.GetSceneID(Instance.introScene),
-            (int)Scenes.MainMenu));
-    }
-
-    public static void ReloadGameScene()
-    {
-        Instance.StartCoroutine(Instance.ReloadGameSceneCoroutine());
+        Instance.StartCoroutine(Instance.ToMainMenuCor());
     }
 
     /// <summary> Depends on the naming (0_Scene)</summary>
@@ -83,25 +79,15 @@ public class GameStateManager : MonoBehaviour
         ShowLoadScreen(false);
     }
 
-    IEnumerator ReloadGameSceneCoroutine()
-    {
-        ShowLoadScreen(true);
-
-        yield return new WaitForSeconds(.3f);
-        yield return SceneLoader.Instance.UnloadSceneViaIndex(GetSceneID(Instance.introScene));
-        yield return SceneLoader.Instance.LoadSceneViaIndex(GetSceneID(Instance.introScene));
-        ShowLoadScreen(false);
-    }
-
     IEnumerator RestartGameCoroutine()
     {
         ShowLoadScreen(true);
-        yield return Reset();
+        yield return ResetCor();
         ShowLoadScreen(false);
         resetRoutine = null;
     }
 
-    IEnumerator Reset()
+    IEnumerator ResetCor()
     {
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.MainMenu);
@@ -109,7 +95,15 @@ public class GameStateManager : MonoBehaviour
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Manager);
 
         yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.Startup);
-        
+
         Destroy(gameObject);
+    }
+    
+    IEnumerator ToMainMenuCor()
+    {
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
+        yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
+        yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.MainMenu);
+
     }
 }

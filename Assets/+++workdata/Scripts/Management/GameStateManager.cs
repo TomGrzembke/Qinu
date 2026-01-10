@@ -1,8 +1,6 @@
 using System.Collections;
 using MyBox;
-using UnityEditor.SearchService;
 using UnityEngine;
-using Scene = UnityEngine.SceneManagement.Scene;
 
 /// <summary> Used for calling management methods from buttons or in scene besides the Manager scene</summary>
 public class GameStateManager : MonoBehaviour

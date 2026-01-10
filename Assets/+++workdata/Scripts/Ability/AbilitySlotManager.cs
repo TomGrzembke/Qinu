@@ -3,16 +3,22 @@ using UnityEngine;
 public class AbilitySlotManager : MonoBehaviour
 {
     #region Serialized
+
     [field: SerializeField] public AbilitySlot[] AbilitySlots { get; private set; }
-    [Header("Ability getter")]
-    [SerializeField] Transform playerObj;
+
+    [Header("Ability getter")] [SerializeField]
+    Transform playerObj;
+
     public Transform PlayerObj => playerObj;
     [field: SerializeField] public Transform Puk { get; private set; }
     [field: SerializeField] public Transform Middle { get; private set; }
+
     #endregion
 
     #region Non Serialized
+
     public static AbilitySlotManager Instance;
+
     #endregion
 
     void Awake() => Instance = this;
@@ -51,7 +57,8 @@ public class AbilitySlotManager : MonoBehaviour
         {
             if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab)
                 break;
-            else if (!AbilitySlots[i].Occupied)
+
+            if (!AbilitySlots[i].Occupied)
             {
                 AbilitySlots[i].ChangeAbilityPrefab(newPrefab);
                 break;
@@ -82,14 +89,14 @@ public class AbilitySlotManager : MonoBehaviour
             }
         }
 
-        if (slotID == 0)
-            return "Q";
-        else if (slotID == 1)
-            return "W";
-        else if (slotID == 2)
-            return "E";
-        else if (slotID == 3)
-            return "R";
+        if (slotID == 0) return "Q";
+
+        if (slotID == 1) return "W";
+
+        if (slotID == 2) return "E";
+
+        if (slotID == 3) return "R";
+
 
         return "Apparently No";
     }

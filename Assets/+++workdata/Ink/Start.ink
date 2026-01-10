@@ -18,7 +18,7 @@ Welcome Qinu! #speaker: Anthony
  
  == Abilities
     ~Event ("ActivateAbilities")
- You will be able to use 4 ability slots. #speaker: Anthony
+ You will be able to use 3 ability slots. #speaker: Anthony
  Here's your first one! #speaker: Anthony
     ~Event ("GainDash")
  -> END

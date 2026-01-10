@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,11 +7,14 @@ using UnityEngine.UI;
 public abstract class Ability : MonoBehaviour
 {
     #region Serialized
+
     [SerializeField] protected float cooldown;
     [SerializeField] protected AbilitySO abilitySO;
+
     #endregion
 
     #region Non Serialized
+
     public AbilitySO AbilitySO => abilitySO;
     public bool IsActive => cooldown > 0;
     GameObject numberObject;
@@ -19,6 +23,7 @@ public abstract class Ability : MonoBehaviour
     Image abilityImageBG;
     Coroutine coolDownCor;
     Animator anim;
+
     #endregion
 
     public void EnterAbility(Image _abilityImage, Image _abilityImageBG, GameObject _numberObject, Animator _anim)
@@ -39,6 +44,7 @@ public abstract class Ability : MonoBehaviour
                 SoundManager.Instance.PlaySound(SoundType.AbilityCooldown);
                 anim.SetTrigger("wobble");
             }
+
             return;
         }
 
@@ -50,12 +56,13 @@ public abstract class Ability : MonoBehaviour
         }
         else
             DeExecuteInternal();
-
     }
+
     public void OnInitialized()
     {
         OnInitializedInternal();
     }
+
     protected abstract void ExecuteInternal();
     protected abstract void DeExecuteInternal();
     protected abstract void OnInitializedInternal();
@@ -73,5 +80,14 @@ public abstract class Ability : MonoBehaviour
 
         numberObject.SetActive(true);
         coolDownCor = null;
+    }
+
+    void OnDestroy()
+    {
+        if (coolDownCor != null)
+            StopCoroutine(coolDownCor);
+        
+        abilityImageBG.fillAmount = 1;
+        abilityImage.fillAmount = 1;
     }
 }

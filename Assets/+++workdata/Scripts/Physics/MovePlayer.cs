@@ -71,8 +71,8 @@ public class MovePlayer : RBGetter
     Vector2 GetMoveDir()
     {
         if (inputDisabled) return ResetMoveDirection();
-        
-        if (currentOutOfReachTime > outOfReachMinTime)  return ResetMoveDirection();
+
+        if (currentOutOfReachTime > outOfReachMinTime) return ResetMoveDirection();
 
         Vector2 direction = GetRawDirection(GetVirtualMousePosition());
 
@@ -100,7 +100,7 @@ public class MovePlayer : RBGetter
     Vector2 GetAveragedDirection(Vector2 direction)
     {
         if (cachedDirections.Count == 0) return direction;
-        
+
         Vector2 cachedAverage = Vector2.zero;
 
         for (int i = 0; i < cachedDirections.Count; i++)
@@ -229,7 +229,10 @@ public class MovePlayer : RBGetter
     {
         if (other.collider.CompareTag("Puk")) return;
 
-        collisionDirection = GetSingleAxisDirection(GetMoveDir());
+        var moveDir = GetMoveDir();
+        if (moveDir == Vector2.zero) return;
+
+        collisionDirection = GetSingleAxisDirection(moveDir);
     }
 
     Vector2 GetSingleAxisDirection(Vector2 input)
@@ -240,11 +243,14 @@ public class MovePlayer : RBGetter
         return GetAxisDirection(input);
     }
 
+    //sign returns -1 if its below 0 and 1 if above
     Vector2 GetAxisDirection(Vector2 input)
     {
         input = input.Clamp(-1, 1);
-        input = input.ToVector2Int();
 
+        if (input.x != 0) input.x = Mathf.Sign(input.x);
+        if (input.y != 0)  input.y = Mathf.Sign(input.y);
+        
         return input;
     }
 

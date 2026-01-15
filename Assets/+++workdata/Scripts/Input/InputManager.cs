@@ -15,12 +15,12 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
-    [Header("Cursor Confinement settings")] 
-    
-    [SerializeField] int deltaSpeedModifier = 80;
+    [Header("Cursor Confinement settings")] [SerializeField]
+    int deltaSpeedModifier = 80;
+
     [SerializeField] int edgeThreshold = 50;
     [SerializeField] float virtualMouseYOffset = 3;
-    
+
     public static InputManager Instance;
 
     const int CenterGraceDistance = 2;
@@ -138,8 +138,8 @@ public class InputManager : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier;
-            additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier;
+            additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier * Time.fixedDeltaTime;
+            additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier * Time.fixedDeltaTime;
             MouseDelta = additionalDelta;
             return;
         }
@@ -171,7 +171,7 @@ public class InputManager : MonoBehaviour
         return atEdge;
     }
 
-    Vector2 GetTrueMousePosition()
+    public Vector2 GetTrueMousePosition()
     {
         return Mouse.current.position.ReadValue();
     }

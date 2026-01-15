@@ -22,7 +22,7 @@ MonoBehaviour:
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 45
       <StoppingDistance>k__BackingField: 0.1
-      <Acceleration>k__BackingField: 10000
+      <Acceleration>k__BackingField: 100000
       <Decceleration>k__BackingField: 20
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 60

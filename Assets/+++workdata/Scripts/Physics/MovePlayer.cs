@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using MyBox;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +39,9 @@ public class MovePlayer : RBGetter
 
     [SerializeField] float cachedDirectionAmount = 3;
     [SerializeField] float maxCachedDirectionPercentage = 0.3f;
+
+    [SerializeField] float cursorResetCooldown = 0.1f;
+     float currentCursorResetCooldown;
 
     Camera Cam;
 
@@ -168,7 +170,14 @@ public class MovePlayer : RBGetter
         if (TryFirstVisibleCursorFrame()) return;
 
         if (Cursor.lockState == CursorLockMode.Confined) return;
+        
+        currentCursorResetCooldown -= Time.deltaTime;
+        currentCursorResetCooldown = Mathf.Clamp(currentCursorResetCooldown, 0, cursorResetCooldown);
+        
         if (currentOutOfReachTime <= outOfReachMinTime) return;
+        if (currentCursorResetCooldown > 0) return;
+
+        currentCursorResetCooldown = cursorResetCooldown;
 
         virtualMouseOffset = transform.position.RemoveZ() - GetMousePosition();
     }
@@ -177,7 +186,7 @@ public class MovePlayer : RBGetter
     {
         if (virtualMouseOffset == Vector2.zero) return false;
         if (Cursor.lockState == CursorLockMode.Locked) return false;
-
+        
         virtualMouseOffset = Vector2.zero;
         return true;
     }
@@ -231,6 +240,8 @@ public class MovePlayer : RBGetter
 
         var moveDir = GetMoveDir();
         if (moveDir == Vector2.zero) return;
+
+        currentOutOfReachTime = 0;
 
         collisionDirection = GetSingleAxisDirection(moveDir);
     }

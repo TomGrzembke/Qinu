@@ -41,7 +41,9 @@ public class MovePlayer : RBGetter
     [SerializeField] float maxCachedDirectionPercentage = 0.3f;
 
     [SerializeField] float cursorResetCooldown = 0.1f;
-     float currentCursorResetCooldown;
+    float currentCursorResetCooldown;
+
+    [SerializeField] private Collider2D extraBallCollider;
 
     Camera Cam;
 
@@ -138,6 +140,8 @@ public class MovePlayer : RBGetter
         CalculateMaxSpeed();
 
         ClampVelocity();
+
+        extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.85f;
     }
 
     void VirtualCursorDebug()
@@ -170,10 +174,10 @@ public class MovePlayer : RBGetter
         if (TryFirstVisibleCursorFrame()) return;
 
         if (Cursor.lockState == CursorLockMode.Confined) return;
-        
+
         currentCursorResetCooldown -= Time.deltaTime;
         currentCursorResetCooldown = Mathf.Clamp(currentCursorResetCooldown, 0, cursorResetCooldown);
-        
+
         if (currentOutOfReachTime <= outOfReachMinTime) return;
         if (currentCursorResetCooldown > 0) return;
 
@@ -186,7 +190,7 @@ public class MovePlayer : RBGetter
     {
         if (virtualMouseOffset == Vector2.zero) return false;
         if (Cursor.lockState == CursorLockMode.Locked) return false;
-        
+
         virtualMouseOffset = Vector2.zero;
         return true;
     }
@@ -260,8 +264,8 @@ public class MovePlayer : RBGetter
         input = input.Clamp(-1, 1);
 
         if (input.x != 0) input.x = Mathf.Sign(input.x);
-        if (input.y != 0)  input.y = Mathf.Sign(input.y);
-        
+        if (input.y != 0) input.y = Mathf.Sign(input.y);
+
         return input;
     }
 

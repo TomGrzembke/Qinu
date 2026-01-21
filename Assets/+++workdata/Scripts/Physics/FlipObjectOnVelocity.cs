@@ -5,23 +5,29 @@ using UnityEngine;
 public class FlipObjectOnVelocity : MonoBehaviour
 {
     #region Serialized
+
     [SerializeField] float timeToFlip = .3f;
     [SerializeField] AnimationCurve flipCurve;
     [SerializeField] float flipSensitivity;
+
     #endregion
 
     #region Non Serialized
+
     public float MaxScale { get; private set; }
     bool FlipState;
     Vector3 localScale;
     Vector3 targetScale;
-    Rigidbody2D rb;
+    [SerializeField] Rigidbody2D rb;
     Coroutine flipRoutine;
+
     #endregion
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+        
         MaxScale = transform.localScale.x;
     }
 
@@ -36,7 +42,6 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
         //Only start if null
         flipRoutine ??= StartCoroutine(Flip());
-
     }
 
     IEnumerator Flip()

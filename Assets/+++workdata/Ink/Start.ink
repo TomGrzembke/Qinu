@@ -1,3 +1,14 @@
+== AmazeIntro
+What is this place? #speaker: Qinu
+Where surpressed feelings end up Qinu. #speaker: Anthony
+ -> END
+ 
+ == AmazeIntro2
+Those noises.. #speaker: Qinu
+Its your theme, do you like it? #speaker: Anthony
+Was made for you #speaker: Anthony
+ -> END
+
 == Welcome
 Welcome Qinu! #speaker: Anthony
     ~Event ("Blocker")

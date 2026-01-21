@@ -141,7 +141,7 @@ public class MovePlayer : RBGetter
 
         ClampVelocity();
 
-        extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.85f;
+        extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.91f;
     }
 
     void VirtualCursorDebug()

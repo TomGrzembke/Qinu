@@ -65,7 +65,7 @@ public class MovePlayer : RBGetter
 
     void OnDisable()
     {
-        if (disableInputRightclick)
+        if (disableInputRightclick && InputManager.Instance != null)
             InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
 
         StopAllCoroutines();
@@ -271,6 +271,8 @@ public class MovePlayer : RBGetter
 
     Vector2 GetMousePosition()
     {
+        if (InputManager.Instance == null) return Vector2.zero;
+        
         var distortedMouseDelta = InputManager.Instance.GetDistortedMouseDelta();
         var mousePos = GetCam().ScreenToWorldPoint(distortedMouseDelta);
 

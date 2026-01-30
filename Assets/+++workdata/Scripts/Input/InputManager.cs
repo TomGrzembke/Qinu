@@ -121,15 +121,6 @@ public class InputManager : MonoBehaviour
 
     void CalculateMousePos()
     {
-        if (Input.touchCount > 0)
-        {
-            MousePos = GetCam().ScreenToWorldPoint(Input.GetTouch(0).position);
-            usedTouch = true;
-            return;
-        }
-
-        if (usedTouch) return;
-
         CalculateMouseDelta();
         MousePos = GetCam().ScreenToWorldPoint(MouseDelta);
     }

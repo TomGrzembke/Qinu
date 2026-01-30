@@ -11,14 +11,15 @@ public class StartupManager : MonoBehaviour
     {
         yield return SceneLoader.LoadScene(Scenes.Manager);
         yield return SceneLoader.LoadScene(Scenes.Pixelate);
+        yield return null;
 
 #if UNITY_EDITOR
         yield return SceneLoader.LoadScene(sceneToLoad);
         yield return UnloadExtraScenes();
-#else
+#else 
         yield return SceneLoader.LoadScene(Scenes.MainMenu);
 #endif
-
+        
         SceneLoader.UnloadScene(Scenes.Startup);
     }
 

@@ -1,14 +1,10 @@
 == AmazeIntro
-What is this place? #speaker: Qinu
-Where surpressed feelings end up Qinu. #speaker: Anthony
+Lets Play! #speaker: Anthony
+
  -> END
  
  == AmazeIntro2
-Lets play something! #speaker: Anthony
- 
-Those noises.. #speaker: Qinu
-Its your theme, do you like it? #speaker: Anthony
-Was made for you #speaker: Anthony
+Surpressed? #speaker: Qinu
  -> END
 
 == Welcome

@@ -72,8 +72,8 @@ public class InputManager : MonoBehaviour
         input = new();
 
         MoveAction = input.Player.Move;
-        MoveAction.performed += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
-        MoveAction.canceled += ctx => Movement(ctx.ReadValue<Vector2>().normalized);
+        MoveAction.performed += ctx => Instance.Movement(ctx.ReadValue<Vector2>().normalized);
+        MoveAction.canceled += ctx => Instance.Movement(ctx.ReadValue<Vector2>().normalized);
 
         MousePosAction = input.Player.MousePos;
 
@@ -84,8 +84,18 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        GetPostProcessVolume();
+    }
+
+    bool GetPostProcessVolume()
+    {
         postProcessVolume = FindObjectOfType<Volume>();
-        postProcessVolume.profile.TryGet(out lensDistortion);
+
+        if (postProcessVolume == null) return false;
+
+        if (!postProcessVolume.profile.TryGet(out lensDistortion)) return false;
+
+        return true;
     }
 
     public void InitMainMenu()
@@ -179,6 +189,9 @@ public class InputManager : MonoBehaviour
     public Vector2 GetDistortedMouseDelta()
     {
         var rawMousePos = MouseDelta;
+
+        if (lensDistortion == null) GetPostProcessVolume();
+        if (lensDistortion == null) return rawMousePos;
 
         if (!lensDistortion.active || lensDistortion.intensity.value == 0)
         {

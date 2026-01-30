@@ -130,7 +130,7 @@ public class MovePlayer : RBGetter
         if (dashRoutine != null) return;
 
         OutOfReachMonitoring();
-
+        
         VirtualCursorDebug();
 
         SetBackCursorOnConfined();
@@ -141,7 +141,8 @@ public class MovePlayer : RBGetter
 
         ClampVelocity();
 
-        extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.85f;
+        if (extraBallCollider != null)
+            extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.85f;
     }
 
     void VirtualCursorDebug()

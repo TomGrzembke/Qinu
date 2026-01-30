@@ -2747,6 +2747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a4ee1aa2394a34bbc71ef1d37905f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a: {fileID: 0}
   <MousePos>k__BackingField: {x: 0, y: 0}
   <MouseDelta>k__BackingField: {x: 0, y: 0}
   <MovementVec>k__BackingField: {x: 0, y: 0}

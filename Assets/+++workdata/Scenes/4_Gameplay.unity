@@ -6021,6 +6021,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+      propertyPath: atext
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154612333215874295, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
       propertyPath: outOfReachValue
       value: 3
       objectReference: {fileID: 0}

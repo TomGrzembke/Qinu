@@ -273,7 +273,7 @@ public class MovePlayer : RBGetter
     Vector2 GetMousePosition()
     {
         var distortedMouseDelta = InputManager.Instance.GetDistortedMouseDelta();
-        var mousePos = GetCam().ScreenToWorldPoint(distortedMouseDelta);
+        var mousePos = GetCam().ScreenToWorldPoint(distortedMouseDelta) - GetCam().transform.position;
 
         return mousePos;
     }

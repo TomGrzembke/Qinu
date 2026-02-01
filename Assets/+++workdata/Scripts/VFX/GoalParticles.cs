@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class GoalParticles : MonoBehaviour
@@ -7,6 +8,8 @@ public class GoalParticles : MonoBehaviour
     [SerializeField] bool leftSide;
     [SerializeField] ParticleSystem goalParticles;
     [field: SerializeField] public ParticleSystem wonParticles { get; private set; }
+
+    [SerializeField]  CinemachineImpulseSource impulseSource;
     #endregion
 
     void OnTriggerEnter2D(Collider2D other)
@@ -15,6 +18,9 @@ public class GoalParticles : MonoBehaviour
 
         minigameManager.Goal(leftSide == true ? 0 : 1, this);
         goalParticles.Play();
+
+        if(impulseSource == null) return;
+        impulseSource.GenerateImpulseAt(impulseSource.transform.position, impulseSource.m_DefaultVelocity * Random.Range(0.2f, 2f));
 
     }
 

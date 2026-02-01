@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="96f80158-856e-4c45-9f48-5d069880b021" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qinu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/1_Manager.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/2_Pixelate.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/AttachToGO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/AttachToGO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scenes/4_Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/Physics/MovePlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/+++workdata/Scripts/VFX/GoalParticles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/+++workdata/Scripts/VFX/GoalParticles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +170,7 @@
       <workItem from="1768468820069" duration="1922000" />
       <workItem from="1769032567442" duration="2227000" />
       <workItem from="1769802216596" duration="3426000" />
-      <workItem from="1769953125508" duration="294000" />
+      <workItem from="1769953125508" duration="2090000" />
     </task>
     <servers />
   </component>

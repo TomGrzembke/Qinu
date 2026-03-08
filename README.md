@@ -20,9 +20,9 @@ WebGL embed at itch.io: [here](https://tom-grzembke.itch.io/qinu)
 
 System | Script | Purpose | 
   --- | --- | --- | 
-DialogueTutorial  | [Read here](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Intro/DialogueTutorial.cs#L111) | Provides a serialized List of "DialogueSegments" to configure the starting dialogue in inspector. |
-MovePlayer | [Read here](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Physics/MovePlayer.cs) | Mouse-based player movement with autostop on wall collision and virtual mouse calculation. |
-RewardWindow | [Read here](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A rewward window that offers abilities to pick. |
+DialogueTutorial  | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Intro/DialogueTutorial.cs#L111) | Provides a serialized List of "DialogueSegments" to configure the starting dialogue in inspector. |
+MovePlayer | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Physics/MovePlayer.cs) | Mouse-based player movement with autostop on wall collision and virtual mouse calculation. |
+RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A rewward window that offers abilities to pick. |
 </div>
 
 ## Additional Info

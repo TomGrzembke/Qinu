@@ -30,6 +30,7 @@ This Project was displayed at [Talk and Play 53](https://www.flickr.com/photos/1
 
 - Release date: 01.07.2024
 - Unity Version: Unity 2022.3.62f3
+- Theres a "[What does Qinu Consist of](https://www.youtube.com/watch?v=UqLftMAHedM)" Video on Yt
 
 ## Packages: 
 - [Deadcows Mybox](https://github.com/Deadcows/MyBox.git) (Editor Utils and Handy Extension Methods)

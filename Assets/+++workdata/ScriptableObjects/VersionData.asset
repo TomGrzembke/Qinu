@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VersionData
   m_EditorClassIdentifier: 
   majorVersion: 0.12
-  minorVersion: 35
+  minorVersion: 36

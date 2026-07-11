@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
 
+/// <summary> Disclaimer: This code was written by tommy after a tutorial for Unity2022.3 and was updated using gemini to Unity 6.5</summary>
 public class PixelatePostProcessPass : ScriptableRenderPass
 {
     RTHandle cameraColorTarget;
@@ -33,7 +35,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
         mainTexID = Shader.PropertyToID("_MainTex");
         m_MainTex = RTHandles.Alloc(mainTexID, name: "_MainTex");
 
-        const FormatUsage usage = FormatUsage.Linear | FormatUsage.Render;
+        const GraphicsFormatUsage usage = GraphicsFormatUsage.Linear | GraphicsFormatUsage.Render;
         if (SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32, usage))
         {
             hdrFormat = GraphicsFormat.B10G11R11_UFloatPack32;
@@ -45,47 +47,64 @@ public class PixelatePostProcessPass : ScriptableRenderPass
             : GraphicsFormat.R8G8B8A8_UNorm;
         }
     }
+    private class PassData { }
 
-    public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+    public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
     {
+        // 1. Fetch camera data and descriptor (replaces OnCameraSetup)
+        UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+        m_Descriptor = cameraData.cameraTargetDescriptor;
+
+        // 2. Volume manager checks
         VolumeStack stack = VolumeManager.instance.stack;
         m_effect = stack.GetComponent<PixelPostProcessComponent>();
 
+        if (m_effect == null || !m_effect.AnyPropertiesIsOverridden())
+            return;
 
-        if (!m_effect.AnyPropertiesIsOverridden()) return;
+        // 3. Fetch active camera color textures
+        UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+        TextureHandle cameraColorTarget = resourceData.activeColorTexture;
 
-        CommandBuffer cmd = CommandBufferPool.Get();
+        if (!cameraColorTarget.IsValid())
+            return;
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("Pixelate")))
+        // 4. Set up Render Graph raster pass (replaces CommandBufferPool.Get & ProfilingScope)
+        using (var builder = renderGraph.AddRasterRenderPass("Pixelate", out PassData passData))
         {
-            SetupPixel();
+            // Tell Render Graph we are reading/writing the camera texture
+            builder.SetRenderAttachment(cameraColorTarget, 0, AccessFlags.ReadWrite);
+            builder.AllowPassCulling(false);
 
-            CalculatePixelScaling();
-            m_composite.SetVector("_Resolution", scaling);
-            m_composite.SetFloat("_OutlineThickness", m_effect.lineSize.value);
-            m_composite.SetFloat("_ColormaskRange", m_effect.colorMaskRange.value);
-            m_composite.SetFloat("_ColorMaskFuziness", m_effect.colorMaskFuzziness.value);
-            m_composite.SetColor("_OutlineColor", m_effect.lineCol.value);
-            m_composite.SetColor("_IgnoreCol", m_effect.ignoreCol.value);
-            m_composite.SetTexture("_MainTex", cameraColorTarget);
+            // 5. This block handles the actual execution using context.cmd
+            builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
+            {
+                // Call your internal script calculations using the graph's safe command buffer
+                // Make sure these helper methods accept context.cmd if they use a command buffer!
+                SetupPixel();
+                CalculatePixelScaling();
 
-            Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
-            //m_composite.SetTexture("_OriginalTex", m_MainTex);
-            m_DefCom.SetTexture("_OriginalTex", m_MainTex);
-            Blitter.BlitCameraTexture(cmd, m_MainTex, cameraColorTarget, m_DefCom, 0);
-            //Blitter.BlitCameraTexture(cmd, cameraColorTarget, m_MainTex, m_composite, 0);
+                // Set material properties
+                m_composite.SetVector("_Resolution", scaling);
+                m_composite.SetFloat("_OutlineThickness", m_effect.lineSize.value);
+                m_composite.SetFloat("_ColormaskRange", m_effect.colorMaskRange.value);
+                m_composite.SetFloat("_ColorMaskFuziness", m_effect.colorMaskFuzziness.value);
+                m_composite.SetColor("_OutlineColor", m_effect.lineCol.value);
+                m_composite.SetColor("_IgnoreCol", m_effect.ignoreCol.value);
+
+                // Render Graph uses standard TextureHandle properties instead of old RTHandles
+                m_composite.SetTexture("_MainTex", cameraColorTarget);
+
+                // First Blit (Camera -> Temporary/MainTex)
+                // Note: Ensure 'm_MainTex' is updated to be a valid TextureHandle or target in your script
+                Blitter.BlitTexture(context.cmd, cameraColorTarget, new Vector4(1, 1, 0, 0), m_composite, 0);
+
+                m_DefCom.SetTexture("_OriginalTex", m_MainTex);
+
+                // Second Blit (Temporary/MainTex -> Camera)
+                Blitter.BlitTexture(context.cmd, m_MainTex, new Vector4(1, 1, 0, 0), m_DefCom, 0);
+            });
         }
-
-        context.ExecuteCommandBuffer(cmd);
-        cmd.Clear();
-
-        CommandBufferPool.Release(cmd);
-    }
-
-
-    public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
-    {
-        m_Descriptor = renderingData.cameraData.cameraTargetDescriptor;
     }
 
     RenderTextureDescriptor GetCompatibleDescriptor()
@@ -117,7 +136,7 @@ public class PixelatePostProcessPass : ScriptableRenderPass
 
         var desc = GetCompatibleDescriptor(targetWidth, targetHeight, hdrFormat);
 
-        RenderingUtils.ReAllocateIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
+        RenderingUtils.ReAllocateHandleIfNeeded(ref m_MainTex, desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_MainTex.name);
     }
 
     void CalculatePixelScaling()

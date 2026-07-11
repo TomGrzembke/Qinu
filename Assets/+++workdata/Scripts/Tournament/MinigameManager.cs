@@ -56,7 +56,7 @@ public class MinigameManager : MonoBehaviour
 
         GoalSound();
 
-        pukRB.velocity = Vector2.zero;
+        pukRB.linearVelocity = Vector2.zero;
         pukRB.transform.position = goalInLeft ? ballResetRight.position : ballResetLeft.position;
 
         PlaySlowMo();
@@ -72,7 +72,7 @@ public class MinigameManager : MonoBehaviour
     /// <summary> Depends on rb velocity</summary>
     void GoalSound()
     {
-        float ballSpeed = pukRB.velocity.magnitude;
+        float ballSpeed = pukRB.linearVelocity.magnitude;
 
         if (ballSpeed < ballSFXSpeed[0])
             SoundManager.Instance.PlaySound(SoundType.GoalShotSoft);

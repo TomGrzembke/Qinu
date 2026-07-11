@@ -51,6 +51,7 @@ Material:
     - _OutlineColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
     - _PixelCount: {r: 559, g: 314.4375, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &1023563809089684273
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -63,4 +64,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 7
+  version: 10

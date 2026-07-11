@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-
-[VolumeComponentMenuForRenderPipeline("Custom/Pixelate", typeof(UniversalRenderPipeline))]
+[VolumeComponentMenu("Custom/Pixelate")]
+[SupportedOnRenderPipeline(typeof(UniversalRenderPipelineAsset))]
 public class PixelPostProcessComponent : VolumeComponent, IPostProcessComponent
 {
-
     public ClampedFloatParameter pixelRes = new(128, 1, 1080, true);
     public ClampedIntParameter lineSize = new(1, 1, 10, true);
     [Header("Outline")]

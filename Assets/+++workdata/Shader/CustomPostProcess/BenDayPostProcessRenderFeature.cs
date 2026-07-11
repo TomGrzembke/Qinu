@@ -18,6 +18,7 @@ public class BenDayPostProcessRenderFeature : ScriptableRendererFeature
     {
         if (renderingData.cameraData.cameraType == CameraType.Game)
         {
+            customPass.ConfigureInput(ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Color);
             renderer.EnqueuePass(customPass);
         }
     }
@@ -35,13 +36,5 @@ public class BenDayPostProcessRenderFeature : ScriptableRendererFeature
         CoreUtils.Destroy(m_defCom);
         CoreUtils.Destroy(compositeMaterial);
     }
-    public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
-    {
-        if (renderingData.cameraData.cameraType == CameraType.Game)
-        {
-            customPass.ConfigureInput(ScriptableRenderPassInput.Depth);
-            customPass.ConfigureInput(ScriptableRenderPassInput.Color);
-            customPass.SetTarget(renderer.cameraColorTargetHandle, renderer.cameraDepthTargetHandle);
-        }
-    }
+   
 }

@@ -89,7 +89,7 @@ public class InputManager : MonoBehaviour
 
     bool GetPostProcessVolume()
     {
-        postProcessVolume = FindObjectOfType<Volume>();
+        postProcessVolume = FindAnyObjectByType<Volume>();
 
         if (postProcessVolume == null) return false;
 

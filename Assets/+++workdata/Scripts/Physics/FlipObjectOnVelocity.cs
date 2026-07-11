@@ -38,7 +38,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     void FlipLogic()
     {
-        if (rb.velocity.magnitude <= flipSensitivity) return;
+        if (rb.linearVelocity.magnitude <= flipSensitivity) return;
 
         //Only start if null
         flipRoutine ??= StartCoroutine(Flip());
@@ -46,7 +46,7 @@ public class FlipObjectOnVelocity : MonoBehaviour
 
     IEnumerator Flip()
     {
-        FlipState = rb.velocity.x > 0;
+        FlipState = rb.linearVelocity.x > 0;
         localScale = transform.localScale;
 
         targetScale = localScale;

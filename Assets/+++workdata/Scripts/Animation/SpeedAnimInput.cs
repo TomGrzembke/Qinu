@@ -41,7 +41,7 @@ public class SpeedAnimInput : MonoBehaviour
 
     void Update()
     {
-        smoothedSpeed = Mathf.Lerp(smoothedSpeed, rb.velocity.magnitude / maxSpeed, smoothAlpha);
+        smoothedSpeed = Mathf.Lerp(smoothedSpeed, rb.linearVelocity.magnitude / maxSpeed, smoothAlpha);
 
         if (!hasSpeedParam) return;
 

@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-[VolumeComponentMenuForRenderPipeline("Custom/BenDayDots", typeof(UniversalRenderPipeline))]
+[VolumeComponentMenu("Custom/BenDayDots")]
+[SupportedOnRenderPipeline(typeof(UniversalRenderPipelineAsset))]
 public class BenDayDotsComponent : VolumeComponent, IPostProcessComponent
 {
     public FloatParameter threshold = new(.9f, true);

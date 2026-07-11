@@ -39,7 +39,7 @@ public class MoveRB : RBGetter
     void OnDisable()
     {
         StopAllCoroutines();
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 
     void FixedUpdate()
@@ -48,15 +48,15 @@ public class MoveRB : RBGetter
 
         if (GetMoveDir() == Vector2.zero)
         {
-            rb.AddForce(rb.velocity * -decceleration, ForceMode2D.Force);
+            rb.AddForce(rb.linearVelocity * -decceleration, ForceMode2D.Force);
             return;
         }
 
         rb.AddForce(GetMoveDir() * acceleration, ForceMode2D.Force);
 
-        if (rb.velocity.magnitude > currentMaxSpeed)
+        if (rb.linearVelocity.magnitude > currentMaxSpeed)
         {
-            rb.velocity = (rb.velocity * Time.deltaTime).normalized * currentMaxSpeed;
+            rb.linearVelocity = (rb.linearVelocity * Time.deltaTime).normalized * currentMaxSpeed;
         }
     }
 

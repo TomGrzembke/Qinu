@@ -18,6 +18,7 @@ public class PixelatePostProcessRenderFeature : ScriptableRendererFeature
     {
         if (renderingData.cameraData.cameraType == CameraType.Game)
         {
+            pixelPass.ConfigureInput(ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Color);
             renderer.EnqueuePass(pixelPass);
         }
     }
@@ -35,15 +36,5 @@ public class PixelatePostProcessRenderFeature : ScriptableRendererFeature
     {
         CoreUtils.Destroy(m_Pixelate);
         CoreUtils.Destroy(m_Composite);
-    }
-
-    public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
-    {
-        if (renderingData.cameraData.cameraType == CameraType.Game)
-        {
-            pixelPass.ConfigureInput(ScriptableRenderPassInput.Depth);
-            pixelPass.ConfigureInput(ScriptableRenderPassInput.Color);
-            pixelPass.SetTarget(renderer.cameraColorTargetHandle, renderer.cameraDepthTargetHandle);
-        }
     }
 }

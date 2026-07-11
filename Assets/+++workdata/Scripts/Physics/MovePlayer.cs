@@ -69,7 +69,7 @@ public class MovePlayer : RBGetter
             InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
 
         StopAllCoroutines();
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 
     Vector2 GetMoveDir()
@@ -142,7 +142,7 @@ public class MovePlayer : RBGetter
         ClampVelocity();
 
         if (extraBallCollider != null)
-            extraBallCollider.enabled = rb.velocity.magnitude > maxSpeed * 0.85f;
+            extraBallCollider.enabled = rb.linearVelocity.magnitude > maxSpeed * 0.85f;
     }
 
     void VirtualCursorDebug()
@@ -154,7 +154,7 @@ public class MovePlayer : RBGetter
 
     void Accelerate()
     {
-        Vector2 currentVel = rb.velocity;
+        Vector2 currentVel = rb.linearVelocity;
 
         if (GetMoveDir() == Vector2.zero)
         {
@@ -167,7 +167,7 @@ public class MovePlayer : RBGetter
             currentVel += GetMoveDir() * (acceleration / rb.mass) * Time.fixedDeltaTime;
         }
 
-        rb.velocity = currentVel;
+        rb.linearVelocity = currentVel;
     }
 
     void SetBackCursorOnConfined()
@@ -285,9 +285,9 @@ public class MovePlayer : RBGetter
 
     void ClampVelocity()
     {
-        if (rb.velocity.magnitude <= currentMaxSpeed) return;
+        if (rb.linearVelocity.magnitude <= currentMaxSpeed) return;
 
-        rb.velocity = rb.velocity.normalized * currentMaxSpeed;
+        rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
     }
 
     public void Dash()

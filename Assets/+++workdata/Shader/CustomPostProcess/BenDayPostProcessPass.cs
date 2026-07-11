@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
 
 [System.Serializable]
@@ -44,7 +45,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
             m_BloomMipDown[i] = RTHandles.Alloc(bloomMipDown[i], name: "_BloomMipDown" + i);
         }
 
-        const FormatUsage usage = FormatUsage.Linear | FormatUsage.Render;
+        const GraphicsFormatUsage usage = GraphicsFormatUsage.Linear | GraphicsFormatUsage.Render;
         if (SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32, usage))
         {
             hdrFormat = GraphicsFormat.B10G11R11_UFloatPack32;
@@ -58,38 +59,43 @@ public class BenDayPostProcessPass : ScriptableRenderPass
         }
     }
 
-    public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+    private class PassData { }
+
+    public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
     {
+        UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+        m_Descriptor = cameraData.cameraTargetDescriptor;
+
         VolumeStack stack = VolumeManager.instance.stack;
         m_effect = stack.GetComponent<BenDayDotsComponent>();
 
-        if (!m_effect.AnyPropertiesIsOverridden()) return;
+        if (m_effect == null || !m_effect.AnyPropertiesIsOverridden())
+            return;
 
-        CommandBuffer cmd = CommandBufferPool.Get();
+        UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+        TextureHandle cameraColor = resourceData.activeColorTexture;
+        TextureHandle cameraDepth = resourceData.activeDepthTexture;
 
-        using (new ProfilingScope(cmd, new ProfilingSampler("BenDayBloom")))
+        if (!cameraColor.IsValid())
+            return;
+
+        using (var builder = renderGraph.AddRasterRenderPass("BenDayBloom", out PassData passData))
         {
-            SetupBloom(cmd, cameraColorTarget);
+            builder.SetRenderAttachment(cameraColor, 0, AccessFlags.Write);
+            builder.AllowPassCulling(false);
 
-            m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
-            m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
-            m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
-            m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
-            m_composite.SetColor("_Tint", m_effect.tint.value);
+            builder.SetRenderFunc((PassData data, RasterGraphContext context) =>
+            {
+                m_composite.SetFloat("_Cutoff", m_effect.dotsCutoff.value);
+                m_composite.SetFloat("_Density", m_effect.dotsDensity.value);
+                m_composite.SetVector("_Direction", m_effect.scrollDirection.value);
+                m_composite.SetFloat("_BloomIntensity", m_effect.intensity.value);
+                m_composite.SetColor("_Tint", m_effect.tint.value);
 
-            SetupDef(cmd, cameraColorTarget);
-            Blitter.BlitCameraTexture(cmd, cameraColorTarget, cameraColorTarget, m_composite, 0);
+                Blitter.BlitTexture(context.cmd, cameraColor, new Vector4(1, 1, 0, 0), m_composite, 0);
+            });
+
         }
-
-        context.ExecuteCommandBuffer(cmd);
-        cmd.Clear();
-
-        CommandBufferPool.Release(cmd);
-    }
-
-    public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
-    {
-        m_Descriptor = renderingData.cameraData.cameraTargetDescriptor;
     }
 
     RenderTextureDescriptor GetCompatibleDescriptor()
@@ -116,7 +122,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
     void SetupBloom(CommandBuffer cmd, RTHandle source)
     {
-        // Start at half—res
+        // Start at halfï¿½res
         int downres = 1;
         int tw = m_Descriptor.width >> downres;
         int th = m_Descriptor.height >> downres;
@@ -126,7 +132,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
         int iterations = Mathf.FloorToInt(Mathf.Log(maxSize, 2f) - 1);
         int mipCount = Mathf.Clamp(iterations, 1, m_effect.maxIterations.value);
 
-        // Pre—filtering parameters
+        // Preï¿½filtering parameters
         float clamp = m_effect.clamp.value;
         float threshold = Mathf.GammaToLinearSpace(m_effect.threshold.value);
         float thresholdKnee = threshold * 0.5f; // Hardcoded soft knee
@@ -143,9 +149,9 @@ public class BenDayPostProcessPass : ScriptableRenderPass
 
         for (int i = 0; i < mipCount; i++)
         {
-            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipUp[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
+            RenderingUtils.ReAllocateHandleIfNeeded(ref m_BloomMipUp[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
                 name: m_BloomMipUp[i].name);
-            RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
+            RenderingUtils.ReAllocateHandleIfNeeded(ref m_BloomMipDown[i], desc, FilterMode.Bilinear, TextureWrapMode.Clamp,
                 name: m_BloomMipDown[i].name);
             desc.width = Mathf.Max(1, desc.width >> 1);
             desc.height = Mathf.Max(1, desc.height >> 1);
@@ -158,9 +164,9 @@ public class BenDayPostProcessPass : ScriptableRenderPass
         var lastDown = m_BloomMipDown[0];
         for (int i = 0; i < mipCount; i++)
         {
-            //Classic two pass gaussian blur — use mipUp as a temporary target
-            //First pass does 2x downsampling +9—tap gaussian
-            //Second pass does 9—tap gaussian using a 5—tap filter +bilinear filtering
+            //Classic two pass gaussian blur ï¿½ use mipUp as a temporary target
+            //First pass does 2x downsampling +9ï¿½tap gaussian
+            //Second pass does 9ï¿½tap gaussian using a 5ï¿½tap filter +bilinear filtering
             Blitter.BlitCameraTexture(cmd, lastDown, m_BloomMipUp[i], RenderBufferLoadAction.DontCare,
                 RenderBufferStoreAction.Store, bloomMaterial, 1);
             Blitter.BlitCameraTexture(cmd, m_BloomMipUp[i], m_BloomMipDown[i], RenderBufferLoadAction.DontCare,
@@ -189,7 +195,7 @@ public class BenDayPostProcessPass : ScriptableRenderPass
     {
         var desc = GetCompatibleDescriptor(m_Descriptor.width, m_Descriptor.height, hdrFormat);
 
-        RenderingUtils.ReAllocateIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
+        RenderingUtils.ReAllocateHandleIfNeeded(ref m_BloomMipDown[0], desc, FilterMode.Point, TextureWrapMode.Clamp, name: m_BloomMipDown[0].name);
 
         //m_DefCom.SetTexture("_OriginalTex", source); //useful when urp sample buffer blit doesnt, display the wanted screen tex
         m_composite.SetTexture("_OriginalTex", m_BloomMipDown[0]);

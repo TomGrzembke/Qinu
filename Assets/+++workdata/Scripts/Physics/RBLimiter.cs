@@ -13,10 +13,10 @@ public class RBLimiter : RBGetter
 
     void FixedUpdate()
     {
-        currentSpeed = rb.velocity.magnitude;
-        if (rb.velocity.magnitude > speedLimit)
+        currentSpeed = rb.linearVelocity.magnitude;
+        if (rb.linearVelocity.magnitude > speedLimit)
         {
-            rb.velocity = rb.velocity.normalized * speedLimit;
+            rb.linearVelocity = rb.linearVelocity.normalized * speedLimit;
         }
     }
 }

@@ -13,24 +13,24 @@ public class BallController : RBGetter
 
     void FixedUpdate()
     {
-        currentSpeed = rb.velocity.magnitude;
+        currentSpeed = rb.linearVelocity.magnitude;
 
-        if (rb.velocity.magnitude > maxSpeed)  
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+        if (rb.linearVelocity.magnitude > maxSpeed)  
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
 
     }
 
     public void AddBallMaxSpeed(float add, bool showImpact = false)
     {
         maxSpeed += add;
-        currentSpeed = rb.velocity.magnitude;
+        currentSpeed = rb.linearVelocity.magnitude;
 
         if (!showImpact) return;
 
         if (currentSpeed + add > 1)
-            rb.velocity = rb.velocity.normalized * (currentSpeed + add);
+            rb.linearVelocity = rb.linearVelocity.normalized * (currentSpeed + add);
         else
-            rb.velocity = rb.velocity.normalized;
+            rb.linearVelocity = rb.linearVelocity.normalized;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

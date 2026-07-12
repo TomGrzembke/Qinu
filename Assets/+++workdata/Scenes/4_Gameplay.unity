@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
-      value: E
+      value: R
       objectReference: {fileID: 0}
     - target: {fileID: 7472891150874132316, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: slotIndex
@@ -2602,7 +2602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
-      value: W
+      value: M
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_fontStyle
@@ -4261,6 +4261,7 @@ MonoBehaviour:
   playerObj: {fileID: 1130039576}
   <Puk>k__BackingField: {fileID: 1183967833}
   <Middle>k__BackingField: {fileID: 971475960}
+  <MiddleStartPosition>k__BackingField: {x: 0, y: 0}
 --- !u!224 &1120480025577778120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5860,6 +5861,10 @@ PrefabInstance:
     - target: {fileID: 2140923976461966759, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_text
+      value: L
       objectReference: {fileID: 0}
     - target: {fileID: 6823277829427038813, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

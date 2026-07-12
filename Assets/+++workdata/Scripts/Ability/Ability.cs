@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,25 +5,17 @@ using UnityEngine.UI;
 /// <summary> The template and function for all abilities </summary>
 public abstract class Ability : MonoBehaviour
 {
-    #region Serialized
-
     [SerializeField] protected float cooldown;
     [SerializeField] protected AbilitySO abilitySO;
 
-    #endregion
-
-    #region Non Serialized
 
     public AbilitySO AbilitySO => abilitySO;
     public bool IsActive => cooldown > 0;
     GameObject numberObject;
-
     Image abilityImage;
     Image abilityImageBG;
     Coroutine coolDownCor;
     Animator anim;
-
-    #endregion
 
     public void EnterAbility(Image _abilityImage, Image _abilityImageBG, GameObject _numberObject, Animator _anim)
     {
@@ -54,18 +45,17 @@ public abstract class Ability : MonoBehaviour
             ExecuteInternal();
             numberObject.SetActive(false);
         }
-        else
-            DeExecuteInternal();
     }
+
 
     public void OnInitialized()
     {
         OnInitializedInternal();
     }
 
-    protected abstract void ExecuteInternal();
-    protected abstract void DeExecuteInternal();
     protected abstract void OnInitializedInternal();
+    protected abstract void ExecuteInternal();
+    protected abstract void CleanupInternal();
 
     IEnumerator Cooldown()
     {
@@ -82,12 +72,22 @@ public abstract class Ability : MonoBehaviour
         coolDownCor = null;
     }
 
-    void OnDestroy()
+    public virtual void Cleanup()
     {
+        CleanupInternal();
+
         if (coolDownCor != null)
+        {
             StopCoroutine(coolDownCor);
-        
+            coolDownCor = null;
+        }
+
         abilityImageBG.fillAmount = 1;
         abilityImage.fillAmount = 1;
+    }
+
+    void OnDestroy()
+    {
+        Cleanup();
     }
 }

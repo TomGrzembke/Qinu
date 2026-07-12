@@ -1,30 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-//The indiviual function for the current ability 
 public class ChangeBallSpeed : Ability
 {
-    #region Serialized
     [SerializeField] float speedAmount = 10;
     [SerializeField] float duration = 3;
-    #endregion
 
-    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Coroutine abilityRoutine;
     BallVFX ballVFX;
     BallController ballController;
-    #endregion
-
-    protected override void DeExecuteInternal()
-    {
-
-    }
+    float currentGivenSpeedAmount;
 
     protected override void ExecuteInternal()
     {
-        if (abilityRoutine == null)
-            abilityRoutine = StartCoroutine(SpeedUpBall());
+        if (abilityRoutine != null) return;
+
+        abilityRoutine = StartCoroutine(SpeedUpBall());
     }
 
     protected override void OnInitializedInternal()
@@ -37,8 +29,22 @@ public class ChangeBallSpeed : Ability
     {
         ballVFX.ChangeSprite(abilitySO.abilitySprite, duration);
         ballController.AddBallMaxSpeed(speedAmount, true);
+        currentGivenSpeedAmount = speedAmount;
+
         yield return new WaitForSeconds(duration);
-        ballController.AddBallMaxSpeed(-speedAmount, false);
+
+        ResetSpeed();
+    }
+
+    protected void ResetSpeed()
+    {
+        ballController.AddBallMaxSpeed(-currentGivenSpeedAmount, false);
+        currentGivenSpeedAmount = 0;
         abilityRoutine = null;
+    }
+
+    protected override void CleanupInternal()
+    {
+        ResetSpeed();
     }
 }

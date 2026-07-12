@@ -48,4 +48,15 @@ public class BallVFX : MonoBehaviour
         ballSR.color = ballCol;
         ballSR.sprite = originalSprite;
     }
+
+    public void StopVisuals()
+    {
+        if (spriteRoutine != null)
+        {
+            StopCoroutine(spriteRoutine);
+        }
+
+        TPVisualVFX.Stop();
+        TPReachedVFX.Stop();
+    }
 }

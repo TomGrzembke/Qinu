@@ -487,6 +487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 173636337912830749, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Acceleration
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1437530471901252514, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Size.x
       value: 2.484753
@@ -692,7 +696,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 7004819885984797505}
     m_Modifications:
     - target: {fileID: 1037485291734859549, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
@@ -720,63 +724,63 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[0]
+      propertyPath: 'm_BoneTransforms.Array.data[0]'
       value: 
       objectReference: {fileID: 4511506544287318348}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[1]
+      propertyPath: 'm_BoneTransforms.Array.data[1]'
       value: 
       objectReference: {fileID: 1370217338415815845}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[2]
+      propertyPath: 'm_BoneTransforms.Array.data[2]'
       value: 
       objectReference: {fileID: 6590752191261745101}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[3]
+      propertyPath: 'm_BoneTransforms.Array.data[3]'
       value: 
       objectReference: {fileID: 655025533578370648}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[4]
+      propertyPath: 'm_BoneTransforms.Array.data[4]'
       value: 
       objectReference: {fileID: 7045264466552366370}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[5]
+      propertyPath: 'm_BoneTransforms.Array.data[5]'
       value: 
       objectReference: {fileID: 5347315230611994255}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[6]
+      propertyPath: 'm_BoneTransforms.Array.data[6]'
       value: 
       objectReference: {fileID: 7091326315333025018}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[7]
+      propertyPath: 'm_BoneTransforms.Array.data[7]'
       value: 
       objectReference: {fileID: 6902415005175791823}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[8]
+      propertyPath: 'm_BoneTransforms.Array.data[8]'
       value: 
       objectReference: {fileID: 2280895796209297319}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[9]
+      propertyPath: 'm_BoneTransforms.Array.data[9]'
       value: 
       objectReference: {fileID: 8767991076064344160}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[10]
+      propertyPath: 'm_BoneTransforms.Array.data[10]'
       value: 
       objectReference: {fileID: 4266048353755753566}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[11]
+      propertyPath: 'm_BoneTransforms.Array.data[11]'
       value: 
       objectReference: {fileID: 9031729343829021844}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[12]
+      propertyPath: 'm_BoneTransforms.Array.data[12]'
       value: 
       objectReference: {fileID: 6661945922866881613}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[13]
+      propertyPath: 'm_BoneTransforms.Array.data[13]'
       value: 
       objectReference: {fileID: 365661124834541560}
     - target: {fileID: 2372656900463247186, guid: cd42c452505ff86408158bceb51e834f, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[14]
+      propertyPath: 'm_BoneTransforms.Array.data[14]'
       value: 
       objectReference: {fileID: 5588211462597519233}
     - target: {fileID: 3237137991316426266, guid: cd42c452505ff86408158bceb51e834f, type: 3}
@@ -850,7 +854,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &4987811965207254390
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -864,6 +868,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-//The indiviual function for the current ability 
 public class MoveMiddle : Ability
 {
-    #region Serialized
     [SerializeField] float spaceToAdd = 3;
 
     [Header("Time")]
@@ -12,30 +10,22 @@ public class MoveMiddle : Ability
     [SerializeField] float timeToLerpTo = 1;
     [SerializeField] float timeToLerpBack = 3;
 
-    #endregion
-
-    #region Non Serialized
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     Vector3 fromPos;
     Vector3 toPos;
     Coroutine abilityRoutine;
-    #endregion
-
-    protected override void DeExecuteInternal()
-    {
-        SlotManager.Middle.position = fromPos;
-    }
 
     protected override void ExecuteInternal()
     {
-        if (abilityRoutine == null)
-            abilityRoutine = StartCoroutine(TPBall());
+        if (abilityRoutine != null) return;
+
+        abilityRoutine = StartCoroutine(TPBall());
     }
 
     protected override void OnInitializedInternal()
     {
-        fromPos = SlotManager.Middle.position;
-        toPos = SlotManager.Middle.position.Add(spaceToAdd, 0);
+        fromPos = SlotManager.MiddleStartPosition;
+        toPos = SlotManager.MiddleStartPosition.Add(spaceToAdd, 0);
     }
 
     IEnumerator TPBall()
@@ -44,7 +34,7 @@ public class MoveMiddle : Ability
 
         while (lerpTime < timeToLerpTo)
         {
-            SlotManager.Middle.position = Vector3.Lerp(fromPos, toPos, (lerpTime / timeToLerpTo));
+            SlotManager.Middle.position = Vector3.Lerp(fromPos, toPos, lerpTime / timeToLerpTo);
             lerpTime += Time.deltaTime;
             yield return null;
         }
@@ -55,12 +45,17 @@ public class MoveMiddle : Ability
 
         while (lerpTime < timeToLerpBack)
         {
-            SlotManager.Middle.position = Vector3.Lerp(toPos, fromPos, (lerpTime / timeToLerpBack));
+            SlotManager.Middle.position = Vector3.Lerp(toPos, fromPos, lerpTime / timeToLerpBack);
             lerpTime += Time.deltaTime;
             yield return null;
         }
 
         abilityRoutine = null;
+    }
 
+    protected override void CleanupInternal()
+    {
+        // SlotManager.Middle.position = fromPos;
+        //Fix Qinu being on the right and no snapback problem 
     }
 }

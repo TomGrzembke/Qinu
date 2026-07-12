@@ -12,6 +12,7 @@ public class AbilitySlotManager : MonoBehaviour
     public Transform PlayerObj => playerObj;
     [field: SerializeField] public Transform Puk { get; private set; }
     [field: SerializeField] public Transform Middle { get; private set; }
+    [field: SerializeField] public Vector2 MiddleStartPosition { get; private set; } 
 
     #endregion
 
@@ -25,6 +26,8 @@ public class AbilitySlotManager : MonoBehaviour
 
     void Start()
     {
+        MiddleStartPosition = Middle.position;
+        
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
             AbilitySlots[i].SetSlotIndex(i);

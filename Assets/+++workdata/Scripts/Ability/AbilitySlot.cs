@@ -94,8 +94,13 @@ public class AbilitySlot : MonoBehaviour
     public void Execute(bool performed = true)
     {
         Performed = performed;
-        
-        if (CurrentAbility == null) return;
+
+        if (CurrentAbility == null)
+        {
+            SoundManager.Instance.PlaySound(SoundType.AbilityCooldown);
+            anim.SetTrigger("wobble");
+            return;
+        }
 
         CurrentAbility.Execute(performed);
     }

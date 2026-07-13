@@ -8,7 +8,7 @@ public class SizeUp : Ability
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     FlipObjectOnVelocity flipObjectOnVelocity;
-    Coroutine saveRoutine;
+    Coroutine abilityRoutine;
 
     protected override void OnInitializedInternal()
     {
@@ -17,9 +17,9 @@ public class SizeUp : Ability
 
     protected override void ExecuteInternal()
     {
-        if (saveRoutine != null) return;
+        if (abilityRoutine != null) return;
         
-        saveRoutine = StartCoroutine(SizeUpRoutine());
+        abilityRoutine = StartCoroutine(SizeUpRoutine());
     }
 
 
@@ -29,12 +29,14 @@ public class SizeUp : Ability
         flipObjectOnVelocity.SetMaxScale(flipObjectOnVelocity.MaxScale * timesSize);
 
         yield return new WaitForSeconds(duration);
+        
         flipObjectOnVelocity.SetMaxScale(originalScale);
-        saveRoutine = null;
+        abilityRoutine = null;
     }
 
     protected override void CleanupInternal()
     {
+        QueueDestroy(abilityRoutine);
 
     }
 }

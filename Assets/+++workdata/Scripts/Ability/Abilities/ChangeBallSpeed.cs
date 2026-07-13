@@ -45,6 +45,6 @@ public class ChangeBallSpeed : Ability
 
     protected override void CleanupInternal()
     {
-        ResetSpeed();
+        QueueDestroy(abilityRoutine);
     }
 }

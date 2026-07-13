@@ -19,7 +19,7 @@ public class MoveMiddle : Ability
     {
         if (abilityRoutine != null) return;
 
-        abilityRoutine = StartCoroutine(TPBall());
+        abilityRoutine = StartCoroutine(MoveMiddleRoutine());
     }
 
     protected override void OnInitializedInternal()
@@ -28,7 +28,7 @@ public class MoveMiddle : Ability
         toPos = SlotManager.MiddleStartPosition.Add(spaceToAdd, 0);
     }
 
-    IEnumerator TPBall()
+    IEnumerator MoveMiddleRoutine()
     {
         float lerpTime = 0;
 
@@ -55,7 +55,6 @@ public class MoveMiddle : Ability
 
     protected override void CleanupInternal()
     {
-        // SlotManager.Middle.position = fromPos;
-        //Fix Qinu being on the right and no snapback problem 
+        QueueDestroy(abilityRoutine);
     }
 }

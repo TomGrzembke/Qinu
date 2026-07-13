@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BallTPSave
   m_EditorClassIdentifier: 
   abilitySprite: {fileID: 21300000, guid: 313b9151fa7a14943b2fe2ad948563ac, type: 3}
-  abilityTitel: Ball TP
+  abilityTitel: Ball Teleport
   abilityDescription: Description

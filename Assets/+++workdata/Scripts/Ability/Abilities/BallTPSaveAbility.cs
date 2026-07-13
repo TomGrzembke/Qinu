@@ -7,14 +7,14 @@ public class BallTPSaveAbility : Ability
     [SerializeField] float spaceToAdd = 3;
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    Coroutine saveRoutine;
+    Coroutine tpRoutine;
     BallVFX ballVFX;
 
     protected override void ExecuteInternal()
     {
-        if (saveRoutine != null) return;
+        if (tpRoutine != null) return;
 
-        saveRoutine = StartCoroutine(TPBall());
+        tpRoutine = StartCoroutine(TPBall());
     }
 
     protected override void OnInitializedInternal()
@@ -37,14 +37,11 @@ public class BallTPSaveAbility : Ability
         }
 
         SlotManager.Puk.position = SlotManager.PlayerObj.position.Add(new(spaceToAdd, 0, 0));
-        saveRoutine = null;
+        tpRoutine = null;
     }
 
     protected override void CleanupInternal()
     {
-        if (ballVFX)
-        {
-            ballVFX.StopVisuals();
-        }
+        QueueDestroy(tpRoutine);
     }
 }

@@ -2,37 +2,34 @@ using UnityEngine;
 
 public class AbilitySlotManager : MonoBehaviour
 {
-    #region Serialized
-
     [field: SerializeField] public AbilitySlot[] AbilitySlots { get; private set; }
 
-    [Header("Ability getter")] [SerializeField]
+    [Header("Ability getter")]
+    [SerializeField]
     Transform playerObj;
 
     public Transform PlayerObj => playerObj;
     [field: SerializeField] public Transform Puk { get; private set; }
     [field: SerializeField] public Transform Middle { get; private set; }
-    [field: SerializeField] public Vector2 MiddleStartPosition { get; private set; } 
+    [field: SerializeField] public Vector2 MiddleStartPosition { get; private set; }
 
-    #endregion
-
-    #region Non Serialized
 
     public static AbilitySlotManager Instance;
 
-    #endregion
 
     void Awake() => Instance = this;
 
     void Start()
     {
         MiddleStartPosition = Middle.position;
-        
+
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
             AbilitySlots[i].SetSlotIndex(i);
-            if (AbilitySlots[i].CurrentAbilityPrefab)
-                AddNewAbility(AbilitySlots[i].CurrentAbilityPrefab, i);
+
+            if (AbilitySlots[i].CurrentAbilityPrefab == null) continue;
+
+            AddNewAbility(AbilitySlots[i].CurrentAbilityPrefab, i);
         }
     }
 
@@ -58,8 +55,7 @@ public class AbilitySlotManager : MonoBehaviour
     {
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
-            if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab)
-                break;
+            if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab) break;
 
             if (!AbilitySlots[i].Occupied)
             {
@@ -73,8 +69,7 @@ public class AbilitySlotManager : MonoBehaviour
     {
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
-            if (!AbilitySlots[i].Occupied)
-                return true;
+            if (!AbilitySlots[i].Occupied) return true;
         }
 
         return false;
@@ -85,11 +80,10 @@ public class AbilitySlotManager : MonoBehaviour
         int slotID = -1;
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
-            if (!AbilitySlots[i].Occupied)
-            {
-                slotID = i;
-                break;
-            }
+            if (AbilitySlots[i].Occupied) continue;
+
+            slotID = i;
+            break;
         }
 
         if (slotID == 0) return "Q";

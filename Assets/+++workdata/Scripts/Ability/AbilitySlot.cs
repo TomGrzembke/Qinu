@@ -59,7 +59,7 @@ public class AbilitySlot : MonoBehaviour
         if (CurrentAbility != null)
         {
             CurrentAbility.Cleanup();
-            DestroyImmediate(CurrentAbility.gameObject, true);
+            //DestroyImmediate(CurrentAbility.gameObject, true);
         }
 
         if (newAbilityPrefab == null)

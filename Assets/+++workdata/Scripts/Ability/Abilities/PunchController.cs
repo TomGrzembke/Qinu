@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PunchController : MonoBehaviour
 {
-    #region Serialized
     [Header("Stinger Info")]
 
     [SerializeField] Transform handGFX;
@@ -18,18 +17,17 @@ public class PunchController : MonoBehaviour
 
     [SerializeField] float rotationMinus;
     [SerializeField] float defaultRotation;
-    #endregion
 
-    #region Non Serialized
     Collider2D targetCol;
 
     Coroutine attackCoroutine;
     Coroutine cooldownCoroutine;
-    #endregion
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!(collision.CompareTag("Puk") || collision.CompareTag("NPC"))) return;
+        var isPukOrNPC = collision.CompareTag("Puk") || collision.CompareTag("NPC");
+
+        if (!isPukOrNPC) return;
 
         targetCol = collision;
         AttackTarget(targetCol.transform);
@@ -38,20 +36,24 @@ public class PunchController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Puk"))
-            targetCol = null;
+        if (!collision.CompareTag("Puk")) return;
+
+        targetCol = null;
     }
 
     void Update()
     {
-        if (targetCol)
-            AttackTarget(targetCol.transform);
+        if (targetCol == null) return;
+
+        AttackTarget(targetCol.transform);
     }
 
     public void AttackTarget(Transform target)
     {
-        if (cooldownCoroutine == null && attackCoroutine == null)
-            attackCoroutine = StartCoroutine(Attack(target));
+        if (cooldownCoroutine != null) return;
+        if (attackCoroutine != null) return;
+
+        attackCoroutine = StartCoroutine(Attack(target));
     }
 
     public IEnumerator Attack(Transform target)
@@ -60,6 +62,7 @@ public class PunchController : MonoBehaviour
         float currentAttackWindupTime = 0;
 
         Vector3 currentTargetPos = target.position;
+
         while (currentAttackWindupTime < attackWindupTime)
         {
             HandFrameRotation(currentAttackWindupTime, target.position);
@@ -67,9 +70,13 @@ public class PunchController : MonoBehaviour
             currentAttackWindupTime += Time.deltaTime;
 
             if (attackWindupTime * percentAlphaWindupAttackLock < currentAttackWindupTime)
+            {
                 currentTargetPos = target.position;
+            }
+
             yield return null;
         }
+
         Vector3 currentHandPos = handTarget.position;
 
         while (attackTime < timeToAttack)
@@ -114,6 +121,21 @@ public class PunchController : MonoBehaviour
         yield return new WaitForSeconds(cooldownForNextAttack - resetTime);
 
         cooldownCoroutine = null;
+    }
+
+    public void Stop()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+
+        if (cooldownCoroutine != null)
+        {
+            StopCoroutine(cooldownCoroutine);
+        }
+
+        targetCol = null;
     }
 
     void OnDrawGizmosSelected()

@@ -1,4 +1,5 @@
 using System.Collections;
+using MyBox;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -74,8 +75,6 @@ public abstract class Ability : MonoBehaviour
 
     public virtual void Cleanup()
     {
-        CleanupInternal();
-
         if (coolDownCor != null)
         {
             StopCoroutine(coolDownCor);
@@ -84,10 +83,23 @@ public abstract class Ability : MonoBehaviour
 
         abilityImageBG.fillAmount = 1;
         abilityImage.fillAmount = 1;
+
+        CleanupInternal();
     }
 
-    void OnDestroy()
+    protected void QueueDestroy(Coroutine coroutineToFinish)
     {
-        Cleanup();
+        if (coroutineToFinish == null)
+        {
+            Clear();
+            return;
+        }
+
+        coroutineToFinish.OnComplete(Clear);
+    }
+
+    void Clear()
+    {
+        Destroy(gameObject);
     }
 }

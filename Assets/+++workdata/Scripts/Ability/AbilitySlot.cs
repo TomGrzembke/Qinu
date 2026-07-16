@@ -18,6 +18,9 @@ public class AbilitySlot : MonoBehaviour
     public bool Occupied { get; private set; }
     Animator anim;
 
+    float lastScrollTime;
+    const float SCROLL_DOWN = 0.2f;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -93,6 +96,10 @@ public class AbilitySlot : MonoBehaviour
 
     public void Execute(bool performed = true)
     {
+        if (Time.time - lastScrollTime < SCROLL_DOWN) return;
+
+        lastScrollTime = Time.time;
+
         Performed = performed;
 
         if (CurrentAbility == null)

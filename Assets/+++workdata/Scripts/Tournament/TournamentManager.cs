@@ -38,8 +38,8 @@ public class TournamentManager : MonoBehaviour
     GameObject lastPlayed;
     bool firstMatch = true;
     int roundAmount;
-    
-    
+
+
     private void OnEnable()
     {
         Instance = this;
@@ -183,7 +183,9 @@ public class TournamentManager : MonoBehaviour
         GameState = GameStateEnum.AfterGame;
 
         if (!firstMatch)
+        {
             OnPlayerMatchEnd?.Invoke(UpdateCharStats(sideID).Wins);
+        }
 
         yield return new WaitForSeconds(.5f);
         yield return new WaitUntil(() => CheckOutOfInteraction());
@@ -192,25 +194,38 @@ public class TournamentManager : MonoBehaviour
         GameState = GameStateEnum.OutOfGame;
 
         if (UseList(RightPlayers).Count > 0)
+        {
             RightPlayers[0].GetComponent<NPCNav>().GoHome();
+        }
 
         if (CurrentGameMode == GameMode.a2v2)
+        {
             Cleanup2v2(sideID);
+        }
 
         yield return new WaitUntil(() => CheckOutOfInteraction());
 
         if (!firstMatch)
+        {
             if (sideID == 0)
+            {
                 RewardWindow.Instance.GiveReward();
+            }
             else
+            {
                 RewardWindow.Instance.RemoveReward();
+            }
+        }
 
         firstMatch = false;
 
         yield return new WaitUntil(() => CheckOutOfInteraction());
 
         if (CharStats[0].Wins != WinPoints)
+        {
             InitializeGame();
+        }
+        
         MinigameManager.Instance.Cage.SetActive(false);
     }
 
@@ -349,8 +364,11 @@ public class TournamentManager : MonoBehaviour
     public void RegisterOnPlayerMatchEnd(Action<float> callback, bool getInstantCallback = false)
     {
         OnPlayerMatchEnd += callback;
+
         if (getInstantCallback)
+        {
             callback(CharStats[0].Wins);
+        }
     }
 
     public void LeftPlayerAdd()

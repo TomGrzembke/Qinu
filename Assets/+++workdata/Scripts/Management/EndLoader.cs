@@ -1,45 +1,41 @@
-using System;
 using MyBox;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary> Used as a transition to the end scene </summary>
 public class EndLoader : MonoBehaviour
 {
-    #region Serialized
-
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
     [field: SerializeField] public Vector3 QinuEndPos { get; private set; }
     [field: SerializeField] public bool WonGame { get; private set; }
 
-    #endregion
-
-    #region Non Serialized
 
     public static EndLoader Instance;
     float currentScore;
-
-    #endregion
 
     void Awake()
     {
         Instance = this;
     }
 
-    // IEnumerator Start()
-    // {
-    //     yield return null;
-    //     TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
-    // }
-
     void OnEnable()
     {
-        TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, true);
+        SceneManager.sceneLoaded += TrySubscribeGameEndListener;
+    }
+
+    void TrySubscribeGameEndListener(Scene scene, LoadSceneMode mode)
+    {
+        if (TournamentManager.Instance == null) return;
+
+        TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
+        TournamentManager.Instance.RegisterOnPlayerMatchEnd(OnValueChanged, false);
     }
 
     void OnDisable()
     {
+        SceneManager.sceneLoaded -= TrySubscribeGameEndListener;
         TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
     }
 
@@ -73,4 +69,6 @@ public class EndLoader : MonoBehaviour
         SceneLoader.Instance.LoadSceneViaIndex(Scenes.End);
         SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
     }
+
+
 }

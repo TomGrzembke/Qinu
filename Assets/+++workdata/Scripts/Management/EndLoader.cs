@@ -36,7 +36,11 @@ public class EndLoader : MonoBehaviour
     void OnDisable()
     {
         SceneManager.sceneLoaded -= TrySubscribeGameEndListener;
-        TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
+        
+        if (TournamentManager.Instance != null)
+        {
+            TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
+        }
     }
 
     void OnValueChanged(float value)

@@ -7,36 +7,35 @@ public class GameStateManager : MonoBehaviour
 {
     [SerializeField] SceneReference introScene;
 
-    static GameStateManager Instance;
+    public static GameStateManager Instance { get; private set; }
 
-    static Coroutine resetRoutine;
+    Coroutine resetRoutine;
 
     void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(Instance.gameObject);
+        DontDestroyOnLoad(gameObject);
         Cursor.visible = false;
     }
 
-    public static void StartGame()
+    public void StartGame()
     {
-        Instance.StartCoroutine(Instance.LoadScenesCoroutine((int)Scenes.MainMenu,
-            Instance.GetSceneID(Instance.introScene)));
+        StartCoroutine(LoadScenesCoroutine((int)Scenes.MainMenu, GetSceneID(introScene)));
     }
 
-    public static void ResetGame()
+    public void ResetGame()
     {
         if (resetRoutine != null)
         {
             return;
         }
 
-        resetRoutine = Instance.StartCoroutine(Instance.RestartGameCoroutine());
+        resetRoutine = StartCoroutine(RestartGameCoroutine());
     }
 
-    public static void GoToMainMenu()
+    public void GoToMainMenu()
     {
-        Instance.StartCoroutine(Instance.ToMainMenuCor());
+        StartCoroutine(ToMainMenuCor());
     }
 
     /// <summary> Depends on the naming (0_Scene)</summary>
@@ -86,12 +85,11 @@ public class GameStateManager : MonoBehaviour
 
         Destroy(gameObject);
     }
-    
+
     IEnumerator ToMainMenuCor()
     {
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.Gameplay);
         yield return SceneLoader.Instance.UnloadSceneViaIndex((int)Scenes.End);
         yield return SceneLoader.Instance.LoadSceneViaIndex((int)Scenes.MainMenu);
-
     }
 }

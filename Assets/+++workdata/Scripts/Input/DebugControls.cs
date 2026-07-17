@@ -5,17 +5,13 @@ using UnityEngine.InputSystem;
 /// <summary> Mostly used for a dialogue speed up or to get to a certain game state more quickly </summary>
 public class DebugControls : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] UnityEvent slashEvent;
     [SerializeField] UnityEvent asteriskEvent;
     [SerializeField] UnityEvent num7;
 
     [SerializeField] CanvasGroup[] cgToggleUIAsterisk;
-    #endregion
 
-    #region Non Serialized
     PlayerInputActions inputActions;
-    #endregion
 
     void Awake()
     {
@@ -32,10 +28,8 @@ public class DebugControls : MonoBehaviour
     }
     void OnDisable()
     {
-        inputActions.Disable();
-        
-        inputActions = new();
         inputActions.Player.Reset.performed -= CallResetEvent;
+        inputActions.Disable();
     }
 
     public void CallNum7(UnityEvent givenEvent)
@@ -59,6 +53,6 @@ public class DebugControls : MonoBehaviour
     
     public void CallResetEvent(InputAction.CallbackContext ctx)
     {
-        GameStateManager.ResetGame();
+        GameStateManager.Instance.ResetGame();
     }
 }

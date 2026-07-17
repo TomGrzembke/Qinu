@@ -4,12 +4,12 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        GameStateManager.StartGame();
+        GameStateManager.Instance.StartGame();
     }
     
     public void GoToMainMenu()
     {
-        GameStateManager.GoToMainMenu();
+        GameStateManager.Instance.GoToMainMenu();
     }
     
     public void Resume()

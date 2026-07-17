@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class CapFPS : MonoBehaviour
 {
-    [SerializeField] private int fpsLimit = 120;
+    [SerializeField] int fpsLimit = 120;
 
     void RefreshFrameCap()
     {
         Application.targetFrameRate = fpsLimit;
     }
 
-    private void Start()
+    void Start()
     {
         RefreshFrameCap();
     }
 
-    private void OnValidate()
+    void OnValidate()
     {
         RefreshFrameCap();
     }

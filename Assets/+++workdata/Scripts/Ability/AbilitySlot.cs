@@ -1,6 +1,8 @@
 using MyBox;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary> Handles the image and execution of abilities </summary>
@@ -98,12 +100,13 @@ public class AbilitySlot : MonoBehaviour
 
     public void Execute(bool performed = true)
     {
-        if(performed == false)
+        if (performed == false)
         {
             Performed = false;
         }
 
-        if(blockedByUI && EventSystem.current.IsPointerOverGameObject()) return;
+        if (blockedByUI && IsPointerOverUI()) return;
+
         if (Time.time - lastExecutedTime < EXECUTE_COOLDOWN) return;
 
         lastExecutedTime = Time.time;
@@ -118,6 +121,26 @@ public class AbilitySlot : MonoBehaviour
         }
 
         CurrentAbility.Execute(performed);
+    }
+
+    bool IsPointerOverUI()
+    {
+        PointerEventData eventDataCurrentPosition = new(EventSystem.current)
+        {
+            position = Mouse.current != null ? Mouse.current.position.ReadValue() : Touchscreen.current.primaryTouch.position.ReadValue()
+        };
+
+        List<RaycastResult> results = new();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.GetComponentInParent<Selectable>() == null) continue;
+
+            return true;
+        }
+
+        return false;
     }
 
     public void SetSlotIndex(int index)

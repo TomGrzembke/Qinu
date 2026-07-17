@@ -24,12 +24,12 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
  == AbilityGained
-    ~Event ("QHelp")
-  Activate it by pressing Q. #speaker: Anthony
+  Activate it by pressing the left mouse button. #speaker: Anthony
+      ~Event ("QHelp")
  -> END
  
   == QHelp
-  Q activates your first Slot. #speaker: Anthony
+  Left mouse button activates your first Slot. #speaker: Anthony
  -> END
  
   ==ActivateGoals

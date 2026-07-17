@@ -1,11 +1,13 @@
 using MyBox;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary> Handles the image and execution of abilities </summary>
 public class AbilitySlot : MonoBehaviour
 {
     [field: SerializeField] public bool Performed { get; private set; }
+    [SerializeField] bool blockedByUI = false;
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
@@ -18,8 +20,8 @@ public class AbilitySlot : MonoBehaviour
     public bool Occupied { get; private set; }
     Animator anim;
 
-    float lastScrollTime;
-    const float SCROLL_DOWN = 0.2f;
+    float lastExecutedTime;
+    const float EXECUTE_COOLDOWN = 0.2f;
 
     void Awake()
     {
@@ -96,9 +98,15 @@ public class AbilitySlot : MonoBehaviour
 
     public void Execute(bool performed = true)
     {
-        if (Time.time - lastScrollTime < SCROLL_DOWN) return;
+        if(performed == false)
+        {
+            Performed = false;
+        }
 
-        lastScrollTime = Time.time;
+        if(blockedByUI && EventSystem.current.IsPointerOverGameObject()) return;
+        if (Time.time - lastExecutedTime < EXECUTE_COOLDOWN) return;
+
+        lastExecutedTime = Time.time;
 
         Performed = performed;
 

@@ -31,7 +31,9 @@ public class LoadingScreen : MonoBehaviour
     void OnValidateCall()
     {
         if (canvasGroup == null)
+        {
             canvasGroup = GetComponent<CanvasGroup>();
+        }
     }
 
     public void Show(object instigator)
@@ -45,7 +47,9 @@ public class LoadingScreen : MonoBehaviour
         loadingInstigator.Remove(instigator);
 
         if (loadingInstigator.Count == 0)
+        {
             Hide();
+        }
     }
 
     public void Initialize()

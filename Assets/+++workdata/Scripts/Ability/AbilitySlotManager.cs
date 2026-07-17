@@ -4,6 +4,8 @@ public class AbilitySlotManager : MonoBehaviour
 {
     [field: SerializeField] public AbilitySlot[] AbilitySlots { get; private set; }
 
+    [SerializeField] string[] abilityKeys = new string[4] {"Left", "Middle", "Right", "None"};
+
     [Header("Ability getter")]
     [SerializeField]
     Transform playerObj;
@@ -86,14 +88,7 @@ public class AbilitySlotManager : MonoBehaviour
             break;
         }
 
-        if (slotID == 0) return "Q";
-
-        if (slotID == 1) return "W";
-
-        if (slotID == 2) return "E";
-
-        if (slotID == 3) return "R";
-
+        if (abilityKeys.Length - 1 >= slotID) return abilityKeys[slotID];
 
         return "Apparently No";
     }

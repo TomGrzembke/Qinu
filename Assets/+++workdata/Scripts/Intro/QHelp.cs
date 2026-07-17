@@ -3,30 +3,31 @@ using UnityEngine;
 
 public class QHelp : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] float waitTillHelp = 7;
     [SerializeField] string dialoguePath = "QHelp";
-    #endregion
 
-    #region Non Serialized
-    Coroutine qHelpCor;
-    #endregion
+    Coroutine dashHelpCor;
 
     public void InitializeHelp()
     {
-        qHelpCor = StartCoroutine(QHelpCor());
-        StartCoroutine(QCheckCor());
+        dashHelpCor = StartCoroutine(DashHelpCor());
+        StartCoroutine(DashCheckCor());
     }
 
-    IEnumerator QHelpCor()
+    IEnumerator DashHelpCor()
     {
         yield return new WaitForSeconds(waitTillHelp);
         DialogueController.Instance.StartDialogue(dialoguePath);
     }
 
-    IEnumerator QCheckCor()
+    IEnumerator DashCheckCor()
     {
         yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed());
-        StopCoroutine(qHelpCor);
+        StopCoroutine(dashHelpCor);
+    }
+
+    void OnDisable()
+    {
+        StopCoroutine(dashHelpCor);
     }
 }

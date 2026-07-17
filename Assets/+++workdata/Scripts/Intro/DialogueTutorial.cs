@@ -6,21 +6,17 @@ using UnityEngine;
 /// <summary> Uses a list of dialogue segements to create a custom dynamic sequence of dialogue and gameplay </summary>
 public class DialogueTutorial : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] List<DialogueSegment> dialogueSegment;
 
     [SerializeField] GameObject dashAbilityPrefab;
     [SerializeField] GameObject anthony;
     [SerializeField] InkEvents eventsOfTutorial;
     [SerializeField] AudioClip startMusic;
-    #endregion
 
-    #region Non Serialized
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
-    bool Ability0Pressed => InputManager.Instance.Ability0Action.IsPressed() || AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
+    bool Ability0Pressed => AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
     Coroutine storySegmentCor;
     Vector3 pukPos;
-    #endregion
 
     void Start()
     {

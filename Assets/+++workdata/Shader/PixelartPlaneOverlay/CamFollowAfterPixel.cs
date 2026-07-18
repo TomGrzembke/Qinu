@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,30 +6,24 @@ public class CamFollowAfterPixel : MonoBehaviour
 {
     [Header("Data Set")]
 #pragma warning disable
-    [SerializeField, ShowOnly]
-    private string info =
-        $"Utilizes {nameof(PixelateDataSO)} with {nameof(RT_PixelateCalculatorSO)} as context, as data settings";
+    [SerializeField, ShowOnly] string info = $"Utilizes {nameof(PixelateDataSO)} with {nameof(RT_PixelateCalculatorSO)} as context, as data settings";
 #pragma warning restore
 
-    [SerializeField] private PixelateDataSO pixelateDataSO;
+    [SerializeField] PixelateDataSO pixelateDataSO;
 
-    [FormerlySerializedAs("pixelResSO")] [SerializeField]
-    RT_PixelateCalculatorSO pixelateCalculatorSo;
+    [FormerlySerializedAs("pixelResSO"), SerializeField] RT_PixelateCalculatorSO pixelateCalculatorSo;
 
-    [Header("Scene Related")] [SerializeField]
-    Camera cam;
+    [Header("Scene Related"), SerializeField]Camera cam;
 
     [SerializeField] Transform pixelPlane;
     [SerializeField] Material pixelMat;
 
-    [Header("Debug")] [SerializeField, ShowOnly]
-    Vector2 camFollowPixelDistance;
+    [Header("Debug"), SerializeField, ShowOnly] Vector2 camFollowPixelDistance;
 
     [SerializeField, ShowOnly] Vector2 macroPixelSize;
     [SerializeField, ShowOnly] Vector2 pixelCount;
 
-    [Tooltip("Higher means it will wait more macro pixels until it moves along")]
-    float macroPixelFollowMultiplier = 1;
+    [Tooltip("Higher means it will wait more macro pixels until it moves along")] float macroPixelFollowMultiplier = 1;
 
     Camera mainCam;
     Transform mainCamTrans;
@@ -46,14 +39,14 @@ public class CamFollowAfterPixel : MonoBehaviour
         AdjustPosition();
     }
 
-    private void OnValidate()
+    void OnValidate()
     {
         SubscribeDataChangeValidate();
 
         CalculateMarginPixelValues();
     }
 
-    private void SubscribeDataChangeValidate()
+    void SubscribeDataChangeValidate()
     {
         if (pixelateDataSO == null) return;
 
@@ -77,7 +70,7 @@ public class CamFollowAfterPixel : MonoBehaviour
         pixelPlane.localScale = new(viewWidth, viewHeight, pixelPlane.localScale.z);
     }
 
-    private void ExtractData()
+    void ExtractData()
     {
         if (pixelateDataSO == null) return;
 
@@ -92,10 +85,9 @@ public class CamFollowAfterPixel : MonoBehaviour
         CalculateMarginPixelValues();
     }
 
-    private void AdjustPosition()
+    void AdjustPosition()
     {
         Vector3 newPosition = mainCamTrans.position;
-
 
         newPosition.x = Mathf.Round(newPosition.x / camFollowPixelDistance.x) * camFollowPixelDistance.x;
         newPosition.y = Mathf.Round(newPosition.y / camFollowPixelDistance.y) * camFollowPixelDistance.y;

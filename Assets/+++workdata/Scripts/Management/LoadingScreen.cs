@@ -79,6 +79,7 @@ public class LoadingScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(loadingTime);
         float time = 0;
+        
         while (time < fadeTime)
         {
             yield return null;

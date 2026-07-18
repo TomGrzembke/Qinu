@@ -6,21 +6,17 @@ using UnityEngine;
 /// <summary> Attach this to the text component of a button to match its naming and get some basic scale animations </summary>
 public class UIButton : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] string buttonName;
     [SerializeField] bool additionalSettings;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleOnClick = .75f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleTime = .075f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleHover = .95f;
     [SerializeField] SoundType onClickSFX = SoundType.ButtonClick;
-    #endregion
 
-    #region Non Serialized
-    readonly string buttonNameSyntax = "[Button]";
-    readonly string textNameSyntax = "[Text]";
+    const string BUTTON_NAME_SYNTAX = "[Button]";
+    const string TEXT_NAME_SYNTAX = "[Text]";
     TextMeshProUGUI textComponent;
     Coroutine scaleRoutine;
-    #endregion
 
     void OnValidate() => OnValidateCall();
 
@@ -28,11 +24,13 @@ public class UIButton : MonoBehaviour
 
     private void OnValidateCall()
     {
-        name = buttonNameSyntax + " " + buttonName;
+        name = BUTTON_NAME_SYNTAX + " " + buttonName;
         textComponent = GetComponentInChildren<TextMeshProUGUI>();
+
         if (textComponent == null) return;
+
         textComponent.text = buttonName;
-        textComponent.name = textNameSyntax + " " + buttonName;
+        textComponent.name = TEXT_NAME_SYNTAX + " " + buttonName;
     }
 
     public void ClickedAnim()
@@ -40,7 +38,9 @@ public class UIButton : MonoBehaviour
         transform.localScale = Vector3.one;
 
         if (scaleRoutine != null)
+        {
             StopCoroutine(scaleRoutine);
+        }
 
         scaleRoutine = StartCoroutine(ScaleAnim());
 
@@ -69,8 +69,12 @@ public class UIButton : MonoBehaviour
     public void OnHover(bool condition)
     {
         if (condition)
+        {
             transform.localScale = new Vector3(scaleHover, scaleHover);
+        }
         else
+        {
             transform.localScale = Vector3.one;
+        }
     }
 }

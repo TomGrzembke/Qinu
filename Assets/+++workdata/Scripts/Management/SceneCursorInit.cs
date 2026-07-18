@@ -19,10 +19,11 @@ public class SceneCursorInit : MonoBehaviour
             case SceneCursorInitState.CursorUsable:
                 InputManager.Instance.InitMainMenu();
                 break;
+
             case SceneCursorInitState.CurorLocked:
                 InputManager.Instance.InitGameplayScene();
-
                 break;
+
             default:
                 throw new ArgumentOutOfRangeException();
         }

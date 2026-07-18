@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 /// <summary> Used as a transition to the end scene </summary>
 public class EndLoader : MonoBehaviour
 {
+    public static EndLoader Instance;
+
     [SerializeField] string toEndDialogue = "toEnd";
     [SerializeField] float transitionEndTime = 2f;
     [field: SerializeField] public Vector3 QinuEndPos { get; private set; }
     [field: SerializeField] public bool WonGame { get; private set; }
 
-
-    public static EndLoader Instance;
     float currentScore;
 
     void Awake()
@@ -36,7 +36,7 @@ public class EndLoader : MonoBehaviour
     void OnDisable()
     {
         SceneManager.sceneLoaded -= TrySubscribeGameEndListener;
-        
+
         if (TournamentManager.Instance != null)
         {
             TournamentManager.Instance.OnPlayerMatchEnd -= OnValueChanged;
@@ -47,8 +47,14 @@ public class EndLoader : MonoBehaviour
     {
         currentScore = value;
 
-        if (currentScore > 0) WonGame = true;
-        else WonGame = false;
+        if (currentScore > 0)
+        {
+            WonGame = true;
+        }
+        else
+        {
+            WonGame = false;
+        }
 
         if (value != -TournamentManager.Instance.LoosePoints && value != TournamentManager.Instance.WinPoints) return;
 

@@ -3,21 +3,17 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] SoundBankSO soundBank;
     [SerializeField] AudioSource globalMusicSource;
     [SerializeField] AudioSource globalSFXSource;
     [SerializeField] DialogueSoundPlayer soundPlayer;
     [Header("Music")]
     [SerializeField] float musicBlendTime;
-    #endregion
 
-    #region Non Serialized
     public static SoundManager Instance;
     SoundTypeSO[] SoundTypes => soundBank.soundTypes;
     Coroutine musicRoutine;
     float originalMusicVolume;
-    #endregion
 
     void Awake()
     {
@@ -42,13 +38,15 @@ public class SoundManager : MonoBehaviour
             break;
         }
 
-        if (localSource && clip != null)
+        if (clip == null) return;
+
+        if (localSource == null || !localSource.gameObject.activeInHierarchy)
         {
-            if (localSource.gameObject.activeInHierarchy)
-                localSource.PlayOneShot(clip);
-        }
-        else
             globalSFXSource.PlayOneShot(clip);
+            return;
+        }
+
+        localSource.PlayOneShot(clip);
     }
 
     /// <summary> Gets the index 0 sound length of given type </summary>
@@ -64,28 +62,26 @@ public class SoundManager : MonoBehaviour
             break;
         }
 
-        if (clip == null)
-            return 0;
+        if (clip == null) return 0;
 
         return clip.length;
     }
 
-    #region ButtonMethods
     public void PlaySoundButtonClick()
     {
         PlaySound(SoundType.ButtonClick);
     }
+
     public void PlaySoundButtonHover()
     {
         PlaySound(SoundType.ButtonHover);
     }
+
     public void PlaySoundButtonClickBack()
     {
         PlaySound(SoundType.ButtonClickBack);
     }
-    #endregion
 
-    #region Music
     public void PlayMusic(AudioClip clip)
     {
         if (clip == globalMusicSource.clip) return;
@@ -119,7 +115,6 @@ public class SoundManager : MonoBehaviour
             yield return null;
         }
     }
-    #endregion
 }
 
 public enum SoundType

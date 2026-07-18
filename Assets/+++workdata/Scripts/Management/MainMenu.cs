@@ -22,7 +22,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    #region Sound
     public void PlaySoundButtonClick()
     {
         SoundManager.Instance.PlaySoundButtonClick();
@@ -35,5 +34,4 @@ public class MainMenu : MonoBehaviour
     {
         SoundManager.Instance.PlaySoundButtonClickBack();
     }
-    #endregion
 }

@@ -1,13 +1,14 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
-    PlayerInputActions inputActions;
+
     [SerializeField] GameObject objectToToggle;
-    bool paused;
+
+    PlayerInputActions inputActions;
     CursorLockMode lastCursorState;
+    bool paused;
 
     void Awake()
     {
@@ -17,6 +18,16 @@ public class PauseManager : MonoBehaviour
         inputActions.Player.Pause.performed += ctx => PauseLogic();
 
         lastCursorState = Cursor.lockState;
+    }
+
+    public void OnEnable()
+    {
+        inputActions.Enable();
+    }
+
+    public void OnDisable()
+    {
+        inputActions.Disable();
     }
 
     public void PauseLogic()
@@ -48,15 +59,5 @@ public class PauseManager : MonoBehaviour
 
         InputManager.Instance.HideCursor();
         lastCursorState = Cursor.lockState;
-    }
-
-    public void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    public void OnDisable()
-    {
-        inputActions.Disable();
     }
 }

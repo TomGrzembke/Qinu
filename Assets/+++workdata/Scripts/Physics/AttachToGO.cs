@@ -3,24 +3,28 @@ using UnityEngine;
 
 public class AttachToGO : MonoBehaviour
 {
-    [ConditionalField(nameof(attachToMainCam), true), SerializeField]
-    Transform attachTo;
-
+    [ConditionalField(nameof(attachToMainCam), true), SerializeField] Transform attachTo;
     [SerializeField] bool attachToMainCam;
 
     Transform transToAttachTo;
 
-    private void Start()
+    void Start()
     {
         RefreshAttachment();
     }
 
-    private void RefreshAttachment()
+    void RefreshAttachment()
     {
         if (transToAttachTo != null) return;
 
-        if (!attachToMainCam) transToAttachTo = attachTo;
-        else transToAttachTo = Camera.main.transform;
+        if (!attachToMainCam)
+        {
+            transToAttachTo = attachTo;
+        }
+        else
+        {
+            transToAttachTo = Camera.main.transform;
+        }
     }
 
     void Update()

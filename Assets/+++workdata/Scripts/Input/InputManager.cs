@@ -15,8 +15,8 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
-    [Header("Cursor Confinement settings")] [SerializeField]
-    int deltaSpeedModifier = 80;
+    [Header("Cursor Confinement settings")] 
+    [SerializeField] int deltaSpeedModifier = 80;
 
     [SerializeField] int edgeThreshold = 50;
     [SerializeField] float virtualMouseYOffset = 3;
@@ -218,7 +218,7 @@ public class InputManager : MonoBehaviour
         {
             var r2 = (guess.x * guess.x * xMult) + (guess.y * guess.y * yMult);
             var f = 1.0f + r2 * intensity;
-            guess = (coord / scale) / f;
+            guess = coord / scale / f;
         }
 
         guess.x /= aspect;

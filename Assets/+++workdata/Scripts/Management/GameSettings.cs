@@ -14,10 +14,13 @@ public class GameSettings : MonoBehaviour
     Coroutine sfxChangedCoroutine;
     bool sfxEmitSound;
 
+    const string MUSIC_VOLUME_KEY = "musicVolume";
+    const string SFX_VOLUME_KEY = "sfxVolume";
+
     void Start()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        musicSlider.value = PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY);
+        sfxSlider.value = PlayerPrefs.GetFloat(SFX_VOLUME_KEY);
 
         GetScreenToggle();
         InputManager.Instance.ShowCursor();

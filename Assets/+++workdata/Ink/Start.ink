@@ -24,8 +24,8 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
  == AbilityGained
-  Activate it by pressing the left mouse button. #speaker: Anthony
-      ~Event ("QHelp")
+  Activate it with the left mouse button. #speaker: Anthony
+         ~Event ("QHelp")
  -> END
  
   == QHelp

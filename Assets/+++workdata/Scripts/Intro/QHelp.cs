@@ -23,11 +23,18 @@ public class QHelp : MonoBehaviour
     IEnumerator DashCheckCor()
     {
         yield return new WaitUntil(() => InputManager.Instance.Ability0Action.IsPressed());
-        StopCoroutine(dashHelpCor);
+
+        if (dashHelpCor != null)
+        {
+            StopCoroutine(dashHelpCor);
+        }
     }
 
     void OnDisable()
     {
-        StopCoroutine(dashHelpCor);
+        if (dashHelpCor != null)
+        {
+            StopCoroutine(dashHelpCor);
+        }
     }
 }

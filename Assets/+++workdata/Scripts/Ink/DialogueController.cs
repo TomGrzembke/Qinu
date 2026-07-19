@@ -1,5 +1,6 @@
 using Ink;
 using Ink.Runtime;
+using MyBox;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +16,12 @@ public struct DialogueLine
     public List<Choice> choices;
 }
 
-/// <summary> Handles all dialogue incoming calls</summary>
+/// <summary> Handles all incoming dialogue calls</summary>
 public class DialogueController : MonoBehaviour
 {
-    #region Serialized
-    [field: SerializeField] public float TimeBetweenDialogue { get; private set; } = 1; 
+    public static DialogueController Instance;
+
+    [field: SerializeField] public float TimeBetweenDialogue { get; private set; } = 1;
     [SerializeField] TextAsset inkAsset;
     [field: SerializeField] public bool InDialogue { get; private set; }
     [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
@@ -27,23 +29,21 @@ public class DialogueController : MonoBehaviour
     [SerializeField] GameObject[] speakerBoxParents;
     [SerializeField] Transform topLeft;
     [SerializeField] Transform topRight;
-    [SerializeField] bool debugMessages;
-    #endregion
 
-    #region Non Serialized
-    public static DialogueController Instance;
+    [Header("Debug")]
+    [SerializeField] bool debugMessages;
+
     public static Action dialogueOpened;
     public static Action dialogueClosed;
     public static Action<string> InkEvent;
-
+    const string SPEAKER_TAG = "speaker";
+    List<string> queuedDialogue = new();
     float oldSpeed;
-    const string speakerTag = "speaker";
     string lastSpeaker;
     Story inkStory;
     Coroutine debugTextSpeedCor;
-    #endregion
+    Coroutine dialogueQueueCor;
 
-    #region UnityEvent Functions
     void Awake()
     {
         Instance = this;
@@ -53,21 +53,42 @@ public class DialogueController : MonoBehaviour
         oldSpeed = TypeSpeed;
     }
 
-    #endregion
 
     void OnDestroy()
     {
         inkStory.onError -= OnInkError;
     }
 
-    #region DialogueLifeCycle
     public void StartDialogue(string dialoguePath)
     {
+        if (InDialogue)
+        {
+            queuedDialogue.Add(dialoguePath);
+
+            if (dialogueQueueCor != null)
+            {
+                StopCoroutine(dialogueQueueCor);
+            }
+
+            dialogueQueueCor = StartCoroutine(HandleDialogueQueue());
+
+            if (debugMessages)
+            {
+                Debug.Log("Queued dialogue: " + dialoguePath);
+            }
+
+            return;
+        }
+
+        if (debugMessages)
+        {
+            Debug.Log("Starting dialogue: " + dialoguePath);
+        }
+
         OpenDialogue();
         try
         {
-        inkStory.ChoosePathString(dialoguePath);
-
+            inkStory.ChoosePathString(dialoguePath);
         }
         catch
         {
@@ -103,8 +124,12 @@ public class DialogueController : MonoBehaviour
         }
 
         if (dialogueLine.speaker == null)
+        {
             if (lastSpeaker != null)
+            {
                 dialogueLine.speaker = lastSpeaker;
+            }
+        }
 
         lastSpeaker = dialogueLine.speaker;
 
@@ -115,7 +140,6 @@ public class DialogueController : MonoBehaviour
 
         dialogueBox.CamFollow?.SetTargets(GetDialogueTarget(dialogueLine));
         dialogueBox.DisplayText(dialogueLine);
-
     }
 
     void OpenDialogue()
@@ -140,11 +164,15 @@ public class DialogueController : MonoBehaviour
             if (!speakerBoxParents[i].name.Contains(speaker)) continue;
 
             speakerBoxParents[i].gameObject.SetActive(true);
+
             return speakerBoxParents[i].GetComponentInChildren<DialogueBox>();
         }
 
         if (debugMessages)
+        {
             Debug.Log(dialogueLine.speaker + " has no DialogueBox in " + nameof(speakerBoxParents));
+        }
+
         return null;
     }
 
@@ -161,34 +189,41 @@ public class DialogueController : MonoBehaviour
             NPCNav nPCNav = chars[i].GetComponentInChildren<NPCNav>();
 
             if (nPCNav.IsRight)
+            {
                 return topRight;
+            }
             else
+            {
                 return topLeft;
+            }
         }
 
         if (debugMessages)
-            Debug.Log(dialogueLine.speaker + " isn't in scene");
+        {
+            Debug.Log(speaker + " isn't in scene");
+        }
+
         return null;
     }
-    #endregion
 
-    #region Ink
     DialogueLine HandleTags(List<string> currentTags, DialogueLine dialogueLine)
     {
         foreach (string tag in currentTags)
         {
             string[] splitTag = tag.Split(':');
+
             if (splitTag.Length != 2)
             {
                 Debug.LogError(tag + " hasnt been split correctly");
                 break;
             }
+
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
 
             switch (tagKey)
             {
-                case speakerTag:
+                case SPEAKER_TAG:
                     dialogueLine.speaker = tagValue;
                     break;
                 default:
@@ -235,7 +270,9 @@ public class DialogueController : MonoBehaviour
     public void BoostTypeSpeed(float typeTime)
     {
         if (debugTextSpeedCor != null)
+        {
             StopCoroutine(debugTextSpeedCor);
+        }
 
         debugTextSpeedCor = StartCoroutine(BoostTypeSpeedCoroutine(typeTime));
     }
@@ -246,5 +283,22 @@ public class DialogueController : MonoBehaviour
         yield return new WaitForSeconds(typeTime);
         TypeSpeed = oldSpeed;
     }
-    #endregion
+
+    IEnumerator HandleDialogueQueue()
+    {
+        while (InDialogue)
+        {
+            yield return null;
+        }
+
+        var dialogueIndex = queuedDialogue.Count - 1;
+        var dialoguePath = queuedDialogue[dialogueIndex];
+
+        StartDialogue(dialoguePath);
+        queuedDialogue.Remove(dialoguePath);
+
+        if (queuedDialogue.Count == 0) yield break;
+
+        dialogueQueueCor = StartCoroutine(HandleDialogueQueue());
+    }
 }

@@ -8,12 +8,18 @@ using UnityEngine.UI;
 /// <summary> Handles the image and execution of abilities </summary>
 public class AbilitySlot : MonoBehaviour
 {
+    [Header("Runtime")]
     [field: SerializeField] public bool Performed { get; private set; }
+    [SerializeField] int slotIndex;
+
+    [Header("Settings")]
     [SerializeField] bool blockedByUI = false;
+
+    [Header("References")]
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
+    
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
-    [SerializeField] int slotIndex;
     [SerializeField] Image abilityImage;
     [SerializeField] Image abilityImageBG;
     [SerializeField] GameObject numberObject;
@@ -21,7 +27,6 @@ public class AbilitySlot : MonoBehaviour
 
     public bool Occupied { get; private set; }
     Animator anim;
-
     float lastExecutedTime;
     const float EXECUTE_COOLDOWN = 0.2f;
 

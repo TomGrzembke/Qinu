@@ -1,7 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    IEnumerator Start()
+    {
+        yield return null;
+        InputManager.Instance.ShowCursor();
+    }
+
     public void StartGame()
     {
         GameStateManager.Instance.StartGame();

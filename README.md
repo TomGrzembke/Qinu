@@ -29,7 +29,7 @@ RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2
 This Project was displayed at [Talk and Play 53](https://www.flickr.com/photos/12601747@N00/54932329209/in/album-72177720330395625)
 
 - Release date: 01.07.2024
-- Unity Version: Unity 2022.3.62f3
+- Unity Version: Unity 6000.5.3f1 (used 2022.3.62f3 for the biggest period of development) 
 - Theres a "[What does Qinu Consist of](https://www.youtube.com/watch?v=UqLftMAHedM)" Video on Yt
 
 ## Packages: 

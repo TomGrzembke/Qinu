@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -5,7 +6,6 @@ using UnityEngine;
 /// <summary> Manages goals, resets and the ball </summary>
 public class MinigameManager : MonoBehaviour
 {
-    #region Serialized
     [field: SerializeField] public CharSwitch CharSwitchManager { get; private set; }
     [SerializeField] float pointsTilWin = 5;
     [SerializeField] Vector2 pointCounter;
@@ -33,10 +33,11 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] AnimationCurve slowMoCurve;
     [SerializeField] float slowMoBlendTime = 0.3f;
     [SerializeField] float slowMoBlendTimeScale = .8f;
-    #endregion
-    
+
     public static MinigameManager Instance;
     Coroutine blendRoutine;
+
+    public static event Action<Vector2> OnGoalShot;
 
     void Awake()
     {
@@ -48,9 +49,15 @@ public class MinigameManager : MonoBehaviour
         bool goalInLeft = goalID == 0;
 
         if (goalInLeft)
+        {
             pointCounter.y += 1;
+        }
         else
+        {
             pointCounter.x += 1;
+        }
+        
+        OnGoalShot?.Invoke(pointCounter);
 
         UpdateCounter();
 
@@ -75,11 +82,17 @@ public class MinigameManager : MonoBehaviour
         float ballSpeed = pukRB.linearVelocity.magnitude;
 
         if (ballSpeed < ballSFXSpeed[0])
+        {
             SoundManager.Instance.PlaySound(SoundType.GoalShotSoft);
+        }
         else if (ballSpeed < ballSFXSpeed[1])
+        {
             SoundManager.Instance.PlaySound(SoundType.GoalShotMiddle);
+        }
         else
+        {
             SoundManager.Instance.PlaySound(SoundType.GoalShotHard);
+        }
     }
 
     public void ResetArena()
@@ -103,7 +116,9 @@ public class MinigameManager : MonoBehaviour
     public void PlaySlowMo()
     {
         if (blendRoutine != null)
+        {
             StopCoroutine(blendRoutine);
+        }
 
         blendRoutine = StartCoroutine(NormalBlendTimeScale());
     }
@@ -111,7 +126,9 @@ public class MinigameManager : MonoBehaviour
     public void PlayStrongSlowMo()
     {
         if (blendRoutine != null)
+        {
             StopCoroutine(blendRoutine);
+        }
 
         blendRoutine = StartCoroutine(StrongBlendTimeScale());
     }
@@ -165,5 +182,15 @@ public class MinigameManager : MonoBehaviour
         }
 
         blendRoutine = null;
+    }
+
+    public int GetLeftSideGoals()
+    {
+        return (int)pointCounter.x;
+    }
+
+    public int GetRightSideGoals()
+    {
+        return (int)pointCounter.y;
     }
 }

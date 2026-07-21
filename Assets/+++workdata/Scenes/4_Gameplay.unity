@@ -2833,8 +2833,8 @@ MonoBehaviour:
   - beforeWaitSeconds: 1.5
     dialogueName: Ball
     afterWaitSeconds: 0
-    condition: 2
-  - beforeWaitSeconds: 3
+    condition: 6
+  - beforeWaitSeconds: 0.2
     dialogueName: Abilities
     afterWaitSeconds: 0
     condition: 3
@@ -3198,7 +3198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameState>k__BackingField: 0
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 00000000010000000100000002000000
+  <FirstGameModes>k__BackingField: 010000000100000002000000
   <CharStats>k__BackingField: []
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
@@ -3693,6 +3693,10 @@ PrefabInstance:
     - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: debugMessages
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: <TypeSpeed>k__BackingField
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: <TimeBetweenDialogue>k__BackingField

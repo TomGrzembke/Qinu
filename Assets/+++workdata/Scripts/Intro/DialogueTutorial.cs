@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary> Uses a list of dialogue segements to create a custom dynamic sequence of dialogue and gameplay </summary>
@@ -17,19 +18,34 @@ public class DialogueTutorial : MonoBehaviour
     bool Ability0Pressed => AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
     Coroutine storySegmentCor;
     Vector3 pukPos;
+    bool goalFreshlyShot;
 
     void Start()
     {
         if (startMusic)
+        {
             SoundManager.Instance.PlayMusic(startMusic);
+        }
 
         if (MinigameManager.Instance)
+        {
             pukPos = MinigameManager.Instance.Puk.position;
+            MinigameManager.OnGoalShot += OnGoalShot;
+        }
 
         StartCoroutine(IntroCoroutine());
+
         TournamentManager.Instance.LeftPlayerAdd();
+
         if (anthony)
+        {
             TournamentManager.Instance.RightPlayerAdd(anthony);
+        }
+    }
+
+    void OnDestroy()
+    {
+        MinigameManager.OnGoalShot -= OnGoalShot;
     }
 
     IEnumerator IntroCoroutine()
@@ -70,14 +86,27 @@ public class DialogueTutorial : MonoBehaviour
                 return !RewardWindow.Instance.InAbilitySelect;
 
             case ContineCondition.ButtonPressed:
-
                 return Ability0Pressed;
 
             case ContineCondition.InRound:
                 return !IsPlaying;
 
+            case ContineCondition.WaitGoalShot:
+                return goalFreshlyShot;
             default:
                 return true;
+        }
+    }
+
+    void OnGoalShot(Vector2 standing)
+    {
+        goalFreshlyShot = true;
+        StartCoroutine(CleanupGoalShot());
+
+        IEnumerator CleanupGoalShot()
+        {
+            yield return null;
+            goalFreshlyShot = false;
         }
     }
 
@@ -100,7 +129,8 @@ public enum ContineCondition
     WaitBallMove,
     WaitAbilitySelect,
     ButtonPressed,
-    InRound
+    InRound,
+    WaitGoalShot,
 }
 
 [Serializable]

@@ -1,23 +1,22 @@
 == Welcome
 Welcome Qinu! #speaker: Anthony
     ~Event ("Blocker")
-    ~Event ("Ball")
  -> END
  
  == Ball
- I'm Anthony the spirit of empathy.
  What am I? #speaker: Qinu
- Your a surpressed feeling. #speaker: Anthony
- A spirit held captive by your problems.
-    ~Event ("Problems")
- Don't worry you are safe and stored in this data segment.
- You will be competing for your freedom.
- Let's play a bit!
+ Your a suppressed feeling. #speaker: Anthony
+ Don't worry about it for now.
+ Is this.. an air hockey arena? #speaker: Qinu
+ Exactly! Let's play a bit! #speaker: Anthony
+    ~Event ("Ball")
     ~Event ("AnthonyActive")
+    ~Event ("GoalActive")
  -> END
  
  == Abilities
-    ~Event ("ActivateAbilities")
+  ~Event ("GoalActive")
+  ~Event ("ActivateAbilities")
  You will be able to use 3 ability slots. #speaker: Anthony
  Here's your first one! #speaker: Anthony
     ~Event ("GainDash")
@@ -33,20 +32,39 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
   ==ActivateGoals
-Now that's a dash, what do you think friends? #speaker: Anthony
-    ~Event ("SilentSpiritsExclamation")
-You win a round by scoring 3 Goals!
-    ~Event ("GoalActive")
+   ~Event ("GoalActive")
+Now that's a dash! #speaker: Anthony
+Whoever scores 3 Goals first wins.
  -> END
  
    ==IntroMatchEnd
 Good match! #speaker: Anthony
+~Event ("BarUp")
 The bar goes up if you win 
-    ~Event ("BarUp")
-and down if you loose.
     ~Event ("BarDown")
+and down if you loose.
 Don't let it reach the left.
     ~Event ("UpdateBar")
-Now Meet the others!
-Hi Qinu. #speaker: Bodi
+Now Show 'em what you've got!
  -> END
+ 
+ == StartArchive
+ Welcome Qinu! #speaker: Anthony
+    ~Event ("Blocker")
+     I'm Anthony the spirit of empathy.
+ What am I? #speaker: Qinu
+ Your a surpressed feeling. #speaker: Anthony
+ A spirit held captive by your problems.
+    ~Event ("Problems")
+ Don't worry you are safe and stored in this data segment.
+ You will be competing for your freedom.
+ Let's play a bit!
+    ~Event ("Ball")
+    ~Event ("AnthonyActive")
+        ~Event ("ActivateAbilities")
+ You will be able to use 3 ability slots. #speaker: Anthony
+ Here's your first one! #speaker: Anthony
+    ~Event ("GainDash")
+     Activate it with the left mouse button. #speaker: Anthony
+         ~Event ("QHelp")
+ ->END

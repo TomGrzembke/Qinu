@@ -1172,6 +1172,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1662176734, guid: 48eaf0824b2f6d547b2b69c2f3a54c92, type: 3}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20580909
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.07929869
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
       value: R
@@ -2472,6 +2492,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 629107452482937804, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2140923976461966759, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2550,6 +2574,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2140923976461966759, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -849796893, guid: 48eaf0824b2f6d547b2b69c2f3a54c92, type: 3}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20580909
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.07929869
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
@@ -3198,7 +3242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameState>k__BackingField: 0
   <CurrentGameMode>k__BackingField: 0
-  <FirstGameModes>k__BackingField: 010000000100000002000000
+  <FirstGameModes>k__BackingField: 01000000010000000100000002000000
   <CharStats>k__BackingField: []
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
@@ -5823,6 +5867,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20580909
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614666217794141140, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.07929869
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
       value: L
@@ -6661,7 +6721,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144689463048450479}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

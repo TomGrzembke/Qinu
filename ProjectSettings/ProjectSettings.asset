@@ -150,7 +150,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.12.045
+  bundleVersion: 0.12.046
   preloadedAssets:
   - {fileID: -944628639613478452, guid: f6edbd41ece14fa46a9c78fa0f202969, type: 3}
   metroInputSource: 0
@@ -403,6 +403,9 @@ PlayerSettings:
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1
+    m_DynamicBatching: 0
+  - m_BuildTarget: WebGL
+    m_StaticBatching: 0
     m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []

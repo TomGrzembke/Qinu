@@ -41,6 +41,7 @@ public class TournamentManager : MonoBehaviour
     int roundAmount;
 
 
+
     private void OnEnable()
     {
         Instance = this;
@@ -59,6 +60,9 @@ public class TournamentManager : MonoBehaviour
         {
             CharStats.Add(new(AvailableChars[i]));
         }
+
+        GameObject anthony = AvailableChars[1];
+        lastPlayed = anthony;
     }
 
     public void InitializeGame()
@@ -91,8 +95,9 @@ public class TournamentManager : MonoBehaviour
 
                 break;
             case GameMode.notBodi:
+                NotBodiRound();
                 break;
-                
+
             default:
                 Calc1v1();
                 break;
@@ -102,9 +107,13 @@ public class TournamentManager : MonoBehaviour
     void DetermineWhichMode()
     {
         if (roundAmount < FirstGameModes.Count)
+        {
             CurrentGameMode = FirstGameModes[roundAmount];
+        }
         else
+        {
             CurrentGameMode = (GameMode)Random.Range(1, 3);
+        }
     }
 
     void Calc1v1()
@@ -149,6 +158,20 @@ public class TournamentManager : MonoBehaviour
         AddToList(RightPlayers, bodi);
         SwitchChars();
     }
+
+    void NotBodiRound()
+    {
+        ClearSideLists();
+        LeftPlayerAdd();
+        GameObject bodi = AvailableChars[2];
+
+        lastPlayed = GetLowestPlayRate(lastPlayed, bodi);
+
+        var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
+        AddToList(RightPlayers, newChar);
+        SwitchChars();
+    }
+
 
     void AddToList(List<GameObject> list, GameObject toAdd)
     {
@@ -349,8 +372,9 @@ public class TournamentManager : MonoBehaviour
         for (int i = 1; i < CharStats.Count; i++)
         {
             if (CharStats[i].TimesPlayed == lowestTimesPlayed)
-                if (Random.Range(0, 2) == 0)
-                    continue;
+            {
+                if (Random.Range(0, 2) == 0) continue;
+            }
 
             if (CharStats[i].TimesPlayed <= lowestTimesPlayed)
             {

@@ -6,9 +6,8 @@ using UnityEngine;
 /// <summary> Switches the color of the given assets on character change </summary>
 public class CharSwitch : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI rightScoreTxt;
-    [SerializeField] SpriteRenderer rightArenaSR;
-    [SerializeField] SpriteRenderer arenaMiddle;
+    [SerializeField] SpriteRenderer[] secondaryColorSpriteRenderes;
+    [SerializeField] TextMeshProUGUI[] secondaryColorTexts;
     [SerializeField] float colorBlendTime = 2;
 
     CharAestheticSettings rightCharAestheticSettings;
@@ -17,10 +16,18 @@ public class CharSwitch : MonoBehaviour
     {
         rightCharAestheticSettings = rightPlayers[0].GetComponent<CharSOHolder>().CharSO.charAestheticSettings;
 
-        Color primaryCol = rightCharAestheticSettings.PrimaryColor;
-        StartCoroutine(BlendColorCor(rightScoreTxt, primaryCol));
-        StartCoroutine(BlendColorCor(rightArenaSR, primaryCol));
-        StartCoroutine(BlendColorCor(arenaMiddle, primaryCol));
+        Color secondaryArenaColor = rightCharAestheticSettings.PrimaryColor;
+
+        foreach (var entry in secondaryColorSpriteRenderes)
+        {
+            StartCoroutine(BlendColorCor(entry, secondaryArenaColor));
+        }
+
+        foreach (var entry in secondaryColorTexts)
+        {
+            StartCoroutine(BlendColorCor(entry, secondaryArenaColor));
+        }
+
         SoundManager.Instance.PlayMusic(rightCharAestheticSettings.Music);
     }
 

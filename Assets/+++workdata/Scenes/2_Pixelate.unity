@@ -324,6 +324,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1101106980633374068, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1336571108935631637, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: field of view
       value: 9

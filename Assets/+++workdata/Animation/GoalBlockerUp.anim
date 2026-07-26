@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GoalBlockerUp
-  serializedVersion: 7
+  serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -11.58, y: -3.1287, z: 0}
+        value: {x: -11.406, y: -3.1287, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -29,7 +29,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.81666666
-        value: {x: -11.58, y: -1.5478, z: 0}
+        value: {x: -11.3523, y: -1.5478, z: 0}
         inSlope: {x: 0, y: 3.2387, z: 0}
         outSlope: {x: 0, y: 3.2387, z: 0}
         tangentMode: 0
@@ -38,7 +38,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1
-        value: {x: -11.58, y: 0.109999895, z: 0}
+        value: {x: -11.3622, y: 0.109999895, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.08062313, y: 0.06036072, z: 1}
+        value: {x: 0.21656685, y: 0.06036072, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -64,7 +64,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.81666666
-        value: {x: 0.08062313, y: 1.2953864, z: 1}
+        value: {x: 0.25850278, y: 1.2953864, z: 1}
         inSlope: {x: 0, y: 2.5302281, z: 0}
         outSlope: {x: 0, y: 2.5302281, z: 0}
         tangentMode: 0
@@ -73,7 +73,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1
-        value: {x: 0.08062313, y: 2.5905888, z: 1}
+        value: {x: 0.2507619, y: 2.5905888, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -102,6 +102,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     - serializedVersion: 2
       path: 1585480085
       attribute: 3
@@ -111,6 +112,7 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+      metaData: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -139,7 +141,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -11.58
+        value: -11.406
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -148,7 +150,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.81666666
-        value: -11.58
+        value: -11.3523
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -157,7 +159,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: -11.58
+        value: -11.3622
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -256,7 +258,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.08062313
+        value: 0.21656685
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -265,7 +267,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.81666666
-        value: 0.08062313
+        value: 0.25850278
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -274,7 +276,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.08062313
+        value: 0.2507619
         inSlope: 0
         outSlope: 0
         tangentMode: 136

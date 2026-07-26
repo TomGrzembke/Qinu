@@ -19,7 +19,8 @@ public class TournamentManager : MonoBehaviour
     {
         Bodi,
         a1v1,
-        a2v2
+        a2v2,
+        notBodi,
     }
 
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
@@ -75,12 +76,27 @@ public class TournamentManager : MonoBehaviour
     {
         DetermineWhichMode();
 
-        if (CurrentGameMode == GameMode.a1v1)
-            Calc1v1();
-        else if (CurrentGameMode == GameMode.a2v2)
-            Calc2v2();
-        else if (CurrentGameMode == GameMode.Bodi)
-            BodiRound();
+        switch (CurrentGameMode)
+        {
+            case GameMode.a1v1:
+                Calc1v1();
+
+                break;
+            case GameMode.a2v2:
+                Calc2v2();
+
+                break;
+            case GameMode.Bodi:
+                BodiRound();
+
+                break;
+            case GameMode.notBodi:
+                break;
+                
+            default:
+                Calc1v1();
+                break;
+        }
     }
 
     void DetermineWhichMode()
@@ -224,7 +240,7 @@ public class TournamentManager : MonoBehaviour
         {
             InitializeGame();
         }
-        
+
         MinigameManager.Instance.ReleaseBall();
     }
 

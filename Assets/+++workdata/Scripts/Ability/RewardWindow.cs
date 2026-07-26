@@ -7,7 +7,6 @@ using UnityEngine;
 /// <summary> Responsible for the UI and distrebution of abilities</summary>
 public class RewardWindow : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] GameObject rewardWindow;
     [SerializeField] GameObject essentialUI;
 
@@ -19,15 +18,11 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] List<GameObject> rewardsReceived;
     [field: SerializeField] public bool InAbilitySelect { get; private set; }
 
-    #endregion
-
-    #region Non Serialized
     public static RewardWindow Instance;
     GameObject[] rewards;
     CanvasGroup rewardWindowCanvasGroup;
     CanvasGroup essentialUICanvasGroup;
     Coroutine currentRewarWindowCoroutine;
-    #endregion
 
     void Awake()
     {
@@ -44,22 +39,28 @@ public class RewardWindow : MonoBehaviour
 
         for (int i = 0; i < abilitySlots.Length; i++)
         {
-            if (abilitySlots[i].CurrentAbilityPrefab)
-                rewardsReceived.Add(abilitySlots[i].CurrentAbilityPrefab);
+            if (!abilitySlots[i].CurrentAbilityPrefab) continue;
+
+            rewardsReceived.Add(abilitySlots[i].CurrentAbilityPrefab);
         }
     }
 
     public void OpenRewardWindow(bool showAll = true)
     {
         if (showAll)
+        {
             for (int i = 0; i < choiceButtonTexts.Length; i++)
             {
                 choiceButtonTexts[i].gameObject.SetActive(true);
             }
+        }
 
         if (currentRewarWindowCoroutine != null)
+        {
             StopCoroutine(currentRewarWindowCoroutine);
+        }
 
+        MinigameManager.Instance.CageBall();
         SoundManager.Instance.PlaySound(SoundType.AbilityPopup);
         currentRewarWindowCoroutine = StartCoroutine(ShowCoroutine());
     }
@@ -75,7 +76,9 @@ public class RewardWindow : MonoBehaviour
         for (int i = 0; i < choiceButtonTexts.Length; i++)
         {
             if (rewards[i] != null && rewards[i].TryGetComponent(out Ability ability))
+            {
                 currentText = ability.AbilitySO.abilityTitel;
+            }
             else
             {
                 Debug.Log(i + " has no Ability Script");
@@ -95,7 +98,9 @@ public class RewardWindow : MonoBehaviour
 
 
         if (specified.TryGetComponent(out Ability ability))
+        {
             currentText = ability.AbilitySO.abilityTitel;
+        }
         else
         {
             Debug.Log(specified.name + " has no Ability Script");
@@ -135,11 +140,9 @@ public class RewardWindow : MonoBehaviour
 
         GameObject randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
 
-        bool applicableAbility = randomObject != null && !rewardsReceived.Contains(randomObject)
-            && randomObject != priorChoice1 && randomObject != priorChoice2;
+        bool applicableAbility = randomObject != null && !rewardsReceived.Contains(randomObject) && randomObject != priorChoice1 && randomObject != priorChoice2;
 
-        if (!applicableAbility)
-            return GetRandomReward(priorChoice1, priorChoice2);
+        if (!applicableAbility) return GetRandomReward(priorChoice1, priorChoice2);
 
         return randomObject;
     }
@@ -156,8 +159,12 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void Close()
     {
+        MinigameManager.Instance.ReleaseBall();
+
         if (currentRewarWindowCoroutine != null)
+        {
             StopCoroutine(currentRewarWindowCoroutine);
+        }
 
         currentRewarWindowCoroutine = StartCoroutine(HideCoroutine());
     }
@@ -166,7 +173,7 @@ public class RewardWindow : MonoBehaviour
     {
         InputManager.Instance.ShowCursor();
 
-        
+
         InAbilitySelect = true;
 
         essentialUI.SetActive(true);
@@ -184,6 +191,7 @@ public class RewardWindow : MonoBehaviour
             essentialUICanvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
             rewardWindowCanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
+
         rewardWindowCanvasGroup.interactable = true;
         rewardWindowCanvasGroup.alpha = 1;
         essentialUICanvasGroup.alpha = 0;

@@ -56,7 +56,7 @@ public class MinigameManager : MonoBehaviour
         {
             pointCounter.x += 1;
         }
-        
+
         OnGoalShot?.Invoke(pointCounter);
 
         UpdateCounter();
@@ -105,6 +105,17 @@ public class MinigameManager : MonoBehaviour
     {
         pointCounter = new();
         Puk.position = pukResetPos.position;
+    }
+
+    public void CageBall()
+    {
+        ResetInternal();
+        Cage.SetActive(true);
+    }
+
+    public void ReleaseBall()
+    {
+        Cage.SetActive(false);
     }
 
     void UpdateCounter()

@@ -177,8 +177,7 @@ public class TournamentManager : MonoBehaviour
 
         SituationalDialogue.Instance.StartDialogue(UseList(RightPlayers)[0].name);
 
-        MinigameManager.Instance.ResetInternal();
-        MinigameManager.Instance.Cage.SetActive(true);
+        MinigameManager.Instance.CageBall();
 
         GameState = GameStateEnum.AfterGame;
 
@@ -226,7 +225,7 @@ public class TournamentManager : MonoBehaviour
             InitializeGame();
         }
         
-        MinigameManager.Instance.Cage.SetActive(false);
+        MinigameManager.Instance.ReleaseBall();
     }
 
     bool CheckOutOfInteraction()

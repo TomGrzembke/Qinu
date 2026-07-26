@@ -70,6 +70,7 @@ public class GameStateManager : MonoBehaviour
     {
         ShowLoadScreen(true);
         yield return ResetCor();
+        Time.timeScale = 1;
         ShowLoadScreen(false);
         resetRoutine = null;
     }

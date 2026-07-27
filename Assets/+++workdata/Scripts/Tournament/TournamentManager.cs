@@ -12,7 +12,7 @@ public class TournamentManager : MonoBehaviour
     {
         InGame,
         AfterGame,
-        OutOfGame
+        OutOfGame,
     }
 
     public enum GameMode
@@ -22,7 +22,7 @@ public class TournamentManager : MonoBehaviour
         a2v2,
         notBodi,
     }
-
+    
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
@@ -39,7 +39,6 @@ public class TournamentManager : MonoBehaviour
     GameObject lastPlayed;
     bool firstMatch = true;
     int roundAmount;
-
 
 
     private void OnEnable()

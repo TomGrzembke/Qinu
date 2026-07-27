@@ -18,10 +18,10 @@ public class AbilitySlot : MonoBehaviour
     [Header("References")]
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
     [SerializeField] GameObject currentAbilityPrefab;
-    
+
     [field: SerializeField] public Ability CurrentAbility { get; private set; }
     [SerializeField] Image abilityImage;
-    [SerializeField] Image abilityImageBG;
+    [SerializeField] Image[] abilityBGImages;
     [SerializeField] GameObject numberObject;
     [SerializeField] ParticleSystem lostVFX;
 
@@ -35,12 +35,7 @@ public class AbilitySlot : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void OnValidate()
-    {
-        RefreshPicture();
-    }
-
-    void RefreshPicture()
+    public void RefreshPicture()
     {
         Ability tempAbility = null;
         var hasAbilityPrefab = currentAbilityPrefab != null;
@@ -66,41 +61,70 @@ public class AbilitySlot : MonoBehaviour
         }
     }
 
+    public void RefreshRarity(AbilityRaritiesSO abilityRaritiesSO)
+    {
+        var currentRarity = 0;
+
+        if (CurrentAbility != null)
+        {
+            currentRarity = CurrentAbility.GetCurrentRarity();
+        }
+
+        var currentRarityColor = abilityRaritiesSO.RarityColors[currentRarity];
+
+        foreach (var entry in abilityBGImages)
+        {
+            entry.color = currentRarityColor;
+        }
+    }
+
+    public bool UpgradeRarity(AbilityRaritiesSO abilityRaritiesSO)
+    {
+        if (CurrentAbility == null) return false;
+
+        bool succeeded = CurrentAbility.UpgradeRarity(abilityRaritiesSO.MaxRarity);
+        RefreshRarity(abilityRaritiesSO);
+
+        return succeeded;
+    }
+
     public void ChangeAbilityPrefab(GameObject newAbilityPrefab)
     {
         if (CurrentAbility != null)
         {
             CurrentAbility.Cleanup();
-            //DestroyImmediate(CurrentAbility.gameObject, true);
         }
 
-        if (newAbilityPrefab == null)
+        bool lostAbility = newAbilityPrefab == null;
+        currentAbilityPrefab = newAbilityPrefab;
+
+        if (lostAbility)
         {
-            abilityImageBG.color = Color.red;
             lostVFX.Play();
             numberObject.SetActive(false);
         }
         else
-        {
-            abilityImageBG.color = Color.gray;
-        }
-
-        currentAbilityPrefab = newAbilityPrefab;
-
-        if (currentAbilityPrefab)
         {
             CurrentAbility = Instantiate(newAbilityPrefab, gameObject.transform).GetComponent<Ability>();
             EnterAbility();
         }
 
         RefreshPicture();
+
+        if (lostAbility)
+        {
+            foreach (var entry in abilityBGImages)
+            {
+                entry.color = Color.red;
+            }
+        }
     }
 
     public void EnterAbility()
     {
         if (CurrentAbility == null) return;
 
-        CurrentAbility.EnterAbility(abilityImage, abilityImageBG, numberObject, anim);
+        CurrentAbility.EnterAbility(abilityImage, abilityBGImages, numberObject, anim);
     }
 
     public void Execute(bool performed = true)

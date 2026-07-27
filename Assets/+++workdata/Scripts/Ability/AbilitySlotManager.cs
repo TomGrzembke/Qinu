@@ -4,7 +4,7 @@ public class AbilitySlotManager : MonoBehaviour
 {
     [field: SerializeField] public AbilitySlot[] AbilitySlots { get; private set; }
 
-    [SerializeField] string[] abilityKeys = new string[4] {"Left", "Middle", "Right", "None"};
+    [SerializeField] string[] abilityKeys = new string[4] { "Left", "Middle", "Right", "None" };
 
     [Header("Ability getter")]
     [SerializeField]
@@ -14,12 +14,22 @@ public class AbilitySlotManager : MonoBehaviour
     [field: SerializeField] public Transform Puk { get; private set; }
     [field: SerializeField] public Transform Middle { get; private set; }
     [field: SerializeField] public Vector2 MiddleStartPosition { get; private set; }
+    [field: SerializeField] public AbilityRaritiesSO RaritySO { get; private set; }
 
 
     public static AbilitySlotManager Instance;
 
 
     void Awake() => Instance = this;
+
+    void OnValidate()
+    {
+        foreach (var entry in AbilitySlots)
+        {
+            entry.RefreshPicture();
+            entry.RefreshRarity(RaritySO);
+        }
+    }
 
     void Start()
     {
@@ -96,5 +106,12 @@ public class AbilitySlotManager : MonoBehaviour
     public bool GetAbilitySlotPerformed(int index)
     {
         return AbilitySlots[index].Performed;
+    }
+
+    public bool UpgradeRarity(int index)
+    {
+        if (index < 0 || index >= AbilitySlots.Length) return false;
+
+        return AbilitySlots[index].UpgradeRarity(RaritySO);
     }
 }

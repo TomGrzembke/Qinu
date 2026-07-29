@@ -21,7 +21,6 @@ public class RewardWindow : MonoBehaviour
     public static RewardWindow Instance;
     GameObject[] rewards;
     CanvasGroup rewardWindowCanvasGroup;
-    CanvasGroup essentialUICanvasGroup;
     Coroutine currentRewarWindowCoroutine;
     GameObject rewardSelected;
 
@@ -29,12 +28,10 @@ public class RewardWindow : MonoBehaviour
     {
         Instance = this;
         rewardWindowCanvasGroup = rewardWindow.GetComponent<CanvasGroup>();
-        essentialUICanvasGroup = essentialUI.GetComponent<CanvasGroup>();
     }
 
     public void OpenRewardWindow(bool showAll = true)
     {
-
         if (showAll)
         {
             for (int i = 0; i < choiceButtonTexts.Length; i++)
@@ -221,7 +218,6 @@ public class RewardWindow : MonoBehaviour
         essentialUI.SetActive(true);
         rewardWindow.SetActive(true);
 
-        //essentialUICanvasGroup.alpha = 1;
         rewardWindowCanvasGroup.alpha = 0;
 
         float time = 0;
@@ -230,13 +226,11 @@ public class RewardWindow : MonoBehaviour
         {
             yield return null;
             time += Time.unscaledDeltaTime;
-            // essentialUICanvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
             rewardWindowCanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
 
         rewardWindowCanvasGroup.interactable = true;
         rewardWindowCanvasGroup.alpha = 1;
-        // essentialUICanvasGroup.alpha = 0;
     }
 
     IEnumerator HideCoroutine()
@@ -244,7 +238,6 @@ public class RewardWindow : MonoBehaviour
         InputManager.Instance.HideCursor();
 
         rewardWindowCanvasGroup.interactable = false;
-        //essentialUICanvasGroup.alpha = 0;
         essentialUI.SetActive(true);
         rewardWindowCanvasGroup.alpha = 0;
         rewardWindow.SetActive(false);
@@ -254,16 +247,13 @@ public class RewardWindow : MonoBehaviour
         {
             yield return null;
             time += Time.unscaledDeltaTime;
-            // essentialUICanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
-        //essentialUICanvasGroup.alpha = 1;
         InAbilitySelect = false;
     }
 
     public void SelectedSlot(int i)
     {
         choiceButtonAnimation[i].SetPressed(gameObject, true);
-        //Debug.Log("Selected Slot: " + i);
 
         ExchangeReward(rewardSelected, i);
         rewardSelected = null;

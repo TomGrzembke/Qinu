@@ -84,9 +84,12 @@ public class AbilitySlotManager : MonoBehaviour
             {
                 AbilitySlots[i].UpgradeRarity(RaritySO);
 
-                break;
+                return;
             }
+        }
 
+        for (int i = 0; i < AbilitySlots.Length; i++)
+        {
             if (!AbilitySlots[i].Occupied)
             {
                 AbilitySlots[i].ChangeAbilityPrefab(newPrefab);

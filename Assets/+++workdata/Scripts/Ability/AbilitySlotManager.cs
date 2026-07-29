@@ -1,3 +1,4 @@
+using MyBox;
 using UnityEngine;
 
 public class AbilitySlotManager : MonoBehaviour
@@ -41,7 +42,7 @@ public class AbilitySlotManager : MonoBehaviour
 
             if (AbilitySlots[i].CurrentAbilityPrefab == null) continue;
 
-            AddNewAbility(AbilitySlots[i].CurrentAbilityPrefab, i);
+            ExchangeAbility(AbilitySlots[i].CurrentAbilityPrefab, i);
         }
     }
 
@@ -50,16 +51,28 @@ public class AbilitySlotManager : MonoBehaviour
         AbilitySlots[slotIndex].Execute(performed);
     }
 
-    public void AddNewAbility(GameObject newPrefab, int slotIndex)
+    public void ExchangeAbility(GameObject newPrefab, int slotIndex)
     {
+        if (slotIndex == -1)
+        {
+            AddNewAbility(newPrefab);
+            return;
+        }
+
         AbilitySlots[slotIndex].ChangeAbilityPrefab(newPrefab);
+        AbilitySlots[slotIndex].RefreshRarity(RaritySO);
     }
 
     public GameObject RemoveRandomAbility()
     {
         int number = Random.Range(1, AbilitySlots.Length);
-        GameObject prefab = AbilitySlots[number].CurrentAbilityPrefab;
-        AbilitySlots[number].ChangeAbilityPrefab(null);
+        return RemoveAbility(number);
+    }
+
+    GameObject RemoveAbility(int slotIndex)
+    {
+        GameObject prefab = AbilitySlots[slotIndex].CurrentAbilityPrefab;
+        AbilitySlots[slotIndex].ChangeAbilityPrefab(null);
         return prefab;
     }
 
@@ -67,11 +80,18 @@ public class AbilitySlotManager : MonoBehaviour
     {
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
-            if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab) break;
+            if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab)
+            {
+                AbilitySlots[i].UpgradeRarity(RaritySO);
+
+                break;
+            }
 
             if (!AbilitySlots[i].Occupied)
             {
                 AbilitySlots[i].ChangeAbilityPrefab(newPrefab);
+                AbilitySlots[i].RefreshRarity(RaritySO);
+
                 break;
             }
         }
@@ -87,6 +107,50 @@ public class AbilitySlotManager : MonoBehaviour
         return false;
     }
 
+    public bool CheckIfAbilityCanUpgradeSomething(GameObject abilityPrefab)
+    {
+        bool equalsCurrentPrefab = false;
+        bool hasUpgradeRoom = false;
+
+        for (int i = 0; i < AbilitySlots.Length; i++)
+        {
+            if (!AbilitySlots[i].Occupied) continue;
+            if (AbilitySlots[i].CurrentAbility == null) continue;
+
+            equalsCurrentPrefab = AbilitySlots[i].CurrentAbilityPrefab.Equals(abilityPrefab);
+            hasUpgradeRoom = AbilitySlots[i].GetRarity() < RaritySO.MaxRarity;
+
+            if (equalsCurrentPrefab && hasUpgradeRoom) return true;
+        }
+
+        return false;
+    }
+
+    public bool CheckIfSlotHasUpgradeRoom(GameObject abilityPrefab)
+    {
+        var slotID = GetAbilitySlot(abilityPrefab);
+
+        if (slotID == -1) return true;
+
+        bool hasUpgradeRoom = AbilitySlots[slotID].GetRarity() < RaritySO.MaxRarity;
+
+        if (hasUpgradeRoom) return true;
+
+        return false;
+    }
+
+    public bool CheckIfSlotHasUpgradeRoom(int slotID)
+    {
+        if (AbilitySlots[slotID] == null) return true;
+
+        bool hasUpgradeRoom = AbilitySlots[slotID].GetRarity() < RaritySO.MaxRarity;
+
+        if (hasUpgradeRoom) return true;
+
+        return false;
+    }
+
+
     public string GetAvailableSlotKey()
     {
         int slotID = -1;
@@ -98,6 +162,7 @@ public class AbilitySlotManager : MonoBehaviour
             break;
         }
 
+        if (slotID == -1) return "Upgrade or Exchange";
         if (abilityKeys.Length - 1 >= slotID) return abilityKeys[slotID];
 
         return "Apparently No";
@@ -108,10 +173,38 @@ public class AbilitySlotManager : MonoBehaviour
         return AbilitySlots[index].Performed;
     }
 
+    [ButtonMethod]
+    public void Upgrade0()
+    {
+        UpgradeRarity(0);
+    }
+
     public bool UpgradeRarity(int index)
     {
         if (index < 0 || index >= AbilitySlots.Length) return false;
 
         return AbilitySlots[index].UpgradeRarity(RaritySO);
+    }
+
+    public void SetSelectable(bool condition)
+    {
+        foreach (var entry in AbilitySlots)
+        {
+            entry.SetSelectable(condition);
+        }
+    }
+
+    public int GetAbilitySlot(GameObject prefab)
+    {
+        foreach (var entry in AbilitySlots)
+        {
+            if (entry == null) continue;
+            if (entry.CurrentAbilityPrefab == null) continue;
+            if (!entry.CurrentAbilityPrefab.Equals(prefab)) continue;
+
+            return entry.GetSlotIndex();
+        }
+
+        return -1;
     }
 }

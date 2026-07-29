@@ -11,11 +11,11 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] GameObject essentialUI;
 
     [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
+    [SerializeField] UIButton[] choiceButtonAnimation;
     [SerializeField] TextMeshProUGUI keySlotDescription;
 
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
-    [SerializeField] List<GameObject> rewardsReceived;
     [field: SerializeField] public bool InAbilitySelect { get; private set; }
 
     public static RewardWindow Instance;
@@ -23,6 +23,7 @@ public class RewardWindow : MonoBehaviour
     CanvasGroup rewardWindowCanvasGroup;
     CanvasGroup essentialUICanvasGroup;
     Coroutine currentRewarWindowCoroutine;
+    GameObject rewardSelected;
 
     void Awake()
     {
@@ -31,22 +32,9 @@ public class RewardWindow : MonoBehaviour
         essentialUICanvasGroup = essentialUI.GetComponent<CanvasGroup>();
     }
 
-    IEnumerator Start()
-    {
-        yield return null;
-
-        AbilitySlot[] abilitySlots = AbilitySlotManager.Instance.AbilitySlots;
-
-        for (int i = 0; i < abilitySlots.Length; i++)
-        {
-            if (!abilitySlots[i].CurrentAbilityPrefab) continue;
-
-            rewardsReceived.Add(abilitySlots[i].CurrentAbilityPrefab);
-        }
-    }
-
     public void OpenRewardWindow(bool showAll = true)
     {
+
         if (showAll)
         {
             for (int i = 0; i < choiceButtonTexts.Length; i++)
@@ -68,8 +56,6 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void GiveReward()
     {
-        if (!AbilitySlotManager.Instance.CheckIfSlotAvailable()) return;
-
         rewards = PickThreeRewards();
         string currentText = "";
 
@@ -87,10 +73,11 @@ public class RewardWindow : MonoBehaviour
 
             choiceButtonTexts[i].text = currentText;
         }
-        keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
-
         OpenRewardWindow();
+
+        keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
     }
+
     public void GiveSingleReward(GameObject specified)
     {
         string currentText;
@@ -121,7 +108,7 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void RemoveReward()
     {
-        rewardsReceived.Remove(AbilitySlotManager.Instance.RemoveRandomAbility());
+        AbilitySlotManager.Instance.RemoveRandomAbility();
     }
 
     public GameObject[] PickThreeRewards()
@@ -137,10 +124,16 @@ public class RewardWindow : MonoBehaviour
     /// <summary> Gets a random reward and repeats if it isn't applicable </summary>
     public GameObject GetRandomReward(GameObject priorChoice1 = null, GameObject priorChoice2 = null)
     {
+        if (priorChoice1 != null && priorChoice2 && possibleRewards.Count < 3) return priorChoice1;
 
         GameObject randomObject = possibleRewards[Random.Range(0, possibleRewards.Count)];
 
-        bool applicableAbility = randomObject != null && !rewardsReceived.Contains(randomObject) && randomObject != priorChoice1 && randomObject != priorChoice2;
+        bool exists = randomObject != null;
+        bool isDifferentToChoice1 = randomObject != priorChoice1;
+        bool isDifferentToChoice2 = randomObject != priorChoice2;
+        bool hasUpgradeRoom = AbilitySlotManager.Instance.CheckIfSlotHasUpgradeRoom(randomObject);
+
+        bool applicableAbility = exists && isDifferentToChoice1 && isDifferentToChoice2 && hasUpgradeRoom;
 
         if (!applicableAbility) return GetRandomReward(priorChoice1, priorChoice2);
 
@@ -149,10 +142,46 @@ public class RewardWindow : MonoBehaviour
 
     public void RewardPicked(int buttonID)
     {
-        if (!rewards[buttonID]) return;
+        var abilityPrefab = rewards[buttonID];
+        if (abilityPrefab == null) return;
 
+        var slotAvailable = AbilitySlotManager.Instance.CheckIfSlotAvailable();
+        var upgardeAvailable = AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(abilityPrefab);
+
+        if (!slotAvailable && !upgardeAvailable)
+        {
+            rewardSelected = abilityPrefab;
+
+            StopChoicePressedAnimation();
+            choiceButtonAnimation[buttonID].SetPressed(gameObject, true);
+
+            if (!AbilitySlotManager.Instance.CheckIfSlotAvailable())
+            {
+                AbilitySlotManager.Instance.SetSelectable(true);
+            }
+
+            return;
+        }
+
+        ReceiveReward(buttonID);
+    }
+
+    void ReceiveReward(int buttonID)
+    {
         AbilitySlotManager.Instance.AddNewAbility(rewards[buttonID]);
-        rewardsReceived.Add(rewards[buttonID]);
+        Close();
+    }
+
+    void ExchangeReward(GameObject reward, int atIndex)
+    {
+        if (reward == null)
+        {
+            Debug.LogError("Reward received is null", gameObject);
+            return;
+        }
+
+        AbilitySlotManager.Instance.ExchangeAbility(reward, atIndex);
+
         Close();
     }
 
@@ -160,6 +189,9 @@ public class RewardWindow : MonoBehaviour
     public void Close()
     {
         MinigameManager.Instance.ReleaseBall();
+        AbilitySlotManager.Instance.SetSelectable(false);
+
+        StopChoicePressedAnimation();
 
         if (currentRewarWindowCoroutine != null)
         {
@@ -167,6 +199,16 @@ public class RewardWindow : MonoBehaviour
         }
 
         currentRewarWindowCoroutine = StartCoroutine(HideCoroutine());
+    }
+
+    void StopChoicePressedAnimation()
+    {
+        foreach (var entry in choiceButtonAnimation)
+        {
+            if (entry == null) continue;
+
+            entry.SetPressed(gameObject, false);
+        }
     }
 
     IEnumerator ShowCoroutine()
@@ -179,7 +221,7 @@ public class RewardWindow : MonoBehaviour
         essentialUI.SetActive(true);
         rewardWindow.SetActive(true);
 
-        essentialUICanvasGroup.alpha = 1;
+        //essentialUICanvasGroup.alpha = 1;
         rewardWindowCanvasGroup.alpha = 0;
 
         float time = 0;
@@ -188,13 +230,13 @@ public class RewardWindow : MonoBehaviour
         {
             yield return null;
             time += Time.unscaledDeltaTime;
-            essentialUICanvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
+            // essentialUICanvasGroup.alpha = 1 - Mathf.Clamp01(time / fadeTime);
             rewardWindowCanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
 
         rewardWindowCanvasGroup.interactable = true;
         rewardWindowCanvasGroup.alpha = 1;
-        essentialUICanvasGroup.alpha = 0;
+        // essentialUICanvasGroup.alpha = 0;
     }
 
     IEnumerator HideCoroutine()
@@ -202,7 +244,7 @@ public class RewardWindow : MonoBehaviour
         InputManager.Instance.HideCursor();
 
         rewardWindowCanvasGroup.interactable = false;
-        essentialUICanvasGroup.alpha = 0;
+        //essentialUICanvasGroup.alpha = 0;
         essentialUI.SetActive(true);
         rewardWindowCanvasGroup.alpha = 0;
         rewardWindow.SetActive(false);
@@ -212,9 +254,18 @@ public class RewardWindow : MonoBehaviour
         {
             yield return null;
             time += Time.unscaledDeltaTime;
-            essentialUICanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
+            // essentialUICanvasGroup.alpha = Mathf.Clamp01(time / fadeTime);
         }
-        essentialUICanvasGroup.alpha = 1;
+        //essentialUICanvasGroup.alpha = 1;
         InAbilitySelect = false;
+    }
+
+    public void SelectedSlot(int i)
+    {
+        choiceButtonAnimation[i].SetPressed(gameObject, true);
+        //Debug.Log("Selected Slot: " + i);
+
+        ExchangeReward(rewardSelected, i);
+        rewardSelected = null;
     }
 }

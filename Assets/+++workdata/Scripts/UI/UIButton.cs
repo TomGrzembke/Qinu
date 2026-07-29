@@ -17,6 +17,7 @@ public class UIButton : MonoBehaviour
     const string TEXT_NAME_SYNTAX = "[Text]";
     TextMeshProUGUI textComponent;
     Coroutine scaleRoutine;
+    BoolLock hoveredBoolLock = new();
 
     void OnValidate() => OnValidateCall();
 
@@ -70,11 +71,41 @@ public class UIButton : MonoBehaviour
     {
         if (condition)
         {
+            hoveredBoolLock.AddInstigator(this);
+        }
+        else
+        {
+            hoveredBoolLock.RemoveInstigator(this);
+        }
+
+        RefreshHoverScale();
+    }
+
+    void RefreshHoverScale()
+    {
+        if (hoveredBoolLock.IsLocked)
+        {
             transform.localScale = new Vector3(scaleHover, scaleHover);
+
         }
         else
         {
             transform.localScale = Vector3.one;
+
         }
+    }
+
+    public void SetPressed(GameObject requestor, bool condition)
+    {
+        if (condition)
+        {
+            hoveredBoolLock.AddInstigator(requestor);
+        }
+        else
+        {
+            hoveredBoolLock.RemoveInstigator(requestor);
+        }
+
+        RefreshHoverScale();
     }
 }

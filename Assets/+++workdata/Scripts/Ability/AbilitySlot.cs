@@ -134,7 +134,7 @@ public class AbilitySlot : MonoBehaviour
             Performed = false;
         }
 
-        if (blockedByUI && IsPointerOverUI()) return;
+        if (IsBlocked()) return;
 
         if (Time.time - lastExecutedTime < EXECUTE_COOLDOWN) return;
 
@@ -152,8 +152,10 @@ public class AbilitySlot : MonoBehaviour
         CurrentAbility.Execute(performed);
     }
 
-    bool IsPointerOverUI()
+    bool IsBlocked()
     {
+        if (!blockedByUI) return false;
+
         PointerEventData eventDataCurrentPosition = new(EventSystem.current)
         {
             position = Mouse.current != null ? Mouse.current.position.ReadValue() : Touchscreen.current.primaryTouch.position.ReadValue()
@@ -175,5 +177,22 @@ public class AbilitySlot : MonoBehaviour
     public void SetSlotIndex(int index)
     {
         slotIndex = index;
+    }
+
+    public int GetSlotIndex()
+    {
+        return slotIndex;
+    }
+
+    public void SetSelectable(bool condition)
+    {
+        anim.SetBool("selectable", condition);
+    }
+
+    public int GetRarity()
+    {
+        if (CurrentAbility == null) return -1;
+
+        return CurrentAbility.GetCurrentRarity();
     }
 }

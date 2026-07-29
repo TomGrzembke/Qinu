@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MoveMiddle : Ability
 {
-    [SerializeField] float spaceToAdd = 3;
+    [SerializeField] float[] spaceToAddPerRarity;
 
     [Header("Time")]
     [SerializeField] float movedTime = 4;
@@ -25,11 +25,13 @@ public class MoveMiddle : Ability
     protected override void OnInitializedInternal()
     {
         fromPos = SlotManager.MiddleStartPosition;
-        toPos = SlotManager.MiddleStartPosition.Add(spaceToAdd, 0);
     }
 
     IEnumerator MoveMiddleRoutine()
     {
+        var spaceToAdd = spaceToAddPerRarity[EvaluateRaritySizing(spaceToAddPerRarity.Length)];
+        toPos = SlotManager.MiddleStartPosition.Add(spaceToAdd, 0);
+
         float lerpTime = 0;
 
         while (lerpTime < timeToLerpTo)

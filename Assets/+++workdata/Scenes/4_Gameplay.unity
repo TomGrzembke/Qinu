@@ -4036,7 +4036,7 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: 8f8e285916384274eb9f960859583b28, type: 3}
   - {fileID: 3832746447698499432, guid: b01bb03cdc423474eac51484f97a7486, type: 3}
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
-  <WinPoints>k__BackingField: 8
+  <WinPoints>k__BackingField: 10
   <LoosePoints>k__BackingField: 4
 --- !u!1 &1996249407 stripped
 GameObject:
@@ -5500,6 +5500,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 5853305422772045845, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5853305422772045845, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1

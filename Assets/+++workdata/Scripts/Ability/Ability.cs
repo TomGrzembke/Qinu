@@ -123,4 +123,21 @@ public abstract class Ability : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    protected int EvaluateRaritySizing(int listLength)
+    {
+        int raritySizing = currentRarity;
+
+        if (raritySizing > listLength - 1)
+        {
+            raritySizing = listLength - 1;
+        }
+
+        if (raritySizing < 0)
+        {
+            raritySizing = 0;
+        }
+
+        return raritySizing;
+    }
 }

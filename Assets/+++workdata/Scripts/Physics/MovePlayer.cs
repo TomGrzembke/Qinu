@@ -290,12 +290,12 @@ public class MovePlayer : RBGetter
         rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
     }
 
-    public void Dash()
+    public void Dash(float dashMultiplier)
     {
         ResetCollisionConstraint();
 
         if (dashCooldownRoutine != null) return;
-        dashRoutine = StartCoroutine(DashCor());
+        dashRoutine = StartCoroutine(DashCor(dashMultiplier));
     }
 
     void DisableInput(InputAction.CallbackContext ctx)
@@ -304,11 +304,11 @@ public class MovePlayer : RBGetter
         inputDisabled = !inputDisabled;
     }
 
-    IEnumerator DashCor()
+    IEnumerator DashCor(float multiplier)
     {
         if (!dashEnabled) yield break;
 
-        rb.AddForce(GetDashDirection() * dashForce, ForceMode2D.Impulse);
+        rb.AddForce(GetDashDirection() * dashForce * multiplier, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashTime);
 

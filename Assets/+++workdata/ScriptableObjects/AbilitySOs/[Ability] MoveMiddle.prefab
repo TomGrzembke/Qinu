@@ -79,7 +79,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 10
   abilitySO: {fileID: 11400000, guid: 55d18297255563443a770d2b3f1d1e7f, type: 2}
-  spaceToAdd: 3
+  spaceToAddPerRarity:
+  - 1.6
+  - 3
+  - 4.4
+  - 7
   movedTime: 4
   timeToLerpTo: 1
   timeToLerpBack: 1.5

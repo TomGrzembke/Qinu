@@ -79,3 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 1
   abilitySO: {fileID: 11400000, guid: 5029a9bbcf3cff4439e5d98b4a165385, type: 2}
+  dashMultiplierPerRarity:
+  - 0.85
+  - 1
+  - 1.17
+  - 1.38

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SizeUp : Ability
 {
-    [SerializeField] float timesSize = 1.3f;
+    [SerializeField] float[] sizesPerRarity;
     [SerializeField] float duration = 3;
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
@@ -26,10 +26,13 @@ public class SizeUp : Ability
     IEnumerator SizeUpRoutine()
     {
         float originalScale = flipObjectOnVelocity.MaxScale;
-        flipObjectOnVelocity.SetMaxScale(flipObjectOnVelocity.MaxScale * timesSize);
+
+        int raritySizing = EvaluateRaritySizing(sizesPerRarity.Length);
+
+        flipObjectOnVelocity.SetMaxScale(flipObjectOnVelocity.MaxScale * sizesPerRarity[raritySizing]);
 
         yield return new WaitForSeconds(duration);
-        
+
         flipObjectOnVelocity.SetMaxScale(originalScale);
         abilityRoutine = null;
     }
@@ -37,6 +40,5 @@ public class SizeUp : Ability
     protected override void CleanupInternal()
     {
         QueueDestroy(abilityRoutine);
-
     }
 }

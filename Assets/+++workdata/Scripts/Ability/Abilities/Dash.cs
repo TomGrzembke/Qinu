@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public class Dash : Ability
 {
+    [SerializeField] float[] dashMultiplierPerRarity;
+
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     MovePlayer moveRB;
 
@@ -15,7 +19,7 @@ public class Dash : Ability
 
     protected override void ExecuteInternal()
     {
-        moveRB.Dash();
+        moveRB.Dash(dashMultiplierPerRarity[EvaluateRaritySizing(dashMultiplierPerRarity.Length)]);
     }
 
 }

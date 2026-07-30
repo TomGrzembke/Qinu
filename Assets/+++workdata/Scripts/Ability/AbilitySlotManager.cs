@@ -48,6 +48,8 @@ public class AbilitySlotManager : MonoBehaviour
 
     public void ActivateSlot(int slotIndex, bool performed = true)
     {
+        if(slotIndex > AbilitySlots.Length -1) return;
+
         AbilitySlots[slotIndex].Execute(performed);
     }
 

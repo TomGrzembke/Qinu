@@ -11,7 +11,7 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected AbilitySO abilitySO;
 
     public AbilitySO AbilitySO => abilitySO;
-    public bool IsActive => currentabilityTime > 0;
+    public bool IsActive => currentabilityTime == 0;
     protected int currentRarity;
     GameObject numberObject;
     Image abilityImage;
@@ -94,6 +94,7 @@ public abstract class Ability : MonoBehaviour
 
         numberObject.SetActive(true);
         coolDownCor = null;
+        currentabilityTime = 0;
     }
 
     public virtual void Cleanup()

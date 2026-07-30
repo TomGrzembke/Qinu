@@ -106,6 +106,8 @@ public class AbilitySlot : MonoBehaviour
         else
         {
             CurrentAbility = Instantiate(newAbilityPrefab, gameObject.transform).GetComponent<Ability>();
+            numberObject.SetActive(true);
+
             EnterAbility();
         }
 

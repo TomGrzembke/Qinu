@@ -6,18 +6,21 @@ using UnityEngine.UI;
 /// <summary> The template and function for all abilities </summary>
 public abstract class Ability : MonoBehaviour
 {
-    [SerializeField] protected float cooldown;
+
     [SerializeField] protected float[] cooldownPerRarity;
     [SerializeField] protected AbilitySO abilitySO;
 
     public AbilitySO AbilitySO => abilitySO;
-    public bool IsActive => cooldown > 0;
+    public bool IsActive => currentabilityTime > 0;
     protected int currentRarity;
     GameObject numberObject;
     Image abilityImage;
     Image[] abilityBGImages;
     Coroutine coolDownCor;
     Animator anim;
+    float currentCooldown;
+    float currentabilityTime;
+    bool isCleaningUp;
 
     public void EnterAbility(Image _abilityImage, Image[] _abilityBGImages, GameObject _numberObject, Animator _anim)
     {
@@ -30,7 +33,7 @@ public abstract class Ability : MonoBehaviour
 
     public virtual bool UpgradeRarity(int maxRarity)
     {
-        if(currentRarity >= maxRarity) return false;
+        if (currentRarity >= maxRarity) return false;
 
         currentRarity++;
         return true;
@@ -45,6 +48,7 @@ public abstract class Ability : MonoBehaviour
     public virtual void Execute(bool performed = true)
     {
         if (!performed) return;
+        if (isCleaningUp) return;
 
         if (coolDownCor != null)
         {
@@ -71,20 +75,20 @@ public abstract class Ability : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        float wentByTime = 0;
+        currentabilityTime = 0;
 
-        var currentCooldown = cooldownPerRarity[EvaluateRaritySizing(cooldownPerRarity.Length)];
+        currentCooldown = cooldownPerRarity[EvaluateRaritySizing(cooldownPerRarity.Length)];
 
-        while (wentByTime < currentCooldown)
+        while (currentabilityTime < currentCooldown)
         {
-            wentByTime += Time.deltaTime;
+            currentabilityTime += Time.deltaTime;
 
             foreach (var entry in abilityBGImages)
             {
-                entry.fillAmount = wentByTime / currentCooldown;
+                entry.fillAmount = currentabilityTime / currentCooldown;
             }
 
-            abilityImage.fillAmount = wentByTime / currentCooldown;
+            abilityImage.fillAmount = currentabilityTime / currentCooldown;
             yield return null;
         }
 
@@ -94,6 +98,7 @@ public abstract class Ability : MonoBehaviour
 
     public virtual void Cleanup()
     {
+        isCleaningUp = true;
         currentRarity = 0;
 
         if (coolDownCor != null)
@@ -123,7 +128,7 @@ public abstract class Ability : MonoBehaviour
         coroutineToFinish.OnComplete(Clear);
     }
 
-    void Clear()
+    protected void Clear()
     {
         Destroy(gameObject);
     }

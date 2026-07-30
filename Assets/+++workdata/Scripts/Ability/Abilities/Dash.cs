@@ -14,7 +14,7 @@ public class Dash : Ability
 
     protected override void CleanupInternal()
     {
-
+        Clear();
     }
 
     protected override void ExecuteInternal()

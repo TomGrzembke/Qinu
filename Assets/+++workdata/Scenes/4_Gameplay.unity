@@ -2017,7 +2017,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 23.54625, z: 12}
+  m_LocalScale: {x: 1, y: 17.365358, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1130039576}
@@ -2037,7 +2037,7 @@ PlatformEffector2D:
   m_RotationalOffset: -90
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 140
+  m_SurfaceArc: 128.9
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -7864,6 +7864,7 @@ MonoBehaviour:
   - {fileID: 328120642978159602, guid: e2d5a716cd59ef84f8e3be29526f4c92, type: 3}
   - {fileID: 8574770232140604388, guid: 053b0effef475454a83687d9e5fa5197, type: 3}
   - {fileID: 8766142505129722052, guid: 6b865d881f5002449bdd58eb65141861, type: 3}
+  - {fileID: 8766142505129722052, guid: 003f529e97119e244bc70076c5339033, type: 3}
   <InAbilitySelect>k__BackingField: 0
 --- !u!224 &8676418989120381466
 RectTransform:

@@ -15,8 +15,10 @@ public class BallController : RBGetter
     {
         currentSpeed = rb.linearVelocity.magnitude;
 
-        if (rb.linearVelocity.magnitude > maxSpeed)  
+        if (rb.linearVelocity.magnitude > maxSpeed)
+        {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+        }
 
     }
 
@@ -28,15 +30,35 @@ public class BallController : RBGetter
         if (!showImpact) return;
 
         if (currentSpeed + add > 1)
+        {
             rb.linearVelocity = rb.linearVelocity.normalized * (currentSpeed + add);
+        }
         else
+        {
             rb.linearVelocity = rb.linearVelocity.normalized;
+        }
+
+        TryKnock();
+    }
+
+    public void TryKnock()
+    {
+        if (rb.linearVelocity == Vector2.zero && maxSpeed > 0.1f)
+        {
+            rb.linearVelocity = transform.up;
+        }
+    }
+
+    public void FlipVelocity()
+    {
+        TryKnock();
+        rb.linearVelocity = -rb.linearVelocity;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision == null) return;
-        if(sfxSpeedMargin > currentSpeed) return;
+        if (sfxSpeedMargin > currentSpeed) return;
         SoundManager.Instance.PlaySound(SoundType.BallHit);
     }
 }

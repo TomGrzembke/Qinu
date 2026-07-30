@@ -59,5 +59,7 @@ public class Punch : Ability
         {
             Destroy(punch);
         }
+
+        Clear();
     }
 }

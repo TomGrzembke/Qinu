@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -23,15 +24,17 @@ public class PunchController : MonoBehaviour
     Coroutine attackCoroutine;
     Coroutine cooldownCoroutine;
 
+    public event Action OnAttackFinished;
+
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        var isPukOrNPC = collision.CompareTag("Puk") || collision.CompareTag("NPC");
+        var isPukOrNPC = collision.CompareTag("Puk");
 
         if (!isPukOrNPC) return;
 
         targetCol = collision;
         AttackTarget(targetCol.transform);
-
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -81,12 +84,15 @@ public class PunchController : MonoBehaviour
 
         while (attackTime < timeToAttack)
         {
+            currentTargetPos = target.position;
+
             HandFrameRotation(attackTime, target.position);
             attackTime += Time.deltaTime;
             handTarget.position = Vector3.Lerp(currentHandPos, currentTargetPos, animationCurve.Evaluate(attackTime / timeToAttack));
             yield return null;
         }
 
+        OnAttackFinished?.Invoke();
         cooldownCoroutine = StartCoroutine(Cooldown());
         attackCoroutine = null;
     }
@@ -136,6 +142,21 @@ public class PunchController : MonoBehaviour
         }
 
         targetCol = null;
+    }
+
+    public void SetTimeToAttack(float newTime)
+    {
+        timeToAttack = newTime;
+    }
+
+    public void SetAttackWindupTime(float newTime)
+    {
+        attackWindupTime = newTime;
+    }
+
+    public void SetPercentAlphaWindupAttackLock(float percentAlpha)
+    {
+        percentAlphaWindupAttackLock = percentAlpha;
     }
 
     void OnDrawGizmosSelected()

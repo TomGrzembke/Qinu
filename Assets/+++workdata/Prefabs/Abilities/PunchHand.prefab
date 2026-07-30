@@ -106,7 +106,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeToAttack: 0.21
-  cooldownForNextAttack: 1.78
+  cooldownForNextAttack: 0.5
   attackWindupTime: 0.4
   percentAlphaWindupAttackLock: 0.4
   rotationMinus: 0
@@ -169,14 +169,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 16.375525, y: 67.635925}
-      - {x: -53.923058, y: 54.182747}
-      - {x: -56.38349, y: -2.3568645}
-      - {x: -39.208893, y: -55.961723}
-      - {x: 3.8055987, y: -57.33751}
-      - {x: 104.24535, y: -50.579014}
-      - {x: 166.93933, y: 7.611881}
-      - {x: 104.47696, y: 61.45849}
+    - - {x: 13.151587, y: 196.59366}
+      - {x: -292.49484, y: 192.81229}
+      - {x: -309.46304, y: -160.33006}
+      - {x: -124.64338, y: -296.14545}
+      - {x: 95.68799, y: -266.8938}
+      - {x: 231.5911, y: -215.00012}
+      - {x: 268.49353, y: 109.166084}
+      - {x: 146.38821, y: 187.19226}
   m_UseDelaunayMesh: 0
 --- !u!1 &691684338737331149
 GameObject:

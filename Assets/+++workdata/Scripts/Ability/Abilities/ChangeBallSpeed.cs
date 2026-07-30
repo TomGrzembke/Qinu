@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChangeBallSpeed : Ability
 {
-    [SerializeField] float speedAmount = 10;
+    [SerializeField] float[] speedPerRarity;
     [SerializeField] float duration = 3;
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
@@ -28,8 +28,10 @@ public class ChangeBallSpeed : Ability
     IEnumerator SpeedUpBall()
     {
         ballVFX.ChangeSprite(abilitySO.abilitySprite, duration);
-        ballController.AddBallMaxSpeed(speedAmount, true);
-        currentGivenSpeedAmount = speedAmount;
+        var currentSpeedAmount = speedPerRarity[EvaluateRaritySizing(speedPerRarity.Length)];
+
+        ballController.AddBallMaxSpeed(currentSpeedAmount, true);
+        currentGivenSpeedAmount = currentSpeedAmount;
 
         yield return new WaitForSeconds(duration);
 

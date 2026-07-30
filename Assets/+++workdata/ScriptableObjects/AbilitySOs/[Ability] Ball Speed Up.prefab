@@ -79,5 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 4
   abilitySO: {fileID: 11400000, guid: 47318849aae92a24584171e0badf6ae5, type: 2}
-  speedAmount: 20
+  speedPerRarity:
+  - 10
+  - 20
+  - 30
+  - 40
   duration: 0.8

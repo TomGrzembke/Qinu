@@ -143,9 +143,9 @@ public class RewardWindow : MonoBehaviour
         if (abilityPrefab == null) return;
 
         var slotAvailable = AbilitySlotManager.Instance.CheckIfSlotAvailable();
-        var upgardeAvailable = AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(abilityPrefab);
+        var upgradeAvailable = AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(abilityPrefab);
 
-        if (!slotAvailable && !upgardeAvailable)
+        if (!slotAvailable && !upgradeAvailable)
         {
             rewardSelected = abilityPrefab;
 

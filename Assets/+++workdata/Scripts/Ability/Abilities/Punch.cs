@@ -1,15 +1,14 @@
-using System.Collections;
 using UnityEngine;
 
 public class Punch : Ability
 {
-    [SerializeField] float punchTime = .3f;
     [SerializeField] GameObject punchPrefab;
+    [SerializeField] float[] timePerRarity;
+
 
     PunchController punchController;
+    GameObject punch;
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    Coroutine abilityRoutine;
-
 
     protected override void OnInitializedInternal()
     {
@@ -18,30 +17,47 @@ public class Punch : Ability
 
     protected override void ExecuteInternal()
     {
-        if (abilityRoutine != null) return;
-
-        abilityRoutine = StartCoroutine(PunchRoutine());
+        PunchStart();
     }
 
 
-    IEnumerator PunchRoutine()
+    void PunchStart()
     {
-        GameObject punch = Instantiate(punchPrefab, SlotManager.PlayerObj.position, Quaternion.identity);
+        punch = Instantiate(punchPrefab, SlotManager.PlayerObj.position, Quaternion.identity);
         punch.transform.parent = SlotManager.PlayerObj.transform;
         punchController = punch.GetComponentInChildren<PunchController>();
+        punchController.OnAttackFinished += PunchFinished;
 
-        yield return new WaitForSeconds(punchTime);
-        Destroy(punch);
-        abilityRoutine = null;
+        var time = timePerRarity[EvaluateRaritySizing(timePerRarity.Length)];
+
+        punchController.SetAttackWindupTime(time);
+        punchController.SetAttackWindupTime(time);
+        punchController.SetPercentAlphaWindupAttackLock(time);
+    }
+
+    void PunchFinished()
+    {
+        punchController.OnAttackFinished -= PunchFinished;
+        if (punch != null)
+        {
+            Destroy(punch);
+        }
     }
 
     protected override void CleanupInternal()
     {
-        if(punchController != null)
+        if (punchController != null)
         {
             punchController.Stop();
+            punchController.OnAttackFinished -= PunchFinished;
+
+            punchController = null;
+            punch = null;
         }
 
-        QueueDestroy(abilityRoutine);
+        if (punch != null)
+        {
+            Destroy(punch);
+        }
     }
 }

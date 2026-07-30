@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class BallTPSaveAbility : Ability
 {
-    [SerializeField] float tpTime = .3f;
+    [SerializeField] float[] tpTimePerRarity;
+
     [SerializeField] float spaceToAdd = 3;
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
@@ -29,7 +30,7 @@ public class BallTPSaveAbility : Ability
             ballVFX.PlayTPVisual();
         }
 
-        yield return new WaitForSeconds(tpTime);
+        yield return new WaitForSeconds(tpTimePerRarity[EvaluateRaritySizing(tpTimePerRarity.Length)]);
 
         if (ballVFX)
         {

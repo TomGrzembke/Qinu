@@ -78,6 +78,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 20
+  cooldownPerRarity:
+  - 20
+  - 19
+  - 17
+  - 17
   abilitySO: {fileID: 11400000, guid: 2d864a0f9387a594da713a502fcab07b, type: 2}
   sizesPerRarity:
   - 1.55

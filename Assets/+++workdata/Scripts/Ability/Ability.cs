@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public abstract class Ability : MonoBehaviour
 {
     [SerializeField] protected float cooldown;
+    [SerializeField] protected float[] cooldownPerRarity;
     [SerializeField] protected AbilitySO abilitySO;
 
     public AbilitySO AbilitySO => abilitySO;
@@ -71,16 +72,19 @@ public abstract class Ability : MonoBehaviour
     IEnumerator Cooldown()
     {
         float wentByTime = 0;
-        while (wentByTime < cooldown)
+
+        var currentCooldown = cooldownPerRarity[EvaluateRaritySizing(cooldownPerRarity.Length)];
+
+        while (wentByTime < currentCooldown)
         {
             wentByTime += Time.deltaTime;
 
             foreach (var entry in abilityBGImages)
             {
-                entry.fillAmount = wentByTime / cooldown;
+                entry.fillAmount = wentByTime / currentCooldown;
             }
 
-            abilityImage.fillAmount = wentByTime / cooldown;
+            abilityImage.fillAmount = wentByTime / currentCooldown;
             yield return null;
         }
 

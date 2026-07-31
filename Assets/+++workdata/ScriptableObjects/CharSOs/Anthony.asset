@@ -20,12 +20,12 @@ MonoBehaviour:
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.000001
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 12
-      <StoppingDistance>k__BackingField: 0.05
-      <Acceleration>k__BackingField: 100
-      <Decceleration>k__BackingField: 250
-      <PositionCorrection>k__BackingField: 100
-      <VelocityCorrection>k__BackingField: 20
+      <MaxSpeed>k__BackingField: 80
+      <StoppingDistance>k__BackingField: 1
+      <Acceleration>k__BackingField: 5000
+      <Decceleration>k__BackingField: 5000
+      <PositionCorrection>k__BackingField: 1000
+      <VelocityCorrection>k__BackingField: 185.2
       <MaxCorrectionAcceleration>k__BackingField: 1000
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 70

@@ -15,9 +15,6 @@ public class NPCNav : NavCalc
 
     [field: SerializeField] public bool IsRight { get; private set; }
     [SerializeField] float arenaTransitionDistance = 2;
-    [SerializeField] bool goesToDefault = true;
-    [SerializeField] bool dashRandomly = true;
-    [SerializeField] float probabilityPerFrame = 10;
 
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
@@ -29,22 +26,26 @@ public class NPCNav : NavCalc
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
+    bool GoesToDefault => sOHolder.CharSO.CharSettings.CharNPCSettings.GoesToDefault;
     bool InvertY => sOHolder.CharSO.CharSettings.CharNPCSettings.InvertY;
     bool FollowBallY => sOHolder.CharSO.CharSettings.CharNPCSettings.FollowBallY;
+    bool DashRandomly => sOHolder.CharSO.CharSettings.CharNPCSettings.DashRandomly;
+    float ProbabilityPerFrame => sOHolder.CharSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
     float stoppingDistance => sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance;
 
 
     void Start()
     {
         if (agent.isOnNavMesh)
+        {
             agent.Warp(transform.position);
+        }
     }
 
     void Update()
     {
         if (arenaMode == ArenaMode.ToArena)
         {
-            agent.stoppingDistance = stoppingDistance;
             if (defaultTrans)
             {
                 targetPos = defaultTrans.position;
@@ -72,11 +73,10 @@ public class NPCNav : NavCalc
 
         if (PukOnSide)
         {
-            agent.stoppingDistance = 0f;
             targetPos = Puk.position;
-            if (dashRandomly)
+            if (DashRandomly)
             {
-                if (Random.Range(0, 100) <= probabilityPerFrame)
+                if (Random.value <= ProbabilityPerFrame)
                 {
                     moveRB.Dash();
                 }
@@ -85,15 +85,13 @@ public class NPCNav : NavCalc
         }
         else if (!FollowBallY)
         {
-            agent.stoppingDistance = stoppingDistance;
-            if (goesToDefault)
+            if (GoesToDefault)
             {
                 targetPos = defaultTrans.position;
             }
         }
         else
         {
-            agent.stoppingDistance = stoppingDistance;
             targetPos.x = defaultTrans.position.x;
 
             if (!InvertY)
@@ -106,6 +104,16 @@ public class NPCNav : NavCalc
             }
         }
 
+    }
+
+    protected override float GetStoppingDistance()
+    {
+        if (arenaMode == ArenaMode.Arena && MinigameManager.Instance && PukOnSide)
+        {
+            return 0f;
+        }
+
+        return stoppingDistance;
     }
 
     public void SideSettings(bool _isRight)

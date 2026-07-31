@@ -9,7 +9,6 @@ public class MoveRB : RBGetter
 
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
-    float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
     float positionCorrection => charSO.CharSettings.CharRigidSettings.PositionCorrection;
     float velocityCorrection => charSO.CharSettings.CharRigidSettings.VelocityCorrection;
     float maxCorrectionAcceleration => charSO.CharSettings.CharRigidSettings.MaxCorrectionAcceleration;
@@ -20,7 +19,6 @@ public class MoveRB : RBGetter
     bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
 
     Transform Puk => MinigameManager.Instance.Puk;
-    float currentMaxSpeed;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
     CharSO charSO;
@@ -35,14 +33,11 @@ public class MoveRB : RBGetter
     protected override void AwakeInternal()
     {
         charSO = GetComponent<CharSOHolder>().CharSO;
-        currentMaxSpeed = maxSpeed;
 
         agent.updatePosition = false;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        agent.speed = currentMaxSpeed;
-        agent.acceleration = acceleration / rb.mass;
-        agent.stoppingDistance = charSO.CharSettings.CharRigidSettings.StoppingDistance;
+        UpdateAgentSettings();
     }
 
     void OnDisable()
@@ -53,12 +48,14 @@ public class MoveRB : RBGetter
 
     void FixedUpdate()
     {
+        UpdateAgentSettings();
+
         if (dashRoutine != null) return;
 
         if (!agent.isOnNavMesh) return;
 
         Vector2 desiredPosition = agent.nextPosition.RemoveZ();
-        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), currentMaxSpeed);
+        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), maxSpeed);
 
         Vector2 positionDifference = desiredPosition - rb.position;
         Vector2 velocityDifference = desiredVelocity - rb.linearVelocity;
@@ -68,7 +65,13 @@ public class MoveRB : RBGetter
 
         rb.AddForce(correctionAcceleration * rb.mass, ForceMode2D.Force);
 
-        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, currentMaxSpeed);
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxSpeed);
+    }
+
+    void UpdateAgentSettings()
+    {
+        agent.speed = maxSpeed;
+        agent.acceleration = acceleration / rb.mass;
     }
 
     public void Dash()

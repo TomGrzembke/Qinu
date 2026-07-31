@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class MoveRB : RBGetter
 {
     [SerializeField] NavMeshAgent agent;
-    
+
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
@@ -25,9 +25,8 @@ public class MoveRB : RBGetter
     public Vector2 GetMoveDir()
     {
         if (agent == null) return Vector2.zero;
-        
-        Vector2 velocity = agent.desiredVelocity.RemoveZ();
-        return velocity != Vector2.zero ? velocity.Clamp(-1, 1) : Vector2.zero;
+
+        return agent.desiredVelocity.RemoveZ().normalized;
     }
 
     protected override void AwakeInternal()
@@ -46,18 +45,22 @@ public class MoveRB : RBGetter
     {
         if (dashRoutine != null) return;
 
-        if (GetMoveDir() == Vector2.zero)
-        {
-            rb.AddForce(rb.linearVelocity * -decceleration, ForceMode2D.Force);
-            return;
-        }
+        agent.speed = currentMaxSpeed;
+        agent.acceleration = acceleration / rb.mass;
 
-        rb.AddForce(GetMoveDir() * acceleration, ForceMode2D.Force);
+        Vector2 desiredVelocity = agent.desiredVelocity.RemoveZ();
 
-        if (rb.linearVelocity.magnitude > currentMaxSpeed)
-        {
-            rb.linearVelocity = (rb.linearVelocity * Time.deltaTime).normalized * currentMaxSpeed;
-        }
+        desiredVelocity = Vector2.ClampMagnitude(desiredVelocity, currentMaxSpeed);
+
+        Vector2 velocityDifference = desiredVelocity - rb.linearVelocity;
+
+        float forceLimit = desiredVelocity.sqrMagnitude > 0.001f ? acceleration : decceleration;
+
+        Vector2 force = Vector2.ClampMagnitude(velocityDifference * rb.mass / Time.fixedDeltaTime, forceLimit);
+
+        rb.AddForce(force, ForceMode2D.Force);
+
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, currentMaxSpeed);
     }
 
     public void Dash()
@@ -73,13 +76,18 @@ public class MoveRB : RBGetter
         yield return new WaitForFixedUpdate();
 
         if (dashAutomAim)
+        {
             rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
+        }
         else
-            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce,
-                ForceMode2D.Impulse);
+        {
+            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce, ForceMode2D.Impulse);
+        }
 
         if (agent)
+        {
             agent.ResetPath();
+        }
 
         yield return new WaitForSeconds(dashTime);
 

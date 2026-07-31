@@ -109,7 +109,7 @@ public class MinigameManager : MonoBehaviour
 
     public void CageBall()
     {
-        ResetInternal();
+        Puk.position = pukResetPos.position;
         Cage.SetActive(true);
     }
 

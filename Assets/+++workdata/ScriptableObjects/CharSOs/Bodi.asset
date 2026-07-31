@@ -20,14 +20,14 @@ MonoBehaviour:
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.002
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 6.5
-      <StoppingDistance>k__BackingField: 0.9
+      <MaxSpeed>k__BackingField: 8
+      <StoppingDistance>k__BackingField: 0.7
       <Acceleration>k__BackingField: 35
       <Decceleration>k__BackingField: 25
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: -5
+      <DashForce>k__BackingField: -9
       <DashTime>k__BackingField: 0.3
-      <DashCooldown>k__BackingField: 1.7
+      <DashCooldown>k__BackingField: 1.9
       <DashAutomAim>k__BackingField: 0
       mouseInputHeader: 
       <MaxSpeedDistance>k__BackingField: 0.7

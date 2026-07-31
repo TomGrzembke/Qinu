@@ -191,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 5004313823777714748}
     - target: {fileID: 4687094399772724065, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: typeSpeedMultiplier
-      value: 0.3
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7664997262151867161, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: m_Name

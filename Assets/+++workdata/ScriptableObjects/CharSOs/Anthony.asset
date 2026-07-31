@@ -21,9 +21,12 @@ MonoBehaviour:
       <ProbabilityPerFrame>k__BackingField: 0.000001
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 12
-      <StoppingDistance>k__BackingField: 2
+      <StoppingDistance>k__BackingField: 0.05
       <Acceleration>k__BackingField: 100
       <Decceleration>k__BackingField: 250
+      <PositionCorrection>k__BackingField: 100
+      <VelocityCorrection>k__BackingField: 20
+      <MaxCorrectionAcceleration>k__BackingField: 1000
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 70
       <DashTime>k__BackingField: 0.2

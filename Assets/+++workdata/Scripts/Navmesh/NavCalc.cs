@@ -10,6 +10,7 @@ public class NavCalc : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.updatePosition = false;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         sOHolder = GetComponent<CharSOHolder>();
@@ -17,12 +18,8 @@ public class NavCalc : MonoBehaviour
 
     public void SetAgentPosition(Vector3 targetPos)
     {
-        if (Vector3.Distance(transform.position, targetPos) > sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance)
-        {
+        if (agent.isOnNavMesh)
             agent.SetDestination(targetPos);
-        }
-
-        agent.velocity = Vector2.zero;
     }
 
     public void SetAgentPosition(Transform targetTrans)

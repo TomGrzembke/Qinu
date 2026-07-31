@@ -14,7 +14,7 @@ public class NPCNav : NavCalc
     [SerializeField] ArenaMode arenaMode;
 
     [field: SerializeField] public bool IsRight { get; private set; }
-    [SerializeField] float stoppingDistance = 2;
+    [SerializeField] float arenaTransitionDistance = 2;
     [SerializeField] bool goesToDefault = true;
     [SerializeField] bool dashRandomly = true;
     [SerializeField] float probabilityPerFrame = 10;
@@ -31,13 +31,13 @@ public class NPCNav : NavCalc
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
     bool InvertY => sOHolder.CharSO.CharSettings.CharNPCSettings.InvertY;
     bool FollowBallY => sOHolder.CharSO.CharSettings.CharNPCSettings.FollowBallY;
+    float stoppingDistance => sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance;
 
 
     void Start()
     {
-        agent.updatePosition = false;
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        if (agent.isOnNavMesh)
+            agent.Warp(transform.position);
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class NPCNav : NavCalc
             {
                 targetPos = defaultTrans.position;
             }
-            if (Vector3.Distance(targetPos, transform.position) < 2)
+            if (Vector3.Distance(targetPos, transform.position) < arenaTransitionDistance)
             {
                 arenaMode = ArenaMode.Arena;
             }
@@ -63,7 +63,6 @@ public class NPCNav : NavCalc
             targetPos = DespawnPos.position;
         }
 
-        agent.nextPosition = transform.position;
         SetAgentPosition(targetPos);
     }
 
@@ -73,6 +72,7 @@ public class NPCNav : NavCalc
 
         if (PukOnSide)
         {
+            agent.stoppingDistance = 0f;
             targetPos = Puk.position;
             if (dashRandomly)
             {
@@ -85,6 +85,7 @@ public class NPCNav : NavCalc
         }
         else if (!FollowBallY)
         {
+            agent.stoppingDistance = stoppingDistance;
             if (goesToDefault)
             {
                 targetPos = defaultTrans.position;
@@ -92,6 +93,7 @@ public class NPCNav : NavCalc
         }
         else
         {
+            agent.stoppingDistance = stoppingDistance;
             targetPos.x = defaultTrans.position.x;
 
             if (!InvertY)
@@ -104,10 +106,6 @@ public class NPCNav : NavCalc
             }
         }
 
-        if (Vector3.Distance(transform.position, targetPos) < stoppingDistance)
-        {
-            targetPos = transform.position;
-        }
     }
 
     public void SideSettings(bool _isRight)

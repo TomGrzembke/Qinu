@@ -10,6 +10,9 @@ public class MoveRB : RBGetter
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
+    float positionCorrection => charSO.CharSettings.CharRigidSettings.PositionCorrection;
+    float velocityCorrection => charSO.CharSettings.CharRigidSettings.VelocityCorrection;
+    float maxCorrectionAcceleration => charSO.CharSettings.CharRigidSettings.MaxCorrectionAcceleration;
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
     float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
     float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
@@ -33,6 +36,13 @@ public class MoveRB : RBGetter
     {
         charSO = GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
+
+        agent.updatePosition = false;
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.speed = currentMaxSpeed;
+        agent.acceleration = acceleration / rb.mass;
+        agent.stoppingDistance = charSO.CharSettings.CharRigidSettings.StoppingDistance;
     }
 
     void OnDisable()
@@ -45,20 +55,18 @@ public class MoveRB : RBGetter
     {
         if (dashRoutine != null) return;
 
-        agent.speed = currentMaxSpeed;
-        agent.acceleration = acceleration / rb.mass;
+        if (!agent.isOnNavMesh) return;
 
-        Vector2 desiredVelocity = agent.desiredVelocity.RemoveZ();
+        Vector2 desiredPosition = agent.nextPosition.RemoveZ();
+        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), currentMaxSpeed);
 
-        desiredVelocity = Vector2.ClampMagnitude(desiredVelocity, currentMaxSpeed);
-
+        Vector2 positionDifference = desiredPosition - rb.position;
         Vector2 velocityDifference = desiredVelocity - rb.linearVelocity;
 
-        float forceLimit = desiredVelocity.sqrMagnitude > 0.001f ? acceleration : decceleration;
+        Vector2 correctionAcceleration = positionDifference * positionCorrection + velocityDifference * velocityCorrection;
+        correctionAcceleration = Vector2.ClampMagnitude(correctionAcceleration, maxCorrectionAcceleration);
 
-        Vector2 force = Vector2.ClampMagnitude(velocityDifference * rb.mass / Time.fixedDeltaTime, forceLimit);
-
-        rb.AddForce(force, ForceMode2D.Force);
+        rb.AddForce(correctionAcceleration * rb.mass, ForceMode2D.Force);
 
         rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, currentMaxSpeed);
     }
@@ -66,6 +74,7 @@ public class MoveRB : RBGetter
     public void Dash()
     {
         if (dashCooldownRoutine != null) return;
+        
         dashRoutine = StartCoroutine(DashCor());
     }
 

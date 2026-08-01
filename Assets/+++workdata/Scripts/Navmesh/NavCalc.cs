@@ -28,7 +28,7 @@ public class NavCalc : MonoBehaviour
 
     protected virtual float GetStoppingDistance()
     {
-        return sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance;
+        return sOHolder.CharSO.StoppingDistance;
     }
 
     public void SetAgentPosition(Transform targetTrans)

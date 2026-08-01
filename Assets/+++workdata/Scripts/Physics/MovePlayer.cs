@@ -29,7 +29,7 @@ public class MovePlayer : RBGetter
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
 
-    CharSO charSO;
+    PlayerCharSO charSO;
     float currentOutOfReachTime;
 
     Vector2 collisionDirection;
@@ -56,7 +56,7 @@ public class MovePlayer : RBGetter
 
     protected override void AwakeInternal()
     {
-        charSO = GetComponent<CharSOHolder>().CharSO;
+        charSO = (PlayerCharSO)GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
 
         if (disableInputRightclick)

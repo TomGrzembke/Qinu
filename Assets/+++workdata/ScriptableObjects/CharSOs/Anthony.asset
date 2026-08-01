@@ -9,57 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d663540ba7f524d9100fcf6801e653, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
   m_Name: Anthony
   m_EditorClassIdentifier: 
+  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  <charAestheticSettings>k__BackingField:
+    <PrimaryColor>k__BackingField: {r: 0.7960785, g: 0.21568629, b: 0.8235295, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: bbff5025809c56943bf614c3ca4ed599, type: 3}
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
+      <DefaultSwitchTime>k__BackingField: 8
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.000001
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 80
-      <StoppingDistance>k__BackingField: 1
-      <Acceleration>k__BackingField: 5000
-      <Decceleration>k__BackingField: 5000
-      <PositionCorrection>k__BackingField: 1000
-      <VelocityCorrection>k__BackingField: 185.2
-      <MaxCorrectionAcceleration>k__BackingField: 1000
+      <MaxSpeed>k__BackingField: 12
+      <StoppingDistance>k__BackingField: 0.5
+      <Acceleration>k__BackingField: 150
+      <VelocityCorrection>k__BackingField: 100
+      <MaxCorrectionAcceleration>k__BackingField: 173
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 70
       <DashTime>k__BackingField: 0.2
       <DashCooldown>k__BackingField: 2
       <DashAutomAim>k__BackingField: 1
-      mouseInputHeader: 
-      <MaxSpeedDistance>k__BackingField: 0.7
-      <MoveCurve>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <MinSpeed>k__BackingField: 1
-  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
-  <charAestheticSettings>k__BackingField:
-    <PrimaryColor>k__BackingField: {r: 0.7960785, g: 0.21568629, b: 0.8235295, a: 1}
-    <Music>k__BackingField: {fileID: 8300000, guid: bbff5025809c56943bf614c3ca4ed599, type: 3}

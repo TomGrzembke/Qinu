@@ -5,11 +5,12 @@ using UnityEngine.AI;
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MoveRB : RBGetter
 {
+    const float arrivalTolerance = 0.05f;
+
     [SerializeField] NavMeshAgent agent;
 
     float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
-    float positionCorrection => charSO.CharSettings.CharRigidSettings.PositionCorrection;
     float velocityCorrection => charSO.CharSettings.CharRigidSettings.VelocityCorrection;
     float maxCorrectionAcceleration => charSO.CharSettings.CharRigidSettings.MaxCorrectionAcceleration;
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
@@ -21,7 +22,7 @@ public class MoveRB : RBGetter
     Transform Puk => MinigameManager.Instance.Puk;
     Coroutine dashRoutine;
     Coroutine dashCooldownRoutine;
-    CharSO charSO;
+    NPCCharSO charSO;
 
     public Vector2 GetMoveDir()
     {
@@ -32,7 +33,7 @@ public class MoveRB : RBGetter
 
     protected override void AwakeInternal()
     {
-        charSO = GetComponent<CharSOHolder>().CharSO;
+        charSO = (NPCCharSO)GetComponent<CharSOHolder>().CharSO;
 
         agent.updatePosition = false;
         agent.updateRotation = false;
@@ -54,13 +55,18 @@ public class MoveRB : RBGetter
 
         if (!agent.isOnNavMesh) return;
 
-        Vector2 desiredPosition = agent.nextPosition.RemoveZ();
-        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), maxSpeed);
+        agent.nextPosition = rb.position;
 
-        Vector2 positionDifference = desiredPosition - rb.position;
+        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), maxSpeed);
         Vector2 velocityDifference = desiredVelocity - rb.linearVelocity;
 
-        Vector2 correctionAcceleration = positionDifference * positionCorrection + velocityDifference * velocityCorrection;
+        if (!agent.pathPending && (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance + arrivalTolerance))
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        Vector2 correctionAcceleration = velocityDifference * velocityCorrection;
         correctionAcceleration = Vector2.ClampMagnitude(correctionAcceleration, maxCorrectionAcceleration);
 
         rb.AddForce(correctionAcceleration * rb.mass, ForceMode2D.Force);

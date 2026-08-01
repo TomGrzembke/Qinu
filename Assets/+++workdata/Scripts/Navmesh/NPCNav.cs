@@ -1,4 +1,4 @@
-using MyBox;
+using System.Collections;
 using UnityEngine;
 
 /// <summary> NPC movement with ArenaMode states </summary>
@@ -19,19 +19,20 @@ public class NPCNav : NavCalc
     [SerializeField] MoveRB moveRB;
     [SerializeField] Vector3 targetPos;
 
-    [SerializeField] Transform defaultTrans;
+    [SerializeField] Transform defaultTransform;
     [field: SerializeField] public Transform TopTextTarget { get; private set; }
     [field: SerializeField] public Transform BotTextTarget { get; private set; }
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
+    NPCCharSO charSO => (NPCCharSO)sOHolder.CharSO;
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
-    bool GoesToDefault => sOHolder.CharSO.CharSettings.CharNPCSettings.GoesToDefault;
-    bool InvertY => sOHolder.CharSO.CharSettings.CharNPCSettings.InvertY;
-    bool FollowBallY => sOHolder.CharSO.CharSettings.CharNPCSettings.FollowBallY;
-    bool DashRandomly => sOHolder.CharSO.CharSettings.CharNPCSettings.DashRandomly;
-    float ProbabilityPerFrame => sOHolder.CharSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
-    float stoppingDistance => sOHolder.CharSO.CharSettings.CharRigidSettings.StoppingDistance;
+    bool GoesToDefault => charSO.CharSettings.CharNPCSettings.GoesToDefault;
+    bool InvertY => charSO.CharSettings.CharNPCSettings.InvertY;
+    bool FollowBallY => charSO.CharSettings.CharNPCSettings.FollowBallY;
+    bool DashRandomly => charSO.CharSettings.CharNPCSettings.DashRandomly;
+    float ProbabilityPerFrame => charSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
+    float stoppingDistance => charSO.StoppingDistance;
 
 
     void Start()
@@ -40,15 +41,22 @@ public class NPCNav : NavCalc
         {
             agent.Warp(transform.position);
         }
+
+        StartCoroutine(DefaultSwitchRoutine());
     }
 
     void Update()
     {
+        if (agent.isOnNavMesh)
+        {
+            agent.nextPosition = transform.position;
+        }
+
         if (arenaMode == ArenaMode.ToArena)
         {
-            if (defaultTrans)
+            if (defaultTransform)
             {
-                targetPos = defaultTrans.position;
+                targetPos = defaultTransform.position;
             }
             if (Vector3.Distance(targetPos, transform.position) < arenaTransitionDistance)
             {
@@ -87,12 +95,12 @@ public class NPCNav : NavCalc
         {
             if (GoesToDefault)
             {
-                targetPos = defaultTrans.position;
+                targetPos = defaultTransform.position;
             }
         }
         else
         {
-            targetPos.x = defaultTrans.position.x;
+            targetPos.x = defaultTransform.position.x;
 
             if (!InvertY)
             {
@@ -119,9 +127,9 @@ public class NPCNav : NavCalc
     public void SideSettings(bool _isRight)
     {
         IsRight = _isRight;
-
-        defaultTrans = TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
     }
+
+
 
     public void GoHome()
     {
@@ -152,5 +160,24 @@ public class NPCNav : NavCalc
         {
             arenaMode = ArenaMode.ToArena;
         }
+    }
+
+    IEnumerator DefaultSwitchRoutine()
+    {
+        while (charSO.CharSettings.CharNPCSettings.GoesToDefault)
+        {
+            var waitTime = charSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
+
+            if(waitTime <= 0) yield break;
+
+            yield return new WaitForSeconds(waitTime);
+            
+            defaultTransform = GetRandomDefaultTransform();
+        }
+    }
+
+    Transform GetRandomDefaultTransform()
+    {
+        return TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
     }
 }

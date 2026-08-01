@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharNPCSettings
 {
     [field: SerializeField] public bool GoesToDefault { get; private set; } = true;
+    [field: SerializeField] public float DefaultSwitchTime { get; private set; } 
     [field: SerializeField] public bool FollowBallY { get; private set; } = true;
     [field: SerializeField] public bool InvertY { get; private set; }
     [field: SerializeField] public bool DashRandomly { get; private set; } = true;

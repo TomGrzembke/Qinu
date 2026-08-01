@@ -9,57 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d663540ba7f524d9100fcf6801e653, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
   m_Name: Bodi
   m_EditorClassIdentifier: 
-  <CharSettings>k__BackingField:
-    <CharNPCSettings>k__BackingField:
-      <GoesToDefault>k__BackingField: 1
-      <FollowBallY>k__BackingField: 1
-      <InvertY>k__BackingField: 0
-      <DashRandomly>k__BackingField: 1
-      <ProbabilityPerFrame>k__BackingField: 0.002
-    <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 8
-      <StoppingDistance>k__BackingField: 0.7
-      <Acceleration>k__BackingField: 35
-      <Decceleration>k__BackingField: 25
-      <PositionCorrection>k__BackingField: 100
-      <VelocityCorrection>k__BackingField: 20
-      <MaxCorrectionAcceleration>k__BackingField: 1000
-      <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: -9
-      <DashTime>k__BackingField: 0.3
-      <DashCooldown>k__BackingField: 1.9
-      <DashAutomAim>k__BackingField: 0
-      mouseInputHeader: 
-      <MaxSpeedDistance>k__BackingField: 0.7
-      <MoveCurve>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <MinSpeed>k__BackingField: 1
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: eca1a620bf69b3540a440a737b3c7d7b, type: 3}
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.83921576, g: 0.59607846, b: 0.098039225, a: 1}
     <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}
+  <CharSettings>k__BackingField:
+    <CharNPCSettings>k__BackingField:
+      <GoesToDefault>k__BackingField: 1
+      <DefaultSwitchTime>k__BackingField: 3.4
+      <FollowBallY>k__BackingField: 0
+      <InvertY>k__BackingField: 0
+      <DashRandomly>k__BackingField: 1
+      <ProbabilityPerFrame>k__BackingField: 0.01
+    <CharRigidSettings>k__BackingField:
+      <MaxSpeed>k__BackingField: 9
+      <StoppingDistance>k__BackingField: 0.7
+      <Acceleration>k__BackingField: 1000
+      <VelocityCorrection>k__BackingField: 64
+      <MaxCorrectionAcceleration>k__BackingField: 109.4
+      <DashEnabled>k__BackingField: 1
+      <DashForce>k__BackingField: -10
+      <DashTime>k__BackingField: 0.3
+      <DashCooldown>k__BackingField: 1.5
+      <DashAutomAim>k__BackingField: 0

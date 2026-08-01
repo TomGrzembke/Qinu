@@ -13,7 +13,7 @@ public class SpeedAnimInput : MonoBehaviour
     
     CharSOHolder charSOHolder;
     CharSO charSO;
-    float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
+    float maxSpeed => charSO.MaxSpeed;
 
     float smoothedSpeed;
     

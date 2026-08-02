@@ -24,24 +24,24 @@ MonoBehaviour:
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
       <ProbabilityPerFrame>k__BackingField: 0.03
-      <PukApproachDistance>k__BackingField: 3
-      <RequiredShotAlignment>k__BackingField: 0.1
-      <PukPredictionTime>k__BackingField: 0.2
-      <OwnGoalDangerDistance>k__BackingField: 15
-      <MinimumThreatSpeed>k__BackingField: 2
-      <OwnGoalThreatAlignment>k__BackingField: 0.6
-      <EmergencyGoalDistance>k__BackingField: 5
-      <EmergencyClearAlignment>k__BackingField: 0.75
-      <EmergencyDashPukClearance>k__BackingField: 1.25
+      <PukApproachDistance>k__BackingField: 2.5
+      <RequiredShotAlignment>k__BackingField: 0.031
+      <PukPredictionTime>k__BackingField: 0.12
+      <OwnGoalDangerDistance>k__BackingField: 24
+      <MinimumThreatSpeed>k__BackingField: 0.5
+      <OwnGoalThreatAlignment>k__BackingField: 0.124
+      <EmergencyGoalDistance>k__BackingField: 7
+      <EmergencyClearAlignment>k__BackingField: 0.85
+      <EmergencyDashPukClearance>k__BackingField: 0.25
       <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 17
-      <StoppingDistance>k__BackingField: 0.6
-      <Acceleration>k__BackingField: 400
-      <VelocityCorrection>k__BackingField: 100
-      <MaxCorrectionAcceleration>k__BackingField: 300
+      <MaxSpeed>k__BackingField: 30
+      <StoppingDistance>k__BackingField: 0.3
+      <Acceleration>k__BackingField: 600
+      <VelocityCorrection>k__BackingField: 250
+      <MaxCorrectionAcceleration>k__BackingField: 500
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 30
-      <DashTime>k__BackingField: 0.15
-      <DashCooldown>k__BackingField: 0.7
+      <DashForce>k__BackingField: 40
+      <DashTime>k__BackingField: 0.1
+      <DashCooldown>k__BackingField: 0.45
       <DashAutomAim>k__BackingField: 1

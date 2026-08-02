@@ -41,8 +41,8 @@ public class CharNPCSettings
     [field: Tooltip("Minimum alignment required before an emergency backdash changes into a normal outward clear. Higher values reduce risky side contact; lower values start the clear sooner.")]
     [field: Range(-1f, 1f)]
     [field: SerializeField] public float EmergencyClearAlignment { get; private set; } = 0.75f;
-    [field: Separator("Emergency Dash Clearance - higher keeps the dash farther from the puck")]
-    [field: Tooltip("Minimum distance that the straight backdash path must keep from the puck. If no safe dash path exists, the NPC repositions without dashing.")]
+    [field: Separator("Emergency Clearance Margin - higher routes farther around the puck")]
+    [field: Tooltip("Additional safety margin added to the character and puck collider radii when routing behind the puck. Higher values avoid early contact more reliably but require more free space.")]
     [field: Min(0f)]
     [field: SerializeField] public float EmergencyDashPukClearance { get; private set; } = 1.25f;
     [field: Separator("Defensive Dash - enabled backdashes during emergencies")]

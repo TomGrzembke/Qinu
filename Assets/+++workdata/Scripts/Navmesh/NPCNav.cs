@@ -129,8 +129,6 @@ public class NPCNav : NavCalc
         IsRight = _isRight;
     }
 
-
-
     public void GoHome()
     {
         arenaMode = ArenaMode.Despawn;
@@ -160,6 +158,8 @@ public class NPCNav : NavCalc
         {
             arenaMode = ArenaMode.ToArena;
         }
+
+        defaultTransform = GetRandomDefaultTransform();
     }
 
     IEnumerator DefaultSwitchRoutine()

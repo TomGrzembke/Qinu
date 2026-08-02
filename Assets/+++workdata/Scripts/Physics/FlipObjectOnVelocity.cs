@@ -4,15 +4,9 @@ using UnityEngine;
 /// <summary> Uses the x local scale to flip an object if the set sensibility is bigger than the rb.velocity.magnitude </summary>
 public class FlipObjectOnVelocity : MonoBehaviour
 {
-    #region Serialized
-
     [SerializeField] float timeToFlip = .3f;
     [SerializeField] AnimationCurve flipCurve;
     [SerializeField] float flipSensitivity;
-
-    #endregion
-
-    #region Non Serialized
 
     public float MaxScale { get; private set; }
     bool FlipState;
@@ -21,12 +15,12 @@ public class FlipObjectOnVelocity : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     Coroutine flipRoutine;
 
-    #endregion
-
     void Awake()
     {
         if (rb == null)
+        {
             rb = GetComponent<Rigidbody2D>();
+        }
         
         MaxScale = transform.localScale.x;
     }

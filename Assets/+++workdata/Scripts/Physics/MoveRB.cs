@@ -44,6 +44,8 @@ public class MoveRB : RBGetter
     void OnDisable()
     {
         StopAllCoroutines();
+        dashRoutine = null;
+        dashCooldownRoutine = null;
         rb.linearVelocity = Vector3.zero;
     }
 
@@ -82,20 +84,65 @@ public class MoveRB : RBGetter
 
     public void Dash()
     {
-        if (dashCooldownRoutine != null) return;
-        
-        dashRoutine = StartCoroutine(DashCor());
+        if (!CanDash()) return;
+
+        dashRoutine = StartCoroutine(DashCor(Puk));
     }
 
-    IEnumerator DashCor()
+    public void DashAtDirection(Transform target)
     {
-        if (!dashEnabled) yield break;
+        if (!CanDash()) return;
 
+        dashRoutine = StartCoroutine(DashCor(target));
+    }
+
+    public void DashAtPosition(Vector3 position)
+    {
+        if (!CanDash()) return;
+
+        dashRoutine = StartCoroutine(DashCor(position));
+    }
+
+    bool CanDash()
+    {
+        if (!dashEnabled) return false;
+        if (dashCooldownRoutine != null) return false;
+        if (dashRoutine != null) return false;
+
+        return true;
+    }
+
+    IEnumerator DashCor(Transform target)
+    {
         yield return new WaitForFixedUpdate();
 
         if (dashAutomAim)
         {
-            rb.AddForce((Puk.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
+            rb.AddForce((target.position - transform.position).normalized * dashForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce((InputManager.Instance.MousePos - transform.position.RemoveZ()).Clamp(-1, 1) * dashForce, ForceMode2D.Impulse);
+        }
+
+        if (agent)
+        {
+            agent.ResetPath();
+        }
+
+        yield return new WaitForSeconds(dashTime);
+
+        dashCooldownRoutine = StartCoroutine(DashCooldown());
+        dashRoutine = null;
+    }
+
+    IEnumerator DashCor(Vector3 target)
+    {
+        yield return new WaitForFixedUpdate();
+
+        if (dashAutomAim)
+        {
+            rb.AddForce((target - transform.position).normalized * dashForce, ForceMode2D.Impulse);
         }
         else
         {

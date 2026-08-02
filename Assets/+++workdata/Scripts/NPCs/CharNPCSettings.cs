@@ -21,4 +21,31 @@ public class CharNPCSettings
     [field: Tooltip("Seconds of current puck velocity added to its position when planning. Zero targets its current position; higher values lead fast-moving pucks farther ahead.")]
     [field: Min(0f)]
     [field: SerializeField] public float PukPredictionTime { get; private set; } = 0.1f;
+    [field: Separator("Goal Danger Distance - defense overrides attacking inside this range")]
+    [field: Tooltip("Distance from the own goal within which a puck moving toward it is treated as a defensive threat.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float OwnGoalDangerDistance { get; private set; } = 15f;
+    [field: Separator("Threat Speed - lower reacts to slower incoming pucks")]
+    [field: Tooltip("Minimum puck speed required to trigger a defensive clear before it enters the emergency distance.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float MinimumThreatSpeed { get; private set; } = 2f;
+    [field: Separator("Threat Alignment - higher requires movement more directly at the goal")]
+    [field: Tooltip("Minimum dot-product alignment between puck velocity and the direction toward the own goal. -1 accepts any direction, 0 accepts sideways movement, and 1 requires movement directly at the goal.")]
+    [field: Range(-1f, 1f)]
+    [field: SerializeField] public float OwnGoalThreatAlignment { get; private set; } = 0.6f;
+    [field: Separator("Emergency Distance - backdash behind the puck before clearing")]
+    [field: Tooltip("Inside this distance from the middle of the own goal, the NPC first dashes to a clear goal-side setup position without touching the puck, then approaches normally to clear it out of the goal.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float EmergencyGoalDistance { get; private set; } = 5f;
+    [field: Separator("Emergency Alignment - higher moves farther behind the puck before clearing")]
+    [field: Tooltip("Minimum alignment required before an emergency backdash changes into a normal outward clear. Higher values reduce risky side contact; lower values start the clear sooner.")]
+    [field: Range(-1f, 1f)]
+    [field: SerializeField] public float EmergencyClearAlignment { get; private set; } = 0.75f;
+    [field: Separator("Emergency Dash Clearance - higher keeps the dash farther from the puck")]
+    [field: Tooltip("Minimum distance that the straight backdash path must keep from the puck. If no safe dash path exists, the NPC repositions without dashing.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float EmergencyDashPukClearance { get; private set; } = 1.25f;
+    [field: Separator("Defensive Dash - enabled backdashes during emergencies")]
+    [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Probability Per Frame.")]
+    [field: SerializeField] public bool DashDefensively { get; private set; } = true;
 }

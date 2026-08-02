@@ -15,8 +15,10 @@ public class MinigameManager : MonoBehaviour
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }
     [field: SerializeField] public Transform DespawnPos { get; private set; }
     [field: SerializeField] public GameObject Cage { get; private set; }
-    [field: SerializeField] public Transform LeftGoal { get; private set; } 
-    [field: SerializeField] public Transform RightGoal { get; private set; } 
+    [field: SerializeField] public Transform LeftGoalStart { get; private set; }
+    [field: SerializeField] public Transform LeftGoalEnd { get; private set; }
+    [field: SerializeField] public Transform RightGoalStart { get; private set; }
+    [field: SerializeField] public Transform RightGoalEnd { get; private set; }
 
     public Rigidbody2D PukRB => pukRB;
 
@@ -42,6 +44,18 @@ public class MinigameManager : MonoBehaviour
     Coroutine blendRoutine;
 
     public static event Action<Vector2> OnGoalShot;
+
+    public bool TryGetGoalMiddle(bool isRight, out Vector2 goalMiddle)
+    {
+        Transform goalStart = isRight ? RightGoalStart : LeftGoalStart;
+        Transform goalEnd = isRight ? RightGoalEnd : LeftGoalEnd;
+        goalMiddle = Vector2.zero;
+
+        if (!goalStart || !goalEnd) return false;
+
+        goalMiddle = Vector2.Lerp(goalStart.position, goalEnd.position, 0.5f);
+        return true;
+    }
 
     void Awake()
     {

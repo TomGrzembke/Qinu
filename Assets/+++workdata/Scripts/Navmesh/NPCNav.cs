@@ -47,71 +47,87 @@ public class NPCNav : NavCalc
 
     void Update()
     {
-        if (agent.isOnNavMesh)
-        {
-            agent.nextPosition = transform.position;
-        }
+        SyncAgentPosition();
 
-        if (arenaMode == ArenaMode.ToArena)
+        switch (arenaMode)
         {
-            if (defaultTransform)
-            {
-                targetPos = defaultTransform.position;
-            }
-            if (Vector3.Distance(targetPos, transform.position) < arenaTransitionDistance)
-            {
-                arenaMode = ArenaMode.Arena;
-            }
-        }
-        else if (arenaMode == ArenaMode.Arena)
-        {
-            InArena();
-        }
-        else if (arenaMode == ArenaMode.Despawn)
-        {
-            targetPos = DespawnPos.position;
+            case ArenaMode.ToArena:
+                UpdateToArena();
+                break;
+            case ArenaMode.Arena:
+                UpdateArena();
+                break;
+            case ArenaMode.Despawn:
+                UpdateDespawn();
+                break;
         }
 
         SetAgentPosition(targetPos);
     }
 
-    void InArena()
+    void SyncAgentPosition()
+    {
+        if (!agent.isOnNavMesh) return;
+
+        agent.nextPosition = transform.position;
+    }
+
+    void UpdateToArena()
+    {
+        if (defaultTransform)
+        {
+            targetPos = defaultTransform.position;
+        }
+
+        if (Vector3.Distance(targetPos, transform.position) < arenaTransitionDistance)
+        {
+            SetArenaMode(ArenaMode.Arena);
+        }
+    }
+
+    void UpdateArena()
     {
         if (!MinigameManager.Instance) return;
 
         if (PukOnSide)
         {
-            targetPos = Puk.position;
-            if (DashRandomly)
-            {
-                if (Random.value <= ProbabilityPerFrame)
-                {
-                    moveRB.Dash();
-                }
-            }
-
+            ChasePuk();
         }
-        else if (!FollowBallY)
+        else
+        {
+            Defend();
+        }
+    }
+
+    void UpdateDespawn()
+    {
+        targetPos = DespawnPos.position;
+    }
+
+    void ChasePuk()
+    {
+        targetPos = Puk.position;
+
+        if (DashRandomly && Random.value <= ProbabilityPerFrame)
+        {
+            moveRB.Dash();
+        }
+    }
+
+    void Defend()
+    {
+        if (!FollowBallY)
         {
             if (GoesToDefault)
             {
                 targetPos = defaultTransform.position;
             }
-        }
-        else
-        {
-            targetPos.x = defaultTransform.position.x;
 
-            if (!InvertY)
-            {
-                targetPos.y = Puk.position.y;
-            }
-            else
-            {
-                targetPos.y = -Puk.position.y;
-            }
+            return;
         }
 
+        targetPos.x = defaultTransform.position.x;
+        targetPos.y = InvertY ? -Puk.position.y : Puk.position.y;
     }
 
     protected override float GetStoppingDistance()
@@ -168,10 +184,10 @@ public class NPCNav : NavCalc
         {
             var waitTime = charSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
 
-            if(waitTime <= 0) yield break;
+            if (waitTime <= 0) yield break;
 
             yield return new WaitForSeconds(waitTime);
-            
+
             defaultTransform = GetRandomDefaultTransform();
         }
     }

@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -7,6 +10,10 @@ using UnityEditor;
 /// <summary> NPC movement with ArenaMode states </summary>
 public class NPCNav : NavCalc
 {
+    const int approachCandidateCount = 7;
+    const int approachDistanceAttempts = 4;
+    const float approachReplanInterval = 0.1f;
+
     public enum ArenaMode
     {
         ToArena,
@@ -32,6 +39,12 @@ public class NPCNav : NavCalc
     float shotAlignment;
     bool canSafelyStrike;
     bool hasShotPlan;
+    bool hasApproachPlan;
+    float nextApproachPlanTime;
+    Collider2D arenaCollider;
+    readonly List<Vector2> validApproachCandidates = new();
+    readonly List<Vector2> rejectedApproachCandidates = new();
+    NavMeshPath candidatePath;
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
@@ -50,6 +63,8 @@ public class NPCNav : NavCalc
 
     void Start()
     {
+        candidatePath = new NavMeshPath();
+
         if (agent.isOnNavMesh)
         {
             agent.Warp(transform.position);
@@ -133,12 +148,24 @@ public class NPCNav : NavCalc
 
         predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
         shotDirection = (opponentGoal.position.RemoveZ() - predictedPukPosition).normalized;
-        approachPosition = predictedPukPosition - shotDirection * PukApproachDistance;
 
         Vector2 characterToPuk = (predictedPukPosition - transform.position.RemoveZ()).normalized;
         shotAlignment = Vector2.Dot(characterToPuk, shotDirection);
         canSafelyStrike = shotAlignment >= RequiredShotAlignment;
         hasShotPlan = true;
+
+        if (!canSafelyStrike && (!hasApproachPlan || Time.time >= nextApproachPlanTime))
+        {
+            approachPosition = FindBestApproachPosition();
+            hasApproachPlan = true;
+            nextApproachPlanTime = Time.time + approachReplanInterval;
+        }
+
+        if (canSafelyStrike)
+        {
+            approachPosition = predictedPukPosition - shotDirection * PukApproachDistance;
+            hasApproachPlan = false;
+        }
 
         targetPos = canSafelyStrike ? Puk.position : approachPosition;
 
@@ -146,6 +173,84 @@ public class NPCNav : NavCalc
         {
             moveRB.Dash();
         }
+    }
+
+    Vector2 FindBestApproachPosition()
+    {
+        validApproachCandidates.Clear();
+        rejectedApproachCandidates.Clear();
+
+        Vector2 idealApproachDirection = -shotDirection;
+        float maximumAngle = Mathf.Acos(Mathf.Clamp(RequiredShotAlignment, -1f, 1f)) * Mathf.Rad2Deg;
+        float bestScore = float.PositiveInfinity;
+        Vector2 bestPosition = predictedPukPosition;
+
+        for (int i = 0; i < approachCandidateCount; i++)
+        {
+            float angleAlpha = approachCandidateCount == 1 ? 0f : i / (approachCandidateCount - 1f);
+            float angle = Mathf.Lerp(-maximumAngle, maximumAngle, angleAlpha);
+            Vector2 candidateDirection = Quaternion.Euler(0f, 0f, angle) * idealApproachDirection;
+
+            for (int distanceAttempt = 0; distanceAttempt < approachDistanceAttempts; distanceAttempt++)
+            {
+                float distanceAlpha = 1f - distanceAttempt / (float)approachDistanceAttempts;
+                Vector2 rawCandidate = predictedPukPosition + candidateDirection * PukApproachDistance * distanceAlpha;
+
+                if (!TryEvaluateApproachCandidate(rawCandidate, angle, out Vector2 sampledCandidate, out float score))
+                {
+                    rejectedApproachCandidates.Add(rawCandidate);
+                    continue;
+                }
+
+                validApproachCandidates.Add(sampledCandidate);
+
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    bestPosition = sampledCandidate;
+                }
+
+                break;
+            }
+        }
+
+        return bestPosition;
+    }
+
+    bool TryEvaluateApproachCandidate(Vector2 rawCandidate, float angle, out Vector2 sampledCandidate, out float score)
+    {
+        sampledCandidate = rawCandidate;
+        score = float.PositiveInfinity;
+
+        if (arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) return false;
+
+        float sampleRadius = Mathf.Max(agent.radius * 0.5f, 0.25f);
+
+        if (!NavMesh.SamplePosition(rawCandidate, out NavMeshHit navHit, sampleRadius, agent.areaMask)) return false;
+
+        sampledCandidate = navHit.position.RemoveZ();
+
+        if (arenaCollider && !arenaCollider.OverlapPoint(sampledCandidate)) return false;
+        if (!agent.CalculatePath(navHit.position, candidatePath)) return false;
+        if (candidatePath.status != NavMeshPathStatus.PathComplete) return false;
+
+        float pathLength = GetPathLength(candidatePath);
+        float anglePenalty = Mathf.Abs(angle) / 180f * PukApproachDistance;
+        float distancePenalty = Mathf.Abs(PukApproachDistance - Vector2.Distance(predictedPukPosition, sampledCandidate)) * 0.5f;
+        score = pathLength + anglePenalty + distancePenalty;
+        return true;
+    }
+
+    static float GetPathLength(NavMeshPath path)
+    {
+        float length = 0f;
+
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            length += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+        }
+
+        return length;
     }
 
     void Defend()
@@ -205,6 +310,20 @@ public class NPCNav : NavCalc
         Gizmos.DrawWireSphere(safeApproachPosition, 0.4f);
         Gizmos.DrawLine(safeApproachPosition, predictedPosition);
 
+        Gizmos.color = Color.white;
+
+        foreach (Vector2 candidate in validApproachCandidates)
+        {
+            Gizmos.DrawWireSphere(candidate, 0.2f);
+        }
+
+        Gizmos.color = new Color(1f, 0.3f, 0.3f);
+
+        foreach (Vector2 candidate in rejectedApproachCandidates)
+        {
+            Gizmos.DrawWireCube(candidate, Vector3.one * 0.25f);
+        }
+
         Gizmos.color = Color.green;
         DrawArrow(predictedPosition, shotDirection, 4f);
 
@@ -236,6 +355,7 @@ public class NPCNav : NavCalc
     {
         if (collision.CompareTag("Arena"))
         {
+            arenaCollider = collision;
             SetArenaMode(ArenaMode.Arena);
         }
     }

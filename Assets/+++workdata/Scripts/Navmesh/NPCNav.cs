@@ -32,6 +32,9 @@ public class NPCNav : NavCalc
     bool FollowBallY => charSO.CharSettings.CharNPCSettings.FollowBallY;
     bool DashRandomly => charSO.CharSettings.CharNPCSettings.DashRandomly;
     float ProbabilityPerFrame => charSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
+    float PukApproachDistance => charSO.CharSettings.CharNPCSettings.PukApproachDistance;
+    float RequiredShotAlignment => charSO.CharSettings.CharNPCSettings.RequiredShotAlignment;
+    float PukPredictionTime => charSO.CharSettings.CharNPCSettings.PukPredictionTime;
     float stoppingDistance => charSO.StoppingDistance;
 
 
@@ -106,9 +109,22 @@ public class NPCNav : NavCalc
 
     void ChasePuk()
     {
-        targetPos = Puk.position;
+        Transform opponentGoal = IsRight ? MinigameManager.Instance.LeftGoal : MinigameManager.Instance.RightGoal;
 
-        if (DashRandomly && Random.value <= ProbabilityPerFrame)
+        if (!opponentGoal)
+        {
+            targetPos = Puk.position;
+            return;
+        }
+
+        Vector2 predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
+        Vector2 shotDirection = (opponentGoal.position.RemoveZ() - predictedPukPosition).normalized;
+        Vector2 characterToPuk = (predictedPukPosition - transform.position.RemoveZ()).normalized;
+        bool canSafelyStrike = Vector2.Dot(characterToPuk, shotDirection) >= RequiredShotAlignment;
+
+        targetPos = canSafelyStrike ? Puk.position : predictedPukPosition - shotDirection * PukApproachDistance;
+
+        if (canSafelyStrike && DashRandomly && Random.value <= ProbabilityPerFrame)
         {
             moveRB.Dash();
         }

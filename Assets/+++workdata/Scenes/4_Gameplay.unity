@@ -770,6 +770,8 @@ MonoBehaviour:
   - {fileID: 1591490626}
   <DespawnPos>k__BackingField: {fileID: 1877918424}
   <Cage>k__BackingField: {fileID: 1078603537}
+  <LeftGoal>k__BackingField: {fileID: 947656478}
+  <RightGoal>k__BackingField: {fileID: 10648174}
   ballResetLeft: {fileID: 180869749}
   ballResetRight: {fileID: 1979328818}
   leftCounterTxt: {fileID: 461598521}

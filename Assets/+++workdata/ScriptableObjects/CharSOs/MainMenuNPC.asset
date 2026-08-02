@@ -19,6 +19,9 @@ MonoBehaviour:
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 0
       <ProbabilityPerFrame>k__BackingField: 0.001
+      <PukApproachDistance>k__BackingField: 4
+      <RequiredShotAlignment>k__BackingField: 0.7
+      <PukPredictionTime>k__BackingField: 0.1
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 4
       <StoppingDistance>k__BackingField: 1

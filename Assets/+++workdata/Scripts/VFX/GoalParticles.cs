@@ -6,6 +6,7 @@ public class GoalParticles : MonoBehaviour
     #region Serialized
     [SerializeField] MinigameManager minigameManager;
     [SerializeField] bool leftSide;
+    public bool IsLeftSide => leftSide;
     [SerializeField] ParticleSystem goalParticles;
     [field: SerializeField] public ParticleSystem wonParticles { get; private set; }
 

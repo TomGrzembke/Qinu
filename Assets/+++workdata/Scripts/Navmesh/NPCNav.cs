@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /// <summary> NPC movement with ArenaMode states </summary>
 public class NPCNav : NavCalc
@@ -22,6 +25,13 @@ public class NPCNav : NavCalc
     [SerializeField] Transform defaultTransform;
     [field: SerializeField] public Transform TopTextTarget { get; private set; }
     [field: SerializeField] public Transform BotTextTarget { get; private set; }
+
+    Vector2 predictedPukPosition;
+    Vector2 shotDirection;
+    Vector2 approachPosition;
+    float shotAlignment;
+    bool canSafelyStrike;
+    bool hasShotPlan;
 
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
@@ -55,12 +65,14 @@ public class NPCNav : NavCalc
         switch (arenaMode)
         {
             case ArenaMode.ToArena:
+                hasShotPlan = false;
                 UpdateToArena();
                 break;
             case ArenaMode.Arena:
                 UpdateArena();
                 break;
             case ArenaMode.Despawn:
+                hasShotPlan = false;
                 UpdateDespawn();
                 break;
         }
@@ -98,6 +110,7 @@ public class NPCNav : NavCalc
         }
         else
         {
+            hasShotPlan = false;
             Defend();
         }
     }
@@ -113,16 +126,21 @@ public class NPCNav : NavCalc
 
         if (!opponentGoal)
         {
+            hasShotPlan = false;
             targetPos = Puk.position;
             return;
         }
 
-        Vector2 predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
-        Vector2 shotDirection = (opponentGoal.position.RemoveZ() - predictedPukPosition).normalized;
-        Vector2 characterToPuk = (predictedPukPosition - transform.position.RemoveZ()).normalized;
-        bool canSafelyStrike = Vector2.Dot(characterToPuk, shotDirection) >= RequiredShotAlignment;
+        predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
+        shotDirection = (opponentGoal.position.RemoveZ() - predictedPukPosition).normalized;
+        approachPosition = predictedPukPosition - shotDirection * PukApproachDistance;
 
-        targetPos = canSafelyStrike ? Puk.position : predictedPukPosition - shotDirection * PukApproachDistance;
+        Vector2 characterToPuk = (predictedPukPosition - transform.position.RemoveZ()).normalized;
+        shotAlignment = Vector2.Dot(characterToPuk, shotDirection);
+        canSafelyStrike = shotAlignment >= RequiredShotAlignment;
+        hasShotPlan = true;
+
+        targetPos = canSafelyStrike ? Puk.position : approachPosition;
 
         if (canSafelyStrike && DashRandomly && Random.value <= ProbabilityPerFrame)
         {
@@ -169,6 +187,49 @@ public class NPCNav : NavCalc
 
     void OnDrawGizmosSelected()
     {
+        if (!hasShotPlan || !MinigameManager.Instance) return;
+
+        Vector3 characterPosition = transform.position;
+        Vector3 pukPosition = Puk.position;
+        Vector3 predictedPosition = predictedPukPosition;
+        Vector3 safeApproachPosition = approachPosition;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(pukPosition, 0.3f);
+        Gizmos.DrawLine(pukPosition, predictedPosition);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(predictedPosition, 0.3f);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(safeApproachPosition, 0.4f);
+        Gizmos.DrawLine(safeApproachPosition, predictedPosition);
+
+        Gizmos.color = Color.green;
+        DrawArrow(predictedPosition, shotDirection, 4f);
+
+        Gizmos.color = canSafelyStrike ? Color.green : Color.red;
+        Gizmos.DrawLine(characterPosition, predictedPosition);
+        Gizmos.DrawWireSphere(targetPos, 0.5f);
+        Gizmos.DrawLine(characterPosition, targetPos);
+
+#if UNITY_EDITOR
+        Handles.Label(pukPosition + Vector3.up * 0.5f, "Puck");
+        Handles.Label(predictedPosition + Vector3.up * 0.5f, "Predicted puck");
+        Handles.Label(safeApproachPosition + Vector3.up * 0.5f, "Safe approach");
+        Handles.Label(characterPosition + Vector3.up, $"Alignment: {shotAlignment:F2} / {RequiredShotAlignment:F2}\n{(canSafelyStrike ? "SAFE TO STRIKE" : "REPOSITIONING")}");
+#endif
+    }
+
+    static void DrawArrow(Vector3 start, Vector2 direction, float length)
+    {
+        Vector3 end = start + (Vector3)(direction * length);
+        Vector2 perpendicular = new(-direction.y, direction.x);
+        Vector3 arrowBase = end - (Vector3)(direction * 0.6f);
+
+        Gizmos.DrawLine(start, end);
+        Gizmos.DrawLine(end, arrowBase + (Vector3)(perpendicular * 0.3f));
+        Gizmos.DrawLine(end, arrowBase - (Vector3)(perpendicular * 0.3f));
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -45,6 +45,10 @@ public class CharNPCSettings
     [field: Tooltip("Additional safety margin added to the character and puck collider radii when routing behind the puck. Higher values avoid early contact more reliably but require more free space.")]
     [field: Min(0f)]
     [field: SerializeField] public float EmergencyDashPukClearance { get; private set; } = 1.25f;
+    [field: Separator("Emergency Route Width - higher takes a wider path around the puck")]
+    [field: Tooltip("Multiplier applied to the combined character and puck clearance when placing side-route waypoints. One follows the clearance boundary; higher values create wider and safer detours.")]
+    [field: Min(1f)]
+    [field: SerializeField] public float EmergencyRouteWidth { get; private set; } = 1.25f;
     [field: Separator("Defensive Dash - enabled backdashes during emergencies")]
     [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Probability Per Frame.")]
     [field: SerializeField] public bool DashDefensively { get; private set; } = true;

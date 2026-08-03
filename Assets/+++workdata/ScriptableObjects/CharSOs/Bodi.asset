@@ -33,6 +33,7 @@ MonoBehaviour:
       <EmergencyGoalDistance>k__BackingField: 5
       <EmergencyClearAlignment>k__BackingField: 0.75
       <EmergencyDashPukClearance>k__BackingField: 0.25
+      <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 9

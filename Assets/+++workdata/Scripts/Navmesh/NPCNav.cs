@@ -16,6 +16,12 @@ public class NPCNav : NavCalc
     /// <summary>How often the approaches are resampled to find the best attempt</summary>
     const int APPROACH_DISTANCE_ATTEMPTS = 4;
     const float APPROACH_REPLAN_INTERVALL = 0.1f;
+    const float ROUTE_REACHED_CLEARANCE_FACTOR = 0.2f;
+    const float NAVMESH_SAMPLE_RADIUS_FACTOR = 0.5f;
+    const float MIN_NAVMESH_SAMPLE_RADIUS = 0.25f;
+    const float HALF_ROTATION_DEGREES = 180f;
+    const float APPROACH_DISTANCE_PENALTY_WEIGHT = 0.5f;
+    const float BLOCKED_PUK_PATH_SCORE_PENALTY = 1000f;
 
     public enum ArenaMode
     {
@@ -97,6 +103,7 @@ public class NPCNav : NavCalc
     float EmergencyGoalDistance => CharSO.CharSettings.CharNPCSettings.EmergencyGoalDistance;
     float EmergencyClearAlignment => CharSO.CharSettings.CharNPCSettings.EmergencyClearAlignment;
     float EmergencyDashPukClearance => CharSO.CharSettings.CharNPCSettings.EmergencyDashPukClearance;
+    float EmergencyRouteWidth => CharSO.CharSettings.CharNPCSettings.EmergencyRouteWidth;
     bool DashDefensively => CharSO.CharSettings.CharNPCSettings.DashDefensively;
     float MaxSpeed => CharSO.CharSettings.CharRigidSettings.MaxSpeed;
     float stoppingDistance => CharSO.StoppingDistance;
@@ -181,58 +188,17 @@ public class NPCNav : NavCalc
     {
         directlyBlockingThreat = false;
 
-        if (!MinigameManager.Instance.TryGetGoalMiddle(IsRight, out Vector2 ownGoalMiddle) ||
-            !MinigameManager.Instance.TryGetGoalMiddle(!IsRight, out Vector2 opponentGoalMiddle))
+        if (!TryGetGoalPositions(out Vector2 ownGoalMiddle, out Vector2 opponentGoalMiddle))
         {
-            hasShotPlan = false;
-            targetPos = Puk.position;
+            ChasePukWithoutGoalPlan();
             return;
         }
 
-        predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
-        predictedPukPosition = ClampToArenaSideOfGoalLine(predictedPukPosition, ownGoalMiddle);
-        currentPukIntent = GetPukIntent(ownGoalMiddle);
+        UpdatePredictedPukPosition(ownGoalMiddle);
+        UpdatePukIntent(ownGoalMiddle);
+        UpdateShotPlan(ownGoalMiddle, opponentGoalMiddle);
 
-        if (currentPukIntent == PukIntent.EmergencyBlock && emergencyPhase == EmergencyPhase.None)
-        {
-            emergencyPhase = EmergencyPhase.Backdash;
-        }
-
-        if (currentPukIntent != previousPukIntent)
-        {
-            hasApproachPlan = false;
-            usesVerticalEmergencyFallback = false;
-            emergencyPhase = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyPhase.Backdash : EmergencyPhase.None;
-            previousPukIntent = currentPukIntent;
-        }
-
-        shotDirection = GetDesiredShotDirection(currentPukIntent, ownGoalMiddle, opponentGoalMiddle);
-
-        Vector2 alignmentPosition = currentPukIntent == PukIntent.EmergencyBlock ? Puk.position.RemoveZ() : predictedPukPosition;
-        Vector2 characterToPuk = (alignmentPosition - transform.position.RemoveZ()).normalized;
-        shotAlignment = Vector2.Dot(characterToPuk, shotDirection);
-        float requiredAlignment = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
-        canSafelyStrike = shotAlignment >= requiredAlignment;
-
-        if (currentPukIntent == PukIntent.AttackGoal && HasPhysicallyReachedApproach())
-        {
-            canSafelyStrike = true;
-        }
-
-        hasShotPlan = true;
-
-        directlyBlockingThreat = currentPukIntent != PukIntent.AttackGoal && (hasPredictedGoalCrossing || IsBetweenPukAndGoal(ownGoalMiddle));
-
-        if (directlyBlockingThreat)
-        {
-            usesVerticalEmergencyFallback = false;
-            emergencyPhase = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyPhase.Clear : EmergencyPhase.None;
-            defensiveInterceptPosition = hasPredictedGoalCrossing ? GetDefensiveInterceptPosition() : predictedPukPosition;
-            approachPosition = defensiveInterceptPosition;
-            targetPos = defensiveInterceptPosition;
-            hasApproachPlan = false;
-            return;
-        }
+        if (TryBlockImmediateThreat(ownGoalMiddle)) return;
 
         if (currentPukIntent == PukIntent.EmergencyBlock)
         {
@@ -240,7 +206,113 @@ public class NPCNav : NavCalc
             return;
         }
 
-        if (!canSafelyStrike && (!hasApproachPlan || Time.time >= nextApproachPlanTime))
+        UpdateApproachPlan();
+        UpdateChaseTarget();
+        TryDashAtPuk();
+    }
+
+    bool TryGetGoalPositions(out Vector2 ownGoalMiddle, out Vector2 opponentGoalMiddle)
+    {
+        bool foundOwnGoal = MinigameManager.Instance.TryGetGoalMiddle(IsRight, out ownGoalMiddle);
+        if (!foundOwnGoal)
+        {
+            opponentGoalMiddle = default;
+            return false;
+        }
+
+        bool foundOpponentGoal = MinigameManager.Instance.TryGetGoalMiddle(!IsRight, out opponentGoalMiddle);
+        return foundOpponentGoal;
+    }
+
+    void ChasePukWithoutGoalPlan()
+    {
+        hasShotPlan = false;
+        targetPos = Puk.position;
+    }
+
+    void UpdatePredictedPukPosition(Vector2 ownGoalMiddle)
+    {
+        predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
+        predictedPukPosition = ClampToArenaSideOfGoalLine(predictedPukPosition, ownGoalMiddle);
+    }
+
+    void UpdatePukIntent(Vector2 ownGoalMiddle)
+    {
+        currentPukIntent = GetPukIntent(ownGoalMiddle);
+
+        bool needsEmergencyPhase = currentPukIntent == PukIntent.EmergencyBlock;
+        bool hasNoEmergencyPhase = emergencyPhase == EmergencyPhase.None;
+
+        if (needsEmergencyPhase && hasNoEmergencyPhase)
+        {
+            emergencyPhase = EmergencyPhase.Backdash;
+        }
+
+        bool intentChanged = currentPukIntent != previousPukIntent;
+        if (!intentChanged) return;
+
+        hasApproachPlan = false;
+        usesVerticalEmergencyFallback = false;
+        emergencyPhase = needsEmergencyPhase ? EmergencyPhase.Backdash : EmergencyPhase.None;
+        previousPukIntent = currentPukIntent;
+    }
+
+    void UpdateShotPlan(Vector2 ownGoalMiddle, Vector2 opponentGoalMiddle)
+    {
+        bool isEmergencyBlock = currentPukIntent == PukIntent.EmergencyBlock;
+
+        shotDirection = GetDesiredShotDirection(currentPukIntent, ownGoalMiddle, opponentGoalMiddle);
+
+        Vector2 alignmentPosition = isEmergencyBlock ? Puk.position.RemoveZ() : predictedPukPosition;
+        Vector2 characterToPuk = (alignmentPosition - transform.position.RemoveZ()).normalized;
+        shotAlignment = Vector2.Dot(characterToPuk, shotDirection);
+        float requiredAlignment = isEmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
+        canSafelyStrike = shotAlignment >= requiredAlignment;
+
+        bool isAttackingGoal = currentPukIntent == PukIntent.AttackGoal;
+        bool reachedApproachPosition = false;
+        if (isAttackingGoal)
+        {
+            reachedApproachPosition = HasPhysicallyReachedApproach();
+        }
+
+        if (isAttackingGoal && reachedApproachPosition)
+        {
+            canSafelyStrike = true;
+        }
+
+        hasShotPlan = true;
+    }
+
+    bool TryBlockImmediateThreat(Vector2 ownGoalMiddle)
+    {
+        bool isDefensiveIntent = currentPukIntent != PukIntent.AttackGoal;
+        if (!isDefensiveIntent) return false;
+
+        bool isBetweenPukAndGoal = IsBetweenPukAndGoal(ownGoalMiddle);
+        bool isInThreatPath = hasPredictedGoalCrossing || isBetweenPukAndGoal;
+        directlyBlockingThreat = isInThreatPath;
+
+        if (!directlyBlockingThreat) return false;
+
+        usesVerticalEmergencyFallback = false;
+        bool isEmergencyBlock = currentPukIntent == PukIntent.EmergencyBlock;
+        emergencyPhase = isEmergencyBlock ? EmergencyPhase.Clear : EmergencyPhase.None;
+        defensiveInterceptPosition = hasPredictedGoalCrossing ? GetDefensiveInterceptPosition() : predictedPukPosition;
+        approachPosition = defensiveInterceptPosition;
+        targetPos = defensiveInterceptPosition;
+        hasApproachPlan = false;
+        return true;
+    }
+
+    void UpdateApproachPlan()
+    {
+        bool needsSaferPosition = !canSafelyStrike;
+        bool hasNoApproachPlan = !hasApproachPlan;
+        bool planHasExpired = Time.time >= nextApproachPlanTime;
+        bool shouldReplanApproach = needsSaferPosition && (hasNoApproachPlan || planHasExpired);
+
+        if (shouldReplanApproach)
         {
             approachPosition = FindBestApproachPosition(predictedPukPosition);
             hasApproachPlan = true;
@@ -252,10 +324,22 @@ public class NPCNav : NavCalc
             approachPosition = predictedPukPosition - shotDirection * PukApproachDistance;
             hasApproachPlan = false;
         }
+    }
 
+    void UpdateChaseTarget()
+    {
         targetPos = canSafelyStrike ? Puk.position : approachPosition;
+    }
 
-        if (canSafelyStrike && DashRandomly && Random.value <= ProbabilityPerFrame)
+    void TryDashAtPuk()
+    {
+        bool randomDashEnabled = DashRandomly;
+        bool canAttemptDash = canSafelyStrike && randomDashEnabled;
+        if (!canAttemptDash) return;
+
+        bool passedRandomDashCheck = Random.value <= ProbabilityPerFrame;
+
+        if (passedRandomDashCheck)
         {
             moveRB.DashAtPosition(Puk.position);
         }
@@ -263,69 +347,106 @@ public class NPCNav : NavCalc
 
     void UpdateEmergencyBlock()
     {
-        if (emergencyPhase == EmergencyPhase.Backdash && canSafelyStrike)
-        {
-            emergencyPhase = EmergencyPhase.Clear;
-            hasApproachPlan = false;
-        }
+        UpdateEmergencyClearPhase();
 
-        if (emergencyPhase == EmergencyPhase.Clear)
-        {
-            usesVerticalEmergencyFallback = false;
-            approachPosition = Puk.position.RemoveZ() - shotDirection * PukApproachDistance;
-            targetPos = Puk.position;
-            return;
-        }
+        if (TryClearPukDuringEmergency()) return;
+        if (TryFollowEmergencyRoute()) return;
 
-        if (emergencyPhase == EmergencyPhase.RouteBehind)
-        {
-            usesVerticalEmergencyFallback = false;
-            float routeReachedDistance = Mathf.Max(GetCombinedPukClearance() * 0.2f, 0.25f);
-
-            if (Vector2.Distance(transform.position, emergencyRoutePosition) <= routeReachedDistance)
-            {
-                emergencyPhase = EmergencyPhase.Backdash;
-                hasApproachPlan = false;
-            }
-            else if (Vector2.Distance(Puk.position, emergencyRoutePukPosition) <= routeReachedDistance)
-            {
-                approachPosition = emergencyRoutePosition;
-                targetPos = emergencyRoutePosition;
-                return;
-            }
-            else
-            {
-                emergencyPhase = EmergencyPhase.Backdash;
-                hasApproachPlan = false;
-            }
-        }
-
-        if (!hasApproachPlan || Time.time >= nextApproachPlanTime)
-        {
-            approachPosition = FindBestApproachPosition(Puk.position.RemoveZ(), true);
-            hasApproachPlan = true;
-            nextApproachPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
-
-            if (!IsPathClearOfPuk(approachPosition))
-            {
-                if (TryFindEmergencyRoutePosition(approachPosition, out emergencyRoutePosition))
-                {
-                    emergencyRoutePukPosition = Puk.position;
-                    emergencyPhase = EmergencyPhase.RouteBehind;
-                    targetPos = emergencyRoutePosition;
-                    return;
-                }
-
-                SetVerticalEmergencyFallback();
-                return;
-            }
-
-            usesVerticalEmergencyFallback = false;
-        }
+        if (UpdateEmergencyApproachPlan()) return;
 
         targetPos = approachPosition;
+        TryDefensiveDash();
+    }
 
-        if (DashDefensively && HasClearDashPath(approachPosition))
+    void UpdateEmergencyClearPhase()
+    {
+        bool isBackingUp = emergencyPhase == EmergencyPhase.Backdash;
+        bool isReadyToClear = isBackingUp && canSafelyStrike;
+        if (!isReadyToClear) return;
+
+        emergencyPhase = EmergencyPhase.Clear;
+        hasApproachPlan = false;
+    }
+
+    bool TryClearPukDuringEmergency()
+    {
+        bool isClearingPuk = emergencyPhase == EmergencyPhase.Clear;
+        if (!isClearingPuk) return false;
+
+        usesVerticalEmergencyFallback = false;
+        approachPosition = Puk.position.RemoveZ() - shotDirection * PukApproachDistance;
+        targetPos = Puk.position;
+        return true;
+    }
+
+    bool TryFollowEmergencyRoute()
+    {
+        bool isRoutingBehindPuk = emergencyPhase == EmergencyPhase.RouteBehind;
+        if (!isRoutingBehindPuk) return false;
+
+        usesVerticalEmergencyFallback = false;
+        float routeReachedDistance = Mathf.Max(GetCombinedPukClearance() * ROUTE_REACHED_CLEARANCE_FACTOR, MIN_NAVMESH_SAMPLE_RADIUS);
+        bool hasReachedRoute = Vector2.Distance(transform.position, emergencyRoutePosition) <= routeReachedDistance;
+        bool pukStayedNearRouteStart = Vector2.Distance(Puk.position, emergencyRoutePukPosition) <= routeReachedDistance;
+
+        if (hasReachedRoute)
+        {
+            emergencyPhase = EmergencyPhase.Backdash;
+            hasApproachPlan = false;
+            return false;
+        }
+
+        if (pukStayedNearRouteStart)
+        {
+            approachPosition = emergencyRoutePosition;
+            targetPos = emergencyRoutePosition;
+            return true;
+        }
+
+        emergencyPhase = EmergencyPhase.Backdash;
+        hasApproachPlan = false;
+        return false;
+    }
+
+    bool UpdateEmergencyApproachPlan()
+    {
+        bool hasNoApproachPlan = !hasApproachPlan;
+        bool planHasExpired = Time.time >= nextApproachPlanTime;
+        bool shouldReplanApproach = hasNoApproachPlan || planHasExpired;
+        if (!shouldReplanApproach) return false;
+
+        approachPosition = FindBestApproachPosition(Puk.position.RemoveZ(), true);
+        hasApproachPlan = true;
+        nextApproachPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
+
+        bool hasClearApproachPath = IsPathClearOfPuk(approachPosition);
+        if (hasClearApproachPath)
+        {
+            usesVerticalEmergencyFallback = false;
+            return false;
+        }
+
+        bool foundRouteBehindPuk = TryFindEmergencyRoutePosition(approachPosition, out emergencyRoutePosition);
+        if (foundRouteBehindPuk)
+        {
+            emergencyRoutePukPosition = Puk.position;
+            emergencyPhase = EmergencyPhase.RouteBehind;
+            targetPos = emergencyRoutePosition;
+            return true;
+        }
+
+        SetVerticalEmergencyFallback();
+        return true;
+    }
+
+    void TryDefensiveDash()
+    {
+        bool defensiveDashEnabled = DashDefensively;
+        if (!defensiveDashEnabled) return;
+
+        bool hasClearDashPath = HasClearDashPath(approachPosition);
+
+        if (hasClearDashPath)
         {
             moveRB.DashAtPosition(approachPosition);
         }
@@ -360,9 +481,11 @@ public class NPCNav : NavCalc
             return PukIntent.EmergencyBlock;
         }
 
-        bool isThreat = ownGoalDistance <= OwnGoalDangerDistance &&
-                        puckVelocity.magnitude >= MinimumThreatSpeed &&
-                        (hasPredictedGoalCrossing || ownGoalThreatAlignment >= OwnGoalThreatAlignment);
+        bool isNearOwnGoal = ownGoalDistance <= OwnGoalDangerDistance;
+        bool isMovingFastEnough = puckVelocity.magnitude >= MinimumThreatSpeed;
+        bool isMovingTowardOwnGoal = ownGoalThreatAlignment >= OwnGoalThreatAlignment;
+        bool isHeadingIntoGoal = hasPredictedGoalCrossing || isMovingTowardOwnGoal;
+        bool isThreat = isNearOwnGoal && isMovingFastEnough && isHeadingIntoGoal;
 
         if (!isThreat) return PukIntent.AttackGoal;
 
@@ -403,7 +526,12 @@ public class NPCNav : NavCalc
         float pukArenaDistance = Vector2.Dot(pukPosition - ownGoalMiddle, arenaDirection);
         float characterArenaDistance = Vector2.Dot(transform.position.RemoveZ() - ownGoalMiddle, arenaDirection);
 
-        return pukArenaDistance > 0f && characterArenaDistance >= 0f && characterArenaDistance < pukArenaDistance;
+        bool pukIsInsideArena = pukArenaDistance > 0f;
+        bool characterIsInsideArena = characterArenaDistance >= 0f;
+        bool characterIsBehindPuk = characterArenaDistance < pukArenaDistance;
+
+        bool isBetweenPukAndGoal = pukIsInsideArena && characterIsInsideArena && characterIsBehindPuk;
+        return isBetweenPukAndGoal;
     }
 
     bool TryGetPredictedGoalCrossing(Vector2 ownGoalMiddle, out Vector2 crossingPosition, out float crossingTime)
@@ -426,7 +554,11 @@ public class NPCNav : NavCalc
         crossingTime = pukArenaDistance / speedTowardGoal;
         crossingPosition = pukPosition + pukVelocity * crossingTime;
         float distanceAlongGoal = Vector2.Dot(crossingPosition - goalStartPosition, goalDifference.normalized);
-        return distanceAlongGoal >= 0f && distanceAlongGoal <= goalDifference.magnitude;
+        bool crossingIsAfterGoalStart = distanceAlongGoal >= 0f;
+        bool crossingIsBeforeGoalEnd = distanceAlongGoal <= goalDifference.magnitude;
+
+        bool crossesGoalOpening = crossingIsAfterGoalStart && crossingIsBeforeGoalEnd;
+        return crossesGoalOpening;
     }
 
     Vector2 GetDefensiveInterceptPosition()
@@ -536,7 +668,7 @@ public class NPCNav : NavCalc
 
         if (arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) return false;
 
-        float sampleRadius = Mathf.Max(agent.radius * 0.5f, 0.25f);
+        float sampleRadius = Mathf.Max(agent.radius * NAVMESH_SAMPLE_RADIUS_FACTOR, MIN_NAVMESH_SAMPLE_RADIUS);
 
         if (!NavMesh.SamplePosition(rawCandidate, out NavMeshHit navHit, sampleRadius, agent.areaMask)) return false;
 
@@ -553,13 +685,21 @@ public class NPCNav : NavCalc
         if (candidatePath.status != NavMeshPathStatus.PathComplete) return false;
 
         float pathLength = GetPathLength(candidatePath);
-        float anglePenalty = Mathf.Abs(angle) / 180f * PukApproachDistance;
-        float distancePenalty = Mathf.Abs(PukApproachDistance - Vector2.Distance(plannedPukPosition, sampledCandidate)) * 0.5f;
+        float anglePenalty = Mathf.Abs(angle) / HALF_ROTATION_DEGREES * PukApproachDistance;
+        float distancePenalty = Mathf.Abs(PukApproachDistance - Vector2.Distance(plannedPukPosition, sampledCandidate)) * APPROACH_DISTANCE_PENALTY_WEIGHT;
         score = pathLength + anglePenalty + distancePenalty;
 
-        if (preferClearDashPath && !IsCalculatedPathClearOfPuk(candidatePath))
+        bool hasClearPukPath = true;
+        if (preferClearDashPath)
         {
-            score += 1000f;
+            hasClearPukPath = IsCalculatedPathClearOfPuk(candidatePath);
+        }
+
+        bool shouldPenalizeBlockedPath = preferClearDashPath && !hasClearPukPath;
+
+        if (shouldPenalizeBlockedPath)
+        {
+            score += BLOCKED_PUK_PATH_SCORE_PENALTY;
         }
 
         return true;
@@ -595,7 +735,7 @@ public class NPCNav : NavCalc
         Vector2 behindDifference = behindPukPosition - pukPosition;
         Vector2 behindDirection = behindDifference.sqrMagnitude > Mathf.Epsilon ? behindDifference.normalized : -shotDirection;
         Vector2 routeDirection = new(-behindDirection.y, behindDirection.x);
-        float routeOffset = GetCombinedPukClearance() * 1.25f;
+        float routeOffset = GetCombinedPukClearance() * EmergencyRouteWidth;
         float bestPathLength = float.PositiveInfinity;
         routePosition = behindPukPosition;
 
@@ -604,7 +744,7 @@ public class NPCNav : NavCalc
             Vector2 rawRoutePosition = behindPukPosition + routeDirection * routeOffset * directionSign;
 
             if (arenaCollider && !arenaCollider.OverlapPoint(rawRoutePosition)) continue;
-            if (!NavMesh.SamplePosition(rawRoutePosition, out NavMeshHit navHit, Mathf.Max(agent.radius, 0.25f), agent.areaMask)) continue;
+            if (!NavMesh.SamplePosition(rawRoutePosition, out NavMeshHit navHit, Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS), agent.areaMask)) continue;
 
             Vector2 sampledRoutePosition = navHit.position.RemoveZ();
 
@@ -643,14 +783,20 @@ public class NPCNav : NavCalc
 
     bool IsSegmentClearOfPuk(Vector2 segmentStart, Vector2 segmentEnd)
     {
-        Vector2 puckPosition = Puk.position.RemoveZ();
+        Vector2 pukPosition = Puk.position.RemoveZ();
         Vector2 segmentDifference = segmentEnd - segmentStart;
 
-        if (segmentDifference.sqrMagnitude <= Mathf.Epsilon) return Vector2.Distance(segmentStart, puckPosition) >= GetCombinedPukClearance();
+        if (segmentDifference.sqrMagnitude <= Mathf.Epsilon)
+        {
+            bool isPointClearOfPuk = Vector2.Distance(segmentStart, pukPosition) >= GetCombinedPukClearance();
+            return isPointClearOfPuk;
+        }
 
-        float segmentAlpha = Mathf.Clamp01(Vector2.Dot(puckPosition - segmentStart, segmentDifference) / segmentDifference.sqrMagnitude);
+        float segmentAlpha = Mathf.Clamp01(Vector2.Dot(pukPosition - segmentStart, segmentDifference) / segmentDifference.sqrMagnitude);
         Vector2 closestPoint = segmentStart + segmentDifference * segmentAlpha;
-        return Vector2.Distance(closestPoint, puckPosition) >= GetCombinedPukClearance();
+        bool isSegmentClearOfPuk = Vector2.Distance(closestPoint, pukPosition) >= GetCombinedPukClearance();
+        
+        return isSegmentClearOfPuk;
     }
 
     float GetCombinedPukClearance()
@@ -658,14 +804,14 @@ public class NPCNav : NavCalc
         return GetColliderRadius(characterCollider) + GetColliderRadius(PukCollider) + EmergencyDashPukClearance;
     }
 
-    static float GetColliderRadius(Collider2D targetCollider)
+    float GetColliderRadius(Collider2D targetCollider)
     {
         if (!targetCollider) return 0f;
 
         return Mathf.Max(targetCollider.bounds.extents.x, targetCollider.bounds.extents.y);
     }
 
-    static float GetPathLength(NavMeshPath path)
+    float GetPathLength(NavMeshPath path)
     {
         float length = 0f;
 
@@ -679,7 +825,7 @@ public class NPCNav : NavCalc
 
     void Defend()
     {
-        if (!FollowBallY)
+        if (FollowBallY == false)
         {
             if (GoesToDefault)
             {
@@ -695,10 +841,11 @@ public class NPCNav : NavCalc
 
     protected override float GetStoppingDistance()
     {
-        if (arenaMode == ArenaMode.Arena && MinigameManager.Instance && PukOnSide)
-        {
-            return 0f;
-        }
+        bool isInArena = arenaMode == ArenaMode.Arena;
+        bool hasMinigameManager = MinigameManager.Instance;
+        bool isChasingPuk = isInArena && hasMinigameManager && PukOnSide;
+
+        if (isChasingPuk) return 0f;
 
         return stoppingDistance;
     }
@@ -712,6 +859,49 @@ public class NPCNav : NavCalc
     {
         arenaMode = ArenaMode.Despawn;
         SetAgentPosition(DespawnPos);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Arena")) return;
+
+        arenaCollider = collision;
+        SetArenaMode(ArenaMode.Arena);
+    }
+
+    public void SetArenaMode(ArenaMode newMode)
+    {
+        arenaMode = newMode;
+    }
+
+    public void ToArena()
+    {
+        if (arenaMode != ArenaMode.Arena)
+        {
+            arenaMode = ArenaMode.ToArena;
+        }
+
+        defaultTransform = GetRandomDefaultTransform();
+    }
+
+    /// <summary>Switches the default position of the character</summary>
+    IEnumerator DefaultSwitchRoutine()
+    {
+        while (CharSO.CharSettings.CharNPCSettings.GoesToDefault)
+        {
+            var waitTime = CharSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
+
+            if (waitTime <= 0) yield break;
+
+            yield return new WaitForSeconds(waitTime);
+
+            defaultTransform = GetRandomDefaultTransform();
+        }
+    }
+
+    Transform GetRandomDefaultTransform()
+    {
+        return TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
     }
 
     void OnDrawGizmosSelected()
@@ -808,18 +998,7 @@ public class NPCNav : NavCalc
 #endif
     }
 
-    Color GetIntentColor()
-    {
-        return currentPukIntent switch
-        {
-            PukIntent.ClearUp or PukIntent.ClearDown => Color.cyan,
-            PukIntent.EmergencyBlock => new Color(1f, 0.5f, 0f),
-            _ => Color.green,
-        };
-
-    }
-
-    static void DrawArrow(Vector3 start, Vector2 direction, float length)
+    void DrawArrow(Vector3 start, Vector2 direction, float length)
     {
         Vector3 end = start + (Vector3)(direction * length);
         Vector2 perpendicular = new(-direction.y, direction.x);
@@ -830,47 +1009,14 @@ public class NPCNav : NavCalc
         Gizmos.DrawLine(end, arrowBase - (Vector3)(perpendicular * 0.3f));
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    Color GetIntentColor()
     {
-        if (collision.CompareTag("Arena"))
+        return currentPukIntent switch
         {
-            arenaCollider = collision;
-            SetArenaMode(ArenaMode.Arena);
-        }
-    }
+            PukIntent.ClearUp or PukIntent.ClearDown => Color.cyan,
+            PukIntent.EmergencyBlock => new Color(1f, 0.5f, 0f),
+            _ => Color.green,
+        };
 
-    public void SetArenaMode(ArenaMode newMode)
-    {
-        arenaMode = newMode;
-    }
-
-    public void ToArena()
-    {
-        if (arenaMode != ArenaMode.Arena)
-        {
-            arenaMode = ArenaMode.ToArena;
-        }
-
-        defaultTransform = GetRandomDefaultTransform();
-    }
-
-    /// <summary>Switches the default position of the character</summary>
-    IEnumerator DefaultSwitchRoutine()
-    {
-        while (CharSO.CharSettings.CharNPCSettings.GoesToDefault)
-        {
-            var waitTime = CharSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
-
-            if (waitTime <= 0) yield break;
-
-            yield return new WaitForSeconds(waitTime);
-
-            defaultTransform = GetRandomDefaultTransform();
-        }
-    }
-
-    Transform GetRandomDefaultTransform()
-    {
-        return TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
     }
 }

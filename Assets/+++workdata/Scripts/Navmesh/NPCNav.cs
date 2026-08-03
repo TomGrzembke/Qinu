@@ -13,6 +13,7 @@ public class NPCNav : NavCalc
 {
     /// <summary> The number of points looked at when the approaching the ball</summary>
     const int APPROACH_CANDIDATE_SAMPLE_COUNT = 7;
+
     /// <summary>How often the approaches are resampled to find the best attempt</summary>
     const int APPROACH_DISTANCE_ATTEMPTS = 4;
     const float APPROACH_REPLAN_INTERVALL = 0.1f;
@@ -87,26 +88,10 @@ public class NPCNav : NavCalc
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
     NPCCharSO CharSO => (NPCCharSO)sOHolder.CharSO;
+    CharNPCSettings NPCSettings => CharSO.CharSettings.CharNPCSettings;
+    NPCRigidSettings RigidSettings => CharSO.CharSettings.CharRigidSettings;
 
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
-    bool GoesToDefault => CharSO.CharSettings.CharNPCSettings.GoesToDefault;
-    bool InvertY => CharSO.CharSettings.CharNPCSettings.InvertY;
-    bool FollowBallY => CharSO.CharSettings.CharNPCSettings.FollowBallY;
-    bool DashRandomly => CharSO.CharSettings.CharNPCSettings.DashRandomly;
-    float ProbabilityPerFrame => CharSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
-    float PukApproachDistance => CharSO.CharSettings.CharNPCSettings.PukApproachDistance;
-    float RequiredShotAlignment => CharSO.CharSettings.CharNPCSettings.RequiredShotAlignment;
-    float PukPredictionTime => CharSO.CharSettings.CharNPCSettings.PukPredictionTime;
-    float OwnGoalDangerDistance => CharSO.CharSettings.CharNPCSettings.OwnGoalDangerDistance;
-    float MinimumThreatSpeed => CharSO.CharSettings.CharNPCSettings.MinimumThreatSpeed;
-    float OwnGoalThreatAlignment => CharSO.CharSettings.CharNPCSettings.OwnGoalThreatAlignment;
-    float EmergencyGoalDistance => CharSO.CharSettings.CharNPCSettings.EmergencyGoalDistance;
-    float EmergencyClearAlignment => CharSO.CharSettings.CharNPCSettings.EmergencyClearAlignment;
-    float EmergencyDashPukClearance => CharSO.CharSettings.CharNPCSettings.EmergencyDashPukClearance;
-    float EmergencyRouteWidth => CharSO.CharSettings.CharNPCSettings.EmergencyRouteWidth;
-    bool DashDefensively => CharSO.CharSettings.CharNPCSettings.DashDefensively;
-    float MaxSpeed => CharSO.CharSettings.CharRigidSettings.MaxSpeed;
-    float stoppingDistance => CharSO.StoppingDistance;
 
 
     void Start()
@@ -232,7 +217,7 @@ public class NPCNav : NavCalc
 
     void UpdatePredictedPukPosition(Vector2 ownGoalMiddle)
     {
-        predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * PukPredictionTime;
+        predictedPukPosition = Puk.position.RemoveZ() + MinigameManager.Instance.PukRB.linearVelocity * NPCSettings.PukPredictionTime;
         predictedPukPosition = ClampToArenaSideOfGoalLine(predictedPukPosition, ownGoalMiddle);
     }
 
@@ -266,7 +251,7 @@ public class NPCNav : NavCalc
         Vector2 alignmentPosition = isEmergencyBlock ? Puk.position.RemoveZ() : predictedPukPosition;
         Vector2 characterToPuk = (alignmentPosition - transform.position.RemoveZ()).normalized;
         shotAlignment = Vector2.Dot(characterToPuk, shotDirection);
-        float requiredAlignment = isEmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
+        float requiredAlignment = isEmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         canSafelyStrike = shotAlignment >= requiredAlignment;
 
         bool isAttackingGoal = currentPukIntent == PukIntent.AttackGoal;
@@ -321,7 +306,7 @@ public class NPCNav : NavCalc
 
         if (canSafelyStrike)
         {
-            approachPosition = predictedPukPosition - shotDirection * PukApproachDistance;
+            approachPosition = predictedPukPosition - shotDirection * NPCSettings.PukApproachDistance;
             hasApproachPlan = false;
         }
     }
@@ -333,11 +318,11 @@ public class NPCNav : NavCalc
 
     void TryDashAtPuk()
     {
-        bool randomDashEnabled = DashRandomly;
+        bool randomDashEnabled = NPCSettings.DashRandomly;
         bool canAttemptDash = canSafelyStrike && randomDashEnabled;
         if (!canAttemptDash) return;
 
-        bool passedRandomDashCheck = Random.value <= ProbabilityPerFrame;
+        bool passedRandomDashCheck = Random.value <= NPCSettings.ProbabilityPerFrame;
 
         if (passedRandomDashCheck)
         {
@@ -374,7 +359,7 @@ public class NPCNav : NavCalc
         if (!isClearingPuk) return false;
 
         usesVerticalEmergencyFallback = false;
-        approachPosition = Puk.position.RemoveZ() - shotDirection * PukApproachDistance;
+        approachPosition = Puk.position.RemoveZ() - shotDirection * NPCSettings.PukApproachDistance;
         targetPos = Puk.position;
         return true;
     }
@@ -441,7 +426,7 @@ public class NPCNav : NavCalc
 
     void TryDefensiveDash()
     {
-        bool defensiveDashEnabled = DashDefensively;
+        bool defensiveDashEnabled = NPCSettings.DashDefensively;
         if (!defensiveDashEnabled) return;
 
         bool hasClearDashPath = HasClearDashPath(approachPosition);
@@ -476,14 +461,14 @@ public class NPCNav : NavCalc
         ownGoalThreatAlignment = puckVelocity.sqrMagnitude > 0f ? Vector2.Dot(puckVelocity.normalized, puckToOwnGoal.normalized) : -1f;
         hasPredictedGoalCrossing = TryGetPredictedGoalCrossing(ownGoalMiddle, out predictedGoalCrossing, out timeToGoalLine);
 
-        if (ownGoalDistance <= EmergencyGoalDistance)
+        if (ownGoalDistance <= NPCSettings.EmergencyGoalDistance)
         {
             return PukIntent.EmergencyBlock;
         }
 
-        bool isNearOwnGoal = ownGoalDistance <= OwnGoalDangerDistance;
-        bool isMovingFastEnough = puckVelocity.magnitude >= MinimumThreatSpeed;
-        bool isMovingTowardOwnGoal = ownGoalThreatAlignment >= OwnGoalThreatAlignment;
+        bool isNearOwnGoal = ownGoalDistance <= NPCSettings.OwnGoalDangerDistance;
+        bool isMovingFastEnough = puckVelocity.magnitude >= NPCSettings.MinimumThreatSpeed;
+        bool isMovingTowardOwnGoal = ownGoalThreatAlignment >= NPCSettings.OwnGoalThreatAlignment;
         bool isHeadingIntoGoal = hasPredictedGoalCrossing || isMovingTowardOwnGoal;
         bool isThreat = isNearOwnGoal && isMovingFastEnough && isHeadingIntoGoal;
 
@@ -549,7 +534,7 @@ public class NPCNav : NavCalc
         crossingTime = 0f;
 
         if (goalDifference.sqrMagnitude <= Mathf.Epsilon) return false;
-        if (pukArenaDistance <= 0f || speedTowardGoal < MinimumThreatSpeed) return false;
+        if (pukArenaDistance <= 0f || speedTowardGoal < NPCSettings.MinimumThreatSpeed) return false;
 
         crossingTime = pukArenaDistance / speedTowardGoal;
         crossingPosition = pukPosition + pukVelocity * crossingTime;
@@ -573,7 +558,7 @@ public class NPCNav : NavCalc
         {
             float interceptTime = timeToGoalLine * i / interceptSamples;
             Vector2 interceptPosition = pukPosition + pukVelocity * interceptTime;
-            float reachableDistance = MaxSpeed * interceptTime + agent.radius;
+            float reachableDistance = RigidSettings.MaxSpeed * interceptTime + agent.radius;
 
             if (Vector2.Distance(characterPosition, interceptPosition) <= reachableDistance)
             {
@@ -622,8 +607,8 @@ public class NPCNav : NavCalc
         rejectedApproachCandidates.Clear();
 
         Vector2 idealApproachDirection = -shotDirection;
-        float desiredApproachDistance = currentPukIntent == PukIntent.EmergencyBlock ? Mathf.Max(PukApproachDistance, GetCombinedPukClearance()) : PukApproachDistance;
-        float approachAlignment = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
+        float desiredApproachDistance = currentPukIntent == PukIntent.EmergencyBlock ? Mathf.Max(NPCSettings.PukApproachDistance, GetCombinedPukClearance()) : NPCSettings.PukApproachDistance;
+        float approachAlignment = currentPukIntent == PukIntent.EmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         float maximumAngle = Mathf.Acos(Mathf.Clamp(approachAlignment, -1f, 1f)) * Mathf.Rad2Deg;
         float bestScore = float.PositiveInfinity;
         Vector2 bestPosition = currentPukIntent == PukIntent.EmergencyBlock ? plannedPukPosition + idealApproachDirection * desiredApproachDistance : plannedPukPosition;
@@ -676,7 +661,7 @@ public class NPCNav : NavCalc
 
         if (arenaCollider && !arenaCollider.OverlapPoint(sampledCandidate)) return false;
 
-        float requiredAlignment = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
+        float requiredAlignment = currentPukIntent == PukIntent.EmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         Vector2 sampledShotDifference = plannedPukPosition - sampledCandidate;
 
         if (sampledShotDifference.sqrMagnitude <= Mathf.Epsilon) return false;
@@ -685,8 +670,8 @@ public class NPCNav : NavCalc
         if (candidatePath.status != NavMeshPathStatus.PathComplete) return false;
 
         float pathLength = GetPathLength(candidatePath);
-        float anglePenalty = Mathf.Abs(angle) / HALF_ROTATION_DEGREES * PukApproachDistance;
-        float distancePenalty = Mathf.Abs(PukApproachDistance - Vector2.Distance(plannedPukPosition, sampledCandidate)) * APPROACH_DISTANCE_PENALTY_WEIGHT;
+        float anglePenalty = Mathf.Abs(angle) / HALF_ROTATION_DEGREES * NPCSettings.PukApproachDistance;
+        float distancePenalty = Mathf.Abs(NPCSettings.PukApproachDistance - Vector2.Distance(plannedPukPosition, sampledCandidate)) * APPROACH_DISTANCE_PENALTY_WEIGHT;
         score = pathLength + anglePenalty + distancePenalty;
 
         bool hasClearPukPath = true;
@@ -735,7 +720,7 @@ public class NPCNav : NavCalc
         Vector2 behindDifference = behindPukPosition - pukPosition;
         Vector2 behindDirection = behindDifference.sqrMagnitude > Mathf.Epsilon ? behindDifference.normalized : -shotDirection;
         Vector2 routeDirection = new(-behindDirection.y, behindDirection.x);
-        float routeOffset = GetCombinedPukClearance() * EmergencyRouteWidth;
+        float routeOffset = GetCombinedPukClearance() * NPCSettings.EmergencyRouteWidth;
         float bestPathLength = float.PositiveInfinity;
         routePosition = behindPukPosition;
 
@@ -795,13 +780,13 @@ public class NPCNav : NavCalc
         float segmentAlpha = Mathf.Clamp01(Vector2.Dot(pukPosition - segmentStart, segmentDifference) / segmentDifference.sqrMagnitude);
         Vector2 closestPoint = segmentStart + segmentDifference * segmentAlpha;
         bool isSegmentClearOfPuk = Vector2.Distance(closestPoint, pukPosition) >= GetCombinedPukClearance();
-        
+
         return isSegmentClearOfPuk;
     }
 
     float GetCombinedPukClearance()
     {
-        return GetColliderRadius(characterCollider) + GetColliderRadius(PukCollider) + EmergencyDashPukClearance;
+        return GetColliderRadius(characterCollider) + GetColliderRadius(PukCollider) + NPCSettings.EmergencyDashPukClearance;
     }
 
     float GetColliderRadius(Collider2D targetCollider)
@@ -825,9 +810,9 @@ public class NPCNav : NavCalc
 
     void Defend()
     {
-        if (FollowBallY == false)
+        if (NPCSettings.FollowBallY == false)
         {
-            if (GoesToDefault)
+            if (NPCSettings.GoesToDefault)
             {
                 targetPos = defaultTransform.position;
             }
@@ -836,7 +821,7 @@ public class NPCNav : NavCalc
         }
 
         targetPos.x = defaultTransform.position.x;
-        targetPos.y = InvertY ? -Puk.position.y : Puk.position.y;
+        targetPos.y = NPCSettings.InvertY ? -Puk.position.y : Puk.position.y;
     }
 
     protected override float GetStoppingDistance()
@@ -847,7 +832,7 @@ public class NPCNav : NavCalc
 
         if (isChasingPuk) return 0f;
 
-        return stoppingDistance;
+        return CharSO.StoppingDistance;
     }
 
     public void SideSettings(bool _isRight)
@@ -887,9 +872,9 @@ public class NPCNav : NavCalc
     /// <summary>Switches the default position of the character</summary>
     IEnumerator DefaultSwitchRoutine()
     {
-        while (CharSO.CharSettings.CharNPCSettings.GoesToDefault)
+        while (NPCSettings.GoesToDefault)
         {
-            var waitTime = CharSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
+            var waitTime = NPCSettings.DefaultSwitchTime;
 
             if (waitTime <= 0) yield break;
 
@@ -917,10 +902,10 @@ public class NPCNav : NavCalc
         Gizmos.DrawWireSphere(ownGoalMiddle, 0.3f);
 
         Gizmos.color = new Color(1f, 0.5f, 0f);
-        Gizmos.DrawWireSphere(ownGoalMiddle, OwnGoalDangerDistance);
+        Gizmos.DrawWireSphere(ownGoalMiddle, NPCSettings.OwnGoalDangerDistance);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(ownGoalMiddle, EmergencyGoalDistance);
+        Gizmos.DrawWireSphere(ownGoalMiddle, NPCSettings.EmergencyGoalDistance);
 
         if (!hasShotPlan) return;
 
@@ -983,7 +968,7 @@ public class NPCNav : NavCalc
         }
 
 #if UNITY_EDITOR
-        float requiredAlignment = currentPukIntent == PukIntent.EmergencyBlock ? EmergencyClearAlignment : RequiredShotAlignment;
+        float requiredAlignment = currentPukIntent == PukIntent.EmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         string movementStatus = directlyBlockingThreat ? "DIRECTLY BLOCKING" : canSafelyStrike ? "SAFE TO CLEAR" : "REPOSITIONING";
 
         if (usesVerticalEmergencyFallback)
@@ -994,7 +979,7 @@ public class NPCNav : NavCalc
         Handles.Label(pukPosition + Vector3.up * 0.5f, "Puck");
         Handles.Label(predictedPosition + Vector3.up * 0.5f, "Predicted puck");
         Handles.Label(safeApproachPosition + Vector3.up * 0.5f, emergencyPhase == EmergencyPhase.Backdash ? "Backdash target" : "Safe approach");
-        Handles.Label(characterPosition + Vector3.up, $"Intent: {currentPukIntent}\nEmergency: {emergencyPhase}\nShot: {shotAlignment:F2} / {requiredAlignment:F2}\nThreat: {ownGoalThreatAlignment:F2} / {OwnGoalThreatAlignment:F2}\nGoal distance: {ownGoalDistance:F1}\nGoal crossing: {(hasPredictedGoalCrossing ? $"{timeToGoalLine:F2}s" : "None")}\n{movementStatus}");
+        Handles.Label(characterPosition + Vector3.up, $"Intent: {currentPukIntent}\nEmergency: {emergencyPhase}\nShot: {shotAlignment:F2} / {requiredAlignment:F2}\nThreat: {ownGoalThreatAlignment:F2} / {NPCSettings.OwnGoalThreatAlignment:F2}\nGoal distance: {ownGoalDistance:F1}\nGoal crossing: {(hasPredictedGoalCrossing ? $"{timeToGoalLine:F2}s" : "None")}\n{movementStatus}");
 #endif
     }
 

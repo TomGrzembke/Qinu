@@ -752,6 +752,7 @@ MonoBehaviour:
   pointsTilWin: 3
   pointCounter: {x: 0, y: 0}
   <Puk>k__BackingField: {fileID: 1183967833}
+  <PukCollider>k__BackingField: {fileID: 3257105426784781250}
   <ArenaMiddle>k__BackingField: {fileID: 971475960}
   <DefaultPosLeft>k__BackingField:
   - {fileID: 60282861}
@@ -774,6 +775,7 @@ MonoBehaviour:
   <LeftGoalEnd>k__BackingField: {fileID: 380661580}
   <RightGoalStart>k__BackingField: {fileID: 1652233264}
   <RightGoalEnd>k__BackingField: {fileID: 1788287617}
+  <Field>k__BackingField: {fileID: 0}
   ballResetLeft: {fileID: 180869749}
   ballResetRight: {fileID: 1979328818}
   leftCounterTxt: {fileID: 461598521}
@@ -6933,6 +6935,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
+--- !u!58 &3257105426784781250 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1250439790961783938, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
+  m_PrefabInstance: {fileID: 3257105426784781249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3360150962637468889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,34 +7,37 @@ using UnityEngine.AI;
 using UnityEditor;
 #endif
 
-/// <summary> NPC movement with ArenaMode states </summary>
+/// <summary> NPC movement with ArenaMode states  
+/// Disclaimer: I used Codex for the complex Math calculations of this script.</summary>
 public class NPCNav : NavCalc
 {
-    const int approachCandidateCount = 7;
-    const int approachDistanceAttempts = 4;
-    const float approachReplanInterval = 0.1f;
+    /// <summary> The number of points looked at when the approaching the ball</summary>
+    const int APPROACH_CANDIDATE_SAMPLE_COUNT = 7;
+    /// <summary>How often the approaches are resampled to find the best attempt</summary>
+    const int APPROACH_DISTANCE_ATTEMPTS = 4;
+    const float APPROACH_REPLAN_INTERVALL = 0.1f;
 
     public enum ArenaMode
     {
-        ToArena,
-        Arena,
-        Despawn
+        ToArena = 0,
+        Arena = 10,
+        Despawn = 20,
     }
 
     enum PukIntent
     {
-        AttackGoal,
-        ClearUp,
-        ClearDown,
-        EmergencyBlock
+        AttackGoal = 0,
+        ClearUp = 10,
+        ClearDown = 20,
+        EmergencyBlock = 30,
     }
 
     enum EmergencyPhase
     {
-        None,
-        RouteBehind,
-        Backdash,
-        Clear
+        None = -1,
+        RouteBehind = 10,
+        Backdash = 20,
+        Clear = 30,
     }
 
     [SerializeField] ArenaMode arenaMode;
@@ -43,11 +46,10 @@ public class NPCNav : NavCalc
     [SerializeField] float arenaTransitionDistance = 2;
 
     [SerializeField] MoveRB moveRB;
-    [SerializeField] Vector3 targetPos;
+    [SerializeField] Collider2D characterCollider;
 
+    [SerializeField] Vector3 targetPos;
     [SerializeField] Transform defaultTransform;
-    [field: SerializeField] public Transform TopTextTarget { get; private set; }
-    [field: SerializeField] public Transform BotTextTarget { get; private set; }
 
     Vector2 predictedPukPosition;
     Vector2 predictedGoalCrossing;
@@ -70,41 +72,39 @@ public class NPCNav : NavCalc
     bool hasPredictedGoalCrossing;
     bool usesVerticalEmergencyFallback;
     float nextApproachPlanTime;
-    Collider2D arenaCollider;
-    Collider2D characterCollider;
-    Collider2D pukCollider;
     readonly List<Vector2> validApproachCandidates = new();
     readonly List<Vector2> rejectedApproachCandidates = new();
     NavMeshPath candidatePath;
+    Collider2D arenaCollider;
 
+    Collider2D PukCollider => MinigameManager.Instance.PukCollider;
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
-    NPCCharSO charSO => (NPCCharSO)sOHolder.CharSO;
+    NPCCharSO CharSO => (NPCCharSO)sOHolder.CharSO;
+
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
-    bool GoesToDefault => charSO.CharSettings.CharNPCSettings.GoesToDefault;
-    bool InvertY => charSO.CharSettings.CharNPCSettings.InvertY;
-    bool FollowBallY => charSO.CharSettings.CharNPCSettings.FollowBallY;
-    bool DashRandomly => charSO.CharSettings.CharNPCSettings.DashRandomly;
-    float ProbabilityPerFrame => charSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
-    float PukApproachDistance => charSO.CharSettings.CharNPCSettings.PukApproachDistance;
-    float RequiredShotAlignment => charSO.CharSettings.CharNPCSettings.RequiredShotAlignment;
-    float PukPredictionTime => charSO.CharSettings.CharNPCSettings.PukPredictionTime;
-    float OwnGoalDangerDistance => charSO.CharSettings.CharNPCSettings.OwnGoalDangerDistance;
-    float MinimumThreatSpeed => charSO.CharSettings.CharNPCSettings.MinimumThreatSpeed;
-    float OwnGoalThreatAlignment => charSO.CharSettings.CharNPCSettings.OwnGoalThreatAlignment;
-    float EmergencyGoalDistance => charSO.CharSettings.CharNPCSettings.EmergencyGoalDistance;
-    float EmergencyClearAlignment => charSO.CharSettings.CharNPCSettings.EmergencyClearAlignment;
-    float EmergencyDashPukClearance => charSO.CharSettings.CharNPCSettings.EmergencyDashPukClearance;
-    bool DashDefensively => charSO.CharSettings.CharNPCSettings.DashDefensively;
-    float MaxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
-    float stoppingDistance => charSO.StoppingDistance;
+    bool GoesToDefault => CharSO.CharSettings.CharNPCSettings.GoesToDefault;
+    bool InvertY => CharSO.CharSettings.CharNPCSettings.InvertY;
+    bool FollowBallY => CharSO.CharSettings.CharNPCSettings.FollowBallY;
+    bool DashRandomly => CharSO.CharSettings.CharNPCSettings.DashRandomly;
+    float ProbabilityPerFrame => CharSO.CharSettings.CharNPCSettings.ProbabilityPerFrame;
+    float PukApproachDistance => CharSO.CharSettings.CharNPCSettings.PukApproachDistance;
+    float RequiredShotAlignment => CharSO.CharSettings.CharNPCSettings.RequiredShotAlignment;
+    float PukPredictionTime => CharSO.CharSettings.CharNPCSettings.PukPredictionTime;
+    float OwnGoalDangerDistance => CharSO.CharSettings.CharNPCSettings.OwnGoalDangerDistance;
+    float MinimumThreatSpeed => CharSO.CharSettings.CharNPCSettings.MinimumThreatSpeed;
+    float OwnGoalThreatAlignment => CharSO.CharSettings.CharNPCSettings.OwnGoalThreatAlignment;
+    float EmergencyGoalDistance => CharSO.CharSettings.CharNPCSettings.EmergencyGoalDistance;
+    float EmergencyClearAlignment => CharSO.CharSettings.CharNPCSettings.EmergencyClearAlignment;
+    float EmergencyDashPukClearance => CharSO.CharSettings.CharNPCSettings.EmergencyDashPukClearance;
+    bool DashDefensively => CharSO.CharSettings.CharNPCSettings.DashDefensively;
+    float MaxSpeed => CharSO.CharSettings.CharRigidSettings.MaxSpeed;
+    float stoppingDistance => CharSO.StoppingDistance;
 
 
     void Start()
     {
         candidatePath = new NavMeshPath();
-        characterCollider = FindSolidCollider(gameObject);
-        pukCollider = FindSolidCollider(Puk.gameObject);
 
         if (agent.isOnNavMesh)
         {
@@ -125,7 +125,7 @@ public class NPCNav : NavCalc
                 UpdateToArena();
                 break;
             case ArenaMode.Arena:
-                UpdateArena();
+                UpdateInArena();
                 break;
             case ArenaMode.Despawn:
                 hasShotPlan = false;
@@ -156,7 +156,7 @@ public class NPCNav : NavCalc
         }
     }
 
-    void UpdateArena()
+    void UpdateInArena()
     {
         if (!MinigameManager.Instance) return;
 
@@ -244,7 +244,7 @@ public class NPCNav : NavCalc
         {
             approachPosition = FindBestApproachPosition(predictedPukPosition);
             hasApproachPlan = true;
-            nextApproachPlanTime = Time.time + approachReplanInterval;
+            nextApproachPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
         }
 
         if (canSafelyStrike)
@@ -304,7 +304,7 @@ public class NPCNav : NavCalc
         {
             approachPosition = FindBestApproachPosition(Puk.position.RemoveZ(), true);
             hasApproachPlan = true;
-            nextApproachPlanTime = Time.time + approachReplanInterval;
+            nextApproachPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
 
             if (!IsPathClearOfPuk(approachPosition))
             {
@@ -372,17 +372,16 @@ public class NPCNav : NavCalc
 
     Vector2 GetDesiredShotDirection(PukIntent intent, Vector2 ownGoalMiddle, Vector2 opponentGoalMiddle)
     {
-        switch (intent)
+        return intent switch
         {
-            case PukIntent.ClearUp:
-                return Vector2.up;
-            case PukIntent.ClearDown:
-                return Vector2.down;
-            case PukIntent.EmergencyBlock:
-                return GetGoalArenaDirection(IsRight, ownGoalMiddle);
-            default:
-                return (opponentGoalMiddle - predictedPukPosition).normalized;
-        }
+            PukIntent.ClearUp => Vector2.up,
+            PukIntent.ClearDown => Vector2.down,
+
+            PukIntent.EmergencyBlock => GetGoalArenaDirection(IsRight, ownGoalMiddle),
+
+            _ => (opponentGoalMiddle - predictedPukPosition).normalized,
+        };
+
     }
 
     Vector2 GetClearDirection()
@@ -497,15 +496,15 @@ public class NPCNav : NavCalc
         float bestScore = float.PositiveInfinity;
         Vector2 bestPosition = currentPukIntent == PukIntent.EmergencyBlock ? plannedPukPosition + idealApproachDirection * desiredApproachDistance : plannedPukPosition;
 
-        for (int i = 0; i < approachCandidateCount; i++)
+        for (int i = 0; i < APPROACH_CANDIDATE_SAMPLE_COUNT; i++)
         {
-            float angleAlpha = approachCandidateCount == 1 ? 0f : i / (approachCandidateCount - 1f);
+            float angleAlpha = APPROACH_CANDIDATE_SAMPLE_COUNT == 1 ? 0f : i / (APPROACH_CANDIDATE_SAMPLE_COUNT - 1f);
             float angle = Mathf.Lerp(-maximumAngle, maximumAngle, angleAlpha);
             Vector2 candidateDirection = Quaternion.Euler(0f, 0f, angle) * idealApproachDirection;
 
-            for (int distanceAttempt = 0; distanceAttempt < approachDistanceAttempts; distanceAttempt++)
+            for (int distanceAttempt = 0; distanceAttempt < APPROACH_DISTANCE_ATTEMPTS; distanceAttempt++)
             {
-                float distanceAlpha = 1f - distanceAttempt / (float)approachDistanceAttempts;
+                float distanceAlpha = 1f - distanceAttempt / (float)APPROACH_DISTANCE_ATTEMPTS;
                 float candidateDistance = currentPukIntent == PukIntent.EmergencyBlock ? Mathf.Max(desiredApproachDistance * distanceAlpha, GetCombinedPukClearance()) : desiredApproachDistance * distanceAlpha;
                 Vector2 rawCandidate = plannedPukPosition + candidateDirection * candidateDistance;
 
@@ -656,10 +655,7 @@ public class NPCNav : NavCalc
 
     float GetCombinedPukClearance()
     {
-        if (!characterCollider) characterCollider = FindSolidCollider(gameObject);
-        if (!pukCollider) pukCollider = FindSolidCollider(Puk.gameObject);
-
-        return GetColliderRadius(characterCollider) + GetColliderRadius(pukCollider) + EmergencyDashPukClearance;
+        return GetColliderRadius(characterCollider) + GetColliderRadius(PukCollider) + EmergencyDashPukClearance;
     }
 
     static float GetColliderRadius(Collider2D targetCollider)
@@ -667,40 +663,6 @@ public class NPCNav : NavCalc
         if (!targetCollider) return 0f;
 
         return Mathf.Max(targetCollider.bounds.extents.x, targetCollider.bounds.extents.y);
-    }
-
-    static Collider2D FindSolidCollider(GameObject rootObject)
-    {
-        Collider2D largestCollider = null;
-        float largestRadius = 0f;
-
-        foreach (Collider2D currentCollider in rootObject.GetComponents<Collider2D>())
-        {
-            if (!currentCollider.enabled || currentCollider.isTrigger) continue;
-
-            float currentRadius = GetColliderRadius(currentCollider);
-
-            if (currentRadius <= largestRadius) continue;
-
-            largestCollider = currentCollider;
-            largestRadius = currentRadius;
-        }
-
-        if (largestCollider) return largestCollider;
-
-        foreach (Collider2D currentCollider in rootObject.GetComponentsInChildren<Collider2D>())
-        {
-            if (!currentCollider.enabled || currentCollider.isTrigger) continue;
-
-            float currentRadius = GetColliderRadius(currentCollider);
-
-            if (currentRadius <= largestRadius) continue;
-
-            largestCollider = currentCollider;
-            largestRadius = currentRadius;
-        }
-
-        return largestCollider;
     }
 
     static float GetPathLength(NavMeshPath path)
@@ -848,16 +810,13 @@ public class NPCNav : NavCalc
 
     Color GetIntentColor()
     {
-        switch (currentPukIntent)
+        return currentPukIntent switch
         {
-            case PukIntent.ClearUp:
-            case PukIntent.ClearDown:
-                return Color.cyan;
-            case PukIntent.EmergencyBlock:
-                return new Color(1f, 0.5f, 0f);
-            default:
-                return Color.green;
-        }
+            PukIntent.ClearUp or PukIntent.ClearDown => Color.cyan,
+            PukIntent.EmergencyBlock => new Color(1f, 0.5f, 0f),
+            _ => Color.green,
+        };
+
     }
 
     static void DrawArrow(Vector3 start, Vector2 direction, float length)
@@ -895,11 +854,12 @@ public class NPCNav : NavCalc
         defaultTransform = GetRandomDefaultTransform();
     }
 
+    /// <summary>Switches the default position of the character</summary>
     IEnumerator DefaultSwitchRoutine()
     {
-        while (charSO.CharSettings.CharNPCSettings.GoesToDefault)
+        while (CharSO.CharSettings.CharNPCSettings.GoesToDefault)
         {
-            var waitTime = charSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
+            var waitTime = CharSO.CharSettings.CharNPCSettings.DefaultSwitchTime;
 
             if (waitTime <= 0) yield break;
 

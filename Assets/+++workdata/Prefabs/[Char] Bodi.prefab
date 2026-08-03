@@ -429,6 +429,10 @@ PrefabInstance:
       value: DialoguePoint
       objectReference: {fileID: 0}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: characterCollider
+      value: 
+      objectReference: {fileID: 3938423315641164905}
+    - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: <BotTextTarget>k__BackingField
       value: 
       objectReference: {fileID: 632085850976808775}

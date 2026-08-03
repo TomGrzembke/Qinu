@@ -123,6 +123,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flipSensitivity: 6
+  rb: {fileID: 0}
 --- !u!114 &7953238053786489971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,15 +138,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arenaMode: 0
   <IsRight>k__BackingField: 0
-  stoppingDistance: 2
-  goesToDefault: 1
-  dashRandomly: 1
-  probabilityPerFrame: 0.001
+  arenaTransitionDistance: 2
   moveRB: {fileID: 3822254324265408848}
+  characterCollider: {fileID: 5295608182062773719}
   targetPos: {x: 0, y: 0, z: 0}
-  defaultTrans: {fileID: 0}
-  <TopTextTarget>k__BackingField: {fileID: 0}
-  <BotTextTarget>k__BackingField: {fileID: 0}
+  defaultTransform: {fileID: 0}
 --- !u!114 &3822254324265408848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 173636337912830749}
-  disableInputRightclick: 0
-  anim: {fileID: 0}
 --- !u!114 &8040409890454107378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,9 +170,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   rb: {fileID: 3565451610172718577}
+  smoothAlpha: 0.5
 --- !u!50 &3565451610172718577
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,8 +184,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.005
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0.005
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: f17b1f03d0b14604dad43d851f339043, type: 2}
   m_IncludeLayers:
@@ -232,6 +228,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2678853848379604295}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -255,9 +252,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.10366583}
-  serializedVersion: 2
   m_Radius: 2.884315
 --- !u!1 &5445744495270310648
 GameObject:

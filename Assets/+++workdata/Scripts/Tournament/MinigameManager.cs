@@ -10,6 +10,7 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] float pointsTilWin = 5;
     [SerializeField] Vector2 pointCounter;
     [field: SerializeField] public Transform Puk { get; private set; }
+    [field: SerializeField] public Collider2D PukCollider { get; private set; }
     [field: SerializeField] public Transform ArenaMiddle { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosLeft { get; private set; }
     [field: SerializeField] public Transform[] DefaultPosRight { get; private set; }

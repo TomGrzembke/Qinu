@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MovePlayer : RBGetter
 {
+    const float PreviousPhysicsStep = 0.02f;
+
     [SerializeField] bool disableInputRightclick;
     [SerializeField] float outOfReachMinTime = 1;
     [SerializeField] Transform virtualMouseDebug;
@@ -34,6 +36,7 @@ public class MovePlayer : RBGetter
 
     Vector2 collisionDirection;
     Vector2 virtualMouseOffset;
+    Vector2 currentMoveDirection;
 
     List<Vector2> cachedDirections = new();
 
@@ -72,7 +75,7 @@ public class MovePlayer : RBGetter
         rb.linearVelocity = Vector3.zero;
     }
 
-    Vector2 GetMoveDir()
+    Vector2 SampleMoveDirection()
     {
         if (inputDisabled) return ResetMoveDirection();
 
@@ -135,7 +138,8 @@ public class MovePlayer : RBGetter
 
         SetBackCursorOnConfined();
 
-        Accelerate();
+        currentMoveDirection = SampleMoveDirection();
+        Accelerate(currentMoveDirection);
 
         CalculateMaxSpeed();
 
@@ -152,19 +156,22 @@ public class MovePlayer : RBGetter
         virtualMouseDebug.position = GetVirtualMousePosition();
     }
 
-    void Accelerate()
+    void Accelerate(Vector2 moveDirection)
     {
         Vector2 currentVel = rb.linearVelocity;
 
-        if (GetMoveDir() == Vector2.zero)
+        if (moveDirection == Vector2.zero)
         {
-            currentVel -= currentVel * decceleration * Time.fixedDeltaTime;
+            float previousStepVelocityMultiplier = Mathf.Max(0f, 1f - decceleration * PreviousPhysicsStep);
+            float stepRatio = Time.fixedDeltaTime / PreviousPhysicsStep;
+            float velocityMultiplier = Mathf.Pow(previousStepVelocityMultiplier, stepRatio);
+            currentVel *= velocityMultiplier;
 
             if (currentVel.magnitude < 0.01f) currentVel = Vector2.zero;
         }
         else
         {
-            currentVel += GetMoveDir() * (acceleration / rb.mass) * Time.fixedDeltaTime;
+            currentVel += moveDirection * (acceleration / rb.mass) * Time.fixedDeltaTime;
         }
 
         rb.linearVelocity = currentVel;
@@ -228,7 +235,7 @@ public class MovePlayer : RBGetter
         }
 
         //Makes sure that the player actually moved away from the wall.
-        var moveDirection = GetAxisDirection(GetMoveDir());
+        var moveDirection = GetAxisDirection(currentMoveDirection);
         if (Vector2.Dot(moveDirection, collisionDirection) >= 0) return;
 
         collisionDirection = Vector2.zero;
@@ -243,7 +250,7 @@ public class MovePlayer : RBGetter
     {
         if (other.collider.CompareTag("Puk")) return;
 
-        var moveDir = GetMoveDir();
+        var moveDir = currentMoveDirection;
         if (moveDir == Vector2.zero) return;
 
         currentOutOfReachTime = 0;

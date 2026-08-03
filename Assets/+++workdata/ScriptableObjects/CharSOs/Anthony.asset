@@ -23,7 +23,7 @@ MonoBehaviour:
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
-      <ProbabilityPerFrame>k__BackingField: 0.03
+      <RandomDashesPerSecond>k__BackingField: 3.045921
       <PukApproachDistance>k__BackingField: 2.5
       <RequiredShotAlignment>k__BackingField: 0.031
       <PukPredictionTime>k__BackingField: 0.12

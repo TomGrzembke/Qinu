@@ -9,7 +9,9 @@ public class CharNPCSettings
     [field: SerializeField] public bool FollowBallY { get; private set; } = true;
     [field: SerializeField] public bool InvertY { get; private set; }
     [field: SerializeField] public bool DashRandomly { get; private set; } = true;
-    [field: SerializeField] public float ProbabilityPerFrame { get; private set; } = 0.001f;
+    [field: Tooltip("Average number of random attacking dash attempts per second. The actual chance is adjusted for the current frame duration.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float RandomDashesPerSecond { get; private set; } = 0.1f;
     [field: Separator("Approach Distance - higher lines up farther behind the puck")]
     [field: Tooltip("Distance behind the predicted puck position used for approach candidates. Lower values produce shorter, more direct approaches; higher values create wider and safer run-ups.")]
     [field: SerializeField] public float PukApproachDistance { get; private set; } = 4f;
@@ -50,6 +52,6 @@ public class CharNPCSettings
     [field: Min(1f)]
     [field: SerializeField] public float EmergencyRouteWidth { get; private set; } = 1.25f;
     [field: Separator("Defensive Dash - enabled backdashes during emergencies")]
-    [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Probability Per Frame.")]
+    [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Random Dashes Per Second.")]
     [field: SerializeField] public bool DashDefensively { get; private set; } = true;
 }

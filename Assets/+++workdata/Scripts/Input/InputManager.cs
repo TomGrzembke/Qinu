@@ -16,7 +16,8 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
     [Header("Cursor Confinement settings")] 
-    [SerializeField] int deltaSpeedModifier = 80;
+    [Tooltip("Virtual cursor pixels added per mouse-axis unit.")]
+    [SerializeField] float mouseSensitivity = 1.6f;
 
     [SerializeField] int edgeThreshold = 50;
     [SerializeField] float virtualMouseYOffset = 3;
@@ -148,8 +149,8 @@ public class InputManager : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            additionalDelta.x += Input.GetAxis("Mouse X") * deltaSpeedModifier * Time.fixedDeltaTime;
-            additionalDelta.y += Input.GetAxis("Mouse Y") * deltaSpeedModifier * Time.fixedDeltaTime;
+            additionalDelta.x += Input.GetAxis("Mouse X") * mouseSensitivity;
+            additionalDelta.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
             MouseDelta = additionalDelta;
             return;
         }

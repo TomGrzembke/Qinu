@@ -78,7 +78,7 @@ public class NPCNav : NavCalc
         public Vector2 Position;
         public float NextPlanTime;
         public bool HasPlan;
-        public readonly NavMeshPath CandidatePath = new();
+        public NavMeshPath CandidatePath;
     }
 
     sealed class ApproachDebug
@@ -116,6 +116,8 @@ public class NPCNav : NavCalc
 
     void Start()
     {
+        approachPlan.CandidatePath = new();
+        
         if (agent.isOnNavMesh)
         {
             agent.Warp(transform.position);
@@ -340,7 +342,8 @@ public class NPCNav : NavCalc
         bool canAttemptDash = shotPlan.CanSafelyStrike && randomDashEnabled;
         if (!canAttemptDash) return;
 
-        bool passedRandomDashCheck = Random.value <= NPCSettings.ProbabilityPerFrame;
+        float dashChanceThisFrame = 1f - Mathf.Exp(-NPCSettings.RandomDashesPerSecond * Time.deltaTime);
+        bool passedRandomDashCheck = Random.value <= dashChanceThisFrame;
 
         if (passedRandomDashCheck)
         {

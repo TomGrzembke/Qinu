@@ -55,6 +55,7 @@ public class MovePlayer : RBGetter
     PlayerCharSO charSO;
     Vector2 virtualMouseOffset;
     Vector2 currentMoveDirection;
+    bool isReturningFromDash;
 
     readonly List<Vector2> cachedDirections = new();
     readonly Dictionary<Collider2D, Vector2> solidCollisionNormals = new();
@@ -98,6 +99,7 @@ public class MovePlayer : RBGetter
         collisionNormalExpiryTimes.Clear();
         expiredCollisionNormals.Clear();
         movementCastConstraints.Clear();
+        isReturningFromDash = false;
         rb.linearVelocity = Vector3.zero;
     }
 
@@ -176,7 +178,16 @@ public class MovePlayer : RBGetter
 
         RemoveExpiredCollisionNormals();
         ResetVirtualCursorOffsetWhenVisible();
-        ConstrainVirtualCursor();
+
+        if (isReturningFromDash)
+        {
+            UpdateDashReturnTarget();
+        }
+        else
+        {
+            ConstrainVirtualCursor();
+        }
+
         VirtualCursorDebug();
 
         currentMoveDirection = SampleMoveDirection();
@@ -435,8 +446,21 @@ public class MovePlayer : RBGetter
 
     public void Dash(float dashMultiplier)
     {
+        if (!dashEnabled) return;
         if (dashCooldownRoutine != null) return;
+        if (dashRoutine != null) return;
+
+        isReturningFromDash = true;
         dashRoutine = StartCoroutine(DashCor(dashMultiplier));
+    }
+
+    void UpdateDashReturnTarget()
+    {
+        bool reachedDashReturnPosition = Vector2.Distance(transform.position, GetVirtualMousePosition()) <= stoppingDistance;
+        if (reachedDashReturnPosition)
+        {
+            isReturningFromDash = false;
+        }
     }
 
     void DisableInput(InputAction.CallbackContext ctx)
@@ -447,8 +471,6 @@ public class MovePlayer : RBGetter
 
     IEnumerator DashCor(float multiplier)
     {
-        if (!dashEnabled) yield break;
-
         rb.AddForce(GetDashDirection() * dashForce * multiplier, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashTime);

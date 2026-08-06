@@ -18,9 +18,10 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 80de8c08e31d1354eab5336ed14fa03c, type: 3}
   <CharSettings>k__BackingField:
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 45
+      <MaxSpeed>k__BackingField: 60
       <StoppingDistance>k__BackingField: 0.1
-      <Acceleration>k__BackingField: 100000
+      <Acceleration>k__BackingField: 5000
+      <TurningResponse>k__BackingField: 3000
       <Decceleration>k__BackingField: 20
       <DashEnabled>k__BackingField: 1
       <DashForce>k__BackingField: 60

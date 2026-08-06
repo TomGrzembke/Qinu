@@ -9,8 +9,13 @@ public class MovePlayer : RBGetter
     const float PreviousPhysicsStep = 0.02f;
 
     [SerializeField] bool disableInputRightclick;
-    [SerializeField] float outOfReachMinTime = 1;
     [SerializeField] Transform virtualMouseDebug;
+    [SerializeField] float maximumVisualCursorDistance = 2.5f;
+    [SerializeField, Min(0f)] float collisionNormalRetentionTime = 0.03f;
+
+    [Header("High-speed puck collider")]
+    [SerializeField, Range(0f, 1f)] float extraColliderEnableSpeedRatio = 0.85f;
+    [SerializeField, Range(0f, 1f)] float extraColliderDisableSpeedRatio = 0.7f;
 
     AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
     float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
@@ -18,6 +23,7 @@ public class MovePlayer : RBGetter
     float minSpeed => charSO.CharSettings.CharRigidSettings.MinSpeed;
     float stoppingDistance => charSO.CharSettings.CharRigidSettings.StoppingDistance;
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
+    float turningResponse => charSO.CharSettings.CharRigidSettings.TurningResponse;
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
     float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
     float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
@@ -32,19 +38,16 @@ public class MovePlayer : RBGetter
     Coroutine dashCooldownRoutine;
 
     PlayerCharSO charSO;
-    float currentOutOfReachTime;
-
-    Vector2 collisionDirection;
     Vector2 virtualMouseOffset;
     Vector2 currentMoveDirection;
 
-    List<Vector2> cachedDirections = new();
+    readonly List<Vector2> cachedDirections = new();
+    readonly Dictionary<Collider2D, Vector2> solidCollisionNormals = new();
+    readonly Dictionary<Collider2D, float> collisionNormalExpiryTimes = new();
+    readonly List<Collider2D> expiredCollisionNormals = new();
 
-    [SerializeField] float cachedDirectionAmount = 3;
-    [SerializeField] float maxCachedDirectionPercentage = 0.3f;
-
-    [SerializeField] float cursorResetCooldown = 0.1f;
-    float currentCursorResetCooldown;
+    [SerializeField] int cachedDirectionAmount = 5;
+    [SerializeField, Range(0f, 1f)] float maxCachedDirectionPercentage = 0.4f;
 
     [SerializeField] private Collider2D extraBallCollider;
 
@@ -72,29 +75,41 @@ public class MovePlayer : RBGetter
             InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
 
         StopAllCoroutines();
+        solidCollisionNormals.Clear();
+        collisionNormalExpiryTimes.Clear();
+        expiredCollisionNormals.Clear();
         rb.linearVelocity = Vector3.zero;
+    }
+
+    void OnValidate()
+    {
+        cachedDirectionAmount = Mathf.Max(1, cachedDirectionAmount);
+        maximumVisualCursorDistance = Mathf.Max(0f, maximumVisualCursorDistance);
+        collisionNormalRetentionTime = Mathf.Max(0f, collisionNormalRetentionTime);
+        extraColliderDisableSpeedRatio = Mathf.Min(extraColliderDisableSpeedRatio, extraColliderEnableSpeedRatio);
     }
 
     Vector2 SampleMoveDirection()
     {
         if (inputDisabled) return ResetMoveDirection();
 
-        if (currentOutOfReachTime > outOfReachMinTime) return ResetMoveDirection();
+        Vector2 rawDirection = GetRawDirection(GetVirtualMousePosition());
+        float cursorDistance = rawDirection.magnitude;
 
-        Vector2 direction = GetRawDirection(GetVirtualMousePosition());
+        bool isInsideStoppingDistance = rawDirection.sqrMagnitude <= stoppingDistance * stoppingDistance;
+        if (isInsideStoppingDistance) return ResetMoveDirection();
 
-        if (direction.sqrMagnitude <= stoppingDistance) return ResetMoveDirection();
-
-        cachedDirections.Add(direction);
+        Vector2 currentDirection = rawDirection / cursorDistance;
+        cachedDirections.Add(currentDirection);
 
         if (cachedDirections.Count > cachedDirectionAmount)
         {
-            cachedDirections.Remove(cachedDirections[0]);
+            cachedDirections.RemoveAt(0);
         }
 
-        direction = GetAveragedDirection(direction);
+        Vector2 smoothedDirection = GetSmoothedDirection(currentDirection);
 
-        return direction;
+        return smoothedDirection * cursorDistance;
     }
 
     Vector2 ResetMoveDirection()
@@ -104,49 +119,51 @@ public class MovePlayer : RBGetter
         return Vector2.zero;
     }
 
-    Vector2 GetAveragedDirection(Vector2 direction)
+    Vector2 GetSmoothedDirection(Vector2 currentDirection)
     {
-        if (cachedDirections.Count == 0) return direction;
+        if (cachedDirections.Count <= 1) return currentDirection;
 
-        Vector2 cachedAverage = Vector2.zero;
+        Vector2 weightedDirection = Vector2.zero;
+        float totalWeight = 0f;
 
         for (int i = 0; i < cachedDirections.Count; i++)
         {
-            cachedAverage += cachedDirections[i];
+            float weight = i + 1f;
+            weightedDirection += cachedDirections[i] * weight;
+            totalWeight += weight;
         }
 
-        cachedAverage /= cachedDirections.Count;
+        if (weightedDirection.sqrMagnitude <= Mathf.Epsilon) return currentDirection;
 
-        var blendAlpha = Mathf.Clamp(GetMouseDistanceAlpha(), 0, maxCachedDirectionPercentage);
-        direction = Vector2.Lerp(direction, cachedAverage, blendAlpha);
+        Vector2 averageDirection = (weightedDirection / totalWeight).normalized;
+        float historicalInfluence = Mathf.Min(GetMouseDistanceAlpha(), maxCachedDirectionPercentage);
+        Vector2 smoothedDirection = Vector2.Lerp(currentDirection, averageDirection, historicalInfluence);
 
-        return direction;
+        return smoothedDirection.normalized;
     }
 
     float GetMouseDistanceAlpha()
     {
-        return moveCurve.Evaluate(Vector2.Distance(transform.position, GetVirtualMousePosition()) / maxSpeedDistance);
+        float distance = Vector2.Distance(transform.position, GetVirtualMousePosition());
+        float distanceAlpha = Mathf.Clamp01(distance / maxSpeedDistance);
+        return moveCurve.Evaluate(distanceAlpha);
     }
 
     void FixedUpdate()
     {
         if (dashRoutine != null) return;
 
-        OutOfReachMonitoring();
-        
+        RemoveExpiredCollisionNormals();
+        ResetVirtualCursorOffsetWhenVisible();
+        ConstrainVirtualCursor();
         VirtualCursorDebug();
 
-        SetBackCursorOnConfined();
-
         currentMoveDirection = SampleMoveDirection();
-        Accelerate(currentMoveDirection);
-
         CalculateMaxSpeed();
+        UpdateVelocity(currentMoveDirection);
 
         ClampVelocity();
-
-        if (extraBallCollider != null)
-            extraBallCollider.enabled = rb.linearVelocity.magnitude > maxSpeed * 0.85f;
+        UpdateExtraBallCollider();
     }
 
     void VirtualCursorDebug()
@@ -156,89 +173,82 @@ public class MovePlayer : RBGetter
         virtualMouseDebug.position = GetVirtualMousePosition();
     }
 
-    void Accelerate(Vector2 moveDirection)
+    void UpdateVelocity(Vector2 moveDirection)
     {
-        Vector2 currentVel = rb.linearVelocity;
+        Vector2 currentVelocity = RemoveBlockedMovement(rb.linearVelocity);
+        Vector2 desiredVelocity = GetDesiredVelocity(moveDirection);
 
-        if (moveDirection == Vector2.zero)
+        if (desiredVelocity == Vector2.zero)
         {
             float previousStepVelocityMultiplier = Mathf.Max(0f, 1f - decceleration * PreviousPhysicsStep);
             float stepRatio = Time.fixedDeltaTime / PreviousPhysicsStep;
             float velocityMultiplier = Mathf.Pow(previousStepVelocityMultiplier, stepRatio);
-            currentVel *= velocityMultiplier;
+            currentVelocity *= velocityMultiplier;
 
-            if (currentVel.magnitude < 0.01f) currentVel = Vector2.zero;
+            if (currentVelocity.magnitude < 0.01f) currentVelocity = Vector2.zero;
         }
         else
         {
-            currentVel += moveDirection * (acceleration / rb.mass) * Time.fixedDeltaTime;
+            float velocityResponse = IsChangingDirection(currentVelocity, desiredVelocity) ? turningResponse : acceleration;
+            float maximumVelocityChange = velocityResponse * Time.fixedDeltaTime;
+            currentVelocity = Vector2.MoveTowards(currentVelocity, desiredVelocity, maximumVelocityChange);
         }
 
-        rb.linearVelocity = currentVel;
+        rb.linearVelocity = currentVelocity;
     }
 
-    void SetBackCursorOnConfined()
+    Vector2 GetDesiredVelocity(Vector2 moveDirection)
     {
-        if (TryFirstVisibleCursorFrame()) return;
+        if (moveDirection.sqrMagnitude <= Mathf.Epsilon) return Vector2.zero;
 
-        if (Cursor.lockState == CursorLockMode.Confined) return;
-
-        currentCursorResetCooldown -= Time.deltaTime;
-        currentCursorResetCooldown = Mathf.Clamp(currentCursorResetCooldown, 0, cursorResetCooldown);
-
-        if (currentOutOfReachTime <= outOfReachMinTime) return;
-        if (currentCursorResetCooldown > 0) return;
-
-        currentCursorResetCooldown = cursorResetCooldown;
-
-        virtualMouseOffset = transform.position.RemoveZ() - GetMousePosition();
+        Vector2 desiredVelocity = moveDirection.normalized * currentMaxSpeed;
+        return RemoveBlockedMovement(desiredVelocity);
     }
 
-    bool TryFirstVisibleCursorFrame()
+    bool IsChangingDirection(Vector2 currentVelocity, Vector2 desiredVelocity)
     {
-        if (virtualMouseOffset == Vector2.zero) return false;
-        if (Cursor.lockState == CursorLockMode.Locked) return false;
+        if (currentVelocity.sqrMagnitude <= Mathf.Epsilon) return false;
+
+        float directionAlignment = Vector2.Dot(currentVelocity.normalized, desiredVelocity.normalized);
+        return directionAlignment < 0.99f;
+    }
+
+    void UpdateExtraBallCollider()
+    {
+        if (!extraBallCollider) return;
+
+        float speedRatio = maxSpeed <= Mathf.Epsilon ? 0f : rb.linearVelocity.magnitude / maxSpeed;
+
+        if (!extraBallCollider.enabled && speedRatio >= extraColliderEnableSpeedRatio)
+        {
+            extraBallCollider.enabled = true;
+        }
+        else if (extraBallCollider.enabled && speedRatio <= extraColliderDisableSpeedRatio)
+        {
+            extraBallCollider.enabled = false;
+        }
+    }
+
+    void ResetVirtualCursorOffsetWhenVisible()
+    {
+        if (virtualMouseOffset == Vector2.zero) return;
+        if (Cursor.lockState == CursorLockMode.Locked) return;
 
         virtualMouseOffset = Vector2.zero;
-        return true;
     }
 
-    void OutOfReachMonitoring()
+    void ConstrainVirtualCursor()
     {
-        if (collisionDirection == Vector2.zero)
-        {
-            currentOutOfReachTime = 0;
-            return;
-        }
+        if (maximumVisualCursorDistance <= 0f) return;
 
-        var relativeMousPos = GetRawDirection(GetVirtualMousePosition());
-        var mouseSingleDirection = GetAxisDirection(relativeMousPos);
+        Vector2 playerPosition = transform.position.RemoveZ();
+        Vector2 virtualCursorPosition = GetVirtualMousePosition();
+        Vector2 playerToCursor = virtualCursorPosition - playerPosition;
 
-        // Dot: minus means it points in a different direction, 0 would be perpendicular (rechtwinklich)
-        if (Vector2.Dot(mouseSingleDirection, collisionDirection) <= 0)
-        {
-            ResetCollisionConstraint();
-            return;
-        }
+        if (playerToCursor.sqrMagnitude <= maximumVisualCursorDistance * maximumVisualCursorDistance) return;
 
-        currentOutOfReachTime += Time.deltaTime;
-    }
-
-    private void ResetCollisionConstraint()
-    {
-        currentOutOfReachTime = 0;
-
-        if (Cursor.lockState == CursorLockMode.Confined)
-        {
-            collisionDirection = Vector2.zero;
-            return;
-        }
-
-        //Makes sure that the player actually moved away from the wall.
-        var moveDirection = GetAxisDirection(currentMoveDirection);
-        if (Vector2.Dot(moveDirection, collisionDirection) >= 0) return;
-
-        collisionDirection = Vector2.zero;
+        Vector2 constrainedCursorPosition = playerPosition + playerToCursor.normalized * maximumVisualCursorDistance;
+        virtualMouseOffset += constrainedCursorPosition - virtualCursorPosition;
     }
 
     void CalculateMaxSpeed()
@@ -246,35 +256,77 @@ public class MovePlayer : RBGetter
         currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, GetMouseDistanceAlpha());
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    Vector2 RemoveBlockedMovement(Vector2 moveDirection)
     {
-        if (other.collider.CompareTag("Puk")) return;
+        foreach (Vector2 collisionNormal in solidCollisionNormals.Values)
+        {
+            float movementIntoObstacle = Vector2.Dot(moveDirection, collisionNormal);
+            bool isMovingIntoObstacle = movementIntoObstacle < 0f;
 
-        var moveDir = currentMoveDirection;
-        if (moveDir == Vector2.zero) return;
+            if (isMovingIntoObstacle)
+            {
+                moveDirection -= collisionNormal * movementIntoObstacle;
+            }
+        }
 
-        currentOutOfReachTime = 0;
-
-        collisionDirection = GetSingleAxisDirection(moveDir);
+        return moveDirection;
     }
 
-    Vector2 GetSingleAxisDirection(Vector2 input)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Mathf.Abs(input.x) < Mathf.Abs(input.y)) input.x = 0;
-        else input.y = 0;
-
-        return GetAxisDirection(input);
+        UpdateCollisionNormal(collision);
     }
 
-    //sign returns -1 if its below 0 and 1 if above
-    Vector2 GetAxisDirection(Vector2 input)
+    void OnCollisionStay2D(Collision2D collision)
     {
-        input = input.Clamp(-1, 1);
+        UpdateCollisionNormal(collision);
+    }
 
-        if (input.x != 0) input.x = Mathf.Sign(input.x);
-        if (input.y != 0) input.y = Mathf.Sign(input.y);
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!solidCollisionNormals.ContainsKey(collision.collider)) return;
 
-        return input;
+        collisionNormalExpiryTimes[collision.collider] = Time.fixedTime + collisionNormalRetentionTime;
+    }
+
+    void UpdateCollisionNormal(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Puk")) return;
+        if (collision.contactCount == 0) return;
+
+        Vector2 combinedNormal = Vector2.zero;
+
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            combinedNormal += collision.GetContact(i).normal;
+        }
+
+        if (combinedNormal.sqrMagnitude <= Mathf.Epsilon) return;
+
+        solidCollisionNormals[collision.collider] = combinedNormal.normalized;
+        collisionNormalExpiryTimes[collision.collider] = float.PositiveInfinity;
+    }
+
+    void RemoveExpiredCollisionNormals()
+    {
+        expiredCollisionNormals.Clear();
+
+        foreach (KeyValuePair<Collider2D, float> collisionNormalExpiry in collisionNormalExpiryTimes)
+        {
+            bool colliderWasDestroyed = !collisionNormalExpiry.Key;
+            bool retentionExpired = Time.fixedTime >= collisionNormalExpiry.Value;
+
+            if (colliderWasDestroyed || retentionExpired)
+            {
+                expiredCollisionNormals.Add(collisionNormalExpiry.Key);
+            }
+        }
+
+        foreach (Collider2D expiredCollider in expiredCollisionNormals)
+        {
+            solidCollisionNormals.Remove(expiredCollider);
+            collisionNormalExpiryTimes.Remove(expiredCollider);
+        }
     }
 
     Vector2 GetMousePosition()
@@ -299,8 +351,6 @@ public class MovePlayer : RBGetter
 
     public void Dash(float dashMultiplier)
     {
-        ResetCollisionConstraint();
-
         if (dashCooldownRoutine != null) return;
         dashRoutine = StartCoroutine(DashCor(dashMultiplier));
     }

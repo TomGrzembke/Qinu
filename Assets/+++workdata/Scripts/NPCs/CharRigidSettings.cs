@@ -7,6 +7,8 @@ public class PlayerRigidSettings
     [field: SerializeField] public float MaxSpeed { get; private set; } = 5f;
     [field: SerializeField] public float StoppingDistance { get; private set; } = 1;
     [field: SerializeField] public float Acceleration { get; private set; } = 10f;
+    [field: Tooltip("How quickly velocity changes when steering in a different direction.")]
+    [field: SerializeField] public float TurningResponse { get; private set; } = 20f;
     [field: SerializeField] public float Decceleration { get; private set; } = 10f;
     [field: SerializeField] public bool DashEnabled { get; private set; } = true;
     [field: SerializeField] public float DashForce { get; private set; } = 10f;

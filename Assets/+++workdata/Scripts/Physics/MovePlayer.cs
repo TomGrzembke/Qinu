@@ -6,12 +6,27 @@ using UnityEngine.InputSystem;
 /// <summary> Either depending on agent provided or Input in case of the player</summary>
 public class MovePlayer : RBGetter
 {
+    readonly struct MovementCastConstraint
+    {
+        public readonly Vector2 Normal;
+        public readonly float MaximumInwardSpeed;
+
+        public MovementCastConstraint(Vector2 normal, float maximumInwardSpeed)
+        {
+            Normal = normal;
+            MaximumInwardSpeed = maximumInwardSpeed;
+        }
+    }
+
     const float PreviousPhysicsStep = 0.02f;
+    const int MovementCastHitCapacity = 8;
 
     [SerializeField] bool disableInputRightclick;
     [SerializeField] Transform virtualMouseDebug;
     [SerializeField] float maximumVisualCursorDistance = 2.5f;
     [SerializeField, Min(0f)] float collisionNormalRetentionTime = 0.03f;
+    [SerializeField] Collider2D movementCollider;
+    [SerializeField, Min(0f)] float movementCastSkin = 0.05f;
 
     [Header("High-speed puck collider")]
     [SerializeField, Range(0f, 1f)] float extraColliderEnableSpeedRatio = 0.85f;
@@ -45,6 +60,9 @@ public class MovePlayer : RBGetter
     readonly Dictionary<Collider2D, Vector2> solidCollisionNormals = new();
     readonly Dictionary<Collider2D, float> collisionNormalExpiryTimes = new();
     readonly List<Collider2D> expiredCollisionNormals = new();
+    readonly List<MovementCastConstraint> movementCastConstraints = new();
+    readonly RaycastHit2D[] movementCastHits = new RaycastHit2D[MovementCastHitCapacity];
+    ContactFilter2D movementCastFilter;
 
     [SerializeField] int cachedDirectionAmount = 5;
     [SerializeField, Range(0f, 1f)] float maxCachedDirectionPercentage = 0.4f;
@@ -64,6 +82,7 @@ public class MovePlayer : RBGetter
     {
         charSO = (PlayerCharSO)GetComponent<CharSOHolder>().CharSO;
         currentMaxSpeed = maxSpeed;
+        ConfigureMovementCastFilter();
 
         if (disableInputRightclick)
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
@@ -78,6 +97,7 @@ public class MovePlayer : RBGetter
         solidCollisionNormals.Clear();
         collisionNormalExpiryTimes.Clear();
         expiredCollisionNormals.Clear();
+        movementCastConstraints.Clear();
         rb.linearVelocity = Vector3.zero;
     }
 
@@ -86,6 +106,7 @@ public class MovePlayer : RBGetter
         cachedDirectionAmount = Mathf.Max(1, cachedDirectionAmount);
         maximumVisualCursorDistance = Mathf.Max(0f, maximumVisualCursorDistance);
         collisionNormalRetentionTime = Mathf.Max(0f, collisionNormalRetentionTime);
+        movementCastSkin = Mathf.Max(0f, movementCastSkin);
         extraColliderDisableSpeedRatio = Mathf.Min(extraColliderDisableSpeedRatio, extraColliderEnableSpeedRatio);
     }
 
@@ -160,6 +181,7 @@ public class MovePlayer : RBGetter
 
         currentMoveDirection = SampleMoveDirection();
         CalculateMaxSpeed();
+        UpdateMovementCastNormals(currentMoveDirection);
         UpdateVelocity(currentMoveDirection);
 
         ClampVelocity();
@@ -260,16 +282,78 @@ public class MovePlayer : RBGetter
     {
         foreach (Vector2 collisionNormal in solidCollisionNormals.Values)
         {
-            float movementIntoObstacle = Vector2.Dot(moveDirection, collisionNormal);
-            bool isMovingIntoObstacle = movementIntoObstacle < 0f;
+            moveDirection = RemoveMovementIntoNormal(moveDirection, collisionNormal);
+        }
 
-            if (isMovingIntoObstacle)
-            {
-                moveDirection -= collisionNormal * movementIntoObstacle;
-            }
+        foreach (MovementCastConstraint castConstraint in movementCastConstraints)
+        {
+            moveDirection = LimitMovementByCast(moveDirection, castConstraint);
         }
 
         return moveDirection;
+    }
+
+    Vector2 LimitMovementByCast(Vector2 moveDirection, MovementCastConstraint castConstraint)
+    {
+        float inwardSpeed = Vector2.Dot(moveDirection, castConstraint.Normal);
+        float minimumAllowedInwardSpeed = -castConstraint.MaximumInwardSpeed;
+
+        if (inwardSpeed < minimumAllowedInwardSpeed)
+        {
+            moveDirection += castConstraint.Normal * (minimumAllowedInwardSpeed - inwardSpeed);
+        }
+
+        return moveDirection;
+    }
+
+    Vector2 RemoveMovementIntoNormal(Vector2 moveDirection, Vector2 collisionNormal)
+    {
+        float movementIntoObstacle = Vector2.Dot(moveDirection, collisionNormal);
+        bool isMovingIntoObstacle = movementIntoObstacle < 0f;
+
+        if (isMovingIntoObstacle)
+        {
+            moveDirection -= collisionNormal * movementIntoObstacle;
+        }
+
+        return moveDirection;
+    }
+
+    void ConfigureMovementCastFilter()
+    {
+        int collidingLayers = Physics2D.GetLayerCollisionMask(gameObject.layer);
+        movementCastFilter = new ContactFilter2D
+        {
+            useTriggers = false,
+            useLayerMask = true,
+            layerMask = collidingLayers,
+        };
+    }
+
+    void UpdateMovementCastNormals(Vector2 moveDirection)
+    {
+        movementCastConstraints.Clear();
+
+        if (!movementCollider) return;
+        if (moveDirection.sqrMagnitude <= Mathf.Epsilon) return;
+
+        Vector2 castDirection = moveDirection.normalized;
+        float projectedSpeed = Mathf.Max(rb.linearVelocity.magnitude, currentMaxSpeed);
+        float castDistance = projectedSpeed * Time.fixedDeltaTime + movementCastSkin;
+        int hitCount = movementCollider.Cast(castDirection, movementCastFilter, movementCastHits, castDistance);
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit2D castHit = movementCastHits[i];
+
+            if (!castHit.collider) continue;
+            if (castHit.collider.CompareTag("Puk")) continue;
+            if (castHit.normal.sqrMagnitude <= Mathf.Epsilon) continue;
+
+            float availableDistance = Mathf.Max(0f, castHit.distance - movementCastSkin);
+            float maximumInwardSpeed = availableDistance / Time.fixedDeltaTime;
+            movementCastConstraints.Add(new MovementCastConstraint(castHit.normal, maximumInwardSpeed));
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

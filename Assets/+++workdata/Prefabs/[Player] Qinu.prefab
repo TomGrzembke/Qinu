@@ -5198,6 +5198,8 @@ MonoBehaviour:
   virtualMouseDebug: {fileID: 0}
   maximumVisualCursorDistance: 2.5
   collisionNormalRetentionTime: 0.03
+  movementCollider: {fileID: 7119062691497510257}
+  movementCastSkin: 0.05
   extraColliderEnableSpeedRatio: 0.85
   extraColliderDisableSpeedRatio: 0.7
   cachedDirectionAmount: 5

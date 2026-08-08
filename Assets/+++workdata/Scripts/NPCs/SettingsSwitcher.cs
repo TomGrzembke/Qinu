@@ -11,7 +11,10 @@ public class SettingsSwitcher : MonoBehaviour
     [SerializeField] float timeInDefault = 10;
     [SerializeField] float timeInSpecial = 5;
     [SerializeField] float musicBlendTimeOverride = .64f;
+
+    [SerializeField] ParticleSystem[] specialSystems;
     Coroutine switchRoutine;
+
 
 
     void Start()
@@ -25,9 +28,26 @@ public class SettingsSwitcher : MonoBehaviour
         {
             yield return null;
             ChangeCharSO(defaultCharSO);
+            PlaySpecialParticles(false);
             yield return new WaitForSeconds(timeInDefault);
             ChangeCharSO(specialCharSO);
+            PlaySpecialParticles(true);
             yield return new WaitForSeconds(timeInSpecial);
+        }
+    }
+
+    void PlaySpecialParticles(bool condition)
+    {
+        foreach (var entry in specialSystems)
+        {
+            if (condition)
+            {
+                entry.Play();
+            }
+            else
+            {
+                entry.Stop();
+            }
         }
     }
 

@@ -18,11 +18,13 @@ public class TournamentManager : MonoBehaviour
     public enum GameMode
     {
         Bodi,
-        a1v1,
-        a2v2,
-        notBodi,
+        A1v1,
+        A2v2,
+        NotBodi,
+        Pamo,
+        PamoOrTessar
     }
-    
+
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
     [field: SerializeField] public GameMode CurrentGameMode { get; private set; }
     [field: SerializeField] public List<GameMode> FirstGameModes { get; private set; }
@@ -81,20 +83,28 @@ public class TournamentManager : MonoBehaviour
 
         switch (CurrentGameMode)
         {
-            case GameMode.a1v1:
+            case GameMode.A1v1:
                 Calc1v1();
 
                 break;
-            case GameMode.a2v2:
+            case GameMode.A2v2:
                 Calc2v2();
 
                 break;
             case GameMode.Bodi:
-                BodiRound();
+                SpecificCharacterRound(2);
 
                 break;
-            case GameMode.notBodi:
-                NotBodiRound();
+            case GameMode.NotBodi:
+                NotSpecificCharacterRound(2);
+                break;
+
+            case GameMode.Pamo:
+                SpecificCharacterRound(3);
+                break;
+
+            case GameMode.PamoOrTessar:
+                SpecificCharacterRound(Random.Range(3, 5));
                 break;
 
             default:
@@ -145,26 +155,26 @@ public class TournamentManager : MonoBehaviour
         SwitchChars();
     }
 
-    void BodiRound()
+    void SpecificCharacterRound(int charIndex)
     {
         ClearSideLists();
         LeftPlayerAdd();
 
-        GameObject bodi = AvailableChars[2];
-        lastPlayed = bodi;
+        GameObject specificChar = AvailableChars[charIndex];
+        lastPlayed = specificChar;
 
-        bodi = CharManager.Instance.InitializeChar(bodi, true);
-        AddToList(RightPlayers, bodi);
+        specificChar = CharManager.Instance.InitializeChar(specificChar, true);
+        AddToList(RightPlayers, specificChar);
         SwitchChars();
     }
 
-    void NotBodiRound()
+    void NotSpecificCharacterRound(int charIndex)
     {
         ClearSideLists();
         LeftPlayerAdd();
-        GameObject bodi = AvailableChars[2];
+        GameObject specificExcludeChar = AvailableChars[charIndex];
 
-        lastPlayed = GetLowestPlayRate(lastPlayed, bodi);
+        lastPlayed = GetLowestPlayRate(lastPlayed, specificExcludeChar);
 
         var newChar = CharManager.Instance.InitializeChar(lastPlayed, true);
         AddToList(RightPlayers, newChar);
@@ -235,7 +245,7 @@ public class TournamentManager : MonoBehaviour
             RightPlayers[0].GetComponent<NPCNav>().GoHome();
         }
 
-        if (CurrentGameMode == GameMode.a2v2)
+        if (CurrentGameMode == GameMode.A2v2)
         {
             Cleanup2v2(sideID);
         }

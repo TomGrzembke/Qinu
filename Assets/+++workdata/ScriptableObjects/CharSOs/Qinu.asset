@@ -16,6 +16,13 @@ MonoBehaviour:
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.19215688, g: 0.54901963, b: 0.18823531, a: 1}
     <Music>k__BackingField: {fileID: 8300000, guid: 80de8c08e31d1354eab5336ed14fa03c, type: 3}
+  <DashSettings>k__BackingField:
+    <Enabled>k__BackingField: 1
+    <Force>k__BackingField: 140
+    <Duration>k__BackingField: 0.1
+    <Cooldown>k__BackingField: 0
+    <AutoAim>k__BackingField: 1
+    <TargetTrackingPercentage>k__BackingField: 1
   <CharSettings>k__BackingField:
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 60
@@ -23,11 +30,6 @@ MonoBehaviour:
       <Acceleration>k__BackingField: 5000
       <TurningResponse>k__BackingField: 3000
       <Decceleration>k__BackingField: 20
-      <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 60
-      <DashTime>k__BackingField: 0.1
-      <DashCooldown>k__BackingField: 0
-      <DashAutomAim>k__BackingField: 1
       mouseInputHeader: 
       <MaxSpeedDistance>k__BackingField: 2
       <MoveCurve>k__BackingField:

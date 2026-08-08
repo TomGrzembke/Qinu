@@ -10,13 +10,6 @@ public class PlayerRigidSettings
     [field: Tooltip("How quickly velocity changes when steering in a different direction.")]
     [field: SerializeField] public float TurningResponse { get; private set; } = 20f;
     [field: SerializeField] public float Decceleration { get; private set; } = 10f;
-    [field: SerializeField] public bool DashEnabled { get; private set; } = true;
-    [field: SerializeField] public float DashForce { get; private set; } = 10f;
-    [field: SerializeField] public float DashTime { get; private set; } = 0.1f;
-    [field: SerializeField] public float DashCooldown { get; private set; } = 0.1f;
-    [field: SerializeField] public bool DashAutomAim { get; private set; } = true;
-
-
     [Space(20)]
     [SerializeField,ShowOnly] string mouseInputHeader;
     [field: SerializeField] public float MaxSpeedDistance { get; private set; } = .7f;
@@ -36,9 +29,4 @@ public class NPCRigidSettings
     [field: Separator("Correction Strength - lower feels heavier")]
     [field: Tooltip("Lower values make the character feel heavy or sluggish; higher values allow faster corrections.")]
     [field: SerializeField] public float MaxCorrectionAcceleration { get; private set; } = 1000f;
-    [field: SerializeField] public bool DashEnabled { get; private set; } = true;
-    [field: SerializeField] public float DashForce { get; private set; } = 10f;
-    [field: SerializeField] public float DashTime { get; private set; } = 0.1f;
-    [field: SerializeField] public float DashCooldown { get; private set; } = 0.1f;
-    [field: SerializeField] public bool DashAutomAim { get; private set; } = true;
 }

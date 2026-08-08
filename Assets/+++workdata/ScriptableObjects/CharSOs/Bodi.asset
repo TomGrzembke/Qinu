@@ -16,6 +16,13 @@ MonoBehaviour:
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.83921576, g: 0.59607846, b: 0.098039225, a: 1}
     <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}
+  <DashSettings>k__BackingField:
+    <Enabled>k__BackingField: 1
+    <Force>k__BackingField: -10
+    <Duration>k__BackingField: 0.3
+    <Cooldown>k__BackingField: 1.5
+    <AutoAim>k__BackingField: 0
+    <TargetTrackingPercentage>k__BackingField: 0.6
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
@@ -41,8 +48,3 @@ MonoBehaviour:
       <Acceleration>k__BackingField: 1000
       <VelocityCorrection>k__BackingField: 64
       <MaxCorrectionAcceleration>k__BackingField: 109.4
-      <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: -10
-      <DashTime>k__BackingField: 0.3
-      <DashCooldown>k__BackingField: 1.5
-      <DashAutomAim>k__BackingField: 0

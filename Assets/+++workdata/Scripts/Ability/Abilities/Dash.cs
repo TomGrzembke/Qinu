@@ -5,11 +5,11 @@ public class Dash : Ability
     [SerializeField] float[] dashMultiplierPerRarity;
 
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
-    MovePlayer moveRB;
+    DashController dashController;
 
     protected override void OnInitializedInternal()
     {
-        moveRB = SlotManager.PlayerObj.GetComponent<MovePlayer>();
+        dashController = SlotManager.PlayerObj.GetComponent<DashController>();
     }
 
     protected override void CleanupInternal()
@@ -19,7 +19,7 @@ public class Dash : Ability
 
     protected override void ExecuteInternal()
     {
-        moveRB.Dash(dashMultiplierPerRarity[EvaluateRaritySizing(dashMultiplierPerRarity.Length)]);
+        dashController.Dash(dashMultiplierPerRarity[EvaluateRaritySizing(dashMultiplierPerRarity.Length)]);
     }
 
 }

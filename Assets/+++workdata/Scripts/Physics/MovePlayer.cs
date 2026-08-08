@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary> Intends to achieve fluid player movement via smoothing </summary>
+[RequireComponent(typeof(DashController))]
 public class MovePlayer : RBGetter
 {
     readonly struct MovementCastConstraint
@@ -23,7 +23,6 @@ public class MovePlayer : RBGetter
 
     [SerializeField] bool disableInputRightclick;
     [SerializeField] Transform virtualMouseDebug;
-    [SerializeField] float maximumVisualCursorDistance = 2.5f;
     [SerializeField, Min(0f)] float collisionNormalRetentionTime = 0.03f;
     [SerializeField] Collider2D movementCollider;
     [SerializeField, Min(0f)] float movementCastSkin = 0.05f;
@@ -40,17 +39,9 @@ public class MovePlayer : RBGetter
     float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
     float turningResponse => charSO.CharSettings.CharRigidSettings.TurningResponse;
     float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
-    float dashForce => charSO.CharSettings.CharRigidSettings.DashForce;
-    float dashTime => charSO.CharSettings.CharRigidSettings.DashTime;
-    float dashCooldown => charSO.CharSettings.CharRigidSettings.DashCooldown;
-    bool dashAutomAim => charSO.CharSettings.CharRigidSettings.DashAutomAim;
-    bool dashEnabled => charSO.CharSettings.CharRigidSettings.DashEnabled;
-
-    Transform Puk => MinigameManager.Instance.Puk;
     bool inputDisabled;
     float currentMaxSpeed;
-    Coroutine dashRoutine;
-    Coroutine dashCooldownRoutine;
+    DashController dashController;
 
     PlayerCharSO charSO;
     Vector2 virtualMouseOffset;
@@ -71,6 +62,7 @@ public class MovePlayer : RBGetter
     [SerializeField] private Collider2D extraBallCollider;
 
     Camera Cam;
+    public Vector2 DashAimPosition => GetVirtualMousePosition();
 
     Camera GetCam()
     {
@@ -82,19 +74,33 @@ public class MovePlayer : RBGetter
     protected override void AwakeInternal()
     {
         charSO = (PlayerCharSO)GetComponent<CharSOHolder>().CharSO;
+        dashController = GetComponent<DashController>();
         currentMaxSpeed = maxSpeed;
         ConfigureMovementCastFilter();
 
         if (disableInputRightclick)
+        {
             InputManager.Instance.SubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+        }
+    }
+
+    void OnEnable()
+    {
+        dashController.DashStarted += OnDashStarted;
     }
 
     void OnDisable()
     {
-        if (disableInputRightclick)
-            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+        if (dashController)
+        {
+            dashController.DashStarted -= OnDashStarted;
+        }
 
-        StopAllCoroutines();
+        if (disableInputRightclick)
+        {
+            InputManager.Instance.DesubscribeTo(DisableInput, InputManager.Instance.RightClickAction);
+        }
+
         solidCollisionNormals.Clear();
         collisionNormalExpiryTimes.Clear();
         expiredCollisionNormals.Clear();
@@ -106,7 +112,6 @@ public class MovePlayer : RBGetter
     void OnValidate()
     {
         cachedDirectionAmount = Mathf.Max(1, cachedDirectionAmount);
-        maximumVisualCursorDistance = Mathf.Max(0f, maximumVisualCursorDistance);
         collisionNormalRetentionTime = Mathf.Max(0f, collisionNormalRetentionTime);
         movementCastSkin = Mathf.Max(0f, movementCastSkin);
         extraColliderDisableSpeedRatio = Mathf.Min(extraColliderDisableSpeedRatio, extraColliderEnableSpeedRatio);
@@ -174,7 +179,7 @@ public class MovePlayer : RBGetter
 
     void FixedUpdate()
     {
-        if (dashRoutine != null) return;
+        if (dashController.IsDashing) return;
 
         RemoveExpiredCollisionNormals();
         ResetVirtualCursorOffsetWhenVisible();
@@ -272,15 +277,16 @@ public class MovePlayer : RBGetter
 
     void ConstrainVirtualCursor()
     {
-        if (maximumVisualCursorDistance <= 0f) return;
+        var cursorDistance = maxSpeedDistance;
+        if (cursorDistance <= 0f) return;
 
         Vector2 playerPosition = transform.position.RemoveZ();
         Vector2 virtualCursorPosition = GetVirtualMousePosition();
         Vector2 playerToCursor = virtualCursorPosition - playerPosition;
 
-        if (playerToCursor.sqrMagnitude <= maximumVisualCursorDistance * maximumVisualCursorDistance) return;
+        if (playerToCursor.sqrMagnitude <= cursorDistance * cursorDistance) return;
 
-        Vector2 constrainedCursorPosition = playerPosition + playerToCursor.normalized * maximumVisualCursorDistance;
+        Vector2 constrainedCursorPosition = playerPosition + playerToCursor.normalized * cursorDistance;
         virtualMouseOffset += constrainedCursorPosition - virtualCursorPosition;
     }
 
@@ -444,14 +450,9 @@ public class MovePlayer : RBGetter
         rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
     }
 
-    public void Dash(float dashMultiplier)
+    void OnDashStarted()
     {
-        if (!dashEnabled) return;
-        if (dashCooldownRoutine != null) return;
-        if (dashRoutine != null) return;
-
         isReturningFromDash = true;
-        dashRoutine = StartCoroutine(DashCor(dashMultiplier));
     }
 
     void UpdateDashReturnTarget()
@@ -467,30 +468,6 @@ public class MovePlayer : RBGetter
     {
         if (!ctx.performed) return;
         inputDisabled = !inputDisabled;
-    }
-
-    IEnumerator DashCor(float multiplier)
-    {
-        rb.AddForce(GetDashDirection() * dashForce * multiplier, ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(dashTime);
-
-        dashCooldownRoutine = StartCoroutine(DashCooldown());
-        dashRoutine = null;
-    }
-
-    Vector2 GetDashDirection()
-    {
-        if (dashAutomAim) return GetRawDirection(Puk.position).normalized;
-
-        return GetRawDirection(GetVirtualMousePosition()).normalized;
-    }
-
-    IEnumerator DashCooldown()
-    {
-        yield return new WaitForSeconds(dashCooldown);
-
-        dashCooldownRoutine = null;
     }
 
     /// <summary> Subtracted given vector with transform.pos </summary>

@@ -107,7 +107,7 @@ public class NPCNav : NavCalc
     [field: SerializeField] public bool IsRight { get; private set; }
     [SerializeField] float arenaTransitionDistance = 2;
 
-    [SerializeField] MoveRB moveRB;
+    DashController dashController;
     [SerializeField] Collider2D characterCollider;
 
     [SerializeField] Vector3 targetPos;
@@ -117,6 +117,7 @@ public class NPCNav : NavCalc
     void Start()
     {
         approachPlan.CandidatePath = new();
+        dashController = GetComponent<DashController>();
         
         if (agent.isOnNavMesh)
         {
@@ -347,7 +348,7 @@ public class NPCNav : NavCalc
 
         if (passedRandomDashCheck)
         {
-            moveRB.DashAtPosition(Puk.position);
+            dashController.DashAtTarget(Puk);
         }
     }
 
@@ -454,7 +455,7 @@ public class NPCNav : NavCalc
 
         if (hasClearDashPath)
         {
-            moveRB.DashAtPosition(approachPlan.Position);
+            dashController.DashAtPosition(approachPlan.Position);
         }
     }
 

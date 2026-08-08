@@ -5134,6 +5134,7 @@ GameObject:
   - component: {fileID: 8800807559234233458}
   - component: {fileID: 7313825319390368262}
   - component: {fileID: 6154612333215874295}
+  - component: {fileID: 7706057311981543002}
   - component: {fileID: 281730897870352152}
   - component: {fileID: 8159841771566686583}
   - component: {fileID: 222933248188153509}
@@ -5205,6 +5206,18 @@ MonoBehaviour:
   cachedDirectionAmount: 5
   maxCachedDirectionPercentage: 0.4
   extraBallCollider: {fileID: 3787696829200937629}
+--- !u!114 &7706057311981543002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811716013710717747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84d65274e8d4e67a021346952017aca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &281730897870352152
 MonoBehaviour:
   m_ObjectHideFlags: 0

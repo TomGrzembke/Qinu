@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8523064361346453057}
   - component: {fileID: 7953238053786489971}
   - component: {fileID: 3822254324265408848}
+  - component: {fileID: 6246057311981543001}
   - component: {fileID: 8040409890454107378}
   - component: {fileID: 3565451610172718577}
   - component: {fileID: 173636337912830749}
@@ -139,7 +140,6 @@ MonoBehaviour:
   arenaMode: 0
   <IsRight>k__BackingField: 0
   arenaTransitionDistance: 2
-  moveRB: {fileID: 3822254324265408848}
   characterCollider: {fileID: 5295608182062773719}
   targetPos: {x: 0, y: 0, z: 0}
   defaultTransform: {fileID: 0}
@@ -156,6 +156,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 173636337912830749}
+--- !u!114 &6246057311981543001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678853848379604295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84d65274e8d4e67a021346952017aca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &8040409890454107378
 MonoBehaviour:
   m_ObjectHideFlags: 0

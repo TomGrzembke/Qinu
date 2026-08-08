@@ -21,6 +21,14 @@ public class DashSettings
     [field: Range(0f, 1f)]
     [field: SerializeField] public float TargetTrackingPercentage { get; private set; }
 
+    [field: Separator("Post-Dash Movement")]
+    [field: Tooltip("Constant multiplier applied to maximum movement speed after the dash. One leaves movement unchanged, zero prevents ordinary movement, and two doubles it.")]
+    [field: Range(0f, 2f)]
+    [field: SerializeField] public float PostDashMoveSpeedMultiplier { get; private set; } = 1f;
+    [field: Tooltip("How long the post-dash movement speed multiplier remains active, in seconds.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float PostDashMoveSpeedDuration { get; private set; }
+
     static AnimationCurve CreateDefaultVelocityApplication()
     {
         return new AnimationCurve(new Keyframe(0f, 0f, 0f, 16f), new Keyframe(0.05f, 0.8f, 16f, 0.2105263f), new Keyframe(1f, 1f, 0.2105263f, 0f));

@@ -48,8 +48,8 @@ MonoBehaviour:
   defaultCharSO: {fileID: 11400000, guid: d3ccd5e52d162be4181da3059d87f87e, type: 2}
   specialCharSO: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
   timeInDefault: 12.5
-  timeInSpecial: 10.4
-  musicBlendTimeOverride: 0.2
+  timeInSpecial: 9.6
+  musicBlendTimeOverride: 0.31
 --- !u!1 &1298984877052044461
 GameObject:
   m_ObjectHideFlags: 0

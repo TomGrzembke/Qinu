@@ -292,7 +292,8 @@ public class MovePlayer : RBGetter
 
     void CalculateMaxSpeed()
     {
-        currentMaxSpeed = Mathf.Lerp(minSpeed, maxSpeed, GetMouseDistanceAlpha());
+        float configuredMoveSpeed = Mathf.Lerp(minSpeed, maxSpeed, GetMouseDistanceAlpha());
+        currentMaxSpeed = configuredMoveSpeed * dashController.MoveSpeedMultiplier;
     }
 
     Vector2 RemoveBlockedMovement(Vector2 moveDirection)

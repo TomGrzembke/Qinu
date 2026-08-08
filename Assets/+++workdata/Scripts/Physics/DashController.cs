@@ -20,11 +20,13 @@ public class DashController : RBGetter
     CharSO charSO;
     Coroutine dashRoutine;
     Coroutine cooldownRoutine;
+    Coroutine postDashMoveSpeedRoutine;
 
     DashSettings Settings => charSO.DashSettings;
     Transform Puk => MinigameManager.Instance.Puk;
 
     public bool IsDashing => dashRoutine != null;
+    public float MoveSpeedMultiplier { get; private set; } = 1f;
     public event Action DashStarted;
     public event Action DashFinished;
 
@@ -41,6 +43,8 @@ public class DashController : RBGetter
         StopAllCoroutines();
         dashRoutine = null;
         cooldownRoutine = null;
+        postDashMoveSpeedRoutine = null;
+        MoveSpeedMultiplier = 1f;
     }
 
     void OnDestroy()
@@ -140,7 +144,34 @@ public class DashController : RBGetter
 
         dashRoutine = null;
         DashFinished?.Invoke();
+        ApplyPostDashMoveSpeed(dashSettings);
         cooldownRoutine = StartCoroutine(CooldownRoutine(dashSettings.Cooldown));
+    }
+
+    void ApplyPostDashMoveSpeed(DashSettings dashSettings)
+    {
+        if (postDashMoveSpeedRoutine != null)
+        {
+            StopCoroutine(postDashMoveSpeedRoutine);
+        }
+
+        MoveSpeedMultiplier = dashSettings.PostDashMoveSpeedMultiplier;
+
+        if (dashSettings.PostDashMoveSpeedDuration <= Mathf.Epsilon)
+        {
+            MoveSpeedMultiplier = 1f;
+            postDashMoveSpeedRoutine = null;
+            return;
+        }
+
+        postDashMoveSpeedRoutine = StartCoroutine(PostDashMoveSpeedRoutine(dashSettings.PostDashMoveSpeedDuration));
+    }
+
+    IEnumerator PostDashMoveSpeedRoutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        MoveSpeedMultiplier = 1f;
+        postDashMoveSpeedRoutine = null;
     }
 
     Vector2 GetDirection(TargetMode targetMode, Vector2 targetPosition)

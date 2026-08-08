@@ -58,7 +58,7 @@ public class MoveRB : RBGetter
 
         charSO = newNPCCharSO;
         UpdateAgentSettings();
-        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, CharSettings.MaxSpeed);
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, GetMaximumMoveSpeed());
     }
 
     void FixedUpdate()
@@ -71,7 +71,8 @@ public class MoveRB : RBGetter
 
         agent.nextPosition = rb.position;
 
-        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), CharSettings.MaxSpeed);
+        float maximumMoveSpeed = GetMaximumMoveSpeed();
+        Vector2 desiredVelocity = Vector2.ClampMagnitude(agent.desiredVelocity.RemoveZ(), maximumMoveSpeed);
         Vector2 velocityDifference = desiredVelocity - rb.linearVelocity;
 
         if (!agent.pathPending && (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance + arrivalTolerance))
@@ -85,13 +86,18 @@ public class MoveRB : RBGetter
 
         rb.AddForce(correctionAcceleration * rb.mass, ForceMode2D.Force);
 
-        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, CharSettings.MaxSpeed);
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maximumMoveSpeed);
     }
 
     void UpdateAgentSettings()
     {
-        agent.speed = CharSettings.MaxSpeed;
+        agent.speed = GetMaximumMoveSpeed();
         agent.acceleration = CharSettings.Acceleration / rb.mass;
+    }
+
+    float GetMaximumMoveSpeed()
+    {
+        return CharSettings.MaxSpeed * dashController.MoveSpeedMultiplier;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

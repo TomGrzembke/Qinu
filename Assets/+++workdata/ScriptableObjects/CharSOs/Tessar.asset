@@ -65,6 +65,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
     <TargetTrackingPercentage>k__BackingField: 0.987
+    <PostDashMoveSpeedMultiplier>k__BackingField: 0.1
+    <PostDashMoveSpeedDuration>k__BackingField: 1.94
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1

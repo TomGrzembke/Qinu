@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary> Either depending on agent provided or Input in case of the player</summary>
+/// <summary> Intends to achieve fluid player movement via smoothing </summary>
 public class MovePlayer : RBGetter
 {
     readonly struct MovementCastConstraint

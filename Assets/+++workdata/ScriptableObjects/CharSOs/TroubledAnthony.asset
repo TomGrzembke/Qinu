@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
-  m_Name: Anthony
+  m_Name: TroubledAnthony
   m_EditorClassIdentifier: 
   <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
   <charAestheticSettings>k__BackingField:
@@ -23,26 +23,26 @@ MonoBehaviour:
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
-      <RandomDashesPerSecond>k__BackingField: 0.7
-      <PukApproachDistance>k__BackingField: 1.3
-      <RequiredShotAlignment>k__BackingField: -0.374
-      <PukPredictionTime>k__BackingField: 0.4
-      <OwnGoalDangerDistance>k__BackingField: 6.1
-      <MinimumThreatSpeed>k__BackingField: 1.5
-      <OwnGoalThreatAlignment>k__BackingField: 0.436
-      <EmergencyGoalDistance>k__BackingField: 4
-      <EmergencyClearAlignment>k__BackingField: -0.243
-      <EmergencyDashPukClearance>k__BackingField: 0.23
-      <EmergencyRouteWidth>k__BackingField: 1.35
+      <RandomDashesPerSecond>k__BackingField: 3.045921
+      <PukApproachDistance>k__BackingField: 2.5
+      <RequiredShotAlignment>k__BackingField: 0.031
+      <PukPredictionTime>k__BackingField: 0.12
+      <OwnGoalDangerDistance>k__BackingField: 24
+      <MinimumThreatSpeed>k__BackingField: 0.5
+      <OwnGoalThreatAlignment>k__BackingField: 0.124
+      <EmergencyGoalDistance>k__BackingField: 7
+      <EmergencyClearAlignment>k__BackingField: 0.85
+      <EmergencyDashPukClearance>k__BackingField: 0.25
+      <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 10.3
-      <StoppingDistance>k__BackingField: 0.13
-      <Acceleration>k__BackingField: 11
-      <VelocityCorrection>k__BackingField: 80
-      <MaxCorrectionAcceleration>k__BackingField: 550
+      <MaxSpeed>k__BackingField: 30
+      <StoppingDistance>k__BackingField: 0.3
+      <Acceleration>k__BackingField: 600
+      <VelocityCorrection>k__BackingField: 250
+      <MaxCorrectionAcceleration>k__BackingField: 500
       <DashEnabled>k__BackingField: 1
-      <DashForce>k__BackingField: 12
-      <DashTime>k__BackingField: 0.29
-      <DashCooldown>k__BackingField: 0.7
+      <DashForce>k__BackingField: 40
+      <DashTime>k__BackingField: 0.1
+      <DashCooldown>k__BackingField: 0.45
       <DashAutomAim>k__BackingField: 1

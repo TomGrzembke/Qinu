@@ -7,6 +7,9 @@ public class CharNPCSettings
     [field: Header("General")]
     [field: SerializeField] public bool GoesToDefault { get; private set; } = true;
     [field: SerializeField] public float DefaultSwitchTime { get; private set; }
+    [field: Tooltip("Controls which default positions are selected more often. -1 prefers the middle line, 0 selects every position equally, and 1 prefers the own goal.")]
+    [field: Range(-1f, 1f)]
+    [field: SerializeField] public float DefaultPositionGoalBias { get; private set; }
     [field: SerializeField] public bool FollowBallY { get; private set; } = true;
     [field: SerializeField] public bool InvertY { get; private set; }
 

@@ -62,6 +62,7 @@ MonoBehaviour:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <DefaultSwitchTime>k__BackingField: 1.68
+      <DefaultPositionGoalBias>k__BackingField: 0.745
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1

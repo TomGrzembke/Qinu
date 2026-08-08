@@ -1142,7 +1142,86 @@ public class NPCNav : NavCalc
 
     Transform GetRandomDefaultTransform()
     {
-        return TournamentManager.Instance.GetRandomDefaultTrans(IsRight ? 1 : 0);
+        EnsureCharSettingsAreCached();
+
+        Transform[] defaultPositions = IsRight
+            ? MinigameManager.Instance.DefaultPosRight
+            : MinigameManager.Instance.DefaultPosLeft;
+
+        if (defaultPositions == null || defaultPositions.Length == 0)
+        {
+            Debug.LogError($"No default positions are configured for {name}.", this);
+            return defaultTransform;
+        }
+
+        if (NPCSettings == null || Mathf.Approximately(NPCSettings.DefaultPositionGoalBias, 0f))
+        {
+            return defaultPositions[Random.Range(0, defaultPositions.Length)];
+        }
+
+        if (!MinigameManager.Instance.TryGetGoalMiddle(IsRight, out Vector2 ownGoalMiddle))
+        {
+            return defaultPositions[Random.Range(0, defaultPositions.Length)];
+        }
+
+        return GetWeightedDefaultTransform(defaultPositions, ownGoalMiddle, NPCSettings.DefaultPositionGoalBias);
+    }
+
+    void EnsureCharSettingsAreCached()
+    {
+        if (NPCSettings != null) return;
+
+        if (!sOHolder)
+        {
+            sOHolder = GetComponent<CharSOHolder>();
+        }
+
+        if (sOHolder && sOHolder.CharSO)
+        {
+            CacheCharSettings(sOHolder.CharSO);
+        }
+    }
+
+    Transform GetWeightedDefaultTransform(Transform[] positions, Vector2 ownGoalPosition, float goalBias)
+    {
+        Vector2 middlePosition = ArenaMiddle.position;
+        float middleToGoalDistance = Vector2.Distance(middlePosition, ownGoalPosition);
+
+        if (middleToGoalDistance <= Mathf.Epsilon)
+        {
+            return positions[Random.Range(0, positions.Length)];
+        }
+
+        float totalWeight = 0f;
+
+        foreach (Transform position in positions)
+        {
+            totalWeight += GetDefaultPositionWeight(position.position, middlePosition, ownGoalPosition, middleToGoalDistance, goalBias);
+        }
+
+        float selection = Random.value * totalWeight;
+
+        foreach (Transform position in positions)
+        {
+            selection -= GetDefaultPositionWeight(position.position, middlePosition, ownGoalPosition, middleToGoalDistance, goalBias);
+
+            if (selection <= 0f)
+            {
+                return position;
+            }
+        }
+
+        return positions[^1];
+    }
+
+    float GetDefaultPositionWeight(Vector2 position, Vector2 middlePosition, Vector2 ownGoalPosition, float middleToGoalDistance, float goalBias)
+    {
+        Vector2 middleToGoalDirection = (ownGoalPosition - middlePosition) / middleToGoalDistance;
+        float distanceTowardGoal = Vector2.Dot(position - middlePosition, middleToGoalDirection);
+        float goalCloseness = Mathf.Clamp01(distanceTowardGoal / middleToGoalDistance);
+        float middleToGoalScore = goalCloseness * 2f - 1f;
+
+        return Mathf.Max(0.001f, 1f + goalBias * middleToGoalScore);
     }
 
     void OnDrawGizmosSelected()

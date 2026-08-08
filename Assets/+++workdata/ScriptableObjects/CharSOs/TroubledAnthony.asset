@@ -21,12 +21,48 @@ MonoBehaviour:
     <Force>k__BackingField: 40
     <Duration>k__BackingField: 0.1
     <Cooldown>k__BackingField: 0.45
+    <VelocityApplication>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 16
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.05
+        value: 0.8
+        inSlope: 16
+        outSlope: 0.2105263
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.2105263
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
     <TargetTrackingPercentage>k__BackingField: 0.6
+    <PostDashMoveSpeedMultiplier>k__BackingField: 1
+    <PostDashMoveSpeedDuration>k__BackingField: 0
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <DefaultSwitchTime>k__BackingField: 8
+      <DefaultPositionGoalBias>k__BackingField: 0.25
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
@@ -34,13 +70,6 @@ MonoBehaviour:
       <PukApproachDistance>k__BackingField: 2.5
       <RequiredShotAlignment>k__BackingField: 0.031
       <AlignmentStabilityMargin>k__BackingField: 0.02
-      <StuckDetectionTime>k__BackingField: 0.4
-      <MinimumStuckProgress>k__BackingField: 0.1
-      <StuckDesiredSpeed>k__BackingField: 0.5
-      <StuckRecoveryDuration>k__BackingField: 1
-      <StuckRecoveryMoveDistance>k__BackingField: 2
-      <StuckRecoveryRadius>k__BackingField: 2
-      <StuckCandidatePenalty>k__BackingField: 100
       <PukPredictionTime>k__BackingField: 0.12
       <OwnGoalDangerDistance>k__BackingField: 24
       <MinimumThreatSpeed>k__BackingField: 0.5
@@ -50,6 +79,13 @@ MonoBehaviour:
       <EmergencyDashPukClearance>k__BackingField: 0.25
       <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
+      <StuckDetectionTime>k__BackingField: 0.4
+      <MinimumStuckProgress>k__BackingField: 0.1
+      <StuckDesiredSpeed>k__BackingField: 0.5
+      <StuckRecoveryDuration>k__BackingField: 1
+      <StuckRecoveryMoveDistance>k__BackingField: 2
+      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 30
       <StoppingDistance>k__BackingField: 0.3

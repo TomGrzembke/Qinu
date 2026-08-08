@@ -56,10 +56,13 @@ MonoBehaviour:
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 0
     <TargetTrackingPercentage>k__BackingField: 0.62
+    <PostDashMoveSpeedMultiplier>k__BackingField: 1
+    <PostDashMoveSpeedDuration>k__BackingField: 0
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
       <DefaultSwitchTime>k__BackingField: 0.9
+      <DefaultPositionGoalBias>k__BackingField: -1
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1

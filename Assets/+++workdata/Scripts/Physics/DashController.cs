@@ -17,11 +17,11 @@ public class DashController : RBGetter
 
     NavMeshAgent agent;
     MovePlayer movePlayer;
-    CharSO CharSO => charSOHolder.CharSO;
+    CharSO charSO;
     Coroutine dashRoutine;
     Coroutine cooldownRoutine;
 
-    DashSettings Settings => CharSO.DashSettings;
+    DashSettings Settings => charSO.DashSettings;
     Transform Puk => MinigameManager.Instance.Puk;
 
     public bool IsDashing => dashRoutine != null;
@@ -32,6 +32,8 @@ public class DashController : RBGetter
     {
         agent = GetComponent<NavMeshAgent>();
         movePlayer = GetComponent<MovePlayer>();
+        charSO = charSOHolder.CharSO;
+        charSOHolder.CharSOChanged += OnCharSOChanged;
     }
 
     void OnDisable()
@@ -39,6 +41,19 @@ public class DashController : RBGetter
         StopAllCoroutines();
         dashRoutine = null;
         cooldownRoutine = null;
+    }
+
+    void OnDestroy()
+    {
+        if (charSOHolder)
+        {
+            charSOHolder.CharSOChanged -= OnCharSOChanged;
+        }
+    }
+
+    void OnCharSOChanged(CharSO newCharSO)
+    {
+        charSO = newCharSO;
     }
 
     public void Dash(float multiplier = 1f)
@@ -68,7 +83,8 @@ public class DashController : RBGetter
     {
         if (!CanDash()) return;
 
-        dashRoutine = StartCoroutine(DashRoutine(targetMode, target, targetPosition, multiplier));
+        DashSettings dashSettings = Settings;
+        dashRoutine = StartCoroutine(DashRoutine(targetMode, target, targetPosition, multiplier, dashSettings));
         DashStarted?.Invoke();
     }
 
@@ -81,13 +97,13 @@ public class DashController : RBGetter
         return true;
     }
 
-    IEnumerator DashRoutine(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier)
+    IEnumerator DashRoutine(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier, DashSettings dashSettings)
     {
-        float duration = Settings.Duration;
+        float duration = dashSettings.Duration;
 
         if (duration <= Mathf.Epsilon)
         {
-            rb.AddForce(GetDirection(targetMode, targetPosition) * Settings.Force * multiplier, ForceMode2D.Impulse);
+            rb.AddForce(GetDirection(targetMode, targetPosition) * dashSettings.Force * multiplier, ForceMode2D.Impulse);
             yield return new WaitForFixedUpdate();
         }
         else
@@ -99,7 +115,7 @@ public class DashController : RBGetter
             {
                 float dashAlpha = elapsedTime / duration;
 
-                if (targetMode == TargetMode.MovingTarget && target && dashAlpha < Settings.TargetTrackingPercentage)
+                if (targetMode == TargetMode.MovingTarget && target && dashAlpha < dashSettings.TargetTrackingPercentage)
                 {
                     targetPosition = target.position;
                 }
@@ -111,9 +127,9 @@ public class DashController : RBGetter
 
                 float appliedStepDuration = Mathf.Min(Time.fixedDeltaTime, duration - elapsedTime);
                 float nextDashAlpha = (elapsedTime + appliedStepDuration) / duration;
-                float velocityPercentage = Settings.VelocityApplication.Evaluate(nextDashAlpha);
+                float velocityPercentage = dashSettings.VelocityApplication.Evaluate(nextDashAlpha);
                 float velocityPercentageStep = velocityPercentage - previousVelocityPercentage;
-                float stepForce = Settings.Force * multiplier * velocityPercentageStep / Time.fixedDeltaTime;
+                float stepForce = dashSettings.Force * multiplier * velocityPercentageStep / Time.fixedDeltaTime;
                 rb.AddForce(GetDirection(targetMode, targetPosition) * stepForce, ForceMode2D.Force);
                 previousVelocityPercentage = velocityPercentage;
                 elapsedTime += appliedStepDuration;
@@ -124,7 +140,7 @@ public class DashController : RBGetter
 
         dashRoutine = null;
         DashFinished?.Invoke();
-        cooldownRoutine = StartCoroutine(CooldownRoutine());
+        cooldownRoutine = StartCoroutine(CooldownRoutine(dashSettings.Cooldown));
     }
 
     Vector2 GetDirection(TargetMode targetMode, Vector2 targetPosition)
@@ -138,9 +154,9 @@ public class DashController : RBGetter
         return (targetPosition - transform.position.RemoveZ()).normalized;
     }
 
-    IEnumerator CooldownRoutine()
+    IEnumerator CooldownRoutine(float cooldown)
     {
-        yield return new WaitForSeconds(Settings.Cooldown);
+        yield return new WaitForSeconds(cooldown);
         cooldownRoutine = null;
     }
 }

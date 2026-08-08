@@ -117,13 +117,16 @@ public class NPCNav : NavCalc
     readonly MovementProgress movementProgress = new();
     readonly List<RigidbodyColliderState> rigidbodyColliderStates = new();
     Collider2D arenaCollider;
+    NPCCharSO charSO;
+    CharNPCSettings npcSettings;
+    NPCRigidSettings rigidSettings;
+    Coroutine defaultSwitchRoutine;
 
     Collider2D PukCollider => MinigameManager.Instance.PukCollider;
     Transform Puk => MinigameManager.Instance.Puk;
     Transform ArenaMiddle => MinigameManager.Instance.ArenaMiddle;
-    NPCCharSO CharSO => (NPCCharSO)sOHolder.CharSO;
-    CharNPCSettings NPCSettings => CharSO.CharSettings.CharNPCSettings;
-    NPCRigidSettings RigidSettings => CharSO.CharSettings.CharRigidSettings;
+    CharNPCSettings NPCSettings => npcSettings;
+    NPCRigidSettings RigidSettings => rigidSettings;
 
     bool PukOnSide => IsRight ? ArenaMiddle.position.x < Puk.position.x : ArenaMiddle.position.x > Puk.position.x;
     
@@ -141,6 +144,8 @@ public class NPCNav : NavCalc
 
     void Start()
     {
+        CacheCharSettings(sOHolder.CharSO);
+        sOHolder.CharSOChanged += OnCharSOChanged;
         approachPlan.CandidatePath = new();
         dashController = GetComponent<DashController>();
         CacheRigidbodyColliders();
@@ -151,7 +156,63 @@ public class NPCNav : NavCalc
             agent.Warp(transform.position);
         }
 
-        StartCoroutine(DefaultSwitchRoutine());
+        defaultSwitchRoutine = StartCoroutine(DefaultSwitchRoutine());
+    }
+
+    void OnDestroy()
+    {
+        if (sOHolder)
+        {
+            sOHolder.CharSOChanged -= OnCharSOChanged;
+        }
+    }
+
+    void OnCharSOChanged(CharSO newCharSO)
+    {
+        CacheCharSettings(newCharSO);
+        ResetPlansForSettingsChange();
+        RestartDefaultSwitchRoutine();
+    }
+
+    void CacheCharSettings(CharSO newCharSO)
+    {
+        if (newCharSO is not NPCCharSO newNPCCharSO)
+        {
+            Debug.LogError($"{name} requires NPCCharSO settings.", this);
+            return;
+        }
+
+        charSO = newNPCCharSO;
+        npcSettings = charSO.CharSettings.CharNPCSettings;
+        rigidSettings = charSO.CharSettings.CharRigidSettings;
+    }
+
+    void ResetPlansForSettingsChange()
+    {
+        shotPlan.HasPlan = false;
+        shotPlan.CanSafelyStrike = false;
+        shotPlan.DirectlyBlockingThreat = false;
+        approachPlan.HasPlan = false;
+        approachPlan.HasBeenReached = false;
+        approachPlan.NextPlanTime = 0f;
+        emergencyPlan.Phase = EmergencyPhase.None;
+        emergencyPlan.UsesVerticalFallback = false;
+        approachDebug.ValidCandidates.Clear();
+        approachDebug.RejectedCandidates.Clear();
+        movementProgress.HasSample = false;
+        movementProgress.IsRecovering = false;
+        movementProgress.BlockedDirection = Vector2.zero;
+        movementProgress.DirectionAttempt = 0;
+    }
+
+    void RestartDefaultSwitchRoutine()
+    {
+        if (defaultSwitchRoutine != null)
+        {
+            StopCoroutine(defaultSwitchRoutine);
+        }
+
+        defaultSwitchRoutine = StartCoroutine(DefaultSwitchRoutine());
     }
 
     void Update()
@@ -218,7 +279,7 @@ public class NPCNav : NavCalc
     {
         targetPos = DespawnPos.position;
 
-        float despawnDistance = Mathf.Max(CharSO.StoppingDistance + DESPAWN_ARRIVAL_TOLERANCE, MIN_NAVMESH_SAMPLE_RADIUS);
+        float despawnDistance = Mathf.Max(charSO.StoppingDistance + DESPAWN_ARRIVAL_TOLERANCE, MIN_NAVMESH_SAMPLE_RADIUS);
         if (Vector2.Distance(transform.position, DespawnPos.position) > despawnDistance) return false;
 
         CharManager.Instance.CharsSpawned.Remove(gameObject);
@@ -999,7 +1060,7 @@ public class NPCNav : NavCalc
 
         if (isChasingPuk) return 0f;
 
-        return CharSO.StoppingDistance;
+        return charSO.StoppingDistance;
     }
 
     public void SideSettings(bool _isRight)

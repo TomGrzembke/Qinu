@@ -25,8 +25,22 @@ public class SpeedAnimInput : MonoBehaviour
         GetIfNotAssigned(ref rb);
         GetIfNotAssigned(ref charSOHolder);
         charSO = charSOHolder.CharSO;
+        charSOHolder.CharSOChanged += OnCharSOChanged;
         
         hasSpeedParam = anim.parameters.Any(p => p.name == SpeedString);
+    }
+
+    void OnDestroy()
+    {
+        if (charSOHolder)
+        {
+            charSOHolder.CharSOChanged -= OnCharSOChanged;
+        }
+    }
+
+    void OnCharSOChanged(CharSO newCharSO)
+    {
+        charSO = newCharSO;
     }
     
     void GetIfNotAssigned<T>(ref T component) where T : Component

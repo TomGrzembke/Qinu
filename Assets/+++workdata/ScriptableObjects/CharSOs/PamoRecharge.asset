@@ -64,12 +64,12 @@ MonoBehaviour:
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
       <RandomDashesPerSecond>k__BackingField: 0.8
-      <PukApproachDistance>k__BackingField: 5
-      <RequiredShotAlignment>k__BackingField: 0.363
+      <PukApproachDistance>k__BackingField: 4
+      <RequiredShotAlignment>k__BackingField: 0.047
       <AlignmentStabilityMargin>k__BackingField: 0.007
-      <PukPredictionTime>k__BackingField: 0.2
-      <OwnGoalDangerDistance>k__BackingField: 3
-      <MinimumThreatSpeed>k__BackingField: 3
+      <PukPredictionTime>k__BackingField: 0.28
+      <OwnGoalDangerDistance>k__BackingField: 7
+      <MinimumThreatSpeed>k__BackingField: 1
       <OwnGoalThreatAlignment>k__BackingField: 0.437
       <EmergencyGoalDistance>k__BackingField: 5
       <EmergencyClearAlignment>k__BackingField: 0.086
@@ -84,8 +84,8 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 12
+      <MaxSpeed>k__BackingField: 13
       <StoppingDistance>k__BackingField: 0.5
-      <Acceleration>k__BackingField: 110
+      <Acceleration>k__BackingField: 79.5
       <VelocityCorrection>k__BackingField: 8
       <MaxCorrectionAcceleration>k__BackingField: 1200

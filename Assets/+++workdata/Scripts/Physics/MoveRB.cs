@@ -12,6 +12,7 @@ public class MoveRB : RBGetter
     NPCRigidSettings CharSettings => charSO.CharSettings.CharRigidSettings;
 
     DashController dashController;
+    CharSOHolder charSOHolder;
     NPCCharSO charSO;
 
     public Vector2 GetMoveDir()
@@ -23,7 +24,9 @@ public class MoveRB : RBGetter
 
     protected override void AwakeInternal()
     {
-        charSO = (NPCCharSO)GetComponent<CharSOHolder>().CharSO;
+        charSOHolder = GetComponent<CharSOHolder>();
+        charSO = (NPCCharSO)charSOHolder.CharSO;
+        charSOHolder.CharSOChanged += OnCharSOChanged;
         dashController = GetComponent<DashController>();
 
         agent.updatePosition = false;
@@ -35,6 +38,27 @@ public class MoveRB : RBGetter
     void OnDisable()
     {
         rb.linearVelocity = Vector3.zero;
+    }
+
+    void OnDestroy()
+    {
+        if (charSOHolder)
+        {
+            charSOHolder.CharSOChanged -= OnCharSOChanged;
+        }
+    }
+
+    void OnCharSOChanged(CharSO newCharSO)
+    {
+        if (newCharSO is not NPCCharSO newNPCCharSO)
+        {
+            Debug.LogError($"{name} requires NPCCharSO settings.", this);
+            return;
+        }
+
+        charSO = newNPCCharSO;
+        UpdateAgentSettings();
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, CharSettings.MaxSpeed);
     }
 
     void FixedUpdate()

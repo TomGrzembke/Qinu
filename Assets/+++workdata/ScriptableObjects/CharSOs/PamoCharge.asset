@@ -18,7 +18,7 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 1964eb1db4f89dc4b9493e4bb75dd022, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 100
+    <Force>k__BackingField: 130
     <Duration>k__BackingField: 0.1
     <Cooldown>k__BackingField: 0.05
     <VelocityApplication>k__BackingField:
@@ -84,7 +84,7 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 50
+      <MaxSpeed>k__BackingField: 24
       <StoppingDistance>k__BackingField: 0.5
       <Acceleration>k__BackingField: 172
       <VelocityCorrection>k__BackingField: 25

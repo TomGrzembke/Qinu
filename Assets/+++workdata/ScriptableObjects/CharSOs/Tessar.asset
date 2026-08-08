@@ -75,15 +75,15 @@ MonoBehaviour:
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 1
       <DashRandomly>k__BackingField: 1
-      <RandomDashesPerSecond>k__BackingField: 1.4
+      <RandomDashesPerSecond>k__BackingField: 1.3
       <PukApproachDistance>k__BackingField: 1.6
-      <RequiredShotAlignment>k__BackingField: 1
-      <AlignmentStabilityMargin>k__BackingField: 0.317
+      <RequiredShotAlignment>k__BackingField: 0.801
+      <AlignmentStabilityMargin>k__BackingField: 0.02
       <PukPredictionTime>k__BackingField: 0.16
       <OwnGoalDangerDistance>k__BackingField: 5
       <MinimumThreatSpeed>k__BackingField: 2
       <OwnGoalThreatAlignment>k__BackingField: 0.656
-      <MinimumSafeOwnGoalStrikeAlignment>k__BackingField: -0.071
+      <MinimumSafeOwnGoalStrikeAlignment>k__BackingField: -0.757
       <EmergencyGoalDistance>k__BackingField: 3.5
       <EmergencyClearAlignment>k__BackingField: 0.861
       <EmergencyDashPukClearance>k__BackingField: 0.25
@@ -100,7 +100,7 @@ MonoBehaviour:
       <MiddleLineMaxSpeed>k__BackingField: 17.7
       <OwnGoalMaxSpeed>k__BackingField: 13.4
       <ArenaTransitionMaxSpeed>k__BackingField: 17
-      <StoppingDistance>k__BackingField: 0.2
+      <StoppingDistance>k__BackingField: 0.12
       <Acceleration>k__BackingField: 200
       <VelocityCorrection>k__BackingField: 26.8
       <MaxCorrectionAcceleration>k__BackingField: 544.1

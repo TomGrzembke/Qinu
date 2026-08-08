@@ -74,6 +74,7 @@ MonoBehaviour:
       <OwnGoalDangerDistance>k__BackingField: 6.1
       <MinimumThreatSpeed>k__BackingField: 1.5
       <OwnGoalThreatAlignment>k__BackingField: 0.483
+      <MinimumSafeOwnGoalStrikeAlignment>k__BackingField: 0.209
       <EmergencyGoalDistance>k__BackingField: 4
       <EmergencyClearAlignment>k__BackingField: -0.243
       <EmergencyDashPukClearance>k__BackingField: 0.23

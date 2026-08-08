@@ -366,7 +366,7 @@ public class TournamentManager : MonoBehaviour
 
     GameObject GetLowestPlayRate(GameObject exclude = null, GameObject exclude2 = null)
     {
-        GameObject lowestPlayRateChar = new();
+        GameObject lowestPlayRateChar = null;
         int lowestTimesPlayed = 100;
         for (int i = 1; i < CharStats.Count; i++)
         {

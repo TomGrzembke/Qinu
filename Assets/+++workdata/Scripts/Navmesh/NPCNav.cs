@@ -79,9 +79,11 @@ public class NPCNav : NavCalc
     sealed class ApproachPlan
     {
         public Vector2 Position;
+        public Vector2 RoutePosition;
         public float NextPlanTime;
         public bool HasPlan;
         public bool HasBeenReached;
+        public bool IsRoutingAroundPuk;
         public NavMeshPath CandidatePath;
     }
 
@@ -194,6 +196,7 @@ public class NPCNav : NavCalc
         shotPlan.DirectlyBlockingThreat = false;
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
+        approachPlan.IsRoutingAroundPuk = false;
         approachPlan.NextPlanTime = 0f;
         emergencyPlan.Phase = EmergencyPhase.None;
         emergencyPlan.UsesVerticalFallback = false;
@@ -358,6 +361,7 @@ public class NPCNav : NavCalc
 
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
+        approachPlan.IsRoutingAroundPuk = false;
         shotPlan.CanSafelyStrike = false;
         emergencyPlan.UsesVerticalFallback = false;
         emergencyPlan.Phase = needsEmergencyPhase ? EmergencyPhase.Backdash : EmergencyPhase.None;
@@ -376,6 +380,7 @@ public class NPCNav : NavCalc
         float requiredAlignment = isEmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         float alignmentThreshold = shotPlan.CanSafelyStrike ? requiredAlignment - NPCSettings.AlignmentStabilityMargin : requiredAlignment + NPCSettings.AlignmentStabilityMargin;
         shotPlan.CanSafelyStrike = shotPlan.Alignment >= alignmentThreshold;
+        shotPlan.CanSafelyStrike &= IsContactDirectionSafeForOwnGoal(ownGoalMiddle);
 
         if (movementProgress.IsRecovering)
         {
@@ -387,7 +392,6 @@ public class NPCNav : NavCalc
         if (canCompleteApproach && HasPhysicallyReachedApproach())
         {
             approachPlan.HasBeenReached = true;
-            shotPlan.CanSafelyStrike = true;
             movementProgress.IsRecovering = false;
             ResetMovementSample();
         }
@@ -401,7 +405,8 @@ public class NPCNav : NavCalc
         if (!isDefensiveIntent) return false;
 
         bool isBetweenPukAndGoal = IsBetweenPukAndGoal(ownGoalMiddle);
-        bool isInThreatPath = shotPlan.HasPredictedGoalCrossing || isBetweenPukAndGoal;
+        bool hasSafeContactDirection = IsContactDirectionSafeForOwnGoal(ownGoalMiddle);
+        bool isInThreatPath = (shotPlan.HasPredictedGoalCrossing || isBetweenPukAndGoal) && hasSafeContactDirection;
         shotPlan.DirectlyBlockingThreat = isInThreatPath;
 
         if (!shotPlan.DirectlyBlockingThreat) return false;
@@ -429,13 +434,53 @@ public class NPCNav : NavCalc
             approachPlan.HasPlan = true;
             approachPlan.HasBeenReached = false;
             approachPlan.NextPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
+            UpdatePukAvoidanceRoute();
         }
 
     }
 
     void UpdateChaseTarget()
     {
-        targetPos = shotPlan.CanSafelyStrike ? Puk.position : approachPlan.Position;
+        if (shotPlan.CanSafelyStrike)
+        {
+            approachPlan.IsRoutingAroundPuk = false;
+            targetPos = Puk.position;
+            return;
+        }
+
+        if (TryFollowPukAvoidanceRoute()) return;
+
+        targetPos = approachPlan.Position;
+    }
+
+    void UpdatePukAvoidanceRoute()
+    {
+        approachPlan.IsRoutingAroundPuk = false;
+
+        if (IsPathClearOfPuk(approachPlan.Position)) return;
+
+        if (TryFindPukAvoidanceRoutePosition(approachPlan.Position, out Vector2 routePosition))
+        {
+            approachPlan.RoutePosition = routePosition;
+            approachPlan.IsRoutingAroundPuk = true;
+        }
+    }
+
+    bool TryFollowPukAvoidanceRoute()
+    {
+        if (!approachPlan.IsRoutingAroundPuk) return false;
+
+        float routeReachedDistance = Mathf.Max(GetCombinedPukClearance() * ROUTE_REACHED_CLEARANCE_FACTOR, MIN_NAVMESH_SAMPLE_RADIUS);
+        bool reachedRoutePosition = Vector2.Distance(transform.position, approachPlan.RoutePosition) <= routeReachedDistance;
+
+        if (reachedRoutePosition)
+        {
+            approachPlan.IsRoutingAroundPuk = false;
+            return false;
+        }
+
+        targetPos = approachPlan.RoutePosition;
+        return true;
     }
 
     void TryDashAtPuk()
@@ -534,7 +579,7 @@ public class NPCNav : NavCalc
             return false;
         }
 
-        bool foundRouteBehindPuk = TryFindEmergencyRoutePosition(approachPlan.Position, out emergencyPlan.RoutePosition);
+        bool foundRouteBehindPuk = TryFindPukAvoidanceRoutePosition(approachPlan.Position, out emergencyPlan.RoutePosition);
         if (foundRouteBehindPuk)
         {
             emergencyPlan.RoutePukPosition = Puk.position;
@@ -613,6 +658,17 @@ public class NPCNav : NavCalc
             _ => (opponentGoalMiddle - shotPlan.PredictedPukPosition).normalized,
         };
 
+    }
+
+    bool IsContactDirectionSafeForOwnGoal(Vector2 ownGoalMiddle)
+    {
+        Vector2 characterToPuk = Puk.position.RemoveZ() - transform.position.RemoveZ();
+        if (characterToPuk.sqrMagnitude <= Mathf.Epsilon) return false;
+
+        Vector2 directionAwayFromOwnGoal = GetGoalArenaDirection(IsRight, ownGoalMiddle);
+        float ownGoalSafetyAlignment = Vector2.Dot(characterToPuk.normalized, directionAwayFromOwnGoal);
+
+        return ownGoalSafetyAlignment >= NPCSettings.MinimumSafeOwnGoalStrikeAlignment;
     }
 
     Vector2 GetClearDirection()
@@ -864,6 +920,7 @@ public class NPCNav : NavCalc
         shotPlan.CanSafelyStrike = false;
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
+        approachPlan.IsRoutingAroundPuk = false;
         approachPlan.NextPlanTime = 0f;
         agent.ResetPath();
         TryFindStuckRecoveryPosition(out movementProgress.RecoveryPosition);
@@ -946,7 +1003,7 @@ public class NPCNav : NavCalc
         return true;
     }
 
-    bool TryFindEmergencyRoutePosition(Vector2 behindPukPosition, out Vector2 routePosition)
+    bool TryFindPukAvoidanceRoutePosition(Vector2 behindPukPosition, out Vector2 routePosition)
     {
         Vector2 pukPosition = Puk.position.RemoveZ();
         Vector2 behindDifference = behindPukPosition - pukPosition;

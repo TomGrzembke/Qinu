@@ -49,6 +49,10 @@ public class CharNPCSettings
     [field: Tooltip("Minimum dot-product alignment between puck velocity and the direction toward the own goal. -1 accepts any direction, 0 accepts sideways movement, and 1 requires movement directly at the goal.")]
     [field: Range(-1f, 1f)]
     [field: SerializeField] public float OwnGoalThreatAlignment { get; private set; } = 0.6f;
+    [field: Separator("Own Goal Strike Safety - higher requires contact to point farther away from the own goal")]
+    [field: Tooltip("Minimum alignment between the character-to-puck contact direction and the direction away from the own goal. Zero allows lateral clears but rejects contact directed toward the own goal.")]
+    [field: Range(-1f, 1f)]
+    [field: SerializeField] public float MinimumSafeOwnGoalStrikeAlignment { get; private set; }
 
     [field: Space(18f)]
     [field: Header("Emergency Defense")]

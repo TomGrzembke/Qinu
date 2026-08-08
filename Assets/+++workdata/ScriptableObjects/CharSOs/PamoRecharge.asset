@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
-  m_Name: Anthony
+  m_Name: PamoRecharge
   m_EditorClassIdentifier: 
-  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: cd42c452505ff86408158bceb51e834f, type: 3}
   <charAestheticSettings>k__BackingField:
-    <PrimaryColor>k__BackingField: {r: 0.7960785, g: 0.21568629, b: 0.8235295, a: 1}
-    <Music>k__BackingField: {fileID: 8300000, guid: bbff5025809c56943bf614c3ca4ed599, type: 3}
+    <PrimaryColor>k__BackingField: {r: 0.08235294, g: 0.8352942, b: 0.8745099, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: 17d1cf652f119314d8e3097f99a954f9, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 14
-    <Duration>k__BackingField: 0.29
-    <Cooldown>k__BackingField: 0.7
+    <Force>k__BackingField: 20
+    <Duration>k__BackingField: 0.1
+    <Cooldown>k__BackingField: 0.05
     <VelocityApplication>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -55,27 +55,27 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 0
-    <TargetTrackingPercentage>k__BackingField: 0.941
+    <TargetTrackingPercentage>k__BackingField: 0.62
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
-      <DefaultSwitchTime>k__BackingField: 8
+      <DefaultSwitchTime>k__BackingField: 1.68
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
-      <RandomDashesPerSecond>k__BackingField: 0.7
-      <PukApproachDistance>k__BackingField: 1.1
-      <RequiredShotAlignment>k__BackingField: -0.374
-      <AlignmentStabilityMargin>k__BackingField: 0.309
-      <PukPredictionTime>k__BackingField: 0.4
-      <OwnGoalDangerDistance>k__BackingField: 6.1
-      <MinimumThreatSpeed>k__BackingField: 1.5
-      <OwnGoalThreatAlignment>k__BackingField: 0.483
-      <EmergencyGoalDistance>k__BackingField: 4
-      <EmergencyClearAlignment>k__BackingField: -0.243
-      <EmergencyDashPukClearance>k__BackingField: 0.23
-      <EmergencyRouteWidth>k__BackingField: 1.35
-      <DashDefensively>k__BackingField: 1
+      <RandomDashesPerSecond>k__BackingField: 0.8
+      <PukApproachDistance>k__BackingField: 5
+      <RequiredShotAlignment>k__BackingField: 0.363
+      <AlignmentStabilityMargin>k__BackingField: 0.007
+      <PukPredictionTime>k__BackingField: 0.2
+      <OwnGoalDangerDistance>k__BackingField: 3
+      <MinimumThreatSpeed>k__BackingField: 3
+      <OwnGoalThreatAlignment>k__BackingField: 0.437
+      <EmergencyGoalDistance>k__BackingField: 5
+      <EmergencyClearAlignment>k__BackingField: 0.086
+      <EmergencyDashPukClearance>k__BackingField: 1.03
+      <EmergencyRouteWidth>k__BackingField: 1.3
+      <DashDefensively>k__BackingField: 0
       <StuckDetectionTime>k__BackingField: 0.4
       <MinimumStuckProgress>k__BackingField: 0.1
       <StuckDesiredSpeed>k__BackingField: 0.5
@@ -84,8 +84,8 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 10.7
-      <StoppingDistance>k__BackingField: 0.13
-      <Acceleration>k__BackingField: 0.7
-      <VelocityCorrection>k__BackingField: 90
-      <MaxCorrectionAcceleration>k__BackingField: 500
+      <MaxSpeed>k__BackingField: 12
+      <StoppingDistance>k__BackingField: 0.5
+      <Acceleration>k__BackingField: 110
+      <VelocityCorrection>k__BackingField: 8
+      <MaxCorrectionAcceleration>k__BackingField: 1200

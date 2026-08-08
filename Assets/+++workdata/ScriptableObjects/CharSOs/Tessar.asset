@@ -18,8 +18,8 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: f819775f53079d04894a12488b55a2cf, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 90
-    <Duration>k__BackingField: 0.1
+    <Force>k__BackingField: 70
+    <Duration>k__BackingField: 0.6
     <Cooldown>k__BackingField: 0.2
     <VelocityApplication>k__BackingField:
       serializedVersion: 2
@@ -28,25 +28,34 @@ MonoBehaviour:
         time: 0
         value: 0
         inSlope: 0
-        outSlope: 16
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.05
-        value: 0.8
-        inSlope: 16
-        outSlope: 0.2105263
+        time: 0.027653504
+        value: 0.99285585
+        inSlope: 1.281776
+        outSlope: 1.281776
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.20887567
+      - serializedVersion: 3
+        time: 0.23791653
+        value: 0.7110707
+        inSlope: 0.2105263
+        outSlope: 0.2105263
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0.2105263
-        outSlope: 0
+        outSlope: 0.2105263
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -55,18 +64,27 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
-    <TargetTrackingPercentage>k__BackingField: 0.6
+    <TargetTrackingPercentage>k__BackingField: 0.987
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
-      <DefaultSwitchTime>k__BackingField: 0.3
+      <DefaultSwitchTime>k__BackingField: 0.8
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 1
       <DashRandomly>k__BackingField: 1
-      <RandomDashesPerSecond>k__BackingField: 0.001
-      <PukApproachDistance>k__BackingField: 4
-      <RequiredShotAlignment>k__BackingField: 0.712
-      <AlignmentStabilityMargin>k__BackingField: 0.02
+      <RandomDashesPerSecond>k__BackingField: 1.4
+      <PukApproachDistance>k__BackingField: 1.6
+      <RequiredShotAlignment>k__BackingField: 1
+      <AlignmentStabilityMargin>k__BackingField: 0.317
+      <PukPredictionTime>k__BackingField: 0.16
+      <OwnGoalDangerDistance>k__BackingField: 5
+      <MinimumThreatSpeed>k__BackingField: 2
+      <OwnGoalThreatAlignment>k__BackingField: 0.656
+      <EmergencyGoalDistance>k__BackingField: 3.5
+      <EmergencyClearAlignment>k__BackingField: 0.861
+      <EmergencyDashPukClearance>k__BackingField: 0.25
+      <EmergencyRouteWidth>k__BackingField: 1.25
+      <DashDefensively>k__BackingField: 1
       <StuckDetectionTime>k__BackingField: 0.4
       <MinimumStuckProgress>k__BackingField: 0.1
       <StuckDesiredSpeed>k__BackingField: 0.5
@@ -74,18 +92,9 @@ MonoBehaviour:
       <StuckRecoveryMoveDistance>k__BackingField: 2
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
-      <PukPredictionTime>k__BackingField: 0.1
-      <OwnGoalDangerDistance>k__BackingField: 15
-      <MinimumThreatSpeed>k__BackingField: 2
-      <OwnGoalThreatAlignment>k__BackingField: 0.6
-      <EmergencyGoalDistance>k__BackingField: 5
-      <EmergencyClearAlignment>k__BackingField: 0.75
-      <EmergencyDashPukClearance>k__BackingField: 0.25
-      <EmergencyRouteWidth>k__BackingField: 1.25
-      <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 15
+      <MaxSpeed>k__BackingField: 17
       <StoppingDistance>k__BackingField: 0.2
-      <Acceleration>k__BackingField: 120
-      <VelocityCorrection>k__BackingField: 20.7
-      <MaxCorrectionAcceleration>k__BackingField: 400
+      <Acceleration>k__BackingField: 200
+      <VelocityCorrection>k__BackingField: 26.8
+      <MaxCorrectionAcceleration>k__BackingField: 544.1

@@ -13,13 +13,15 @@ public class DashController : RBGetter
         Mouse,
     }
 
+    [SerializeField] CharSOHolder charSOHolder;
+
     NavMeshAgent agent;
     MovePlayer movePlayer;
-    CharSO charSO;
+    CharSO CharSO => charSOHolder.CharSO;
     Coroutine dashRoutine;
     Coroutine cooldownRoutine;
 
-    DashSettings Settings => charSO.DashSettings;
+    DashSettings Settings => CharSO.DashSettings;
     Transform Puk => MinigameManager.Instance.Puk;
 
     public bool IsDashing => dashRoutine != null;
@@ -30,7 +32,6 @@ public class DashController : RBGetter
     {
         agent = GetComponent<NavMeshAgent>();
         movePlayer = GetComponent<MovePlayer>();
-        charSO = GetComponent<CharSOHolder>().CharSO;
     }
 
     void OnDisable()

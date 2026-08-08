@@ -82,24 +82,27 @@ public class SoundManager : MonoBehaviour
         PlaySound(SoundType.ButtonClickBack);
     }
 
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip, float musicBlendTimeOverride = -1)
     {
         if (clip == globalMusicSource.clip) return;
 
         if (musicRoutine != null)
+        {
             StopCoroutine(musicRoutine);
+        }
 
-        musicRoutine = StartCoroutine(BlendMusic(clip));
+        musicRoutine = StartCoroutine(BlendMusic(clip, musicBlendTimeOverride));
     }
 
-    IEnumerator BlendMusic(AudioClip clip)
+    IEnumerator BlendMusic(AudioClip clip, float musicBlendTimeOverride = -1)
     {
+        float blendTime = Mathf.Approximately(-1, musicBlendTimeOverride) ? musicBlendTime : musicBlendTimeOverride;
         float timeWentBy = 0;
 
-        while (timeWentBy < musicBlendTime)
+        while (timeWentBy < blendTime)
         {
             timeWentBy += Time.deltaTime;
-            globalMusicSource.volume = Mathf.Lerp(originalMusicVolume, 0, timeWentBy / musicBlendTime);
+            globalMusicSource.volume = Mathf.Lerp(originalMusicVolume, 0, timeWentBy / blendTime);
             yield return null;
         }
 
@@ -108,10 +111,10 @@ public class SoundManager : MonoBehaviour
         globalMusicSource.Play();
         timeWentBy = 0;
 
-        while (timeWentBy < musicBlendTime)
+        while (timeWentBy < blendTime)
         {
             timeWentBy += Time.deltaTime;
-            globalMusicSource.volume = Mathf.Lerp(0, originalMusicVolume, timeWentBy / musicBlendTime);
+            globalMusicSource.volume = Mathf.Lerp(0, originalMusicVolume, timeWentBy / blendTime);
             yield return null;
         }
     }

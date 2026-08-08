@@ -17,7 +17,7 @@ Welcome Qinu! #speaker: Anthony
  == Abilities
   ~Event ("GoalActive")
   ~Event ("ActivateAbilities")
- You will be able to use 3 ability slots. #speaker: Anthony
+ You will be able abilites. #speaker: Anthony
  Here's your first one! #speaker: Anthony
     ~Event ("GainDash")
  -> END
@@ -34,16 +34,16 @@ Welcome Qinu! #speaker: Anthony
   ==ActivateGoals
    ~Event ("GoalActive")
 Now that's a dash! #speaker: Anthony
-Whoever scores 3 Goals first wins.
+Whoever scores 3 Goals wins.
  -> END
  
    ==IntroMatchEnd
 Good match! #speaker: Anthony
 ~Event ("BarUp")
-The bar goes up if you win 
+See that bar up there?
     ~Event ("BarDown")
-and down if you loose.
-Don't let it reach the left.
+It tracks your wins.
+Don't loose too much, I can't do this again.
     ~Event ("UpdateBar")
 Now Show 'em what you've got!
  -> END

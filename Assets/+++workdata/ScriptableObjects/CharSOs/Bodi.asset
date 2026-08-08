@@ -18,8 +18,8 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 32
-    <Duration>k__BackingField: 0.7
+    <Force>k__BackingField: 28
+    <Duration>k__BackingField: 1.2
     <Cooldown>k__BackingField: 1.5
     <VelocityApplication>k__BackingField:
       serializedVersion: 2

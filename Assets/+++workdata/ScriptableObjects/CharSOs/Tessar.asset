@@ -21,6 +21,39 @@ MonoBehaviour:
     <Force>k__BackingField: 90
     <Duration>k__BackingField: 0.1
     <Cooldown>k__BackingField: 0.2
+    <VelocityApplication>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 16
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.05
+        value: 0.8
+        inSlope: 16
+        outSlope: 0.2105263
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.2105263
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
     <TargetTrackingPercentage>k__BackingField: 0.6
   <CharSettings>k__BackingField:
@@ -32,7 +65,15 @@ MonoBehaviour:
       <DashRandomly>k__BackingField: 1
       <RandomDashesPerSecond>k__BackingField: 0.001
       <PukApproachDistance>k__BackingField: 4
-      <RequiredShotAlignment>k__BackingField: 0.7
+      <RequiredShotAlignment>k__BackingField: 0.712
+      <AlignmentStabilityMargin>k__BackingField: 0.02
+      <StuckDetectionTime>k__BackingField: 0.4
+      <MinimumStuckProgress>k__BackingField: 0.1
+      <StuckDesiredSpeed>k__BackingField: 0.5
+      <StuckRecoveryDuration>k__BackingField: 1
+      <StuckRecoveryMoveDistance>k__BackingField: 2
+      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckCandidatePenalty>k__BackingField: 100
       <PukPredictionTime>k__BackingField: 0.1
       <OwnGoalDangerDistance>k__BackingField: 15
       <MinimumThreatSpeed>k__BackingField: 2
@@ -44,7 +85,7 @@ MonoBehaviour:
       <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 15
-      <StoppingDistance>k__BackingField: 0
+      <StoppingDistance>k__BackingField: 0.2
       <Acceleration>k__BackingField: 120
       <VelocityCorrection>k__BackingField: 20.7
       <MaxCorrectionAcceleration>k__BackingField: 400

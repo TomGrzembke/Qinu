@@ -18,33 +18,65 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: -10
-    <Duration>k__BackingField: 0.3
+    <Force>k__BackingField: 32
+    <Duration>k__BackingField: 0.7
     <Cooldown>k__BackingField: 1.5
+    <VelocityApplication>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.007839203
+        value: 0.37722778
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     <AutoAim>k__BackingField: 0
-    <TargetTrackingPercentage>k__BackingField: 0.6
+    <TargetTrackingPercentage>k__BackingField: 0.902
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
-      <DefaultSwitchTime>k__BackingField: 3.4
+      <DefaultSwitchTime>k__BackingField: 4
       <FollowBallY>k__BackingField: 0
       <InvertY>k__BackingField: 0
       <DashRandomly>k__BackingField: 1
-      <RandomDashesPerSecond>k__BackingField: 1.005034
-      <PukApproachDistance>k__BackingField: 4
-      <RequiredShotAlignment>k__BackingField: 0.7
-      <PukPredictionTime>k__BackingField: 0.1
-      <OwnGoalDangerDistance>k__BackingField: 15
-      <MinimumThreatSpeed>k__BackingField: 2
-      <OwnGoalThreatAlignment>k__BackingField: 0.6
-      <EmergencyGoalDistance>k__BackingField: 5
+      <RandomDashesPerSecond>k__BackingField: 1
+      <PukApproachDistance>k__BackingField: 1.2
+      <RequiredShotAlignment>k__BackingField: 0.849
+      <AlignmentStabilityMargin>k__BackingField: 0.55
+      <PukPredictionTime>k__BackingField: 0.17
+      <OwnGoalDangerDistance>k__BackingField: 6.31
+      <MinimumThreatSpeed>k__BackingField: 2.66
+      <OwnGoalThreatAlignment>k__BackingField: 0.158
+      <EmergencyGoalDistance>k__BackingField: 9.77
       <EmergencyClearAlignment>k__BackingField: 0.75
       <EmergencyDashPukClearance>k__BackingField: 0.25
       <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
+      <StuckDetectionTime>k__BackingField: 0.4
+      <MinimumStuckProgress>k__BackingField: 0.1
+      <StuckDesiredSpeed>k__BackingField: 0.5
+      <StuckRecoveryDuration>k__BackingField: 1
+      <StuckRecoveryMoveDistance>k__BackingField: 4
+      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 9
+      <MaxSpeed>k__BackingField: 8.5
       <StoppingDistance>k__BackingField: 0.7
-      <Acceleration>k__BackingField: 1000
-      <VelocityCorrection>k__BackingField: 64
-      <MaxCorrectionAcceleration>k__BackingField: 109.4
+      <Acceleration>k__BackingField: 1375.1
+      <VelocityCorrection>k__BackingField: 147.2
+      <MaxCorrectionAcceleration>k__BackingField: 172.3

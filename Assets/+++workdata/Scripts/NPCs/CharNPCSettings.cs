@@ -4,10 +4,14 @@ using MyBox;
 [System.Serializable]
 public class CharNPCSettings
 {
+    [field: Header("General")]
     [field: SerializeField] public bool GoesToDefault { get; private set; } = true;
-    [field: SerializeField] public float DefaultSwitchTime { get; private set; } 
+    [field: SerializeField] public float DefaultSwitchTime { get; private set; }
     [field: SerializeField] public bool FollowBallY { get; private set; } = true;
     [field: SerializeField] public bool InvertY { get; private set; }
+
+    [field: Space(18f)]
+    [field: Header("Attacking")]
     [field: SerializeField] public bool DashRandomly { get; private set; } = true;
     [field: Tooltip("Average number of random attacking dash attempts per second. The actual chance is adjusted for the current frame duration.")]
     [field: Min(0f)]
@@ -19,10 +23,17 @@ public class CharNPCSettings
     [field: Tooltip("Minimum dot-product alignment toward the opponent goal before the NPC may chase or dash into the puck. -1 allows any angle, 0 allows a 90-degree approach, and 1 requires perfect alignment.")]
     [field: Range(-1f, 1f)]
     [field: SerializeField] public float RequiredShotAlignment { get; private set; } = 0.7f;
+    [field: Separator("Alignment Stability - higher prevents rapid switching near the required alignment")]
+    [field: Tooltip("Margin around the required shot or emergency alignment. The NPC must exceed the requirement by this amount to begin striking and fall below it by this amount before repositioning again.")]
+    [field: Range(0f, 1f)]
+    [field: SerializeField] public float AlignmentStabilityMargin { get; private set; } = 0.02f;
     [field: Separator("Puck Prediction - higher aims farther ahead")]
     [field: Tooltip("Seconds of current puck velocity added to its position when planning. Zero targets its current position; higher values lead fast-moving pucks farther ahead.")]
     [field: Min(0f)]
     [field: SerializeField] public float PukPredictionTime { get; private set; } = 0.1f;
+
+    [field: Space(18f)]
+    [field: Header("Defense")]
     [field: Separator("Goal Danger Distance - defense overrides attacking inside this range")]
     [field: Tooltip("Distance from the own goal within which a puck moving toward it is treated as a defensive threat.")]
     [field: Min(0f)]
@@ -35,6 +46,9 @@ public class CharNPCSettings
     [field: Tooltip("Minimum dot-product alignment between puck velocity and the direction toward the own goal. -1 accepts any direction, 0 accepts sideways movement, and 1 requires movement directly at the goal.")]
     [field: Range(-1f, 1f)]
     [field: SerializeField] public float OwnGoalThreatAlignment { get; private set; } = 0.6f;
+
+    [field: Space(18f)]
+    [field: Header("Emergency Defense")]
     [field: Separator("Emergency Distance - backdash behind the puck before clearing")]
     [field: Tooltip("Inside this distance from the middle of the own goal, the NPC first dashes to a clear goal-side setup position without touching the puck, then approaches normally to clear it out of the goal.")]
     [field: Min(0f)]
@@ -54,4 +68,30 @@ public class CharNPCSettings
     [field: Separator("Defensive Dash - enabled backdashes during emergencies")]
     [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Random Dashes Per Second.")]
     [field: SerializeField] public bool DashDefensively { get; private set; } = true;
+
+    [field: Space(18f)]
+    [field: Header("Stuck Detection and Recovery")]
+    [field: Separator("Stuck Detection - lower reacts sooner to blocked movement")]
+    [field: Tooltip("Seconds during which the agent must request movement without sufficient physical progress before recovery begins.")]
+    [field: Min(0.05f)]
+    [field: SerializeField] public float StuckDetectionTime { get; private set; } = 0.4f;
+    [field: Tooltip("Minimum physical distance the character must cover during the detection time to avoid being considered stuck.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float MinimumStuckProgress { get; private set; } = 0.1f;
+    [field: Tooltip("Minimum requested NavMeshAgent speed required for stuck detection. Higher values ignore weaker navigation corrections.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float StuckDesiredSpeed { get; private set; } = 0.5f;
+    [field: Separator("Stuck Recovery - avoids the recently failed destination")]
+    [field: Tooltip("Seconds during which direct striking is disabled and alternative approach positions are preferred.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float StuckRecoveryDuration { get; private set; } = 1f;
+    [field: Tooltip("Distance from the current position used for escape waypoints. Higher values create stronger moves away from walls but need more free space.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float StuckRecoveryMoveDistance { get; private set; } = 2f;
+    [field: Tooltip("Radius around the failed destination in which new approach candidates receive a penalty.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float StuckRecoveryRadius { get; private set; } = 2f;
+    [field: Tooltip("Score penalty applied to approach candidates near the failed destination. Higher values encourage a more different route.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float StuckCandidatePenalty { get; private set; } = 100f;
 }

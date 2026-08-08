@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550526427184610354}
-  - component: {fileID: 3938423315641164905}
+  - component: {fileID: 7890045590650273081}
   m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
@@ -58,15 +58,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892783902095969481}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0045050387, w: 0.99998987}
+  m_LocalPosition: {x: -0.32, y: -0.24, z: 0}
+  m_LocalScale: {x: 0.53430367, y: 0.53430367, z: 0.53430367}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7004819885984797505}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!70 &3938423315641164905
-CapsuleCollider2D:
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.516}
+--- !u!58 &7890045590650273081
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,7 +75,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c25e16c14aa2f5a498b226d4453bd338, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -99,9 +99,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.03692003, y: -0.8515155}
-  m_Size: {x: 4.2869067, y: 5.064682}
-  m_Direction: 0
+  m_Offset: {x: 0.611903, y: 0.0055134622}
+  m_Radius: 2.716729
 --- !u!1 &1127015601015589491
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +337,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 173636337912830749, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Radius
-      value: 0.71
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 173636337912830749, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_BaseOffset
+      value: 2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 173636337912830749, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1437530471901252514, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: m_Size.x
@@ -388,6 +395,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 3565451610172718577, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: c25e16c14aa2f5a498b226d4453bd338, type: 2}
     - target: {fileID: 3822254324265408848, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: charSO
       value: 
@@ -431,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: characterCollider
       value: 
-      objectReference: {fileID: 3938423315641164905}
+      objectReference: {fileID: 7890045590650273081}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: <BotTextTarget>k__BackingField
       value: 
@@ -501,12 +512,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: timeToFlip
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: flipSensitivity
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: <FlipState>k__BackingField
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: flipCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: flipCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: flipCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523064361346453057, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: flipCurve.m_Curve.Array.data[1].outSlope
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5295608182062773719, guid: ed5f8f7bba90463429d017797f82f662, type: 3}

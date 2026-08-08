@@ -18,11 +18,35 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 80de8c08e31d1354eab5336ed14fa03c, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 140
+    <Force>k__BackingField: 64
     <Duration>k__BackingField: 0.1
     <Cooldown>k__BackingField: 0
+    <VelocityApplication>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.003353119
+        value: 0.17855835
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.1744609
+        outSlope: 0.1744609
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.055865895
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
-    <TargetTrackingPercentage>k__BackingField: 1
+    <TargetTrackingPercentage>k__BackingField: 0.541
   <CharSettings>k__BackingField:
     <CharRigidSettings>k__BackingField:
       <MaxSpeed>k__BackingField: 60

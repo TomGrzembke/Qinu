@@ -33,6 +33,14 @@ MonoBehaviour:
       <RandomDashesPerSecond>k__BackingField: 3.045921
       <PukApproachDistance>k__BackingField: 2.5
       <RequiredShotAlignment>k__BackingField: 0.031
+      <AlignmentStabilityMargin>k__BackingField: 0.02
+      <StuckDetectionTime>k__BackingField: 0.4
+      <MinimumStuckProgress>k__BackingField: 0.1
+      <StuckDesiredSpeed>k__BackingField: 0.5
+      <StuckRecoveryDuration>k__BackingField: 1
+      <StuckRecoveryMoveDistance>k__BackingField: 2
+      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckCandidatePenalty>k__BackingField: 100
       <PukPredictionTime>k__BackingField: 0.12
       <OwnGoalDangerDistance>k__BackingField: 24
       <MinimumThreatSpeed>k__BackingField: 0.5

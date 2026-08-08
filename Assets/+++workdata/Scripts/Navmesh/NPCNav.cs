@@ -23,6 +23,9 @@ public class NPCNav : NavCalc
     const float HALF_ROTATION_DEGREES = 180f;
     const float APPROACH_DISTANCE_PENALTY_WEIGHT = 0.5f;
     const float BLOCKED_PUK_PATH_SCORE_PENALTY = 1000f;
+    const int STUCK_RECOVERY_DIRECTION_COUNT = 8;
+    const float STUCK_RECOVERY_DIRECTION_STEP = 45f;
+    const float DESPAWN_ARRIVAL_TOLERANCE = 0.05f;
 
     public enum ArenaMode
     {
@@ -78,6 +81,7 @@ public class NPCNav : NavCalc
         public Vector2 Position;
         public float NextPlanTime;
         public bool HasPlan;
+        public bool HasBeenReached;
         public NavMeshPath CandidatePath;
     }
 
@@ -87,10 +91,31 @@ public class NPCNav : NavCalc
         public readonly List<Vector2> RejectedCandidates = new();
     }
 
+    sealed class MovementProgress
+    {
+        public Vector2 SamplePosition;
+        public Vector2 FailedTarget;
+        public Vector2 RecoveryPosition;
+        public Vector2 BlockedDirection;
+        public float SampleStartTime;
+        public float RecoveryEndTime;
+        public int DirectionAttempt;
+        public bool HasSample;
+        public bool IsRecovering;
+    }
+
+    sealed class RigidbodyColliderState
+    {
+        public Collider2D Collider;
+        public bool WasEnabled;
+    }
+
     readonly ShotPlan shotPlan = new();
     readonly EmergencyPlan emergencyPlan = new();
     readonly ApproachPlan approachPlan = new();
     readonly ApproachDebug approachDebug = new();
+    readonly MovementProgress movementProgress = new();
+    readonly List<RigidbodyColliderState> rigidbodyColliderStates = new();
     Collider2D arenaCollider;
 
     Collider2D PukCollider => MinigameManager.Instance.PukCollider;
@@ -118,6 +143,8 @@ public class NPCNav : NavCalc
     {
         approachPlan.CandidatePath = new();
         dashController = GetComponent<DashController>();
+        CacheRigidbodyColliders();
+        SetRigidbodyCollidersEnabled(arenaMode != ArenaMode.Despawn);
         
         if (agent.isOnNavMesh)
         {
@@ -142,11 +169,12 @@ public class NPCNav : NavCalc
                 break;
             case ArenaMode.Despawn:
                 shotPlan.HasPlan = false;
-                UpdateDespawn();
+                if (UpdateDespawn()) return;
                 break;
         }
 
         SetAgentPosition(targetPos);
+        UpdateMovementProgress();
     }
 
     void SyncAgentPosition()
@@ -172,6 +200,7 @@ public class NPCNav : NavCalc
     void UpdateInArena()
     {
         if (!MinigameManager.Instance) return;
+        if (TryFollowStuckRecovery()) return;
 
         if (PukOnSide)
         {
@@ -185,9 +214,16 @@ public class NPCNav : NavCalc
         }
     }
 
-    void UpdateDespawn()
+    bool UpdateDespawn()
     {
         targetPos = DespawnPos.position;
+
+        float despawnDistance = Mathf.Max(CharSO.StoppingDistance + DESPAWN_ARRIVAL_TOLERANCE, MIN_NAVMESH_SAMPLE_RADIUS);
+        if (Vector2.Distance(transform.position, DespawnPos.position) > despawnDistance) return false;
+
+        CharManager.Instance.CharsSpawned.Remove(gameObject);
+        Destroy(gameObject);
+        return true;
     }
 
     void ChasePuk()
@@ -258,6 +294,8 @@ public class NPCNav : NavCalc
         if (!intentChanged) return;
 
         approachPlan.HasPlan = false;
+        approachPlan.HasBeenReached = false;
+        shotPlan.CanSafelyStrike = false;
         emergencyPlan.UsesVerticalFallback = false;
         emergencyPlan.Phase = needsEmergencyPhase ? EmergencyPhase.Backdash : EmergencyPhase.None;
         shotPlan.PreviousIntent = shotPlan.CurrentIntent;
@@ -273,18 +311,22 @@ public class NPCNav : NavCalc
         Vector2 characterToPuk = (alignmentPosition - transform.position.RemoveZ()).normalized;
         shotPlan.Alignment = Vector2.Dot(characterToPuk, shotPlan.Direction);
         float requiredAlignment = isEmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
-        shotPlan.CanSafelyStrike = shotPlan.Alignment >= requiredAlignment;
+        float alignmentThreshold = shotPlan.CanSafelyStrike ? requiredAlignment - NPCSettings.AlignmentStabilityMargin : requiredAlignment + NPCSettings.AlignmentStabilityMargin;
+        shotPlan.CanSafelyStrike = shotPlan.Alignment >= alignmentThreshold;
 
-        bool isAttackingGoal = shotPlan.CurrentIntent == PukIntent.AttackGoal;
-        bool reachedApproachPosition = false;
-        if (isAttackingGoal)
+        if (movementProgress.IsRecovering)
         {
-            reachedApproachPosition = HasPhysicallyReachedApproach();
+            shotPlan.CanSafelyStrike = false;
         }
 
-        if (isAttackingGoal && reachedApproachPosition)
+        bool isAttackingGoal = shotPlan.CurrentIntent == PukIntent.AttackGoal;
+        bool canCompleteApproach = isAttackingGoal && !approachPlan.HasBeenReached;
+        if (canCompleteApproach && HasPhysicallyReachedApproach())
         {
+            approachPlan.HasBeenReached = true;
             shotPlan.CanSafelyStrike = true;
+            movementProgress.IsRecovering = false;
+            ResetMovementSample();
         }
 
         shotPlan.HasPlan = true;
@@ -322,14 +364,10 @@ public class NPCNav : NavCalc
         {
             approachPlan.Position = FindBestApproachPosition(shotPlan.PredictedPukPosition);
             approachPlan.HasPlan = true;
+            approachPlan.HasBeenReached = false;
             approachPlan.NextPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
         }
 
-        if (shotPlan.CanSafelyStrike)
-        {
-            approachPlan.Position = shotPlan.PredictedPukPosition - shotPlan.Direction * NPCSettings.PukApproachDistance;
-            approachPlan.HasPlan = false;
-        }
     }
 
     void UpdateChaseTarget()
@@ -696,6 +734,13 @@ public class NPCNav : NavCalc
         float distancePenalty = Mathf.Abs(NPCSettings.PukApproachDistance - Vector2.Distance(plannedPukPosition, sampledCandidate)) * APPROACH_DISTANCE_PENALTY_WEIGHT;
         score = pathLength + anglePenalty + distancePenalty;
 
+        if (movementProgress.IsRecovering)
+        {
+            float failedTargetDistance = Vector2.Distance(sampledCandidate, movementProgress.FailedTarget);
+            float failedTargetPenalty = Mathf.Max(0f, NPCSettings.StuckRecoveryRadius - failedTargetDistance);
+            score += failedTargetPenalty * NPCSettings.StuckCandidatePenalty;
+        }
+
         bool hasClearPukPath = true;
         if (preferClearDashPath)
         {
@@ -710,6 +755,106 @@ public class NPCNav : NavCalc
         }
 
         return true;
+    }
+
+    void UpdateMovementProgress()
+    {
+        bool canEvaluateMovement = arenaMode == ArenaMode.Arena && agent.isOnNavMesh && agent.hasPath && !agent.pathPending && !dashController.IsDashing;
+        bool agentWantsToMove = canEvaluateMovement && agent.desiredVelocity.magnitude >= NPCSettings.StuckDesiredSpeed;
+        bool isAwayFromTarget = Vector2.Distance(transform.position, targetPos) > agent.stoppingDistance + MIN_NAVMESH_SAMPLE_RADIUS;
+
+        if (!agentWantsToMove || !isAwayFromTarget)
+        {
+            ResetMovementSample();
+            return;
+        }
+
+        if (!movementProgress.HasSample)
+        {
+            movementProgress.SamplePosition = transform.position;
+            movementProgress.SampleStartTime = Time.time;
+            movementProgress.HasSample = true;
+            return;
+        }
+
+        if (Time.time < movementProgress.SampleStartTime + NPCSettings.StuckDetectionTime) return;
+
+        float physicalProgress = Vector2.Distance(transform.position, movementProgress.SamplePosition);
+        if (physicalProgress < NPCSettings.MinimumStuckProgress)
+        {
+            BeginStuckRecovery();
+            return;
+        }
+
+        ResetMovementSample();
+    }
+
+    void BeginStuckRecovery()
+    {
+        bool continuesRecovery = movementProgress.IsRecovering;
+        movementProgress.FailedTarget = targetPos;
+        movementProgress.BlockedDirection = continuesRecovery ? movementProgress.BlockedDirection : agent.desiredVelocity.RemoveZ().normalized;
+        movementProgress.DirectionAttempt = continuesRecovery ? movementProgress.DirectionAttempt + 1 : 0;
+        movementProgress.IsRecovering = true;
+        movementProgress.RecoveryEndTime = Time.time + NPCSettings.StuckRecoveryDuration;
+        shotPlan.CanSafelyStrike = false;
+        approachPlan.HasPlan = false;
+        approachPlan.HasBeenReached = false;
+        approachPlan.NextPlanTime = 0f;
+        agent.ResetPath();
+        TryFindStuckRecoveryPosition(out movementProgress.RecoveryPosition);
+        targetPos = movementProgress.RecoveryPosition;
+        ResetMovementSample();
+    }
+
+    bool TryFollowStuckRecovery()
+    {
+        if (!movementProgress.IsRecovering) return false;
+
+        float recoveryReach = Mathf.Max(NPCSettings.MinimumStuckProgress, MIN_NAVMESH_SAMPLE_RADIUS);
+        bool recoveryExpired = Time.time >= movementProgress.RecoveryEndTime;
+        bool reachedRecoveryPosition = Vector2.Distance(transform.position, movementProgress.RecoveryPosition) <= recoveryReach;
+
+        if (recoveryExpired || reachedRecoveryPosition)
+        {
+            movementProgress.IsRecovering = false;
+            ResetMovementSample();
+            return false;
+        }
+
+        targetPos = movementProgress.RecoveryPosition;
+        return true;
+    }
+
+    bool TryFindStuckRecoveryPosition(out Vector2 recoveryPosition)
+    {
+        Vector2 characterPosition = transform.position;
+        Vector2 escapeDirection = movementProgress.BlockedDirection.sqrMagnitude > Mathf.Epsilon ? -movementProgress.BlockedDirection : Vector2.up;
+        recoveryPosition = characterPosition;
+
+        for (int attemptOffset = 0; attemptOffset < STUCK_RECOVERY_DIRECTION_COUNT; attemptOffset++)
+        {
+            int directionIndex = (movementProgress.DirectionAttempt + attemptOffset) % STUCK_RECOVERY_DIRECTION_COUNT;
+            int directionStep = directionIndex == 0 ? 0 : (directionIndex + 1) / 2 * (directionIndex % 2 == 1 ? 1 : -1);
+            Vector2 direction = Quaternion.Euler(0f, 0f, directionStep * STUCK_RECOVERY_DIRECTION_STEP) * escapeDirection;
+            Vector2 rawCandidate = characterPosition + direction * NPCSettings.StuckRecoveryMoveDistance;
+
+            if (arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) continue;
+            if (!NavMesh.SamplePosition(rawCandidate, out NavMeshHit navHit, Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS), agent.areaMask)) continue;
+            if (!agent.CalculatePath(navHit.position, approachPlan.CandidatePath)) continue;
+            if (approachPlan.CandidatePath.status != NavMeshPathStatus.PathComplete) continue;
+
+            recoveryPosition = navHit.position.RemoveZ();
+            movementProgress.DirectionAttempt = directionIndex;
+            return true;
+        }
+
+        return false;
+    }
+
+    void ResetMovementSample()
+    {
+        movementProgress.HasSample = false;
     }
 
     bool HasClearDashPath(Vector2 dashTarget)
@@ -864,7 +1009,7 @@ public class NPCNav : NavCalc
 
     public void GoHome()
     {
-        arenaMode = ArenaMode.Despawn;
+        SetArenaMode(ArenaMode.Despawn);
         SetAgentPosition(DespawnPos);
     }
 
@@ -879,16 +1024,44 @@ public class NPCNav : NavCalc
     public void SetArenaMode(ArenaMode newMode)
     {
         arenaMode = newMode;
+        SetRigidbodyCollidersEnabled(newMode != ArenaMode.Despawn);
     }
 
     public void ToArena()
     {
         if (arenaMode != ArenaMode.Arena)
         {
-            arenaMode = ArenaMode.ToArena;
+            SetArenaMode(ArenaMode.ToArena);
         }
 
         defaultTransform = GetRandomDefaultTransform();
+    }
+
+    void CacheRigidbodyColliders()
+    {
+        Rigidbody2D characterRigidbody = GetComponent<Rigidbody2D>();
+
+        foreach (Collider2D attachedCollider in GetComponentsInChildren<Collider2D>(true))
+        {
+            if (attachedCollider.isTrigger) continue;
+            if (attachedCollider.attachedRigidbody != characterRigidbody) continue;
+
+            rigidbodyColliderStates.Add(new RigidbodyColliderState
+            {
+                Collider = attachedCollider,
+                WasEnabled = attachedCollider.enabled,
+            });
+        }
+    }
+
+    void SetRigidbodyCollidersEnabled(bool enabled)
+    {
+        foreach (RigidbodyColliderState colliderState in rigidbodyColliderStates)
+        {
+            if (!colliderState.Collider) continue;
+
+            colliderState.Collider.enabled = enabled && colliderState.WasEnabled;
+        }
     }
 
     /// <summary>Switches the default position of the character</summary>
@@ -989,9 +1162,18 @@ public class NPCNav : NavCalc
             Gizmos.DrawLine(characterPosition, emergencyPlan.RoutePosition);
         }
 
+        if (movementProgress.IsRecovering)
+        {
+            Gizmos.color = new Color(1f, 0.35f, 0f);
+            Gizmos.DrawWireSphere(movementProgress.FailedTarget, NPCSettings.StuckRecoveryRadius);
+            Gizmos.DrawWireSphere(movementProgress.RecoveryPosition, 0.4f);
+            Gizmos.DrawLine(characterPosition, movementProgress.RecoveryPosition);
+        }
+
 #if UNITY_EDITOR
         float requiredAlignment = shotPlan.CurrentIntent == PukIntent.EmergencyBlock ? NPCSettings.EmergencyClearAlignment : NPCSettings.RequiredShotAlignment;
         string movementStatus = shotPlan.DirectlyBlockingThreat ? "DIRECTLY BLOCKING" : shotPlan.CanSafelyStrike ? "SAFE TO CLEAR" : "REPOSITIONING";
+        string recoveryStatus = movementProgress.IsRecovering ? "\nSTUCK RECOVERY" : string.Empty;
 
         if (emergencyPlan.UsesVerticalFallback)
         {
@@ -1001,7 +1183,7 @@ public class NPCNav : NavCalc
         Handles.Label(pukPosition + Vector3.up * 0.5f, "Puck");
         Handles.Label(predictedPosition + Vector3.up * 0.5f, "Predicted puck");
         Handles.Label(safeApproachPosition + Vector3.up * 0.5f, emergencyPlan.Phase == EmergencyPhase.Backdash ? "Backdash target" : "Safe approach");
-        Handles.Label(characterPosition + Vector3.up, $"Intent: {shotPlan.CurrentIntent}\nEmergency: {emergencyPlan.Phase}\nShot: {shotPlan.Alignment:F2} / {requiredAlignment:F2}\nThreat: {shotPlan.OwnGoalThreatAlignment:F2} / {NPCSettings.OwnGoalThreatAlignment:F2}\nGoal distance: {shotPlan.OwnGoalDistance:F1}\nGoal crossing: {(shotPlan.HasPredictedGoalCrossing ? $"{shotPlan.TimeToGoalLine:F2}s" : "None")}\n{movementStatus}");
+        Handles.Label(characterPosition + Vector3.up, $"Intent: {shotPlan.CurrentIntent}\nEmergency: {emergencyPlan.Phase}\nShot: {shotPlan.Alignment:F2} / {requiredAlignment:F2}\nThreat: {shotPlan.OwnGoalThreatAlignment:F2} / {NPCSettings.OwnGoalThreatAlignment:F2}\nGoal distance: {shotPlan.OwnGoalDistance:F1}\nGoal crossing: {(shotPlan.HasPredictedGoalCrossing ? $"{shotPlan.TimeToGoalLine:F2}s" : "None")}\n{movementStatus}{recoveryStatus}");
 #endif
     }
 

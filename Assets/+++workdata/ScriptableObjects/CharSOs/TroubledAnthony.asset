@@ -87,7 +87,9 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 30
+      <MiddleLineMaxSpeed>k__BackingField: 30
+      <OwnGoalMaxSpeed>k__BackingField: 26
+      <ArenaTransitionMaxSpeed>k__BackingField: 30
       <StoppingDistance>k__BackingField: 0.3
       <Acceleration>k__BackingField: 600
       <VelocityCorrection>k__BackingField: 250

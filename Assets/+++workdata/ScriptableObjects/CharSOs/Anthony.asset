@@ -61,7 +61,7 @@ MonoBehaviour:
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
       <GoesToDefault>k__BackingField: 1
-      <DefaultSwitchTime>k__BackingField: 1
+      <DefaultSwitchTime>k__BackingField: 4.5
       <DefaultPositionGoalBias>k__BackingField: 0.663
       <FollowBallY>k__BackingField: 1
       <InvertY>k__BackingField: 0
@@ -87,7 +87,9 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 10.7
+      <MiddleLineMaxSpeed>k__BackingField: 15.43
+      <OwnGoalMaxSpeed>k__BackingField: 9.8
+      <ArenaTransitionMaxSpeed>k__BackingField: 10.7
       <StoppingDistance>k__BackingField: 0.13
       <Acceleration>k__BackingField: 0.7
       <VelocityCorrection>k__BackingField: 90

@@ -18,7 +18,7 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: f819775f53079d04894a12488b55a2cf, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 70
+    <Force>k__BackingField: 57
     <Duration>k__BackingField: 0.6
     <Cooldown>k__BackingField: 0.2
     <VelocityApplication>k__BackingField:
@@ -96,7 +96,9 @@ MonoBehaviour:
       <StuckRecoveryRadius>k__BackingField: 2
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 17
+      <MiddleLineMaxSpeed>k__BackingField: 17.7
+      <OwnGoalMaxSpeed>k__BackingField: 13.4
+      <ArenaTransitionMaxSpeed>k__BackingField: 17
       <StoppingDistance>k__BackingField: 0.2
       <Acceleration>k__BackingField: 200
       <VelocityCorrection>k__BackingField: 26.8

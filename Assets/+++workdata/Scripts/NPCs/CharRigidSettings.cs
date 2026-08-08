@@ -20,7 +20,14 @@ public class PlayerRigidSettings
 [System.Serializable]
 public class NPCRigidSettings
 {
-    [field: SerializeField] public float MaxSpeed { get; private set; } = 5f;
+    [field: Tooltip("Maximum movement speed at the arena middle line. Inside the arena, speed is interpolated between Own Goal Max Speed and this value.")]
+    [field: SerializeField] public float MiddleLineMaxSpeed { get; private set; } = 5f;
+    [field: Tooltip("Maximum movement speed at the character's own goal line.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float OwnGoalMaxSpeed { get; private set; } = 5f;
+    [field: Tooltip("Maximum movement speed while entering or leaving the arena.")]
+    [field: Min(0f)]
+    [field: SerializeField] public float ArenaTransitionMaxSpeed { get; private set; } = 5f;
     [field: SerializeField] public float StoppingDistance { get; private set; } = 1f;
     [field: SerializeField] public float Acceleration { get; private set; } = 10f;
     [field: Separator("Overshoot Damping - higher reduces overshoot")]

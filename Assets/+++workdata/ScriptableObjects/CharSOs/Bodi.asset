@@ -18,7 +18,7 @@ MonoBehaviour:
     <Music>k__BackingField: {fileID: 8300000, guid: 812ebc2d54210d244bec0c2675f6a267, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
-    <Force>k__BackingField: 28
+    <Force>k__BackingField: 40
     <Duration>k__BackingField: 1.2
     <Cooldown>k__BackingField: 1.5
     <VelocityApplication>k__BackingField:
@@ -46,8 +46,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 0
-    <TargetTrackingPercentage>k__BackingField: 0.902
-    <PostDashMoveSpeedMultiplier>k__BackingField: 0.3
+    <TargetTrackingPercentage>k__BackingField: 0.989
+    <PostDashMoveSpeedMultiplier>k__BackingField: 0.836
     <PostDashMoveSpeedDuration>k__BackingField: 1
   <CharSettings>k__BackingField:
     <CharNPCSettings>k__BackingField:
@@ -70,15 +70,17 @@ MonoBehaviour:
       <EmergencyDashPukClearance>k__BackingField: 0.25
       <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
-      <StuckDetectionTime>k__BackingField: 0.4
+      <StuckDetectionTime>k__BackingField: 0.25
       <MinimumStuckProgress>k__BackingField: 0.1
       <StuckDesiredSpeed>k__BackingField: 0.5
-      <StuckRecoveryDuration>k__BackingField: 1
-      <StuckRecoveryMoveDistance>k__BackingField: 4
-      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckRecoveryDuration>k__BackingField: 2
+      <StuckRecoveryMoveDistance>k__BackingField: 5
+      <StuckRecoveryRadius>k__BackingField: 1.8
       <StuckCandidatePenalty>k__BackingField: 100
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 8.5
+      <MiddleLineMaxSpeed>k__BackingField: 9
+      <OwnGoalMaxSpeed>k__BackingField: 11
+      <ArenaTransitionMaxSpeed>k__BackingField: 8.5
       <StoppingDistance>k__BackingField: 0.7
       <Acceleration>k__BackingField: 1375.1
       <VelocityCorrection>k__BackingField: 147.2

@@ -247,6 +247,8 @@ public class NPCNav : NavCalc
 
     void UpdateToArena()
     {
+        if (TryFollowStuckRecovery()) return;
+
         if (defaultTransform)
         {
             targetPos = defaultTransform.position;
@@ -679,7 +681,7 @@ public class NPCNav : NavCalc
         {
             float interceptTime = shotPlan.TimeToGoalLine * i / interceptSamples;
             Vector2 interceptPosition = pukPosition + pukVelocity * interceptTime;
-            float reachableDistance = RigidSettings.MaxSpeed * interceptTime + agent.radius;
+            float reachableDistance = GetBaseMaximumMoveSpeed() * interceptTime + agent.radius;
 
             if (Vector2.Distance(characterPosition, interceptPosition) <= reachableDistance)
             {
@@ -820,7 +822,8 @@ public class NPCNav : NavCalc
 
     void UpdateMovementProgress()
     {
-        bool canEvaluateMovement = arenaMode == ArenaMode.Arena && agent.isOnNavMesh && agent.hasPath && !agent.pathPending && !dashController.IsDashing;
+        bool usesActiveMovement = arenaMode == ArenaMode.ToArena || arenaMode == ArenaMode.Arena;
+        bool canEvaluateMovement = usesActiveMovement && agent.isOnNavMesh && agent.hasPath && !agent.pathPending && !dashController.IsDashing;
         bool agentWantsToMove = canEvaluateMovement && agent.desiredVelocity.magnitude >= NPCSettings.StuckDesiredSpeed;
         bool isAwayFromTarget = Vector2.Distance(transform.position, targetPos) > agent.stoppingDistance + MIN_NAVMESH_SAMPLE_RADIUS;
 
@@ -900,7 +903,8 @@ public class NPCNav : NavCalc
             Vector2 direction = Quaternion.Euler(0f, 0f, directionStep * STUCK_RECOVERY_DIRECTION_STEP) * escapeDirection;
             Vector2 rawCandidate = characterPosition + direction * NPCSettings.StuckRecoveryMoveDistance;
 
-            if (arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) continue;
+            bool mustRemainInsideArena = arenaMode == ArenaMode.Arena;
+            if (mustRemainInsideArena && arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) continue;
             if (!NavMesh.SamplePosition(rawCandidate, out NavMeshHit navHit, Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS), agent.areaMask)) continue;
             if (!agent.CalculatePath(navHit.position, approachPlan.CandidatePath)) continue;
             if (approachPlan.CandidatePath.status != NavMeshPathStatus.PathComplete) continue;
@@ -1061,6 +1065,41 @@ public class NPCNav : NavCalc
         if (isChasingPuk) return 0f;
 
         return charSO.StoppingDistance;
+    }
+
+    public float GetBaseMaximumMoveSpeed()
+    {
+        EnsureCharSettingsAreCached();
+
+        if (RigidSettings == null) return 0f;
+
+        if (arenaMode != ArenaMode.Arena)
+        {
+            return RigidSettings.ArenaTransitionMaxSpeed;
+        }
+
+        if (!MinigameManager.Instance || !ArenaMiddle)
+        {
+            return RigidSettings.MiddleLineMaxSpeed;
+        }
+
+        if (!MinigameManager.Instance.TryGetGoalMiddle(IsRight, out Vector2 ownGoalMiddle))
+        {
+            return RigidSettings.MiddleLineMaxSpeed;
+        }
+
+        Vector2 goalToMiddle = ArenaMiddle.position.RemoveZ() - ownGoalMiddle;
+        float goalToMiddleLengthSquared = goalToMiddle.sqrMagnitude;
+
+        if (goalToMiddleLengthSquared <= Mathf.Epsilon)
+        {
+            return RigidSettings.MiddleLineMaxSpeed;
+        }
+
+        Vector2 goalToCharacter = transform.position.RemoveZ() - ownGoalMiddle;
+        float distanceFromGoalToMiddleAlpha = Mathf.Clamp01(Vector2.Dot(goalToCharacter, goalToMiddle) / goalToMiddleLengthSquared);
+
+        return Mathf.Lerp(RigidSettings.OwnGoalMaxSpeed, RigidSettings.MiddleLineMaxSpeed, distanceFromGoalToMiddleAlpha);
     }
 
     public void SideSettings(bool _isRight)

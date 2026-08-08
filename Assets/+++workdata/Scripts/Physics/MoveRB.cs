@@ -12,6 +12,7 @@ public class MoveRB : RBGetter
     NPCRigidSettings CharSettings => charSO.CharSettings.CharRigidSettings;
 
     DashController dashController;
+    NPCNav npcNavigation;
     CharSOHolder charSOHolder;
     NPCCharSO charSO;
 
@@ -28,6 +29,7 @@ public class MoveRB : RBGetter
         charSO = (NPCCharSO)charSOHolder.CharSO;
         charSOHolder.CharSOChanged += OnCharSOChanged;
         dashController = GetComponent<DashController>();
+        npcNavigation = GetComponent<NPCNav>();
 
         agent.updatePosition = false;
         agent.updateRotation = false;
@@ -97,7 +99,11 @@ public class MoveRB : RBGetter
 
     float GetMaximumMoveSpeed()
     {
-        return CharSettings.MaxSpeed * dashController.MoveSpeedMultiplier;
+        float baseMaximumMoveSpeed = npcNavigation
+            ? npcNavigation.GetBaseMaximumMoveSpeed()
+            : CharSettings.MiddleLineMaxSpeed;
+
+        return baseMaximumMoveSpeed * dashController.MoveSpeedMultiplier;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -46,7 +46,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     <AutoAim>k__BackingField: 1
-    <TargetTrackingPercentage>k__BackingField: 0.541
+    <TargetTrackingPercentage>k__BackingField: 0.901
     <PostDashMoveSpeedMultiplier>k__BackingField: 1.2
     <PostDashMoveSpeedDuration>k__BackingField: 0.6
   <CharSettings>k__BackingField:

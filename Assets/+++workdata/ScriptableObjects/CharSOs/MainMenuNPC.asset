@@ -46,7 +46,9 @@ MonoBehaviour:
       <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
-      <MaxSpeed>k__BackingField: 4
+      <MiddleLineMaxSpeed>k__BackingField: 4
+      <OwnGoalMaxSpeed>k__BackingField: 4
+      <ArenaTransitionMaxSpeed>k__BackingField: 4
       <StoppingDistance>k__BackingField: 1
       <Acceleration>k__BackingField: 50
       <Decceleration>k__BackingField: 8

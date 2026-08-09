@@ -22,7 +22,8 @@ public class TournamentManager : MonoBehaviour
         A2v2,
         NotBodi,
         Pamo,
-        PamoOrTessar
+        PamoOrTessar,
+        Tessar
     }
 
     [field: SerializeField] public GameStateEnum GameState { get; private set; }
@@ -107,6 +108,10 @@ public class TournamentManager : MonoBehaviour
                 SpecificCharacterRound(Random.Range(3, 5));
                 break;
 
+            case GameMode.Tessar:
+                SpecificCharacterRound(4);
+                break;
+
             default:
                 Calc1v1();
                 break;
@@ -186,7 +191,10 @@ public class TournamentManager : MonoBehaviour
     {
         list.CleanList();
         if (!list.Contains(toAdd))
+        {
             list.Add(toAdd);
+        }
+
         list.CleanList();
     }
 
@@ -252,7 +260,7 @@ public class TournamentManager : MonoBehaviour
 
         yield return new WaitUntil(() => CheckOutOfInteraction());
 
-        if (!firstMatch)
+        if (!firstMatch && CharStats[0].Wins != WinPoints)
         {
             if (sideID == 0)
             {

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
+  m_Name: TroubledNoty
+  m_EditorClassIdentifier: 
+  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  <charAestheticSettings>k__BackingField:
+    <PrimaryColor>k__BackingField: {r: 0.7960785, g: 0.21568629, b: 0.8235295, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: bbff5025809c56943bf614c3ca4ed599, type: 3}
+  <DashSettings>k__BackingField:
+    <Enabled>k__BackingField: 1
+    <Force>k__BackingField: 40
+    <Duration>k__BackingField: 0.1
+    <Cooldown>k__BackingField: 0.45
+    <VelocityApplication>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 16
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.05
+        value: 0.8
+        inSlope: 16
+        outSlope: 0.2105263
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.2105263
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    <AutoAim>k__BackingField: 1
+    <TargetTrackingPercentage>k__BackingField: 0.6
+    <PostDashMoveSpeedMultiplier>k__BackingField: 1
+    <PostDashMoveSpeedDuration>k__BackingField: 0
+  <CharSettings>k__BackingField:
+    <CharNPCSettings>k__BackingField:
+      <GoesToDefault>k__BackingField: 1
+      <DefaultSwitchTime>k__BackingField: 8
+      <DefaultPositionGoalBias>k__BackingField: 0.25
+      <FollowBallY>k__BackingField: 1
+      <InvertY>k__BackingField: 0
+      <DashRandomly>k__BackingField: 1
+      <RandomDashesPerSecond>k__BackingField: 3.045921
+      <PukApproachDistance>k__BackingField: 2.5
+      <RequiredShotAlignment>k__BackingField: 0.031
+      <AlignmentStabilityMargin>k__BackingField: 0.02
+      <PukPredictionTime>k__BackingField: 0.12
+      <OwnGoalDangerDistance>k__BackingField: 24
+      <MinimumThreatSpeed>k__BackingField: 0.5
+      <OwnGoalThreatAlignment>k__BackingField: 0.124
+      <EmergencyGoalDistance>k__BackingField: 7
+      <EmergencyClearAlignment>k__BackingField: 0.85
+      <EmergencyDashPukClearance>k__BackingField: 0.25
+      <EmergencyRouteWidth>k__BackingField: 1.25
+      <DashDefensively>k__BackingField: 1
+      <StuckDetectionTime>k__BackingField: 0.4
+      <MinimumStuckProgress>k__BackingField: 0.1
+      <StuckDesiredSpeed>k__BackingField: 0.5
+      <StuckRecoveryDuration>k__BackingField: 1
+      <StuckRecoveryMoveDistance>k__BackingField: 2
+      <StuckRecoveryRadius>k__BackingField: 2
+      <StuckCandidatePenalty>k__BackingField: 100
+    <CharRigidSettings>k__BackingField:
+      <MiddleLineMaxSpeed>k__BackingField: 30
+      <OwnGoalMaxSpeed>k__BackingField: 26
+      <ArenaTransitionMaxSpeed>k__BackingField: 30
+      <StoppingDistance>k__BackingField: 0.3
+      <Acceleration>k__BackingField: 600
+      <VelocityCorrection>k__BackingField: 250
+      <MaxCorrectionAcceleration>k__BackingField: 500

@@ -17,6 +17,8 @@ public class AbilitySlotManager : MonoBehaviour
     [field: SerializeField] public Vector2 MiddleStartPosition { get; private set; }
     [field: SerializeField] public AbilityRaritiesSO RaritySO { get; private set; }
 
+    [SerializeField] AbilityExchange abilityExchange;
+
 
     public static AbilitySlotManager Instance;
 
@@ -48,9 +50,17 @@ public class AbilitySlotManager : MonoBehaviour
 
     public void ActivateSlot(int slotIndex, bool performed = true)
     {
-        if(slotIndex > AbilitySlots.Length -1) return;
+        if (slotIndex > AbilitySlots.Length - 1) return;
+        if (IsAbilityExchangeCall()) return;
 
         AbilitySlots[slotIndex].Execute(performed);
+    }
+
+    bool IsAbilityExchangeCall()
+    {
+        if (abilityExchange == null) return false;
+
+        return abilityExchange.enabled;
     }
 
     public void ExchangeAbility(GameObject newPrefab, int slotIndex)

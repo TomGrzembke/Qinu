@@ -16,6 +16,7 @@ public class RewardWindow : MonoBehaviour
 
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
+    [SerializeField] AbilityExchange abilityExchange;
     [field: SerializeField] public bool InAbilitySelect { get; private set; }
 
     public static RewardWindow Instance;
@@ -47,6 +48,8 @@ public class RewardWindow : MonoBehaviour
 
         MinigameManager.Instance.CageBall();
         SoundManager.Instance.PlaySound(SoundType.AbilityPopup);
+        StopChoicePressedAnimation();
+
         currentRewarWindowCoroutine = StartCoroutine(ShowCoroutine());
     }
 
@@ -147,7 +150,12 @@ public class RewardWindow : MonoBehaviour
 
         if (!slotAvailable && !upgradeAvailable)
         {
+            abilityExchange.enabled = true;
+            abilityExchange.OnSlotSelected -= SelectedSlot;
+            abilityExchange.OnSlotSelected += SelectedSlot;
+
             rewardSelected = abilityPrefab;
+            keySlotDescription.text = "Press the Ability you want to exchange";
 
             StopChoicePressedAnimation();
             choiceButtonAnimation[buttonID].SetPressed(gameObject, true);
@@ -253,7 +261,12 @@ public class RewardWindow : MonoBehaviour
 
     public void SelectedSlot(int i)
     {
-        choiceButtonAnimation[i].SetPressed(gameObject, true);
+        if (rewardSelected == null) return;
+
+        StopChoicePressedAnimation();
+
+        abilityExchange.enabled = false;
+        abilityExchange.OnSlotSelected -= SelectedSlot;
 
         ExchangeReward(rewardSelected, i);
         rewardSelected = null;

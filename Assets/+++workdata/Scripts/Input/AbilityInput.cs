@@ -2,13 +2,8 @@ using UnityEngine;
 
 public class AbilityInput : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] AbilitySlotManager abilitySlotManager;
-    #endregion
-
-    #region Non Serialized
     PlayerInputActions inputActions;
-    #endregion
 
     void Awake()
     {
@@ -31,7 +26,7 @@ public class AbilityInput : MonoBehaviour
         abilitySlotManager.ActivateSlot(index, performed);
     }
 
-    #region OnEnable/Disable
+
     public void OnEnable()
     {
         inputActions.Enable();
@@ -41,5 +36,4 @@ public class AbilityInput : MonoBehaviour
     {
         inputActions.Disable();
     }
-    #endregion
 }

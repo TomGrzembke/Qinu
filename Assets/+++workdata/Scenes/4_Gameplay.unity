@@ -497,6 +497,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Choice'
       objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: scaleHover
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: additionalSettings
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -1480,6 +1488,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Choice'
       objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: scaleHover
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: additionalSettings
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -2291,6 +2307,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4177674582965076180, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
   m_PrefabInstance: {fileID: 2405039697391964354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1061606967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061606969}
+  - component: {fileID: 1061606968}
+  m_Layer: 0
+  m_Name: '[AbilityExchange]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1061606968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061606967}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f9666a484f2ad4c849fc8c835dce04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityExchange
+--- !u!224 &1061606969
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061606967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1694846252092175210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1061938405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2272819076072263763, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
@@ -4807,6 +4871,7 @@ MonoBehaviour:
   <Middle>k__BackingField: {fileID: 971475960}
   <MiddleStartPosition>k__BackingField: {x: 0, y: 0}
   <RaritySO>k__BackingField: {fileID: 11400000, guid: 12f585cf09e5db645a488d64bc901093, type: 2}
+  abilityExchange: {fileID: 1061606968}
 --- !u!224 &1120480025577778120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4932,6 +4997,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1061606969}
   - {fileID: 1457987631037552305}
   m_Father: {fileID: 2084748541018018569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7140,6 +7206,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Choice'
       objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: scaleHover
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: additionalSettings
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -7744,6 +7818,7 @@ MonoBehaviour:
   - {fileID: 8574770232140604388, guid: 053b0effef475454a83687d9e5fa5197, type: 3}
   - {fileID: 8766142505129722052, guid: 6b865d881f5002449bdd58eb65141861, type: 3}
   - {fileID: 8766142505129722052, guid: 003f529e97119e244bc70076c5339033, type: 3}
+  abilityExchange: {fileID: 1061606968}
   <InAbilitySelect>k__BackingField: 0
 --- !u!224 &8676418989120381466
 RectTransform:

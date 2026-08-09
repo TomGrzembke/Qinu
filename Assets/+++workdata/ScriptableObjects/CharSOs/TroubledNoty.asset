@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c13ff10b85740aa945df75b737d8eb5, type: 3}
   m_Name: TroubledNoty
   m_EditorClassIdentifier: 
-  <VisualPrefab>k__BackingField: {fileID: 8712820266890463795, guid: 4e23733720ec4d147bbd83809ec03b71, type: 3}
+  <VisualPrefab>k__BackingField: {fileID: 7267010303098542400, guid: a5003efdfd4119e4aa95217629ad6810, type: 3}
   <charAestheticSettings>k__BackingField:
-    <PrimaryColor>k__BackingField: {r: 0.7960785, g: 0.21568629, b: 0.8235295, a: 1}
-    <Music>k__BackingField: {fileID: 8300000, guid: bbff5025809c56943bf614c3ca4ed599, type: 3}
+    <PrimaryColor>k__BackingField: {r: 0.20974578, g: 0, b: 0.31132078, a: 1}
+    <Music>k__BackingField: {fileID: 8300000, guid: e924980c24529f1498d71c243a5d8b82, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
     <Force>k__BackingField: 40
@@ -74,6 +74,7 @@ MonoBehaviour:
       <OwnGoalDangerDistance>k__BackingField: 24
       <MinimumThreatSpeed>k__BackingField: 0.5
       <OwnGoalThreatAlignment>k__BackingField: 0.124
+      <MinimumSafeOwnGoalStrikeAlignment>k__BackingField: 0
       <EmergencyGoalDistance>k__BackingField: 7
       <EmergencyClearAlignment>k__BackingField: 0.85
       <EmergencyDashPukClearance>k__BackingField: 0.25

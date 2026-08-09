@@ -6,6 +6,7 @@ public class SizeUp : Ability
     [SerializeField] float[] sizesPerRarity;
     [SerializeField] float duration = 3;
 
+    public bool IsSizeUpActive => abilityRoutine != null;
     AbilitySlotManager SlotManager => AbilitySlotManager.Instance;
     FlipObjectOnVelocity flipObjectOnVelocity;
     Coroutine abilityRoutine;
@@ -18,7 +19,7 @@ public class SizeUp : Ability
     protected override void ExecuteInternal()
     {
         if (abilityRoutine != null) return;
-        
+
         abilityRoutine = StartCoroutine(SizeUpRoutine());
     }
 
@@ -40,5 +41,10 @@ public class SizeUp : Ability
     protected override void CleanupInternal()
     {
         QueueDestroy(abilityRoutine);
+    }
+
+    public float GetCurrentSize()
+    {
+        return sizesPerRarity[EvaluateRaritySizing(sizesPerRarity.Length)];
     }
 }

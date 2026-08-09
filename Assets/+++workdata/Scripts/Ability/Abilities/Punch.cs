@@ -24,7 +24,15 @@ public class Punch : Ability
     void PunchStart()
     {
         punch = Instantiate(punchPrefab, SlotManager.PlayerObj.position, Quaternion.identity);
-       // punch.transform.parent = SlotManager.PlayerObj.transform;
+
+        var sizeUp = SlotManager.GetComponentInChildren<SizeUp>();
+        
+        if (sizeUp != null && sizeUp.IsSizeUpActive)
+        {
+            punch.transform.localScale *= sizeUp.GetCurrentSize();
+        }
+
+        // punch.transform.parent = SlotManager.PlayerObj.transform;
         punchController = punch.GetComponentInChildren<PunchController>();
         punchController.OnAttackFinished += PunchFinished;
 

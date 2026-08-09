@@ -4018,7 +4018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameState>k__BackingField: 0
   <CurrentGameMode>k__BackingField: 1
-  <FirstGameModes>k__BackingField: 0400000000000000050000000100000002000000
+  <FirstGameModes>k__BackingField: 00000000050000000100000002000000
   <CharStats>k__BackingField: []
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []

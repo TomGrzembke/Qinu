@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -82,9 +83,9 @@ public class SoundManager : MonoBehaviour
         PlaySound(SoundType.ButtonClickBack);
     }
 
-    public void PlayMusic(AudioClip clip, float musicBlendTimeOverride = -1)
+    public void PlayMusic(AudioResource clip, float musicBlendTimeOverride = -1)
     {
-        if (clip == globalMusicSource.clip) return;
+        if (clip == globalMusicSource.clip && globalMusicSource.isPlaying) return;
 
         if (musicRoutine != null)
         {
@@ -94,7 +95,7 @@ public class SoundManager : MonoBehaviour
         musicRoutine = StartCoroutine(BlendMusic(clip, musicBlendTimeOverride));
     }
 
-    IEnumerator BlendMusic(AudioClip clip, float musicBlendTimeOverride = -1)
+    IEnumerator BlendMusic(AudioResource clip, float musicBlendTimeOverride = -1)
     {
         float blendTime = Mathf.Approximately(-1, musicBlendTimeOverride) ? musicBlendTime : musicBlendTimeOverride;
         float timeWentBy = 0;
@@ -107,7 +108,7 @@ public class SoundManager : MonoBehaviour
         }
 
         globalMusicSource.volume = 0;
-        globalMusicSource.clip = clip;
+        globalMusicSource.resource = clip;
         globalMusicSource.Play();
         timeWentBy = 0;
 

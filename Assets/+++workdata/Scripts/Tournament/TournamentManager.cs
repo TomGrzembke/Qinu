@@ -39,7 +39,13 @@ public class TournamentManager : MonoBehaviour
     public static TournamentManager Instance;
 
     public event Action<float> OnPlayerMatchEnd;
+    public event Action OnRoundCleanupFinished;
+    public event Action<bool> OnBossFightEnded;
+    public bool IsResolvingRound { get; private set; }
+    public bool BossFightActive { get; private set; }
+
     GameObject lastPlayed;
+    GameObject bossOpponent;
     bool firstMatch = true;
     int roundAmount;
 
@@ -54,6 +60,8 @@ public class TournamentManager : MonoBehaviour
         if (Instance != this) return;
 
         OnPlayerMatchEnd = null;
+        OnRoundCleanupFinished = null;
+        OnBossFightEnded = null;
     }
 
     void Awake()
@@ -223,7 +231,12 @@ public class TournamentManager : MonoBehaviour
     /// <param name="sideID">0 = left, 1 = right</param>
     public void SideWon(int sideID)
     {
-        StartCoroutine(AfterGameCor(sideID));
+        if (IsResolvingRound) return;
+
+        IsResolvingRound = true;
+        StartCoroutine(BossFightActive
+            ? AfterBossFightCoroutine(sideID)
+            : AfterGameCor(sideID));
     }
 
     IEnumerator AfterGameCor(int sideID)
@@ -282,6 +295,51 @@ public class TournamentManager : MonoBehaviour
         }
 
         MinigameManager.Instance.ReleaseBall();
+        IsResolvingRound = false;
+        OnRoundCleanupFinished?.Invoke();
+    }
+
+    IEnumerator AfterBossFightCoroutine(int sideID)
+    {
+        MinigameManager.Instance.PlayStrongSlowMo();
+        yield return new WaitUntil(() => MinigameManager.Instance.GetSlowMoFinished());
+
+        MinigameManager.Instance.CageBall();
+        GameState = GameStateEnum.AfterGame;
+
+        yield return new WaitForSeconds(.5f);
+
+        MinigameManager.Instance.ResetArena();
+        GameState = GameStateEnum.OutOfGame;
+        BossFightActive = false;
+        IsResolvingRound = false;
+
+        bool playerWon = sideID == 0;
+        OnBossFightEnded?.Invoke(playerWon);
+    }
+
+    /// <summary>Starts or retries a first-to-three boss match without changing campaign statistics.</summary>
+    public bool StartBossFight(GameObject bossPrefab)
+    {
+        bool cannotStart = !bossPrefab
+            || GameState == GameStateEnum.InGame
+            || IsResolvingRound;
+        if (cannotStart) return false;
+
+        ClearSideLists();
+        LeftPlayerAdd();
+
+        if (!bossOpponent)
+            bossOpponent = CharManager.Instance.InitializeChar(bossPrefab, true);
+
+        AddToList(RightPlayers, bossOpponent);
+        SwitchChars();
+
+        MinigameManager.Instance.ResetArena();
+        BossFightActive = true;
+        GameState = GameStateEnum.InGame;
+        MinigameManager.Instance.ReleaseBall();
+        return true;
     }
 
     bool CheckOutOfInteraction()

@@ -56,7 +56,16 @@ public class EndLoader : MonoBehaviour
             WonGame = false;
         }
 
-        if (value != -TournamentManager.Instance.LoosePoints && value != TournamentManager.Instance.WinPoints) return;
+        bool reachedLossEnding = value == -TournamentManager.Instance.LoosePoints;
+        bool reachedWinEnding = value == TournamentManager.Instance.WinPoints;
+        if (!reachedLossEnding && !reachedWinEnding) return;
+
+        if (reachedWinEnding
+            && OptionalBossFightManager.Instance
+            && OptionalBossFightManager.Instance.TryBeginBossOffer())
+        {
+            return;
+        }
 
         LoadEnd();
     }

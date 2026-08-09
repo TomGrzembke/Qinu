@@ -574,6 +574,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""786bdd56-00b8-43f5-8899-cb138fd8d0c0"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ccf0a434-7199-4d93-8d17-edffeff34d75"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",

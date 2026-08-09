@@ -14,4 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundType: 13
   clips:
-  - {fileID: 8300000, guid: bd50ffbcfac3c064fb328c0731031df8, type: 3}
+  - {fileID: 8300000, guid: 02dc938c3f6f7d2449453bb53904ddd1, type: 3}
+  - {fileID: 8300000, guid: 584ad55903e42d9409fb4aa44426d4a1, type: 3}
+  - {fileID: 8300000, guid: f6829d2fc8c00c04880b3494fa7c945e, type: 3}
+  - {fileID: 8300000, guid: 8da19130daef4d54a9b68d53c5c690a1, type: 3}
+  - {fileID: 8300000, guid: 02dc938c3f6f7d2449453bb53904ddd1, type: 3}
+  - {fileID: 8300000, guid: 3fe8c84660c9b524bb9c40681454a7ed, type: 3}
+  - {fileID: 8300000, guid: 97fdc883aab1c3946a19d727e84a2db5, type: 3}
+  - {fileID: 8300000, guid: 584ad55903e42d9409fb4aa44426d4a1, type: 3}
+  - {fileID: 8300000, guid: 3ab5e5e147b7deb43a6d9990334a19d4, type: 3}

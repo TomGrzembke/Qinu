@@ -186,6 +186,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4687094399772724065, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
+      propertyPath: voice
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687094399772724065, guid: bbee2ae7a956a004aa80e57d28e7bac9, type: 3}
       propertyPath: dialogueText
       value: 
       objectReference: {fileID: 7171519344062910139}

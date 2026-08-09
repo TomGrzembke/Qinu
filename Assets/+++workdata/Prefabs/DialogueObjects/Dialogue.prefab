@@ -166,6 +166,8 @@ MonoBehaviour:
   - {fileID: 2511019210710914599}
   topLeft: {fileID: 3190136310712182585}
   topRight: {fileID: 4330933657955488610}
+  botLeft: {fileID: 641653801022025094}
+  botRight: {fileID: 5047144043100280286}
   debugMessages: 0
 --- !u!114 &8639886682119824135
 MonoBehaviour:

@@ -29,6 +29,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] GameObject[] speakerBoxParents;
     [SerializeField] Transform topLeft;
     [SerializeField] Transform topRight;
+    [SerializeField] Transform botLeft;
+    [SerializeField] Transform botRight;
 
     [Header("Debug")]
     [SerializeField] bool debugMessages;
@@ -138,7 +140,7 @@ public class DialogueController : MonoBehaviour
 
         if (!dialogueBox) return;
 
-        dialogueBox.CamFollow?.SetTargets(GetDialogueTarget(dialogueLine));
+        SetDialoguePlacement(dialogueBox, dialogueLine);
         dialogueBox.DisplayText(dialogueLine);
     }
 
@@ -176,9 +178,15 @@ public class DialogueController : MonoBehaviour
         return null;
     }
 
-    Transform GetDialogueTarget(DialogueLine dialogueLine)
+    void SetDialoguePlacement(DialogueBox dialogueBox, DialogueLine dialogueLine)
     {
         string speaker = dialogueLine.speaker;
+        if (!CharManager.Instance)
+        {
+            LogMissingSpeaker(speaker);
+            return;
+        }
+
         List<GameObject> chars = CharManager.Instance.CharsSpawned;
         chars.CleanList();
 
@@ -187,23 +195,33 @@ public class DialogueController : MonoBehaviour
             if (!chars[i].name.Contains(speaker)) continue;
 
             NPCNav nPCNav = chars[i].GetComponentInChildren<NPCNav>();
+            bool isRightSide = nPCNav
+                ? nPCNav.IsRight
+                : IsOnRightSideOfCamera(chars[i].transform);
 
-            if (nPCNav.IsRight)
-            {
-                return topRight;
-            }
-            else
-            {
-                return topLeft;
-            }
+            dialogueBox.CamFollow?.SetDialoguePlacement(
+                chars[i].transform,
+                isRightSide,
+                topLeft,
+                topRight,
+                botLeft,
+                botRight);
+            return;
         }
 
+        LogMissingSpeaker(speaker);
+    }
+
+    bool IsOnRightSideOfCamera(Transform speaker)
+    {
+        Camera mainCamera = Camera.main;
+        return mainCamera && mainCamera.WorldToViewportPoint(speaker.position).x >= .5f;
+    }
+
+    void LogMissingSpeaker(string speaker)
+    {
         if (debugMessages)
-        {
             Debug.Log(speaker + " isn't in scene");
-        }
-
-        return null;
     }
 
     DialogueLine HandleTags(List<string> currentTags, DialogueLine dialogueLine)

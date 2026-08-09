@@ -47,8 +47,8 @@ MonoBehaviour:
   charSOHolder: {fileID: 5895136273394615735}
   defaultCharSO: {fileID: 11400000, guid: d3ccd5e52d162be4181da3059d87f87e, type: 2}
   specialCharSO: {fileID: 11400000, guid: 6278b39d4e5f4d74e9b54882767447f0, type: 2}
-  timeInDefault: 9
-  timeInSpecial: 8.5
+  timeInDefault: 7.4
+  timeInSpecial: 8
   musicBlendTimeOverride: 0.31
   specialSystems:
   - {fileID: 8454878889325460158}

@@ -27,6 +27,8 @@ public class NPCNav : NavCalc
     const float STUCK_RECOVERY_DIRECTION_STEP = 45f;
     const float DESPAWN_ARRIVAL_TOLERANCE = 0.05f;
     const float ALIGNMENT_COMPARISON_TOLERANCE = 0.001f;
+    const int APPROACH_ESCAPE_CANDIDATE_COUNT = 16;
+    const float MIDDLE_CROSSING_MARGIN = 0.1f;
 
     public enum ArenaMode
     {
@@ -73,6 +75,7 @@ public class NPCNav : NavCalc
     {
         public Vector2 RoutePosition;
         public Vector2 RoutePukPosition;
+        public Vector2 VerticalFallbackDirection;
         public EmergencyPhase Phase;
         public bool UsesVerticalFallback;
     }
@@ -85,6 +88,9 @@ public class NPCNav : NavCalc
         public bool HasPlan;
         public bool HasBeenReached;
         public bool IsRoutingAroundPuk;
+        public bool IsEscapingFailedApproach;
+        public Vector2 EscapePukPosition;
+        public int EscapeAttempt;
         public NavMeshPath CandidatePath;
     }
 
@@ -110,8 +116,11 @@ public class NPCNav : NavCalc
     sealed class SideReturnPlan
     {
         public Vector2 RoutePosition;
+        public Vector2 MiddleApproachPosition;
+        public Vector2 MiddleDestination;
         public bool IsReturning;
         public bool IsRoutingAroundPuk;
+        public bool UsesMiddleTeleport;
     }
 
     sealed class RigidbodyColliderState
@@ -147,6 +156,7 @@ public class NPCNav : NavCalc
     [SerializeField] float arenaTransitionDistance = 2;
 
     DashController dashController;
+    Rigidbody2D characterRigidbody;
     [SerializeField] Collider2D characterCollider;
 
     [SerializeField] Vector3 targetPos;
@@ -159,8 +169,10 @@ public class NPCNav : NavCalc
         sOHolder.CharSOChanged += OnCharSOChanged;
         approachPlan.CandidatePath = new();
         dashController = GetComponent<DashController>();
+        characterRigidbody = GetComponent<Rigidbody2D>();
         CacheRigidbodyColliders();
-        SetRigidbodyCollidersEnabled(arenaMode != ArenaMode.Despawn);
+        CacheArenaTrigger();
+        SetRigidbodyCollidersEnabled(arenaMode == ArenaMode.Arena);
         
         if (agent.isOnNavMesh)
         {
@@ -206,6 +218,8 @@ public class NPCNav : NavCalc
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
         approachPlan.IsRoutingAroundPuk = false;
+        approachPlan.IsEscapingFailedApproach = false;
+        approachPlan.EscapeAttempt = 0;
         approachPlan.NextPlanTime = 0f;
         emergencyPlan.Phase = EmergencyPhase.None;
         emergencyPlan.UsesVerticalFallback = false;
@@ -217,6 +231,7 @@ public class NPCNav : NavCalc
         movementProgress.DirectionAttempt = 0;
         sideReturnPlan.IsReturning = false;
         sideReturnPlan.IsRoutingAroundPuk = false;
+        sideReturnPlan.UsesMiddleTeleport = false;
     }
 
     void RestartDefaultSwitchRoutine()
@@ -263,6 +278,12 @@ public class NPCNav : NavCalc
     {
         if (TryFollowStuckRecovery()) return;
 
+        if (arenaCollider && arenaCollider.OverlapPoint(transform.position))
+        {
+            SetArenaMode(ArenaMode.Arena);
+            return;
+        }
+
         if (defaultTransform)
         {
             targetPos = defaultTransform.position;
@@ -277,6 +298,13 @@ public class NPCNav : NavCalc
     void UpdateInArena()
     {
         if (!MinigameManager.Instance) return;
+
+        if (arenaCollider && !arenaCollider.OverlapPoint(transform.position))
+        {
+            SetArenaMode(ArenaMode.ToArena);
+            return;
+        }
+
         if (TryFollowStuckRecovery()) return;
         if (TryReturnToOwnSide()) return;
 
@@ -303,12 +331,14 @@ public class NPCNav : NavCalc
         float distanceIntoOwnHalf = Vector2.Dot(transform.position.RemoveZ() - arenaMiddle, directionToOwnGoal.normalized);
         float returnCompletionDistance = Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS);
 
-        if (!sideReturnPlan.IsReturning && distanceIntoOwnHalf >= 0f) return false;
+        bool startsReturning = !sideReturnPlan.IsReturning;
+        if (startsReturning && distanceIntoOwnHalf >= 0f) return false;
 
         if (sideReturnPlan.IsReturning && distanceIntoOwnHalf >= returnCompletionDistance)
         {
             sideReturnPlan.IsReturning = false;
             sideReturnPlan.IsRoutingAroundPuk = false;
+            sideReturnPlan.UsesMiddleTeleport = false;
             ResetMovementSample();
             return false;
         }
@@ -324,6 +354,13 @@ public class NPCNav : NavCalc
         Vector2 returnPosition = defaultTransform
             ? defaultTransform.position.RemoveZ()
             : arenaMiddle + directionToOwnGoal.normalized * returnCompletionDistance;
+
+        if (startsReturning)
+        {
+            TryBuildMiddleTeleportPlan(returnPosition, arenaMiddle, directionToOwnGoal.normalized, distanceIntoOwnHalf);
+        }
+
+        if (TryFollowMiddleTeleportPlan(returnPosition)) return true;
 
         if (TryFollowSideReturnRoute()) return true;
 
@@ -342,6 +379,68 @@ public class NPCNav : NavCalc
         }
 
         targetPos = transform.position;
+        return true;
+    }
+
+    void TryBuildMiddleTeleportPlan(Vector2 returnPosition, Vector2 arenaMiddle, Vector2 directionToOwnGoal, float distanceIntoOwnHalf)
+    {
+        sideReturnPlan.UsesMiddleTeleport = false;
+
+        float crossingClearance = Mathf.Max(GetColliderRadius(characterCollider), agent.radius) + MIDDLE_CROSSING_MARGIN;
+        Vector2 middleCrossingPosition = transform.position.RemoveZ() - directionToOwnGoal * distanceIntoOwnHalf;
+        Vector2 rawApproachPosition = middleCrossingPosition - directionToOwnGoal * crossingClearance;
+        Vector2 rawDestination = middleCrossingPosition + directionToOwnGoal * crossingClearance;
+        float sampleRadius = Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS);
+
+        if (!NavMesh.SamplePosition(rawApproachPosition, out NavMeshHit approachHit, sampleRadius, agent.areaMask)) return;
+        if (!NavMesh.SamplePosition(rawDestination, out NavMeshHit destinationHit, sampleRadius, agent.areaMask)) return;
+
+        Vector2 approachPosition = approachHit.position.RemoveZ();
+        Vector2 destination = destinationHit.position.RemoveZ();
+        bool approachIsOnWrongHalf = Vector2.Dot(approachPosition - arenaMiddle, directionToOwnGoal) < 0f;
+        bool destinationIsOnOwnHalf = Vector2.Dot(destination - arenaMiddle, directionToOwnGoal) > 0f;
+        if (!approachIsOnWrongHalf || !destinationIsOnOwnHalf) return;
+
+        if (!TryGetCompletePathLength(approachPosition, out _)) return;
+        if (!IsCalculatedPathClearOfPuk(approachPlan.CandidatePath)) return;
+
+        sideReturnPlan.MiddleApproachPosition = approachPosition;
+        sideReturnPlan.MiddleDestination = destination;
+        sideReturnPlan.UsesMiddleTeleport = true;
+    }
+
+    bool TryFollowMiddleTeleportPlan(Vector2 returnPosition)
+    {
+        if (!sideReturnPlan.UsesMiddleTeleport) return false;
+
+        float approachReachDistance = Mathf.Max(agent.stoppingDistance + DESPAWN_ARRIVAL_TOLERANCE, agent.radius, MIN_NAVMESH_SAMPLE_RADIUS);
+        bool reachedMiddleApproach = Vector2.Distance(transform.position, sideReturnPlan.MiddleApproachPosition) <= approachReachDistance;
+
+        if (!reachedMiddleApproach)
+        {
+            targetPos = sideReturnPlan.MiddleApproachPosition;
+            return true;
+        }
+
+        characterRigidbody.linearVelocity = Vector2.zero;
+        characterRigidbody.position = sideReturnPlan.MiddleDestination;
+        agent.Warp(sideReturnPlan.MiddleDestination);
+        agent.nextPosition = sideReturnPlan.MiddleDestination;
+        sideReturnPlan.UsesMiddleTeleport = false;
+        sideReturnPlan.IsReturning = false;
+        targetPos = returnPosition;
+        ResetMovementSample();
+        return true;
+    }
+
+    bool TryGetCompletePathLength(Vector2 destination, out float pathLength)
+    {
+        pathLength = float.PositiveInfinity;
+
+        if (!agent.CalculatePath(destination, approachPlan.CandidatePath)) return false;
+        if (approachPlan.CandidatePath.status != NavMeshPathStatus.PathComplete) return false;
+
+        pathLength = GetPathLength(approachPlan.CandidatePath);
         return true;
     }
 
@@ -444,6 +543,7 @@ public class NPCNav : NavCalc
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
         approachPlan.IsRoutingAroundPuk = false;
+        approachPlan.IsEscapingFailedApproach = false;
         shotPlan.CanSafelyStrike = false;
         emergencyPlan.UsesVerticalFallback = false;
         emergencyPlan.Phase = needsEmergencyPhase ? EmergencyPhase.Backdash : EmergencyPhase.None;
@@ -504,6 +604,8 @@ public class NPCNav : NavCalc
 
     void UpdateApproachPlan()
     {
+        if (UpdateFailedApproachEscape()) return;
+
         bool needsSaferPosition = !shotPlan.CanSafelyStrike;
         bool hasNoApproachPlan = !approachPlan.HasPlan;
         bool planHasExpired = Time.time >= approachPlan.NextPlanTime;
@@ -511,7 +613,14 @@ public class NPCNav : NavCalc
 
         if (shouldReplanApproach)
         {
-            approachPlan.Position = FindBestApproachPosition(shotPlan.PredictedPukPosition);
+            bool foundSafeApproach = TryFindBestApproachPosition(shotPlan.PredictedPukPosition, out approachPlan.Position);
+
+            if (!foundSafeApproach)
+            {
+                BeginFailedApproachEscape(shotPlan.PredictedPukPosition);
+                return;
+            }
+
             approachPlan.HasPlan = true;
             approachPlan.HasBeenReached = false;
             approachPlan.NextPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
@@ -520,8 +629,85 @@ public class NPCNav : NavCalc
 
     }
 
+    bool UpdateFailedApproachEscape()
+    {
+        if (!approachPlan.IsEscapingFailedApproach) return false;
+
+        float escapeReachDistance = Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS);
+        bool reachedEscapePosition = Vector2.Distance(transform.position, approachPlan.Position) <= escapeReachDistance;
+        bool puckMoved = Vector2.Distance(Puk.position, approachPlan.EscapePukPosition) >= escapeReachDistance;
+        bool escapeExpired = Time.time >= approachPlan.NextPlanTime;
+        bool canStrikeNow = shotPlan.CanSafelyStrike;
+
+        if (reachedEscapePosition || puckMoved || escapeExpired || canStrikeNow)
+        {
+            approachPlan.IsEscapingFailedApproach = false;
+            approachPlan.HasPlan = false;
+            approachPlan.NextPlanTime = 0f;
+            return false;
+        }
+
+        return true;
+    }
+
+    void BeginFailedApproachEscape(Vector2 plannedPukPosition)
+    {
+        approachPlan.HasPlan = true;
+        approachPlan.HasBeenReached = false;
+        approachPlan.IsRoutingAroundPuk = false;
+        approachPlan.IsEscapingFailedApproach = true;
+        approachPlan.EscapePukPosition = Puk.position;
+        approachPlan.NextPlanTime = Time.time + NPCSettings.StuckRecoveryDuration;
+
+        if (TryFindApproachEscapePosition(plannedPukPosition, out Vector2 escapePosition))
+        {
+            approachPlan.Position = escapePosition;
+        }
+        else
+        {
+            approachPlan.Position = transform.position;
+        }
+
+        approachPlan.EscapeAttempt++;
+    }
+
+    bool TryFindApproachEscapePosition(Vector2 plannedPukPosition, out Vector2 escapePosition)
+    {
+        float escapeRadius = Mathf.Max(NPCSettings.PukApproachDistance, GetCombinedPukClearance());
+        escapePosition = transform.position;
+
+        for (int i = 0; i < APPROACH_ESCAPE_CANDIDATE_COUNT; i++)
+        {
+            int rotatedIndex = (i + approachPlan.EscapeAttempt) % APPROACH_ESCAPE_CANDIDATE_COUNT;
+            float angle = rotatedIndex * 360f / APPROACH_ESCAPE_CANDIDATE_COUNT;
+            Vector2 direction = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
+            Vector2 rawCandidate = plannedPukPosition + direction * escapeRadius;
+
+            if (arenaCollider && !arenaCollider.OverlapPoint(rawCandidate)) continue;
+            if (!NavMesh.SamplePosition(rawCandidate, out NavMeshHit navHit, Mathf.Max(agent.radius, MIN_NAVMESH_SAMPLE_RADIUS), agent.areaMask)) continue;
+
+            Vector2 sampledCandidate = navHit.position.RemoveZ();
+            if (arenaCollider && !arenaCollider.OverlapPoint(sampledCandidate)) continue;
+            if (Vector2.Distance(sampledCandidate, Puk.position) < GetCombinedPukClearance()) continue;
+            if (!agent.CalculatePath(navHit.position, approachPlan.CandidatePath)) continue;
+            if (approachPlan.CandidatePath.status != NavMeshPathStatus.PathComplete) continue;
+            if (!IsCalculatedPathClearOfPuk(approachPlan.CandidatePath)) continue;
+
+            escapePosition = sampledCandidate;
+            return true;
+        }
+
+        return false;
+    }
+
     void UpdateChaseTarget()
     {
+        if (approachPlan.IsEscapingFailedApproach)
+        {
+            targetPos = approachPlan.Position;
+            return;
+        }
+
         if (shotPlan.CanSafelyStrike)
         {
             approachPlan.IsRoutingAroundPuk = false;
@@ -607,7 +793,6 @@ public class NPCNav : NavCalc
         bool isClearingPuk = emergencyPlan.Phase == EmergencyPhase.Clear;
         if (!isClearingPuk) return false;
 
-        emergencyPlan.UsesVerticalFallback = false;
         approachPlan.Position = Puk.position.RemoveZ() - shotPlan.Direction * NPCSettings.PukApproachDistance;
         targetPos = Puk.position;
         return true;
@@ -618,7 +803,6 @@ public class NPCNav : NavCalc
         bool isRoutingBehindPuk = emergencyPlan.Phase == EmergencyPhase.RouteBehind;
         if (!isRoutingBehindPuk) return false;
 
-        emergencyPlan.UsesVerticalFallback = false;
         float routeReachedDistance = Mathf.Max(GetCombinedPukClearance() * ROUTE_REACHED_CLEARANCE_FACTOR, MIN_NAVMESH_SAMPLE_RADIUS);
         bool hasReachedRoute = Vector2.Distance(transform.position, emergencyPlan.RoutePosition) <= routeReachedDistance;
         bool pukStayedNearRouteStart = Vector2.Distance(Puk.position, emergencyPlan.RoutePukPosition) <= routeReachedDistance;
@@ -649,14 +833,20 @@ public class NPCNav : NavCalc
         bool shouldReplanApproach = hasNoApproachPlan || planHasExpired;
         if (!shouldReplanApproach) return false;
 
-        approachPlan.Position = FindBestApproachPosition(Puk.position.RemoveZ(), true);
+        bool foundSafeApproach = TryFindBestApproachPosition(Puk.position.RemoveZ(), out approachPlan.Position, true);
+
+        if (!foundSafeApproach)
+        {
+            SetVerticalEmergencyFallback();
+            return true;
+        }
+
         approachPlan.HasPlan = true;
         approachPlan.NextPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
 
         bool hasClearApproachPath = IsPathClearOfPuk(approachPlan.Position);
         if (hasClearApproachPath)
         {
-            emergencyPlan.UsesVerticalFallback = false;
             return false;
         }
 
@@ -689,8 +879,29 @@ public class NPCNav : NavCalc
     void SetVerticalEmergencyFallback()
     {
         emergencyPlan.UsesVerticalFallback = true;
-        shotPlan.Direction = GetClearDirection();
-        approachPlan.Position = Puk.position.RemoveZ() + shotPlan.Direction * GetCombinedPukClearance();
+        Vector2 characterToPuk = Puk.position.RemoveZ() - transform.position.RemoveZ();
+        Vector2 reachableVerticalDirection = Mathf.Abs(characterToPuk.y) > ALIGNMENT_COMPARISON_TOLERANCE
+            ? (characterToPuk.y > 0f ? Vector2.up : Vector2.down)
+            : GetClearDirection();
+
+        if (MinigameManager.Instance.TryGetGoalMiddle(IsRight, out Vector2 ownGoalMiddle))
+        {
+            Vector2 directionAwayFromOwnGoal = GetGoalArenaDirection(IsRight, ownGoalMiddle);
+            float requiredAwayAlignment = Mathf.Clamp(NPCSettings.MinimumSafeOwnGoalStrikeAlignment + NPCSettings.AlignmentStabilityMargin, 0f, 0.95f);
+            float awayDirectionWeight = requiredAwayAlignment <= 0f
+                ? 0f
+                : requiredAwayAlignment / Mathf.Sqrt(1f - requiredAwayAlignment * requiredAwayAlignment);
+            emergencyPlan.VerticalFallbackDirection = (reachableVerticalDirection + directionAwayFromOwnGoal * awayDirectionWeight).normalized;
+        }
+        else
+        {
+            emergencyPlan.VerticalFallbackDirection = reachableVerticalDirection;
+        }
+
+        shotPlan.Direction = emergencyPlan.VerticalFallbackDirection;
+        approachPlan.Position = Puk.position.RemoveZ() - shotPlan.Direction * GetCombinedPukClearance();
+        approachPlan.HasPlan = true;
+        approachPlan.NextPlanTime = Time.time + APPROACH_REPLAN_INTERVALL;
         targetPos = approachPlan.Position;
     }
 
@@ -734,7 +945,9 @@ public class NPCNav : NavCalc
             PukIntent.ClearUp => Vector2.up,
             PukIntent.ClearDown => Vector2.down,
 
-            PukIntent.EmergencyBlock => GetGoalArenaDirection(IsRight, ownGoalMiddle),
+            PukIntent.EmergencyBlock => emergencyPlan.UsesVerticalFallback
+                ? emergencyPlan.VerticalFallbackDirection
+                : GetGoalArenaDirection(IsRight, ownGoalMiddle),
 
             _ => (opponentGoalMiddle - shotPlan.PredictedPukPosition).normalized,
         };
@@ -743,13 +956,18 @@ public class NPCNav : NavCalc
 
     bool IsContactDirectionSafeForOwnGoal(Vector2 ownGoalMiddle)
     {
+        return IsContactDirectionSafeForOwnGoal(ownGoalMiddle, NPCSettings.MinimumSafeOwnGoalStrikeAlignment);
+    }
+
+    bool IsContactDirectionSafeForOwnGoal(Vector2 ownGoalMiddle, float minimumSafetyAlignment)
+    {
         Vector2 characterToPuk = Puk.position.RemoveZ() - transform.position.RemoveZ();
         if (characterToPuk.sqrMagnitude <= Mathf.Epsilon) return false;
 
         Vector2 directionAwayFromOwnGoal = GetGoalArenaDirection(IsRight, ownGoalMiddle);
         float ownGoalSafetyAlignment = Vector2.Dot(characterToPuk.normalized, directionAwayFromOwnGoal);
 
-        return ownGoalSafetyAlignment >= NPCSettings.MinimumSafeOwnGoalStrikeAlignment;
+        return ownGoalSafetyAlignment >= minimumSafetyAlignment;
     }
 
     float GetStrikeAlignmentThreshold(bool isEmergencyBlock, bool currentlySafeToStrike)
@@ -873,7 +1091,7 @@ public class NPCNav : NavCalc
         return Vector2.Dot(arenaDirection, ArenaMiddle.position.RemoveZ() - goalMiddle) >= 0f ? arenaDirection : -arenaDirection;
     }
 
-    Vector2 FindBestApproachPosition(Vector2 plannedPukPosition, bool preferClearDashPath = false)
+    bool TryFindBestApproachPosition(Vector2 plannedPukPosition, out Vector2 bestPosition, bool preferClearDashPath = false)
     {
         approachDebug.ValidCandidates.Clear();
         approachDebug.RejectedCandidates.Clear();
@@ -885,7 +1103,7 @@ public class NPCNav : NavCalc
         float approachAlignment = GetStrikeAlignmentThreshold(isEmergencyBlock, false);
         float maximumAngle = Mathf.Acos(Mathf.Clamp(approachAlignment, -1f, 1f)) * Mathf.Rad2Deg;
         float bestScore = float.PositiveInfinity;
-        Vector2 bestPosition = shotPlan.CurrentIntent == PukIntent.EmergencyBlock ? plannedPukPosition + idealApproachDirection * desiredApproachDistance : plannedPukPosition;
+        bestPosition = Vector2.zero;
 
         for (int i = 0; i < APPROACH_CANDIDATE_SAMPLE_COUNT; i++)
         {
@@ -917,7 +1135,7 @@ public class NPCNav : NavCalc
             }
         }
 
-        return bestPosition;
+        return bestScore < float.PositiveInfinity;
     }
 
     bool TryEvaluateApproachCandidate(Vector2 rawCandidate, Vector2 plannedPukPosition, float angle, bool preferClearDashPath, out Vector2 sampledCandidate, out float score)
@@ -1017,6 +1235,7 @@ public class NPCNav : NavCalc
         approachPlan.HasPlan = false;
         approachPlan.HasBeenReached = false;
         approachPlan.IsRoutingAroundPuk = false;
+        approachPlan.IsEscapingFailedApproach = false;
         approachPlan.NextPlanTime = 0f;
         agent.ResetPath();
         TryFindStuckRecoveryPosition(out movementProgress.RecoveryPosition);
@@ -1292,7 +1511,8 @@ public class NPCNav : NavCalc
         arenaMode = newMode;
         sideReturnPlan.IsReturning = false;
         sideReturnPlan.IsRoutingAroundPuk = false;
-        SetRigidbodyCollidersEnabled(newMode != ArenaMode.Despawn);
+        sideReturnPlan.UsesMiddleTeleport = false;
+        SetRigidbodyCollidersEnabled(newMode == ArenaMode.Arena);
     }
 
     public void ToArena()
@@ -1319,6 +1539,22 @@ public class NPCNav : NavCalc
                 Collider = attachedCollider,
                 WasEnabled = attachedCollider.enabled,
             });
+        }
+    }
+
+    void CacheArenaTrigger()
+    {
+        if (arenaCollider) return;
+
+        foreach (GameObject arenaObject in GameObject.FindGameObjectsWithTag("Arena"))
+        {
+            foreach (Collider2D candidateCollider in arenaObject.GetComponents<Collider2D>())
+            {
+                if (!candidateCollider.isTrigger) continue;
+
+                arenaCollider = candidateCollider;
+                return;
+            }
         }
     }
 
@@ -1522,6 +1758,16 @@ public class NPCNav : NavCalc
         float requiredAlignment = GetStrikeAlignmentThreshold(isEmergencyBlock, shotPlan.CanSafelyStrike);
         string movementStatus = shotPlan.DirectlyBlockingThreat ? "DIRECTLY BLOCKING" : shotPlan.CanSafelyStrike ? "SAFE TO CLEAR" : "REPOSITIONING";
         string recoveryStatus = movementProgress.IsRecovering ? "\nSTUCK RECOVERY" : string.Empty;
+
+        if (approachPlan.IsEscapingFailedApproach)
+        {
+            movementStatus = "ESCAPING FAILED APPROACH";
+        }
+
+        if (sideReturnPlan.IsReturning)
+        {
+            movementStatus = sideReturnPlan.UsesMiddleTeleport ? "RETURNING VIA MIDDLE" : "RETURNING TO OWN SIDE";
+        }
 
         if (emergencyPlan.UsesVerticalFallback)
         {

@@ -1361,7 +1361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
@@ -3177,7 +3177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
@@ -4368,6 +4368,14 @@ PrefabInstance:
     - target: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: <TimeBetweenDialogue>k__BackingField
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047144043100280286, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047144043100280286, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5284503793797742906, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_IsActive
@@ -6869,7 +6877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059931518946730794, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4524989285124870472, guid: 8700a7813c4f5b247b90a96f35582f3d, type: 3}
       propertyPath: m_text
@@ -7520,7 +7528,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144689463048450479}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

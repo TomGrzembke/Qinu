@@ -3191,6 +3191,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!4 &234964820594043465
 Transform:
   m_ObjectHideFlags: 0
@@ -3663,6 +3666,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!223 &555864488867348164
 Canvas:
   m_ObjectHideFlags: 0
@@ -4008,6 +4014,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!4 &766023692789473207
 Transform:
   m_ObjectHideFlags: 0
@@ -11094,6 +11103,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!4 &2156137239990319678
 Transform:
   m_ObjectHideFlags: 0
@@ -11735,6 +11747,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!1 &2595780089517644594
 GameObject:
   m_ObjectHideFlags: 0
@@ -13180,7 +13195,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -13793,6 +13808,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!223 &4370260828048435605
 Canvas:
   m_ObjectHideFlags: 0
@@ -19336,6 +19354,8 @@ MonoBehaviour:
   - {fileID: 2654421389601469068}
   topLeft: {fileID: 3047578540656346002}
   topRight: {fileID: 4184998182704887753}
+  botLeft: {fileID: 0}
+  botRight: {fileID: 0}
   debugMessages: 0
 --- !u!1 &4878515532152407521
 GameObject:
@@ -24615,6 +24635,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   sensitivity: 0.01
   yMargin: 2.5
+  minimumSpeakerClearance: 0.18
+  oppositeSideFallbackImprovement: 0.08
+  anchorSwitchAdvantage: 0.04
 --- !u!224 &8569355507388364311
 RectTransform:
   m_ObjectHideFlags: 0

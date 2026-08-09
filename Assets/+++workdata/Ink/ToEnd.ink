@@ -20,7 +20,7 @@ The story isn't that fleshed out yet. Dev needs more time.
 But this world still has a trick up its sleeve. 
 There's a character that is neeearly impossible to beat, extra for Gamescom. 
 
-If you want you can try. 
+You can try if you want. 
 
 I don’t expect you to win and its fine if you don’t. 
 

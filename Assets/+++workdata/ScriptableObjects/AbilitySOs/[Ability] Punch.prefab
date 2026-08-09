@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownPerRarity:
-  - 9
-  - 8
-  - 7
-  - 5
+  - 8.2
+  - 6
+  - 5.1
+  - 3.7
   abilitySO: {fileID: 11400000, guid: ae368d90d28215c41b62986f4729aeed, type: 2}
   punchPrefab: {fileID: 287724407541472641, guid: 69c7142e1168bc1488f0401198b1ceaa, type: 3}
   timePerRarity:

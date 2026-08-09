@@ -7206,6 +7206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Choice'
       objectReference: {fileID: 0}
+    - target: {fileID: 2239280143931799125, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: scaleHover
       value: 0.83

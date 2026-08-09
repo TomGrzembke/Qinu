@@ -131,6 +131,13 @@ public class SceneLoader : MonoBehaviour
         return Instance.UnloadSceneViaScene(scene, onLoadingFinished);
     }
 
+    public static bool IsSceneLoaded(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName)) return false;
+
+        return SceneManager.GetSceneByName(sceneName).isLoaded;
+    }
+
 
 #if UNITY_EDITOR
     [MenuItem("ThisGame/Load Startup Scene")]

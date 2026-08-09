@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -38,8 +39,10 @@ public class PauseManager : MonoBehaviour
     public void PauseLogic(bool _paused)
     {
         paused = _paused;
-        Time.timeScale = paused ? 0 : 1; //Could slowmow blend this 
 
+        if (paused && SceneLoader.IsSceneLoaded("3_MainMenu")) return;
+
+        Time.timeScale = paused ? 0 : 1; //Could slowmow blend this 
 
         objectToToggle.SetActive(paused);
 

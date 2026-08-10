@@ -14,12 +14,14 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
     SoundTypeSO[] SoundTypes => soundBank.soundTypes;
     Coroutine musicRoutine;
+    AudioResource requestedMusic;
     float originalMusicVolume;
 
     void Awake()
     {
         Instance = this;
         originalMusicVolume = globalMusicSource.volume;
+        requestedMusic = globalMusicSource.resource;
     }
 
     public void PlayVoice(SoundType type)
@@ -87,6 +89,8 @@ public class SoundManager : MonoBehaviour
     {
         if (clip == globalMusicSource.clip && globalMusicSource.isPlaying) return;
 
+        requestedMusic = clip;
+
         if (musicRoutine != null)
         {
             StopCoroutine(musicRoutine);
@@ -94,6 +98,8 @@ public class SoundManager : MonoBehaviour
 
         musicRoutine = StartCoroutine(BlendMusic(clip, musicBlendTimeOverride));
     }
+
+    public bool IsMusicPlayingOrRequested(AudioResource music) => music && requestedMusic == music;
 
     IEnumerator BlendMusic(AudioResource clip, float musicBlendTimeOverride = -1)
     {
@@ -118,6 +124,8 @@ public class SoundManager : MonoBehaviour
             globalMusicSource.volume = Mathf.Lerp(0, originalMusicVolume, timeWentBy / blendTime);
             yield return null;
         }
+
+        musicRoutine = null;
     }
 }
 

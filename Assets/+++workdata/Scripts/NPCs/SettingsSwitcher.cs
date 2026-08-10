@@ -28,11 +28,11 @@ public class SettingsSwitcher : MonoBehaviour
         while (true)
         {
             yield return null;
-            ChangeCharSO(defaultCharSO);
+            ChangeCharSO(defaultCharSO, specialCharSO);
             PlayDefaultParticles(true);
             PlaySpecialParticles(false);
             yield return new WaitForSeconds(timeInDefault);
-            ChangeCharSO(specialCharSO);
+            ChangeCharSO(specialCharSO, defaultCharSO);
             PlaySpecialParticles(true);
             PlayDefaultParticles(false);
 
@@ -70,15 +70,18 @@ public class SettingsSwitcher : MonoBehaviour
         }
     }
 
-    void ChangeCharSO(NPCCharSO charSO)
+    void ChangeCharSO(NPCCharSO charSO, NPCCharSO requiredMusicState)
     {
         charSOHolder.ChangeCharSO(charSO);
+
+        if (!SoundManager.Instance.IsMusicPlayingOrRequested(requiredMusicState.charAestheticSettings.Music)) return;
+
         SoundManager.Instance.PlayMusic(charSO.charAestheticSettings.Music, musicBlendTimeOverride);
     }
 
     void StopSwitching()
     {
         StopCoroutine(switchRoutine);
-        ChangeCharSO(defaultCharSO);
+        ChangeCharSO(defaultCharSO, specialCharSO);
     }
 }

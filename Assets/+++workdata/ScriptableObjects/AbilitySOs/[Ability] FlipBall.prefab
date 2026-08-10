@@ -78,8 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlipBall
   cooldownPerRarity:
-  - 5.5
-  - 4.6
-  - 4
-  - 2.4
+  - 3.2
+  - 2.5
+  - 1.5
+  - 0.4
   abilitySO: {fileID: 11400000, guid: 3073419b23244024182c3174c6501482, type: 2}

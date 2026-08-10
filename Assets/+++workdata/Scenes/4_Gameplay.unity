@@ -460,11 +460,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2239280143931799125, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3301573338349137274, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_Name
       value: '[Text] HECK YEAH'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461921092321825040, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642023311917596151, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642023311917596151, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: buttonName
@@ -481,6 +493,22 @@ PrefabInstance:
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_text
       value: HECK YEAH
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_margin.x
+      value: 7.330002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_margin.z
+      value: -6.3564067
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -500,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMin.x
@@ -508,7 +536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_SizeDelta.x
@@ -548,11 +576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 270
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -203.78806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1093,6 +1121,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Text] X'
       objectReference: {fileID: 0}
+    - target: {fileID: 4642023311917596151, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642023311917596151, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: buttonName
       value: X
@@ -1214,7 +1250,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3461921092321825040, guid: cfc23da46d94575428c43267177eb966, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfc23da46d94575428c43267177eb966, type: 3}
@@ -2702,7 +2739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &791936920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2732,7 +2769,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791936919}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -4206,6 +4243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Text] Go to End'
       objectReference: {fileID: 0}
+    - target: {fileID: 3461921092321825040, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4954851375121333377, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: buttonName
       value: Go to End
@@ -4221,6 +4262,18 @@ PrefabInstance:
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_text
       value: Go to End
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_margin.x
+      value: -47.26957
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4989767012262521468, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -4240,7 +4293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4248,7 +4301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4288,11 +4341,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 810
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -203.78806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9091336928690234989, guid: cfc23da46d94575428c43267177eb966, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10358,6 +10411,10 @@ MonoBehaviour:
   - {fileID: 7318746238855420532}
   - {fileID: 627196423}
   - {fileID: 242544565}
+  choiceImages:
+  - {fileID: 9010000000000000001}
+  - {fileID: 9010000000000000002}
+  - {fileID: 9010000000000000003}
   choiceButtonAnimation:
   - {fileID: 2610494664183184914}
   - {fileID: 627196429}
@@ -10441,6 +10498,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 353.2057, y: 44.1507}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &9010000000000000001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2611712714652623465, guid: cfc23da46d94575428c43267177eb966, type: 3}
+  m_PrefabInstance: {fileID: 5436345793658181780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &9010000000000000002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2611712714652623465, guid: cfc23da46d94575428c43267177eb966, type: 3}
+  m_PrefabInstance: {fileID: 627196422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &9010000000000000003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2611712714652623465, guid: cfc23da46d94575428c43267177eb966, type: 3}
+  m_PrefabInstance: {fileID: 242544563}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &9041539091296668657
 GameObject:
   m_ObjectHideFlags: 0

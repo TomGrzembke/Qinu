@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary> Responsible for the UI and distrebution of abilities</summary>
 public class RewardWindow : MonoBehaviour
@@ -11,6 +12,7 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] GameObject essentialUI;
 
     [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
+    [SerializeField] Image[] choiceImages;
     [SerializeField] UIButton[] choiceButtonAnimation;
     [SerializeField] TextMeshProUGUI keySlotDescription;
     [SerializeField] RectTransform skipButton;
@@ -58,6 +60,7 @@ public class RewardWindow : MonoBehaviour
     public void GiveReward()
     {
         rewards = PickThreeRewards();
+        UpdateChoiceImages();
         string currentText = "";
 
         for (int i = 0; i < choiceButtonTexts.Length; i++)
@@ -103,6 +106,7 @@ public class RewardWindow : MonoBehaviour
         _rewards[1] = specified;
 
         rewards = _rewards;
+        UpdateChoiceImages();
         UpdateSkipButtonVisibility();
         keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
 
@@ -195,6 +199,20 @@ public class RewardWindow : MonoBehaviour
         }
 
         skipButton.gameObject.SetActive(!canReceiveWithoutExchange);
+    }
+
+    void UpdateChoiceImages()
+    {
+        for (int i = 0; i < choiceImages.Length; i++)
+        {
+            Ability ability = null;
+            var hasAbility = rewards[i] != null && rewards[i].TryGetComponent(out ability);
+            choiceImages[i].sprite = hasAbility ? ability.AbilitySO.abilitySprite : null;
+
+            var color = choiceImages[i].color;
+            color.a = hasAbility ? 1 : 0;
+            choiceImages[i].color = color;
+        }
     }
 
     public void SkipReward() => Close();

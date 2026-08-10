@@ -324,6 +324,7 @@ public class TournamentManager : MonoBehaviour
         // bool cannotStart = !bossPrefab|| GameState == GameStateEnum.InGame|| IsResolvingRound;
         // if (cannotStart) return false;
 
+        CharManager.Instance.SendAllNPCsHome(bossOpponent);
         ClearSideLists();
         LeftPlayerAdd();
 

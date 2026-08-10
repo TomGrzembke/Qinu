@@ -58,4 +58,18 @@ public class CharManager : MonoBehaviour
     {
         CharsSpawned.CleanList();
     }
+
+    public void SendAllNPCsHome(GameObject exception = null)
+    {
+        CleanList();
+
+        foreach (GameObject character in CharsSpawned)
+        {
+            if (!character || character == exception) continue;
+            if (character.TryGetComponent(out MovePlayer _)) continue;
+            if (!character.TryGetComponent(out NPCNav navigation)) continue;
+
+            navigation.GoHome();
+        }
+    }
 }

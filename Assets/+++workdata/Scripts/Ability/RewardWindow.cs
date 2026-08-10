@@ -13,6 +13,7 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
     [SerializeField] UIButton[] choiceButtonAnimation;
     [SerializeField] TextMeshProUGUI keySlotDescription;
+    [SerializeField] RectTransform skipButton;
 
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
@@ -73,6 +74,8 @@ public class RewardWindow : MonoBehaviour
 
             choiceButtonTexts[i].text = currentText;
         }
+
+        UpdateSkipButtonVisibility();
         OpenRewardWindow();
 
         keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
@@ -100,6 +103,7 @@ public class RewardWindow : MonoBehaviour
         _rewards[1] = specified;
 
         rewards = _rewards;
+        UpdateSkipButtonVisibility();
         keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
 
         OpenRewardWindow(false);
@@ -176,6 +180,24 @@ public class RewardWindow : MonoBehaviour
         AbilitySlotManager.Instance.AddNewAbility(rewards[buttonID]);
         Close();
     }
+
+    void UpdateSkipButtonVisibility()
+    {
+        var canUseEmptySlot = AbilitySlotManager.Instance.CheckIfSlotAvailable();
+        var canReceiveWithoutExchange = false;
+
+        foreach (var reward in rewards)
+        {
+            if (reward == null) continue;
+
+            canReceiveWithoutExchange = canUseEmptySlot || AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(reward);
+            if (canReceiveWithoutExchange) break;
+        }
+
+        skipButton.gameObject.SetActive(!canReceiveWithoutExchange);
+    }
+
+    public void SkipReward() => Close();
 
     void ExchangeReward(GameObject reward, int atIndex)
     {

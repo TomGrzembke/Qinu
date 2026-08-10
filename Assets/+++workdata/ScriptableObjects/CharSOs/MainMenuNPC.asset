@@ -45,6 +45,7 @@ MonoBehaviour:
       <EmergencyDashPukClearance>k__BackingField: 0.25
       <EmergencyRouteWidth>k__BackingField: 1.25
       <DashDefensively>k__BackingField: 1
+      <ApplyPostDashSpeedModifierAfterEmergencyDash>k__BackingField: 1
     <CharRigidSettings>k__BackingField:
       <MiddleLineMaxSpeed>k__BackingField: 4
       <OwnGoalMaxSpeed>k__BackingField: 4

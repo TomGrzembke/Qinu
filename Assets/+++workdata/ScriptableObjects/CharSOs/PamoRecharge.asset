@@ -80,6 +80,7 @@ MonoBehaviour:
       <EmergencyDashPukClearance>k__BackingField: 1.03
       <EmergencyRouteWidth>k__BackingField: 1.3
       <DashDefensively>k__BackingField: 0
+      <ApplyPostDashSpeedModifierAfterEmergencyDash>k__BackingField: 1
       <StuckDetectionTime>k__BackingField: 0.4
       <MinimumStuckProgress>k__BackingField: 0.1
       <StuckDesiredSpeed>k__BackingField: 0.5

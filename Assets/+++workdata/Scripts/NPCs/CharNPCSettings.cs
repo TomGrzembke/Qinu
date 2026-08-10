@@ -75,6 +75,9 @@ public class CharNPCSettings
     [field: Separator("Defensive Dash - enabled backdashes during emergencies")]
     [field: Tooltip("Allows deterministic emergency backdashes. Normal attacking dashes continue to use Dash Randomly and Random Dashes Per Second.")]
     [field: SerializeField] public bool DashDefensively { get; private set; } = true;
+    [field: Separator("Emergency Post-Dash Speed - disabled restores normal movement immediately")]
+    [field: Tooltip("When enabled, emergency dashes apply the character's post-dash movement speed modifier. Disable it when the character must recover immediately after dashing outside its usual defensive area.")]
+    [field: SerializeField] public bool ApplyPostDashSpeedModifierAfterEmergencyDash { get; private set; } = true;
 
     [field: Space(18f)]
     [field: Header("Stuck Detection and Recovery")]

@@ -872,7 +872,7 @@ public class NPCNav : NavCalc
 
         if (hasClearDashPath)
         {
-            dashController.DashAtPosition(approachPlan.Position);
+            dashController.DashAtPosition(approachPlan.Position, applyPostDashMoveSpeed: NPCSettings.ApplyPostDashSpeedModifierAfterEmergencyDash);
         }
     }
 

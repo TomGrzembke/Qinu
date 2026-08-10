@@ -87,17 +87,17 @@ public class DashController : RBGetter
         StartDash(TargetMode.MovingTarget, target, target.position, multiplier);
     }
 
-    public void DashAtPosition(Vector2 position, float multiplier = 1f)
+    public void DashAtPosition(Vector2 position, float multiplier = 1f, bool applyPostDashMoveSpeed = true)
     {
-        StartDash(TargetMode.FixedPosition, null, position, multiplier);
+        StartDash(TargetMode.FixedPosition, null, position, multiplier, applyPostDashMoveSpeed);
     }
 
-    void StartDash(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier)
+    void StartDash(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier, bool applyPostDashMoveSpeed = true)
     {
         if (!CanDash()) return;
 
         DashSettings dashSettings = Settings;
-        dashRoutine = StartCoroutine(DashRoutine(targetMode, target, targetPosition, multiplier, dashSettings));
+        dashRoutine = StartCoroutine(DashRoutine(targetMode, target, targetPosition, multiplier, applyPostDashMoveSpeed, dashSettings));
         DashStarted?.Invoke();
     }
 
@@ -110,7 +110,7 @@ public class DashController : RBGetter
         return true;
     }
 
-    IEnumerator DashRoutine(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier, DashSettings dashSettings)
+    IEnumerator DashRoutine(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier, bool applyPostDashMoveSpeed, DashSettings dashSettings)
     {
         float duration = dashSettings.Duration;
 
@@ -153,8 +153,35 @@ public class DashController : RBGetter
 
         dashRoutine = null;
         DashFinished?.Invoke();
-        ApplyPostDashMoveSpeed(dashSettings);
+
+        if (applyPostDashMoveSpeed)
+        {
+            ApplyPostDashMoveSpeed(dashSettings);
+        }
+        else
+        {
+            ClearPostDashMoveSpeed();
+        }
+
         cooldownRoutine = StartCoroutine(CooldownRoutine(dashSettings.Cooldown));
+    }
+
+    void ClearPostDashMoveSpeed()
+    {
+        bool modifierWasActive = IsPostDashModifierActive;
+
+        if (postDashMoveSpeedRoutine != null)
+        {
+            StopCoroutine(postDashMoveSpeedRoutine);
+            postDashMoveSpeedRoutine = null;
+        }
+
+        MoveSpeedMultiplier = 1f;
+
+        if (modifierWasActive)
+        {
+            PostDashModifierFinished?.Invoke();
+        }
     }
 
     void ApplyPostDashMoveSpeed(DashSettings dashSettings)

@@ -36,6 +36,8 @@ public class InactivityReset : MonoBehaviour
         if (!GameStateManager.Instance) return;
 
         resetTriggered = true;
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         GameStateManager.Instance.ResetGame();
     }
 

@@ -13,7 +13,7 @@ public class AbilityExchange : MonoBehaviour
     void Awake()
     {
         inputActions = new();
-        inputActions.Player.Ability0.performed += ctx => Input(0);
+       // inputActions.Player.Ability0.performed += ctx => Input(0);
 
         inputActions.Player.Ability1.performed += ctx => Input(1);
 

@@ -13,6 +13,7 @@ public class RewardWindow : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI[] choiceButtonTexts;
     [SerializeField] Image[] choiceImages;
+    [SerializeField] Image[] rarityImages;
     [SerializeField] UIButton[] choiceButtonAnimation;
     [SerializeField] TextMeshProUGUI keySlotDescription;
     [SerializeField] RectTransform skipButton;
@@ -24,9 +25,11 @@ public class RewardWindow : MonoBehaviour
 
     public static RewardWindow Instance;
     GameObject[] rewards;
+    int[] rewardRarities;
     CanvasGroup rewardWindowCanvasGroup;
     Coroutine currentRewarWindowCoroutine;
     GameObject rewardSelected;
+    int rewardSelectedRarity;
 
     void Awake()
     {
@@ -60,6 +63,7 @@ public class RewardWindow : MonoBehaviour
     public void GiveReward()
     {
         rewards = PickThreeRewards();
+        RollRewardRarities();
         UpdateChoiceImages();
         string currentText = "";
 
@@ -106,6 +110,7 @@ public class RewardWindow : MonoBehaviour
         _rewards[1] = specified;
 
         rewards = _rewards;
+        RollRewardRarities();
         UpdateChoiceImages();
         UpdateSkipButtonVisibility();
         keySlotDescription.text = AbilitySlotManager.Instance.GetAvailableSlotKey() + " Key Slot";
@@ -163,6 +168,7 @@ public class RewardWindow : MonoBehaviour
             abilityExchange.OnSlotSelected += SelectedSlot;
 
             rewardSelected = abilityPrefab;
+            rewardSelectedRarity = rewardRarities[buttonID];
             keySlotDescription.text = "Press the Ability you want to exchange";
 
             StopChoicePressedAnimation();
@@ -181,7 +187,7 @@ public class RewardWindow : MonoBehaviour
 
     void ReceiveReward(int buttonID)
     {
-        AbilitySlotManager.Instance.AddNewAbility(rewards[buttonID]);
+        AbilitySlotManager.Instance.AddNewAbility(rewards[buttonID], rewardRarities[buttonID]);
         Close();
     }
 
@@ -190,11 +196,12 @@ public class RewardWindow : MonoBehaviour
         var canUseEmptySlot = AbilitySlotManager.Instance.CheckIfSlotAvailable();
         var canReceiveWithoutExchange = false;
 
-        foreach (var reward in rewards)
+        for (int i = 0; i < rewards.Length; i++)
         {
-            if (reward == null) continue;
+            if (rewards[i] == null) continue;
 
-            canReceiveWithoutExchange = canUseEmptySlot || AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(reward);
+            bool canUpgrade = AbilitySlotManager.Instance.CheckIfAbilityCanUpgradeSomething(rewards[i]);
+            canReceiveWithoutExchange = canUseEmptySlot || canUpgrade;
             if (canReceiveWithoutExchange) break;
         }
 
@@ -212,7 +219,31 @@ public class RewardWindow : MonoBehaviour
             var color = choiceImages[i].color;
             color.a = hasAbility ? 1 : 0;
             choiceImages[i].color = color;
+
+            UpdateRarityImage(i, hasAbility);
         }
+    }
+
+    void RollRewardRarities()
+    {
+        rewardRarities = new int[rewards.Length];
+
+        for (int i = 0; i < rewards.Length; i++)
+        {
+            if (rewards[i] == null) continue;
+
+            rewardRarities[i] = AbilitySlotManager.Instance.RaritySO.RollRewardRarityValue();
+        }
+    }
+
+    void UpdateRarityImage(int choiceIndex, bool hasAbility)
+    {
+        int currentRarityValue = hasAbility ? AbilitySlotManager.Instance.GetAbilityRarityValue(rewards[choiceIndex]) : 0;
+        bool showRarity = hasAbility && (rewardRarities[choiceIndex] > 0 || currentRarityValue > 0);
+        int resultingRarityIndex = hasAbility ? AbilitySlotManager.Instance.GetResultingRarityIndex(rewards[choiceIndex], rewardRarities[choiceIndex]) : 0;
+        Color rarityColor = AbilitySlotManager.Instance.RaritySO.RarityColors[resultingRarityIndex];
+        rarityColor.a = showRarity ? 1f : 0f;
+        rarityImages[choiceIndex].color = rarityColor;
     }
 
     public void SkipReward() => Close();
@@ -225,7 +256,7 @@ public class RewardWindow : MonoBehaviour
             return;
         }
 
-        AbilitySlotManager.Instance.ExchangeAbility(reward, atIndex);
+        AbilitySlotManager.Instance.ExchangeAbility(reward, atIndex, rewardSelectedRarity);
 
         Close();
     }
@@ -233,6 +264,7 @@ public class RewardWindow : MonoBehaviour
     [ButtonMethod]
     public void Close()
     {
+        CancelPendingExchange();
         MinigameManager.Instance.ReleaseBall();
         AbilitySlotManager.Instance.SetSelectable(false);
 
@@ -244,6 +276,14 @@ public class RewardWindow : MonoBehaviour
         }
 
         currentRewarWindowCoroutine = StartCoroutine(HideCoroutine());
+    }
+
+    void CancelPendingExchange()
+    {
+        abilityExchange.enabled = false;
+        abilityExchange.OnSlotSelected -= SelectedSlot;
+        rewardSelected = null;
+        rewardSelectedRarity = 0;
     }
 
     void StopChoicePressedAnimation()
@@ -310,5 +350,6 @@ public class RewardWindow : MonoBehaviour
 
         ExchangeReward(rewardSelected, i);
         rewardSelected = null;
+        rewardSelectedRarity = 0;
     }
 }

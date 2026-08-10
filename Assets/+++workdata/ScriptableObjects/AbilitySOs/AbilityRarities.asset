@@ -17,3 +17,13 @@ MonoBehaviour:
   - {r: 0, g: 0.56078434, b: 0.99215686, a: 1}
   - {r: 0.5803922, g: 0.09803922, b: 1, a: 1}
   - {r: 0.9254902, g: 0.15686275, b: 0.4509804, a: 1}
+  <RewardRarityWeights>k__BackingField:
+  - 90
+  - 12
+  - 5
+  - 1
+  rewardRarityPercentages:
+  - 83.333336
+  - 11.111111
+  - 4.6296296
+  - 0.9259259

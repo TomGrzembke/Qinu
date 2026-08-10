@@ -88,6 +88,28 @@ public class AbilitySlot : MonoBehaviour
         return succeeded;
     }
 
+    public bool ReduceRarity(int amount, AbilityRaritiesSO abilityRaritiesSO)
+    {
+        if (CurrentAbility == null) return false;
+        if (!CurrentAbility.ReduceRarity(amount)) return false;
+
+        PlayLostVFX();
+        RefreshRarity(abilityRaritiesSO);
+        return true;
+    }
+
+    public void PlayLostVFX() => lostVFX.Play();
+
+    public void ShowEmptySlotLossFeedback()
+    {
+        PlayLostVFX();
+
+        foreach (var entry in abilityBGImages)
+        {
+            entry.color = Color.red;
+        }
+    }
+
     public void ChangeAbilityPrefab(GameObject newAbilityPrefab)
     {
         if (CurrentAbility != null)
@@ -100,7 +122,7 @@ public class AbilitySlot : MonoBehaviour
 
         if (lostAbility)
         {
-            lostVFX.Play();
+            PlayLostVFX();
             numberObject.SetActive(false);
         }
         else

@@ -39,6 +39,12 @@ public abstract class Ability : MonoBehaviour
         return true;
     }
 
+    public bool ReduceRarity(int amount)
+    {
+        currentRarity -= amount;
+        return currentRarity >= 0;
+    }
+
     public int GetCurrentRarity()
     {
         return currentRarity;

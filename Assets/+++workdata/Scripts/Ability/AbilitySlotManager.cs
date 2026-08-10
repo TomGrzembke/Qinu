@@ -1,4 +1,5 @@
 using MyBox;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilitySlotManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class AbilitySlotManager : MonoBehaviour
 
 
     public static AbilitySlotManager Instance;
+    const int RARITIES_LOST = 2;
 
 
     void Awake() => Instance = this;
@@ -63,38 +65,70 @@ public class AbilitySlotManager : MonoBehaviour
         return abilityExchange.enabled;
     }
 
-    public void ExchangeAbility(GameObject newPrefab, int slotIndex)
+    public void ExchangeAbility(GameObject newPrefab, int slotIndex, int rewardRarity = 0)
     {
         if (slotIndex == -1)
         {
-            AddNewAbility(newPrefab);
+            AddNewAbility(newPrefab, rewardRarity);
             return;
         }
 
         AbilitySlots[slotIndex].ChangeAbilityPrefab(newPrefab);
-        AbilitySlots[slotIndex].RefreshRarity(RaritySO);
+        ApplyRarityUpgrades(AbilitySlots[slotIndex], rewardRarity);
     }
 
     public GameObject RemoveRandomAbility()
     {
-        int number = Random.Range(1, AbilitySlots.Length);
-        return RemoveAbility(number);
+        List<int> candidateSlotIndices = new();
+
+        for (int i = 0; i < AbilitySlots.Length; i++)
+        {
+            if (i == 0)
+            {
+                if (AbilitySlots[i].Occupied && AbilitySlots[i].GetRarity() <= 0) continue;
+            }
+
+            candidateSlotIndices.Add(i);
+        }
+
+        if (candidateSlotIndices.Count == 0) return null;
+
+        int randomSlotIndex = candidateSlotIndices[Random.Range(0, candidateSlotIndices.Count)];
+        return RemoveAbility(randomSlotIndex);
     }
 
     GameObject RemoveAbility(int slotIndex)
     {
+        if (!AbilitySlots[slotIndex].Occupied)
+        {
+            AbilitySlots[slotIndex].ShowEmptySlotLossFeedback();
+            return null;
+        }
+
         GameObject prefab = AbilitySlots[slotIndex].CurrentAbilityPrefab;
-        AbilitySlots[slotIndex].ChangeAbilityPrefab(null);
+
+        if (slotIndex == 0)
+        {
+            int rarityLoss = Mathf.Min(RARITIES_LOST, AbilitySlots[slotIndex].GetRarity());
+            AbilitySlots[slotIndex].ReduceRarity(rarityLoss, RaritySO);
+            return prefab;
+        }
+
+        if (!AbilitySlots[slotIndex].ReduceRarity(RARITIES_LOST, RaritySO))
+        {
+            AbilitySlots[slotIndex].ChangeAbilityPrefab(null);
+        }
+
         return prefab;
     }
 
-    public void AddNewAbility(GameObject newPrefab)
+    public void AddNewAbility(GameObject newPrefab, int rewardRarity)
     {
         for (int i = 0; i < AbilitySlots.Length; i++)
         {
             if (AbilitySlots[i].CurrentAbilityPrefab == newPrefab)
             {
-                AbilitySlots[i].UpgradeRarity(RaritySO);
+                ApplyRarityUpgrades(AbilitySlots[i], rewardRarity + 1);
 
                 return;
             }
@@ -105,11 +139,35 @@ public class AbilitySlotManager : MonoBehaviour
             if (!AbilitySlots[i].Occupied)
             {
                 AbilitySlots[i].ChangeAbilityPrefab(newPrefab);
-                AbilitySlots[i].RefreshRarity(RaritySO);
+                ApplyRarityUpgrades(AbilitySlots[i], rewardRarity);
 
                 break;
             }
         }
+    }
+
+    void ApplyRarityUpgrades(AbilitySlot slot, int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (!slot.UpgradeRarity(RaritySO)) break;
+        }
+
+        slot.RefreshRarity(RaritySO);
+    }
+
+    public int GetAbilityRarityValue(GameObject abilityPrefab)
+    {
+        int slotID = GetAbilitySlot(abilityPrefab);
+        return slotID < 0 ? 0 : AbilitySlots[slotID].GetRarity() + 1;
+    }
+
+    public int GetResultingRarityIndex(GameObject abilityPrefab, int rewardRarity)
+    {
+        int currentRarityValue = GetAbilityRarityValue(abilityPrefab);
+        int rewardRarityValue = rewardRarity + 1;
+        int resultingRarityValue = currentRarityValue > 0 ? currentRarityValue + rewardRarityValue : rewardRarityValue;
+        return Mathf.Clamp(resultingRarityValue - 1, 0, RaritySO.MaxRarity);
     }
 
     public bool CheckIfSlotAvailable()

@@ -78,14 +78,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownPerRarity:
-  - 2.7
-  - 2.1
-  - 1.8
-  - 1.8
+  - 3.5
+  - 2.5
+  - 2
+  - 1.7
   abilitySO: {fileID: 11400000, guid: a26a4a1d48e25414cad120f80b97e0b0, type: 2}
   tpTimePerRarity:
   - 0.5
-  - 0.3
-  - 0.2
+  - 0.35
+  - 0.25
   - 0.05
   spaceToAdd: 2.7

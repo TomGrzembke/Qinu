@@ -6367,7 +6367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameState>k__BackingField: 0
   <CurrentGameMode>k__BackingField: 1
-  <FirstGameModes>k__BackingField: 040000000000000006000000010000000200000005000000
+  <FirstGameModes>k__BackingField: 060000000000000006000000010000000200000005000000
   <CharStats>k__BackingField: []
   <RightPlayers>k__BackingField: []
   <LeftPlayers>k__BackingField: []
@@ -7938,7 +7938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6393214263725234054, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.69
+      value: -2.41
       objectReference: {fileID: 0}
     - target: {fileID: 6424674059282816134, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
       propertyPath: m_Color.b

@@ -26,9 +26,12 @@ public class DashController : RBGetter
     Transform Puk => MinigameManager.Instance.Puk;
 
     public bool IsDashing => dashRoutine != null;
+    public bool IsPostDashModifierActive => postDashMoveSpeedRoutine != null;
     public float MoveSpeedMultiplier { get; private set; } = 1f;
     public event Action DashStarted;
     public event Action DashFinished;
+    public event Action PostDashModifierStarted;
+    public event Action PostDashModifierFinished;
 
     protected override void AwakeInternal()
     {
@@ -40,11 +43,17 @@ public class DashController : RBGetter
 
     void OnDisable()
     {
+        bool hadActivePostDashModifier = IsPostDashModifierActive;
         StopAllCoroutines();
         dashRoutine = null;
         cooldownRoutine = null;
         postDashMoveSpeedRoutine = null;
         MoveSpeedMultiplier = 1f;
+
+        if (hadActivePostDashModifier)
+        {
+            PostDashModifierFinished?.Invoke();
+        }
     }
 
     void OnDestroy()
@@ -150,21 +159,36 @@ public class DashController : RBGetter
 
     void ApplyPostDashMoveSpeed(DashSettings dashSettings)
     {
+        bool modifierWasAlreadyActive = IsPostDashModifierActive;
+
         if (postDashMoveSpeedRoutine != null)
         {
             StopCoroutine(postDashMoveSpeedRoutine);
+            postDashMoveSpeedRoutine = null;
         }
 
         MoveSpeedMultiplier = dashSettings.PostDashMoveSpeedMultiplier;
+        bool hasModifier = !Mathf.Approximately(MoveSpeedMultiplier, 1f);
+        bool hasDuration = dashSettings.PostDashMoveSpeedDuration > Mathf.Epsilon;
 
-        if (dashSettings.PostDashMoveSpeedDuration <= Mathf.Epsilon)
+        if (!hasModifier || !hasDuration)
         {
             MoveSpeedMultiplier = 1f;
-            postDashMoveSpeedRoutine = null;
+
+            if (modifierWasAlreadyActive)
+            {
+                PostDashModifierFinished?.Invoke();
+            }
+
             return;
         }
 
         postDashMoveSpeedRoutine = StartCoroutine(PostDashMoveSpeedRoutine(dashSettings.PostDashMoveSpeedDuration));
+
+        if (!modifierWasAlreadyActive)
+        {
+            PostDashModifierStarted?.Invoke();
+        }
     }
 
     IEnumerator PostDashMoveSpeedRoutine(float duration)
@@ -172,6 +196,7 @@ public class DashController : RBGetter
         yield return new WaitForSeconds(duration);
         MoveSpeedMultiplier = 1f;
         postDashMoveSpeedRoutine = null;
+        PostDashModifierFinished?.Invoke();
     }
 
     Vector2 GetDirection(TargetMode targetMode, Vector2 targetPosition)

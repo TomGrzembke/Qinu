@@ -10220,18 +10220,6 @@ PrefabInstance:
       value: WeakEffect
       objectReference: {fileID: 0}
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 9.339547
-      objectReference: {fileID: 0}
-    - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6364
-      objectReference: {fileID: 0}
-    - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.6364
-      objectReference: {fileID: 0}
-    - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.61
       objectReference: {fileID: 0}
@@ -10270,30 +10258,6 @@ PrefabInstance:
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: VelocityModule.z.scalar
-      value: -0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: InitialModule.gravitySource
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

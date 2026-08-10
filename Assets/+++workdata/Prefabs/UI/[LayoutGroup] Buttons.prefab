@@ -58,6 +58,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!222 &6255121439001063905
 CanvasRenderer:
@@ -780,6 +781,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!222 &7300857411462373207
 CanvasRenderer:
@@ -1050,6 +1052,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!222 &8497004375975896378
 CanvasRenderer:

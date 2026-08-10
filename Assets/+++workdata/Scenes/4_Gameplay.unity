@@ -9271,13 +9271,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2384758876425480167, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3257105426784781256}
   m_SourcePrefab: {fileID: 100100000, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
 --- !u!58 &3257105426784781250 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 1250439790961783938, guid: a13bd27d7b7e50d4192cddd217fbf019, type: 3}
   m_PrefabInstance: {fileID: 3257105426784781249}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3257105426784781256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183967831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed77581c06eb42d295888d6e598b7f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PukRecovery
+  pukRigidbody: {fileID: 1183967834}
+  recoveryTarget: {fileID: 1979328818}
+  cage: {fileID: 1078603537}
+  stationarySpeedThreshold: 0.1
+  stuckDuration: 5
+  cageExclusionRadius: 3.5
+  recoveryDuration: 1
+  emergencyTeleportDistance: 60
 --- !u!114 &3360150962637468889
 MonoBehaviour:
   m_ObjectHideFlags: 0

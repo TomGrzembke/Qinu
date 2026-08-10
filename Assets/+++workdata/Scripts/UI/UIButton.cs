@@ -11,17 +11,28 @@ public class UIButton : MonoBehaviour
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleOnClick = .75f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleTime = .075f;
     [SerializeField, ConditionalField(nameof(additionalSettings))] float scaleHover = .95f;
+    [SerializeField, Min(0f), Tooltip("How long the cursor must remain outside before hover visuals are removed. Higher values prevent flickering near the edge of a button.")] float hoverSwitchCooldown = .08f;
     [SerializeField] SoundType onClickSFX = SoundType.ButtonClick;
 
     const string BUTTON_NAME_SYNTAX = "[Button]";
     const string TEXT_NAME_SYNTAX = "[Text]";
     TextMeshProUGUI textComponent;
     Coroutine scaleRoutine;
+    Coroutine hoverSwitchRoutine;
     BoolLock hoveredBoolLock = new();
+    bool pointerHovered;
 
     void OnValidate() => OnValidateCall();
 
     void Awake() => OnValidateCall();
+
+    void OnDisable()
+    {
+        hoverSwitchRoutine = null;
+        pointerHovered = false;
+        hoveredBoolLock.RemoveInstigator(this);
+        RefreshHoverScale();
+    }
 
     private void OnValidateCall()
     {
@@ -69,16 +80,35 @@ public class UIButton : MonoBehaviour
 
     public void OnHover(bool condition)
     {
+        pointerHovered = condition;
+
+        if (hoverSwitchRoutine != null)
+        {
+            StopCoroutine(hoverSwitchRoutine);
+            hoverSwitchRoutine = null;
+        }
+
         if (condition)
         {
             hoveredBoolLock.AddInstigator(this);
-        }
-        else
-        {
-            hoveredBoolLock.RemoveInstigator(this);
+            RefreshHoverScale();
+            return;
         }
 
-        RefreshHoverScale();
+        hoverSwitchRoutine = StartCoroutine(RemoveHoverAfterCooldown());
+    }
+
+    IEnumerator RemoveHoverAfterCooldown()
+    {
+        yield return new WaitForSecondsRealtime(hoverSwitchCooldown);
+
+        if (!pointerHovered)
+        {
+            hoveredBoolLock.RemoveInstigator(this);
+            RefreshHoverScale();
+        }
+
+        hoverSwitchRoutine = null;
     }
 
     void RefreshHoverScale()

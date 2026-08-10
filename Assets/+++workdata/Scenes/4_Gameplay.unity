@@ -1057,7 +1057,6 @@ MonoBehaviour:
   retryText: {fileID: 704969886}
   retryMessage: 'Retry: <b><color=#FF3B30>Noty</color></b>?'
   spaceVisual: {fileID: 1667384514}
-  goalRenderer: []
 --- !u!4 &343745503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6477723844891083208, guid: 1c8826e1cd2201943a8bed1fa40aedff, type: 3}
@@ -2460,6 +2459,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &676559744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2811716013710717747, guid: ed2ba8abca3352f4ebdf968e8277ac34, type: 3}
+  m_PrefabInstance: {fileID: 5674910289240462904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704969884
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,6 +5892,7 @@ MonoBehaviour:
   - {fileID: 3832746447698499432, guid: d024ae12afd35b0419abe360e0e4b8fb, type: 3}
   <CharsSpawned>k__BackingField:
   - {fileID: 1335534815}
+  - {fileID: 676559744}
   leftSpawn: {fileID: 1981629235}
   rightSpawn: {fileID: 222077828}
 --- !u!1 &1918162476
@@ -6199,6 +6204,10 @@ PrefabInstance:
       propertyPath: topTarget
       value: 
       objectReference: {fileID: 1437835580}
+    - target: {fileID: 362264768424101672, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: useTopAndBotTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 385805539680704521, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -6226,6 +6235,14 @@ PrefabInstance:
     - target: {fileID: 417993918362666237, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641653801022025094, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 641653801022025094, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.23
       objectReference: {fileID: 0}
     - target: {fileID: 688069192088372831, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: voice
@@ -6330,6 +6347,14 @@ PrefabInstance:
     - target: {fileID: 2920028856976063515, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: voice
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190136310712182585, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190136310712182585, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.76
       objectReference: {fileID: 0}
     - target: {fileID: 3621050707426847758, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
       propertyPath: m_Name

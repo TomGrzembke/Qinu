@@ -16,6 +16,7 @@ MonoBehaviour:
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.20974578, g: 0, b: 0.31132078, a: 1}
     <Music>k__BackingField: {fileID: 8300000, guid: b69ed3a1d843b284cbabe785b91860f4, type: 3}
+    <MusicBlendTime>k__BackingField: 0.05
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
     <Force>k__BackingField: 40

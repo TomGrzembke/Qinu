@@ -28,7 +28,7 @@ public class CharSwitch : MonoBehaviour
             StartCoroutine(BlendColorCor(entry, secondaryArenaColor));
         }
 
-        SoundManager.Instance.PlayMusic(rightCharAestheticSettings.Music);
+        SoundManager.Instance.PlayMusic(rightCharAestheticSettings.Music, rightCharAestheticSettings.MusicBlendTime);
     }
 
     IEnumerator BlendColorCor(SpriteRenderer target, Color newCol)

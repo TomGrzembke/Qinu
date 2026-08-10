@@ -3948,7 +3948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriangleSystem
   pukString: Puk
-  triangleActivateSeconds: 1.92
+  triangleActivateSeconds: 1.65
   triangleDeactivateSeconds: 10
   triangles: {fileID: 2084448627}
 --- !u!60 &1193734180
@@ -3997,16 +3997,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -8.994712, y: 0.33958244}
-      - {x: -10.326171, y: -0.6176014}
+    - - {x: 0, y: 1.5654678}
+      - {x: -8.947591, y: 1.0935402}
+      - {x: -10.70315, y: -0.19350052}
       - {x: -9.074928, y: -1.3417025}
       - {x: -4.878139, y: -1.1133337}
       - {x: 0.12585926, y: -1.533555}
       - {x: 5.9474964, y: -1.426733}
       - {x: 9.636495, y: -1.436574}
-      - {x: 10.433351, y: -0.36082363}
-      - {x: 7.879427, y: 0.8044691}
+      - {x: 11.422919, y: 0.48737907}
+      - {x: 7.9736714, y: 1.4170599}
   m_UseDelaunayMesh: 1
 --- !u!1001 &1196559421
 PrefabInstance:

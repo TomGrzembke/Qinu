@@ -15,7 +15,7 @@ MonoBehaviour:
   <VisualPrefab>k__BackingField: {fileID: 7267010303098542400, guid: a5003efdfd4119e4aa95217629ad6810, type: 3}
   <charAestheticSettings>k__BackingField:
     <PrimaryColor>k__BackingField: {r: 0.20974578, g: 0, b: 0.31132078, a: 1}
-    <Music>k__BackingField: {fileID: 8300000, guid: e924980c24529f1498d71c243a5d8b82, type: 3}
+    <Music>k__BackingField: {fileID: 8300000, guid: b69ed3a1d843b284cbabe785b91860f4, type: 3}
   <DashSettings>k__BackingField:
     <Enabled>k__BackingField: 1
     <Force>k__BackingField: 40

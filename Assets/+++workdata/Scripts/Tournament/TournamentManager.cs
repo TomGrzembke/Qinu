@@ -321,16 +321,16 @@ public class TournamentManager : MonoBehaviour
     /// <summary>Starts or retries a first-to-three boss match without changing campaign statistics.</summary>
     public bool StartBossFight(GameObject bossPrefab)
     {
-        bool cannotStart = !bossPrefab
-            || GameState == GameStateEnum.InGame
-            || IsResolvingRound;
-        if (cannotStart) return false;
+        // bool cannotStart = !bossPrefab|| GameState == GameStateEnum.InGame|| IsResolvingRound;
+        // if (cannotStart) return false;
 
         ClearSideLists();
         LeftPlayerAdd();
 
         if (!bossOpponent)
+        {
             bossOpponent = CharManager.Instance.InitializeChar(bossPrefab, true);
+        }
 
         AddToList(RightPlayers, bossOpponent);
         SwitchChars();

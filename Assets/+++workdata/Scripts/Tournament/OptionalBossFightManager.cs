@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,9 @@ public class OptionalBossFightManager : MonoBehaviour
     [SerializeField] GameObject anthonyPrefab;
     [SerializeField] string bossOfferDialogue = "BossOffer";
     [SerializeField] BossFlowState state;
-
+    [SerializeField] TextMeshProUGUI retryText;
+    [SerializeField] string retryMessage = "Retry: <b><color=#FF3B30>Noty</color></b>?";
+    [SerializeField] GameObject spaceVisual;
     public static OptionalBossFightManager Instance { get; private set; }
 
     CanvasGroup choiceCanvasGroup;
@@ -40,7 +43,9 @@ public class OptionalBossFightManager : MonoBehaviour
     void Start()
     {
         if (TournamentManager.Instance)
+        {
             TournamentManager.Instance.OnBossFightEnded += OnBossFightEnded;
+        }
     }
 
     void OnDestroy()
@@ -127,7 +132,7 @@ public class OptionalBossFightManager : MonoBehaviour
         ShowChoice();
     }
 
-    void ShowChoice()
+    public void ShowChoice()
     {
         state = BossFlowState.Choosing;
         MinigameManager.Instance.CageBall();
@@ -151,6 +156,11 @@ public class OptionalBossFightManager : MonoBehaviour
             Debug.LogError("The Noty boss fight could not be started.", this);
             ShowChoice();
         }
+
+        if (spaceVisual != null)
+        {
+            spaceVisual.SetActive(true);
+        }
     }
 
     void PassBossFight()
@@ -173,6 +183,12 @@ public class OptionalBossFightManager : MonoBehaviour
         }
 
         // Noty stays in the arena. The next attempt reuses the same instance.
+
+        if (retryText != null)
+        {
+            retryText.text = retryMessage;
+        }
+
         ShowChoice();
     }
 

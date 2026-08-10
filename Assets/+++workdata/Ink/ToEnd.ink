@@ -15,14 +15,13 @@ Im still so confused, #speaker: Qinu
 I cant grasp whats happening! 
 
 I know Qinu, we're sorry.#speaker: Anthony
-The story isn't that fleshed out yet. Dev needs more time. 
+The story hasn't unfolded yet. Dev needs more time. 
 
 But this world still has a trick up its sleeve. 
-There's a character that is neeearly impossible to beat, extra for Gamescom. 
-
-You can try if you want. 
+There's a character that is neeearly impossible to beat. 
 
 I don’t expect you to win and its fine if you don’t. 
 
 Make your choice.
+-> END
 -> END

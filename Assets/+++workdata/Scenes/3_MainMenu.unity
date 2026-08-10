@@ -2701,6 +2701,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 6d0e9b8af0e85a049b2c7d3c278ebfa4, type: 2}
   musicSlider: {fileID: 2026933064}
   sfxSlider: {fileID: 401850088}
+  textSpeedSlider: {fileID: 0}
+  textSpeedPreview: {fileID: 1513853659}
   screenToggle: {fileID: 2024197291}
   onSFXChangedCooldown: 0.1
 --- !u!1 &947842046
@@ -4004,6 +4006,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502993264}
   m_CullTransparentMesh: 1
+--- !u!114 &1513853659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1056672019546890297, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+  m_PrefabInstance: {fileID: 3005864090911420276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1535071623
 GameObject:
   m_ObjectHideFlags: 0
@@ -6314,12 +6327,36 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3297214381084699591, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 942601832}
     - target: {fileID: 3731340930604772403, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 942601832}
     - target: {fileID: 3880445229727635684, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886707082209385775, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886707082209385775, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6045920462766924455, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}

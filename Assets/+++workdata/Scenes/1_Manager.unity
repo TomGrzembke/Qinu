@@ -2148,6 +2148,17 @@ MonoBehaviour:
   - {fileID: 541485421}
   - {fileID: 1816337199}
   defaultState: 1
+--- !u!114 &1125402096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1056672019546890297, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+  m_PrefabInstance: {fileID: 1726114877}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166766557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3179,7 +3190,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2642538501001414271, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 86
+      value: 146
+      objectReference: {fileID: 0}
+    - target: {fileID: 3297214381084699591, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3297214381084699591, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1726114879}
+    - target: {fileID: 3297214381084699591, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTextSpeedSliderChanged
       objectReference: {fileID: 0}
     - target: {fileID: 3731340930604772403, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3188,6 +3211,26 @@ PrefabInstance:
     - target: {fileID: 3731340930604772403, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnSfxSliderChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.18918918
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212956644660831316, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.18918918
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886707082209385775, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.18918918
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886707082209385775, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6045920462766924455, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_Pivot.x
@@ -3307,7 +3350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7413993458019954480, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54.1
+      value: 43.000004
       objectReference: {fileID: 0}
     - target: {fileID: 8180656568613750140, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3316,6 +3359,14 @@ PrefabInstance:
     - target: {fileID: 8180656568613750140, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMusicSliderChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712677511375825092, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712677511375825092, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -79
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7562470579028194093, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
@@ -3347,6 +3398,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 6d0e9b8af0e85a049b2c7d3c278ebfa4, type: 2}
   musicSlider: {fileID: 1710312662}
   sfxSlider: {fileID: 1025170762}
+  textSpeedSlider: {fileID: 2100182590}
+  textSpeedPreview: {fileID: 1125402096}
   screenToggle: {fileID: 0}
   onSFXChangedCooldown: 0.1
 --- !u!1 &1765349253
@@ -4085,6 +4138,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873605474}
   m_CullTransparentMesh: 1
+--- !u!114 &2100182590 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3297214381084699591, guid: 9d73bad2836489c47ac0b90986779bd6, type: 3}
+  m_PrefabInstance: {fileID: 1726114877}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &2141794336
 GameObject:
   m_ObjectHideFlags: 0

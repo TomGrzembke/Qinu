@@ -20,11 +20,12 @@ public struct DialogueLine
 public class DialogueController : MonoBehaviour
 {
     public static DialogueController Instance;
+    public const float DEFAULT_TYPE_SPEED = 0.05f;
 
     [field: SerializeField] public float TimeBetweenDialogue { get; private set; } = 1;
     [SerializeField] TextAsset inkAsset;
     [field: SerializeField] public bool InDialogue { get; private set; }
-    [field: SerializeField] public float TypeSpeed { get; private set; } = 0.05f;
+    [field: SerializeField] public float TypeSpeed { get; private set; } = DEFAULT_TYPE_SPEED;
     [SerializeField] Transform offText;
     [SerializeField] GameObject[] speakerBoxParents;
     [SerializeField] Transform topLeft;
@@ -40,6 +41,7 @@ public class DialogueController : MonoBehaviour
     public static Action<string> InkEvent;
     const string SPEAKER_TAG = "speaker";
     List<string> queuedDialogue = new();
+    float defaultTypeSpeed;
     float oldSpeed;
     string lastSpeaker;
     Story inkStory;
@@ -49,10 +51,23 @@ public class DialogueController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        defaultTypeSpeed = TypeSpeed;
+        SetTextSpeedMultiplier(GameSettings.GetTextSpeedMultiplier());
         inkStory = new(inkAsset.text);
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
         oldSpeed = TypeSpeed;
+    }
+
+    public void SetTextSpeedMultiplier(float multiplier)
+    {
+        TypeSpeed = GetTypeDelay(multiplier, defaultTypeSpeed);
+        oldSpeed = TypeSpeed;
+    }
+
+    public static float GetTypeDelay(float multiplier, float baseTypeSpeed = DEFAULT_TYPE_SPEED)
+    {
+        return baseTypeSpeed / Mathf.Max(0.01f, multiplier);
     }
 
 

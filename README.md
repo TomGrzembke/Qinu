@@ -3,7 +3,7 @@
 
 - Created in Unity Engine.
 - This is a solo passion project with some external art help.
-- Self-set Task: Create a game solo in 6 months.
+- Initial self-set task: Create a game solo in 6 months.
 
 <div align="center">
   
@@ -22,7 +22,7 @@ System | Script | Purpose |
   --- | --- | --- | 
 DialogueTutorial  | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Intro/DialogueTutorial.cs#L111) | Provides a serialized List of "DialogueSegments" to configure the starting dialogue in inspector. |
 MovePlayer | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Physics/MovePlayer.cs) | Mouse-based player movement with autostop on wall collision and virtual mouse calculation. |
-RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A rewward window that offers abilities to pick. |
+RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A reward window that offers abilities to pick. |
 </div>
 
 ## Additional Info

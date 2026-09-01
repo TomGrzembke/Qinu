@@ -3,7 +3,7 @@
 
 - Created in Unity Engine.
 - This is a solo passion project with some external art help.
-- Self-set Task: Create a game solo in 6 months.
+- Initial self-set task: Create a game solo in 6 months.
 
 <div align="center">
   
@@ -22,14 +22,14 @@ System | Script | Purpose |
   --- | --- | --- | 
 DialogueTutorial  | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Intro/DialogueTutorial.cs#L111) | Provides a serialized List of "DialogueSegments" to configure the starting dialogue in inspector. |
 MovePlayer | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Physics/MovePlayer.cs) | Mouse-based player movement with autostop on wall collision and virtual mouse calculation. |
-RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A rewward window that offers abilities to pick. |
+RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2B%2Bworkdata/Scripts/Ability/RewardWindow.cs) | A reward window that offers abilities to pick. |
 </div>
 
 ## Additional Info
-This Project was displayed at [Talk and Play 53](https://www.flickr.com/photos/12601747@N00/54932329209/in/album-72177720330395625)
+This Project was displayed at [Talk and Play 53](https://www.flickr.com/photos/12601747@N00/54932329209/in/album-72177720330395625) and [AMaze Open Screens](https://www.linkedin.com/posts/tom-grzembke_indiedev-gamedev-madewithunity-activity-7460761635314552832-F_m9)
 
 - Release date: 01.07.2024
-- Unity Version: Unity 6000.5.3f1 (used 2022.3.62f3 for the biggest period of development) 
+- Unity Version: Unity 6000.5.3f1 (used 2022.3.62f3 for the longest period of development) 
 - Theres a "[What does Qinu Consist of](https://www.youtube.com/watch?v=UqLftMAHedM)" Video on Yt
 
 ## Packages: 

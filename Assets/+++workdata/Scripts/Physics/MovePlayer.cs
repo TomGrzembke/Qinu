@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary> Intends to achieve fluid player movement via smoothing </summary>
-[RequireComponent(typeof(DashController))]
+[RequireComponent(typeof(DashController), typeof(CharSOHolder))]
 public class MovePlayer : RBGetter
 {
     readonly struct MovementCastConstraint
@@ -18,8 +18,8 @@ public class MovePlayer : RBGetter
         }
     }
 
-    const float PreviousPhysicsStep = 0.02f;
-    const int MovementCastHitCapacity = 8;
+    const float PREVIOUS_PHYSICS_STEP = 0.02f;
+    const int MOVEMENT_CAST_HIT_CAPACITY = 8;
 
     [SerializeField] bool disableInputRightclick;
     [SerializeField] Transform virtualMouseDebug;
@@ -31,19 +31,15 @@ public class MovePlayer : RBGetter
     [SerializeField, Range(0f, 1f)] float extraColliderEnableSpeedRatio = 0.85f;
     [SerializeField, Range(0f, 1f)] float extraColliderDisableSpeedRatio = 0.7f;
 
-    AnimationCurve moveCurve => charSO.CharSettings.CharRigidSettings.MoveCurve;
-    float maxSpeedDistance => charSO.CharSettings.CharRigidSettings.MaxSpeedDistance;
-    float maxSpeed => charSO.CharSettings.CharRigidSettings.MaxSpeed;
-    float minSpeed => charSO.CharSettings.CharRigidSettings.MinSpeed;
-    float stoppingDistance => charSO.CharSettings.CharRigidSettings.StoppingDistance;
-    float acceleration => charSO.CharSettings.CharRigidSettings.Acceleration;
-    float turningResponse => charSO.CharSettings.CharRigidSettings.TurningResponse;
-    float decceleration => charSO.CharSettings.CharRigidSettings.Decceleration;
+    PlayerCharSO CharSO => (PlayerCharSO)charSOHolder.CharSO;
+    PlayerCharSettings PlayerSettings => CharSO.CharSettings;
+    PlayerRigidSettings RigidSettings => PlayerSettings.CharRigidSettings;
+
     bool inputDisabled;
     float currentMaxSpeed;
     DashController dashController;
+    CharSOHolder charSOHolder;
 
-    PlayerCharSO charSO;
     Vector2 virtualMouseOffset;
     Vector2 currentMoveDirection;
     bool isReturningFromDash;
@@ -53,7 +49,7 @@ public class MovePlayer : RBGetter
     readonly Dictionary<Collider2D, float> collisionNormalExpiryTimes = new();
     readonly List<Collider2D> expiredCollisionNormals = new();
     readonly List<MovementCastConstraint> movementCastConstraints = new();
-    readonly RaycastHit2D[] movementCastHits = new RaycastHit2D[MovementCastHitCapacity];
+    readonly RaycastHit2D[] movementCastHits = new RaycastHit2D[MOVEMENT_CAST_HIT_CAPACITY];
     ContactFilter2D movementCastFilter;
 
     [SerializeField] int cachedDirectionAmount = 5;
@@ -61,21 +57,21 @@ public class MovePlayer : RBGetter
 
     [SerializeField] private Collider2D extraBallCollider;
 
-    Camera Cam;
+    Camera cam;
     public Vector2 DashAimPosition => GetVirtualMousePosition();
 
     Camera GetCam()
     {
-        if (Cam == null) Cam = Camera.main;
+        if (cam == null) cam = Camera.main;
 
-        return Cam;
+        return cam;
     }
 
     protected override void AwakeInternal()
     {
-        charSO = (PlayerCharSO)GetComponent<CharSOHolder>().CharSO;
+        charSOHolder = GetComponent<CharSOHolder>();
         dashController = GetComponent<DashController>();
-        currentMaxSpeed = maxSpeed;
+        currentMaxSpeed = RigidSettings.MaxSpeed;
         ConfigureMovementCastFilter();
 
         if (disableInputRightclick)
@@ -124,7 +120,7 @@ public class MovePlayer : RBGetter
         Vector2 rawDirection = GetRawDirection(GetVirtualMousePosition());
         float cursorDistance = rawDirection.magnitude;
 
-        bool isInsideStoppingDistance = rawDirection.sqrMagnitude <= stoppingDistance * stoppingDistance;
+        bool isInsideStoppingDistance = rawDirection.sqrMagnitude <= RigidSettings.StoppingDistance * RigidSettings.StoppingDistance;
         if (isInsideStoppingDistance) return ResetMoveDirection();
 
         Vector2 currentDirection = rawDirection / cursorDistance;
@@ -173,8 +169,8 @@ public class MovePlayer : RBGetter
     float GetMouseDistanceAlpha()
     {
         float distance = Vector2.Distance(transform.position, GetVirtualMousePosition());
-        float distanceAlpha = Mathf.Clamp01(distance / maxSpeedDistance);
-        return moveCurve.Evaluate(distanceAlpha);
+        float distanceAlpha = Mathf.Clamp01(distance / RigidSettings.MaxSpeedDistance);
+        return RigidSettings.MoveCurve.Evaluate(distanceAlpha);
     }
 
     void FixedUpdate()
@@ -218,8 +214,8 @@ public class MovePlayer : RBGetter
 
         if (desiredVelocity == Vector2.zero)
         {
-            float previousStepVelocityMultiplier = Mathf.Max(0f, 1f - decceleration * PreviousPhysicsStep);
-            float stepRatio = Time.fixedDeltaTime / PreviousPhysicsStep;
+            float previousStepVelocityMultiplier = Mathf.Max(0f, 1f - RigidSettings.Decceleration * PREVIOUS_PHYSICS_STEP);
+            float stepRatio = Time.fixedDeltaTime / PREVIOUS_PHYSICS_STEP;
             float velocityMultiplier = Mathf.Pow(previousStepVelocityMultiplier, stepRatio);
             currentVelocity *= velocityMultiplier;
 
@@ -227,7 +223,7 @@ public class MovePlayer : RBGetter
         }
         else
         {
-            float velocityResponse = IsChangingDirection(currentVelocity, desiredVelocity) ? turningResponse : acceleration;
+            float velocityResponse = IsChangingDirection(currentVelocity, desiredVelocity) ? RigidSettings.TurningResponse : RigidSettings.Acceleration;
             float maximumVelocityChange = velocityResponse * Time.fixedDeltaTime;
             currentVelocity = Vector2.MoveTowards(currentVelocity, desiredVelocity, maximumVelocityChange);
         }
@@ -255,7 +251,7 @@ public class MovePlayer : RBGetter
     {
         if (!extraBallCollider) return;
 
-        float speedRatio = maxSpeed <= Mathf.Epsilon ? 0f : rb.linearVelocity.magnitude / maxSpeed;
+        float speedRatio = RigidSettings.MaxSpeed <= Mathf.Epsilon ? 0f : rb.linearVelocity.magnitude / RigidSettings.MaxSpeed;
 
         if (!extraBallCollider.enabled && speedRatio >= extraColliderEnableSpeedRatio)
         {
@@ -277,7 +273,7 @@ public class MovePlayer : RBGetter
 
     void ConstrainVirtualCursor()
     {
-        var cursorDistance = maxSpeedDistance;
+        var cursorDistance = RigidSettings.MaxSpeedDistance;
         if (cursorDistance <= 0f) return;
 
         Vector2 playerPosition = transform.position.RemoveZ();
@@ -292,7 +288,7 @@ public class MovePlayer : RBGetter
 
     void CalculateMaxSpeed()
     {
-        float configuredMoveSpeed = Mathf.Lerp(minSpeed, maxSpeed, GetMouseDistanceAlpha());
+        float configuredMoveSpeed = Mathf.Lerp(RigidSettings.MinSpeed, RigidSettings.MaxSpeed, GetMouseDistanceAlpha());
         currentMaxSpeed = configuredMoveSpeed * dashController.MoveSpeedMultiplier;
     }
 
@@ -458,7 +454,7 @@ public class MovePlayer : RBGetter
 
     void UpdateDashReturnTarget()
     {
-        bool reachedDashReturnPosition = Vector2.Distance(transform.position, GetVirtualMousePosition()) <= stoppingDistance;
+        bool reachedDashReturnPosition = Vector2.Distance(transform.position, GetVirtualMousePosition()) <= RigidSettings.StoppingDistance;
         if (reachedDashReturnPosition)
         {
             isReturningFromDash = false;

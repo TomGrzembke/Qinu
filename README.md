@@ -2,7 +2,7 @@
 .. is a short air hockey RPG about suppressed feelings.
 
 - Created in Unity Engine.
-- This is a solo passion project with some external art help.
+- This is a solo passion project.
 - Initial self-set task: Create a game solo in 6 months.
 
 <div align="center">
@@ -26,7 +26,7 @@ RewardWindow | [View](https://github.com/TomGrzembke/Qinu/blob/main/Assets/%2B%2
 </div>
 
 ## Additional Info
-This Project was displayed at [Talk and Play 53](https://www.flickr.com/photos/12601747@N00/54932329209/in/album-72177720330395625) and [AMaze Open Screens](https://www.linkedin.com/posts/tom-grzembke_indiedev-gamedev-madewithunity-activity-7460761635314552832-F_m9)
+This Project was displayed at [Gamescom AMaze Booth](https://gamescom.a-maze.net/), [AMaze Open Screens](https://www.linkedin.com/posts/tom-grzembke_indiedev-gamedev-madewithunity-activity-7460761635314552832-F_m9) and [Talk and Play 53](https://www.flickr.com/photos/12601747@N00/54932329209/in/album-72177720330395625)
 
 - Release date: 01.07.2024
 - Unity Version: Unity 6000.5.3f1 (used 2022.3.62f3 for the longest period of development) 

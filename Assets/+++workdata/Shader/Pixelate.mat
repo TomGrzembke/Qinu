@@ -48,6 +48,7 @@ Material:
     - _OutlineThickness: 1
     - _PixelRes: 0
     m_Colors:
+    - White: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
     - _PixelCount: {r: 559, g: 314.4375, b: 0, a: 0}
   m_BuildTextureStacks: []

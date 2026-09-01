@@ -5,10 +5,10 @@
 - This is a solo passion project.
 - Initial self-set task: Create a game solo in 6 months.
 
-<img width="200" height="277" alt="FlipperCover4" src="https://github.com/user-attachments/assets/9ee84566-fa1e-480f-b982-ec950c8c9bb7" />
-
 ## How To Run
 WebGL embed at itch.io: [here](https://tom-grzembke.itch.io/qinu)
+
+<img width="200" height="277" alt="FlipperCover4" src="https://github.com/user-attachments/assets/9ee84566-fa1e-480f-b982-ec950c8c9bb7" />
 
 # Code Showcase
 

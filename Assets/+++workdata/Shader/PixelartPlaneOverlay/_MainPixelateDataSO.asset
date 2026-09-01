@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: Primary
     outlineColor: {r: 1, g: 1, b: 1, a: 0}
     outlineSize: 1
-    pixelRes: 232
+    pixelRes: 550
     camOrthoSize: 18
     macroPixelFollowMultiplier: 100
     pixelateCalculatorSo: {fileID: 11400000, guid: 69c94ec339bb381498be3a150ffaafed, type: 2}

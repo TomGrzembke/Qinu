@@ -31,6 +31,9 @@ public class RewardWindow : MonoBehaviour
     GameObject rewardSelected;
     int rewardSelectedRarity;
 
+    const string ABILITY_EXCHANGE_TEXT = "Press the Ability you want to exchange";
+    const string REWARD_FAIL_TEXT = "Reward received is null";
+
     void Awake()
     {
         Instance = this;
@@ -65,6 +68,7 @@ public class RewardWindow : MonoBehaviour
         rewards = PickThreeRewards();
         RollRewardRarities();
         UpdateChoiceImages();
+
         string currentText = "";
 
         for (int i = 0; i < choiceButtonTexts.Length; i++)
@@ -169,7 +173,7 @@ public class RewardWindow : MonoBehaviour
 
             rewardSelected = abilityPrefab;
             rewardSelectedRarity = rewardRarities[buttonID];
-            keySlotDescription.text = "Press the Ability you want to exchange";
+            keySlotDescription.text = ABILITY_EXCHANGE_TEXT;
 
             StopChoicePressedAnimation();
             choiceButtonAnimation[buttonID].SetPressed(gameObject, true);
@@ -252,7 +256,7 @@ public class RewardWindow : MonoBehaviour
     {
         if (reward == null)
         {
-            Debug.LogError("Reward received is null", gameObject);
+            Debug.LogError(REWARD_FAIL_TEXT, gameObject);
             return;
         }
 

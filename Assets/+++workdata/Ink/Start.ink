@@ -4,9 +4,7 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
  == Ball
- What am I? #speaker: Qinu
- Your a suppressed feeling. #speaker: Anthony
- Don't worry about it for now.
+ Headache.. #speaker: Qinu
  Is this.. an air hockey arena? #speaker: Qinu
  Exactly! Let's play a bit! #speaker: Anthony
     ~Event ("Ball")
@@ -17,7 +15,7 @@ Welcome Qinu! #speaker: Anthony
  == Abilities
   ~Event ("GoalActive")
   ~Event ("ActivateAbilities")
- You will be able abilites. #speaker: Anthony
+ You will be able to use abilites. #speaker: Anthony
  Here's your first one! #speaker: Anthony
     ~Event ("GainDash")
  -> END

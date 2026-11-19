@@ -531,7 +531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gamescom Version!!
+  m_text: Baltic Version!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
   m_sharedMaterial: {fileID: 7111155575338065015, guid: ed4a89576bafe6a4b86813a0b8806017, type: 2}
@@ -5416,6 +5416,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!114 &1937675453
 MonoBehaviour:

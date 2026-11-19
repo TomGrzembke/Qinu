@@ -1,11 +1,11 @@
 using Ink;
 using Ink.Runtime;
-using MyBox;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public struct DialogueLine
 {
@@ -47,6 +47,7 @@ public class DialogueController : MonoBehaviour
     Story inkStory;
     Coroutine debugTextSpeedCor;
     Coroutine dialogueQueueCor;
+    DialogueBox currentDialogueBox;
 
     void Awake()
     {
@@ -57,6 +58,8 @@ public class DialogueController : MonoBehaviour
         inkStory.onError += OnInkError;
         inkStory.BindExternalFunction<string>("Event", Event);
         oldSpeed = TypeSpeed;
+
+        InputManager.Instance.SubscribeTo(HandleClick, InputManager.Instance.LeftclickAction);
     }
 
     public void SetTextSpeedMultiplier(float multiplier)
@@ -74,6 +77,7 @@ public class DialogueController : MonoBehaviour
     void OnDestroy()
     {
         inkStory.onError -= OnInkError;
+        InputManager.Instance.DesubscribeTo(HandleClick, InputManager.Instance.LeftclickAction);
     }
 
     public void StartDialogue(string dialoguePath)
@@ -151,12 +155,12 @@ public class DialogueController : MonoBehaviour
         lastSpeaker = dialogueLine.speaker;
 
 
-        DialogueBox dialogueBox = GetDialogueBox(dialogueLine);
+        currentDialogueBox = GetDialogueBox(dialogueLine);
 
-        if (!dialogueBox) return;
+        if (!currentDialogueBox) return;
 
-        SetDialoguePlacement(dialogueBox, dialogueLine);
-        dialogueBox.DisplayText(dialogueLine);
+        SetDialoguePlacement(currentDialogueBox, dialogueLine);
+        currentDialogueBox.DisplayText(dialogueLine);
     }
 
     void OpenDialogue()
@@ -235,8 +239,10 @@ public class DialogueController : MonoBehaviour
 
     void LogMissingSpeaker(string speaker)
     {
-        if (debugMessages)
-            Debug.Log(speaker + " isn't in scene");
+        if (!debugMessages) return;
+
+        Debug.Log(speaker + " isn't in scene");
+
     }
 
     DialogueLine HandleTags(List<string> currentTags, DialogueLine dialogueLine)
@@ -298,6 +304,23 @@ public class DialogueController : MonoBehaviour
     void Event(string eventName)
     {
         InkEvent?.Invoke(eventName);
+    }
+
+    void HandleClick(InputAction.CallbackContext ctx)
+    {
+        if(!InDialogue) return;
+        if(ctx.canceled) return;
+        if(currentDialogueBox == null) return;
+
+        if (currentDialogueBox.IsTyping)
+        {
+            BoostTypeSpeed(0.2f);
+        }
+        else
+        {
+            currentDialogueBox.SetContinueTrigger(true);
+        }
+
     }
 
     public void BoostTypeSpeed(float typeTime)

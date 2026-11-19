@@ -1,44 +1,45 @@
-using System;
 using System.Collections;
+using MyBox;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary> Prints the dialogue lines on call</summary>
 public class DialogueBox : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] SoundType voice;
     [SerializeField] float typeSpeedMultiplier = 1f;
     [SerializeField] TextMeshProUGUI dialogueText;
-    [SerializeField] Button continueButton;
+
+    [SerializeField] GameObject continueObject;
+    [SerializeField] Vector2 localContinueObjectOffset;
     [field: SerializeField] public FollowGameObjectInCam CamFollow { get; private set; }
 
-    #endregion
 
-    #region Non Serialized
-    public event Action<DialogueBox> DialogueContinued;
     Coroutine displayLineCoroutine;
     float typeSpeed => DialogueController.Instance.TypeSpeed / typeSpeedMultiplier;
     const string textAlpha = "<color=#00000000>";
-    #endregion
 
+    bool continueTrigger;
+    [field: SerializeField] public bool IsTyping { get; private set; } 
 
-    #region UnityEvents
-    void Awake()
-    {
-        continueButton?.onClick.AddListener(() => { DialogueContinued?.Invoke(this); });
-    }
 
     void OnEnable()
     {
         dialogueText.SetText(string.Empty);
+        continueObject.SetActive(false);
+    }
+
+    public void SetContinueTrigger(bool condition)
+    {
+        continueTrigger = condition;
     }
 
     public void DisplayText(DialogueLine dialogueLine)
     {
         if (displayLineCoroutine != null)
+        {
             StopCoroutine(displayLineCoroutine);
+        }
 
         displayLineCoroutine = StartCoroutine(DisplayLineAlpha(dialogueLine));
 
@@ -47,13 +48,14 @@ public class DialogueBox : MonoBehaviour
     IEnumerator DisplayLine(DialogueLine dialogueLine)
     {
         dialogueText.text = "";
-
+        IsTyping = true;
         for (int i = 0; i < dialogueLine.text.Length; i++)
         {
             dialogueText.text += dialogueLine.text[i];
 
             yield return new WaitForSeconds(typeSpeed);
         }
+        IsTyping = false;
         yield return new WaitForSeconds(1f);
 
         transform.parent.gameObject.SetActive(false);
@@ -66,6 +68,7 @@ public class DialogueBox : MonoBehaviour
         string originalText = dialogueLine.text;
         string displayedText = "";
         int alphaIndex = 0;
+        IsTyping = true;
 
         foreach (char c in originalText.ToCharArray())
         {
@@ -79,11 +82,41 @@ public class DialogueBox : MonoBehaviour
             yield return new WaitForSeconds(typeSpeed);
 
         }
+        
+        IsTyping = false;
+        RefreshContinueIcon();
 
-        yield return new WaitForSeconds(DialogueController.Instance.TimeBetweenDialogue);
+        //yield return new WaitForSeconds(DialogueController.Instance.TimeBetweenDialogue);
+        yield return new WaitUntil(() => continueTrigger);
+        continueTrigger = false;
 
+        continueObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
         DialogueController.Instance.ContinueDialogue();
     }
-    #endregion
+
+    void RefreshContinueIcon()
+    {
+        TMP_TextInfo textInfo = dialogueText.textInfo;
+        int lastIndex = GetLastVisibleCharacterIndex(textInfo);
+
+        TMP_CharacterInfo charInfo = textInfo.characterInfo[lastIndex];
+        Vector3 targetLocalPos = charInfo.bottomRight + localContinueObjectOffset.WithZ(charInfo.bottomRight.z);
+
+        Vector3 worldPos = dialogueText.transform.TransformPoint(targetLocalPos);
+        continueObject.transform.position = worldPos;
+
+        continueObject.SetActive(true);
+    }
+
+    private int GetLastVisibleCharacterIndex(TMP_TextInfo textInfo)
+    {
+        int count = textInfo.characterCount;
+        for (int i = count - 1; i >= 0; i--)
+        {
+            if (textInfo.characterInfo[i].isVisible) return i;
+        }
+
+        return -1;
+    }
 }

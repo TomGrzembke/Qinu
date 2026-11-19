@@ -16,7 +16,7 @@ qinu
 inuq
 nuqi
 uniq.
+unique.
 ~Event ("MainMenu")
- -> END
-~Event ("MainMenu")
+ -> END("MainMenu")
  -> END

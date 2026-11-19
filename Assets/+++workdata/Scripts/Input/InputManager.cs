@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
 
     PlayerInputActions input;
     Camera Cam;
+    bool leftClickPressed;
     bool usedTouch;
     Vector2 additionalDelta;
 
@@ -79,6 +80,9 @@ public class InputManager : MonoBehaviour
         MousePosAction = input.Player.MousePos;
 
         LeftclickAction = input.Player.LeftClick;
+        LeftclickAction.performed += ctx => SetLeftClickPressed(true);
+        LeftclickAction.canceled += ctx => SetLeftClickPressed(false);
+
         RightClickAction = input.Player.RightClick;
         Ability0Action = input.Player.Ability0;
     }
@@ -185,6 +189,16 @@ public class InputManager : MonoBehaviour
     public Vector2 GetTrueMousePosition()
     {
         return Mouse.current.position.ReadValue();
+    }
+
+    void SetLeftClickPressed(bool condition)
+    {
+        leftClickPressed = condition;
+    }
+
+    public bool GetLeftClickPressed()
+    {
+        return leftClickPressed;
     }
 
     public Vector2 GetDistortedMouseDelta()

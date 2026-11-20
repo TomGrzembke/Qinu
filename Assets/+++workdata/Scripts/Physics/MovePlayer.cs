@@ -180,6 +180,13 @@ public class MovePlayer : RBGetter
         RemoveExpiredCollisionNormals();
         ResetVirtualCursorOffsetWhenVisible();
 
+        if (RewardWindow.Instance.InAbilitySelect)
+        {
+            ConstrainVirtualCursor();
+            rb.linearVelocity = new(0, 0);
+            return;
+        }
+
         if (isReturningFromDash)
         {
             UpdateDashReturnTarget();

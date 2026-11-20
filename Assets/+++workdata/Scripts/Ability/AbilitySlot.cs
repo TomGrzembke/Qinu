@@ -14,6 +14,8 @@ public class AbilitySlot : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] bool blockedByUI = false;
+    [SerializeField] bool blockedByText = false;
+    [SerializeField] bool blockedByAbilitySelect = false;
 
     [Header("References")]
     public GameObject CurrentAbilityPrefab => currentAbilityPrefab;
@@ -29,6 +31,8 @@ public class AbilitySlot : MonoBehaviour
     Animator anim;
     float lastExecutedTime;
     const float EXECUTE_COOLDOWN = 0.2f;
+
+    bool blockSkipTrigger;
 
     void Awake()
     {
@@ -176,9 +180,26 @@ public class AbilitySlot : MonoBehaviour
         CurrentAbility.Execute(performed);
     }
 
+    /// <summary> Allows the player to skip a trigger block (normally by UI or Text) </summary>
+    public void GrantBlockSkipTrigger()
+    {
+        blockSkipTrigger = true;
+        print("blockSkipTrigger TRUE");
+    }
+
     bool IsBlocked()
     {
-        if (!blockedByUI) return false;
+        if (!blockedByUI && !blockedByText) return false;
+
+        if(blockedByAbilitySelect && RewardWindow.Instance.InAbilitySelect) return true;
+
+        if (blockSkipTrigger && !DialogueController.Instance.GetIsTyping())
+        {
+            blockSkipTrigger = false;
+            return false;
+        }
+
+        if (blockedByText && DialogueController.Instance.InDialogue) return true;
 
         PointerEventData eventDataCurrentPosition = new(EventSystem.current)
         {

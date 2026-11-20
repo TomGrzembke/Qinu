@@ -340,6 +340,7 @@ public class RewardWindow : MonoBehaviour
             yield return null;
             time += Time.unscaledDeltaTime;
         }
+        
         InAbilitySelect = false;
     }
 

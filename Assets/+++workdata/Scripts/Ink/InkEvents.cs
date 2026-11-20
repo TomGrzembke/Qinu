@@ -6,9 +6,7 @@ using UnityEngine.Events;
 /// <summary> Stores InkEvents that get called from the ink file </summary>
 public class InkEvents : MonoBehaviour
 {
-    #region Serialized
     [SerializeField] List<InkEvent> inkEvents;
-    #endregion
 
     void OnEnable()
     {
@@ -34,7 +32,9 @@ public class InkEvents : MonoBehaviour
     public void InvokeAllEvents()
     {
         foreach (InkEvent inkEvent in inkEvents)
+        {
             inkEvent.onEvent.Invoke();
+        }
     }
 }
 

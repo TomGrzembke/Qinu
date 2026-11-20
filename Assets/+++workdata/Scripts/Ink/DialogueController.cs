@@ -310,9 +310,8 @@ public class DialogueController : MonoBehaviour
     {
         if(!InDialogue) return;
         if(ctx.canceled) return;
-        if(currentDialogueBox == null) return;
 
-        if (currentDialogueBox.IsTyping)
+        if (GetIsTyping())
         {
             BoostTypeSpeed(0.2f);
         }
@@ -321,6 +320,13 @@ public class DialogueController : MonoBehaviour
             currentDialogueBox.SetContinueTrigger(true);
         }
 
+    }
+
+    public bool GetIsTyping()
+    {
+        if(currentDialogueBox == null) return false;
+
+        return currentDialogueBox.IsTyping;
     }
 
     public void BoostTypeSpeed(float typeTime)

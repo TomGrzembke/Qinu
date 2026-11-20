@@ -21,12 +21,13 @@ Welcome Qinu! #speaker: Anthony
  -> END
  
  == AbilityGained
-  Activate it with the left mouse button. #speaker: Anthony
-         ~Event ("QHelp")
+~Event ("BlockSkip")
+Activate it with the left mouse button. #speaker: Anthony 
  -> END
  
   == QHelp
-  Left mouse button activates your first Slot. #speaker: Anthony
+  ~Event ("BlockSkip")
+ Left mouse button activates your first Slot. #speaker: Anthony
  -> END
  
   ==ActivateGoals
@@ -41,9 +42,8 @@ Good match! #speaker: Anthony
 See that bar up there?
     ~Event ("BarDown")
 It tracks your wins.
-Don't loose too much, I can't do this again.
+Don't loose too much please, you seem nice.
     ~Event ("UpdateBar")
-Now Show 'em what you've got!
  -> END
  
  == StartArchive

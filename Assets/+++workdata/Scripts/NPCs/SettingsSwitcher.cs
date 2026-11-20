@@ -9,11 +9,13 @@ public class SettingsSwitcher : MonoBehaviour
     [SerializeField] NPCCharSO specialCharSO;
 
     [SerializeField] float timeInDefault = 10;
+    [SerializeField] float defaultIndicatorTime = 2;
     [SerializeField] float timeInSpecial = 5;
     [SerializeField] float musicBlendTimeOverride = .64f;
 
     [SerializeField] ParticleSystem[] specialSystems;
     [SerializeField] ParticleSystem[] defaultSystems;
+    [SerializeField] GameObject defaultObject;
     Coroutine switchRoutine;
 
 
@@ -31,10 +33,14 @@ public class SettingsSwitcher : MonoBehaviour
             ChangeCharSO(defaultCharSO, specialCharSO);
             PlayDefaultParticles(true);
             PlaySpecialParticles(false);
+            yield return new WaitForSeconds(defaultIndicatorTime);
+            PlayDefaultParticles(false);
+
             yield return new WaitForSeconds(timeInDefault);
             ChangeCharSO(specialCharSO, defaultCharSO);
             PlaySpecialParticles(true);
             PlayDefaultParticles(false);
+
 
             yield return new WaitForSeconds(timeInSpecial);
         }
@@ -62,10 +68,13 @@ public class SettingsSwitcher : MonoBehaviour
             if (condition)
             {
                 entry.Play();
+                defaultObject.SetActive(true);
             }
             else
             {
                 entry.Stop();
+                defaultObject.SetActive(false);
+
             }
         }
     }

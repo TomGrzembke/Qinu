@@ -35,6 +35,8 @@ public class DialogueTutorial : MonoBehaviour
 
     void AddNPCs()
     {
+        if(TournamentManager.Instance == null) return;
+        
         TournamentManager.Instance.LeftPlayerAdd();
 
         AddStartNPC();

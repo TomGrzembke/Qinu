@@ -732,15 +732,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalScale.x
-      value: 16.68697
+      value: 41.717422
       objectReference: {fileID: 0}
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.923756
+      value: 7.3093896
       objectReference: {fileID: 0}
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.923756
+      value: 7.3093896
       objectReference: {fileID: 0}
     - target: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
       propertyPath: m_LocalPosition.x
@@ -810,38 +810,15 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.minColor.r
       value: 0.37534732
       objectReference: {fileID: 0}
+    - target: {fileID: 8524100218476338356, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
+      propertyPath: dashController
+      value: 
+      objectReference: {fileID: 5094664091428664438}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 176530, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 6794711218033301891}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
---- !u!198 &1040195404975792425 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2769575316332700702, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-  m_PrefabInstance: {fileID: 2882310522435274039}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2882310522435450021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 176530, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}
-  m_PrefabInstance: {fileID: 2882310522435274039}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6794711218033301891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2882310522435450021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12b6441695c4bc4944872c76ae92b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PostDashVFX
-  dashController: {fileID: 5094664091428664438}
-  vfx: {fileID: 1040195404975792425}
 --- !u!4 &2882310522435726519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452992, guid: b7e8a9af0eb63824f94458da886c7b31, type: 3}

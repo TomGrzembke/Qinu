@@ -5,6 +5,7 @@ public class PostDashVFX : MonoBehaviour
     [SerializeField] DashController dashController;
     [Tooltip("Child object shown while the post-dash movement modifier is active.")]
     [SerializeField] ParticleSystem vfx;
+    [SerializeField] GameObject animationObject;
 
     void Awake()
     {
@@ -48,6 +49,9 @@ public class PostDashVFX : MonoBehaviour
         {
             vfx.Stop();
         }
+        
+        if (animationObject == null) return;
 
+        animationObject.SetActive(isActive);
     }
 }

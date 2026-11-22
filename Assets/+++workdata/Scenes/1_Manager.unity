@@ -412,6 +412,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!1 &230158722
 GameObject:
@@ -1666,6 +1667,7 @@ MonoBehaviour:
   scaleOnClick: 0.9
   scaleTime: 0.075
   scaleHover: 0.95
+  hoverSwitchCooldown: 0.08
   onClickSFX: 2
 --- !u!114 &1029670963
 MonoBehaviour:
@@ -3084,7 +3086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -2.7999878}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1709975293

@@ -184,7 +184,6 @@ public class AbilitySlot : MonoBehaviour
     public void GrantBlockSkipTrigger()
     {
         blockSkipTrigger = true;
-        print("blockSkipTrigger TRUE");
     }
 
     bool IsBlocked()

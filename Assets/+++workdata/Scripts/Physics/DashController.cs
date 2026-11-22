@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MyBox;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,7 @@ public class DashController : RBGetter
     }
 
     [SerializeField] CharSOHolder charSOHolder;
+    [SerializeField] GameObject dashEffect;
 
     NavMeshAgent agent;
     MovePlayer movePlayer;
@@ -39,6 +41,11 @@ public class DashController : RBGetter
         movePlayer = GetComponent<MovePlayer>();
         charSO = charSOHolder.CharSO;
         charSOHolder.CharSOChanged += OnCharSOChanged;
+
+        if (dashEffect != null)
+        {
+            dashEffect.SetActive(false);
+        }
     }
 
     void OnDisable()
@@ -113,6 +120,11 @@ public class DashController : RBGetter
     IEnumerator DashRoutine(TargetMode targetMode, Transform target, Vector2 targetPosition, float multiplier, bool applyPostDashMoveSpeed, DashSettings dashSettings)
     {
         float duration = dashSettings.Duration;
+
+        if (dashEffect != null)
+        {
+            dashEffect.SetActive(true);
+        }
 
         if (duration <= Mathf.Epsilon)
         {
@@ -240,6 +252,10 @@ public class DashController : RBGetter
     IEnumerator CooldownRoutine(float cooldown)
     {
         yield return new WaitForSeconds(cooldown);
+        if (dashEffect != null)
+        {
+            dashEffect.SetActive(false);
+        }
         cooldownRoutine = null;
     }
 }

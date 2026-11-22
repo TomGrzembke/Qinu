@@ -15,6 +15,10 @@ I hope you enjoyed that! #speaker: Anthony
 Did that sound bad?
  -> END
  
+  ==Anthony4
+Relationships are there to relate, right? #speaker: Anthony
+ -> END
+ 
  ==Tessar0
 That rocked! #speaker: Tessar
  -> END
@@ -29,6 +33,10 @@ You're talented Qinu! #speaker: Tessar
  
  ==Tessar3
 Off to the next Task! #speaker: Tessar
+ -> END
+ 
+  ==Tessar4
+I think I left something in the oven. #speaker: Tessar
  -> END
  
  ==Bodi0
@@ -51,7 +59,6 @@ I hope the arena is fine after that. #speaker: Bodi
  Huh. #speaker: Bodi
  -> END
  
- 
  ==Pamo0
 I need a recharge. #speaker: Pamo
  -> END
@@ -67,6 +74,11 @@ THAT WAS FUN!!! #speaker: Pamo
  ==Pamo3 
 YOU WENT CRAZY THERE! #speaker: Pamo
  -> END
+ 
+ ==Pamo4
+ What's a dopamine level? #speaker: Pamo
+I think your onto something pamo. #speaker: Qinu
+ ->END
  
  ==Qinu0
  Thanks for playing with me. #speaker: Qinu

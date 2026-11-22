@@ -8,13 +8,12 @@ What happens now? #speaker: Qinu
     ~Event ("SilentSpiritsExclamationOff")
 You will be released to your host again. #speaker: Anthony
     ~Event ("OpenCapsuleWin")
-You're the uniquness of an old person who has lost their partner.
-    ~Event ("SuckQinuIn")
+You're the uniqueness of an old person who has lost their partner.
 With you, they will regain joy in learning life alone again.
+    ~Event ("SuckQinuIn")
  -> END
  
  ==Won2
  Goodbye Qinu. #speaker: Anthony
- Enjoy Gamescom.
     ~Event ("MainMenu")
-  -> END-> END
+  -> END

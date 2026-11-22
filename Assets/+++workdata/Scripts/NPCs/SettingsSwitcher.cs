@@ -63,18 +63,20 @@ public class SettingsSwitcher : MonoBehaviour
 
     void PlayDefaultParticles(bool condition)
     {
+        if (defaultObject != null)
+        {
+            defaultObject.SetActive(condition);
+        }
+
         foreach (var entry in defaultSystems)
         {
             if (condition)
             {
                 entry.Play();
-                defaultObject.SetActive(true);
             }
             else
             {
                 entry.Stop();
-                defaultObject.SetActive(false);
-
             }
         }
     }

@@ -180,7 +180,7 @@ public class MovePlayer : RBGetter
         RemoveExpiredCollisionNormals();
         ResetVirtualCursorOffsetWhenVisible();
 
-        if (RewardWindow.Instance.InAbilitySelect)
+        if (RewardWindow.Instance != null && RewardWindow.Instance.InAbilitySelect)
         {
             ConstrainVirtualCursor();
             rb.linearVelocity = new(0, 0);

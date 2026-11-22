@@ -18,5 +18,4 @@ nuqi
 uniq.
 unique.
 ~Event ("MainMenu")
- -> END("MainMenu")
  -> END

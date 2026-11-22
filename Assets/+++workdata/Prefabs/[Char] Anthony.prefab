@@ -112,6 +112,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Time
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.58431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.5144539
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].inSlope
+      value: -0.6231307
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outSlope
+      value: -0.6231307
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outWeight
+      value: 0.06957708
+      objectReference: {fileID: 0}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: isRight
       value: 0
@@ -128,6 +176,14 @@ PrefabInstance:
       propertyPath: <TopTextTarget>k__BackingField
       value: 
       objectReference: {fileID: 5824789347529995988}
+    - target: {fileID: 8010035651805114025, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010035651805114025, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 8040409890454107378, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: anim
       value: 

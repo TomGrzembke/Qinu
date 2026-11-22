@@ -439,6 +439,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Time
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.73333335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: characterCollider
       value: 

@@ -15,7 +15,7 @@ public class DashController : RBGetter
     }
 
     [SerializeField] CharSOHolder charSOHolder;
-    [SerializeField] GameObject dashEffect;
+    [SerializeField] TrailRenderer dashEffect;
 
     NavMeshAgent agent;
     MovePlayer movePlayer;
@@ -44,7 +44,7 @@ public class DashController : RBGetter
 
         if (dashEffect != null)
         {
-            dashEffect.SetActive(false);
+            dashEffect.emitting = false;
         }
     }
 
@@ -123,7 +123,7 @@ public class DashController : RBGetter
 
         if (dashEffect != null)
         {
-            dashEffect.SetActive(true);
+            dashEffect.emitting = true;
         }
 
         if (duration <= Mathf.Epsilon)
@@ -252,9 +252,10 @@ public class DashController : RBGetter
     IEnumerator CooldownRoutine(float cooldown)
     {
         yield return new WaitForSeconds(cooldown);
+        
         if (dashEffect != null)
         {
-            dashEffect.SetActive(false);
+            dashEffect.emitting = false;
         }
         cooldownRoutine = null;
     }

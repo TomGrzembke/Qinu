@@ -10321,6 +10321,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Time
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.9176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.9294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.2890111
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: -0.14610322
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inWeight
+      value: 0.079126894
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outSlope
+      value: -0.14610322
+      objectReference: {fileID: 0}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: col
       value: 

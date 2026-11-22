@@ -9754,6 +9754,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.43921572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.18431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.23137257
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904457258081854316, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7953238053786489971, guid: ed5f8f7bba90463429d017797f82f662, type: 3}
       propertyPath: isRight
       value: 0

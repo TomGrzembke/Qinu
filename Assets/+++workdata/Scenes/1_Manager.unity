@@ -516,6 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 395187874}
   - component: {fileID: 395187873}
+  - component: {fileID: 395187875}
   - component: {fileID: 395187872}
   - component: {fileID: 395187871}
   - component: {fileID: 395187870}
@@ -638,6 +639,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 607.5761}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &395187875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395187868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7efc9d4dfe2a74285a760ab7b008cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FitWorldCanvasToCamera
+  matchHeight: 1
 --- !u!1 &412481111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 826172280}
   - component: {fileID: 826172281}
+  - component: {fileID: 826172282}
   - component: {fileID: 826172278}
   - component: {fileID: 826172277}
   - component: {fileID: 826172276}
@@ -1181,6 +1196,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2709c76872ad40742b447c0b5854f6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &826172282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826172274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7efc9d4dfe2a74285a760ab7b008cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FitWorldCanvasToCamera
+  matchHeight: 1
 --- !u!1 &852198530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,14 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c0afdf823a9684ba33317b1f1e7e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeScaler
-  slowMoCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  slowMoBlendTime: 0.3
-  slowMoBlendTimeScale: 0.8
+  desiredTimescale: 1
 --- !u!1 &987567733
 GameObject:
   m_ObjectHideFlags: 0

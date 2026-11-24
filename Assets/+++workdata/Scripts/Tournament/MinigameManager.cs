@@ -93,6 +93,7 @@ public class MinigameManager : MonoBehaviour
         TournamentManager.Instance.SideWon(goalID == 0 ? 1 : 0);
         goalTracker?.WonParticle();
         ResetInternal();
+        AbilitySlotManager.Instance.ResetCooldowns();
     }
 
     /// <summary> Depends on rb velocity</summary>

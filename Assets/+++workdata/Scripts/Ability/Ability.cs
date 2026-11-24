@@ -39,6 +39,17 @@ public abstract class Ability : MonoBehaviour
         return true;
     }
 
+    public void ResetCooldown()
+    {
+        if (coolDownCor != null)
+        {
+            StopCoroutine(coolDownCor);
+        }
+
+        currentCooldown = 0;
+        ReadyAbility();
+    }
+
     public bool ReduceRarity(int amount)
     {
         currentRarity -= amount;
@@ -102,6 +113,12 @@ public abstract class Ability : MonoBehaviour
             yield return null;
         }
 
+        ReadyAbility();
+    }
+
+    void ReadyAbility()
+    {
+        FillImages();
         anim.SetTrigger("ready");
         numberObject.SetActive(true);
         coolDownCor = null;
@@ -119,14 +136,19 @@ public abstract class Ability : MonoBehaviour
             coolDownCor = null;
         }
 
+        FillImages();
+
+        CleanupInternal();
+    }
+
+    void FillImages()
+    {
         foreach (var entry in abilityBGImages)
         {
             entry.fillAmount = 1;
         }
 
         abilityImage.fillAmount = 1;
-
-        CleanupInternal();
     }
 
     protected void QueueDestroy(Coroutine coroutineToFinish)

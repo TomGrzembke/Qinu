@@ -58,6 +58,14 @@ public class AbilitySlotManager : MonoBehaviour
         AbilitySlots[slotIndex].Execute(performed);
     }
 
+    public void ResetCooldowns()
+    {
+        foreach (var slot in AbilitySlots)
+        {
+           slot.ResetCooldown();
+        }
+    }
+
     bool IsAbilityExchangeCall()
     {
         if (abilityExchange == null) return false;

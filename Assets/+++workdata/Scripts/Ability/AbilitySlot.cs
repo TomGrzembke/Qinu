@@ -39,6 +39,13 @@ public class AbilitySlot : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    public void ResetCooldown()
+    {
+        if (CurrentAbility == null) return; 
+
+        CurrentAbility.ResetCooldown();
+    }
+
     public void RefreshPicture()
     {
         Ability tempAbility = null;

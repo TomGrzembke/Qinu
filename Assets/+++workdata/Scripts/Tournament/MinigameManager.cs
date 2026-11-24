@@ -31,18 +31,10 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Transform pukResetPos;
     [SerializeField] float[] ballSFXSpeed;
 
-    [Header("StrongSlowMo")]
-    [SerializeField] AnimationCurve strongSlowMoCurve;
-    [SerializeField] float strongSlowMoBlendTime = .85f;
-    [SerializeField] float strongSlowMoBlendTimeScale = 0.05f;
-
-    [Header("NormalSlowMo")]
-    [SerializeField] AnimationCurve slowMoCurve;
-    [SerializeField] float slowMoBlendTime = 0.3f;
-    [SerializeField] float slowMoBlendTimeScale = .8f;
+    [SerializeField] SlowMoDataSo goalSlowMo;
+    [SerializeField] SlowMoDataSo matchEndSlowMo;
 
     public static MinigameManager Instance;
-    Coroutine blendRoutine;
 
     public static event Action<Vector2> OnGoalShot;
 
@@ -146,74 +138,14 @@ public class MinigameManager : MonoBehaviour
 
     public void PlaySlowMo()
     {
-        if (blendRoutine != null)
-        {
-            StopCoroutine(blendRoutine);
-        }
-
-        blendRoutine = StartCoroutine(NormalBlendTimeScale());
+        TimeScaler.Instance.PlaySlowMo(goalSlowMo);
     }
 
     public void PlayStrongSlowMo()
     {
-        if (blendRoutine != null)
-        {
-            StopCoroutine(blendRoutine);
-        }
-
-        blendRoutine = StartCoroutine(StrongBlendTimeScale());
+        TimeScaler.Instance.PlaySlowMo(matchEndSlowMo);
     }
 
-    public bool GetSlowMoFinished()
-    {
-        return blendRoutine == null;
-    }
-
-    IEnumerator NormalBlendTimeScale()
-    {
-        float timeBlended = 0;
-
-        while (timeBlended < slowMoBlendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(1, slowMoBlendTimeScale, slowMoCurve.Evaluate(timeBlended / slowMoBlendTime));
-            yield return null;
-        }
-
-        timeBlended = 0;
-
-        while (timeBlended < slowMoBlendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(slowMoBlendTimeScale, 1, timeBlended / slowMoBlendTime);
-            yield return null;
-        }
-
-        blendRoutine = null;
-    }
-
-    IEnumerator StrongBlendTimeScale()
-    {
-        float timeBlended = 0;
-
-        while (timeBlended < strongSlowMoBlendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(1, strongSlowMoBlendTimeScale, strongSlowMoCurve.Evaluate(timeBlended / strongSlowMoBlendTime));
-            yield return null;
-        }
-
-        timeBlended = 0;
-
-        while (timeBlended < strongSlowMoBlendTime)
-        {
-            timeBlended += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(strongSlowMoBlendTimeScale, 1, timeBlended / strongSlowMoBlendTime);
-            yield return null;
-        }
-
-        blendRoutine = null;
-    }
 
     public int GetLeftSideGoals()
     {

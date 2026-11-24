@@ -242,7 +242,7 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterGameCor(int sideID)
     {
         MinigameManager.Instance.PlayStrongSlowMo();
-        yield return new WaitUntil(() => MinigameManager.Instance.GetSlowMoFinished());
+        yield return new WaitUntil(() => TimeScaler.Instance.GetSlowMoFinished());
 
         SituationalDialogue.Instance.StartDialogue(UseList(RightPlayers)[0].name);
 
@@ -302,7 +302,7 @@ public class TournamentManager : MonoBehaviour
     IEnumerator AfterBossFightCoroutine(int sideID)
     {
         MinigameManager.Instance.PlayStrongSlowMo();
-        yield return new WaitUntil(() => MinigameManager.Instance.GetSlowMoFinished());
+        yield return new WaitUntil(() => TimeScaler.Instance.GetSlowMoFinished());
 
         MinigameManager.Instance.CageBall();
         GameState = GameStateEnum.AfterGame;

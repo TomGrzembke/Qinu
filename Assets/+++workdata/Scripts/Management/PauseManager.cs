@@ -42,7 +42,7 @@ public class PauseManager : MonoBehaviour
 
         if (paused && SceneLoader.IsSceneLoaded("3_MainMenu")) return;
 
-        Time.timeScale = paused ? 0 : 1; //Could slowmow blend this 
+        TimeScaler.Instance.SetPaused(paused); //Could slowmow blend this 
 
         objectToToggle.SetActive(paused);
 

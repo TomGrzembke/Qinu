@@ -3,7 +3,6 @@ using UnityEngine;
 /// <summary> Scales A canvas to the current resolution, handy when you want to use post processing on UI which causes it to not scale on itself </summary>
 public class FitWorldCanvasToCamera : MonoBehaviour
 {
-
     [SerializeField] bool matchHeight = true;
 
     float distanceFromCamera = 10f;
@@ -11,13 +10,21 @@ public class FitWorldCanvasToCamera : MonoBehaviour
     Vector2 referenceResolution = new(1920f, 1080f);
     Camera targetCamera;
 
-    private void Awake()
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        referenceResolution = new(rectTransform.rect.width, rectTransform.rect.height);
-
         targetCamera = Camera.main;
-        distanceFromCamera = Vector3.Distance(targetCamera.transform.position, transform.position); 
+    }
+
+    void Start()
+    {
+        if (targetCamera == null)
+        {
+            targetCamera = Camera.main;
+        }
+
+        distanceFromCamera = Vector3.Distance(targetCamera.transform.position, transform.position);
+        referenceResolution = new(rectTransform.rect.width, rectTransform.rect.height);
     }
 
     void LateUpdate()

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> Scales A canvas to the current resolution, handy when you want to use post processing on UI which causes it to not scale on itself </summary>
 public class FitWorldCanvasToCamera : MonoBehaviour
 {
 

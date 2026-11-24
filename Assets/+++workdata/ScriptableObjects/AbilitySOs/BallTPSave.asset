@@ -15,3 +15,4 @@ MonoBehaviour:
   abilitySprite: {fileID: 21300000, guid: 313b9151fa7a14943b2fe2ad948563ac, type: 3}
   abilityTitel: Ball Teleport
   abilityDescription: Description
+  <AbilitiesSettings>k__BackingField: {fileID: 11400000, guid: 3b98152422d1da247a7c61ee1138bf76, type: 2}

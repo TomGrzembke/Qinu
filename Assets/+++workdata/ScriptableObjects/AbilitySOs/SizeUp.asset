@@ -15,3 +15,4 @@ MonoBehaviour:
   abilitySprite: {fileID: -567010029, guid: e7867d17ed2fb304caf897646eeffe26, type: 3}
   abilityTitel: Size Up
   abilityDescription: 
+  <AbilitiesSettings>k__BackingField: {fileID: 11400000, guid: 3b98152422d1da247a7c61ee1138bf76, type: 2}

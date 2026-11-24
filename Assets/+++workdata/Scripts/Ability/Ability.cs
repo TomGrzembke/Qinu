@@ -84,17 +84,21 @@ public abstract class Ability : MonoBehaviour
         currentabilityTime = 0;
 
         currentCooldown = cooldownPerRarity[EvaluateRaritySizing(cooldownPerRarity.Length)];
+        var abilitySettings = abilitySO.AbilitiesSettings;
+        var cooldownCurve = abilitySettings.CooldownCurve;
 
         while (currentabilityTime < currentCooldown)
         {
             currentabilityTime += Time.deltaTime;
+            var currentRawCooldownAlpha = currentabilityTime / currentCooldown;
+            var currentCooldownDisplayAlpha = cooldownCurve.Evaluate(currentRawCooldownAlpha);
 
             foreach (var entry in abilityBGImages)
             {
-                entry.fillAmount = currentabilityTime / currentCooldown;
+                entry.fillAmount = currentCooldownDisplayAlpha;
             }
 
-            abilityImage.fillAmount = currentabilityTime / currentCooldown;
+            abilityImage.fillAmount = currentCooldownDisplayAlpha;
             yield return null;
         }
 

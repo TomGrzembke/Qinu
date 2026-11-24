@@ -102,6 +102,7 @@ public abstract class Ability : MonoBehaviour
             yield return null;
         }
 
+        anim.SetTrigger("ready");
         numberObject.SetActive(true);
         coolDownCor = null;
         currentabilityTime = 0;

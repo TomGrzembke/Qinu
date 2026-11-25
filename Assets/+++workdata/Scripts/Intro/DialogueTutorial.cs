@@ -142,6 +142,6 @@ public class DialogueTutorial : MonoBehaviour
     public void SkipTutorial()
     {
         StopCoroutine(storySegmentRoutine);
-        eventsOfTutorial.InvokeAllEvents();
+        eventsOfTutorial?.InvokeAllEvents();
     }
 }

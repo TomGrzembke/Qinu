@@ -25,16 +25,9 @@ public class PixelateLayerSettings
 [CreateAssetMenu]
 public class PixelateDataSO : ScriptableObject
 {
-    #region Serialized
-
     public List<PixelateLayerSettings> pixelateLayerSettings;
 
-    #endregion
-
-    #region Non Serialized
     public Action onChanged;
-
-    #endregion
 
     void Awake() => ValidateCall();
 

@@ -5,17 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class RT_PixelateCalculatorSO : ScriptableObject
 {
-    #region Serialized
-
     public Material pixelartMat;
 
     public RenderTexture pixelateTexture;
 
     [SerializeField, ShowOnly] Vector2 pixelCount;
 
-    #endregion
-
-    #region Non Serialized
+    [SerializeField, ShowOnly] float pixelScaleMultiplier = 1;
 
     float pixelRes = 128;
     Color col;
@@ -23,7 +19,6 @@ public class RT_PixelateCalculatorSO : ScriptableObject
 
     RangedFloat assetRatio;
 
-    #endregion
 
     void Awake() => ValidateCall();
 
@@ -38,8 +33,8 @@ public class RT_PixelateCalculatorSO : ScriptableObject
         assetRatio.Min = planesRes.x / greatestCommonFactor;
         assetRatio.Max = planesRes.y / greatestCommonFactor;
 
-        pixelCount.x = pixelRes;
-        pixelCount.y = pixelRes / assetRatio.Min * assetRatio.Max;
+        pixelCount.x = pixelRes * pixelScaleMultiplier;
+        pixelCount.y = pixelRes * pixelScaleMultiplier / assetRatio.Min * assetRatio.Max;
 
         pixelartMat.SetVector("_PixelCount", pixelCount);
         pixelartMat.SetColor("_OutlineColor", col);
@@ -49,11 +44,9 @@ public class RT_PixelateCalculatorSO : ScriptableObject
     /// <summary> GCF = Greatest common factor </summary>
     public float CalculateGCF(float a, float b)
     {
-        if (b == 0)
-            return a;
+        if (b == 0) return a;
 
-        else
-            return CalculateGCF(b, a % b);
+        return CalculateGCF(b, a % b);
     }
 
     public Vector2 GetPixelCount()
@@ -66,6 +59,12 @@ public class RT_PixelateCalculatorSO : ScriptableObject
         this.pixelRes = pixelRes;
         this.col = col;
         this.lineSize = lineSize;
+        ValidateCall();
+    }
+
+    public void SetPixelScaleMultiplier(float newValue)
+    {
+        pixelScaleMultiplier = newValue;
         ValidateCall();
     }
 }

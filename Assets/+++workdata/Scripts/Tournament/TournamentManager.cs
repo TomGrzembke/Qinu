@@ -497,13 +497,13 @@ public class TournamentManager : MonoBehaviour
     }
 
     [ButtonMethod]
-    public void WinGame()
+    public void WinRound()
     {
         SideWon(0);
     }
 
     [ButtonMethod]
-    public void LooseGame()
+    public void LooseRound()
     {
         SideWon(1);
     }

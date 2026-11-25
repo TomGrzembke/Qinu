@@ -1447,17 +1447,6 @@ Transform:
   - {fileID: 1679511312}
   m_Father: {fileID: 868472513}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &543805755 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4995209753401717895, guid: 71ef0c47363dd8e4d902f3cef5d912ed, type: 3}
-  m_PrefabInstance: {fileID: 436436415987836075}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa678a0658f999a41a0e3d65008d1fd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &576591708
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,34 +3538,10 @@ MonoBehaviour:
         m_CallState: 2
   asteriskEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 310168708}
-        m_TargetAssemblyTypeName: OptionalBossFightManager, Assembly-CSharp
-        m_MethodName: ShowChoice
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   num7:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 543805755}
-        m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
-        m_MethodName: BoostTypeSpeed
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 6
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 33318320}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive

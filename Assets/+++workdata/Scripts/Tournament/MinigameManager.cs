@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -86,6 +85,11 @@ public class MinigameManager : MonoBehaviour
         goalTracker?.WonParticle();
         ResetInternal();
         AbilitySlotManager.Instance.ResetCooldowns();
+    }
+
+    public void SetPointsTilWin(int value)
+    {
+        pointsTilWin = value;
     }
 
     /// <summary> Depends on rb velocity</summary>

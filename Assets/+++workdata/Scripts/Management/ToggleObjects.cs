@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary> USed for Toggling Objects like Buttons </summary>
+/// <summary> Used for Toggling Objects like Buttons </summary>
 public class ToggleObjects : MonoBehaviour
 {
     [SerializeField] List<GameObject> toggleObjects;
     [SerializeField] bool defaultState;
     bool active;
 
-    private void Start()
+    void Awake()
     {
         Toggle(defaultState);
     }

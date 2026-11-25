@@ -19,6 +19,7 @@ public class DialogueTutorial : MonoBehaviour
     bool IsPlaying => TournamentManager.Instance.GameState == TournamentManager.GameStateEnum.InGame;
     bool BaseAbilityPressed => AbilitySlotManager.Instance.GetAbilitySlotPerformed(0);
     Coroutine storySegmentRoutine;
+    Coroutine introRoutine;
     Vector3 pukPosoitionCache;
     bool isGoalShotThisFrame;
 
@@ -28,7 +29,7 @@ public class DialogueTutorial : MonoBehaviour
 
         InitializeGoalShotListener();
 
-        StartCoroutine(IntroCoroutine());
+        introRoutine = StartCoroutine(IntroCoroutine());
 
         AddNPCs();
     }
@@ -77,6 +78,8 @@ public class DialogueTutorial : MonoBehaviour
             yield return new WaitUntil(() => storySegmentRoutine == null);
             storySegmentRoutine = StartCoroutine(StorySegmentCor(dialogueSegment[i]));
         }
+
+        introRoutine = null;
     }
 
     IEnumerator StorySegmentCor(DialogueSegment dialogueSegment)
@@ -139,9 +142,18 @@ public class DialogueTutorial : MonoBehaviour
         RewardWindow.Instance.GiveSingleReward(dashAbilityPrefab);
     }
 
+    public bool IsInTutorial()
+    {
+        return introRoutine != null;
+    }
+
     public void SkipTutorial()
     {
         StopCoroutine(storySegmentRoutine);
+        storySegmentRoutine = null;
+        StopCoroutine(introRoutine);
+        introRoutine = null;
+        
         eventsOfTutorial?.InvokeAllEvents();
     }
 }

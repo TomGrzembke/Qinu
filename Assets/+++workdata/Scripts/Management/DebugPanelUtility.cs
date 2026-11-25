@@ -7,16 +7,6 @@ public class DebugPanelUtility : MonoBehaviour
         TournamentManager.Instance.WinRound();
     }
 
-    public void FinishTutorial()
-    {
-        var dialogueTutorials = FindObjectsByType<DialogueTutorial>();
-
-        foreach(var tutorial in dialogueTutorials)
-        {
-           tutorial.SkipTutorial(); 
-        }
-    }
-
     public void AbilityReward()
     {
         RewardWindow.Instance.GiveReward();

@@ -16,6 +16,7 @@ public class DebugPanelUtility : MonoBehaviour
     public void BossPrompt()
     {
         OptionalBossFightManager.Instance.ShowChoice();
+        OptionalBossFightManager.Instance.ActivateCancelButton();
         InputManager.Instance.ShowCursor();
     }
 }

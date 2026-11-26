@@ -37,6 +37,7 @@ public class DebugControls : MonoBehaviour
     {
         givenEvent?.Invoke();
     }
+    
     public void CallAsteriskEvent()
     {
         for (int i = 0; i < cgToggleUIAsterisk.Length; i++)
@@ -46,6 +47,7 @@ public class DebugControls : MonoBehaviour
 
         asteriskEvent?.Invoke();
     }
+
     public void CallSlashEvent()
     {
         slashEvent?.Invoke();

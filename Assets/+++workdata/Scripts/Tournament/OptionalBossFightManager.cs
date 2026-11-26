@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -28,8 +27,9 @@ public class OptionalBossFightManager : MonoBehaviour
     public static OptionalBossFightManager Instance { get; private set; }
 
     CanvasGroup choiceCanvasGroup;
-    Button fightButton;
-    Button passButton;
+    [SerializeField] Button fightButton;
+    [SerializeField] Button passButton;
+    [SerializeField] Button xButton;
     GameObject anthonyInstance;
     Coroutine offerRoutine;
 
@@ -51,7 +51,9 @@ public class OptionalBossFightManager : MonoBehaviour
     void OnDestroy()
     {
         if (Instance == this)
+        {
             Instance = null;
+        }
 
         if (TournamentManager.Instance)
         {
@@ -59,18 +61,17 @@ public class OptionalBossFightManager : MonoBehaviour
             TournamentManager.Instance.OnBossFightEnded -= OnBossFightEnded;
         }
 
-        fightButton?.onClick.RemoveListener(FightNoty);
-        passButton?.onClick.RemoveListener(PassBossFight);
+        fightButton.onClick.RemoveListener(FightNoty);
+        passButton.onClick.RemoveListener(PassBossFight);
+        xButton.onClick.RemoveListener(CloseBossFight);
     }
 
     /// <summary>Returns true when this manager takes responsibility for the normal win ending.</summary>
     public bool TryBeginBossOffer()
     {
-        if (state != BossFlowState.Unavailable)
-            return true;
+        if (state != BossFlowState.Unavailable) return true;
 
-        if (!CanRunBossFight())
-            return false;
+        if (!CanRunBossFight()) return false;
 
         state = BossFlowState.WaitingForCleanup;
 
@@ -113,7 +114,9 @@ public class OptionalBossFightManager : MonoBehaviour
         TournamentManager.Instance.OnRoundCleanupFinished -= ShowInitialBossOffer;
 
         if (offerRoutine != null)
+        {
             StopCoroutine(offerRoutine);
+        }
 
         offerRoutine = StartCoroutine(ShowInitialBossOfferCoroutine());
     }
@@ -138,6 +141,13 @@ public class OptionalBossFightManager : MonoBehaviour
         MinigameManager.Instance.CageBall();
         SetChoiceVisible(true);
         InputManager.Instance.ShowCursor();
+        xButton.gameObject.SetActive(false);
+
+    }
+
+    public void ActivateCancelButton()
+    {
+        xButton.gameObject.SetActive(true);
     }
 
     void FightNoty()
@@ -173,6 +183,15 @@ public class OptionalBossFightManager : MonoBehaviour
         EndLoader.Instance.LoadEnd();
     }
 
+    void CloseBossFight()
+    {
+        state = BossFlowState.Unavailable;
+        MinigameManager.Instance.ReleaseBall();
+        SetChoiceVisible(false);
+        InputManager.Instance.HideCursor();
+        xButton.gameObject.SetActive(true);
+    }
+
     void OnBossFightEnded(bool playerWon)
     {
         if (playerWon)
@@ -197,23 +216,11 @@ public class OptionalBossFightManager : MonoBehaviour
         if (!choiceWindow) return;
 
         choiceCanvasGroup = choiceWindow.GetComponent<CanvasGroup>();
-        Button[] buttons = choiceWindow.GetComponentsInChildren<Button>(true);
 
-        foreach (Button button in buttons)
-        {
-            string buttonName = button.name;
-            if (buttonName.Contains("HECK", StringComparison.OrdinalIgnoreCase))
-                fightButton = button;
-            else if (buttonName.Contains("END", StringComparison.OrdinalIgnoreCase)
-                || buttonName.Contains("PASS", StringComparison.OrdinalIgnoreCase))
-                passButton = button;
-        }
+        fightButton.onClick.AddListener(FightNoty);
+        passButton.onClick.AddListener(PassBossFight);
+        xButton.onClick.AddListener(CloseBossFight);
 
-        fightButton?.onClick.AddListener(FightNoty);
-        passButton?.onClick.AddListener(PassBossFight);
-
-        if (!fightButton || !passButton)
-            Debug.LogError("Boss choice needs one HECK YEAH button and one PASS/END button.", choiceWindow);
     }
 
     void SetChoiceVisible(bool visible)

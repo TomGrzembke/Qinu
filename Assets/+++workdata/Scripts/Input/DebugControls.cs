@@ -10,6 +10,7 @@ public class DebugControls : MonoBehaviour
     [SerializeField] UnityEvent num7;
 
     [SerializeField] CanvasGroup[] cgToggleUIAsterisk;
+    [SerializeField] ExhibitSettingsSO exhibitSettingsSO;
 
     PlayerInputActions inputActions;
 
@@ -50,9 +51,11 @@ public class DebugControls : MonoBehaviour
         slashEvent?.Invoke();
     }
 
-    
+
     public void CallResetEvent(InputAction.CallbackContext ctx)
     {
+        if (!exhibitSettingsSO.ExhibitMode) return;
+
         GameStateManager.Instance.ResetGame();
     }
 }

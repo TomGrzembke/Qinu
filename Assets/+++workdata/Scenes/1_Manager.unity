@@ -1332,6 +1332,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   cgToggleUIAsterisk: []
+  exhibitSettingsSO: {fileID: 11400000, guid: ae25b79b3258f5d459bc8c32d886fd64, type: 2}
 --- !u!4 &412481113
 Transform:
   m_ObjectHideFlags: 0

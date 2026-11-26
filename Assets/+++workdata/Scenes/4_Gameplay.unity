@@ -1381,8 +1381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801aab37ee13eba4888f859fddc05575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InactivityReset
-  timeUntilWarning: 65
-  timeUntilReset: 75
+  exhibitSettingsSO: {fileID: 11400000, guid: ae25b79b3258f5d459bc8c32d886fd64, type: 2}
   warningObject: {fileID: 1001399103}
 --- !u!1 &511045118
 GameObject:
@@ -3555,6 +3554,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   cgToggleUIAsterisk: []
+  exhibitSettingsSO: {fileID: 11400000, guid: ae25b79b3258f5d459bc8c32d886fd64, type: 2}
 --- !u!4 &1120151241
 Transform:
   m_ObjectHideFlags: 0

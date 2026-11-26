@@ -13,11 +13,6 @@ public class DebugPanelUtility : MonoBehaviour
         InputManager.Instance.ShowCursor();
     }
 
-    public void SetGoalAmount(int goalAmount)
-    {
-        MinigameManager.Instance.SetPointsTilWin(goalAmount);
-    }
-
     public void BossPrompt()
     {
         OptionalBossFightManager.Instance.ShowChoice();

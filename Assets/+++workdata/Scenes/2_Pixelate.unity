@@ -316,6 +316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 161453253049746329, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_RenderShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 203148051355753115, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: m_SortingOrder
       value: 4
@@ -335,6 +339,10 @@ PrefabInstance:
     - target: {fileID: 1336571108935631637, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: orthographic size
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336571108935631637, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1336571108935631637, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -360,6 +368,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1171696415}
+    - target: {fileID: 4757924677668329147, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_RenderShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757924677668329147, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733605339614011732, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_RenderShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6226088489383218787, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: m_Name
       value: CamSetup
@@ -368,6 +388,10 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 7130894106490486106, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7759863812623564485, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: m_Layer
       value: 15
@@ -375,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 8025509695836850869, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: orthographic size
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025509695836850869, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8025509695836850869, guid: 32d84c5584bf3524081b56b4cb4958f3, type: 3}
       propertyPath: m_CullingMask.m_Bits

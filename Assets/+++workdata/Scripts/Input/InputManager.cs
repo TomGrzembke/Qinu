@@ -146,7 +146,8 @@ public class InputManager : MonoBehaviour
 
         if (Input.touchCount > 0)
         {
-            MousePos = Cam.ScreenToWorldPoint(Input.GetTouch(0).position);
+            MouseDelta = Input.GetTouch(0).position;
+            MousePos = Cam.ScreenToWorldPoint(MouseDelta);
             usedTouch = true;
             return;
         }

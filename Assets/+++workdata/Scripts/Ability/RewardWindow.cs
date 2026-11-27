@@ -21,6 +21,7 @@ public class RewardWindow : MonoBehaviour
     [SerializeField] float fadeTime = 2;
     [SerializeField] List<GameObject> possibleRewards;
     [SerializeField] AbilityExchange abilityExchange;
+    [field: SerializeField] public bool InAbilityExchange { get; private set; } 
     [field: SerializeField] public bool InAbilitySelect { get; private set; }
 
     public static RewardWindow Instance;
@@ -168,6 +169,7 @@ public class RewardWindow : MonoBehaviour
         if (!slotAvailable && !upgradeAvailable)
         {
             abilityExchange.enabled = true;
+            InAbilityExchange = true;
             abilityExchange.OnSlotSelected -= SelectedSlot;
             abilityExchange.OnSlotSelected += SelectedSlot;
 
@@ -285,6 +287,7 @@ public class RewardWindow : MonoBehaviour
     void CancelPendingExchange()
     {
         abilityExchange.enabled = false;
+        InAbilityExchange = false;
         abilityExchange.OnSlotSelected -= SelectedSlot;
         rewardSelected = null;
         rewardSelectedRarity = 0;
@@ -351,6 +354,7 @@ public class RewardWindow : MonoBehaviour
         StopChoicePressedAnimation();
 
         abilityExchange.enabled = false;
+        InAbilityExchange = false;
         abilityExchange.OnSlotSelected -= SelectedSlot;
 
         ExchangeReward(rewardSelected, i);

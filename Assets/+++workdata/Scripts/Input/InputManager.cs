@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
     [field: SerializeField] public InputAction RightClickAction { get; private set; }
     [field: SerializeField] public InputAction Ability0Action { get; private set; }
 
-    [Header("Cursor Confinement settings")] 
+    [Header("Cursor Confinement settings")]
     [Tooltip("Virtual cursor pixels added per mouse-axis unit.")]
     [SerializeField] float mouseSensitivity = 1.6f;
 
@@ -28,7 +28,20 @@ public class InputManager : MonoBehaviour
     readonly Vector2 StartingVirtualCursorPoint = new(265, 270);
 
     PlayerInputActions input;
-    Camera Cam;
+
+    Camera camCache;
+    Camera Cam
+    {
+        get
+        {
+            if (camCache == null)
+            {
+                camCache = Camera.main;
+              return camCache;  
+            } 
+            return camCache;
+        }
+    }
     bool leftClickPressed;
     bool usedTouch;
     Vector2 additionalDelta;
@@ -59,13 +72,6 @@ public class InputManager : MonoBehaviour
     void OnDisable()
     {
         input.Disable();
-    }
-
-    Camera GetCam()
-    {
-        if (Cam == null) Cam = Camera.main;
-
-        return Cam;
     }
 
     void Awake()
@@ -136,9 +142,11 @@ public class InputManager : MonoBehaviour
 
     void CalculateMousePos()
     {
+        if (Cam == null) return;
+
         if (Input.touchCount > 0)
         {
-            MousePos = GetCam().ScreenToWorldPoint(Input.GetTouch(0).position);
+            MousePos = Cam.ScreenToWorldPoint(Input.GetTouch(0).position);
             usedTouch = true;
             return;
         }
@@ -146,7 +154,7 @@ public class InputManager : MonoBehaviour
         if (usedTouch) return;
 
         CalculateMouseDelta();
-        MousePos = GetCam().ScreenToWorldPoint(MouseDelta);
+        MousePos = Cam.ScreenToWorldPoint(MouseDelta);
     }
 
     void CalculateMouseDelta()

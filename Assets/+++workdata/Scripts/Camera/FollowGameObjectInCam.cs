@@ -4,7 +4,6 @@ using UnityEngine;
 /// <summary>Moves an object between camera-relative targets and can keep dialogue away from its speaker.</summary>
 public class FollowGameObjectInCam : MonoBehaviour
 {
-    #region Serialized
     [Header("Basic Follow")]
     [SerializeField] bool useTopAndBotTarget;
     [SerializeField] Transform topTarget;
@@ -17,9 +16,7 @@ public class FollowGameObjectInCam : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float minimumSpeakerClearance = .18f;
     [SerializeField, Range(0f, .5f)] float oppositeSideFallbackImprovement = .08f;
     [SerializeField, Range(0f, .5f)] float anchorSwitchAdvantage = .04f;
-    #endregion
 
-    #region Non Serialized
     Transform target;
     Transform speaker;
     Transform topLeft;
@@ -29,8 +26,6 @@ public class FollowGameObjectInCam : MonoBehaviour
     Camera cam;
     bool useDialoguePlacement;
     bool speakerIsRight;
-    #endregion
-
     void Start()
     {
         target = topTarget;
@@ -39,15 +34,21 @@ public class FollowGameObjectInCam : MonoBehaviour
 
     void Update()
     {
-        if (!cam)
+        if (cam == null)
+        {
             cam = Camera.main;
+        }
 
         if (useDialoguePlacement)
+        {
             UpdateDialogueTarget();
+        }
         else
+        {
             UpdateBasicTarget();
+        }
 
-        if (!target) return;
+        if (target == null) return;
 
         float distance = Vector3.Distance(transform.position, target.position);
         float followAmount = followCurve.Evaluate(distance * sensitivity);
@@ -152,9 +153,13 @@ public class FollowGameObjectInCam : MonoBehaviour
         useDialoguePlacement = false;
 
         if (_topTarget)
+        {
             topTarget = _topTarget;
+        }
 
         if (_botTarget)
+        {
             botTarget = _botTarget;
+        }
     }
 }

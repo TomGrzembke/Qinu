@@ -37,8 +37,8 @@ public class InputManager : MonoBehaviour
             if (camCache == null)
             {
                 camCache = Camera.main;
-              return camCache;  
-            } 
+                return camCache;
+            }
             return camCache;
         }
     }
@@ -207,6 +207,12 @@ public class InputManager : MonoBehaviour
     public bool GetLeftClickPressed()
     {
         return leftClickPressed;
+    }
+
+
+    public Vector2 GetMouseDelta()
+    {
+        return MouseDelta;
     }
 
     public Vector2 GetDistortedMouseDelta()

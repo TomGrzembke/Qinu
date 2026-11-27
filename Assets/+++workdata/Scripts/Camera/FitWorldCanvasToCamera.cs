@@ -9,6 +9,10 @@ public class FitWorldCanvasToCamera : MonoBehaviour
     RectTransform rectTransform;
     Vector2 referenceResolution = new(1920f, 1080f);
     Camera targetCamera;
+    float lastAspect = -1f;
+    float lastOrthographicSize = -1f;
+    float lastFieldOfView = -1f;
+    bool lastWasOrthographic;
 
     void Awake()
     {
@@ -37,6 +41,14 @@ public class FitWorldCanvasToCamera : MonoBehaviour
 
         transform.rotation = targetCamera.transform.rotation;
 
+        bool projectionChanged = lastWasOrthographic != targetCamera.orthographic;
+        bool aspectChanged = !Mathf.Approximately(lastAspect, targetCamera.aspect);
+        bool orthographicSizeChanged = targetCamera.orthographic && !Mathf.Approximately(lastOrthographicSize, targetCamera.orthographicSize);
+        bool fieldOfViewChanged = !targetCamera.orthographic && !Mathf.Approximately(lastFieldOfView, targetCamera.fieldOfView);
+        bool viewChanged = projectionChanged || aspectChanged || orthographicSizeChanged || fieldOfViewChanged;
+
+        if (!viewChanged) return;
+
         float worldHeight;
         if (targetCamera.orthographic)
         {
@@ -59,5 +71,10 @@ public class FitWorldCanvasToCamera : MonoBehaviour
 
         transform.localScale = Vector3.one * scale;
         rectTransform.sizeDelta = new Vector2(logicalWidth, logicalHeight);
+
+        lastWasOrthographic = targetCamera.orthographic;
+        lastAspect = targetCamera.aspect;
+        lastOrthographicSize = targetCamera.orthographicSize;
+        lastFieldOfView = targetCamera.fieldOfView;
     }
 }

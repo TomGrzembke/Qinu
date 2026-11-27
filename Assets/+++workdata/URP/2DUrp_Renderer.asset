@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6335562193104505625
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8086fb524899a614cabae04520833ea3, type: 3}
-  m_Name: BenDayPostProcessRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  bloomShader: {fileID: 4800000, guid: c41b01b6dfa1f8f48809f50bfbe99061, type: 3}
-  compositeShader: {fileID: -6465566751694194690, guid: af308a283594c1a4c8c2e35c722a90ec, type: 3}
-  defComShader: {fileID: -6465566751694194690, guid: 58fea7e1b68a919498ec12c44fceb8c4, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,10 +24,8 @@ MonoBehaviour:
     probeSamplingDebugMesh: {fileID: 0}
     probeSamplingDebugTexture: {fileID: 0}
     probeVolumeBlendStatesCS: {fileID: 0}
-  m_RendererFeatures:
-  - {fileID: 4729827939729441859}
-  - {fileID: -6335562193104505625}
-  m_RendererFeatureMap: 43844a9473b9a341e7749cabc08f13a8
+  m_RendererFeatures: []
+  m_RendererFeatureMap: 
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -73,19 +55,3 @@ MonoBehaviour:
   m_PostProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_DefaultMaterialType: 0
   m_DefaultCustomMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
---- !u!114 &4729827939729441859
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 381dc97a93062e1408b7b96971695460, type: 3}
-  m_Name: PixelatePostProcessRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  pixelShader: {fileID: 4800000, guid: 4428f126ae76d074c80bfe62058d949c, type: 3}
-  compositeShader: {fileID: -6465566751694194690, guid: 40c3dfe021509724697c9a9aac57d247, type: 3}
-  defComShader: {fileID: -6465566751694194690, guid: 58fea7e1b68a919498ec12c44fceb8c4, type: 3}

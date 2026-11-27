@@ -40,7 +40,7 @@ public class GameSettings : MonoBehaviour
             RestartTextSpeedPreview();
         }
 
-        GetScreenToggle();
+        RefreshScreenToggle();
         InputManager.Instance.ShowCursor();
     }
 
@@ -127,12 +127,11 @@ public class GameSettings : MonoBehaviour
         }
     }
 
-    void GetScreenToggle()
+    void RefreshScreenToggle()
     {
         if (screenToggle == null) return;
 
-        screenToggle.isOn = PlayerPrefs.GetInt("fullscreenID") == 0;
-        Screen.fullScreen = screenToggle.isOn;
+        screenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
     }
 
     public void FullScreenToggle()
